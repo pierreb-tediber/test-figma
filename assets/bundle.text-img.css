@@ -164,3 +164,8 @@
 	gap: 0.4rem;
 	flex-wrap: wrap;
 }
+
+.ax-section.ax-text-img .text-img__product-price .price,
+.ax-section.ax-text-img .text-img__product-price .price-item {
+	color: #010c27;
+}
