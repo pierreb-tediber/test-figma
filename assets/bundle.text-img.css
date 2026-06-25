@@ -102,12 +102,12 @@
 
 .ax-section.ax-text-img .text-img__products {
 	display: flex;
-	flex-wrap: wrap;
+	flex-wrap: nowrap;
 	gap: 1.2rem;
 }
 
 .ax-section.ax-text-img .text-img__product {
-	flex: 1 1 auto;
+	flex: 1 1 0%;
 	min-width: 0;
 }
 
@@ -117,11 +117,11 @@
 	gap: 0.8rem;
 	height: 100%;
 	padding: 0.8rem;
-	background: rgb(var(--color-background, 255, 255, 255));
+	background-color: #ffffff;
 	border: 1px solid var(--middlegrey, #ebebeb);
 	border-radius: var(--sm, 0.4rem);
 	text-decoration: none;
-	color: inherit;
+	color: #010c27;
 }
 
 .ax-section.ax-text-img .text-img__product-image-wrapper {
