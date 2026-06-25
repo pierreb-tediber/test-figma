@@ -723,6 +723,9 @@
     "ax_image_with_text": {
       "section_title": "Section image avec texte"
     },
+    "ax_text_img": {
+      "section_title": "Section texte et image"
+    },
     "ax_testimonial": {
       "section_title": "Section témoignages"
     },

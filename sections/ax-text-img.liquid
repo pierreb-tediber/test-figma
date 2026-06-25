@@ -1,0 +1,376 @@
+{%- liquid
+	assign heading = section.blocks | where: 'type', 'heading' | first
+	assign steps = section.blocks | where: 'type', 'step'
+	assign products = section.blocks | where: 'type', 'product'
+-%}
+
+{%- if section.settings.image != blank or heading != blank or steps.size > 0 -%}
+	{{ 'bundle.text-img.css' | asset_url | stylesheet_tag }}
+
+	{%- style -%}
+		.section-{{ section.id }}-padding {
+			padding-top: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px;
+			padding-bottom: {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px;
+		}
+
+		@media screen and (min-width: 750px) {
+			.section-{{ section.id }}-padding {
+				padding-top: {{ section.settings.padding_top }}px;
+				padding-bottom: {{ section.settings.padding_bottom }}px;
+			}
+		}
+	{%- endstyle -%}
+
+	{%- liquid
+		assign fetch_priority = 'high'
+		assign loading = 'eager'
+		assign lazy_load = false
+		if section.index > 2
+			assign fetch_priority = 'auto'
+			assign loading = 'lazy'
+			assign lazy_load = true
+		endif
+		if section.settings.color_scheme == section.settings.section_color_scheme
+			assign remove_color_classes = true
+		endif
+
+		assign accessibility_alt = 'accessibility.image_description' | t
+		assign alt_img = section.settings.image.alt | default: accessibility_alt
+	-%}
+
+	<div
+		class="section-{{ section.id }}-padding gradient color-{{ section.settings.section_color_scheme }}"
+		role="region"
+		aria-label="{% if heading.settings.heading != blank %}{{ heading.settings.heading | strip_html }}{% else %}{{ 'sections.ax_text_img.section_title' | t }}{% endif %}"
+	>
+		{%- unless section.settings.full_width -%}
+			<div class="page-width">
+		{%- endunless -%}
+		<div class="text-img isolate{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+			<div class="text-img__grid{% if section.settings.layout == 'text_first' %} text-img__grid--reverse{% endif %}">
+				<div class="text-img__media-item text-img__grid-item">
+					<div class="text-img__media-wrapper">
+						<div
+							class="text-img__media global-media-settings{% unless remove_color_classes %} gradient color-{{ section.settings.color_scheme }}{% else %} background-transparent{% endunless %}{% if section.settings.image != blank %} media{% else %} text-img__media--placeholder placeholder{% endif %}"
+							role="img"
+							aria-label="{% if section.settings.image.alt != blank %}{{ section.settings.image.alt | escape }}{% else %}{{ alt_img }}{% endif %}"
+						>
+							{%- if section.settings.image -%}
+								{%- capture media_image -%}
+									<picture>
+										{%- if section.settings.image_mobile -%}
+											<source
+												media="(max-width: 749px)"
+												srcset="{{ section.settings.image_mobile | image_url: width: 375 }} 1x, {{ section.settings.image_mobile | image_url: width: 750 }} 2x"
+											>
+										{%- endif -%}
+										<source
+											media="(min-width: 750px)"
+											srcset="{{ section.settings.image | image_url: width: 640 }} 1x, {{ section.settings.image | image_url: width: 1280 }} 2x"
+										>
+										<img
+											src="{{ section.settings.image | image_url: width: section.settings.image.width }}"
+											alt="{% if section.settings.image.alt != blank %}{{ section.settings.image.alt | escape }}{% else %}{{ alt_img }}{% endif %}"
+											width="{{ section.settings.image.width }}"
+											height="{{ section.settings.image.width | divided_by: section.settings.image.aspect_ratio | round }}"
+											loading="{{ loading }}"
+											decoding="async"
+											fetchpriority="{{ fetch_priority }}"
+										>
+									</picture>
+								{%- endcapture -%}
+								{% if lazy_load %}
+									{{ media_image | replace: 'src=', 'lazy-src=' | replace: 'srcset=', 'lazy-srcset=' }}
+								{% else %}
+									{{ media_image }}
+								{% endif %}
+							{%- else -%}
+								{{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+							{%- endif -%}
+						</div>
+					</div>
+				</div>
+				<div class="text-img__text-item text-img__grid-item">
+					<div
+						id="TextImg--{{ section.id }}"
+						class="text-img__content content-container{% unless remove_color_classes %} gradient color-{{ section.settings.color_scheme }}{% else %} background-transparent{% endunless %}"
+					>
+						{%- if heading.settings.heading != blank -%}
+							<h2 class="text-img__heading {{ heading.settings.heading_size | default: 'h2' }}">
+								{{ heading.settings.heading }}
+							</h2>
+						{%- endif -%}
+
+						{%- if steps.size > 0 -%}
+							<ul class="text-img__steps" role="list">
+								{%- for step in steps -%}
+									<li class="text-img__step">
+										{%- if step.settings.title != blank -%}
+											<p class="text-img__step-title">{{ forloop.index }}. {{ step.settings.title }}</p>
+										{%- endif -%}
+										{%- if step.settings.text != blank -%}
+											<div class="text-img__step-text">{{ step.settings.text }}</div>
+										{%- endif -%}
+
+										{%- if forloop.last and products.size > 0 -%}
+											<div class="text-img__products">
+												{%- for block in products -%}
+													{%- liquid
+														assign display_product = block.settings.product
+														assign card_product_mobile_primary_media = display_product.featured_media
+														if block.settings.image_mobile != blank
+															assign card_product_mobile_primary_media = block.settings.image_mobile
+														endif
+													-%}
+													<div class="text-img__product" {{ block.shopify_attributes }}>
+														{%- if display_product != blank -%}
+															<a href="{{ display_product.url }}" class="text-img__product-card">
+																<div class="text-img__product-image-wrapper">
+																	{%- if display_product.featured_media -%}
+																		{%- capture product_card_image -%}
+																			<picture>
+																				<source
+																					media="(max-width: 749px)"
+																					srcset="{{ card_product_mobile_primary_media | image_url: width: 56 }} 1x, {{ card_product_mobile_primary_media | image_url: width: 112 }} 2x"
+																				>
+																				<img
+																					src="{{ display_product.featured_media | image_url: width: 56 }}"
+																					srcset="{{ display_product.featured_media | image_url: width: 56 }} 1x, {{ display_product.featured_media | image_url: width: 112 }} 2x"
+																					loading="lazy"
+																					width="56" height="80"
+																					alt="{{ display_product.featured_media.alt | default: display_product.title | escape }}"
+																					class="text-img__product-image"
+																				>
+																			</picture>
+																		{%- endcapture -%}
+																		{{ product_card_image | replace: 'src=', 'lazy-src=' | replace: 'srcset=', 'lazy-srcset=' }}
+																	{%- endif -%}
+																</div>
+																<div class="text-img__product-content">
+																	<p class="text-img__product-title">{{ display_product.title }}</p>
+																	{%- if block.settings.tagline != blank -%}
+																		<p class="text-img__product-tagline">{{ block.settings.tagline }}</p>
+																	{%- endif -%}
+																	{%- if block.settings.comfort_layers != blank -%}
+																		<p class="text-img__product-layers">{{ block.settings.comfort_layers }}</p>
+																	{%- endif -%}
+																	<div class="text-img__product-price">
+																		{% render 'product-badges', class: 'card__badge card__badge--images bottom left', product: display_product, show_discount: true, show_rating: false %}
+																		{% render 'price', product: display_product, price_class: '', show_compare_at_price: true, show_badges: false %}
+																	</div>
+																</div>
+															</a>
+														{%- endif -%}
+													</div>
+												{%- endfor -%}
+											</div>
+										{%- endif -%}
+									</li>
+								{%- endfor -%}
+							</ul>
+						{%- endif -%}
+					</div>
+				</div>
+			</div>
+		</div>
+		{%- unless section.settings.full_width -%}
+			</div>
+		{%- endunless -%}
+	</div>
+{%- endif -%}
+
+{% schema %}
+	{
+		"name": "Ax Texte et image",
+		"class": "section ax-section ax-text-img",
+		"tag": "section",
+		"disabled_on": {
+			"groups": ["header", "footer"]
+		},
+		"settings": [
+			{
+				"type": "header",
+				"content": "Mise en page"
+			},
+			{
+				"type": "checkbox",
+				"id": "full_width",
+				"label": "Largeur complète",
+				"default": false
+			},
+			{
+				"type": "select",
+				"id": "layout",
+				"options": [
+					{
+						"value": "image_first",
+						"label": "t:sections.image-with-text.settings.layout.options__1.label"
+					},
+					{
+						"value": "text_first",
+						"label": "t:sections.image-with-text.settings.layout.options__2.label"
+					}
+				],
+				"default": "image_first",
+				"label": "t:sections.image-with-text.settings.layout.label"
+			},
+			{
+				"type": "header",
+				"content": "Image"
+			},
+			{
+				"type": "image_picker",
+				"id": "image",
+				"label": "Image"
+			},
+			{
+				"type": "image_picker",
+				"id": "image_mobile",
+				"label": "Image mobile"
+			},
+			{
+				"type": "header",
+				"content": "t:sections.image-with-text.settings.header_colors.content"
+			},
+			{
+				"type": "color_scheme",
+				"id": "section_color_scheme",
+				"label": "t:sections.all.colors.label",
+				"default": "scheme-1"
+			},
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "t:sections.multirow.settings.container_color_scheme.label",
+				"default": "scheme-1"
+			},
+			{
+				"type": "header",
+				"content": "t:sections.all.padding.section_padding_heading"
+			},
+			{
+				"type": "range",
+				"id": "padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "t:sections.all.padding.padding_top",
+				"default": 36
+			},
+			{
+				"type": "range",
+				"id": "padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "t:sections.all.padding.padding_bottom",
+				"default": 36
+			}
+		],
+		"blocks": [
+			{
+				"type": "heading",
+				"name": "Titre",
+				"limit": 1,
+				"settings": [
+					{
+						"type": "richtext",
+						"id": "heading",
+						"default": "<p>Titre</p>",
+						"label": "Titre"
+					},
+					{
+						"type": "select",
+						"id": "heading_size",
+						"options": [
+							{
+								"value": "h3",
+								"label": "t:sections.all.heading_size.options__1.label"
+							},
+							{
+								"value": "h2",
+								"label": "t:sections.all.heading_size.options__2.label"
+							}
+						],
+						"default": "h2",
+						"label": "t:sections.all.heading_size.label"
+					}
+				]
+			},
+			{
+				"type": "step",
+				"name": "Étape",
+				"settings": [
+					{
+						"type": "text",
+						"id": "title",
+						"label": "Titre de l'étape",
+						"info": "Le numéro est ajouté automatiquement"
+					},
+					{
+						"type": "richtext",
+						"id": "text",
+						"label": "Texte"
+					}
+				]
+			},
+			{
+				"type": "product",
+				"name": "Produit",
+				"limit": 2,
+				"settings": [
+					{
+						"type": "product",
+						"id": "product",
+						"label": "Produit"
+					},
+					{
+						"type": "image_picker",
+						"id": "image_mobile",
+						"label": "Image mobile",
+						"info": "Optionnel, remplace l'image principale du produit sur mobile"
+					},
+					{
+						"type": "text",
+						"id": "tagline",
+						"label": "Sous-titre",
+						"info": "Ex: Équilibré"
+					},
+					{
+						"type": "text",
+						"id": "comfort_layers",
+						"label": "Couches de confort",
+						"info": "Ex: 8 couches de confort"
+					}
+				]
+			}
+		],
+		"presets": [
+			{
+				"name": "Ax Texte et image",
+				"blocks": [
+					{
+						"type": "heading"
+					},
+					{
+						"type": "step"
+					},
+					{
+						"type": "step"
+					},
+					{
+						"type": "step"
+					},
+					{
+						"type": "product"
+					},
+					{
+						"type": "product"
+					}
+				]
+			}
+		]
+	}
+{% endschema %}
