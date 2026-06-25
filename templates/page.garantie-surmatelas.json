@@ -1,0 +1,432 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_content": false,
+        "custom_h1": "",
+        "h1_size": "h1",
+        "h1_no_margin": false,
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "ax_heading_6TphAp": {
+      "type": "ax-heading",
+      "name": "Ax heading",
+      "settings": {
+        "heading": "<p>Garantie surmatelas</p>",
+        "heading_size": "h2",
+        "heading_first": true,
+        "subheading": "",
+        "description": "",
+        "full_width": false,
+        "text_alignment": "center",
+        "color_scheme": "",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 32,
+        "padding_top": 96,
+        "padding_bottom": 64
+      }
+    },
+    "ax_richtext_RkciMT": {
+      "type": "ax-richtext",
+      "blocks": {
+        "text_JRbaPb": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Nous vous remercions d’avoir acheté un ou plusieurs nouveau(x) produit(s) TEDIBER. Notre exigence de qualité est élevée et ne doutons pas que vous serez très heureux de votre achat.<br/><br/>Cependant, si vous ne vous accoutumez pas à TEDIBER ou si vous découvrez un défaut dans votre produit, voici ci-dessous les conditions de notre garantie. Si vous estimez avoir le droit de vous prévaloir de leurs conditions, n’hésitez pas à nous contacter à hello@tediber.com pour recevoir des instructions sur la manière de procéder.<br/><br/>VEUILLEZ NOTER QUE NOTRE GARANTIE DES “100 NUITS D’ESSAI & RETOUR GRATUIT” ET NOS GARANTIES PRODUITS S’APPLIQUENT UNIQUEMENT AUX ACHETEURS INITIAUX DE PRODUITS TEDIBER AUTHENTIQUES, QUI ONT ÉTÉ ACHETÉS DIRECTEMENT ET SEULEMENT AUPRÈS DE TEDIBER. UNE PREUVE D’ACHAT VOUS SERA DEMANDÉE AFIN DE CERTIFIER DE L’AUTHENTICITÉ DE L’ACHAT. LA GARANTIE DES “100 NUITS D’ESSAI & RETOUR GRATUIT” S’APPLIQUE POUR CHAQUE PRODUIT TEDIBER MAIS N’EST EN AUCUN CAS RENOUVELABLE.</p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "text_JRbaPb"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_6DaePa": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_jUhgxB": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Surmatelas</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_jUhgxB"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "collapsible_content_LTxXXF": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_F7jM9c": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "La Garantie surmatelas Tediber 2 ans",
+            "icon": "check_mark",
+            "row_content": "<p>Les conditions de notre garantie surmatelas Tediber 2 ans sont les suivantes : Votre surmatelas Tediber est couvert par une garantie de cinq ans, qui vous donne des droits particuliers découlant de la loi.<br/><br/>Elle n’est pas transférable et vous couvre uniquement si vous êtes l’acheteur initial et le propriétaire actuel du surmatelas Tediber pour lequel vous vous prévalez d’un recours au titre de la garantie et si vous l’avez acheté directement sur www.tediber.com ou dans les boutiques TEDIBER. Ainsi, la garantie ne s’applique que pendant la période au cours de laquelle le surmatelas est la propriété et sous le contrôle de l’acheteur initial de ce matelas. La garantie surmatelas Tediber 2 ans est une garantie pleine couvrant des défauts de fabrication et notamment :<br/><br/>    Une empreinte ou un tassement visible de la laine supérieur à 3 cm sur l’ensemble du surmatelas. Cela fait référence à une empreinte visible lorsque rien ne pèse sur le dessus du surmatelas. Si vous avez des questions, contactez-nous à hello@tediber.com(mailto:hello@tediber.com)<br/>    Tout défaut physique qui entraîne un déchirement de la couture, un capiton qui se défait malgré une utilisation normale et une manipulation appropriée du produit. Le surmatelas n’étant pas déhoussable, la casse de la fermeture n’est pas prise en charge par la garantie en cas d’ouverture.<br/><br/>Si le surmatelas est, en effet, défectueux, nous procéderons au remplacement du surmatelas défectueux et les frais de livraison seront à notre charge.<br/><br/>Par ailleurs, veuillez noter qu’aucun remboursement ne sera effectué en dehors de la garantie des 100 nuits d’essai.<br/><br/>Par ailleurs, si vous vous apercevez au-delà des 100 nuits d’essai que votre surmatelas est défectueux et que nous le confirmons, nous récupérerons le surmatelas défectueux puis nous vous ferons livrer un nouveau surmatelas. L’offre des 100 nuits d’essai n'est alors pas renouvelée à partir de la date de livraison de votre nouveau produit. La garantie n’est pas renouvelée non plus à partir de cette nouvelle date de livraison.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_8hRpWM": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "La garantie surmatelas Tediber ne couvre pas",
+            "icon": "check_mark",
+            "row_content": "<p>les surmatelas non déballés dans le mois suivant la date de livraison.<br/>    les surmatelas utilisés par des dormeurs pesant plus de 130 kg.<br/>    les surmatelas vendus par des revendeurs non-agréés et ne couvre que les matelas vendus directement par Tediber.<br/>    votre surmatelas si vous l’utilisez d’une façon incompatible avec sa destination et son utilisation prévue, par exemple, une situation non domestique.<br/><br/>En outre, elle ne couvre pas les états découlant d’une mauvaise manipulation, d’une mauvaise utilisation ou de la négligence, par exemple, lors du transport du produit.<br/><br/>La garantie surmatelas Tediber ne couvre pas votre surmatelas si le matelas utilisé avec celui-ci présente un affaissement ou un défaut de planéité quelconque qui pourrait induire un défaut sur le surmatelas.<br/><br/>Elle ne couvre pas l’usure normale du surmatelas et les situations susceptibles de causer une détérioration ou des dommages.<br/><br/>Plus particulièrement, cette garantie exclut :<br/><br/>    les affaissements naturels des matériaux comme la partie laine, dont le tassement résulte d’un mécanisme naturel et exposé lors de l’achat<br/>    l’usure normale du fait de l’utilisation prévue des produits, comme le boulochage des tissus,<br/>    si vous avez tenté d’altérer ou de réparer le matelas sans notre consentement ou si vous avez nettoyé les produits avec des produits ou des techniques inappropriés,<br/>    des imperfections mineures et de légers défauts esthétiques,<br/>    des déchirures, des tâches, de la salissure, des brûlures, des dommages liquides et la décoloration - des matériaux qui surviennent au fil du temps,<br/>    l’humidité, les odeurs ou la moisissure (qui peut entre-autre être provoquée par l’absence de sommier),<br/>    les préférences individuelles ou personnelles concernant la fermeté, la texture, le confort, etc. des allergies ou des sensibilités individuelles ou personnelles,<br/>    toutes les contaminations par les puces, punaises de lit où autres parasites,<br/>    si le défaut résulte d’un cas de force majeure ou d’un phénomène naturel indépendant de notre volonté, y compris, sans limitation, d’un incendie, d’une inondation ou d’une catastrophe naturelle.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_q4NAzU": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Que fera Tediber ?",
+            "icon": "check_mark",
+            "row_content": "<p>les surmatelas non déballés dans le mois suivant la date de livraison.<br/>    les surmatelas utilisés par des dormeurs pesant plus de 130 kg.<br/>    les surmatelas vendus par des revendeurs non-agréés et ne couvre que les matelas vendus directement par Tediber.<br/>    votre surmatelas si vous l’utilisez d’une façon incompatible avec sa destination et son utilisation prévue, par exemple, une situation non domestique.<br/><br/>En outre, elle ne couvre pas les états découlant d’une mauvaise manipulation, d’une mauvaise utilisation ou de la négligence, par exemple, lors du transport du produit.<br/><br/>La garantie surmatelas Tediber ne couvre pas votre surmatelas si le matelas utilisé avec celui-ci présente un affaissement ou un défaut de planéité quelconque qui pourrait induire un défaut sur le surmatelas.<br/><br/>Elle ne couvre pas l’usure normale du surmatelas et les situations susceptibles de causer une détérioration ou des dommages.<br/><br/>Plus particulièrement, cette garantie exclut :<br/><br/>    les affaissements naturels des matériaux comme la partie laine, dont le tassement résulte d’un mécanisme naturel et exposé lors de l’achat<br/>    l’usure normale du fait de l’utilisation prévue des produits, comme le boulochage des tissus,<br/>    si vous avez tenté d’altérer ou de réparer le matelas sans notre consentement ou si vous avez nettoyé les produits avec des produits ou des techniques inappropriés,<br/>    des imperfections mineures et de légers défauts esthétiques,<br/>    des déchirures, des tâches, de la salissure, des brûlures, des dommages liquides et la décoloration - des matériaux qui surviennent au fil du temps,<br/>    l’humidité, les odeurs ou la moisissure (qui peut entre-autre être provoquée par l’absence de sommier),<br/>    les préférences individuelles ou personnelles concernant la fermeté, la texture, le confort, etc. des allergies ou des sensibilités individuelles ou personnelles,<br/>    toutes les contaminations par les puces, punaises de lit où autres parasites,<br/>    si le défaut résulte d’un cas de force majeure ou d’un phénomène naturel indépendant de notre volonté, y compris, sans limitation, d’un incendie, d’une inondation ou d’une catastrophe naturelle.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_4CEiTm": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Quelle est la durée de la garantie ?",
+            "icon": "check_mark",
+            "row_content": "<p>Cette garantie couvrant votre surmatelas Tediber dure pendant deux ans à compter de la date de livraison. Nous ne proratisons pas les termes (c’est-à-dire que nous ne réduisons pas le montant total en fonction du temps écoulé). Un surmatelas remplacé ou réparé ne prolonge pas la durée de votre garantie. Le calcul de la durée de garantie se fait à partir du jour de la date de commande de votre achat d’origine.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_DQycMF": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Absence de déclaration de nature médicale ou liée à la santé",
+            "icon": "check_mark",
+            "row_content": "<p>TEDIBER n’effectue aucune déclaration de nature médicale ou liée à la santé concernant ses surmatelas. Les allergies, l’inconfort ou d’autres situations ne sont pas couvert(e)s au titre de cette garantie. Toute question ou préoccupation concernant les situations de nature médicale ou liées à la santé doit être adressée à un médecin habilité.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_imJzzb": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Comment effectuer une réclamation au titre de cette garantie ?",
+            "icon": "check_mark",
+            "row_content": "<p>Pour effectuer une réclamation au titre de notre garantie, veuillez envoyer une brève description écrite (accompagnée de photos, si possible) du problème ou de l’état qui selon vous constitue un défaut à l’adresse hello@tediber.com(mailto:hello@tediber.com). Par ailleurs, d’autres éléments comme la preuve d’achat ou des photos complémentaires pourront être demandés.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_jYnXiF": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Informations sur les qualités et caractéristiques environnementales",
+            "icon": "check_mark",
+            "row_content": "<p>Conformément à la réglementation, Tediber fournit à ses clients les informations de mise en conformité concernant la présence de substances dangereuses, l'incorporation de matières recyclées, et la recyclabilité - découvrez les informations <a href=\"https://docs.google.com/spreadsheets/d/1vq86j7D2zjYq1guPzI7_0s8_1u3o3k-DKBSmS_BZrkY/edit?userstoinvite=elise%40tediber.com&sharingaction=manageaccess&role=writer&gid=0#gid=0\" title=\"https://docs.google.com/spreadsheets/d/1vq86j7D2zjYq1guPzI7_0s8_1u3o3k-DKBSmS_BZrkY/edit?userstoinvite=elise%40tediber.com&sharingaction=manageaccess&role=writer&gid=0#gid=0\">ici</a></p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_F7jM9c",
+        "collapsible_row_8hRpWM",
+        "collapsible_row_q4NAzU",
+        "collapsible_row_4CEiTm",
+        "collapsible_row_DQycMF",
+        "collapsible_row_imJzzb",
+        "collapsible_row_jYnXiF"
+      ],
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "full_width": true,
+        "caption": "",
+        "heading": "",
+        "heading_size": "h2",
+        "heading_alignment": "center",
+        "layout": "none",
+        "container_color_scheme": "",
+        "color_scheme": "",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "ax_richtext_zXiMVx": {
+      "type": "ax-richtext",
+      "blocks": {
+        "button_fVLUcQ": {
+          "type": "button",
+          "settings": {
+            "button_text": "Découvrir le surmatelas Tediber",
+            "url": "shopify://products/surmatelas-laine",
+            "link_blank": false,
+            "style_button": "button button--primary",
+            "button_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "button_fVLUcQ"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_FM3xfE": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_4nnJEy": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Surmatelas universel</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_4nnJEy"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "collapsible_content_NwknYz": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_LtVhed": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "La Garantie surmatelas universel Tediber 2 ans",
+            "icon": "check_mark",
+            "row_content": "<p>Les conditions de notre garantie surmatelas universel Tediber 2 ans sont les suivantes : Votre surmatelas universel Tediber est couvert par une garantie de deux ans. Elle n’est pas transférable et vous couvre uniquement si vous êtes l’acheteur initial et le propriétaire actuel du surmatelas Tediber pour lequel vous vous prévalez d’un recours au titre de la garantie.<br/><br/>Ainsi, la garantie ne s’applique que pendant la période au cours de laquelle le surmatelas universel est la propriété et sous le contrôle de l’acheteur initial de ce matelas. La garantie surmatelas Tediber 2 ans est une garantie pleine couvrant des défauts de fabrication et notamment :<br/><br/>Une empreinte ou un tassement visible du garnissage supérieur à 3 cm sur l’ensemble du surmatelas universel. Cela fait référence à une empreinte visible lorsque rien ne pèse sur le dessus du surmatelas. Si vous avez des questions, contactez-nous à hello@tediber.com Tout défaut physique qui entraîne un déchirement de l’enveloppe ou des coutures malgré une utilisation normale et une manipulation appropriée du produit. Si le surmatelas universel est, en effet, défectueux, nous procéderons au remplacement du surmatelas universel défectueux et les frais de livraison seront à notre charge.<br/><br/>Par ailleurs, veuillez noter qu’aucun remboursement ne sera effectué en dehors des 100 nuits d’essai.<br/><br/>Par ailleurs, si vous vous apercevez au-delà des 100 nuits d’essai que votre surmatelas universel est défectueux et que nous le confirmons, nous récupérerons le surmatelas universel défectueux puis nous vous ferons livrer un nouveau surmatelas universel. L’offre des 100 nuits d’essai n'est alors pas renouvelée à partir de la date de livraison de votre nouveau produit. La garantie n’est pas renouvelée non plus à partir de cette nouvelle date de livraison.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_49Bzxe": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "La Garantie surmatelas universel Tediber ne couvre pas",
+            "icon": "check_mark",
+            "row_content": "<p>Les surmatelas universels non déballés dans le mois suivant la date de livraison.<br/>    Les surmatelas universels utilisés par des dormeurs pesant plus de 130 kg.<br/>    Les surmatelas universels vendus par des revendeurs non-agréés<br/>    Votre surmatelas universel si vous l’utilisez d’une façon incompatible avec sa destination et son utilisation prévue, par exemple, une situation non domestique.<br/><br/>En outre, elle ne couvre pas les états découlant d’une mauvaise manipulation, d’une mauvaise utilisation ou de la négligence, par exemple, lors du transport du produit.<br/><br/>La garantie surmatelas universel Tediber ne couvre pas votre surmatelas universel si le matelas utilisé avec celui-ci présente un affaissement ou un défaut de planéité quelconque qui pourrait induire un défaut sur le surmatelas universel.<br/><br/>Elle ne couvre pas l’usure normale du surmatelas universel et les situations susceptibles de causer une détérioration ou des dommages.<br/><br/>Plus particulièrement, cette garantie exclut :<br/><br/>    Les affaissements naturels des matériaux, dont le tassement résulte d’un mécanisme naturel,<br/>    L’usure normale du fait de l’utilisation prévue des produits, comme le boulochage des tissus,<br/>    Si vous avez tenté d’altérer ou de réparer le surmatelas universel sans notre consentement ou si vous avez nettoyé les produits avec des produits ou des techniques inappropriés,<br/>    Des imperfections mineures et de légers défauts esthétiques,<br/>    Des déchirures, des tâches, de la salissure, des brûlures, des dommages liquides et la décoloration - des matériaux qui surviennent au fil du temps, L’humidité, les odeurs ou la moisissure<br/>    Les préférences individuelles ou personnelles concernant la fermeté, la texture, le confort, etc.<br/>    Des allergies ou des sensibilités individuelles ou personnelles,<br/>    Toutes les contaminations par les puces, punaises de lit ou autres parasites,<br/>    Si le défaut résulte d’un cas de force majeure ou d’un phénomène naturel indépendant de notre volonté, y compris, sans limitation, d’un incendie, d’une inondation ou d’une catastrophe naturelle.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_cnJWbb": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Que fera Tediber ?",
+            "icon": "check_mark",
+            "row_content": "<p>La demande d’exercice de la garantie se fait à l’adresse hello@tediber.com et doit comporter une description claire du défaut et la preuve d’achat à votre nom.<br/><br/>En fonction du problème, des éléments complémentaires seront obligatoirement demandés (photographies ou vidéos par exemple) afin de valider avec l’équipe qualité. L’absence de photographies ou une description imprécise pourront retarder la prise en charge du défaut au titre de la garantie 2 ans ou aboutir à son non-exercice. Après inspection du défaut par l’équipe Tediber, elle décidera si le produit est défectueux et si les conditions d’application de la garantie sont remplies.<br/><br/>Les produits défectueux devront être retournés si le défaut est constaté comme éligible à la garantie 2 ans. Le créneau pour l’échange du produit vous sera proposé par notre service client ; le retour du produit défectueux et la livraison du nouveau produit se feront au même moment. Si le défaut est considéré comme étant couvert par la garantie, notre obligation dans le cadre de la garantie 2 ans consistera à fournir une réparation ou un remplacement du produit. Les produits réparés ou remplacés vous seront livrés gratuitement – veuillez noter que l’envoi ne peut être fait que dans le pays choisi lors de la livraison initiale du matelas.<br/><br/>Nous remplacerons le produit considéré comme défectueux par le modèle de taille identique ou, dans le cas où le modèle n’existe plus, par un modèle d’un prix équivalent ou inférieur. Toute réclamation en vertu de cette garantie doit être reçue dans les 30 jours suivant votre constatation du défaut ou suivant la date à laquelle vous auriez raisonnablement dû constater le défaut, et, en tout état de cause, avant la fin de la période de garantie.<br/><br/>Veuillez noter qu’aucun remboursement ne sera effectué au titre de la garantie 2 ans, contrairement à la garantie des 100 nuits d’essai. La garantie 2 ans ouvre droit à une réparation ou éventuellement à un remplacement<br/><br/>La garantie est fournie par Tediber, 20 rue Sainte Croix de la Bretonnerie. Vous pouvez nous contacter à hello@tediber.com.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_6tYmMN": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Quelle est la durée de la garantie ?",
+            "icon": "check_mark",
+            "row_content": "<p>Cette garantie couvrant votre surmatelas universel Tediber dure pendant deux ans à compter de la date de livraison. Nous ne proratisons pas les termes (c’est-à-dire que nous ne réduisons pas le montant total en fonction du temps écoulé). Un surmatelas universel remplacé ou réparé ne prolonge pas la durée de votre garantie. Le calcul de la durée de garantie se fait à partir du jour de la date de livraison de votre achat d’origine.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_6BGqnr": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Absence de déclaration de nature médicale ou liée à la santé",
+            "icon": "check_mark",
+            "row_content": "<p>TEDIBER n’effectue aucune déclaration de nature médicale ou liée à la santé concernant ses surmatelas. Les allergies, l’inconfort ou d’autres situations ne sont pas couvert(e)s au titre de cette garantie. Toute question ou préoccupation concernant les situations de nature médicale ou liées à la santé doit être adressée à un médecin habilité.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_YyX7MK": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Comment effectuer une réclamation au titre de cette garantie ?",
+            "icon": "check_mark",
+            "row_content": "<p>Pour effectuer une réclamation au titre de notre garantie, veuillez envoyer une brève description écrite (accompagnée de photos, si possible) du problème ou de l’état qui selon vous constitue un défaut à l’adresse hello@tediber.com(mailto:hello@tediber.com). Par ailleurs, d’autres éléments comme la preuve d’achat ou des photos complémentaires pourront être demandés.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_HNrKia": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Informations sur les qualités et caractéristiques environnementales",
+            "icon": "check_mark",
+            "row_content": "<p>Conformément à la réglementation, Tediber fournit à ses clients les informations de mise en conformité concernant la présence de substances dangereuses, l'incorporation de matières recyclées, et la recyclabilité - découvrez les informations <a href=\"https://docs.google.com/spreadsheets/d/1vq86j7D2zjYq1guPzI7_0s8_1u3o3k-DKBSmS_BZrkY/edit?userstoinvite=elise%40tediber.com&sharingaction=manageaccess&role=writer&gid=0#gid=0\" title=\"https://docs.google.com/spreadsheets/d/1vq86j7D2zjYq1guPzI7_0s8_1u3o3k-DKBSmS_BZrkY/edit?userstoinvite=elise%40tediber.com&sharingaction=manageaccess&role=writer&gid=0#gid=0\">ici</a></p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_LtVhed",
+        "collapsible_row_49Bzxe",
+        "collapsible_row_cnJWbb",
+        "collapsible_row_6tYmMN",
+        "collapsible_row_6BGqnr",
+        "collapsible_row_YyX7MK",
+        "collapsible_row_HNrKia"
+      ],
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "full_width": true,
+        "caption": "",
+        "heading": "",
+        "heading_size": "h2",
+        "heading_alignment": "center",
+        "layout": "none",
+        "container_color_scheme": "",
+        "color_scheme": "",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "ax_richtext_P6cgrH": {
+      "type": "ax-richtext",
+      "blocks": {
+        "button_V4NMRA": {
+          "type": "button",
+          "settings": {
+            "button_text": "Découvrir le surmatelas universel Tediber",
+            "url": "shopify://products/surmatelas-universel",
+            "link_blank": false,
+            "style_button": "button button--primary",
+            "button_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "button_V4NMRA"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    }
+  },
+  "order": [
+    "main",
+    "ax_heading_6TphAp",
+    "ax_richtext_RkciMT",
+    "ax_richtext_6DaePa",
+    "collapsible_content_LTxXXF",
+    "ax_richtext_zXiMVx",
+    "ax_richtext_FM3xfE",
+    "collapsible_content_NwknYz",
+    "ax_richtext_P6cgrH"
+  ]
+}

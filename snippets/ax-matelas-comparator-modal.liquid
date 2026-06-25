@@ -1,0 +1,193 @@
+{%- comment -%}
+	Renders a modal opener card + its modal dialog for a comparator row.
+	Accepts:
+		- modal: caracteristiques_du_matelas_modal metaobject (required)
+		- unique_id: string suffix for the modal id (required)
+		- section_index: section.index (optional). When the comparator is the
+		  first section on the page, the opener icon is loaded eagerly without
+		  the lazy-src deferral so it isn't held back from LCP.
+{%- endcomment -%}
+{%- if modal != blank -%}
+	{%- liquid
+		assign modal_id = 'CaracteristiqueModal-' | append: unique_id
+		assign modal_title_id = modal_id | append: '-title'
+		assign opener_is_priority = false
+		if section_index == 1
+			assign opener_is_priority = true
+		endif
+	-%}
+
+	<modal-opener class="ax-matelas-comparator__modal-opener" data-modal="#{{ modal_id }}">
+		<button
+			type="button"
+			class="ax-matelas-comparator__modal-opener-button"
+			aria-haspopup="dialog"
+			aria-controls="{{ modal_id }}"
+			aria-expanded="false"
+		>
+			{%- if modal.opener_icon != blank -%}
+				{%- liquid
+					assign opener_icon_alt = modal.opener_icon.alt | default: modal.title | escape
+					assign opener_icon_1x = modal.opener_icon | image_url: width: 64
+					assign opener_icon_2x = modal.opener_icon | image_url: width: 128
+				-%}
+				{%- if opener_is_priority -%}
+					<img
+						src="{{ opener_icon_1x }}"
+						srcset="{{ opener_icon_1x }} 1x, {{ opener_icon_2x }} 2x"
+						loading="eager"
+						fetchpriority="auto"
+						decoding="async"
+						width="64"
+						height="40"
+						alt="{{ opener_icon_alt }}"
+					>
+				{%- else -%}
+					{%- capture opener_icon_img -%}
+						<img
+							src="{{ opener_icon_1x }}"
+							srcset="{{ opener_icon_1x }} 1x, {{ opener_icon_2x }} 2x"
+							loading="lazy"
+							fetchpriority="low"
+							decoding="async"
+							width="64"
+							height="40"
+							alt="{{ opener_icon_alt }}"
+						>
+					{%- endcapture -%}
+					{{- opener_icon_img | replace: 'src="', 'lazy-src="' | replace: 'srcset="', 'lazy-srcset="' -}}
+				{%- endif -%}
+			{%- endif -%}
+			<span class="ax-matelas-comparator__modal-opener-text">
+				{%- if modal.title != blank -%}
+					<span class="ax-matelas-comparator__modal-opener-title h6">{{ modal.title }}</span>
+				{%- endif -%}
+				{%- if modal.opener_subtitle != blank -%}
+					<span class="ax-matelas-comparator__modal-opener-subtitle">{{ modal.opener_subtitle }}</span>
+				{%- endif -%}
+			</span>
+			{{- 'icon-plus.svg' | inline_asset_content -}}
+		</button>
+	</modal-opener>
+
+	<modal-dialog id="{{ modal_id }}" class="modal-dialog ax-matelas-comparator__modal">
+		<div role="dialog" aria-labelledby="{{ modal_title_id }}" aria-modal="true" tabindex="-1">
+			<div class="modal-dialog__content" role="document">
+				<div class="modal-dialog__header ax-matelas-comparator__modal-header">
+					{%- if modal.title != blank -%}
+						<h2 id="{{ modal_title_id }}" class="h4">{{ modal.title }}</h2>
+					{%- endif -%}
+					<button
+						id="ModalClose-{{ unique_id }}"
+						type="button"
+						class="modal-dialog__toggle"
+						aria-label="{{ 'accessibility.close' | t | escape }}"
+					>
+						<span class="svg-wrapper">{{- 'icon-close.svg' | inline_asset_content -}}</span>
+					</button>
+				</div>
+				<div class="ax-matelas-comparator__modal-body rte">
+					{{- modal.modal_content | metafield_tag -}}
+
+					{%- liquid
+						assign modal_note = modal.note
+						assign has_any_card = false
+						for i in (1..3)
+							assign title_key = 'card_' | append: i | append: '_title'
+							assign subtitle_key = 'card_' | append: i | append: '_subtitle'
+							assign image_key = 'card_' | append: i | append: '_image'
+							assign labels_key = 'card_' | append: i | append: '_row_labels'
+							assign card_labels = modal[labels_key].value
+							if modal[title_key] != blank or modal[subtitle_key] != blank or modal[image_key] != blank or card_labels != blank
+								assign has_any_card = true
+							endif
+						endfor
+					-%}
+
+					{%- if has_any_card -%}
+						<div class="ax-matelas-comparator__modal-cards">
+							{%- for i in (1..3) -%}
+								{%- liquid
+									assign title_key = 'card_' | append: i | append: '_title'
+									assign subtitle_key = 'card_' | append: i | append: '_subtitle'
+									assign image_key = 'card_' | append: i | append: '_image'
+									assign labels_key = 'card_' | append: i | append: '_row_labels'
+									assign values_key = 'card_' | append: i | append: '_row_values'
+									assign card_title = modal[title_key]
+									assign card_subtitle = modal[subtitle_key]
+									assign card_image = modal[image_key]
+									assign card_labels = modal[labels_key].value
+									assign card_values = modal[values_key].value
+								-%}
+								{%- if card_title != blank or card_subtitle != blank or card_image != blank or card_labels != blank -%}
+									<div class="ax-matelas-comparator__modal-card">
+										{%- if card_title != blank or card_subtitle != blank or card_image != blank -%}
+											<div class="ax-matelas-comparator__modal-card-header">
+												{%- if card_image != blank -%}
+													{%- liquid
+														assign card_image_alt = card_image.alt | default: card_title | escape
+														assign card_image_1x = card_image | image_url: width: 96
+														assign card_image_2x = card_image | image_url: width: 192
+													-%}
+													{%- capture card_image_img -%}
+														<img
+															src="{{ card_image_1x }}"
+															srcset="{{ card_image_1x }} 1x, {{ card_image_2x }} 2x"
+															loading="lazy"
+															fetchpriority="low"
+															decoding="async"
+															width="96"
+															height="60"
+															class="ax-matelas-comparator__modal-card-image"
+															alt="{{ card_image_alt }}"
+														>
+													{%- endcapture -%}
+													{{- card_image_img | replace: 'src="', 'lazy-src="' | replace: 'srcset="', 'lazy-srcset="' -}}
+												{%- endif -%}
+												{%- if card_title != blank or card_subtitle != blank -%}
+													<div class="ax-matelas-comparator__modal-card-text">
+														{%- if card_title != blank -%}
+															<h3 class="h6">{{ card_title }}</h3>
+														{%- endif -%}
+														{%- if card_subtitle != blank -%}
+															<div class="ax-matelas-comparator__modal-card-subtitle">{{ card_subtitle | metafield_tag }}</div>
+														{%- endif -%}
+													</div>
+												{%- endif -%}
+											</div>
+										{%- endif -%}
+										{%- if card_labels != blank -%}
+											<ul class="ax-matelas-comparator__modal-card-rows">
+												{%- for label in card_labels -%}
+													<li>
+														<span class="h6">{{ label }}</span>
+														{%- assign row_value = card_values[forloop.index0] -%}
+														{%- if row_value != blank -%}
+															<span class="ax-matelas-comparator__modal-card-pill badge">{{ row_value }}</span>
+														{%- endif -%}
+													</li>
+												{%- endfor -%}
+											</ul>
+										{%- endif -%}
+									</div>
+								{%- endif -%}
+							{%- endfor -%}
+						</div>
+					{%- endif -%}
+
+					{%- if modal_note != blank -%}
+						<div class="ax-matelas-comparator__modal-note" role="note">
+							<span class="ax-matelas-comparator__modal-note-icon h6" aria-hidden="true">
+								{{- 'icon-info.svg' | inline_asset_content -}}
+								<span>{{ 'sections.matelas_comparator.modal.note_label' | t }}</span>
+							</span>
+							<div class="ax-matelas-comparator__modal-note-body rte">
+								{{- modal_note | metafield_tag -}}
+							</div>
+						</div>
+					{%- endif -%}
+				</div>
+			</div>
+		</div>
+	</modal-dialog>
+{%- endif -%}

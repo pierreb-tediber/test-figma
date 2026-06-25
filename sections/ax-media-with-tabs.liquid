@@ -1,0 +1,442 @@
+{{ 'component-image-with-text.css' | asset_url | stylesheet_tag }}
+{{ 'bundle.media-with-tabs.css' | asset_url | stylesheet_tag }}
+
+<script>
+	window.assetsUrl.js.push({ mediaWithTabs: "{{ 'bundle.media-with-tabs.js' | asset_url }}" });
+</script>
+
+{%- style -%}
+	.section-{{ section.id }}-padding {
+	  padding-top: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px;
+	  padding-bottom: {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px;
+	}
+
+	@media screen and (min-width: 750px) {
+	  .section-{{ section.id }}-padding {
+	    padding-top: {{ section.settings.padding_top }}px;
+	    padding-bottom: {{ section.settings.padding_bottom }}px;
+	  }
+	}
+
+	{%- if section.settings.mobile_layout == 'text_first' -%}
+		@media screen and (max-width: 989px) {
+			#shopify-section-{{ section.id }} .image-with-text__grid {
+				display: flex;
+				flex-direction: column;
+			}
+			#shopify-section-{{ section.id }} .image-with-text__media-item {
+				order: 2;
+			}
+			#shopify-section-{{ section.id }} .image-with-text__text-item {
+				order: 1;
+			}
+		}
+	{%- endif -%}
+{%- endstyle -%}
+
+{%- liquid
+	assign loading = 'eager'
+	assign lazy_load = false
+	if section.index > 1
+		assign loading = 'lazy'
+		assign lazy_load = true
+	endif
+	if section.settings.color_scheme == section.settings.section_color_scheme
+		assign remove_color_classes = true
+	endif
+-%}
+
+<div
+	class="section-{{ section.id }}-padding gradient color-{{ section.settings.section_color_scheme }}"
+	role="region"
+	aria-label="{{ section.settings.heading }}"
+	data-ax-section="mediaWithTabs"
+>
+	<div class="image-with-text isolate{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+		<media-tabs>
+			<div class="image-with-text__grid{% if section.settings.layout == 'text_first' %} image-with-text__grid--reverse{% endif %}">
+				<div class="image-with-text__media-item image-with-text__media-item--middle image-with-text__grid-item">
+					<div class="image-with-text__media global-media-settings{% unless remove_color_classes %} gradient color-{{ section.settings.color_scheme }}{% else %} background-transparent{% endunless %}">
+						{%- for block in section.blocks -%}
+							{%- assign has_video = false -%}
+							{%- if block.settings.video != blank -%}
+								{%- assign has_video = true -%}
+							{%- endif -%}
+
+							<div
+								class="media-with-tabs__media-item-media{% if forloop.first %} active{% endif %}"
+								data-tab="{{ block.settings.tab_heading | downcase }}"
+								{% if block.settings.image != blank or has_video %}
+									role="img"
+									aria-label="{{ block.settings.image.alt | escape | default: alt_img }}"
+								{% endif %}
+							>
+								{%- unless has_video -%}
+									{%- if block.settings.image -%}
+										{%- capture media_image -%}
+										<picture>
+											{%- if block.settings.image_mobile -%}
+												<source
+												media="(max-width: 450px)"
+												srcset="{{ block.settings.image_mobile | image_url: width: 450 }} 1x, {{ block.settings.image_mobile | image_url: width: 900 }} 2x"
+											>
+											{%- if block.settings.image_mobile.width >= 500 -%}
+												<source
+													media="(max-width: 500px)"
+													srcset="{{ block.settings.image_mobile | image_url: width: 500 }} 1x, {{ block.settings.image_mobile | image_url: width: 1000 }} 2x"
+												>
+											{%- endif -%}
+											{%- if block.settings.image_mobile.width >= 600 -%}
+												<source
+													media="(max-width: 600px)"
+													srcset="{{ block.settings.image_mobile | image_url: width: 600 }} 1x, {{ block.settings.image_mobile | image_url: width: 1200 }} 2x"
+												>
+											{%- endif -%}
+											{%- if block.settings.image_mobile.width >= 700 -%}
+												<source
+													media="(max-width: 700px)"
+													srcset="{{ block.settings.image_mobile | image_url: width: 700 }} 1x, {{ block.settings.image_mobile | image_url: width: 1400 }} 2x"
+												>
+											{%- endif -%}
+										{%- else -%}
+											{%- if block.settings.image.width >= 330 -%}
+												<source
+													media="(max-width: 330px)"
+													srcset="{{ block.settings.image | image_url: width: 330 }} 1x, {{ block.settings.image | image_url: width: 660 }} 2x"
+												>
+											{%- endif -%}
+											{%- if block.settings.image.width >= 375 -%}
+												<source
+													media="(max-width: 375px)"
+													srcset="{{ block.settings.image | image_url: width: 375 }} 1x, {{ block.settings.image | image_url: width: 750 }} 2x"
+												>
+											{%- endif -%}
+											{%- if block.settings.image.width >= 400 -%}
+												<source
+													media="(max-width: 400px)"
+													srcset="{{ block.settings.image | image_url: width: 400 }} 1x, {{ block.settings.image | image_url: width: 800 }} 2x"
+												>
+											{%- endif -%}
+											{%- if block.settings.image.width >= 450 -%}
+												<source
+													media="(max-width: 450px)"
+													srcset="{{ block.settings.image | image_url: width: 450 }} 1x, {{ block.settings.image | image_url: width: 900 }} 2x"
+												>
+											{%- endif -%}
+											{%- if block.settings.image.width >= 550 -%}
+												<source
+													media="(max-width: 550px)"
+													srcset="{{ block.settings.image | image_url: width: 550 }} 1x, {{ block.settings.image | image_url: width: 1100 }} 2x"
+												>
+											{%- endif -%}
+										{%- endif -%}
+										{%- if block.settings.image.width >= 768 -%}
+											<source
+												media="(max-width: 768px)"
+												srcset="{{ block.settings.image | image_url: width: 768 }} 1x, {{ block.settings.image | image_url: width: 1536 }} 2x"
+											>
+										{%- endif -%}
+										{%- if block.settings.image.width >= 1280 -%}
+											<source
+												media="(max-width: 1280px)"
+												srcset="{{ block.settings.image | image_url: width: 1280 }} 1x, {{ block.settings.image | image_url: width: 2560 }} 2x"
+											>
+										{%- endif -%}
+										{%- if block.settings.image.width >= 1366 -%}
+											<source
+												media="(max-width: 1366px)"
+												srcset="{{ block.settings.image | image_url: width: 1366 }} 1x, {{ block.settings.image | image_url: width: 2732 }} 2x"
+											>
+										{%- endif -%}
+										{%- if block.settings.image.width >= 1440 -%}
+											<source
+												media="(max-width: 1440px)"
+												srcset="{{ block.settings.image | image_url: width: 1440 }} 1x, {{ block.settings.image | image_url: width: 2880 }} 2x"
+											>
+										{%- endif -%}
+										{%- if block.settings.image.width >= 1600 -%}
+											<source
+												media="(max-width: 1600px)"
+												srcset="{{ block.settings.image | image_url: width: 1600 }} 1x, {{ block.settings.image | image_url: width: 3200 }} 2x"
+											>
+										{%- endif -%}
+										<img
+											src="{{ block.settings.image | image_url: width: block.settings.image.width }}"
+											srcset="{{ block.settings.image | image_url: width: block.settings.image.width }}"
+											alt="{{ block.settings.image.alt | escape | default: section.settings.heading }}"
+											width="{{ block.settings.image.width }}"
+											height="{{ block.settings.image.width | divided_by: block.settings.image.aspect_ratio | round }}"
+											loading="{{ loading }}"
+											decoding="async"
+										>
+									</picture>
+								{% endcapture %}
+										{% if lazy_load %}
+											{{ media_image | replace: 'src=', 'lazy-src=' | replace: 'srcset=', 'lazy-srcset=' }}
+										{% else %}
+											{{ media_image }}
+										{% endif %}
+									{%- else -%}
+										{{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+									{%- endif -%}
+								{%- else -%}
+									{%- capture media_video -%}
+									<video 
+										autoplay 
+										loop 
+										muted 
+										playsinline 
+										lazy-source
+										aria-label="{% if block.settings.video.alt != blank %}{{ block.settings.video.alt | escape }}{% else %}{{ 'accessibility.video_description' | t }}{% endif %}"
+										aria-describedby="video-description-{{ block.id }}"
+									>
+										{% if block.settings.video_mobile != blank %}
+											<source
+											src="{{ block.settings.video_mobile.sources[1].url }}"
+											type="video/mp4"
+											media="(max-width: 749px)"
+										>
+										{% endif %}
+										{% if block.settings.video != blank %}
+											<source
+												src="{{ block.settings.video.sources[1].url }}"
+												type="video/mp4"
+												{% if block.settings.video_mobile != blank %}
+													media="(min-width: 750px)"
+												{% endif %}
+											>
+										{% endif %}
+										<p id="video-description-{{ block.id }}" class="visually-hidden">{% if block.settings.video.alt != blank %}{{ block.settings.video.alt | escape }}{% else %}{{ 'accessibility.video_description' | t }}{% endif %}</p>
+									</video>
+								{%- endcapture -%}
+									{% if lazy_load %}
+										{{ media_video | replace: 'src=', 'lazy-src=' | replace: 'srcset=', 'lazy-srcset=' }}
+									{% else %}
+										{{ media_video }}
+									{% endif %}
+								{%- endunless -%}
+							</div>
+						{%- endfor -%}
+					</div>
+				</div>
+				<div class="image-with-text__text-item image-with-text__grid-item">
+					<div
+						id="ImageWithText--{{ section.id }}"
+						class="image-with-text__content image-with-text__content--middle content-container{% unless remove_color_classes %} gradient color-{{ section.settings.color_scheme }}{% else %} background-transparent{% endunless %}"
+					>
+						<div class="media-with-tabs__tabs" role="tablist" aria-label="{{ section.settings.heading | strip_html }}">
+							{%- for block in section.blocks -%}
+								<button
+									type="button"
+									id="tab-{{ block.id }}"
+									class="media-with-tabs__tab{% if forloop.first %} active{% endif %}"
+									data-tab="{{ block.settings.tab_heading | downcase }}"
+									role="tab"
+									aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+									aria-controls="panel-{{ block.id }}"
+									{% unless forloop.first %}
+										tabindex="-1"
+									{% endunless %}
+								>
+									{{ block.settings.tab_heading }}
+								</button>
+							{%- endfor -%}
+						</div>
+						<div class="media-with-tabs__content">
+							<div class="media-with-tabs__heading">
+								<h2>{{ section.settings.heading }}</h2>
+							</div>
+							<div class="media-with-tabs__content-item-wrapper">
+								{%- for block in section.blocks -%}
+									<div
+										id="panel-{{ block.id }}"
+										class="media-with-tabs__content-item{% if forloop.first %} active{% endif %}"
+										data-tab="{{ block.settings.tab_heading | downcase }}"
+										role="tabpanel"
+										aria-labelledby="tab-{{ block.id }}"
+									>
+										<h3 class="media-with-tabs__content-title h3">
+											{{ block.settings.heading }}
+										</h3>
+										<div class="media-with-tabs__content-text">
+											{{ block.settings.content }}
+										</div>
+									</div>
+								{%- endfor -%}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</media-tabs>
+	</div>
+</div>
+
+{% schema %}
+	{
+		"name": "Ax Media with tabs",
+		"class": "section ax-section ax-media-with-tabs",
+		"tag": "section",
+		"disabled_on": {
+			"groups": ["header", "footer"]
+		},
+		"settings": [
+			{
+				"type": "header",
+				"content": "Titre"
+			},
+			{
+				"type": "richtext",
+				"id": "heading",
+				"label": "Titre"
+			},
+			{
+				"type": "select",
+				"id": "layout",
+				"options": [
+					{
+						"value": "image_first",
+						"label": "t:sections.image-with-text.settings.layout.options__1.label"
+					},
+					{
+						"value": "text_first",
+						"label": "t:sections.image-with-text.settings.layout.options__2.label"
+					}
+				],
+				"default": "image_first",
+				"label": "t:sections.image-with-text.settings.layout.label"
+			},
+			{
+				"type": "select",
+				"id": "mobile_layout",
+				"options": [
+					{
+						"value": "image_first",
+						"label": "t:sections.image-with-text.settings.layout.options__1.label"
+					},
+					{
+						"value": "text_first",
+						"label": "t:sections.image-with-text.settings.layout.options__2.label"
+					}
+				],
+				"default": "image_first",
+				"label": "Placement sur mobile"
+			},
+			{
+				"type": "header",
+				"content": "t:sections.image-with-text.settings.header_colors.content"
+			},
+			{
+				"type": "color_scheme",
+				"id": "section_color_scheme",
+				"label": "t:sections.all.colors.label",
+				"default": "scheme-1"
+			},
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "t:sections.multirow.settings.container_color_scheme.label",
+				"default": "scheme-1"
+			},
+			{
+				"type": "header",
+				"content": "t:sections.all.padding.section_padding_heading"
+			},
+			{
+				"type": "range",
+				"id": "padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "t:sections.all.padding.padding_top",
+				"default": 36
+			},
+			{
+				"type": "range",
+				"id": "padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "t:sections.all.padding.padding_bottom",
+				"default": 36
+			}
+		],
+		"blocks": [
+			{
+				"type": "tab",
+				"name": "Onglet",
+				"limit": 3,
+				"settings": [
+					{
+						"type": "header",
+						"content": "Onglet"
+					},
+					{
+						"type": "text",
+						"id": "tab_heading",
+						"default": "Titre de l'onglet",
+						"label": "Titre de l'onglet"
+					},
+					{
+						"type": "header",
+						"content": "Médias"
+					},
+					{
+						"type": "image_picker",
+						"id": "image",
+						"label": "t:sections.image-with-text.settings.image.label"
+					},
+					{
+						"type": "image_picker",
+						"id": "image_mobile",
+						"label": "Image mobile"
+					},
+					{
+						"type": "video",
+						"id": "video",
+						"label": "Vidéo"
+					},
+					{
+						"type": "video",
+						"id": "video_mobile",
+						"label": "Vidéo mobile"
+					},
+					{
+						"type": "header",
+						"content": "Contenu de l'onglet"
+					},
+					{
+						"type": "inline_richtext",
+						"id": "heading",
+						"default": "Titre",
+						"label": "Titre"
+					},
+					{
+						"type": "richtext",
+						"id": "content",
+						"default": "<p>Contenu de l'onglet</p>",
+						"label": "Contenu"
+					}
+				]
+			}
+		],
+		"presets": [
+			{
+				"name": "Ax Media with tabs",
+				"blocks": [
+					{
+						"type": "tab"
+					},
+					{
+						"type": "tab"
+					},
+					{
+						"type": "tab"
+					}
+				]
+			}
+		]
+	}
+{% endschema %}

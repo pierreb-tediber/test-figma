@@ -1,0 +1,18 @@
+{%- comment -%}
+	Renders the "En savoir plus" bullet list for one card.
+
+	Accepts:
+	- card: the Shopify card block (with card_knowmore_1/2/3 richtext settings)
+{%- endcomment -%}
+
+<ul class="ax-versus-comparator__card-knowmore-list">
+	{%- if card.settings.card_knowmore_1 != blank -%}
+		{%- render 'versus-comparator-knowmore-item', content: card.settings.card_knowmore_1 -%}
+	{%- endif -%}
+	{%- if card.settings.card_knowmore_2 != blank -%}
+		{%- render 'versus-comparator-knowmore-item', content: card.settings.card_knowmore_2 -%}
+	{%- endif -%}
+	{%- if card.settings.card_knowmore_3 != blank -%}
+		{%- render 'versus-comparator-knowmore-item', content: card.settings.card_knowmore_3 -%}
+	{%- endif -%}
+</ul>

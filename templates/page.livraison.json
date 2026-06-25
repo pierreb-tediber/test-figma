@@ -1,0 +1,643 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_content": false,
+        "custom_h1": "",
+        "h1_size": "h1",
+        "h1_no_margin": false,
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "ax_heading_Ufnqqj": {
+      "type": "ax-heading",
+      "name": "Ax heading",
+      "settings": {
+        "heading": "<p>LIVRAISON<br/>EXPRESS ET<br/>GRATUITE</p>",
+        "heading_size": "h2",
+        "heading_first": false,
+        "subheading": "",
+        "description": "",
+        "full_width": false,
+        "text_alignment": "center",
+        "color_scheme": "",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 32,
+        "padding_top": 96,
+        "padding_bottom": 64
+      }
+    },
+    "ax_richtext_xYyipe": {
+      "type": "ax-richtext",
+      "blocks": {
+        "text_highlight_begiKb": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>Vous devez choisir votre créneau de livraison avant de procéder au paiement de votre commande.</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_3qKLMM": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Les dates proposées sur notre site internet sont les premières disponibles, elles sont calculées en fonction des produits commandés et de votre adresse de livraison. Une fois le créneau validé, nous ne pouvons pas l'avancer.</p>",
+            "text_alignment": "left"
+          }
+        },
+        "picto_K7PDjF": {
+          "type": "picto",
+          "settings": {
+            "picto": "shopify://shop_images/bulb-white.svg",
+            "picto_size": 136,
+            "picto_size_mobile": 112,
+            "picto_position": "left"
+          }
+        }
+      },
+      "block_order": [
+        "text_highlight_begiKb",
+        "text_3qKLMM",
+        "picto_K7PDjF"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": true,
+        "color_scheme": "scheme-1",
+        "color_scheme_container": "scheme-3",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 16,
+        "mob_padding_bottom_content": 16,
+        "mob_padding_left_content": 16,
+        "mob_padding_right_content": 16,
+        "padding_top_content": 48,
+        "padding_bottom_content": 48,
+        "padding_left_content": 112,
+        "padding_right_content": 112,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "ax_richtext_MGnUp3": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_HCx49C": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>France</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_jepWdn": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Livraison du matelas Tediber (sans reprise ancienne literie) en 24-48h, sur un créneau entre 8h et 13h30. Le créneau ne sera pas affiné. La livraison est gratuite. Pour la livraison (avec reprise ancienne literie) d’un matelas Tediber, sommier, sommier-coffre, tête de lit ou canapé-lit. Livraison sous 8 à 10 jours. Créneau de 5h, les jours seront proposés en fonction de l’adresse de livraison. La veille, vous recevrez un sms de la part du transporteur pour affiner le créneau à 2h. La livraison est payante et aura lieu à l'étage. </p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_HCx49C",
+        "text_jepWdn"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": true,
+        "color_scheme": "scheme-1",
+        "color_scheme_container": "scheme-1",
+        "mob_padding_top": 32,
+        "mob_padding_bottom": 0,
+        "padding_top": 64,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "ax_richtext_UGPPxB": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_jgqd6R": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Paris et petite couronne (dép. 92, 93 et 94) </p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_8A7jeH": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Pour la livraison d’un matelas Tediber, sommier, sommier-coffre, tête de lit ou canapé-lit. En semaine, livraison le jour-même sur un créneau court d'1h30 pour les commandes passées avant 11h30. Les livraisons s’effectuent de 9h à 22h30 du lundi au vendredi et de 10h à 18h le samedi. La livraison est payante et aura lieu à l'étage. </p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_jgqd6R",
+        "text_8A7jeH"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": true,
+        "color_scheme": "scheme-1",
+        "color_scheme_container": "scheme-1",
+        "mob_padding_top": 32,
+        "mob_padding_bottom": 0,
+        "padding_top": 64,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "ax_richtext_LmHxc9": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_Hiy8Kk": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Grande couronne (dép. 77,78, 91 et 95)</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_nfYWji": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Pour la livraison d’un matelas Tediber, sommier, sommier-coffre, tête de lit ou canapé-lit. Créneau court de 2h30 du lundi au vendredi, entre 9h et 21h30 et le samedi de 9h à 16h30. Les jours sont différents en fonction du département. La livraison est payante et aura lieu à l'étage. </p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_Hiy8Kk",
+        "text_nfYWji"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": true,
+        "color_scheme": "scheme-1",
+        "color_scheme_container": "scheme-1",
+        "mob_padding_top": 32,
+        "mob_padding_bottom": 0,
+        "padding_top": 64,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "ax_richtext_9Xj9HR": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_dFnRzU": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>EUROPE</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_tffhga": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Livraison en 72h, en bas d'immeuble sur un créneau de 9h à 18h. Le créneau ne sera pas affiné. La livraison est gratuite. Nous livrons en Espagne, Italie, Belgique, Luxembourg, Pays-Bas, Allemagne, Suisse, Monaco.<br/><br/>Nous ne livrons pas le canapé-lit, le sommier coffre, le matelas Grand Ours, le pack Grand Ours, le lit scandi, le canapé, les têtes de lit, le sommier boxpring, le lit bébé, le lit coffre enfant et le sommier en bois, en dehors de la France métropolitaine. Nous ne livrons aucun produit au Royaume-Uni.<br/><br/>Nous ne proposons pas de service de reprise ancienne literie en Europe, non plus. </p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_dFnRzU",
+        "text_tffhga"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": true,
+        "color_scheme": "scheme-1",
+        "color_scheme_container": "scheme-1",
+        "mob_padding_top": 32,
+        "mob_padding_bottom": 48,
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "ax_richtext_raVgUB": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_MgagUz": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>POUR LES PETITS COLIS</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_ekFtVW": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Livraison en 48h à 72h, en bas d’immeuble sur un créneau de 8h à 18h. Les créneaux ne peuvent être affinés, toutefois, le transporteur vous contactera pour vous confirmer la date de livraison. La livraison à domicile coûte 6€. En cas d'absence, vous aurez la possibilité de choisir une livraison en point relais.Si votre commande contient plusieurs colis, la livraison peut s’effectuer en deux temps. </p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_MgagUz",
+        "text_ekFtVW"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": true,
+        "color_scheme": "scheme-2",
+        "color_scheme_container": "scheme-2",
+        "mob_padding_top": 32,
+        "mob_padding_bottom": 0,
+        "padding_top": 64,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "ax_richtext_NzP9Ua": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_PU4cWy": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>POUR LA LIVRAISON EN POINT RELAIS</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_etyq6g": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Expédition sous 72h ouvrés, livraison dans le point relais de votre choix. Vous recevrez un email de confirmation une fois votre colis arrivé dans le point relais. Vous avez 7 jours calendaires pour aller le chercher. La livraison est gratuite.<br/><br/>Si votre commande contient plusieurs colis, la livraison peut s’effectuer en deux temps. </p>",
+            "text_alignment": "left"
+          }
+        },
+        "button_cF6KLb": {
+          "type": "button",
+          "settings": {
+            "button_text": "Découvrir nos matelas Tediber livrés rapidement",
+            "url": "shopify://collections/matelas",
+            "link_blank": false,
+            "style_button": "button button--primary",
+            "button_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_PU4cWy",
+        "text_etyq6g",
+        "button_cF6KLb"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": true,
+        "color_scheme": "scheme-2",
+        "color_scheme_container": "scheme-2",
+        "mob_padding_top": 32,
+        "mob_padding_bottom": 48,
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "ax_richtext_cLN8JT": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_DWNqjQ": {
+          "type": "heading",
+          "settings": {
+            "heading": "<h2>PARIS À VÉLO</h2>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_D8PLXA": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Pour la livraison d’un matelas Tediber (140x190 cm ou 160x200 cm) seul ou d'un même matelas avec un oreiller, vous avez la possibilité d'être livré à vélo sur des créneaux de 2H. Livraison est payante et dans la pièce d'utilisation. En semaine, livraison le jour-même sur un créneau court de 2h pour les commandes passées avant 11h30. Les livraisons s’effectuent de 8h à 20h du lundi au samedi. La reprise ancienne literie ne peut pas être proposée lors de cette livraison. </p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_DWNqjQ",
+        "text_D8PLXA"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": true,
+        "color_scheme": "scheme-1",
+        "color_scheme_container": "scheme-1",
+        "mob_padding_top": 32,
+        "mob_padding_bottom": 0,
+        "padding_top": 64,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "ax_richtext_H6aTBd": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_LccJ6A": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>COLLECTION GRAND OURS</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_R8TwEc": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Pour le matelas Grand Ours et le sommier boxspring Grand Ours, la livraison est gratuite et sur créneau court. L'installation est gratuite. La livraison et l'installation auront lieu à l'étage et dans la pièce d'utilisation. Les créneaux de livraison sont les mêmes que pour le matelas Tediber. </p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_LccJ6A",
+        "text_R8TwEc"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": true,
+        "color_scheme": "scheme-1",
+        "color_scheme_container": "scheme-1",
+        "mob_padding_top": 32,
+        "mob_padding_bottom": 48,
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "ax_reassurances_UFaaXL": {
+      "type": "ax-reassurances",
+      "blocks": {
+        "reassurance_gtMK6z": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "100-nuits-essai",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_Qr4iYg": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-mnd3qioq",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_pcTiky": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-vfy3a8q5",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_BrgQM4": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-87bgy0zq",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        }
+      },
+      "block_order": [
+        "reassurance_gtMK6z",
+        "reassurance_Qr4iYg",
+        "reassurance_pcTiky",
+        "reassurance_BrgQM4"
+      ],
+      "settings": {
+        "heading": "Nos engagements",
+        "restricted_width": false,
+        "stack_mobile": false,
+        "border_top_mobile": false,
+        "border_bottom_mobile": false,
+        "show_content": false,
+        "autoplay": true,
+        "speed": 300,
+        "loop": false,
+        "pagination": true,
+        "color_scheme": "scheme-2",
+        "color_scheme_popin": "scheme-2",
+        "mob_padding_top": 24,
+        "mob_padding_bottom": 24,
+        "padding_top": 48,
+        "padding_bottom": 48,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "ax_image_with_text_rn4VTP": {
+      "type": "ax-image-with-text",
+      "blocks": {
+        "heading_k7zrN7": {
+          "type": "heading",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "heading": "<p>NOTRE LIVRAISON EST INCROYABLEMENT RAPIDE</p>",
+            "heading_size": "h3"
+          }
+        },
+        "button_7diA8h": {
+          "type": "button",
+          "settings": {
+            "button_text": "Découvrir le matelas Tediber",
+            "button_link": "shopify://products/matelas",
+            "link_blank": false,
+            "link_style": "button button--secondary",
+            "button_alignment": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_k7zrN7",
+        "button_7diA8h"
+      ],
+      "name": "Ax Image with text",
+      "settings": {
+        "full_width": true,
+        "text_alignment": "center",
+        "no_vertical_padding": false,
+        "image": "shopify://shop_images/lifestyle-livraison.jpg",
+        "image_restricted_width": false,
+        "image_adapted_height_with_content": false,
+        "contain_image": false,
+        "layout": "text_first",
+        "mobile_layout": "image_first",
+        "overlay": true,
+        "overlay_opacity": 0.2,
+        "section_color_scheme": "scheme-3",
+        "color_scheme": "scheme-3",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "ax_image_overlayed_text_zfwbTe": {
+      "type": "ax-image-overlayed-text",
+      "blocks": {
+        "heading_By9XjY": {
+          "type": "heading",
+          "settings": {
+            "heading": "Adieu à votre vieux matelas",
+            "heading_size": "h2"
+          }
+        },
+        "text_6AP3Vr": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Profitez de notre service de reprise de votre ancien matelas, sommier ou canapé-lit OU rendez-vous sur le site de votre mairie, le service des encombrants de votre commune se fera un plaisir de récupérer votre ancien matelas en bas de chez vous et de le recycler. </p>",
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "heading_By9XjY",
+        "text_6AP3Vr"
+      ],
+      "settings": {
+        "full_width": true,
+        "image": "shopify://shop_images/sommier-coffre_livraison_7f560c27-cb7e-49a5-a31c-36935c67401e.jpg",
+        "reduce_height_mobile": true,
+        "overlay": false,
+        "overlay_opacity": 0.2,
+        "content_position": "left",
+        "content_position_mobile": "center",
+        "section_color_scheme": "",
+        "color_scheme": "scheme-1",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "ax_heading_Ufnqqj",
+    "ax_richtext_xYyipe",
+    "ax_richtext_MGnUp3",
+    "ax_richtext_UGPPxB",
+    "ax_richtext_LmHxc9",
+    "ax_richtext_9Xj9HR",
+    "ax_richtext_raVgUB",
+    "ax_richtext_NzP9Ua",
+    "ax_richtext_cLN8JT",
+    "ax_richtext_H6aTBd",
+    "ax_reassurances_UFaaXL",
+    "ax_image_with_text_rn4VTP",
+    "ax_image_overlayed_text_zfwbTe"
+  ]
+}

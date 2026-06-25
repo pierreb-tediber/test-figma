@@ -1,0 +1,521 @@
+{% if section.blocks.size > 0 %}
+	{{ 'bundle.comparison-chart.css' | asset_url | stylesheet_tag }}
+
+	{%- style -%}
+		.section-{{ section.id }}-padding {
+		  padding-top: {{ section.settings.mob_padding_top }}px;
+		  padding-bottom: {{ section.settings.mob_padding_bottom }}px;
+		}
+
+		@media screen and (min-width: 750px) {
+		  .section-{{ section.id }}-padding {
+		    padding-top: {{ section.settings.padding_top }}px;
+		    padding-bottom: {{ section.settings.padding_bottom }}px;
+		  }
+		}
+	{%- endstyle -%}
+
+	{%- liquid
+		if section.index > 1
+			assign lazy_load = true
+		else
+			assign lazy_load = false
+		endif
+
+		assign table_1_blocks = section.blocks | where: 'type', 'table_1'
+		assign table_2_blocks = section.blocks | where: 'type', 'table_2'
+		assign table_item_1_blocks = section.blocks | where: 'type', 'table_item_1'
+		assign table_item_2_blocks = section.blocks | where: 'type', 'table_item_2'
+
+		# Winner display setup (only if needed)
+		if section.settings.winner_picto != blank or section.settings.winner_text != blank
+			capture winner_display
+				if section.settings.winner_picto != blank
+					assign winner_image = section.settings.winner_picto | image_url: width: 15 | image_tag: alt: section.settings.winner_picto.alt
+					if lazy_load
+						echo winner_image | replace: 'src="', 'lazy-src="' | replace: 'srcset="', 'lazy-srcset="'
+					else
+						echo winner_image
+					endif
+				endif
+				if section.settings.winner_text != blank
+					echo section.settings.winner_text
+				endif
+			endcapture
+		endif
+
+		# Calculate max items (simple math, no loop)
+		assign max_items = table_item_1_blocks.size
+		if table_item_2_blocks.size > max_items
+			assign max_items = table_item_2_blocks.size
+		endif
+	-%}
+
+	{%- capture bottom_content -%}
+		{%- if section.settings.button_text != blank and section.settings.button_link != blank -%}
+			{%- render 'link-style',
+				link_label: section.settings.button_text,
+				link_url: section.settings.button_link,
+				link_style: section.settings.link_style,
+				link_target: section.settings.link_blank,
+				link_attributes: section.shopify_attributes
+			-%}
+		{%- endif -%}
+
+		{% if section.settings.caption != blank %}
+			<div class="comparison-chart__caption">
+				{{ section.settings.caption }}
+			</div>
+		{% endif %}
+	{%- endcapture -%}
+
+	<div
+		class="comparison-chart gradient color-{{ section.settings.color_scheme }} section-{{ section.id }}-padding"
+		data-ax-section="comparisonChart"
+	>
+		<div class="page-width">
+			<div class="comparison-chart__wrapper{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+				<div class="comparison-chart__content-top">
+					{% render 'section-heading',
+						heading: section.settings.heading,
+						subheading: section.settings.subheading,
+						description: section.settings.description,
+						heading_size: 'h2',
+						text_alignment: 'left'
+					%}
+
+					<div class="small-hide medium-hide">
+						{{ bottom_content }}
+					</div>
+				</div>
+
+				<div class="comparison-chart__table" role="table" aria-label="{{ 'sections.comparison_chart.aria_table' | t }}">
+					{%- comment -%} Table headers - Optimized single loop {%- endcomment -%}
+					{% assign all_table_blocks = table_1_blocks | concat: table_2_blocks %}
+					{% for block in all_table_blocks %}
+						{% if block.settings.image != blank or block.settings.heading != blank %}
+							<div class="comparison-chart__table-header" role="columnheader">
+								{% if block.settings.image != blank %}
+									<div class="comparison-chart__table-header-image">
+										{%- assign header_image = block.settings.image | image_url: width: 100 | image_tag -%}
+										{% if lazy_load %}
+											{{ header_image | replace: 'src="', 'lazy-src="' | replace: 'srcset="', 'lazy-srcset="' }}
+										{% else %}
+											{{ header_image }}
+										{% endif %}
+									</div>
+								{% elsif block.settings.heading != blank %}
+									<div class="comparison-chart__table-header-title">
+										{{ block.settings.heading }}
+									</div>
+								{% endif %}
+							</div>
+						{% endif %}
+					{% endfor %}
+
+					{%- comment -%} Table items - Single loop with direct access {%- endcomment -%}
+					{% assign max_items_index = max_items | minus: 1 %}
+					{% for i in (0..max_items_index) %}
+						{% assign item_1 = table_item_1_blocks[i] %}
+						{% assign item_2 = table_item_2_blocks[i] %}
+
+						{%- comment -%} Column 1 {%- endcomment -%}
+						{% if item_1 %}
+							<div
+								class="comparison-chart__table-item{% if item_1.settings.status == 'check' %} comparison-chart__table-item--checked{% endif %}"
+								role="cell"
+							>
+								<div class="comparison-chart__table-item-status" aria-hidden="true"></div>
+								{{ item_1.settings.text }}
+							</div>
+						{% else %}
+							<div class="comparison-chart__table-item-empty" role="cell"></div>
+						{% endif %}
+
+						{%- comment -%} Column 2 {%- endcomment -%}
+						{% if item_2 %}
+							<div
+								class="comparison-chart__table-item{% if item_2.settings.status == 'check' %} comparison-chart__table-item--checked{% endif %}"
+								role="cell"
+							>
+								<div class="comparison-chart__table-item-status" aria-hidden="true"></div>
+								{{ item_2.settings.text }}
+							</div>
+						{% else %}
+							<div class="comparison-chart__table-item-empty" role="cell"></div>
+						{% endif %}
+					{% endfor %}
+
+					{%- comment -%} Winner sections - Check winner status inline {%- endcomment -%}
+					{% for block in table_1_blocks %}
+						{% if block.settings.is_winner %}
+							<div class="comparison-chart__table-winner" role="cell" aria-label="{{ 'sections.comparison_chart.aria_winner' | t }}">
+								{% if winner_display != blank %}
+									{{ winner_display }}
+								{% endif %}
+							</div>
+						{% else %}
+							<div class="comparison-chart__table-winner-empty" role="cell"></div>
+						{% endif %}
+						{% break %}
+					{% endfor %}
+
+					{% for block in table_2_blocks %}
+						{% if block.settings.is_winner %}
+							<div class="comparison-chart__table-winner" role="cell" aria-label="{{ 'sections.comparison_chart.aria_winner' | t }}">
+								{% if winner_display != blank %}
+									{{ winner_display }}
+								{% endif %}
+							</div>
+						{% else %}
+							<div class="comparison-chart__table-winner-empty" role="cell"></div>
+						{% endif %}
+						{% break %}
+					{% endfor %}
+				</div>
+
+				<div class="comparison-chart__content-bottom large-hide">
+					{{ bottom_content }}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endif %}
+
+{% schema %}
+	{
+		"name": "Ax comparison chart",
+		"tag": "section",
+		"class": "section",
+		"disabled_on": {
+			"groups": ["header", "footer"]
+		},
+		"settings": [
+			{
+				"type": "header",
+				"content": "Contenu"
+			},
+			{
+				"type": "richtext",
+				"id": "heading",
+				"label": "Titre",
+				"default": "<p>Titre</p>"
+			},
+			{
+				"type": "text",
+				"id": "subheading",
+				"label": "Sur-titre",
+				"default": "Sur-titre"
+			},
+			{
+				"type": "richtext",
+				"id": "description",
+				"label": "Texte"
+			},
+			{
+				"type": "text",
+				"id": "button_text",
+				"label": "Texte du bouton"
+			},
+			{
+				"type": "url",
+				"id": "button_link",
+				"label": "Lien du bouton"
+			},
+			{
+				"type": "checkbox",
+				"id": "link_blank",
+				"label": "Lien _blank",
+				"info": "Ouvrir ce lien dans une nouvelle fenêtre",
+				"default": false
+			},
+			{
+				"type": "select",
+				"id": "link_style",
+				"options": [
+					{
+						"value": "button button--primary",
+						"label": "Primary"
+					},
+					{
+						"value": "button button--secondary",
+						"label": "Secondary"
+					},
+					{
+						"value": "ax-link",
+						"label": "Link"
+					},
+					{
+						"value": "ax-link reversed",
+						"label": "Link inversé"
+					},
+					{
+						"value": "underlined-link",
+						"label": "Underline link"
+					}
+				],
+				"default": "button button--primary",
+				"label": "Style du bouton"
+			},
+			{
+				"type": "text",
+				"id": "caption",
+				"label": "Légende",
+				"default": "Légende"
+			},
+			{
+				"type": "header",
+				"content": "Vainqueur du tableau"
+			},
+			{
+				"type": "image_picker",
+				"id": "winner_picto",
+				"label": "Picto du vainqueur",
+				"info": "Picto du vainqueur du tableau, affiché en bas de la section"
+			},
+			{
+				"type": "text",
+				"id": "winner_text",
+				"label": "Texte du vainqueur",
+				"info": "Texte du vainqueur du tableau, affiché en bas de la section"
+			},
+			{
+				"type": "header",
+				"content": "Color"
+			},
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "Color scheme",
+				"default": "background-1"
+			},
+			{
+				"type": "header",
+				"content": "Marges intérieures"
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding bottom",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding bottom",
+				"default": 0
+			},
+			{
+				"type": "header",
+				"content": "Marges extérieures"
+			},
+			{
+				"type": "range",
+				"id": "mob_margin_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Margin top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "mob_margin_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Margin bottom",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "margin_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Margin top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "margin_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Margin bottom",
+				"default": 0
+			}
+		],
+		"blocks": [
+			{
+				"type": "table_1",
+				"name": "Tableau 1",
+				"limit": 1,
+				"settings": [
+					{
+						"type": "text",
+						"id": "heading",
+						"label": "Titre",
+						"default": "Titre"
+					},
+					{
+						"type": "image_picker",
+						"id": "image",
+						"label": "Image",
+						"info": "Image de l'en-tête du tableau 1, prend le dessus sur le titre"
+					},
+					{
+						"type": "checkbox",
+						"id": "is_winner",
+						"label": "Vainqueur",
+						"info": "Si la case est cochée, le tableau sera désigné vainqueur en bas de la section",
+						"default": false
+					}
+				]
+			},
+			{
+				"type": "table_2",
+				"name": "Tableau 2",
+				"limit": 1,
+				"settings": [
+					{
+						"type": "text",
+						"id": "heading",
+						"label": "Titre",
+						"default": "Titre"
+					},
+					{
+						"type": "image_picker",
+						"id": "image",
+						"label": "Image",
+						"info": "Image de l'en-tête du tableau 2, prend le dessus sur le titre"
+					},
+					{
+						"type": "checkbox",
+						"id": "is_winner",
+						"label": "Vainqueur",
+						"info": "Si la case est cochée, le tableau sera désigné vainqueur en bas de la section",
+						"default": false
+					}
+				]
+			},
+			{
+				"type": "table_item_1",
+				"name": "Élément de tableau 1",
+				"settings": [
+					{
+						"type": "text",
+						"id": "text",
+						"label": "Texte",
+						"default": "Texte"
+					},
+					{
+						"type": "select",
+						"id": "status",
+						"label": "Statut",
+						"options": [
+							{
+								"value": "check",
+								"label": "Vrai"
+							},
+							{
+								"value": "cross",
+								"label": "Faux"
+							}
+						]
+					}
+				]
+			},
+			{
+				"type": "table_item_2",
+				"name": "Élément de tableau 2",
+				"settings": [
+					{
+						"type": "text",
+						"id": "text",
+						"label": "Texte",
+						"default": "Texte"
+					},
+					{
+						"type": "select",
+						"id": "status",
+						"label": "Statut",
+						"options": [
+							{
+								"value": "check",
+								"label": "Vrai"
+							},
+							{
+								"value": "cross",
+								"label": "Faux"
+							}
+						]
+					}
+				]
+			}
+		],
+		"presets": [
+			{
+				"name": "Ax comparison chart",
+				"blocks": [
+					{
+						"type": "table_1",
+						"settings": {
+							"heading": "Tableau 1"
+						}
+					},
+					{
+						"type": "table_item_1",
+						"settings": {
+							"text": "Élément de tableau 1"
+						}
+					},
+					{
+						"type": "table_2",
+						"settings": {
+							"heading": "Tableau 2"
+						}
+					},
+					{
+						"type": "table_item_2",
+						"settings": {
+							"text": "Élément de tableau 2"
+						}
+					}
+				]
+			}
+		]
+	}
+{% endschema %}

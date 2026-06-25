@@ -1,0 +1,231 @@
+{% comment %}
+	Renders cart drawer
+
+	Usage:
+	{% render 'cart-drawer', section: section %}
+{% endcomment %}
+
+<style>
+	.drawer {
+		position: fixed;
+		visibility: hidden;
+		height: 0;
+	}
+
+	.cart-drawer__overlay {
+		position: fixed;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
+
+	.cart-drawer__overlay:empty {
+		display: block;
+	}
+</style>
+
+<script src="{{ 'bundle.sidecart.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'bundle.product-form.js' | asset_url }}" defer="defer"></script>
+
+{{ 'component-cart-drawer.css' | asset_url | stylesheet_tag }}
+{{ 'component-cart.css' | asset_url | stylesheet_tag }}
+{{ 'component-totals.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'component-discounts.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'quick-add.css' | asset_url | stylesheet_tag }}
+{{ 'bundle.sidecart.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+	# theme-check-disable
+	capture content_for_query_string
+		echo content_for_header
+	endcapture
+	assign get_url = content_for_query_string | split: '"pageurl":"' | last | split: '"' | first | split: '.myshopify.com' | last | replace: '\/', '/' | replace: '%20', ' ' | replace: '\u0026', '&' | split: '?' | last
+	# theme-check-enable
+
+	# Déterminer si la section est récupérée via fetch de la section
+	assign use_lazy_loading = true
+	if get_url contains 'section_id' or get_url contains 'sections'
+		assign use_lazy_loading = false
+	endif
+
+	# Reassurances : déterminer le mode d'affichage (slider ou statique)
+	# Slider activé → affiché dans drawer__content (haut du panier)
+	# Slider désactivé → affiché dans drawer__footer (sous les boutons de paiement express)
+	assign reassurances_block = section.blocks | where: 'type', 'reassurances' | first
+	assign slider_enabled = reassurances_block.settings.slider_enabled
+-%}
+
+<div id="cart-drawer">
+	<cart-drawer class="drawer{% if cart == empty %} is-empty{% endif %}" data-section-id="{{ section.id }}">
+		<div id="CartDrawer" class="cart-drawer">
+			<div id="CartDrawer-Overlay" class="cart-drawer__overlay"></div>
+			<div
+				class="drawer__inner gradient color-{{ section.settings.cart_color_scheme }}"
+				role="dialog"
+				aria-modal="true"
+				aria-label="{{ 'sections.cart.title' | t }}"
+				tabindex="-1"
+			>
+				<div class="drawer__header">
+					<div class="drawer__header__wrapper">
+						<div id="cart-drawer-heading" class="drawer__heading">
+							{{ 'sections.cart.title' | t }}
+							<span class="drawer__heading-bubble">
+								{%- if cart.item_count < 100 -%}
+									<span aria-hidden="true">({{ cart.item_count }})</span>
+								{%- endif -%}
+								<span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
+							</span>
+						</div>
+						<button
+							class="drawer__close"
+							type="button"
+							onclick="this.closest('cart-drawer').close()"
+							aria-label="{{ 'accessibility.close' | t }}"
+						>
+							<span class="svg-wrapper">
+								{{- 'icon-close.svg' | inline_asset_content -}}
+							</span>
+						</button>
+					</div>
+					<div id="cart-drawer-progress-bar">
+						{%- liquid
+							if cart != empty
+								render 'cart-drawer-progress-bar', section: section
+							endif
+						-%}
+					</div>
+					{%- render 'cart-drawer-messages', section: section -%}
+				</div>
+				<div class="drawer__content">
+					{%- comment -%} Reassurances en mode slider : affiché en haut du contenu {%- endcomment -%}
+					{%- if slider_enabled -%}
+						{%- render 'cart-drawer-reassurances', section: section, use_lazy_loading: use_lazy_loading -%}
+					{%- endif -%}
+					{%- liquid
+						render 'cart-drawer-items', section: section
+						render 'cart-drawer-empty', section: section, use_lazy_loading: use_lazy_loading
+						render 'cart-drawer-send-cart-to-email', section: section
+						render 'cart-drawer-upsell-dynamic', section: section, use_lazy_loading: use_lazy_loading
+					-%}
+				</div>
+				<div id="cart-drawer-footer" class="drawer__footer">
+					<div class="drawer__footer__wrapper">
+						{%- if section.settings.show_cart_note -%}
+							<details id="Details-CartDrawer-Note">
+								<summary>
+									<span class="summary__title">
+										{{ 'sections.cart.note' | t }}
+										{{- 'icon-caret.svg' | inline_asset_content -}}
+									</span>
+								</summary>
+								<cart-note class="cart__note field">
+									<label class="visually-hidden" for="CartDrawer-Note">{{ 'sections.cart.note' | t }}</label>
+									<textarea
+										id="CartDrawer-Note"
+										class="text-area text-area--resize-vertical field__input"
+										name="note"
+										placeholder="{{ 'sections.cart.note' | t }}"
+									>{{ cart.note }}</textarea>
+								</cart-note>
+							</details>
+						{%- endif -%}
+
+							<div id="cart-drawer-footer-wrapper" class="cart-drawer__footer">
+								<div id="cart-drawer-footer-totals" class="cart-drawer__footer__wrapper">
+									{%- render 'cart-drawer-discount-bundle' -%}
+									{%- render 'cart-drawer-discount-list' -%}
+									<div class="drawer__footer-total">
+										<div class="totals" role="status">
+											<div class="totals__total">{{ 'sections.cart.estimated_total' | t }}</div>
+											<p class="totals__total-value">{{ cart.total_price | money }}</p>
+										</div>
+										{%- render 'cart-drawer-total-savings' -%}
+									</div>
+									{%- render 'cart-drawer-eco-part' -%}
+								</div>
+
+								<div id="cart-drawer-discount-code">
+									{% if section.settings.discount_code_active %}
+										{%- render 'cart-drawer-discount-code', section: section -%}
+									{% endif %}
+								</div>
+
+								<div id="CartDrawer-CartErrors-Discount" role="alert" class="hidden">
+									<small class="cart-item__error-text"></small>
+									<span class="svg-wrapper">
+										{{- 'icon-error.svg' | inline_asset_content -}}
+									</span>
+								</div>
+							</div>
+
+							<div id="cart-drawer-footer-errors">
+								<div id="CartDrawer-CartErrors" role="alert" class="hidden">
+									<small class="cart-item__error-text"></small>
+									<span class="svg-wrapper">
+										{{- 'icon-error.svg' | inline_asset_content -}}
+									</span>
+								</div>
+							</div>
+
+						<div
+							id="cart-drawer-footer-buttons"
+							class="cart__ctas"
+							{{ block.shopify_attributes }}
+						>
+							{% if cart != empty %}
+								<cart-checkout-button>
+									<button
+										type="submit"
+										id="CartDrawer-Checkout"
+										class="cart__checkout-button button"
+										name="checkout"
+										form="CartDrawer-Form"
+									>
+										{{ 'sections.cart.checkout' | t }}
+									</button>
+								</cart-checkout-button>
+							{% endif %}
+							{%- if additional_checkout_buttons and section.settings.show_checkout_buttons -%}
+								<cart-checkout-express class="drawer__checkout-express">
+									<button
+										type="button"
+										id="express-checkout-toggle"
+										class="drawer__checkout-express__toggle button button--secondary"
+										aria-expanded="false"
+										aria-controls="drawer__checkout-express-content"
+										aria-describedby="express-checkout-description"
+									>
+										<span>
+											{{ 'sections.cart.express_checkout' | t }}
+										</span>
+									</button>
+									<div
+										id="drawer__checkout-express-content"
+										class="drawer__checkout-express__content"
+										role="region"
+										aria-labelledby="express-checkout-toggle"
+										aria-hidden="true"
+									>
+										<div class="drawer__checkout-express__buttons">
+											<div class="additional-checkout-buttons--vertical">
+												{{ content_for_additional_checkout_buttons }}
+											</div>
+										</div>
+									</div>
+								</cart-checkout-express>
+							{%- endif -%}
+						</div>
+						{%- comment -%} Reassurances en mode statique : affiché sous les boutons de paiement express {%- endcomment -%}
+						{%- unless slider_enabled -%}
+							{%- render 'cart-drawer-reassurances', section: section, use_lazy_loading: use_lazy_loading -%}
+						{%- endunless -%}
+					</div>
+				</div>
+			</div>
+		</div>
+	</cart-drawer>
+</div>

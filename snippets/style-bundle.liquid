@@ -1,0 +1,17 @@
+{%- comment -%}
+	DO NOT DELETE
+{%- endcomment -%}
+
+{% capture layout_bundle_styles %}bundle.{{- layout -}}.css{% endcapture %}
+{{ layout_bundle_styles | asset_url | stylesheet_tag: preload: true }}
+
+{% if template %}
+	{%- unless template.name == 'index' -%}
+		{% capture style_bundle %}bundle.{{ template.name }}.css{% endcapture %}
+		{{ style_bundle | asset_url | stylesheet_tag }}
+	{%- endunless -%}
+{% else %}
+	{% unless checkout %}
+		{{ 'bundle.apps.css' | asset_url | stylesheet_tag }}
+	{% endunless %}
+{% endif %}

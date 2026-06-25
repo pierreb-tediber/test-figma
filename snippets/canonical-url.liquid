@@ -1,0 +1,31 @@
+{%- liquid
+	assign canonical = canonical_url
+	if template contains 'collection' and current_tags
+		assign canonical = shop.url | append: collection.url
+	endif
+
+	case template.name
+		when 'collection'
+			if collection.metafields.custom.override_canonical_seo.value != blank
+				assign canonical = collection.metafields.custom.override_canonical_seo.value
+			endif
+		when 'product'
+			if product.metafields.custom.override_canonical_seo.value != blank
+				assign canonical = product.metafields.custom.override_canonical_seo.value
+			endif
+		when 'page'
+			if page.metafields.custom.override_canonical_seo.value != blank
+				assign canonical = page.metafields.custom.override_canonical_seo.value
+			endif
+		when 'blog'
+			if blog.metafields.custom.override_canonical_seo.value != blank
+				assign canonical = blog.metafields.custom.override_canonical_seo.value
+			endif
+		when 'article'
+			if article.metafields.custom.override_canonical_seo.value != blank
+				assign canonical = article.metafields.custom.override_canonical_seo.value
+			endif
+	endcase
+-%}
+
+<link rel="canonical" href="{{ canonical }}">

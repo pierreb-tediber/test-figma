@@ -1,0 +1,61 @@
+{%- liquid
+	# Récupération du metaobject produit volumineux
+	assign produit_volumineux = product.metafields.custom.produit_volumineux.value
+-%}
+
+{%- if produit_volumineux -%}
+	<div class="product__volumineux" {{ block.shopify_attributes }}>
+		{%- if produit_volumineux.contenu_popin.value != blank -%}
+			{%- comment -%} Texte cliquable qui ouvre la modal {%- endcomment -%}
+			<modal-opener data-modal="#VolumineuxModal-{{ block.id }}">
+				<button
+					type="button"
+					class="product__volumineux-text product__volumineux-text--clickable"
+					aria-haspopup="dialog"
+				>
+					<span class="svg-wrapper">
+						{{- 'icon-warning.svg' | inline_asset_content -}}
+					</span>
+					<p>{{ produit_volumineux.texte.value | replace: '[u]', ' <u>' | replace: '[/u]', '</u> ' }}</p>
+				</button>
+			</modal-opener>
+
+			{%- comment -%} Modal avec le contenu détaillé {%- endcomment -%}
+			<modal-dialog id="VolumineuxModal-{{ block.id }}" class="modal-dialog product__volumineux-modal">
+				<div
+					role="dialog"
+					aria-label="Informations produit volumineux"
+					aria-modal="true"
+					class="product__volumineux-modal-content modal-dialog__content"
+					tabindex="-1"
+				>
+						<div class="modal-dialog__header product__volumineux-modal-header">
+							<button
+								id="ModalClose-{{ block.id }}"
+								type="button"
+								class="modal-dialog__toggle product__volumineux-modal-close"
+								aria-label="{{ 'accessibility.close' | t }}"
+							>
+								<span class="svg-wrapper">
+									{{- 'icon-close.svg' | inline_asset_content -}}
+								</span>
+							</button>
+						</div>
+						<div class="product__volumineux-modal-body">
+							<div class="product__volumineux-modal-text rte">
+								<p>{{ produit_volumineux.contenu_popin | metafield_tag }}</p>
+						</div>
+					</div>
+				</div>
+			</modal-dialog>
+		{%- else -%}
+			{%- comment -%} Texte informatif seulement (non cliquable) {%- endcomment -%}
+			<div class="product__volumineux-text">
+				<span class="svg-wrapper">
+					{{- 'icon-warning.svg' | inline_asset_content -}}
+				</span>
+				{{ produit_volumineux.texte.value | replace: '[u]', ' <u>' | replace: '[/u]', '</u> ' }}
+			</div>
+		{%- endif -%}
+	</div>
+{%- endif -%}

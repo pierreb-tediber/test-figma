@@ -1,0 +1,293 @@
+{%- if settings.cart_type == 'drawer' -%}
+	{%- render 'cart-drawer', section: section -%}
+{%- endif -%}
+
+{% schema %}
+	{
+		"name": "Ax cart drawer",
+		"tag": "section",
+		"class": "section ax-section ax-cart-drawer",
+		"settings": [
+			{
+				"type": "checkbox",
+				"id": "show_cart_note",
+				"label": "t:settings_schema.cart.settings.show_cart_note.label",
+				"default": false
+			},
+			{
+				"type": "checkbox",
+				"id": "show_checkout_buttons",
+				"label": "Afficher les boutons de paiement",
+				"default": true
+			},
+			{
+				"type": "color_scheme",
+				"id": "cart_color_scheme",
+				"label": "t:sections.all.colors.label",
+				"default": "scheme-1"
+			},
+			{
+				"type": "header",
+				"content": "Panier vide"
+			},
+			{
+				"type": "url",
+				"id": "cart_empty_link",
+				"label": "Lien du panier vide"
+			},
+			{
+				"type": "image_picker",
+				"id": "cart_empty_image",
+				"label": "Image du panier vide"
+			},
+			{
+				"type": "color_scheme",
+				"id": "cart_empty_color_scheme",
+				"label": "Couleur du panier vide",
+				"default": "scheme-1"
+			},
+			{
+				"type": "header",
+				"content": "Code promo"
+			},
+			{
+				"type": "checkbox",
+				"id": "discount_code_active",
+				"label": "Activer le code promo",
+				"default": true
+			}
+		],
+		"blocks": [
+			{
+				"type": "reassurances",
+				"name": "Reassurances",
+				"limit": 1,
+				"settings": [
+					{
+						"type": "paragraph",
+						"content": "Reassurance 1"
+					},
+					{
+						"type": "image_picker",
+						"id": "image_1",
+						"label": "Image 1"
+					},
+					{
+						"type": "inline_richtext",
+						"id": "heading_1",
+						"label": "Heading"
+					},
+					{
+						"type": "inline_richtext",
+						"id": "subheading_1",
+						"label": "Subheading"
+					},
+					{
+						"type": "paragraph",
+						"content": "Reassurance 2"
+					},
+					{
+						"type": "image_picker",
+						"id": "image_2",
+						"label": "Image 2"
+					},
+					{
+						"type": "inline_richtext",
+						"id": "heading_2",
+						"label": "Heading"
+					},
+					{
+						"type": "inline_richtext",
+						"id": "subheading_2",
+						"label": "Subheading"
+					},
+					{
+						"type": "paragraph",
+						"content": "Reassurance 3"
+					},
+					{
+						"type": "image_picker",
+						"id": "image_3",
+						"label": "Image 3"
+					},
+					{
+						"type": "inline_richtext",
+						"id": "heading_3",
+						"label": "Heading"
+					},
+					{
+						"type": "inline_richtext",
+						"id": "subheading_3",
+						"label": "Subheading"
+					},
+					{
+						"type": "header",
+						"content": "Mode d'affichage"
+					},
+					{
+						"type": "paragraph",
+						"content": "Slider activé : les reassurances s'affichent en slider (Swiper) avec images, titres et sous-titres, positionné en haut du contenu du panier. Slider désactivé : les reassurances s'affichent en ligne statique (titres séparés par des |, sans images), positionné sous les boutons de paiement express."
+					},
+					{
+						"type": "checkbox",
+						"id": "slider_enabled",
+						"label": "Activer le slider",
+						"default": true,
+						"info": "Décocher pour afficher les reassurances en mode statique sous les boutons de paiement"
+					},
+					{
+						"type": "header",
+						"content": "Paramètres du slider"
+					},
+					{
+						"type": "paragraph",
+						"content": "Les paramètres ci-dessous ne s'appliquent que lorsque le slider est activé."
+					},
+					{
+						"type": "checkbox",
+						"id": "autoplay",
+						"label": "Autoplay",
+						"default": false
+					},
+					{
+						"type": "range",
+						"id": "speed",
+						"label": "Vitesse de transition",
+						"default": 300,
+						"step": 100,
+						"min": 100,
+						"max": 3000
+					},
+					{
+						"type": "color_scheme",
+						"id": "color_scheme",
+						"label": "Couleur des reassurances",
+						"default": "scheme-1"
+					}
+				]
+			},
+			{
+				"type": "progress_bar",
+				"name": "Barre de progression",
+				"limit": 1,
+				"settings": [
+					{
+						"type": "header",
+						"content": "Livraison offerte"
+					},
+					{
+						"type": "number",
+						"id": "free_shipping",
+						"label": "Montant pour la livraison offerte",
+						"default": 0
+					}
+				]
+			},
+			{
+				"type": "send_cart_to_email",
+				"name": "Envoyer cart par email",
+				"limit": 1,
+				"settings": [
+					{
+						"type": "text",
+						"id": "klaviyo_list_id",
+						"label": "Klaviyo list ID"
+					},
+					{
+						"type": "text",
+						"id": "klaviyo_public_key",
+						"label": "Klaviyo public key"
+					}
+				]
+			},
+			{
+				"type": "upsell-dynamic",
+				"name": "Upsell dynamic",
+				"limit": 1,
+				"settings": [
+					{
+						"type": "richtext",
+						"id": "heading",
+						"label": "Heading",
+						"default": "<p></p>"
+					},
+					{
+						"type": "collection",
+						"id": "collection",
+						"label": "Collection"
+					},
+					{
+						"type": "header",
+						"content": "Carte de produit"
+					},
+					{
+						"type": "select",
+						"id": "image_ratio",
+						"options": [
+							{
+								"value": "adapt",
+								"label": "Adapter à l'image"
+							},
+							{
+								"value": "portrait",
+								"label": "Portrait"
+							},
+							{
+								"value": "square",
+								"label": "Carré"
+							}
+						],
+						"default": "adapt",
+						"label": "Rapport d'image"
+					},
+					{
+						"type": "checkbox",
+						"id": "show_secondary_image",
+						"default": false,
+						"label": "Afficher la deuxième image en survol"
+					},
+					{
+						"type": "checkbox",
+						"id": "show_vendor",
+						"default": false,
+						"label": "Show vendor"
+					},
+					{
+						"type": "checkbox",
+						"id": "show_rating",
+						"default": true,
+						"label": "Show product rating",
+						"info": "To display a rating, add a product rating app. [Learn more](https:\/\/help.shopify.com\/manual\/online-store\/themes\/theme-structure\/theme-features#featured-collection-show-product-rating)"
+					},
+					{
+						"type": "select",
+						"id": "quick_add",
+						"default": "none",
+						"label": "Ajout rapide",
+						"info": "La fonction En gros est optimisée pour les articles achetés en grande quantité.",
+						"options": [
+							{
+								"value": "none",
+								"label": "Aucun"
+							},
+							{
+								"value": "standard",
+								"label": "Standard"
+							},
+							{
+								"value": "bulk",
+								"label": "En gros"
+							}
+						]
+					},
+					{
+						"type": "color_scheme",
+						"id": "color_scheme",
+						"label": "Couleur des upsells",
+						"default": "scheme-1"
+					}
+				]
+			}
+		]
+	}
+{% endschema %}

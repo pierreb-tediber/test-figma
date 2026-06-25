@@ -1,0 +1,394 @@
+{% comment %}
+	Render a variant included in the pack
+
+	@param {object} variant - The variant to display
+	@param {string} section_id - The section ID
+	@param {object} product_parent - The parent product
+	@param {object} bundle_configurator - The bundle configurator object
+	@param {string} product_form_id - The product form ID
+	@param {boolean} is_invisible - Whether this is an invisible variant
+	@param {boolean} has_multiple_variants - Whether this product has multiple variants
+	@param {array} variant_ids - Array of variant IDs for this product
+
+	@example
+	{% render 'card-bundle-item-included', variant: variant, section_id: section_id, product: product, product_form_id: product_form_id, bundle_configurator: bundle_configurator, forloop_index: forloop.index %}
+{% endcomment %}
+
+{%- liquid
+	comment
+		RÉCUPÉRATION DE LA VARIANTE À AFFICHER
+
+		Cette section détermine quelle variante utiliser pour l'affichage :
+		- Si pas encore récupérée et qu'on a des IDs : cherche la première variante valide et non cachée
+		- Sinon utilise la variante passée en paramètre
+		Ceci permet de gérer les cas où plusieurs variantes du même produit
+		sont incluses dans le pack
+	endcomment
+
+	if is_fetched != true and variant_ids != blank
+		# Priorité 1 : variante pré-sélectionnée par l'admin (BO `inclus_variantes_preselectionnees`).
+		# Doit être à la fois dans `variant_ids` du groupe ET non cachée. Si non trouvée,
+		# fallback sur l'ancien comportement (1re non cachée).
+		assign variant_included = blank
+		if preselected_variant_id != blank
+			assign preselected_temp_variant = variant.product.variants | where: 'id', preselected_variant_id | first
+			if preselected_temp_variant != blank and preselected_temp_variant.metafields.custom.hidden_variant.value != true
+				assign variant_included = preselected_temp_variant
+			endif
+		endif
+
+		# Priorité 2 (fallback) : première variante non cachée de variant_ids
+		if variant_included == blank
+			for variant_id in variant_ids
+				assign temp_variant = variant.product.variants | where: 'id', variant_id | first
+
+				comment
+					Vérifie si cette variante est cachée
+					Si non, on la sélectionne et on sort de la boucle
+				endcomment
+				if temp_variant.metafields.custom.hidden_variant.value != true
+					assign variant_included = temp_variant
+					break
+				endif
+			endfor
+		endif
+
+		comment
+			Si aucune variante non cachée n'a été trouvée,
+			utilise la première par défaut (fallback ultime)
+		endcomment
+		if variant_included == blank
+			assign variant_included = variant
+		endif
+	else
+		# Utilisation directe de la variante passée en paramètre
+		assign variant_included = variant
+	endif
+
+	comment
+		CALCUL DES ÉCONOMIES RÉALISÉES
+
+		Détermine le montant économisé par l'inclusion gratuite de cet élément
+		dans le pack plutôt que son achat séparé
+	endcomment
+	assign savings_amount = variant_included.price
+	assign savings_amount_money = variant_included.price | money
+
+	comment
+		PRÉPARATION DES CLASSES CSS
+
+		Initialise les classes de base qui seront enrichies selon
+		l'état de disponibilité et de visibilité de la variante
+	endcomment
+	assign wrapper_classes = 'product__variant-selects__bundle__included-card'
+
+	comment
+		VÉRIFICATION COMPLÈTE DE DISPONIBILITÉ DE LA VARIANTE INCLUSE
+
+		Applique la même logique que pour les autres éléments du bundle :
+		1. Vérifie si Shopify gère l'inventaire
+		2. Contrôle les règles de quantité minimale
+		3. Évalue la disponibilité globale
+	endcomment
+	assign check_against_inventory = true
+	if variant_included.inventory_management != 'shopify' or variant_included.inventory_policy == 'continue'
+		assign check_against_inventory = false
+	endif
+
+	assign quantity_rule_soldout = false
+	if variant_included.quantity_rule.min > variant_included.inventory_quantity and check_against_inventory
+		assign quantity_rule_soldout = true
+	endif
+
+	assign variant_available = true
+	if variant_included.available == false or quantity_rule_soldout
+		assign variant_available = false
+	endif
+
+	# Si la variante est cachée, on la rend non disponible
+	if variant_included.metafields.custom.hidden_variant.value == true
+		assign variant_available = false
+	endif
+
+	# Vérifie si la variante est cachée
+	assign variant_included_hidden = false
+	if variant_included.metafields.custom.hidden_variant.value == true
+		assign variant_included_hidden = true
+	endif
+
+	comment
+		RÉCUPÉRATION DE LA DATE DE DISPONIBILITÉ DE LA VARIANTE INCLUSE
+
+		Extrait la date de disponibilité de la variante incluse
+	endcomment
+	assign selected_variant_included_date_dispo = blank
+	if variant_included.metafields.custom.date_de_dispo.value != blank
+		assign selected_variant_included_date_dispo = variant_included.metafields.custom.date_de_dispo.value
+	endif
+
+	comment
+		GESTION DE LA VISIBILITÉ DE LA CARTE
+
+		Détermine si la carte doit être masquée visuellement :
+		- Si la variante n'est pas disponible
+		- Si elle est marquée comme invisible (variante cachée)
+		Les variantes invisibles sont incluses mais pas montrées à l'utilisateur
+	endcomment
+	if variant_available == false or is_invisible
+		if is_invisible
+			assign wrapper_classes = wrapper_classes | append: ' hidden'
+		else
+			assign wrapper_classes = wrapper_classes | append: ' visually-unavailable'
+		endif
+	endif
+-%}
+
+{%- liquid
+	# Modifier de classe pack-new : layout sans image, titre + description +
+	# sélecteur 50/50 ou dim brute. Conserve toute la logique d'input/data
+	# côté legacy.
+	assign included_card_pack_new_class = ''
+	if is_pack_new
+		assign included_card_pack_new_class = ' product__variant-selects__bundle__included-card--pack-new'
+	endif
+
+	# Lecture des overrides BO depuis le metaobject `pack_information`
+	# (champs `inclus_titre` + `inclus_claim`). Lookup variant-level d'abord
+	# (plus spécifique : ex. la couette tempérée Plus en taille X peut avoir
+	# son propre titre/claim), fallback sur product-level.
+	assign included_pack_info_variant = variant_included.metafields.custom.pack_information.value
+	assign included_pack_info_product = variant_included.product.metafields.custom.pack_information.value
+
+	assign included_title_override = blank
+	if included_pack_info_variant.inclus_titre != blank
+		assign included_title_override = included_pack_info_variant.inclus_titre
+	elsif included_pack_info_product.inclus_titre != blank
+		assign included_title_override = included_pack_info_product.inclus_titre
+	endif
+
+	assign included_claim_override = blank
+	if included_pack_info_variant.inclus_claim != blank
+		assign included_claim_override = included_pack_info_variant.inclus_claim
+	elsif included_pack_info_product.inclus_claim != blank
+		assign included_claim_override = included_pack_info_product.inclus_claim
+	endif
+
+	# Description sous le titre :
+	# - pack-new + multi-variants : priorité au claim BO (`inclus_claim`),
+	#   sinon fallback metafield `taille_information`.
+	# - pack-new + single variant (full-width) : la TAILLE prime sur le claim
+	#   (cf. sommier à lattes pack-2 = référence : la card full-width montre
+	#   "80 x 200 cm • Plus"). On construit la desc depuis variant.options
+	#   joined " • " avec filtre version (whitelist `options_version_labels_to_show`,
+	#   ex. "Standard" → masqué, "Plus" → gardé). Si options vides → fallback
+	#   claim → fallback `taille_information`.
+	assign included_description = blank
+	if is_pack_new
+		if has_multiple_variants
+			if included_claim_override != blank
+				assign included_description = included_claim_override
+			else
+				assign included_description = variant_included.metafields.custom.taille_information.value
+			endif
+		else
+			if variant_included.title != 'Default Title'
+				# Whitelist labels version (locale "Plus") + noms d'option version.
+				assign desc_options_names_for_version_translated = 'products.product.options_names_for_version' | t | downcase | replace: ', ', ','
+				assign desc_options_names_for_version = desc_options_names_for_version_translated | split: ',' | uniq
+				assign desc_options_version_labels_to_show_translated = 'products.product.options_version_labels_to_show' | t | replace: ', ', ','
+				assign desc_options_version_labels_to_show = desc_options_version_labels_to_show_translated | split: ',' | uniq
+
+				assign desc_parts = ''
+				for desc_opt in variant_included.product.options_with_values
+					assign desc_opt_name_dc = desc_opt.name | downcase
+					assign desc_opt_name_arr = desc_opt_name_dc | split: ' ' | uniq
+					assign desc_is_version_opt = false
+					for desc_translation in desc_options_names_for_version
+						if desc_opt_name_arr contains desc_translation
+							assign desc_is_version_opt = true
+							break
+						endif
+					endfor
+
+					assign desc_opt_index = desc_opt.position | minus: 1
+					assign desc_opt_value = variant_included.options[desc_opt_index]
+
+					assign desc_keep = true
+					if desc_is_version_opt
+						unless desc_options_version_labels_to_show contains desc_opt_value
+							assign desc_keep = false
+						endunless
+					endif
+
+					if desc_keep and desc_opt_value != blank
+						if desc_parts != ''
+							assign desc_parts = desc_parts | append: ' • '
+						endif
+						assign desc_parts = desc_parts | append: desc_opt_value
+					endif
+				endfor
+				if desc_parts != ''
+					assign included_description = desc_parts
+				endif
+			endif
+			# Fallbacks (variant sans options exploitables) : claim BO, puis
+			# metafield taille_information.
+			if included_description == blank and included_claim_override != blank
+				assign included_description = included_claim_override
+			endif
+			if included_description == blank
+				assign included_description = variant_included.metafields.custom.taille_information.value
+			endif
+		endif
+	endif
+-%}
+
+<div class="product__variant-selects__bundle__included-item">
+	<product-bundle-item-included
+		data-section="card-bundle-item-included"
+		data-url="{{ variant_included.product.url }}"
+		class="{{ wrapper_classes }}{{ included_card_pack_new_class }}"
+	>
+		{% comment %}
+			Input caché pour maintenir la cohérence avec la logique de sélection
+			Toujours checked car les éléments inclus sont automatiquement sélectionnés
+		{% endcomment %}
+		<input
+			type="hidden"
+			class="product__variant-selects__bundle__included-item__radio visually-hidden"
+			id="bundle-item-included-{{ section_id }}-product-{{ variant_included.product.id }}-{{ variant_included.id }}"
+			name="bundle_items[]"
+			value="product:{{ variant_included.product.id }}:{{ variant_included.id }}"
+			data-bundle-item="product"
+			data-variant-id="{{ variant_included.id }}"
+			data-variant-sku="{{ variant_included.sku }}"
+			data-product-id="{{ variant_included.product.id }}"
+			data-available="{{ variant_available }}"
+			data-variant-hidden="{{ variant_included_hidden }}"
+			data-title="{{ variant_included.product.title | append: ' ' | append: variant_included.title }}"
+			data-parent-section-id="{{ section_id }}"
+			data-savings-amount="{{ savings_amount }}"
+			data-price="{{ variant_included.price }}"
+			data-compare-at-price="{{ variant_included.compare_at_price | default: variant_included.price }}"
+			data-is-invisible="{{ is_invisible | default: false }}"
+			data-has-multiple-variants="{{ has_multiple_variants | default: false }}"
+			data-variant-ids="{{ variant_ids | join: ',' }}"
+			data-free="{{ variant_free | default: false }}"
+			data-is-pack-new="{{ is_pack_new | default: false }}"
+			data-hide-extras="{{ hide_extras | default: false }}"
+			data-price-eco-part="{{ variant_included.metafields.custom.exo_tax.value | default: 0 | times: 100 }}"
+			data-date-dispo="{{ selected_variant_included_date_dispo }}"
+			{% comment %}
+				Répétition des données de gouvernance pour l'input
+			{% endcomment %}
+			{% if get_governs_variant != blank and has_governs_variants %}
+				data-governs-variants="{{ has_governs_variants | default: false }}"
+				data-governs-variant="{{ get_governs_variant.id | default: blank }}"
+			{% endif %}
+			{% comment %}
+				Désactivation conditionnelle pour les variantes invisibles gouvernées
+				Empêche la sélection manuelle d'éléments qui doivent être contrôlés automatiquement
+			{% endcomment %}
+			{% if is_invisible and get_governs_variant != blank and has_governs_variants %}
+				disabled
+			{% endif %}
+			checked
+		>
+
+		{% comment %}
+			CONTENU VISUEL DE LA CARTE D'ÉLÉMENT INCLUS
+
+			- En pack-new : structure sans image, title + description + sélecteur/dim.
+			- Sinon : structure legacy avec image à gauche.
+		{% endcomment %}
+		<div class="product__variant-selects__bundle__included-card__inner">
+			{%- unless is_pack_new -%}
+				{% comment %}
+					Image de l'élément inclus (legacy uniquement)
+				{% endcomment %}
+				<div class="product__variant-selects__bundle__included-card__image">
+					{%- if variant_included.featured_image -%}
+						<img
+							src="{{ variant_included.featured_image | image_url: width: 200 }}"
+							alt="{{ variant_included.product.title | escape }}"
+							loading="lazy"
+							width="100"
+							height="100"
+						>
+					{%- elsif variant_included.product.featured_image -%}
+						<img
+							src="{{ variant_included.product.featured_image | image_url: width: 200 }}"
+							alt="{{ variant_included.product.title | escape }}"
+							loading="lazy"
+							width="100"
+							height="100"
+						>
+					{%- endif -%}
+				</div>
+			{%- endunless -%}
+
+			{% comment %}
+				Contenu textuel et interactif de la carte
+			{% endcomment %}
+			<div class="product__variant-selects__bundle__included-card__content">
+				{% comment %}
+					Titre + badge d'économie conditionnel (badge si gratuit ET savings > 0)
+				{% endcomment %}
+				<div class="product__variant-selects__bundle__included-card__title">
+					{%- if included_title_override != blank -%}
+						{{ included_title_override }}
+					{%- else -%}
+						{{ variant_included.product.title }}
+					{%- endif -%}
+					{%- if savings_amount > 0 and variant_free -%}
+						<span class="product__variant-selects__bundle__included-card__savings badge price__badge-sale color-{{ settings.sale_badge_color_scheme }}">
+							{{ 'products.product.included_in_pack_savings' | t: savings_amount: savings_amount_money }}
+						</span>
+					{%- endif -%}
+				</div>
+
+				{%- if is_pack_new and included_description != blank -%}
+					{%- comment -%}
+						Description grise sous le titre — soit le metafield taille_information
+						quand l'item a un sélecteur (couette/oreillers), soit variant.title
+						joined " • " pour les items single-variant (drap housse, protège).
+					{%- endcomment -%}
+					<p class="product__variant-selects__bundle__included-card__description">
+						{{ included_description }}
+					</p>
+				{%- endif -%}
+
+				{% comment %}
+					AFFICHAGE CONDITIONNEL SELON LE NOMBRE DE VARIANTES
+
+					Si le produit a plusieurs variantes : affiche un sélecteur
+					Si une seule variante : pas de sélecteur (variant.title déjà dans __description en pack-new)
+				{% endcomment %}
+				{%- if has_multiple_variants -%}
+					{%- render 'product-bundle-included-picker',
+						product: variant_included.product,
+						selected_variant: variant_included,
+						product_form_id: product_form_id,
+						section_id: section_id,
+						variant_ids: variant_ids,
+						is_pack_new: is_pack_new,
+						hide_extras: hide_extras
+					-%}
+				{%- else -%}
+					{%- unless is_pack_new -%}
+						{%- comment -%}
+							Affichage simple du titre de variante (legacy uniquement — en
+							pack-new, l'info est dans `__description` au-dessus).
+						{%- endcomment -%}
+						<div class="product__variant-selects__bundle__included-card__features">
+							{{ variant_included.title }}
+						</div>
+					{%- endunless -%}
+					<script type="application/json" data-selected-variant>
+						{{ variant_included | json }}
+					</script>
+				{%- endif -%}
+			</div>
+		</div>
+	</product-bundle-item-included>
+</div>

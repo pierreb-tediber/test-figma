@@ -1,0 +1,770 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_content": false,
+        "custom_h1": "",
+        "h1_size": "h1",
+        "h1_no_margin": false,
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "ax_heading_6TphAp": {
+      "type": "ax-heading",
+      "name": "Ax heading",
+      "settings": {
+        "heading": "<p>Garantie matelas</p>",
+        "heading_size": "h2",
+        "heading_first": true,
+        "subheading": "",
+        "description": "",
+        "full_width": false,
+        "text_alignment": "center",
+        "color_scheme": "",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 32,
+        "padding_top": 96,
+        "padding_bottom": 64
+      }
+    },
+    "ax_richtext_RkciMT": {
+      "type": "ax-richtext",
+      "blocks": {
+        "text_JRbaPb": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Nous vous remercions d’avoir acheté un ou plusieurs nouveau(x) produit(s) TEDIBER. Notre exigence de qualité est élevée et ne doutons pas que vous serez très heureux de votre achat.<br/><br/>Cependant, si vous ne vous accoutumez pas à TEDIBER ou si vous découvrez un défaut dans votre produit, voici ci-dessous les conditions de notre garantie. Si vous estimez avoir le droit de vous prévaloir de leurs conditions, n’hésitez pas à nous contacter à hello@tediber.com(mailto:hello@tediber.com) pour recevoir des instructions sur la manière de procéder.<br/><br/>VEUILLEZ NOTER QUE NOTRE GARANTIE DES “100 NUITS D’ESSAI & RETOUR GRATUIT” ET NOS GARANTIES PRODUITS S’APPLIQUENT UNIQUEMENT AUX ACHETEURS INITIAUX DE PRODUITS TEDIBER AUTHENTIQUES, QUI ONT ÉTÉ ACHETÉS DIRECTEMENT ET SEULEMENT AUPRÈS DE TEDIBER. UNE PREUVE D’ACHAT VOUS SERA DEMANDÉE AFIN DE CERTIFIER DE L’AUTHENTICITÉ DE L’ACHAT. LA GARANTIE DES “100 NUITS D’ESSAI & RETOUR GRATUIT” S’APPLIQUE POUR CHAQUE PRODUIT TEDIBER MAIS N’EST EN AUCUN CAS RENOUVELABLE.</p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "text_JRbaPb"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_6DaePa": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_jUhgxB": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p><strong>Le Matelas Hybride, Hybride Premium et Hybride Inifinite </strong></p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_jUhgxB"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "collapsible_content_LTxXXF": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_F7jM9c": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "La garantie du Matelas Hybride, Hybride Premium et Hybride Infinite 10 ans.",
+            "icon": "check_mark",
+            "row_content": "<p>Les conditions de notre garantie Matelas Hybride sont les suivantes :</p><p>Votre matelas est couvert par une garantie de dix ans, qui vous donne des droits particuliers découlant de la loi.</p><p>Elle n’est pas transférable et vous couvre uniquement si vous êtes l’acheteur initial et le propriétaire actuel d’un matelas Hybride pour lequel vous vous prévalez d’un recours au titre de la garantie et si vous l’avez acheté directement sur tediber.com ou dans l'une de nos boutiques Les Boîtes de Nuit.</p><p>Ainsi, la garantie ne s’applique que pendant la période au cours de laquelle le matelas est la propriété et sous le contrôle de l’acheteur initial de ce matelas.</p><p>La garantie Matelas Hybride 10 ans est une garantie pleine couvrant l’intégralité des défauts de fabrication et notamment :</p><p>– Une empreinte ou un affaissement visible du matériau en mousse supérieur à 2.5cm. Cela fait référence à une empreinte qui est visible lorsque rien ne pèse sur le dessus du matelas. Si vous avez des questions, contactez-nous à <a href=\"mailto:hello@tediber.com\">hello@tediber.com</a>.</p><p>– Tout défaut physique du produit qui entraîne une fissure ou une déformation importante malgré une utilisation normale et une manipulation appropriée du produit</p><p>– Tout défaut dans la fabrication de la housse du matelas comme la fermeture éclair qui cède, le tissu qui se déchire ou la couture qui se défait. Comme mentionné plus bas, un défaut de la housse n’ouvre pas droit au remplacement du matelas mais seulement de la housse défectueuse.</p><p>– Pour le matelas hybride en cas de bruit persistant de frottements entre les ressorts et la mousse. Dans ce cas, veillez à vérifier que le bruit provient bien de l'intérieur du matelas et non de votre sommier par exemple.</p><p>Si le matelas est en effet défectueux, nous procéderons à son remplacement et les frais de livraison seront à notre charge. Par ailleurs, veuillez noter qu’aucun remboursement ne sera effectué en dehors de la garantie des 100 nuits d’essai.</p><p>Par ailleurs, si vous vous apercevez au-delà des 100 nuits d’essai que votre matelas est défectueux et que nous le confirmons, nous récupérerons le matelas défectueux puis nous vous ferons livrer un nouveau matelas. L’offre des “100 nuits d’essai & Retour gratuit” n’est alors pas renouvelée à partir de la date de livraison de votre nouveau produit.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_8hRpWM": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "La garantie du Matelas Hybride, Hybride Premium et Hybride Infinite ne couvre pas",
+            "icon": "check_mark",
+            "row_content": "<p>La garantie Matelas Hybride 10 ans ne couvre pas les matelas non déballés dans les 30 jours suivant la date de livraison.</p><p>La garantie Matelas Hybride 10 ans ne couvre pas les matelas vendus par des revendeurs non-agréés et ne couvre que les matelas vendus directement par Tediber.</p><p>La garantie Matelas Hybride 10 ans ne couvre que les matelas vendus comprimés roulés et ne couvre pas les matelas qui auraient été vendus non comprimés.</p><p>La garantie Matelas Hybride ne couvre pas votre matelas si vous l’utilisez d’une façon incompatible avec sa destination et son utilisation prévue, par exemple, une situation non domestique. En outre, elle ne couvre pas les états découlant d’une mauvaise manipulation, d’une mauvaise utilisation ou de la négligence, par exemple, lors du transport du produit. Les défauts visibles sur la mousse devront ainsi être signalés dans la période des 100 jours suivant la livraison et ne pourront faire l’objet d’une demande de garantie 10 ans.</p><p>Elle ne couvre pas l’usure normale du matelas et les situations susceptibles de causer une détérioration ou des dommages.</p><p>Plus particulièrement, cette garantie exclut :</p><p>a) Tous les matelas non déballés dans le mois suivant la livraison. Ainsi les matelas ne regonflant pas ne peuvent être signalés plus de 30 jours après la livraison ;<br/><br/>b) Tous les matelas utilisés sur un sommier électrique (car non compatible avec nos matelas)</p><p>c) une baisse normale de la fermeté de la mousse ne portant pas atteinte aux qualités générales du matelas ;</p><p>d) les affaissements naturels des matériaux, c’est-à-dire les affaissements n’excédant pas plus de 2,5cm de hauteur ;</p><p>e) l’usure normale du fait de l’utilisation prévue des produits, y compris causée par le lavage, comme le boulochage des tissus ;</p><p>f) si vous avez tenté d’altérer ou de réparer le matelas sans notre consentement ou si vous avez nettoyé les produits avec des produits ou des techniques inappropriés ;</p><p>g) des imperfections mineures et de légers défauts esthétiques ;</p><p>h) des déchirures, des tâches, de la salissure, des brûlures, des dommages liquides et la décoloration des matériaux qui surviennent au fil du temps ;</p><p>i) l’humidité, les odeurs ou la moisissure (qui peut entre-autre être provoquée par l’absence de sommier) ;</p><p>j) les préférences individuelles ou personnelles concernant la fermeté, la texture, le confort, etc. ;</p><p>k) des allergies ou des sensibilités individuelles ou personnelles.</p><p>l) Toutes les contaminations par les puces, punaises de lit où autres parasites ;</p><p>m) si le défaut résulte d’un cas de force majeure ou d’un phénomène naturel indépendant de notre volonté, y compris, sans limitation, d’un incendie, d’une inondation ou d’une catastrophe naturelle.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_q4NAzU": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Que fera Tediber ?",
+            "icon": "check_mark",
+            "row_content": "<p>La demande d’exercice de la garantie se fait à l’adresse <a href=\"mailto:hello@tediber.com\"><span style=\"text-decoration:underline\">hello@tediber.com</span></a>. Les demandes de garantie doivent comporter une description claire du défaut, des photos du défaut et la preuve d’achat du produit.<br/>L’absence de photographies ou une description imprécise pourront retarder la prise en charge du défaut au titre de la garantie 10 ans ou aboutir à son non-exercice.<br/><br/>Après inspection du défaut par l’équipe Tediber, elle décidera si le produit est défectueux et si les conditions d’application de la garantie sont remplies.<br/><br/>Les produits défectueux devront être retournés et les frais de retours seront remboursés si le défaut est constaté comme éligible à la garantie 10 ans.<br/><br/>Si le défaut est considéré comme étant couvert par la garantie, notre obligation dans le cadre de la garantie 10 ans consistera à fournir une réparation ou un remplacement du produit. Dans le cas où une partie isolée du produit serait concernée par le défaut (par exemple la housse ou une partie du noyau dans le cas du matelas), seule cette partie sera réparée ou remplacée<br/><br/>Les produits réparés ou remplacés vous seront livrés gratuitement – veuillez noter que l’envoi ne peut être fait que dans le pays choisi lors de la livraison initiale du matelas.<br/><br/>Sur la base de justificatifs et dans un montant raisonnable, les frais éventuels d’envoi du produit défectueux seront remboursés.<br/><br/>Nous remplacerons le produit considéré comme défectueux par un modèle identique.<br/><br/>Dans le cas où le modèle n’existerait plus, il sera remplacé par un modèle d’un prix équivalent (ou inférieur s’il n’est pas disponible à prix équivalent). Si la taille n'est plus commercialisée, nous nous réservons le droit de vous remplacer le produit par une taille similaire.<br/><br/>Toute réclamation en vertu de cette garantie doit être reçue dans les 30 jours suivant votre constatation du défaut ou suivant la date à laquelle vous auriez raisonnablement dû constater le défaut, et, en tout état de cause, avant la fin de la période de garantie.<br/><br/>Veuillez noter qu’aucun remboursement ne sera effectué au titre de la garantie 10 ans, contrairement à la garantie des 100 nuits d’essai. La garantie 10 ans ouvre droit à une réparation ou éventuellement à un remplacement<br/><br/>La garantie est fournie par Tediber, 20 rue sainte croix de la bretonnerie, 75004 Paris. Vous pouvez nous contacter à hello@tediber.com(mailto:hello@tediber.com).</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_4CEiTm": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Quelle est la durée de la garantie ?",
+            "icon": "check_mark",
+            "row_content": "<p>Cette garantie couvrant les matelas Hybride dure pendant dix 10 ans à compter de la date de livraison. Nous ne proratisons pas les termes (c’est-à-dire que nous ne réduisons pas le montant total en fonction du temps écoulé). Un matelas remplacé ou réparé ne prolonge pas la durée de votre garantie. Le calcul de la durée de garantie se fait à partir du jour de la date de livraison de votre achat d’origine.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_DQycMF": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Absence de déclaration de nature médicale ou liée à la santé",
+            "icon": "check_mark",
+            "row_content": "<p>TEDIBER n’effectue aucune déclaration de nature médicale ou liée à la santé concernant ses matelas. Les allergies, l’inconfort ou d’autres situations ne sont pas couvert(e)s au titre de cette garantie. Toute question ou préoccupation concernant les situations de nature médicale ou liées à la santé doit être adressée à un médecin habilité.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_imJzzb": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Comment effectuer une réclamation au titre de cette garantie ?",
+            "icon": "check_mark",
+            "row_content": "<p>Pour effectuer une réclamation au titre de notre garantie, veuillez envoyer une brève description écrite (accompagnée de photos, si possible) du problème ou de l’état qui selon vous constitue un défaut à l’adresse hello@tediber.com(mailto:hello@tediber.com). Par ailleurs, d’autres éléments comme la preuve d’achat ou des photos complémentaires pourront être demandés.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_jYnXiF": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Informations sur les qualités et caractéristiques environnementales",
+            "icon": "check_mark",
+            "row_content": "<p>Conformément à la réglementation, Tediber fournit à ses clients les informations de mise en conformité concernant la présence de substances dangereuses, l'incorporation de matières recyclées, et la recyclabilité - découvrez les informations <a href=\"https://docs.google.com/spreadsheets/d/1vq86j7D2zjYq1guPzI7_0s8_1u3o3k-DKBSmS_BZrkY/edit?userstoinvite=elise%40tediber.com&sharingaction=manageaccess&role=writer&gid=0#gid=0\"><span style=\"text-decoration:underline\">ici</span></a></p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_F7jM9c",
+        "collapsible_row_8hRpWM",
+        "collapsible_row_q4NAzU",
+        "collapsible_row_4CEiTm",
+        "collapsible_row_DQycMF",
+        "collapsible_row_imJzzb",
+        "collapsible_row_jYnXiF"
+      ],
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "full_width": true,
+        "caption": "",
+        "heading": "",
+        "heading_size": "h2",
+        "heading_alignment": "center",
+        "layout": "none",
+        "container_color_scheme": "",
+        "color_scheme": "",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "ax_richtext_Ue8C6E": {
+      "type": "ax-richtext",
+      "blocks": {
+        "button_xEgLxG": {
+          "type": "button",
+          "settings": {
+            "button_text": "Découvrir le matelas Hybride Premium",
+            "url": "shopify://products/matelas-hybride-premium",
+            "link_blank": false,
+            "style_button": "button button--primary",
+            "button_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "button_xEgLxG"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_FM3xfE": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_4nnJEy": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Matelas Grand Ours</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_4nnJEy"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "collapsible_content_NwknYz": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_LtVhed": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "La Garantie réparable à vie du matelas GRAND OURS",
+            "icon": "check_mark",
+            "row_content": "<p>Fidèle à ses valeurs, Tediber prône un luxe durable. Le matelas Grand Ours est ainsi conçu pour traverser le temps grâce à des pièces de confort facilement remplaçables ou réparables et disponibles à l’achat à vie.</p><p>Votre matelas est couvert par une garantie réparable à vie, qui vous donne des droits particuliers découlant de la loi.</p><p>Elle n’est pas transférable et vous couvre uniquement si vous êtes l’acheteur initial et le propriétaire actuel du matelas Grand Ours pour lequel vous vous prévalez d’un recours au titre de la garantie et si vous l’avez acheté directement sur tediber.com ou dans l'une de nos boutiques Les Boîtes de Nuit.</p><p>Ainsi, la garantie ne s’applique que pendant la période au cours de laquelle le matelas est la propriété et sous le contrôle de l’acheteur initial de ce matelas.</p><p>Les conditions de notre garantie Matelas Grand Ours sont les suivantes :</p><p>– Une empreinte ou un affaissement visible du matelas ou surmatelas supérieur à 5cm. Cela fait référence à une empreinte qui est visible lorsque rien ne pèse sur le dessus du matelas. Si vous avez des questions, contactez-nous à <a href=\"mailto:hello@tediber.com\">hello@tediber.com</a>. – Tout défaut physique du produit qui entraîne une fissure ou une déformation importante malgré une utilisation normale et une manipulation appropriée du produit – Tout défaut dans la fabrication des housses du matelas comme la fermeture éclair qui cède, le tissu qui se déchire ou la couture qui se défait – En cas de bruit persistant de frottements entre les ressorts et la mousse. Dans ce cas, veillez à vérifier que le bruit provient bien de l'intérieur du matelas et non de votre sommier par exemple.</p><p>Si le matelas est en effet défectueux, nous procéderons à son remplacement total ou partiel ou à sa réparation suivant la nature de la réclamation qui sera effectuée, de plus les frais de livraison seront à notre charge. Par ailleurs, veuillez noter qu’aucun remboursement ne sera effectué en dehors de la garantie des 100 nuits d’essai.</p><p>L’offre des “100 nuits d’essai & Retour gratuit” n’est alors pas renouvelée à partir de la date de livraison de votre nouveau produit.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_49Bzxe": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "La Garantie Matelas Grand Ours ne couvre pas",
+            "icon": "check_mark",
+            "row_content": "<p>La garantie Matelas Grand Ours réparable à vie ne couvre pas les matelas non installés dans les 30 jours suivant la date de livraison.</p><p>La garantie Matelas Grand Ours réparable à vie ne couvre pas les matelas vendus par des revendeurs non-agréés et ne couvre que les matelas vendus directement par Tediber. La garantie Matelas Grand Ours ne couvre pas votre matelas si vous l’utilisez d’une façon incompatible avec sa destination et son utilisation prévue, par exemple, une situation non domestique. En outre, elle ne couvre pas les états découlant d’une mauvaise manipulation, d’une mauvaise utilisation ou de la négligence, par exemple, lors du transport du produit. Les défauts visibles sur les matériaux devront ainsi être signalés dans la période des 100 jours suivant la livraison et ne pourront faire l’objet d’une demande de garantie réparabilité à vie.</p><p>Elle ne couvre pas l’usure normale du matelas et les situations susceptibles de causer une détérioration ou des dommages.</p><p>Plus particulièrement, cette garantie exclut : a) Tous les matelas non installés dans le mois suivant la livraison. b) un stockage inadapté comme un matelas entreposé sur le tranche c) une baisse normale de la fermeté du matelas ne portant pas atteinte aux qualités générales du matelas ; d) les affaissements naturels des matériaux, c’est-à-dire les affaissements n’excédant pas plus de 5cm de hauteur ; e) l’usure normale du fait de l’utilisation prévue des produits, y compris causée par le lavage, comme le boulochage des tissus ; f) si vous avez tenté d’altérer ou de réparer le matelas sans notre consentement ou si vous avez nettoyé les produits avec des produits ou des techniques inappropriés ; g) des imperfections mineures et de légers défauts esthétiques ; h) des déchirures, des tâches, de la salissure, des brûlures, des dommages liquides et la décoloration des matériaux qui surviennent au fil du temps ; i) l’humidité, les odeurs ou la moisissure (qui peut entre-autre être provoquée par l’absence de sommier) ; j) les préférences individuelles ou personnelles concernant la fermeté, la texture, le confort, etc. ; k) des allergies ou des sensibilités individuelles ou personnelles. l) Toutes les contaminations par les puces, punaises de lit où autres parasites ; m) si le défaut résulte d’un cas de force majeure ou d’un phénomène naturel indépendant de notre volonté, y compris, sans limitation, d’un incendie, d’une inondation ou d’une catastrophe naturelle.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_cnJWbb": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Que fera Tediber ?",
+            "icon": "check_mark",
+            "row_content": "<p>La demande d’exercice de la garantie réparabilité à vie se fait à l’adresse <a href=\"mailto:hello@tediber.com\">hello@tediber.com</a>. Les demandes de garantie doivent comporter une description claire du défaut, des photos du défaut et la preuve d’achat du produit. L’absence de photographies ou une description imprécise pourront retarder la prise en charge du défaut au titre de la garantie réparabilité à vie ou aboutir à son non-exercice.</p><p>Après inspection du défaut par l’équipe Tediber, elle décidera si le produit est défectueux et si les conditions d’application de la garantie réparabilité à vie sont remplies. Les produits défectueux devront être retournés et les frais de retours seront remboursés si le défaut est constaté comme éligible à la garantie décrite. Si le défaut est considéré comme étant couvert par la garantie, notre obligation dans le cadre de la garantie réparabilité à vie consistera à fournir une réparation ou un remplacement du produit. Dans le cas où une partie isolée du produit serait concernée par le défaut, seule cette partie sera réparée ou remplacée comme suit :</p><p><br/>- Avant 10 ans : La totalité du produit sera prise en charge en cas de défaut avéré sur votre produit suivant les différentes conditions d’inclusions et d’exclusions énoncées ci-dessus.<br/>- De 10 à 15 ans : En cas de défaut sur le surmatelas, il sera remplacé moyennant un coût. En cas de défaut sur le reste du matelas, la partie défectueuse sera réparée et prise en charge à 100% suivant les différentes conditions d’inclusions et d’exclusions énoncées ci-dessus.<br/>- De 15 à 30 ans : En cas de défaut sur le surmatelas et la partie supérieure du matelas, ils seront remplacés moyennant un coût. En cas de défaut sur le reste du matelas, la partie défectueuse sera réparée et prise en charge à 100% suivant les différentes conditions d’inclusions et d’exclusions énoncées ci-dessus.<br/>- À partir de 30 ans : en cas de défaut, la totalité du produit sera réparable moyennant un coûtLes produits réparés ou remplacés vous seront livrés gratuitement – veuillez noter que l’envoi ne peut être fait que dans le pays choisi lors de la livraison initiale du matelas. </p><p><br/>Nous remplacerons le produit considéré comme défectueux par un modèle identique.</p><p>Dans le cas où le modèle n’existerait plus, il sera remplacé par un modèle d’un prix équivalent (ou inférieur s’il n’est pas disponible à prix équivalent). Si la taille n'est plus commercialisée, nous nous réservons le droit de vous remplacer le produit par une taille similaire.</p><p>Toute réclamation en vertu de cette garantie doit être reçue dans les 30 jours suivant votre constatation du défaut ou suivant la date à laquelle vous auriez raisonnablement dû constater le défaut, et, en tout état de cause, avant la fin de la période de garantie.</p><p>Veuillez noter qu’aucun remboursement ne sera effectué au titre de la garantie réparable à vie, contrairement à la garantie des 100 nuits d’essai. La garantie réparable à vie ouvre droit à une réparation ou éventuellement à un remplacement</p><p>La garantie est fournie par Tediber, 20 rue sainte croix de la bretonnerie, 75004 Paris. Vous pouvez nous contacter à <a href=\"mailto:hello@tediber.com\">hello@tediber.com</a>.</p><p>Le calcul de la durée de garantie se fait à partir du jour de livraison de votre achat d’origine.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_6tYmMN": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Absence de déclaration de nature médicale ou liée à la santé",
+            "icon": "check_mark",
+            "row_content": "<p>TEDIBER n’effectue aucune déclaration de nature médicale ou liée à la santé concernant ses matelas. Les allergies, l’inconfort ou d’autres situations ne sont pas couvert(e)s au titre de cette garantie. Toute question ou préoccupation concernant les situations de nature médicale ou liées à la santé doit être adressée à un médecin habilité.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_6BGqnr": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Comment effectuer une réclamation au titre de cette garantie ?",
+            "icon": "check_mark",
+            "row_content": "<p>Pour effectuer une réclamation au titre de notre garantie, veuillez envoyer une brève description écrite (accompagnée de photos) du problème ou de l’état qui selon vous constitue un défaut à l’adresse<a href=\"mailto:hello@tediber.com\">hello@tediber.com</a>. Par ailleurs, d’autres éléments comme la preuve d’achat, des photos ou vidéos complémentaires pourront être demandées.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_YyX7MK": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Informations sur les qualités et caractéristiques environnementales",
+            "icon": "check_mark",
+            "row_content": "<p>Conformément à la réglementation, Tediber fournit à ses clients les informations de mise en conformité concernant la présence de substances dangereuses, l'incorporation de matières recyclées, et la recyclabilité - découvrez les informations<a href=\"https://docs.google.com/spreadsheets/d/1vq86j7D2zjYq1guPzI7_0s8_1u3o3k-DKBSmS_BZrkY/edit?userstoinvite=elise%40tediber.com&sharingaction=manageaccess&role=writer&gid=0#gid=0\" target=\"_blank\"><span style=\"text-decoration:underline\"><strong>ici</strong></span></a></p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_LtVhed",
+        "collapsible_row_49Bzxe",
+        "collapsible_row_cnJWbb",
+        "collapsible_row_6tYmMN",
+        "collapsible_row_6BGqnr",
+        "collapsible_row_YyX7MK"
+      ],
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "full_width": true,
+        "caption": "",
+        "heading": "",
+        "heading_size": "h2",
+        "heading_alignment": "center",
+        "layout": "none",
+        "container_color_scheme": "",
+        "color_scheme": "",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "ax_richtext_pDHmLW": {
+      "type": "ax-richtext",
+      "blocks": {
+        "button_6cN73N": {
+          "type": "button",
+          "settings": {
+            "button_text": "Découvrir le matelas Grand Ours Tediber",
+            "url": "shopify://products/matelas-grand-ours",
+            "link_blank": false,
+            "style_button": "button button--primary",
+            "button_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "button_6cN73N"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_DPpAhQ": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_BhAMkb": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Matelas Grand tedi</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_BhAMkb"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "collapsible_content_TkjCpr": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_zGGBpH": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "La Garantie Matelas enfant et ado Grand Tedi by Tediber 5 ans",
+            "icon": "check_mark",
+            "row_content": "<p>Les conditions de notre garantie Matelas 5 ans sont les suivantes : Votre matelas enfant et ado Grand Tedi by Tediber est couvert par une garantie de cinq ans, qui vous donne des droits particuliers découlant de la loi.<br/><br/>Elle n’est pas transférable et vous couvre uniquement si vous êtes l’acheteur initial et le propriétaire actuel du matelas enfant et ado Grand Tedi by Tediber pour lequel vous vous prévalez d’un recours au titre de la garantie et si vous l’avez acheté directement sur www.tediber.com.<br/><br/>Ainsi, la garantie ne s’applique que pendant la période au cours de laquelle le matelas est la propriété et sous le contrôle de l’acheteur initial de ce matelas.<br/><br/>La garantie Matelas enfant et ado Grand Tedi by Tediber 5 ans est une garantie pleine couvrant l’intégralité des défauts de fabrication et notamment :<br/><br/>– Un affaissement visible du matériau en mousse supérieur à 2.5cm. Cela fait référence à une empreinte qui est visible lorsque rien ne pèse sur le dessus du matelas. Si vous avez des questions, contactez-nous à hello@tediber.com. – Tout défaut physique du produit qui entraîne une fissure ou une déformation importante, de plus de 2.5 cm, malgré une utilisation normale et une manipulation appropriée du produit – Les différences de fermeté sur un même matelas. Cela fait référence à une différence d’enfoncement de plus de 2cm entre deux zones d’un même matelas – Tout défaut dans la fabrication de la housse du matelas comme la fermeture éclair qui cède, le tissu qui se déchire ou la couture qui se défait. Comme mentionné plus bas, un défaut de la housse n’ouvre pas droit au remplacement du matelas mais seulement de la housse défectueuse. La garantie ne couvre pas l’usure normale du fait de l’utilisation prévue des produits, y compris causée par le lavage, comme le boulochage des tissus.<br/><br/>Si le matelas est en effet défectueux, nous procéderons à son remplacement et les frais de livraison seront à notre charge. Par ailleurs, veuillez noter qu’aucun remboursement ne sera effectué en dehors de la garantie des 100 nuits d’essai.<br/><br/>Par ailleurs, si vous vous apercevez au-delà des 100 nuits d’essai que votre matelas est défectueux et que nous le confirmons, nous récupérerons le matelas défectueux puis nous vous ferons livrer un nouveau matelas. L’offre des “100 nuits d’essai & Retour gratuit” n’est alors pas renouvelée à partir de la date de livraison de votre nouveau produit.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_Wj4yiY": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "La Garantie Matelas ne couvre pas",
+            "icon": "check_mark",
+            "row_content": "<p>La garantie Matelas enfant et ado Grand Tedi by Tediber 5 ans ne couvre pas les matelas non déballés dans le mois suivant la date de livraison.<br/><br/>La garantie Matelas enfant et ado Grand Tedi by Tediber 5 ans ne couvre pas les matelas utilisés par des dormeurs pesant plus de 130 kg.<br/><br/>La garantie Matelas enfant et ado Grand Tedi by Tediber 5 ans ne couvre pas les matelas vendus par des revendeurs non-agréés et ne couvre que les matelas vendus directement par Tediber.<br/><br/>La garantie Matelas enfant et ado Grand Tedi by Tediber 5 ans ne couvre que les matelas vendus comprimés roulés et ne couvre pas les matelas qui auraient été vendus non comprimés. La garantie Matelas enfant et ado Grand Tedi by Tediber ne couvre pas votre matelas si vous l’utilisez d’une façon incompatible avec sa destination et son utilisation prévue, par exemple, une situation non domestique. En outre, elle ne couvre pas les états découlant d’une mauvaise manipulation, d’une mauvaise utilisation ou de la négligence, par exemple, lors du transport du produit Les défauts visibles sur la mousse devront ainsi être signalés dans la période des 100 jours suivant la livraison et ne pourront faire l’objet d’une demande de garantie 5 ans.<br/><br/>La garantie Matelas enfant et ado Grand Tedi by Tediber ne couvre pas votre matelas si le sommier utilisé avec celui-ci présente un affaissement ou un défaut de planéité quelconque qui pourrait induire un défaut sur le matelas.<br/><br/>Elle ne couvre pas l’usure normale du matelas et les situations susceptibles de causer une détérioration ou des dommages.<br/><br/>Plus particulièrement, cette garantie exclut : a) Tous les matelas non déballés dans le mois suivant la livraison. Ainsi les matelas ne regonflant pas ne peuvent être signalés plus de 30 jours après la livraison ; b) une baisse normale de la fermeté de la mousse ne portant pas atteinte aux qualités générales du matelas ; c) les affaissements naturels des matériaux, c’est-à-dire les affaissements n’excédant pas plus de 2,5cm de hauteur ; d) l’usure normale du fait de l’utilisation prévue des produits, y compris causée par le lavage, comme le boulochage des tissus ; e) si vous avez tenté d’altérer ou de réparer le matelas sans notre consentement ou si vous avez nettoyé les produits avec des produits ou des techniques inappropriés ; f) des imperfections mineures et de légers défauts esthétiques ; g) des déchirures, des tâches, de la salissure, des brûlures, des dommages liquides et la décoloration des matériaux qui surviennent au fil du temps ; h) l’humidité, les odeurs ou la moisissure (qui peut entre-autre être provoquée par l’absence de sommier) ; i) les préférences individuelles ou personnelles concernant la fermeté, la texture, le confort, etc. ; j) des allergies ou des sensibilités individuelles ou personnelles. k) Toutes les contaminations par les puces, punaises de lit où autres parasites ; l) si le défaut résulte d’un cas de force majeure ou d’un phénomène naturel indépendant de notre volonté, y compris, sans limitation, d’un incendie, d’une inondation ou d’une catastrophe naturelle.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_Q7wCFW": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Que fera Tediber ?",
+            "icon": "check_mark",
+            "row_content": "<p>La demande d’exercice de la garantie se fait à l’adresse hello@tediber.com(mailto:hello@tediber.com). Les demandes de garantie doivent comporter une description claire du défaut, des photos du défaut et du sommier utilisé, ainsi que la preuve d’achat du produit. L’absence de photographies ou une description imprécise pourront retarder la prise en charge du défaut au titre de la garantie 5 ans ou aboutir à son non-exercice.<br/><br/>Après inspection du défaut par l’équipe Tediber, elle décidera si le produit est défectueux et si les conditions d’application de la garantie sont remplies.<br/><br/>Les produits défectueux devront être retournés et les frais de retours seront remboursés si le défaut est constaté comme éligible à la garantie 5 ans. Si le défaut est considéré comme étant couvert par la garantie, notre obligation dans le cadre de la garantie 5 ans consistera à fournir une réparation ou un remplacement du produit. Dans le cas où une partie isolée du produit serait concernée par le défaut (par exemple la housse ou le noyau dans le cas du matelas), seule cette partie sera réparée ou remplacée. Les Produits réparés ou remplacés vous seront livrés gratuitement – veuillez noter que l’envoi ne peut être fait que dans le pays choisi lors de la livraison initiale du matelas.<br/><br/>Sur la base de justificatifs et dans un montant raisonnable, les frais éventuels d’envoi du produit défectueux seront remboursés.<br/><br/>Nous remplacerons le produit considéré comme défectueux par un modèle identique.<br/><br/>Dans le cas où le modèle n’existerait plus, il sera remplacé par un modèle d’un prix équivalent (ou inférieur s’il n’est pas disponible à prix équivalent). Si la taille n'est plus commercialisée, nous nous réservons le droit de vous remplacer le produit par une taille similaire.<br/><br/>Toute réclamation en vertu de cette garantie doit être reçue dans les 30 jours suivant votre constatation du défaut ou suivant la date à laquelle vous auriez raisonnablement dû constater le défaut, et, en tout état de cause, avant la fin de la période de garantie.<br/><br/>Veuillez noter qu’aucun remboursement ne sera effectué au titre de la garantie 5 ans, contrairement à la garantie des 100 nuits d’essai. La garantie 5 ans ouvre droit à une réparation ou éventuellement à un remplacement La garantie est fournie par Tediber, 20 rue sainte croix de la bretonnerie, 75004 Paris. Vous pouvez nous contacter à hello@tediber.com(mailto:hello@tediber.com).</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_6GAMeb": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Quelle est la durée de la garantie ?",
+            "icon": "check_mark",
+            "row_content": "<p>Cette garantie couvrant votre matelas enfant et ado Grand Tedi by Tediber dure pendant 5 ans à compter de la date de livraison. Nous ne proratisons pas les termes (c’est-à-dire que nous ne réduisons pas le montant total en fonction du temps écoulé). Un matelas remplacé ou réparé ne prolonge pas la durée de votre garantie. Le calcul de la durée de garantie se fait à partir du jour de la date de commande de votre achat d’origine.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_RpgBJj": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Absence de déclaration de nature médicale ou liée à la santé",
+            "icon": "check_mark",
+            "row_content": "<p>Tediber n’effectue aucune déclaration de nature médicale ou liée à la santé concernant ses matelas. Les allergies, l’inconfort ou d’autres situations ne sont pas couvert(e)s au titre de cette garantie. Toute question ou préoccupation concernant les situations de nature médicale ou liées à la santé doit être adressée à un médecin habilité.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_EkkxJj": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Comment effectuer une réclamation au titre de cette garantie ?",
+            "icon": "check_mark",
+            "row_content": "<p>Pour effectuer une réclamation au titre de notre garantie, veuillez envoyer une brève description écrite (accompagnée de photos, si possible) du problème ou de l’état qui selon vous constitue un défaut à l’adresse hello@tediber.com(mailto:hello@tediber.com). Par ailleurs, d’autres éléments comme la preuve d’achat ou des photos complémentaires pourront être demandés.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_ydLjR3": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Informations sur les qualités et caractéristiques environnementales",
+            "icon": "check_mark",
+            "row_content": "<p>Conformément à la réglementation, Tediber fournit à ses clients les informations de mise en conformité concernant la présence de substances dangereuses, l'incorporation de matières recyclées, et la recyclabilité - découvrez les informations <a href=\"https://docs.google.com/spreadsheets/d/1vq86j7D2zjYq1guPzI7_0s8_1u3o3k-DKBSmS_BZrkY/edit?userstoinvite=elise%40tediber.com&sharingaction=manageaccess&role=writer&gid=0#gid=0\" target=\"_blank\"><span style=\"text-decoration:underline\"><strong>ici</strong></span></a></p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_zGGBpH",
+        "collapsible_row_Wj4yiY",
+        "collapsible_row_Q7wCFW",
+        "collapsible_row_6GAMeb",
+        "collapsible_row_RpgBJj",
+        "collapsible_row_EkkxJj",
+        "collapsible_row_ydLjR3"
+      ],
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "full_width": true,
+        "caption": "",
+        "heading": "",
+        "heading_size": "h2",
+        "heading_alignment": "center",
+        "layout": "none",
+        "container_color_scheme": "",
+        "color_scheme": "",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "ax_richtext_RU6bRN": {
+      "type": "ax-richtext",
+      "blocks": {
+        "button_aFDfYi": {
+          "type": "button",
+          "settings": {
+            "button_text": "Découvrir le matelas enfant ado Grand Tedi Tediber",
+            "url": "shopify://products/matelas-enfant-ado-grand-tedi",
+            "link_blank": false,
+            "style_button": "button button--primary",
+            "button_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "button_aFDfYi"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_4Aq3pA": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_H9zQPq": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Matelas bébé Tedi</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_H9zQPq"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "collapsible_content_LL3BPe": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_Yyhahn": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "La garantie Matelas Bébé Tedi by Tediber 5 ans",
+            "icon": "check_mark",
+            "row_content": "<p>À noter que le matelas bébé Tedi by Tediber de TEDIBER est livré avec l’Incroyable Drap Magique. Celui-ci est exclu de la garantie matelas Tedi by Tediber et vous ne disposez pas non plus des 100 nuits d’essai & retour gratuit pour cet article.<br/><br/>Nous assurons 5 ans de garantie pleine contre tous les défauts (c’est-à-dire non dégressive : même après 2 ans et demi, la garantie couvre l’intégralité et pas seulement la moitié de la valeur du matelas bébé Tedi by Tediber). Cette garantie n’est pas transférable et vous couvre uniquement si vous êtes l’acheteur initial et le propriétaire actuel du matelas bébé Tedi by Tediber pour lequel vous vous prévalez d’un recours au titre de la garantie Incroyable Petit Matelas bébé Tedi by Tediber et si vous l’avez acheté directement sur www.tediber.com(https://www.tediber.com). Ainsi, la garantie ne s’applique que pendant la période au cours de laquelle le matelas pour bébé est la propriété et sous le contrôle de l’acheteur initial de ce matelas.<br/><br/>Cette garantie est limitée aux défauts substantiels découlant de matériaux ou de main d’œuvre de nature défectueuse concernant le matelas pour bébé que vous avez acheté.<br/><br/>Elle couvre:<br/><br/>– Une empreinte ou un affaissement visible du matériau en mousse supérieur à 2 cm. Cela fait référence à une empreinte qui est visible lorsque rien ne pèse sur le dessus du matelas. Si vous avez des questions, contactez-nous à hello@tediber.com(mailto:hello@tediber.com).<br/><br/>– Tout défaut physique du produit qui entraîne une fissure ou une déformation importante malgré une utilisation normale et une manipulation appropriée du produit.<br/>– Tout défaut dans la fabrication de la housse du matelas bébé comme la fermeture éclair qui cède, le tissu qui se déchire ou la couture qui se défait. Comme mentionné plus bas, un défaut de la housse n’ouvre pas droit au remplacement du matelas mais seulement de la housse défectueuse.<br/>Si le matelas est en effet défectueux, nous procéderons à son remplacement et les frais de livraison seront à notre charge. Par ailleurs, veuillez noter qu’aucun remboursement ne sera effectué en dehors de la garantie des 100 nuits d’essai.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_zFpUcz": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "La garantie Incroyable Petit Matelas bébé ne couvre pas",
+            "icon": "check_mark",
+            "row_content": "<p>La garantie Incroyable Petit Matelas bébé ne couvre pas les matelas non déballés dans le mois suivant la date de livraison.<br/><br/>La garantie Incroyable Petit Matelas bébé ne couvre pas les matelas vendus par des revendeurs non-agréés et ne couvre que les matelas vendus directement par Tediber.<br/><br/>La garantie Incroyable Petit Matelas bébé ne couvre que les matelas vendus comprimés roulés et ne couvre pas les matelas qui auraient été vendus non comprimés.<br/><br/>Cette garantie ne couvre pas votre matelas bébé Tedi by Tediber si vous l’utilisez d’une façon incompatible avec sa destination et son utilisation prévue, par exemple, une situation non domestique. En outre, elle ne couvre pas les états découlant d’une mauvaise manipulation, d’une mauvaise utilisation ou de la négligence, par exemple, lors du transport du produit. Les défauts visibles sur la mousse devront ainsi être signalés dans la période des 100 jours suivant la livraison et ne pourront faire l’objet d’une demande de garantie 5 ans.<br/><br/>Elle ne couvre pas l’usure normale du matelas bébé Tedi by Tediber et les situations susceptibles de causer une détérioration ou des dommages.<br/><br/>En outre, les situations suivantes ne sont pas couvertes par cette garantie Incroyable Petit Matelas bébé Tedi by Tediber :<br/>a) Tous les matelas non déballés dans le mois suivant la livraison. Ainsi les matelas ne regonflant pas ne peuvent être signalés plus de 30 jours après la livraison ;<br/>b) une baisse normale de la fermeté de la mousse ne portant pas atteinte aux qualités générales du matelas ;<br/>c) les affaissements n’excédant pas de plus de 2cm de hauteur ;<br/>d) l’usure normale du fait de l’utilisation prévue des produits y compris causée par le lavage, comme le boulochage des tissus ;<br/>e) si vous avez tenté d’altérer ou de réparer le matelas sans notre consentement ou si vous avez nettoyé les produits avec des produits ou des techniques inappropriés ;<br/>f) des imperfections mineures et de légers défauts esthétiques ; g) les préférences individuelles ou personnelles de confort concernant la fermeté, la texture, le confort, etc ;<br/>h) des déchirures, des tâches, de la salissure, des brûlures, des dommages liquides et la décoloration des matériaux qui surviennent au fil du temps ;<br/>i) l’humidité, les odeurs ou la moisissure;<br/>j) des allergies ou des sensibilités individuelles ou personnelles .<br/>k) Toutes les contaminations par les puces, punaises de lit où autres parasites ;<br/>l) si le défaut résulte d’un cas de force majeure ou d’un phénomène naturel indépendant de notre volonté, y compris, sans limitation, d’un incendie, d’une inondation ou d’une catastrophe naturelle.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_DrXG3K": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Que fera Tediber ?",
+            "icon": "check_mark",
+            "row_content": "<p>La demande d’exercice de la garantie se fait à l’adresse hello@tediber.com(mailto:hello@tediber.com). Les demandes de garantie doivent comporter une description claire du défaut, des photos du défaut et la preuve d’achat du produit. L’absence de photographies ou une description imprécise pourront retarder la prise en charge du défaut au titre de la garantie 5 ans ou aboutir à son non-exercice.<br/><br/>Après inspection du défaut par l’équipe Tediber, elle décidera si le produit est défectueux et si les conditions d’application de la garantie sont remplies.<br/><br/>Les produits défectueux devront être retournés et les frais de retours seront remboursés si le défaut est constaté comme éligible à la garantie 5 ans.<br/><br/>Si le défaut est considéré comme étant couvert par la garantie, notre obligation dans le cadre de la garantie 5 ans consistera à fournir une réparation ou un remplacement du produit. Dans le cas où une partie isolée du produit serait concernée par le défaut (par exemple la housse ou le noyau dans le cas du matelas), seule cette partie sera réparée ou remplacée.<br/><br/>Les Produits réparés ou remplacés vous seront livrés gratuitement – veuillez noter que l’envoi ne peut être fait que dans le pays choisi lors de la livraison initiale du matelas.<br/><br/>Sur la base de justificatifs et dans un montant raisonnable, les frais éventuels d’envoi du produit défectueux seront remboursés.<br/><br/>Nous remplacerons le produit considéré comme défectueux par un modèle identique.<br/><br/>Dans le cas où le modèle n’existerait plus, il sera remplacé par un modèle d’un prix équivalent (ou inférieur s’il n’est pas disponible à prix équivalent). Si la taille n'est plus commercialisée, nous nous réservons le droit de vous remplacer le produit par une taille similaire.<br/><br/>Toute réclamation en vertu de cette garantie doit être reçue dans les 30 jours suivant votre constatation du défaut ou suivant la date à laquelle vous auriez raisonnablement dû constater le défaut, et, en tout état de cause, avant la fin de la période de garantie.<br/><br/>Par ailleurs, veuillez noter qu’aucun remboursement ne sera effectué au titre de la garantie 5 ans, contrairement à la garantie des 100 nuits d’essai. La garantie 5 ans ouvre droit à une réparation ou éventuellement à un remplacement.<br/><br/>La garantie est fournie par Tediber, 20 rue sainte croix de la bretonnerie, 75004 Paris. Vous pouvez nous contacter à hello@tediber.com(mailto:hello@tediber.com).</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_TcRCxz": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Quelle est la durée de la garantie ?",
+            "icon": "check_mark",
+            "row_content": "<p>La garantie Incroyable Petit Matelas bébé Tedi by Tediber couvre votre matelas bébé Tedi by Tediber pendant 5 ans à compter de la date de livraison. Nous ne proratisons pas les termes (c’est-à-dire que nous ne réduisons pas le montant total en fonction du temps écoulé). Un matelas remplacé ou réparé ne prolonge pas la durée de votre garantie. Le calcul de la durée de garantie se fait à partir du jour de la date de commande de votre achat d’origine.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_9TQhNW": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Absence de déclaration de nature médicale ou liée à la santé",
+            "icon": "check_mark",
+            "row_content": "<p>TEDIBER n’effectue aucune déclaration de nature médicale ou liée à la santé concernant ses Incroyables Petits Matelas bébé. Les allergies, l’inconfort ou d’autres situations ne sont pas couvert(e)s au titre de cette garantie. Toute question ou préoccupation concernant les situations de nature médicale ou liées à la santé doit être adressée à un médecin habilité.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_pG9e6y": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Comment effectuer une réclamation au titre de cette garantie ?",
+            "icon": "check_mark",
+            "row_content": "<p>Pour effectuer une réclamation au titre de cette garantie concernant l’Incroyable Petit Matelas bébé Tedi by Tediber, veuillez envoyer une brève description écrite (accompagnée de photos, si possible) du problème ou de l’état qui selon vous constitue un défaut à hello@tediber.com(mailto:hello@tediber.com).<br/><br/>Par ailleurs, d’autres éléments comme la preuve d’achat ou des photos complémentaires pourront être demandés.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_HVGfJF": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Informations sur les qualités et caractéristiques environnementales",
+            "icon": "check_mark",
+            "row_content": "<p>Conformément à la réglementation, Tediber fournit à ses clients les informations de mise en conformité concernant la présence de substances dangereuses, l'incorporation de matières recyclées, et la recyclabilité - découvrez les informations <a href=\"https://docs.google.com/spreadsheets/d/1vq86j7D2zjYq1guPzI7_0s8_1u3o3k-DKBSmS_BZrkY/edit?userstoinvite=elise%40tediber.com&sharingaction=manageaccess&role=writer&gid=0#gid=0\" target=\"_blank\"><span style=\"text-decoration:underline\"><strong>ici</strong></span></a></p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_Yyhahn",
+        "collapsible_row_zFpUcz",
+        "collapsible_row_DrXG3K",
+        "collapsible_row_TcRCxz",
+        "collapsible_row_9TQhNW",
+        "collapsible_row_pG9e6y",
+        "collapsible_row_HVGfJF"
+      ],
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "full_width": true,
+        "caption": "",
+        "heading": "",
+        "heading_size": "h2",
+        "heading_alignment": "center",
+        "layout": "none",
+        "container_color_scheme": "",
+        "color_scheme": "",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "ax_richtext_GTF7He": {
+      "type": "ax-richtext",
+      "blocks": {
+        "button_Rhzqh9": {
+          "type": "button",
+          "settings": {
+            "button_text": "Découvrir le matelas bébé Tediber",
+            "url": "shopify://products/matelas-bebe-tedi",
+            "link_blank": false,
+            "style_button": "button button--primary",
+            "button_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "button_Rhzqh9"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    }
+  },
+  "order": [
+    "main",
+    "ax_heading_6TphAp",
+    "ax_richtext_RkciMT",
+    "ax_richtext_6DaePa",
+    "collapsible_content_LTxXXF",
+    "ax_richtext_Ue8C6E",
+    "ax_richtext_FM3xfE",
+    "collapsible_content_NwknYz",
+    "ax_richtext_pDHmLW",
+    "ax_richtext_DPpAhQ",
+    "collapsible_content_TkjCpr",
+    "ax_richtext_RU6bRN",
+    "ax_richtext_4Aq3pA",
+    "collapsible_content_LL3BPe",
+    "ax_richtext_GTF7He"
+  ]
+}

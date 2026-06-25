@@ -1,0 +1,479 @@
+{{ 'bundle.product-reviews.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+	.section-{{ section.id }}-padding {
+		padding-top: {{ section.settings.padding_top }}px;
+		padding-bottom: {{ section.settings.padding_bottom }}px;
+	}
+
+	@media screen and (max-width: 989px) {
+		.section-{{ section.id }}-padding {
+			padding-top: {{ section.settings.mobile_padding_top }}px;
+			padding-bottom: {{ section.settings.mobile_padding_bottom }}px;
+		}
+	}
+
+	{%- if section.settings.overlay -%}
+		#shopify-section-{{ section.id }} .product-reviews__media::before {
+			background: rgba(0, 0, 0, {{ section.settings.overlay_opacity }});
+		}
+	{%- endif -%}
+
+	{%- unless section.settings.adaptive_height -%}
+		#shopify-section-{{ section.id }} .product-reviews__media {
+			height: {{ section.settings.desktop_height }}px;
+		}
+		@media screen and (max-width: 989px) {
+			#shopify-section-{{ section.id }} .product-reviews__media {
+				height: {{ section.settings.mobile_height }}px;
+			}
+		}
+	{%- endunless -%}
+
+	{%- if section.settings.adaptive_height and section.settings.image != blank -%}
+		#shopify-section-{{ section.id }} .product-reviews__media {
+			padding-bottom: {{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100 }}%;
+		}
+	{%- endif -%}
+{%- endstyle -%}
+
+{%- liquid
+	assign fetch_priority = 'high'
+	assign loading = 'eager'
+	assign lazy_load = false
+	if section.index > 1
+		assign fetch_priority = 'auto'
+		assign loading = 'lazy'
+		assign lazy_load = true
+	endif
+
+	# Récupération dynamique des SKUs du produit
+	assign product_skus = ''
+	for variant in product.variants
+		if variant.sku != blank
+			assign product_skus = product_skus | append: variant.sku | append: ','
+		endif
+	endfor
+	assign product_skus = product_skus | remove_last: ','
+
+	# Ajout des SKUs manuels du metafield custom.id_trustpilot
+	if product.metafields.custom.id_trustpilot.value != blank
+		assign manual_skus = product.metafields.custom.id_trustpilot.value | strip
+		if product_skus != blank and manual_skus != blank
+			assign product_skus = product_skus | append: ',' | append: manual_skus
+		elsif manual_skus != blank
+			assign product_skus = manual_skus
+		endif
+	endif
+
+	assign accessibility_alt = 'accessibility.image_description' | t
+	assign alt_img = section.settings.heading | default: accessibility_alt
+-%}
+
+{%- if product_skus != blank -%}
+	<div
+		class="section-{{ section.id }}-padding gradient color-{{ section.settings.section_color_scheme }}"
+		role="region"
+		aria-label="{% if section.settings.heading != blank %}{{ section.settings.heading }}{% else %}{{ 'sections.ax_product_reviews.section_title' | t }}{% endif %}"
+	>
+		{%- unless section.settings.full_width -%}
+			<div class="page-width">
+		{%- endunless -%}
+
+		<div class="product-reviews isolate{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+			{%- comment -%} Bannière avec image et titre superposé {%- endcomment -%}
+			<div class="product-reviews__banner">
+				<div
+					class="product-reviews__media{% if section.settings.overlay %} overlay{% endif %} media media--transparent{% if section.settings.image == blank %} product-reviews__media--placeholder placeholder{% endif %}"
+					role="img"
+					aria-label="{% if section.settings.image.alt != blank %}{{ section.settings.image.alt | escape }}{% else %}{{ alt_img }}{% endif %}"
+				>
+					{%- if section.settings.image -%}
+						{%- capture media_image -%}
+						<picture>
+							{%- if section.settings.image_mobile -%}
+								<source
+									media="(max-width: 450px)"
+									srcset="{{ section.settings.image_mobile | image_url: width: 450 }} 1x, {{ section.settings.image_mobile | image_url: width: 900 }} 2x"
+								>
+								{%- if section.settings.image_mobile.width >= 500 -%}
+									<source
+										media="(max-width: 500px)"
+										srcset="{{ section.settings.image_mobile | image_url: width: 500 }} 1x, {{ section.settings.image_mobile | image_url: width: 1000 }} 2x"
+									>
+								{%- endif -%}
+								{%- if section.settings.image_mobile.width >= 600 -%}
+									<source
+										media="(max-width: 600px)"
+										srcset="{{ section.settings.image_mobile | image_url: width: 600 }} 1x, {{ section.settings.image_mobile | image_url: width: 1200 }} 2x"
+									>
+								{%- endif -%}
+								{%- if section.settings.image_mobile.width >= 700 -%}
+									<source
+										media="(max-width: 989px)"
+										srcset="{{ section.settings.image_mobile | image_url: width: 700 }} 1x, {{ section.settings.image_mobile | image_url: width: 1400 }} 2x"
+									>
+								{%- endif -%}
+							{%- else -%}
+								{%- if section.settings.image.width >= 330 -%}
+									<source
+										media="(max-width: 330px)"
+										srcset="{{ section.settings.image | image_url: width: 330 }} 1x, {{ section.settings.image | image_url: width: 660 }} 2x"
+									>
+								{%- endif -%}
+								{%- if section.settings.image.width >= 375 -%}
+									<source
+										media="(max-width: 375px)"
+										srcset="{{ section.settings.image | image_url: width: 375 }} 1x, {{ section.settings.image | image_url: width: 750 }} 2x"
+									>
+								{%- endif -%}
+								{%- if section.settings.image.width >= 450 -%}
+									<source
+										media="(max-width: 450px)"
+										srcset="{{ section.settings.image | image_url: width: 450 }} 1x, {{ section.settings.image | image_url: width: 900 }} 2x"
+									>
+								{%- endif -%}
+								{%- if section.settings.image.width >= 550 -%}
+									<source
+										media="(max-width: 550px)"
+										srcset="{{ section.settings.image | image_url: width: 550 }} 1x, {{ section.settings.image | image_url: width: 1100 }} 2x"
+									>
+								{%- endif -%}
+							{%- endif -%}
+							{%- if section.settings.image.width >= 768 -%}
+								<source
+									media="(max-width: 768px)"
+									srcset="{{ section.settings.image | image_url: width: 768 }} 1x, {{ section.settings.image | image_url: width: 1536 }} 2x"
+								>
+							{%- endif -%}
+							{%- if section.settings.image.width >= 1280 -%}
+								<source
+									media="(max-width: 1280px)"
+									srcset="{{ section.settings.image | image_url: width: 1280 }} 1x, {{ section.settings.image | image_url: width: 2560 }} 2x"
+								>
+							{%- endif -%}
+							{%- if section.settings.image.width >= 1366 -%}
+								<source
+									media="(max-width: 1366px)"
+									srcset="{{ section.settings.image | image_url: width: 1366 }} 1x, {{ section.settings.image | image_url: width: 2732 }} 2x"
+								>
+							{%- endif -%}
+							{%- if section.settings.image.width >= 1440 -%}
+								<source
+									media="(max-width: 1440px)"
+									srcset="{{ section.settings.image | image_url: width: 1440 }} 1x, {{ section.settings.image | image_url: width: 2880 }} 2x"
+								>
+							{%- endif -%}
+							{%- if section.settings.image.width >= 1600 -%}
+								<source
+									media="(max-width: 1600px)"
+									srcset="{{ section.settings.image | image_url: width: 1600 }} 1x, {{ section.settings.image | image_url: width: 3200 }} 2x"
+								>
+							{%- endif -%}
+							<img
+								src="{{ section.settings.image | image_url: width: section.settings.image.width }}"
+								srcset="{{ section.settings.image | image_url: width: section.settings.image.width }}"
+								alt="{% if section.settings.image.alt != blank %}{{ section.settings.image.alt | escape }}{% else %}{{ alt_img }}{% endif %}"
+								width="{{ section.settings.image.width }}"
+								height="{{ section.settings.image.width | divided_by: section.settings.image.aspect_ratio | round }}"
+								loading="{{ loading }}"
+								fetchpriority="{{ fetch_priority }}"
+								decoding="async"
+							>
+						</picture>
+										{%- endcapture -%}
+						{%- if lazy_load -%}
+							{{ media_image | replace: 'src=', 'lazy-src=' | replace: 'srcset=', 'lazy-srcset=' }}
+						{%- else -%}
+							{{ media_image }}
+						{%- endif -%}
+					{%- else -%}
+						{{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+					{%- endif -%}
+				</div>
+
+				{%- comment -%} Titre superposé sur l'image {%- endcomment -%}
+				{%- if section.settings.heading != blank -%}
+					<div class="product-reviews__content">
+						{%- render 'section-heading',
+							heading: section.settings.heading,
+							text_alignment: 'center',
+							heading_size: 'div',
+							heading_class: section.settings.heading_class
+						-%}
+					</div>
+				{%- endif -%}
+			</div>
+
+			{%- comment -%} Widget Trustpilot Product {%- endcomment -%}
+			<product-trustpilot
+				data-mode="section"
+				data-widget=".trustpilot-widget"
+				data-element=".ax-product-reviews"
+				data-threshold="50"
+				data-stable-ms="1500"
+				data-timeout="2000"
+				data-max-ms="0"
+				data-visible-class="has-reviews"
+				data-hidden-class="no-reviews"
+			>
+				<div class="product-reviews__widget">
+					<!-- TrustBox widget - Product Reviews MultiSource SEO -->
+					<div
+						class="trustpilot-widget"
+						data-locale="fr-FR"
+						data-template-id="5763bccae0a06d08e809ecbb"
+						data-businessunit-id="5a5cdcedf3b8320001d06ddf"
+						data-token="0a516be6-aed8-4832-91fc-0241c04754ac"
+						data-style-height="700px"
+						data-style-width="100%"
+						data-sku="{{ product_skus }}"
+						data-name="{{ product.title }}"
+						data-review-languages="fr"
+						data-star-color="#218252"
+						data-link-color="#191919"
+						data-no-reviews="collapse"
+						data-fullwidth="true"
+					>
+						<a href="https://fr.trustpilot.com/review/www.tediber.com" target="_blank" rel="noopener"></a>
+					</div>
+					<!-- End TrustBox widget -->
+				</div>
+			</product-trustpilot>
+
+			{%- comment -%} CTA centré {%- endcomment -%}
+			{%- liquid
+				assign button_url = blank
+				if section.settings.button_link != blank
+					assign button_url = section.settings.button_link.url
+				endif
+			-%}
+			{%- if section.settings.button_text != blank and button_url != blank -%}
+				<div class="product-reviews__cta">
+					{%- render 'link-style',
+						link_label: section.settings.button_text,
+						link_url: button_url,
+						link_style: section.settings.link_style,
+						link_target: section.settings.link_blank,
+						link_attributes: section.shopify_attributes
+					-%}
+				</div>
+			{%- endif -%}
+		</div>
+
+		{%- unless section.settings.full_width -%}
+			</div>
+		{%- endunless -%}
+	</div>
+{%- endif -%}
+
+{% schema %}
+	{
+		"name": "Ax Product Reviews",
+		"class": "section ax-section ax-product-reviews",
+		"tag": "section",
+		"enabled_on": {
+			"templates": ["product"]
+		},
+		"settings": [
+			{
+				"type": "checkbox",
+				"id": "full_width",
+				"label": "Largeur complète",
+				"default": false
+			},
+			{
+				"type": "header",
+				"content": "Titre"
+			},
+			{
+				"type": "inline_richtext",
+				"id": "heading",
+				"default": "Nos clients vous en parlent !",
+				"label": "Titre"
+			},
+			{
+				"type": "select",
+				"id": "heading_class",
+				"options": [
+					{
+						"value": "h3",
+						"label": "Petit"
+					},
+					{
+						"value": "h2",
+						"label": "Moyen"
+					},
+					{
+						"value": "h1",
+						"label": "Grand"
+					}
+				],
+				"default": "h1",
+				"label": "Taille du titre"
+			},
+			{
+				"type": "header",
+				"content": "Bouton"
+			},
+			{
+				"type": "text",
+				"id": "button_text",
+				"label": "Texte du bouton"
+			},
+			{
+				"type": "page",
+				"id": "button_link",
+				"label": "Page avis"
+			},
+			{
+				"type": "checkbox",
+				"id": "link_blank",
+				"label": "Ouvrir dans un nouvel onglet",
+				"info": "Ouvrir ce lien dans une nouvelle fenêtre",
+				"default": true
+			},
+			{
+				"type": "select",
+				"id": "link_style",
+				"options": [
+					{
+						"value": "button button--primary",
+						"label": "Primary"
+					},
+					{
+						"value": "button button--secondary",
+						"label": "Secondary"
+					},
+					{
+						"value": "ax-link",
+						"label": "Link"
+					},
+					{
+						"value": "ax-link reversed",
+						"label": "Link inversé"
+					},
+					{
+						"value": "underlined-link",
+						"label": "Underline link"
+					}
+				],
+				"default": "button button--primary",
+				"label": "Style du bouton"
+			},
+			{
+				"type": "header",
+				"content": "Image"
+			},
+			{
+				"type": "image_picker",
+				"id": "image",
+				"label": "Image desktop"
+			},
+			{
+				"type": "image_picker",
+				"id": "image_mobile",
+				"label": "Image mobile"
+			},
+			{
+				"type": "checkbox",
+				"id": "adaptive_height",
+				"label": "Hauteur adaptative",
+				"info": "Si désactivé, utilisez les hauteurs personnalisées ci-dessous",
+				"default": true
+			},
+			{
+				"type": "number",
+				"id": "desktop_height",
+				"label": "Hauteur desktop (px)",
+				"default": 500
+			},
+			{
+				"type": "number",
+				"id": "mobile_height",
+				"label": "Hauteur mobile (px)",
+				"default": 300
+			},
+			{
+				"type": "header",
+				"content": "Overlay"
+			},
+			{
+				"type": "checkbox",
+				"id": "overlay",
+				"label": "Ajouter un overlay",
+				"default": true
+			},
+			{
+				"type": "range",
+				"id": "overlay_opacity",
+				"min": 0,
+				"max": 1,
+				"step": 0.1,
+				"label": "Opacité de l'overlay",
+				"info": "Augmente le contraste pour un texte lisible",
+				"default": 0.3
+			},
+			{
+				"type": "header",
+				"content": "Couleurs"
+			},
+			{
+				"type": "color_scheme",
+				"id": "section_color_scheme",
+				"label": "Schéma de couleurs",
+				"default": "scheme-1"
+			},
+			{
+				"type": "header",
+				"content": "Espacement"
+			},
+			{
+				"type": "range",
+				"id": "padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding haut",
+				"default": 36
+			},
+			{
+				"type": "range",
+				"id": "padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding bas",
+				"default": 36
+			},
+			{
+				"type": "range",
+				"id": "mobile_padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Mobile haut",
+				"default": 24
+			},
+			{
+				"type": "range",
+				"id": "mobile_padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Mobile bas",
+				"default": 24
+			}
+		],
+		"blocks": [],
+		"presets": [
+			{
+				"name": "Ax Product Reviews"
+			}
+		]
+	}
+{% endschema %}

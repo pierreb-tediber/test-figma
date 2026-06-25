@@ -1,0 +1,247 @@
+{% comment %}
+	Renders product buy-buttons.
+	Accepts:
+	- product: {Object} product object.
+	- block: {Object} passing the block information.
+	- product_form_id: {String} product form id.
+	- section_id: {String} id of section to which this snippet belongs.
+	- show_pickup_availability: {Boolean} for the pickup availability. If true the pickup availability is rendered, false - not rendered (optional).
+
+	Usage:
+	{% render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true %}
+{% endcomment %}
+<div id="ProductFormBuyButtons-{{ section_id }}" class="product-form__buy-buttons" {{ block.shopify_attributes }}>
+	<div class="product-form__price-savings-wrapper">
+		{%- comment -%}
+			`product-bundle-details-items` (modal "Détails du pack") n'est pas
+			rendu en pack-new : la maquette refonte ne le prévoit pas, l'info est
+			portée par le block `claims` + le picker.
+		{%- endcomment -%}
+		{%- if is_bundle and template.suffix != 'pack-new' -%}
+			{%- render 'product-bundle-details-items', section: section -%}
+		{%- endif -%}
+		{%- unless is_hidden -%}
+			<product-buy-price
+				id="Submit-Container-Price-{{ section.id }}"
+				data-price="{{ selected_variant.price }}"
+				data-compare-at-price="{{ selected_variant.compare_at_price }}"
+				data-money-format="{{- shop.money_format | escape -}}"
+				data-sale-badge-color-scheme="{{ settings.sale_badge_color_scheme }}"
+				class="product-form__price-block{% if selected_variant.compare_at_price > selected_variant.price %} product-form__price-block--on-sale{% endif %}{% if is_bundle or selected_variant == null or selected_variant.metafields.custom.hidden_variant.value == true %} hidden{% endif %}"
+			>
+				<div class="product-form__price-block__prices">
+					<span class="product-form__price-block__price">
+						{{ selected_variant.price | money }}
+					</span>
+					{%- if selected_variant.compare_at_price > selected_variant.price -%}
+						<s class="product-form__price-block__compare-at-price">
+							{{ selected_variant.compare_at_price | money }}
+						</s>
+						<span class="product-form__price-block__badge badge price__badge-sale color-{{ settings.sale_badge_color_scheme }}">
+							{%- assign save_percent = selected_variant.compare_at_price
+								| minus: selected_variant.price
+								| times: 100.0
+								| divided_by: selected_variant.compare_at_price
+								| round
+								| append: '%'
+								| prepend: '-'
+							-%}
+							{{ save_percent }}
+						</span>
+					{%- endif -%}
+				</div>
+				<div id="ProductPriceSavings-{{ section.id }}" class="product__price-savings">
+					{%- liquid
+						assign has_savings = false
+						assign savings_amount_raw = 0
+						assign savings_amount_formatted = ''
+						if selected_variant.compare_at_price > selected_variant.price
+							assign savings_amount_raw = selected_variant.compare_at_price | minus: selected_variant.price
+							assign savings_amount_formatted = savings_amount_raw | money_without_trailing_zeros
+							assign has_savings = true
+						endif
+					-%}
+					<div
+						class="product__price-savings__text{% unless has_savings %} hidden{% endunless %}"
+						data-savings-amount="{{ savings_amount_raw }}"
+					>
+						<div class="product__price-savings__icon">
+							{{ 'icon-multiple-star.svg' | inline_asset_content }}
+						</div>
+						<div class="product__price-savings__label">
+							{{ 'products.product.variant_savings_html' | t: savings_amount: savings_amount_formatted }}
+						</div>
+					</div>
+				</div>
+			</product-buy-price>
+		{%- endunless -%}
+	</div>
+
+	{%- unless is_hidden -%}
+		<div class="product-form__buy-buttons__with__quantity">
+			{% if block.settings.show_quantity_selector and is_bundle == false %}
+				{% render 'product-quantity-selector',
+					product: product,
+					selected_variant: selected_variant,
+					product_form_id: product_form_id
+				%}
+			{% endif %}
+			{%- if product != blank -%}
+				{%- liquid
+					assign gift_card_recipient_feature_active = false
+					if block.settings.show_gift_card_recipient and product.gift_card?
+						assign gift_card_recipient_feature_active = true
+					endif
+
+					assign show_dynamic_checkout = false
+					if block.settings.show_dynamic_checkout and gift_card_recipient_feature_active == false
+						assign show_dynamic_checkout = true
+					endif
+
+					assign check_against_inventory = true
+					if selected_variant.inventory_management != 'shopify' or selected_variant.inventory_policy == 'continue'
+						assign check_against_inventory = false
+					endif
+
+					if selected_variant.quantity_rule.min > selected_variant.inventory_quantity and check_against_inventory
+						assign quantity_rule_soldout = true
+					endif
+
+					assign product_available = true
+					if selected_variant.available == false or quantity_rule_soldout or selected_variant == null or is_bundle == true
+						assign product_available = false
+					endif
+
+					if selected_variant.metafields.custom.hidden_variant.value == true
+						assign product_available = false
+					endif
+				-%}
+
+				<product-form
+					class="product-form"
+					data-hide-errors="{{ gift_card_recipient_feature_active }}"
+					data-section-id="{{ section.id }}"
+				>
+					<div class="product-form__error-message-wrapper" role="alert" hidden>
+						<span class="svg-wrapper">
+							{{- 'icon-error.svg' | inline_asset_content -}}
+						</span>
+						<span class="product-form__error-message"></span>
+					</div>
+
+					{%- form 'product',
+						product,
+						id: product_form_id,
+						class: 'form',
+						novalidate: 'novalidate',
+						data-type: 'add-to-cart-form'
+					-%}
+						<input
+							type="hidden"
+							name="id"
+							value="{{ selected_variant.id }}"
+							{% if product_available == false %}
+								disabled
+							{% endif %}
+							class="product-variant-id"
+						>
+
+						<div id="ProductFormInputHidden-{{ section_id }}">
+							{%- if is_bundle == false and selected_variant.compare_at_price > selected_variant.price -%}
+								<input
+									type="hidden"
+									name="properties[_compare_at_price]"
+									value="{{ selected_variant.compare_at_price | money_without_currency }}"
+								>
+							{%- endif -%}
+						</div>
+
+						{%- if gift_card_recipient_feature_active -%}
+							{%- render 'gift-card-recipient-form',
+								product: product,
+								selected_variant: selected_variant,
+								form: form,
+								section: section
+							-%}
+						{%- endif -%}
+
+						<div class="product-form__buttons">
+							<button
+								id="ProductSubmitButton-{{ section_id }}"
+								type="submit"
+								name="add"
+								class="product-form__submit button button--full-width {% if show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %}"
+								{% if product_available == false %}
+									disabled
+								{% endif %}
+								{% if selected_variant.metafields.custom.hidden_variant.value == true %}
+									data-variant-hidden
+								{% endif %}
+							>
+								<span class="product-form__submit-content">
+									{%- if selected_variant == null or selected_variant.metafields.custom.hidden_variant.value == true -%}
+										{{ 'products.product.unavailable' | t }}
+									{%- elsif selected_variant.available == false or quantity_rule_soldout -%}
+										{{ 'products.product.sold_out' | t }}
+									{%- else -%}
+										{{ 'products.product.add_to_cart' | t }}
+									{%- endif -%}
+								</span>
+								{%- render 'loading-spinner' -%}
+							</button>
+							{%- if show_dynamic_checkout -%}
+								{{ form | payment_button }}
+							{%- endif -%}
+						</div>
+					{%- endform -%}
+				</product-form>
+			{%- else -%}
+				<div class="product-form">
+					<div class="product-form__buttons form">
+						<button
+							type="submit"
+							name="add"
+							class="product-form__submit button button--full-width button--primary"
+							disabled
+						>
+							{{ 'products.product.sold_out' | t }}
+						</button>
+					</div>
+				</div>
+			{%- endif -%}
+		</div>
+
+		{%- if show_pickup_availability -%}
+			{{ 'component-pickup-availability.css' | asset_url | stylesheet_tag }}
+
+			{%- assign pick_up_availabilities = selected_variant.store_availabilities | where: 'pick_up_enabled', true -%}
+
+			<pickup-availability
+				class="product__pickup-availabilities quick-add-hidden"
+				{% if selected_variant.available and pick_up_availabilities.size > 0 %}
+					available
+				{% endif %}
+				data-root-url="{{ routes.root_url }}"
+				data-variant-id="{{ selected_variant.id }}"
+				data-has-only-default-variant="{{ product.has_only_default_variant }}"
+				data-product-page-color-scheme="gradient color-{{ section.settings.color_scheme }}"
+			>
+				<template>
+					<pickup-availability-preview class="pickup-availability-preview">
+						<span class="svg-wrapper">
+							{{- 'icon-unavailable.svg' | inline_asset_content -}}
+						</span>
+						<div class="pickup-availability-info">
+							<p class="caption-large">{{ 'products.product.pickup_availability.unavailable' | t }}</p>
+							<button class="pickup-availability-button link link--text underlined-link">
+								{{ 'products.product.pickup_availability.refresh' | t }}
+							</button>
+						</div>
+					</pickup-availability-preview>
+				</template>
+			</pickup-availability>
+
+			<script src="{{ 'pickup-availability.js' | asset_url }}" defer="defer"></script>
+		{%- endif -%}
+	{%- endunless -%}
+</div>

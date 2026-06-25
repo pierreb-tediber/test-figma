@@ -1,0 +1,495 @@
+<!doctype html>
+<html class="js" lang="{{ request.locale.iso_code }}">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<meta name="theme-color" content="#010c27">
+		<meta name="theme-color" content="#fbf5ed" media="(prefers-color-scheme: dark)">
+		{%- render 'observer-CFH', observer: true -%}
+		{%- render 'canonical-url' -%}
+
+		{{ 'bundle.theme.js' | asset_url | preload_tag: as: 'script' }}
+
+		{%- if settings.favicon != blank -%}
+			<link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+			<link rel="apple-touch-icon" href="{{ images['180.png'] | image_url: width: 180, height: 180 }}" sizes="180x180">
+		{%- endif -%}
+
+		{%- render 'preload-font' -%}
+
+		<title>
+			{% if request.path == '/collections/vendors' and collection.all_products_count == 0 %}
+				{{ 'templates.404.title' | t }}
+			{% else %}
+				{{ page_title }}
+				{%- if current_tags %}&ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+				{%- if current_page != 1 %}&ndash; Page {{ current_page }}{% endif -%}
+				{%- unless page_title contains shop.name %}&ndash; {{ shop.name }}{% endunless -%}
+			{% endif %}
+		</title>
+
+		{% if page_description %}
+			<meta name="description" content="{{ page_description | escape }}">
+		{% endif %}
+
+		{%- render 'meta-tags' -%}
+
+		<script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
+		<script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
+		<script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
+		<script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
+		<script src="{{ 'details-modal.js' | asset_url }}" defer="defer"></script>
+		<script src="{{ 'search-form.js' | asset_url }}" defer="defer"></script>
+
+		{%- if settings.animations_reveal_on_scroll -%}
+			<script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
+		{%- endif -%}
+
+		{% # theme-check-disable %}
+		{% assign content_for_header = content_for_header
+			| replace: '?page=1">', '">'
+			| replace: '?page=1&', '?'
+			| replace: '&page=1&', '&'
+			| replace: '&page=1">', '">'
+			| replace: '&amp;page=1&amp;', '&amp;'
+			| replace: '&amp;page=1">', '">'
+		%}
+
+		{% # theme-check-enable %}
+
+		{{ content_for_header }}
+
+		{%- render 'font-face' -%}
+
+		{%- style %}
+			 {% for scheme in settings.color_schemes -%}
+			   {% assign scheme_classes = scheme_classes | append: ', .color-' | append: scheme.id %}
+			   {% if forloop.index == 1 -%}
+			     :root,
+			   {%- endif %}
+			   .color-{{ scheme.id }} {
+			     --color-background: {{ scheme.settings.background.red }},{{ scheme.settings.background.green }},{{ scheme.settings.background.blue }};
+			   {% if scheme.settings.background_gradient != empty %}
+			     --gradient-background: {{ scheme.settings.background_gradient }};
+			   {% else %}
+			     --gradient-background: {{ scheme.settings.background }};
+			   {% endif %}
+
+			   {% liquid
+			     assign background_color = scheme.settings.background
+			     assign background_color_brightness = background_color | color_brightness
+			     if background_color_brightness <= 26
+			       assign background_color_contrast = background_color | color_lighten: 50
+			     elsif background_color_brightness <= 65
+			       assign background_color_contrast = background_color | color_lighten: 5
+			     else
+			       assign background_color_contrast = background_color | color_darken: 25
+			     endif
+			   %}
+
+			   --color-foreground: {{ scheme.settings.text.red }},{{ scheme.settings.text.green }},{{ scheme.settings.text.blue }};
+			   --color-foreground-title: {{ scheme.settings.title_color.red }},{{ scheme.settings.title_color.green }},{{ scheme.settings.title_color.blue }};
+			   --color-background-contrast: {{ background_color_contrast.red }},{{ background_color_contrast.green }},{{ background_color_contrast.blue }};
+			   --color-shadow: {{ scheme.settings.shadow.red }},{{ scheme.settings.shadow.green }},{{ scheme.settings.shadow.blue }};
+				 --color-button: rgb({{ scheme.settings.button.red }},{{ scheme.settings.button.green }},{{ scheme.settings.button.blue }});
+				 --color-button-hover: rgb({{ scheme.settings.button_hover.red }},{{ scheme.settings.button_hover.green }},{{ scheme.settings.button_hover.blue }});
+			   --color-button-text: {{ scheme.settings.button_label.red }},{{ scheme.settings.button_label.green }},{{ scheme.settings.button_label.blue }};
+			   --color-button-text-hover: {{ scheme.settings.button_label_hover.red }},{{ scheme.settings.button_label_hover.green }},{{ scheme.settings.button_label_hover.blue }};
+				 --color-button-border: rgb({{ scheme.settings.button_border.red }},{{ scheme.settings.button_border.green }},{{ scheme.settings.button_border.blue }});
+				 --color-button-border-hover: rgb({{ scheme.settings.button_border_hover.red }},{{ scheme.settings.button_border_hover.green }},{{ scheme.settings.button_border_hover.blue }});
+				 {% if scheme.settings.secondary_button_gradient != empty %}
+					--color-secondary-button: {{ scheme.settings.secondary_button_gradient }};
+			   {% else %}
+					--color-secondary-button: rgb({{ scheme.settings.secondary_button.red }},{{ scheme.settings.secondary_button.green }},{{ scheme.settings.secondary_button.blue }});
+			   {% endif %}
+				 {% if scheme.settings.secondary_button_gradient_hover != empty %}
+						--color-secondary-button-hover: {{ scheme.settings.secondary_button_gradient_hover }};
+				 {% else %}
+				 --color-secondary-button-hover: rgb({{ scheme.settings.secondary_button_hover.red }},{{ scheme.settings.secondary_button_hover.green }},{{ scheme.settings.secondary_button_hover.blue }});
+				 {% endif %}
+			   --color-secondary-button-text: {{ scheme.settings.secondary_button_label.red }},{{ scheme.settings.secondary_button_label.green }},{{ scheme.settings.secondary_button_label.blue }};
+			   --color-secondary-button-text-hover: {{ scheme.settings.secondary_button_label_hover.red }},{{ scheme.settings.secondary_button_label_hover.green }},{{ scheme.settings.secondary_button_label_hover.blue }};
+				{% if scheme.settings.secondary_button_border_gradient != empty %}
+					{% unless scheme.settings.secondary_button_border_gradient contains 'linear-gradient' %}
+						--color-secondary-button-border: {{ scheme.settings.secondary_button_border_gradient }};
+					{% else %}
+						--color-secondary-button-border: rgb({{ scheme.settings.secondary_button_border.red }},{{ scheme.settings.secondary_button_border.green }},{{ scheme.settings.secondary_button_border.blue }});
+					{% endunless %}
+				{% else %}
+					--color-secondary-button-border: rgb({{ scheme.settings.secondary_button_border.red }},{{ scheme.settings.secondary_button_border.green }},{{ scheme.settings.secondary_button_border.blue }});
+				{% endif %}
+				{% if scheme.settings.secondary_button_border_gradient_hover != empty %}
+					{% unless scheme.settings.secondary_button_border_gradient_hover contains 'linear-gradient' %}
+						--color-secondary-button-border-hover: {{ scheme.settings.secondary_button_border_gradient_hover }};
+					{% else %}
+						--color-secondary-button-border-hover: rgb({{ scheme.settings.secondary_button_border_hover.red }},{{ scheme.settings.secondary_button_border_hover.green }},{{ scheme.settings.secondary_button_border_hover.blue }});
+					{% endunless %}
+				{% else %}
+					--color-secondary-button-border-hover: rgb({{ scheme.settings.secondary_button_border_hover.red }},{{ scheme.settings.secondary_button_border_hover.green }},{{ scheme.settings.secondary_button_border_hover.blue }});
+				{% endif %}
+			   --color-link: {{ scheme.settings.links.red }},{{ scheme.settings.links.green }},{{ scheme.settings.links.blue }};
+			   --color-badge-foreground: {{ scheme.settings.text.red }},{{ scheme.settings.text.green }},{{ scheme.settings.text.blue }};
+			   --color-badge-background: {{ scheme.settings.background.red }},{{ scheme.settings.background.green }},{{ scheme.settings.background.blue }};
+			   --color-badge-border: {{ scheme.settings.text.red }},{{ scheme.settings.text.green }},{{ scheme.settings.text.blue }};
+			   --payment-terms-background-color: rgb({{ scheme.settings.background.rgb }});
+			 }
+			 {% endfor %}
+
+			 {{ scheme_classes | prepend: 'body' }} {
+			   color: rgb(var(--color-foreground));
+			   background-color: rgb(var(--color-background));
+			 }
+
+			 :root {
+			   --font-body-family: "Obviously", sans-serif;
+			   --font-body-style: normal;
+			   --font-body-weight: 400;
+			   --font-body-weight-bold: 700;
+
+			   --font-heading-family: "ObviouslyWide", sans-serif;
+			   --font-heading-style: normal;
+			   --font-heading-weight: 900;
+
+			   --font-narrow-medium-family: "ObviouslyNarrow", sans-serif;
+			   --font-narrow-medium-weight: 500;
+
+			   --font-narrow-bold-family: "ObviouslyNarrow", sans-serif;
+			   --font-narrow-bold-weight: 700;
+
+				 --font-narrow-black-family: "ObviouslyNarrow", sans-serif;
+			   --font-narrow-black-weight: 900;
+
+			   {%- for i in (1..4) -%}
+			   {%- assign name_key = 'campagne_' | append: i | append: '_font_name' -%}
+			   {%- assign weight_key = 'campagne_' | append: i | append: '_font_weight' -%}
+			   {%- assign fallback_key = 'campagne_' | append: i | append: '_fallback' -%}
+			   {%- if settings[name_key] != blank %}
+			   --font-campagne-{{ i }}-family: "{{ settings[name_key] }}", {{ settings[fallback_key] | default: 'sans-serif' }};
+			   --font-campagne-{{ i }}-weight: {{ settings[weight_key] | default: 400 }};
+			   {%- else %}
+			   --font-campagne-{{ i }}-family: var(--font-heading-family);
+			   --font-campagne-{{ i }}-weight: var(--font-heading-weight);
+			   {%- endif %}
+			   {%- endfor %}
+
+			   --font-body-scale: {{ settings.body_scale | divided_by: 100.0 }};
+			   --font-heading-scale: {{ settings.heading_scale | times: 1.0 | divided_by: settings.body_scale }};
+
+			   --media-padding: {{ settings.media_padding }}px;
+			   --media-border-opacity: {{ settings.media_border_opacity | divided_by: 100.0 }};
+			   --media-border-width: {{ settings.media_border_thickness }}px;
+			   --media-radius: {{ settings.media_radius }}px;
+			   --media-shadow-opacity: {{ settings.media_shadow_opacity | divided_by: 100.0 }};
+			   --media-shadow-horizontal-offset: {{ settings.media_shadow_horizontal_offset }}px;
+			   --media-shadow-vertical-offset: {{ settings.media_shadow_vertical_offset }}px;
+			   --media-shadow-blur-radius: {{ settings.media_shadow_blur }}px;
+			   --media-shadow-visible: {% if settings.media_shadow_opacity > 0 %}1{% else %}0{% endif %};
+
+			   --page-width: {{ settings.page_width | divided_by: 10 }}rem;
+			   --page-width-margin: {% if settings.page_width == '1600' %}2{% else %}0{% endif %}rem;
+
+			   --product-card-image-padding: {{ settings.card_image_padding | divided_by: 10.0 }}rem;
+			   --product-card-corner-radius: {{ settings.card_corner_radius | divided_by: 10.0 }}rem;
+			   --product-card-text-alignment: {{ settings.card_text_alignment }};
+			   --product-card-border-width: {{ settings.card_border_thickness | divided_by: 10.0 }}rem;
+			   --product-card-border-opacity: {{ settings.card_border_opacity | divided_by: 100.0 }};
+			   --product-card-shadow-opacity: {{ settings.card_shadow_opacity | divided_by: 100.0 }};
+			   --product-card-shadow-visible: {% if settings.card_shadow_opacity > 0 %}1{% else %}0{% endif %};
+			   --product-card-shadow-horizontal-offset: {{ settings.card_shadow_horizontal_offset | divided_by: 10.0 }}rem;
+			   --product-card-shadow-vertical-offset: {{ settings.card_shadow_vertical_offset | divided_by: 10.0 }}rem;
+			   --product-card-shadow-blur-radius: {{ settings.card_shadow_blur | divided_by: 10.0 }}rem;
+
+			   --collection-card-image-padding: {{ settings.collection_card_image_padding | divided_by: 10.0 }}rem;
+			   --collection-card-corner-radius: {{ settings.collection_card_corner_radius | divided_by: 10.0 }}rem;
+			   --collection-card-text-alignment: {{ settings.collection_card_text_alignment }};
+			   --collection-card-border-width: {{ settings.collection_card_border_thickness | divided_by: 10.0 }}rem;
+			   --collection-card-border-opacity: {{ settings.collection_card_border_opacity | divided_by: 100.0 }};
+			   --collection-card-shadow-opacity: {{ settings.collection_card_shadow_opacity | divided_by: 100.0 }};
+			   --collection-card-shadow-visible: {% if settings.collection_card_shadow_opacity > 0 %}1{% else %}0{% endif %};
+			   --collection-card-shadow-horizontal-offset: {{ settings.collection_card_shadow_horizontal_offset | divided_by: 10.0 }}rem;
+			   --collection-card-shadow-vertical-offset: {{ settings.collection_card_shadow_vertical_offset | divided_by: 10.0 }}rem;
+			   --collection-card-shadow-blur-radius: {{ settings.collection_card_shadow_blur | divided_by: 10.0 }}rem;
+
+			   --blog-card-image-padding: {{ settings.blog_card_image_padding | divided_by: 10.0 }}rem;
+			   --blog-card-corner-radius: {{ settings.blog_card_corner_radius | divided_by: 10.0 }}rem;
+			   --blog-card-text-alignment: {{ settings.blog_card_text_alignment }};
+			   --blog-card-border-width: {{ settings.blog_card_border_thickness | divided_by: 10.0 }}rem;
+			   --blog-card-border-opacity: {{ settings.blog_card_border_opacity | divided_by: 100.0 }};
+			   --blog-card-shadow-opacity: {{ settings.blog_card_shadow_opacity | divided_by: 100.0 }};
+			   --blog-card-shadow-visible: {% if settings.blog_card_shadow_opacity > 0 %}1{% else %}0{% endif %};
+			   --blog-card-shadow-horizontal-offset: {{ settings.blog_card_shadow_horizontal_offset | divided_by: 10.0 }}rem;
+			   --blog-card-shadow-vertical-offset: {{ settings.blog_card_shadow_vertical_offset | divided_by: 10.0 }}rem;
+			   --blog-card-shadow-blur-radius: {{ settings.blog_card_shadow_blur | divided_by: 10.0 }}rem;
+
+			   --badge-corner-radius: {{ settings.badge_corner_radius | divided_by: 10.0 }}rem;
+
+			   --popup-border-width: {{ settings.popup_border_thickness }}px;
+			   --popup-border-opacity: {{ settings.popup_border_opacity | divided_by: 100.0 }};
+			   --popup-corner-radius: {{ settings.popup_corner_radius }}px;
+			   --popup-shadow-opacity: {{ settings.popup_shadow_opacity | divided_by: 100.0 }};
+			   --popup-shadow-horizontal-offset: {{ settings.popup_shadow_horizontal_offset }}px;
+			   --popup-shadow-vertical-offset: {{ settings.popup_shadow_vertical_offset }}px;
+			   --popup-shadow-blur-radius: {{ settings.popup_shadow_blur }}px;
+
+			   --drawer-border-width: {{ settings.drawer_border_thickness }}px;
+			   --drawer-border-opacity: {{ settings.drawer_border_opacity | divided_by: 100.0 }};
+			   --drawer-shadow-opacity: {{ settings.drawer_shadow_opacity | divided_by: 100.0 }};
+			   --drawer-shadow-horizontal-offset: {{ settings.drawer_shadow_horizontal_offset }}px;
+			   --drawer-shadow-vertical-offset: {{ settings.drawer_shadow_vertical_offset }}px;
+			   --drawer-shadow-blur-radius: {{ settings.drawer_shadow_blur }}px;
+
+			   --spacing-sections-desktop: {{ settings.spacing_sections }}px;
+			   --spacing-sections-mobile: {{ settings.spacing_sections | times: 0.5 }}px;
+
+			   --grid-desktop-vertical-spacing: {{ settings.spacing_grid_vertical }}px;
+			   --grid-desktop-horizontal-spacing: {{ settings.spacing_grid_horizontal }}px;
+			   --grid-mobile-vertical-spacing: {{ settings.spacing_grid_vertical | divided_by: 2 }}px;
+			   --grid-mobile-horizontal-spacing: {{ settings.spacing_grid_horizontal | divided_by: 2 }}px;
+
+			   --text-boxes-border-opacity: {{ settings.text_boxes_border_opacity | divided_by: 100.0 }};
+			   --text-boxes-border-width: {{ settings.text_boxes_border_thickness }}px;
+			   --text-boxes-radius: {{ settings.text_boxes_radius }}px;
+			   --text-boxes-shadow-opacity: {{ settings.text_boxes_shadow_opacity | divided_by: 100.0 }};
+			   --text-boxes-shadow-visible: {% if settings.text_boxes_shadow_opacity > 0 %}1{% else %}0{% endif %};
+			   --text-boxes-shadow-horizontal-offset: {{ settings.text_boxes_shadow_horizontal_offset }}px;
+			   --text-boxes-shadow-vertical-offset: {{ settings.text_boxes_shadow_vertical_offset }}px;
+			   --text-boxes-shadow-blur-radius: {{ settings.text_boxes_shadow_blur }}px;
+
+			   --buttons-radius: {{ settings.buttons_radius }}px;
+			   --buttons-radius-outset: {% if settings.buttons_radius > 0 %}{{ settings.buttons_radius | plus: settings.buttons_border_thickness }}{% else %}0{% endif %}px;
+			   --buttons-border-width: {% if settings.buttons_border_opacity > 0 %}{{ settings.buttons_border_thickness }}{% else %}0{% endif %}px;
+			   --buttons-border-opacity: {{ settings.buttons_border_opacity | divided_by: 100.0 }};
+			   --buttons-shadow-opacity: {{ settings.buttons_shadow_opacity | divided_by: 100.0 }};
+			   --buttons-shadow-visible: {% if settings.buttons_shadow_opacity > 0 %}1{% else %}0{% endif %};
+			   --buttons-shadow-horizontal-offset: {{ settings.buttons_shadow_horizontal_offset }}px;
+			   --buttons-shadow-vertical-offset: {{ settings.buttons_shadow_vertical_offset }}px;
+			   --buttons-shadow-blur-radius: {{ settings.buttons_shadow_blur }}px;
+			   --buttons-border-offset: {% if settings.buttons_radius > 0 or settings.buttons_shadow_opacity > 0 %}0.3{% else %}0{% endif %}px;
+
+			   --inputs-radius: {{ settings.inputs_radius }}px;
+			   --inputs-border-width: {{ settings.inputs_border_thickness }}px;
+			   --inputs-border-opacity: {{ settings.inputs_border_opacity | divided_by: 100.0 }};
+			   --inputs-shadow-opacity: {{ settings.inputs_shadow_opacity | divided_by: 100.0 }};
+			   --inputs-shadow-horizontal-offset: {{ settings.inputs_shadow_horizontal_offset }}px;
+			   --inputs-margin-offset: {% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_opacity > 0 %}{{ settings.inputs_shadow_vertical_offset | abs }}{% else %}0{% endif %}px;
+			   --inputs-shadow-vertical-offset: {{ settings.inputs_shadow_vertical_offset }}px;
+			   --inputs-shadow-blur-radius: {{ settings.inputs_shadow_blur }}px;
+			   --inputs-radius-outset: {% if settings.inputs_radius > 0 %}{{ settings.inputs_radius | plus: settings.inputs_border_thickness }}{% else %}0{% endif %}px;
+
+			   --variant-pills-radius: {{ settings.variant_pills_radius }}px;
+			   --variant-pills-border-width: {{ settings.variant_pills_border_thickness }}px;
+			   --variant-pills-border-opacity: {{ settings.variant_pills_border_opacity | divided_by: 100.0 }};
+			   --variant-pills-shadow-opacity: {{ settings.variant_pills_shadow_opacity | divided_by: 100.0 }};
+			   --variant-pills-shadow-horizontal-offset: {{ settings.variant_pills_shadow_horizontal_offset }}px;
+			   --variant-pills-shadow-vertical-offset: {{ settings.variant_pills_shadow_vertical_offset }}px;
+			   --variant-pills-shadow-blur-radius: {{ settings.variant_pills_shadow_blur }}px;
+
+				--font-size-hxl: calc(var(--font-heading-scale) * 9.6rem);
+				--font-size-h0: calc(var(--font-heading-scale) * 8rem);
+				--font-size-h1: calc(var(--font-heading-scale) * 6.4rem);
+				--font-size-h2: calc(var(--font-heading-scale) * 4.8rem);
+				--font-size-h3: calc(var(--font-heading-scale) * 3.2rem);
+				--font-size-h4: calc(var(--font-heading-scale) * 2rem);
+				--font-size-h5: calc(var(--font-heading-scale) * 1.6rem);
+				--font-size-h6: calc(var(--font-heading-scale) * 1.4rem);
+
+				--header-height-default: 71px;
+				--announcement-bar-height-default: 36px;
+			 }
+
+			@media (max-width: 800px) {
+				:root {
+					--font-size-hxl: calc(var(--font-heading-scale) * 3.8rem);
+					--font-size-h0: calc(var(--font-heading-scale) * 3.6rem);
+					--font-size-h1: calc(var(--font-heading-scale) * 3.2rem);
+					--font-size-h2: calc(var(--font-heading-scale) * 3.2rem);
+					--font-size-h3: calc(var(--font-heading-scale) * 2rem);
+					--font-size-h4: calc(var(--font-heading-scale) * 1.8rem);
+					--font-size-h5: calc(var(--font-heading-scale) * 1.6rem);
+					--font-size-h6: calc(var(--font-heading-scale) * 1.4rem);
+				}
+			}
+
+			 *,
+			 *::before,
+			 *::after {
+			   box-sizing: inherit;
+			 }
+
+			 html {
+			   box-sizing: border-box;
+			   font-size: calc(var(--font-body-scale) * 62.5%);
+			   height: 100%;
+			 }
+
+			 body {
+			   min-height: 100%;
+			   margin: 0;
+			   font-size: 1.4rem;
+			   font-family: var(--font-body-family);
+			   font-style: var(--font-body-style);
+			   font-weight: var(--font-body-weight);
+				 line-height: 1em;
+			 }
+
+			   {% if settings.type_header_uppercase %}
+			   h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
+			       text-transform: uppercase;
+			   }
+			   {% endif %}
+		{%- endstyle %}
+
+		{{ 'base.css' | asset_url | stylesheet_tag }}
+		{%- render 'style-bundle', layout: 'theme' -%}
+		<link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
+
+		{%- if localization.available_countries.size > 1 or localization.available_languages.size > 1 -%}
+			{{ 'component-localization-form.css' | asset_url | stylesheet_tag: preload: true }}
+			<script src="{{ 'localization-form.js' | asset_url }}" defer="defer"></script>
+		{%- endif -%}
+
+		{%- if settings.predictive_search_enabled -%}
+			<link
+				rel="stylesheet"
+				href="{{ 'component-predictive-search.css' | asset_url }}"
+				media="print"
+				onload="this.media='all'"
+			>
+		{%- endif -%}
+
+		<script>
+			if (Shopify.designMode) {
+				document.documentElement.classList.add('shopify-design-mode');
+			}
+		</script>
+
+		<script>
+			window.shopUrl = '{{ request.origin }}';
+			window.routes = {
+				cart_add_url: '{{ routes.cart_add_url }}',
+				cart_change_url: '{{ routes.cart_change_url }}',
+				cart_update_url: '{{ routes.cart_update_url }}',
+				cart_url: '{{ routes.cart_url }}',
+				predictive_search_url: '{{ routes.predictive_search_url }}',
+				template_name: '{{ template.name }}',
+			};
+
+			window.cartStrings = {
+				error: `{{ 'sections.cart.cart_error' | t }}`,
+				quantityError: `{{ 'sections.cart.cart_quantity_error_html' | t: quantity: '[quantity]' }}`,
+				sendToEmailErrorEmpty: `{{ 'sections.cart.send_cart_to_email_error_empty' | t }}`,
+				sendToEmailErrorInvalid: `{{ 'sections.cart.send_cart_to_email_error_invalid' | t }}`,
+				sendToEmailErrorKlaviyo: `{{ 'sections.cart.send_cart_to_email_error_klaviyo_html' | t }}`,
+				sendToEmailErrorGeneral: `{{ 'sections.cart.send_cart_to_email_error_general' | t }}`,
+				sendToEmailSuccess: `{{ 'sections.cart.send_cart_to_email_success' | t }}`,
+				cartPermalinkLoading: `{{ 'sections.cart.permalink_loading' | t }}`,
+				cartPermalinkNoItems: `{{ 'sections.cart.permalink_no_items' | t }}`,
+				cartPermalinkNoAvailableItems: `{{ 'sections.cart.permalink_no_available_items' | t }}`,
+				cartPermalinkSuccess: `{{ 'sections.cart.permalink_success' | t }}`,
+				cartPermalinkPartialSuccess: `{{ 'sections.cart.permalink_partial_success' | t }}`,
+				cartPermalinkError: `{{ 'sections.cart.permalink_error' | t }}`,
+				checkSize: `{{ 'sections.cart.messages.check_size' | t }}`,
+				discountCodeError: `{{ 'sections.cart.discount.discount_code_error_html' | t }}`,
+				discountAlreadyApplied: `{{ 'sections.cart.discount.discount_already_applied_html' | t }}`,
+				discountNotApplicable: `{{ 'sections.cart.discount.discount_not_applicable_html' | t }}`,
+				shippingDiscountError: `{{ 'sections.cart.discount.shipping_discount_error_html' | t }}`,
+			};
+
+			window.variantStrings = {
+				addToCart: `{{ 'products.product.add_to_cart' | t }}`,
+				addToCartShort: `{{ 'products.product.add_to_cart_short' | t }}`,
+				removeUpsell: `{{ 'products.product.remove_upsell' | t }}`,
+				soldOut: `{{ 'products.product.sold_out' | t }}`,
+				unavailable: `{{ 'products.product.unavailable' | t }}`,
+				unavailable_with_option: `{{ 'products.product.value_unavailable' | t: option_value: '[value]' }}`,
+			};
+
+			window.quickOrderListStrings = {
+				itemsAdded: `{{ 'sections.quick_order_list.items_added.other' | t: quantity: '[quantity]' }}`,
+				itemAdded: `{{ 'sections.quick_order_list.items_added.one' | t: quantity: '[quantity]' }}`,
+				itemsRemoved: `{{ 'sections.quick_order_list.items_removed.other' | t: quantity: '[quantity]' }}`,
+				itemRemoved: `{{ 'sections.quick_order_list.items_removed.one' | t: quantity: '[quantity]' }}`,
+				viewCart: `{{- 'sections.quick_order_list.view_cart' | t -}}`,
+				each: `{{- 'sections.quick_order_list.each' | t: money: '[money]' }}`,
+				min_error: `{{- 'sections.quick_order_list.min_error' | t: min: '[min]' }}`,
+				max_error: `{{- 'sections.quick_order_list.max_error' | t: max: '[max]' }}`,
+				step_error: `{{- 'sections.quick_order_list.step_error' | t: step: '[step]' }}`,
+			};
+
+			window.accessibilityStrings = {
+				imageAvailable: `{{ 'products.product.media.image_available' | t: index: '[index]' }}`,
+				shareSuccess: `{{ 'general.share.success_message' | t }}`,
+				pauseSlideshow: `{{ 'sections.slideshow.pause_slideshow' | t }}`,
+				playSlideshow: `{{ 'sections.slideshow.play_slideshow' | t }}`,
+				recipientFormExpanded: `{{ 'recipient.form.expanded' | t }}`,
+				recipientFormCollapsed: `{{ 'recipient.form.collapsed' | t }}`,
+				countrySelectorSearchCount: `{{ 'localization.country_results_count' | t: count: '[count]' }}`,
+				includedInPackSavings: `{{ 'products.product.included_in_pack_savings' | t: savings_amount: '[savings_amount]' }}`,
+				variantSavingsHtml: `{{ 'products.product.variant_savings_html' | t: savings_amount: '[savings_amount]' }}`,
+				bundleDetailsTotal: `{{ 'products.product.bundle_details_total' | t }}`,
+				bundlePriceEcoPart: `{{ 'products.product.price_eco_part_html' | t: price: '[price]' }}`,
+				optionsNamesForSizeValueExcept: `{{ 'products.product.options_names_for_size_value_except' | t | downcase | replace: ', ', ',' }}`,
+				optionsNamesForSizeValueStrictExcept: `{{ 'products.product.options_names_for_size_value_strict_except' | t | downcase | replace: ', ', ',' }}`,
+				optionsNamesForFootValueExcept: `{{ 'products.product.options_names_for_foot_value_except' | t | downcase | replace: ', ', ',' }}`,
+				defaultFormatForSizeValue: `{{ 'products.product.default_format_for_size_value' | t | downcase | strip }}`,
+			};
+
+			window.productDeliveryEstimator = {
+				emptyPostalCodeError: `{{ 'products.product.delivery.estimator.empty_postal_code_error' | t | escape }}`,
+				apiError: `{{ 'products.product.delivery.estimator.api_error' | t | escape }}`,
+				noEstimateAvailable: `{{ 'products.product.delivery.estimator.no_estimate_available' | t | escape }}`,
+				deliveryDatePrefix: `{{ 'products.product.delivery.estimator.delivery_date_prefix' | t | escape }}`,
+				deliveryDatePrefixHasDateDecalee: `{{ 'products.product.delivery.estimator.delivery_date_prefix_has_date_decalee' | t | escape }}`,
+				deliveryDateFallback: `{{ 'products.product.delivery.estimator.delivery_date_fallback' | t | escape }}`,
+				estimateTextSimple: `{{ 'products.product.delivery.modal.estimate_text_html' | t }}`,
+				estimateTextBundle: `{{ 'products.product.delivery.modal.estimate_text_bundle_html' | t }}`,
+				locale: `{{ request.locale.iso_code }}`,
+			};
+
+			window.assetsUrl = {
+				css: [],
+				js: [],
+			};
+		</script>
+
+		{%- liquid
+			render 'script-trustpilot'
+			render 'script-kameleoon'
+			render 'script-clarity'
+			render 'script-debugbear'
+
+			render 'meta-seo'
+			render 'microdata-schema'
+		-%}
+	</head>
+
+	<body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
+		<a class="skip-to-content-link button visually-hidden" href="#MainContent">
+			{{ 'accessibility.skip_to_text' | t }}
+		</a>
+
+		{%- sections 'header-group' -%}
+
+		<main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
+			{{ content_for_layout }}
+		</main>
+
+		{%- sections 'footer-group' -%}
+
+		<ul hidden>
+			<li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>
+			<li id="a11y-new-window-message">{{ 'accessibility.link_messages.new_window' | t }}</li>
+		</ul>
+
+		{%- if settings.predictive_search_enabled -%}
+			<script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
+		{%- endif -%}
+
+		{%- liquid
+			render 'script-chatbot'
+			render 'script-bundle', layout: 'theme'
+			render 'observer-CFH', launchevent: true
+		-%}
+	</body>
+</html>

@@ -1,0 +1,593 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "custom_liquid_LLEGPQ": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "{% style %}\n.summer-sale-hero {\n  display: flex;\n  flex-direction: column;\n  align-items: stretch;\n  background-color: #010C27;\n  max-height: 1200px;\n  overflow: hidden;\n  padding: 0;\n}\n\n.summer-sale-hero .columns {\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  height: 100%;\n}\n\n.summer-sale-hero .content,\n.summer-sale-hero .visual {\n  width: 100%;\n}\n\n.summer-sale-hero .content {\n  padding: 48px 24px;\n  text-align: center;\n  font-family: Obviously, sans-serif;\n}\n\n.summer-sale-hero h2,\n.summer-sale-hero h4,\n.summer-sale-hero .promo-block,\n.summer-sale-hero .date {\n  color: #FBF5ED;\n  font-family: Obviously, sans-serif;\n}\n\n.summer-sale-hero h2 {\n  font-size: var(--font-size-xl2, 56px);\n  font-weight: 600;\n  line-height: var(--font-line-height-xl, 56px);\n  text-transform: uppercase;\n  margin-bottom: 8px;\n}\n\n.summer-sale-hero h4 {\n  font-size: var(--font-size-md, 16px);\n  font-weight: 600;\n  line-height: var(--font-line-height-xs, 16px);\n  margin-bottom: 32px;\n}\n\n.summer-sale-hero .promo-block {\n  font-size: var(--font-size-xl, 32px);\n  font-weight: 600;\n  line-height: var(--font-line-height-lg1, 40px);\n  text-transform: uppercase;\n  margin-bottom: 16px;\n}\n\n.summer-sale-hero .promo-block .tag {\n  background-color: #A25F33;\n  color: white;\n  padding: 4px 8px;\n  border-radius: 4px;\n  margin-right: 8px;\n  display: inline-block;\n}\n\n.summer-sale-hero .promo-block .code {\n  display: inline-block;\n  padding: 4px 12px;\n  border: 1px solid #FBF5ED;\n  background-color: white;\n  border-radius: 4px;\n  font-weight: bold;\n  margin-left: 8px;\n  color: #010C27;\n}\n\n/* ESPACEMENT renforcé SOUS la mention \"Jusqu’au 24 juin inclus\" */\n.summer-sale-hero .date {\n  font-weight: bold;\n  text-transform: uppercase;\n  margin-bottom: 24px;\n}\n\n.summer-sale-hero .cta-button {\n  background-color: #010C27;\n  color: white;\n  padding: 16px 24px;\n  border-radius: 4px;\n  font-weight: 500;\n  text-decoration: none;\n  font-family: Obviously, sans-serif;\n  font-size: 16px;\n  border: 1px solid white;\n}\n\n.summer-sale-hero .visual {\n  width: 100%;\n  height: 100%;\n}\n\n.summer-sale-hero .visual img {\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  display: block;\n}\n\n@media (min-width: 768px) {\n  .summer-sale-hero {\n    flex-direction: row;\n    max-height: 600px;\n  }\n\n  .summer-sale-hero .columns {\n    flex-direction: row;\n  }\n\n  .summer-sale-hero .content,\n  .summer-sale-hero .visual {\n    width: 50%;\n    height: 100%;\n  }\n\n  .summer-sale-hero .content {\n    text-align: left;\n    padding: 48px;\n    box-sizing: border-box;\n  }\n\n  .summer-sale-hero .visual {\n    padding: 0;\n  }\n}\n\n@media (max-width: 767px) {\n  .summer-sale-hero h2 {\n    font-size: 40px;\n    line-height: 44px;\n  }\n\n  .summer-sale-hero h4 {\n    font-size: 14px;\n    line-height: 16px;\n  }\n\n  .summer-sale-hero .promo-block {\n    font-size: 24px;\n    line-height: 32px;\n  }\n\n  .summer-sale-hero .promo-block .code {\n    font-size: 16px;\n    padding: 2px 8px;\n  }\n\n  .summer-sale-hero .cta-button {\n    font-size: 14px;\n    padding: 12px 20px;\n  }\n}\n{% endstyle %}\n\n<section class=\"summer-sale-hero\">\n  <div class=\"columns\">\n    <div class=\"content\">\n      <h2>Ventes privées</h2>\n      <h4>✨ RÉSERVÉES À NOS CLIENTS</h4>\n\n      <div class=\"promo-block\">\n        <span class=\"tag\">-20&nbsp;%</span>sur tous nos produits* avec le code <span class=\"code\">TED20EAB</span>\n      </div>\n\n      <div class=\"date\">JUSQU'AU 24 JUIN INCLUS</div>\n\n      <a href=\"/\" class=\"cta-button\">Découvrir nos produits</a>\n    </div>\n\n    <div class=\"visual\">\n      <img src=\"https://cdn.shopify.com/s/files/1/0903/1342/5220/files/lp_vp_juin_grand_ours_lit_confort_premium.png?v=1752139060\">\n    </div>\n  </div>\n</section>",
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "ax_featured_products_BTHMrw": {
+      "type": "ax-featured-products",
+      "blocks": {
+        "push_i6Xeqa": {
+          "type": "push",
+          "disabled": true,
+          "settings": {
+            "metaobject": "push-lp",
+            "position": "left",
+            "push_in_products": false
+          }
+        }
+      },
+      "block_order": [
+        "push_i6Xeqa"
+      ],
+      "settings": {
+        "heading": "<h3>NOS ICONIQUES</h3>",
+        "button_text": "",
+        "button_url": "shopify://collections/matelas",
+        "link_blank": false,
+        "product_list": [
+          "matelas",
+          "sommier-noir-anthracite",
+          "canape-convertible",
+          "parure-lit-satin-coton"
+        ],
+        "stack_mobile": true,
+        "color_scheme": "",
+        "mob_padding_top": 24,
+        "mob_padding_bottom": 24,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "custom_liquid_cd3ywf": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<script>function sendAudienceData(a){window.jDataLayer=window.jDataLayer||[],window.jDataLayer.push({type:\"audience\",data:a})}</script><div id=\"join-widget-Matelas-x-Sommier-Unbounce\" style=\"display:block;\"></div> <style> #join-widget-Matelas-x-Sommier-Unbounce { margin: 5px 2px; min-height: 225.44px; width: 100%; } @media (min-aspect-ratio: 3/4) { #join-widget-Matelas-x-Sommier-Unbounce { min-height: 283px; } } </style>  <script src=\"https://tediber.my.join-stories.com/widgets/Matelas-x-Sommier-Unbounce/index.js\" data-join-widget-id=\"join-widget-Matelas-x-Sommier-Unbounce\" data-join-widget-alias=\"Matelas-x-Sommier-Unbounce\" type=\"text/javascript\" ></script>",
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 0
+      }
+    },
+    "rich_text_f7gU6m": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_Bjqr6B": {
+          "type": "heading",
+          "settings": {
+            "heading": "",
+            "heading_size": "h1"
+          }
+        },
+        "text_3LhAh3": {
+          "type": "text",
+          "settings": {
+            "text": ""
+          }
+        },
+        "button_BQ8Kaa": {
+          "type": "button",
+          "settings": {
+            "button_label": "Découvrir notre incroyable matelas",
+            "button_link": "shopify://products/matelas",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_Bjqr6B",
+        "text_3LhAh3",
+        "button_BQ8Kaa"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0
+      }
+    },
+    "ax_featured_products_P39zeU": {
+      "type": "ax-featured-products",
+      "blocks": {
+        "push_GBJGDM": {
+          "type": "push",
+          "disabled": true,
+          "settings": {
+            "metaobject": "push-lp",
+            "position": "left",
+            "push_in_products": false
+          }
+        }
+      },
+      "block_order": [
+        "push_GBJGDM"
+      ],
+      "settings": {
+        "heading": "<h3>IDÉAL POUR LA SAISON</h3>",
+        "button_text": "Voir toutes les parures",
+        "button_url": "shopify://collections/parure-lit",
+        "link_blank": false,
+        "product_list": [],
+        "stack_mobile": true,
+        "color_scheme": "scheme-1",
+        "mob_padding_top": 24,
+        "mob_padding_bottom": 24,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "ax_featured_products_xM84wb": {
+      "type": "ax-featured-products",
+      "blocks": {
+        "push_Nc3mzQ": {
+          "type": "push",
+          "disabled": true,
+          "settings": {
+            "metaobject": "push-lp",
+            "position": "left",
+            "push_in_products": false
+          }
+        }
+      },
+      "block_order": [
+        "push_Nc3mzQ"
+      ],
+      "settings": {
+        "heading": "<h3>IDÉAL POUR LA SAISON</h3>",
+        "button_text": "Voir tout notre linge",
+        "button_url": "shopify://collections/linge-de-lit",
+        "link_blank": false,
+        "product_list": [
+          "couette-universelle",
+          "matelas-hybride",
+          "drap-housse-lin",
+          "drap-housse-percale-coton"
+        ],
+        "stack_mobile": true,
+        "color_scheme": "",
+        "mob_padding_top": 24,
+        "mob_padding_bottom": 24,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "ax_media_with_text_XA4Vc8": {
+      "type": "ax-media-with-text",
+      "blocks": {
+        "subheading_y9LVUQ": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "<strong>LINGE DE LIT</strong>"
+          }
+        },
+        "heading_ggLeGD": {
+          "type": "heading",
+          "settings": {
+            "heading": "Livré en 48h et 30 nuits d'essai !",
+            "heading_size": "h2"
+          }
+        },
+        "button_ja7whQ": {
+          "type": "button",
+          "settings": {
+            "button_text": "Découvrir tout notre linge",
+            "button_link": "shopify://collections/linge-de-lit",
+            "link_blank": false,
+            "link_style": "button button--secondary"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_y9LVUQ",
+        "heading_ggLeGD",
+        "button_ja7whQ"
+      ],
+      "name": "Ax Media with text",
+      "settings": {
+        "full_width": false,
+        "image": "shopify://shop_images/lp_vp_juin_linge_de_lit_lit_scandi.png",
+        "layout": "text_first",
+        "overlay": true,
+        "overlay_opacity": 0,
+        "section_color_scheme": "scheme-3",
+        "color_scheme": "scheme-3",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "ax_featured_products_Lfc9XD": {
+      "type": "ax-featured-products",
+      "blocks": {
+        "push_Yyf7LX": {
+          "type": "push",
+          "settings": {
+            "metaobject": "marque-francaise",
+            "position": "right",
+            "push_in_products": true
+          }
+        }
+      },
+      "block_order": [
+        "push_Yyf7LX"
+      ],
+      "settings": {
+        "heading": "<h3>nos nouveautés</h3>",
+        "button_text": "",
+        "button_url": "shopify://products/lit-scandinave",
+        "link_blank": false,
+        "product_list": [
+          "lit-scandinave",
+          "couette-legere",
+          "pack-lit-2-places",
+          "parure-de-lit-lin-rose-cerisier"
+        ],
+        "stack_mobile": true,
+        "color_scheme": "",
+        "mob_padding_top": 24,
+        "mob_padding_bottom": 24,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "custom_liquid_FAGHkr": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<script>function sendAudienceData(a){window.jDataLayer=window.jDataLayer||[],window.jDataLayer.push({type:\"audience\",data:a})}</script><div id=\"join-widget-Lit-Scandi-Unbounce\" style=\"display:block;\"></div> <style> #join-widget-Lit-Scandi-Unbounce { margin: 5px 2px; min-height: 268px; width: 100%; } @media (min-aspect-ratio: 3/4) { #join-widget-Lit-Scandi-Unbounce { min-height: 352px; } } </style>  <script src=\"https://tediber.my.join-stories.com/widgets/Lit-Scandi-Unbounce/index.js\" data-join-widget-id=\"join-widget-Lit-Scandi-Unbounce\" data-join-widget-alias=\"Lit-Scandi-Unbounce\" type=\"text/javascript\" ></script>",
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "rich_text_cX9bLb": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_TGQd6j": {
+          "type": "heading",
+          "settings": {
+            "heading": "",
+            "heading_size": "h1"
+          }
+        },
+        "text_twXcJY": {
+          "type": "text",
+          "settings": {
+            "text": ""
+          }
+        },
+        "button_H3xamL": {
+          "type": "button",
+          "settings": {
+            "button_label": "Découvrir notre lit Scandi",
+            "button_link": "shopify://products/lit-scandinave",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_TGQd6j",
+        "text_twXcJY",
+        "button_H3xamL"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0
+      }
+    },
+    "ax_featured_products_RBDbQ9": {
+      "type": "ax-featured-products",
+      "blocks": {
+        "push_3wxMDh": {
+          "type": "push",
+          "settings": {
+            "metaobject": "securite-gamme-enfant",
+            "position": "right",
+            "push_in_products": true
+          }
+        }
+      },
+      "block_order": [
+        "push_3wxMDh"
+      ],
+      "settings": {
+        "heading": "<h3>et pour les petits</h3>",
+        "button_text": "Découvrir notre gamme enfant",
+        "button_url": "shopify://collections/gamme-enfant-bebe",
+        "link_blank": false,
+        "product_list": [
+          "matelas-enfant-ado-grand-tedi",
+          "lit-coffre-enfant",
+          "matelas-bebe-tedi",
+          "couette-enfant"
+        ],
+        "stack_mobile": true,
+        "color_scheme": "",
+        "mob_padding_top": 24,
+        "mob_padding_bottom": 24,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "ax_reassurances_GMJnP4": {
+      "type": "ax-reassurances",
+      "blocks": {
+        "reassurance_NyU4iV": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "100-nuits-essai",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_tUTyfY": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-mnd3qioq",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_mERJn6": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-vfy3a8q5",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_peUdyw": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-87bgy0zq",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        }
+      },
+      "block_order": [
+        "reassurance_NyU4iV",
+        "reassurance_tUTyfY",
+        "reassurance_mERJn6",
+        "reassurance_peUdyw"
+      ],
+      "settings": {
+        "heading": "Nos engagements",
+        "restricted_width": false,
+        "stack_mobile": false,
+        "border_top_mobile": true,
+        "border_bottom_mobile": false,
+        "show_content": false,
+        "autoplay": false,
+        "speed": 300,
+        "loop": false,
+        "pagination": true,
+        "color_scheme": "",
+        "color_scheme_popin": "",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 24,
+        "padding_top": 48,
+        "padding_bottom": 48,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_content": false,
+        "custom_h1": "<p><strong>SOLDES D'ÉTÉ 2025 TEDIBER : -20% SUR TOUT AVEC LE CODE TED56298 !</strong></p>",
+        "h1_size": "h1",
+        "h1_no_margin": false,
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "rich_text_E473Ff": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_a4mrBT": {
+          "type": "heading",
+          "settings": {
+            "heading": "toute la gamme tediber",
+            "heading_size": "h2"
+          }
+        },
+        "text_ibp7G4": {
+          "type": "text",
+          "settings": {
+            "text": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_a4mrBT",
+        "text_ibp7G4"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top_desktop": 24,
+        "padding_bottom_desktop": 0
+      }
+    },
+    "collection_list_fJadCb": {
+      "type": "collection-list",
+      "blocks": {
+        "featured_collection_3hfQmg": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "matelas"
+          }
+        },
+        "featured_collection_7KfVtn": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "lit"
+          }
+        },
+        "featured_collection_kxttQe": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "tete-de-lit"
+          }
+        },
+        "featured_collection_Rmf6td": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "canape"
+          }
+        },
+        "featured_collection_6iiTx4": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "gamme-enfant-bebe"
+          }
+        },
+        "featured_collection_CAMUjC": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "couette-et-oreiller"
+          }
+        },
+        "featured_collection_HAhe9f": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "linge-de-lit"
+          }
+        },
+        "featured_collection_48FRNq": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "pack-literie"
+          }
+        }
+      },
+      "block_order": [
+        "featured_collection_3hfQmg",
+        "featured_collection_7KfVtn",
+        "featured_collection_kxttQe",
+        "featured_collection_Rmf6td",
+        "featured_collection_6iiTx4",
+        "featured_collection_CAMUjC",
+        "featured_collection_HAhe9f",
+        "featured_collection_48FRNq"
+      ],
+      "name": "t:sections.collection-list.presets.name",
+      "settings": {
+        "title": "",
+        "heading_size": "h2",
+        "image_ratio": "square",
+        "columns_desktop": 4,
+        "color_scheme": "",
+        "show_view_all": false,
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 32,
+        "padding_bottom": 32
+      }
+    },
+    "ax_image_banner_6nHzJ3": {
+      "type": "ax-image-banner",
+      "name": "Ax Image Banner",
+      "settings": {
+        "image": "shopify://shop_images/lp_vp_juin_grand_ours_confort_premium.png",
+        "image_mobile": "shopify://shop_images/lp_vp_juin_grand_ours_confort_premium_mobile.png",
+        "subheading": "",
+        "heading": "",
+        "button_text": "",
+        "button_link": "",
+        "link_blank": false,
+        "link_style": "button button--primary",
+        "color_scheme": "",
+        "overlay": true,
+        "overlay_opacity": 0
+      }
+    },
+    "rich_text_zABaaq": {
+      "type": "rich-text",
+      "blocks": {
+        "text_YPnE3F": {
+          "type": "text",
+          "settings": {
+            "text": "<p>* Cumulable sur les packs avec produits offerts. Pour les packs incluant déjà une remise, le pourcentage le plus élevé s'applique. Non applicable sur le pack Grand Ours et produits Grand Ours seuls.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "text_YPnE3F"
+      ],
+      "settings": {
+        "desktop_content_position": "left",
+        "content_alignment": "left",
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "padding_top_desktop": 32,
+        "padding_bottom_desktop": 32
+      }
+    },
+    "custom_liquid_47Qi7a": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "{% style %}\n.top-sticky-card {\n  position: fixed;\n  bottom: 16px;\n  left: 0;\n  right: 0;\n  margin-left: auto;\n  margin-right: auto;\n  width: fit-content;\n  z-index: 9999;\n  justify-content: center;\n}\n\n.top-sticky-card .card-content {\n  background-color: #FDF6EE;\n  border-radius: 9999px;\n  padding: 8px 16px;\n  display: flex;\n  align-items: center;\n  gap: 12px;\n  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);\n  border: 1px solid #010C27;\n  font-family: Obviously, sans-serif;\n}\n\n.top-sticky-card .icon {\n  font-size: 18px;\n  color: #A25F33;\n}\n\n.top-sticky-card .badge {\n  background-color: #A25F33;\n  color: white;\n  padding: 4px 10px;\n  border-radius: 4px;\n  font-weight: bold;\n  font-size: 14px;\n}\n\n.top-sticky-card .label {\n  color: #010C27;\n  font-weight: 600;\n  font-size: 14px;\n  text-transform: uppercase;\n}\n\n.top-sticky-card .code {\n  background-color: #FDF6EE;\n  border: 1px solid #010C27;\n  padding: 4px 10px;\n  border-radius: 4px;\n  font-weight: 800;\n  font-size: 16px;\n}\n{% endstyle %}\n\n<div class=\"top-sticky-card\">\n  <div class=\"card-content\">\n    <span class=\"icon\">✨</span>\n    <span class=\"badge\">-20 %</span>\n    <span class=\"label\">Avec le code</span>\n    <span class=\"code\"> TED20EAB</span>\n  </div>\n</div>",
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    }
+  },
+  "order": [
+    "custom_liquid_LLEGPQ",
+    "ax_featured_products_BTHMrw",
+    "custom_liquid_cd3ywf",
+    "rich_text_f7gU6m",
+    "ax_featured_products_P39zeU",
+    "ax_featured_products_xM84wb",
+    "ax_media_with_text_XA4Vc8",
+    "ax_featured_products_Lfc9XD",
+    "custom_liquid_FAGHkr",
+    "rich_text_cX9bLb",
+    "ax_featured_products_RBDbQ9",
+    "ax_reassurances_GMJnP4",
+    "main",
+    "rich_text_E473Ff",
+    "collection_list_fJadCb",
+    "ax_image_banner_6nHzJ3",
+    "rich_text_zABaaq",
+    "custom_liquid_47Qi7a"
+  ]
+}

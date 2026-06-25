@@ -1,0 +1,106 @@
+{% comment %}
+  Renders a row content cell for the matelas comparator section.
+
+  Accepts:
+  - row_product: {Object} Product object for this cell
+  - caracteristique_label: {String} Label of the characteristic to display
+  - column_index: {Number} Column index for data attribute
+  - row_cell_color: {String} Background color for the cell
+  - row_cell_direction: {String} Default flex direction for the cell
+
+  Usage:
+  {% render 'ax-matelas-comparator-row-cell',
+    row_product: product,
+    caracteristique_label: 'Confort',
+    column_index: 1,
+    row_cell_color: section.settings.cell_color,
+    row_cell_direction: section.settings.cell_direction
+  %}
+{% endcomment %}
+
+{%- liquid
+  # Reset to default before checking product-specific direction and color
+  assign product_cell_direction = row_cell_direction
+  assign product_cell_color = row_cell_color
+  assign row_caracteristique = nil
+
+  for carac in row_product.metafields.custom.liste_des_caracteristiques_du_matelas.value
+    if carac.label == caracteristique_label
+      assign row_caracteristique = carac
+      if row_caracteristique.direction.value != blank and row_caracteristique.image != "null"
+        assign product_cell_direction = row_caracteristique.direction.value
+      endif
+      if row_caracteristique.couleur != blank
+        assign product_cell_color = row_caracteristique.couleur
+        # Replace pure black with transparent - check lowercase version
+        assign color_lower = product_cell_color | downcase | strip
+        if color_lower == '#000000' or color_lower == '#000' or color_lower == 'black' or color_lower == 'rgb(0,0,0)' or color_lower == 'rgb(0, 0, 0)' or color_lower == 'rgba(0,0,0,1)' or color_lower == 'rgba(0, 0, 0, 1)'
+          assign product_cell_color = 'transparent'
+        endif
+      endif
+      break
+    endif
+  endfor
+
+  # Determine image dimensions based on direction
+  assign img_width = 96
+  assign img_height = 60
+  if row_caracteristique.image != blank and product_cell_direction contains 'vertical'
+    assign img_width = 400
+    assign img_height = 90
+  endif
+-%}
+
+<div
+  class="
+    ax-matelas-comparator__row-content
+    {% if row_caracteristique.image != blank and product_cell_direction contains 'horizontal' %}horizontal{% endif %}
+    {% if row_caracteristique.image != blank and product_cell_direction contains 'vertical' %}vertical{% endif %}
+  "
+  data-product-id="{{ row_product.id }}"
+  data-column-index="{{ column_index }}"
+  style="
+    {% if product_cell_color != blank %}
+      background-color: {{ product_cell_color }};
+    {% endif %}
+    {% if product_cell_direction == 'horizontal' %}
+      flex-direction: row;
+      flex-wrap: nowrap;
+      text-align: left;
+      justify-content: flex-start;
+    {% elsif product_cell_direction == 'vertical' %}
+      flex-direction: column;
+    {% elsif product_cell_direction == 'horizontal-reverse' %}
+      flex-direction: row-reverse;
+      flex-wrap: nowrap;
+      text-align: right;
+      justify-content: flex-end;
+    {% elsif product_cell_direction == 'vertical-reverse' %}
+      flex-direction: column-reverse;
+    {% endif %}
+  "
+>
+  {% if row_caracteristique.image != blank %}
+    {% assign row_caracteristique_alt = row_caracteristique.image.alt | default: row_caracteristique.label %}
+    {%- liquid
+      assign img_width_2x = img_width | times: 2
+      assign img_url_1x = row_caracteristique.image | image_url: width: img_width
+      assign img_url_2x = row_caracteristique.image | image_url: width: img_width_2x
+    -%}
+    {%- capture row_image_tag -%}
+      <img
+        src="{{ img_url_1x }}"
+        srcset="{{ img_url_1x }} 1x, {{ img_url_2x }} 2x"
+        loading="lazy"
+        width="{{ img_width }}"
+        height="{{ img_height }}"
+        alt="{{ row_caracteristique_alt }}"
+        class="ax-matelas-comparator__row-content-image"
+      >
+    {%- endcapture -%}
+    {{ row_image_tag | replace: 'src=', 'lazy-src=' | replace: 'srcset=', 'lazy-srcset=' }}
+  {% endif %}
+  {% if row_caracteristique.texte != blank %}
+  	{{- row_caracteristique.texte | metafield_tag | default: "-" -}}
+  {% endif %}
+</div>

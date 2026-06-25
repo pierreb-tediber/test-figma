@@ -1,0 +1,183 @@
+{% comment %}
+	Renders a product media modal. Also see 'product-media-gallery'
+
+	Accepts:
+	- product_media: {Array} Product media array
+	- selected_variant_child: {Object} Selected variant child liquid object
+	- product: {Object} Product liquid object
+	- variant_images: {Array} Product images associated with a variant
+	- is_bundle: {Boolean} Whether the product is a bundle
+	- bundle_configurator: {Object} Bundle configurator object
+	- variant_option_string: {String} Variant option string
+
+	Usage:
+	{% render 'product-media-modal' %}
+{% endcomment %}
+
+<product-modal id="ProductModal-{{ section.id }}-{{ product.id }}" class="product-media-modal media-modal" data-section-id="{{ section.id }}">
+	<div
+		class="product-media-modal__dialog color-{{ section.settings.color_scheme }} gradient"
+		role="dialog"
+		aria-label="{{ 'products.modal.label' | t }}"
+		aria-modal="true"
+		tabindex="-1"
+	>
+		<button
+			id="ModalClose-{{ section.id }}"
+			type="button"
+			class="product-media-modal__toggle"
+			aria-label="{{ 'accessibility.close' | t }}"
+		>
+			{{ 'icon-close.svg' | inline_asset_content }}
+		</button>
+
+		<div
+			class="product-media-modal__content color-{{ section.settings.color_scheme }} gradient"
+			role="document"
+			aria-label="{{ 'products.modal.label' | t }}"
+			tabindex="0"
+		>
+			{%- liquid
+				assign product_media = product_media
+				assign selected_variant = selected_variant
+				if selected_variant_child != blank
+					assign selected_variant = selected_variant_child
+				endif
+				# Déterminer si la section est récupérée via fetch de la section
+				assign use_lazy_loading = true
+				if get_url contains 'section_id' or get_url contains 'sections'
+					assign use_lazy_loading = false
+				endif
+
+				# Pré-scan : médias `|checkout` (pack-new uniquement). Skip
+				# dans la boucle plus bas — ces médias sont exclusifs au
+				# conteneur caché `BundleCheckoutImages-*` rendu par
+				# product-media-gallery.liquid pour `_bundle_image` cart.
+				assign is_pack_new_modal = false
+				if product.template_suffix == 'pack-new'
+					assign is_pack_new_modal = true
+				endif
+				assign modal_checkout_media_ids = '|'
+				if is_pack_new_modal
+					for media in product_media
+						assign m_alt_useful = ''
+						if media.alt contains '#'
+							assign m_parts = media.alt | split: '#'
+							assign m_lang = localization.language.iso_code
+							for i in (0..m_parts.size)
+								if m_parts[i] == m_lang
+									assign m_next = i | plus: 1
+									if m_next < m_parts.size
+										assign m_alt_useful = m_parts[m_next]
+										break
+									endif
+								endif
+							endfor
+						endif
+						if m_alt_useful == ''
+							assign m_alt_useful = media.alt
+						endif
+						if m_alt_useful != blank
+							assign m_last = m_alt_useful | split: '|' | last
+							if m_last == 'checkout'
+								assign modal_checkout_media_ids = modal_checkout_media_ids | append: media.id | append: '|'
+							endif
+						endif
+					endfor
+				endif
+			-%}
+
+			{% if use_lazy_loading %}
+				<div class="product-media-modal__loading">
+					{% render 'loading-spinner' %}
+				</div>
+			{% else %}
+				{%- for media in product_media -%}
+					{%- liquid
+						# Skip les médias `|checkout` : rendus uniquement dans
+						# `BundleCheckoutImages-*` (cf. product-media-gallery.liquid).
+						assign modal_checkout_marker = '|' | append: media.id | append: '|'
+						if modal_checkout_media_ids contains modal_checkout_marker
+							continue
+						endif
+
+						# Déterminer si cette image doit être visible
+						assign is_visible = false
+						assign has_alt_custom = false
+						assign localized_media_alt = media.alt
+
+						# Vérifier si c'est l'image featured de la variante
+						if selected_variant.featured_media and media.id == selected_variant.featured_media.id
+							assign is_visible = true
+						endif
+
+						# Si l'image a un alt de variante
+						if media.alt contains '#'
+							assign has_alt_custom = true
+							# Séparer la chaîne par # pour obtenir les paires langue-valeur
+							assign media_alt_parts = media.alt | split: '#'
+							assign localized_alt = ''
+							assign current_lang = localization.language.iso_code
+
+							# Parcourir les parties pour trouver la valeur correspondant à la langue courante
+							for i in (0..media_alt_parts.size)
+								assign part = media_alt_parts[i]
+								if part == current_lang
+									# La valeur suivante est celle qu'on cherche
+									assign next_index = i | plus: 1
+									if next_index < media_alt_parts.size
+										assign localized_alt = media_alt_parts[next_index]
+										break
+									endif
+								endif
+							endfor
+
+							# Si on a trouvé une valeur localisée, l'utiliser
+							if localized_alt != ''
+								# Comparer avec la chaîne d'options de la variante (sans le #)
+								assign variant_option_string_clean = variant_option_string | remove_first: '#'
+								assign localized_media_alt = localized_alt
+								if localized_alt == variant_option_string_clean
+									assign is_visible = true
+								endif
+							else
+								# Fallback : comportement original si pas de traduction trouvée
+								if media.alt == variant_option_string
+									assign is_visible = true
+								endif
+							endif
+						else
+							# Images sans alt de variante sont toujours visibles
+							# (images générales, lifestyle, packaging, etc.)
+							assign is_visible = true
+						endif
+
+						# Logique existante pour variant_image
+						if section.settings.hide_variants and variant_images contains media.src or variant_images contains media.id
+							assign variant_image = true
+						else
+							assign variant_image = false
+						endif
+
+						# Déterminer les classes CSS
+						assign media_classes = 'product-media-modal__content--item'
+
+						unless is_visible
+							assign media_classes = media_classes | append: ' product-media-modal__content--item--hidden'
+						endunless
+
+						# Lazy loading : activer seulement si l'image n'est pas visible
+						assign lazy_load_modal = true
+						if is_visible
+							assign lazy_load_modal = false
+						endif
+
+						assign localized_media_alt = localized_media_alt | remove_first: '#' | escape
+
+						render 'product-media', media: media, loop: section.settings.enable_video_looping, variant_image: variant_image, class: media_classes, has_alt_custom: has_alt_custom, localized_media_alt: localized_media_alt, lazy_load: lazy_load_modal
+					-%}
+				{%- endfor -%}
+			{% endif %}
+		</div>
+	</div>
+</product-modal>

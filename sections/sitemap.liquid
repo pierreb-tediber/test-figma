@@ -1,0 +1,113 @@
+<div class="sitemap grid-uniform page-width">
+	{% if section.settings.sitemap_collections_enable %}
+		<div class="grid-item">
+			<h2 class="h3">{{ 'templates.page.collections' | t }}</h2>
+			<ul>
+				{% paginate collections by 99999 %}
+					{% for collection in collections %}
+						{% if collection.metafields.custom.level_1.value %}
+							<li>
+								<a
+									href="{{ collection.url }}"
+									class="ax-link ax-link--first-level"
+								>
+									<strong>{{ collection.title }}</strong>
+								</a>
+								{% if collection.metafields.custom.collections_filles.value != blank %}
+									<ul>
+										{% paginate collection.metafields.custom.collections_filles.value by 9999 %}
+											{% for subCollection in collection.metafields.custom.collections_filles.value %}
+												<li>
+													<a
+														href="{{ subCollection.url }}"
+														class="ax-link"
+													>
+														{{ subCollection.title }}
+													</a>
+												</li>
+											{% endfor %}
+										{% endpaginate %}
+									</ul>
+								{% endif %}
+							</li>
+						{% endif %}
+					{% endfor %}
+				{% endpaginate %}
+			</ul>
+		</div>
+	{% endif %}
+
+	{% liquid
+		assign blogs_linklist = linklists['sitemap-blog'].links
+	%}
+
+	{% if section.settings.sitemap_blog_enable %}
+		<div class="grid-item">
+			<h2 class="h3">{{ 'blogs.article.blog' | t }}</h2>
+			<ul>
+				{% for blog_handle in blogs_linklist %}
+					<li>
+						{% assign blog = blog_handle.object %}
+						{% paginate blog by 99999 %}
+							<a href="{{ blog.url }}" class="ax-link ax-link--first-level">
+								<strong>{{ blog.title }}</strong>
+							</a>
+							<ul>
+								{% for article in blog.articles %}
+									<li>
+										<a href="{{ article.url }}" class="ax-link">{{ article.title }}</a>
+									</li>
+								{% endfor %}
+							</ul>
+						{% endpaginate %}
+					</li>
+				{% endfor %}
+			</ul>
+		</div>
+	{% endif %}
+	{% if section.settings.sitemap_page_enable %}
+		<div class="grid-item">
+			<h2 class="h3">{{ 'templates.search.page' | t }}</h2>
+			<ul>
+				{% paginate pages by 99999 %}
+					{% for page in pages %}
+						<li>
+							<a href="{{ page.url }}" class="ax-link ax-link--first-level">{{ page.title }}</a>
+						</li>
+					{% endfor %}
+				{% endpaginate %}
+			</ul>
+		</div>
+	{% endif %}
+</div>
+
+{% schema %}
+	{
+		"name": "Plan du site",
+		"settings": [
+			{
+				"type": "checkbox",
+				"id": "sitemap_collections_enable",
+				"label": "Activer la liste des collections",
+				"default": true
+			},
+			{
+				"type": "checkbox",
+				"id": "sitemap_blog_enable",
+				"label": "Activer la liste des blogs et articles",
+				"default": true
+			},
+			{
+				"type": "blog",
+				"id": "sitemap_blog_name",
+				"label": "blog à lister"
+			},
+			{
+				"type": "checkbox",
+				"id": "sitemap_page_enable",
+				"label": "Activer la liste des pages",
+				"default": true
+			}
+		]
+	}
+{% endschema %}

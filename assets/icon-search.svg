@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-search" width="40" height="40" fill="none" viewBox="0 0 40 40">
+	<path
+		stroke="currentColor"
+		stroke-miterlimit="10"
+		stroke-width="2"
+		d="M19.304 27.108a7.804 7.804 0 1 0 0-15.608 7.804 7.804 0 0 0 0 15.608Z"
+	/>
+	<path
+		stroke="currentColor"
+		stroke-linecap="round"
+		stroke-miterlimit="10"
+		stroke-width="2"
+		d="m24.82 24.82 3.68 3.68"
+	/>
+</svg>

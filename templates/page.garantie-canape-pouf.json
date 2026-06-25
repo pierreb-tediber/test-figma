@@ -1,0 +1,719 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_content": false,
+        "custom_h1": "",
+        "h1_size": "h1",
+        "h1_no_margin": false,
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "ax_heading_6TphAp": {
+      "type": "ax-heading",
+      "name": "Ax heading",
+      "settings": {
+        "heading": "<p>Garantie canapés et poufs</p>",
+        "heading_size": "h2",
+        "heading_first": true,
+        "subheading": "",
+        "description": "",
+        "full_width": false,
+        "text_alignment": "center",
+        "color_scheme": "",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 32,
+        "padding_top": 96,
+        "padding_bottom": 64
+      }
+    },
+    "ax_richtext_RkciMT": {
+      "type": "ax-richtext",
+      "blocks": {
+        "text_JRbaPb": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Nous vous remercions d’avoir acheté un ou plusieurs nouveau(x) produit(s) TEDIBER. Notre exigence de qualité est élevée et ne doutons pas que vous serez très heureux de votre achat.<br/><br/>Cependant, si vous ne vous accoutumez pas à TEDIBER ou si vous découvrez un défaut dans votre produit, voici ci-dessous les conditions de notre garantie. Si vous estimez avoir le droit de vous prévaloir de leurs conditions, n’hésitez pas à nous contacter à hello@tediber.com pour recevoir des instructions sur la manière de procéder.<br/><br/>VEUILLEZ NOTER QUE NOTRE GARANTIE DES “100 NUITS D’ESSAI & RETOUR GRATUIT” ET NOS GARANTIES PRODUITS S’APPLIQUENT UNIQUEMENT AUX ACHETEURS INITIAUX DE PRODUITS TEDIBER AUTHENTIQUES, QUI ONT ÉTÉ ACHETÉS DIRECTEMENT ET SEULEMENT AUPRÈS DE TEDIBER. UNE PREUVE D’ACHAT VOUS SERA DEMANDÉE AFIN DE CERTIFIER DE L’AUTHENTICITÉ DE L’ACHAT. LA GARANTIE DES “100 NUITS D’ESSAI & RETOUR GRATUIT” S’APPLIQUE POUR CHAQUE PRODUIT TEDIBER MAIS N’EST EN AUCUN CAS RENOUVELABLE.</p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "text_JRbaPb"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_6DaePa": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_jUhgxB": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Banquette lit</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_jUhgxB"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "collapsible_content_LTxXXF": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_F7jM9c": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "La Garantie banquette-lit 2 ans",
+            "icon": "check_mark",
+            "row_content": "<p>Les conditions de notre garantie banquette-lit 2 ans sont les suivantes : Votre banquette-lit TEDIBER est couverte par une garantie de deux ans, qui vous donne des droits particuliers découlant de la loi.<br/><br/>Elle n’est pas transférable et vous couvre uniquement si vous êtes l’acheteur initial et le propriétaire actuel de la banquette-lit TEDIBER pour lequel vous vous prévalez d’un recours au titre de la garantie et si vous l’avez acheté directement sur Tediber.com.<br/><br/>Ainsi, la garantie ne s’applique que pendant la période au cours de laquelle la banquette lit est la propriété et sous le contrôle de l’acheteur initial de cette banquette lit. La garantie banquette lit 2 ans est une garantie pleine couvrant l’intégralité des défauts de fabrication et notamment : – Une latte endommagée ou détruite liée à un problème de fabrication (noeud de bois au milieu, mauvaise fixation lors de l’assemblage). Si vous avez des questions, contactez-nous à hello@tediber.com. – Tout défaut physique du produit qui entraîne une fissure ou une déformation importante, malgré une utilisation normale et une manipulation appropriée du produit. – Tout défaut dans la fabrication de la housse de la banquette lit comme le tissu qui se déchire ou la couture qui se défait. La garantie ne couvre pas l’usure normale du fait de l’utilisation prévue des produits, y compris causée par le nettoyage des tissus, une mauvaise utilisation du produit ou la détérioration lié à l’exposition directe au soleil.<br/><br/>La garantie ne couvre pas les défauts d’utilisation sur les pieds, notamment les chocs que ceux-ci peuvent subir pendant leur durée de vie.<br/><br/>Si la banquette lit est en effet défectueuse, nous vous enverrons une pièce de rechange ou nous procéderons à son remplacement selon les cas. Dans le cas d’un remplacement d’une pièce simple, le changement sera effectué par vous-même. Les frais de livraison seront à notre charge. Par ailleurs, veuillez noter qu’aucun remboursement ne sera effectué en dehors de la garantie des 100 nuits d’essai.<br/><br/>Si nous effectuons un remplacement de produit dans le cadre de la garantie banquette-lit, l’offre des “100 nuits d’essai & Retour gratuit” n’est alors pas renouvelée.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_8hRpWM": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "La Garantie banquette-lit ne couvre pas",
+            "icon": "check_mark",
+            "row_content": "<p>La garantie banquette-lit 2 ans ne couvre pas les banquettes-lits vendues par des revendeurs non-agréés et ne couvre que les banquettes-lits vendues directement par Tediber.<br/><br/>La garantie banquette-lit ne couvre pas votre banquette-lit si vous l’utilisez d’une façon incompatible avec sa destination et son utilisation prévue, par exemple, une situation non domestique. En outre, elle ne couvre pas les états découlant d’une mauvaise manipulation, d’une mauvaise utilisation ou de la négligence, par exemple, lors du transport du produit. Les défauts visibles sur les housses de coussins et de matelas devront ainsi être signalés dans la période des 100 jours suivant la livraison et ne pourront faire l’objet d’une demande de garantie 2 ans.<br/><br/>La garantie ne couvre pas votre banquette-lit si le matelas utilisé n’est pas celui fourni avec la banquette-lit.<br/><br/>Elle ne couvre pas l’usure normale de la banquette lit et les situations susceptibles de causer une détérioration ou des dommages.<br/><br/>Plus particulièrement, cette garantie exclut : a) un défaut lié à l’utilisation de la banquette lit sur un sol qui ne serait pas adapté, solide et plan ; b) l’usure normale du fait de l’utilisation prévue des produits, y compris causée par le nettoyage des tissus ou l’exposition directe au soleil ; c) si vous avez tenté d’altérer ou de réparer la banquette lit sans notre consentement ou si vous avez nettoyé les produits avec des produits ou des techniques inappropriés ; d) des imperfections mineures et de légers défauts esthétiques ; e) des déchirures, des tâches, de la salissure, des brûlures, des dommages liquides et la décoloration des matériaux qui surviennent au fil du temps ; f) l’humidité, les odeurs ou la moisissure (qui peut entre-autre être provoquée par l’utilisation d’un matelas endommagé ou trop vieux) ; g) les préférences individuelles ou personnelles concernant la fermeté, la texture, le confort, etc. ; h) des allergies ou des sensibilités individuelles ou personnelles. i) Toutes les contaminations par les puces, punaises de lit où autres parasites ; j) si le défaut résulte d’un cas de force majeure ou d’un phénomène naturel indépendant de notre volonté, y compris, sans limitation, d’un incendie, d’une inondation ou d’une catastrophe naturelle.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_q4NAzU": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Que fera Tediber ?",
+            "icon": "check_mark",
+            "row_content": "<p>La demande d’exercice de la garantie se fait à l’adresse hello@tediber.com. Les demandes de garantie doivent comporter une description claire du défaut, des photos du défaut et du matelas utilisé, ainsi que la preuve d’achat du produit. L’absence de photographies ou une description imprécise pourront retarder la prise en charge du défaut au titre de la garantie 2 ans ou aboutir à son non-exercice.<br/><br/>Après inspection du défaut par l’équipe Tediber, elle décidera si le produit est défectueux et si les conditions d’application de la garantie sont remplies.<br/><br/>Si le défaut est considéré comme étant couvert par la garantie, notre obligation dans le cadre de la garantie 2 ans consistera à fournir une pièce de rechange, une réparation ou un remplacement du produit. Dans le cas où une partie isolée du produit serait concernée par le défaut (par exemple les pieds de la banquette lit), seule cette partie sera remplacée par l’envoi d’une nouvelle pièce de rechange et vous pourrez remplacer la pièce défectueuse.<br/><br/>Dans le cas d’une remplacement de produit, les produits défectueux devront être retournés et les frais de retours seront remboursés si le défaut est constaté comme éligible à la garantie 2 ans. Les Produits réparés ou remplacés vous seront livrés gratuitement – veuillez noter que l’envoi ne peut être fait que dans le pays choisi lors de la livraison initiale de la banquette lit.<br/><br/>Nous remplacerons le produit considéré comme défectueux par le modèle de taille identique ou, dans le cas où le modèle n’existe plus, par un modèle d’un prix équivalent ou inférieur.<br/><br/>Toute réclamation en vertu de cette garantie doit être reçue dans les 30 jours suivant votre constatation du défaut ou suivant la date à laquelle vous auriez raisonnablement dû constater le défaut, et, en tout état de cause, avant la fin de la période de garantie.<br/><br/>Veuillez noter qu’aucun remboursement ne sera effectué au titre de la garantie 2 ans, contrairement à la garantie des 100 nuits d’essai. La garantie 2 ans ouvre droit à une pièce de rechange, une réparation ou éventuellement à un remplacement.<br/><br/>La garantie est fournie par Tediber, 20 Rue Sainte Croix de la Bretonnerie 75004 Paris. Vous pouvez nous contacter à hello@tediber.com.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_4CEiTm": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Quelle est la durée de la garantie ?",
+            "icon": "check_mark",
+            "row_content": "<p>Cette garantie couvrant votre banquette lit TEDIBER dure pendant 2 ans à compter de la date de livraison. Nous ne proratisons pas les termes (c’est-à-dire que nous ne réduisons pas le montant total en fonction du temps écoulé). Une banquette lit remplacée ou réparée ne prolonge pas la durée de votre garantie. Le calcul de la durée de garantie se fait à partir du jour de la date de commande de votre achat d’origine.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_DQycMF": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Absence de déclaration de nature médicale ou liée à la santé",
+            "icon": "check_mark",
+            "row_content": "<p>TEDIBER n’effectue aucune déclaration de nature médicale ou liée à la santé concernant ses banquettes lit. Les allergies, l’inconfort ou d’autres situations ne sont pas couvert(e)s au titre de cette garantie. Toute question ou préoccupation concernant les situations de nature médicale ou liées à la santé doit être adressée à un médecin habilité.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_imJzzb": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Comment effectuer une réclamation au titre de cette garantie ?",
+            "icon": "check_mark",
+            "row_content": "<p>Pour effectuer une réclamation au titre de notre garantie, veuillez envoyer une brève description écrite (accompagnée de photos, si possible) du problème ou de l’état qui selon vous constitue un défaut à l’adresse hello@tediber.com. Par ailleurs, d’autres éléments comme la preuve d’achat ou des photos complémentaires pourront être demandés.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_F7jM9c",
+        "collapsible_row_8hRpWM",
+        "collapsible_row_q4NAzU",
+        "collapsible_row_4CEiTm",
+        "collapsible_row_DQycMF",
+        "collapsible_row_imJzzb"
+      ],
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "full_width": true,
+        "caption": "",
+        "heading": "",
+        "heading_size": "h2",
+        "heading_alignment": "center",
+        "layout": "none",
+        "container_color_scheme": "",
+        "color_scheme": "",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "ax_richtext_FM3xfE": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_4nnJEy": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Canapé</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_4nnJEy"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "collapsible_content_NwknYz": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_LtVhed": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "La Garantie canapé 2 ans",
+            "icon": "check_mark",
+            "row_content": "<p>Les conditions de notre garantie canapé 2 ans sont les suivantes : Votre canapé simple, ou votre canapé d’angle Tediber est couvert par une garantie de 2 ans, qui vous donne des droits particuliers découlant de la loi.<br/><br/>Elle n’est pas transférable et vous couvre uniquement si vous êtes l’acheteur initial et le propriétaire actuel du canapé Tediber pour lequel vous vous prévalez d’un recours au titre de la garantie et si vous l’avez acheté directement sur www.tediber.com ou dans les boutiques Tediber.<br/><br/>Ainsi, la garantie ne s’applique que pendant la période au cours de laquelle le canapé est la propriété et sous le contrôle de l’acheteur initial.<br/><br/>La garantie canapé Tediber 2 ans est une garantie pleine couvrant des défauts de fabrication et notamment :<br/><br/>    Tout défaut physique du produit qui entraîne une fissure ou une déformation importante, malgré une utilisation normale et une manipulation appropriée du produit.<br/>    Tout défaut dans la fabrication des pieds (coloration latérale, tige filetée mal fixée). La garantie ne couvre pas les défauts d’utilisation sur les pieds, notamment les chocs que ceux-ci peuvent subir pendant leur durée de vie.<br/>    Tout défaut dans la fabrication de la housse du canapé comme le tissu qui se déchire, la couture qui se défait, le zip qui se casse. La garantie ne couvre pas l’usure normale du fait de l’utilisation prévue des produits, y compris causée par le nettoyage des tissus, une mauvaise utilisation du produit ou la détérioration liée à l’exposition directe au soleil.<br/><br/>Si le canapé est en effet défectueux, nous vous enverrons une pièce de rechange ou nous procéderons à son remplacement selon les cas. Dans le cas d’un remplacement d’une pièce simple, le changement sera effectué par vous-même. Les frais de livraison seront à notre charge. Par ailleurs, veuillez noter qu’aucun remboursement ne sera effectué en dehors de la garantie des 100 jours d’essai.<br/><br/>Si nous effectuons un remplacement de produit dans le cadre de la garantie canapé, l’offre des “100 jours d’essai & retour gratuit” n’est alors pas renouvelée.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_49Bzxe": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "La Garantie canapé ne couvre pas",
+            "icon": "check_mark",
+            "row_content": "<p>La garantie canapé 2 ans ne couvre pas les produits vendus par des revendeurs non-agréés et ne couvre que les canapés vendus directement par Tediber.<br/><br/>La garantie canapé ne couvre pas votre canapé si vous l’utilisez d’une façon incompatible avec sa destination et son utilisation prévue, par exemple, une situation non domestique. En outre, elle ne couvre pas les états découlant d’une mauvaise manipulation, d’une mauvaise utilisation ou de la négligence, par exemple, lors du transport du produit ou de la manipulation du module d’angle dans le cas d’un canapé d’angle.<br/><br/>Les défauts visibles sur la housse et la structure devront ainsi être signalés dans la période des 100 jours suivant la livraison et ne pourront faire l’objet d’une demande de garantie 2 ans. La garantie ne couvre pas l’usure normale du canapé et les situations susceptibles de causer une détérioration ou des dommages. Plus particulièrement, cette garantie exclut : a) un défaut lié à l’utilisation du canapé sur un sol qui ne serait pas adapté, solide et plan ; b) l’usure normale du fait de l’utilisation prévue des produits, y compris causée par le nettoyage des tissus ou l’exposition directe au soleil ; c) si vous avez tenté d’altérer ou de réparer le canapé sans notre consentement ou si vous avez nettoyé le tissu avec des produits trop agressifs ou des techniques inappropriées ; d) des imperfections mineures et de légers défauts esthétiques (léger accroc sur la housse, rayure discrète sur le bois des pieds, défaut léger caché sous les coussins d’assise ou de dossier…) ; e) des déchirures, des tâches, de la salissure, des brûlures, des dommages liquides et la décoloration des matériaux qui surviennent au fil du temps ; f) l’humidité, les odeurs ou la moisissure ; g) les préférences individuelles ou personnelles concernant la fermeté de l’assise, le confort des coussins, le toucher du tissu et l’appréciation des couleurs de tissu, etc ; h) des allergies ou des sensibilités individuelles ou personnelles. i) toutes les contaminations par les puces, punaises de lit ou autres parasites ; j) si le défaut résulte d’un cas de force majeure ou d’un phénomène naturel indépendant de notre volonté, y compris, sans limitation, d’un incendie, d’une inondation ou d’une catastrophe naturelle.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_cnJWbb": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Que fera Tediber ?",
+            "icon": "check_mark",
+            "row_content": "<p>La demande d’exercice de la garantie se fait à l’adresse hello@tediber.com(mailto:hello@tediber.com) et doit comporter une description claire du défaut et la preuve d’achat à votre nom. En fonction du problème, des éléments complémentaires seront obligatoirement demandés (photographies ou vidéos par exemple) afin de valider le problème avec l’équipe qualité. L’absence de photographies ou une description imprécise pourront retarder la prise en charge du défaut au titre de la garantie 2 ans ou aboutir à son non-exercice. Après inspection du défaut par l’équipe Tediber, elle décidera si le produit est défectueux et si les conditions d’application de la garantie sont remplies.<br/><br/>Les produits défectueux devront être retournés si le défaut est constaté comme éligible à la garantie 2 ans. Le créneau pour l’échange du produit vous sera proposé par notre service client ; le retour du produit défectueux et la livraison du nouveau produit se feront au même moment. Si le défaut est considéré comme étant couvert par la garantie, notre obligation dans le cadre de la garantie 2 ans consistera à fournir une réparation ou un remplacement du produit. Dans le cas où une partie isolée du produit serait concernée par le défaut (par exemple une housse de coussin endommagée), seule cette partie sera remplacée par l’envoi d’une nouvelle pièce de rechange, vous pourrez remplacer la pièce défectueuse. Les produits réparés ou remplacés vous seront livrés gratuitement – veuillez noter que l’envoi ne peut être fait que dans le pays choisi lors de la livraison initiale du canapé.<br/><br/>Nous remplacerons le produit considéré comme défectueux par le modèle de taille identique ou, dans le cas où le modèle n’existe plus, par un modèle d’un prix équivalent ou inférieur. Toute réclamation en vertu de cette garantie doit être reçue dans les 30 jours suivant votre constatation du défaut ou suivant la date à laquelle vous auriez raisonnablement dû constater le défaut, et, en tout état de cause, avant la fin de la période de garantie.<br/><br/>Veuillez noter qu’aucun remboursement ne sera effectué au titre de la garantie 2 ans, contrairement à la garantie des 100 jours d’essai. La garantie 2 ans ouvre droit à une réparation ou éventuellement à un remplacement.<br/><br/>La garantie est fournie par Tediber, 20 Rue Sainte Croix de la Bretonnerie 75004 Paris. Vous pouvez nous contacter à hello@tediber.com(mailto:hello@tediber.com).</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_6tYmMN": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Quelle est la durée de la garantie ?",
+            "icon": "check_mark",
+            "row_content": "<p>Cette garantie couvrant votre canapé Tediber dure pendant 2 ans à compter de la date de livraison. Nous ne proratisons pas les termes (c’est-à-dire que nous ne réduisons pas le montant total en fonction du temps écoulé). Un canapé remplacé ou réparé ne prolonge pas la durée de votre garantie. Le calcul de la durée de garantie se fait à partir du jour de la date de livraison de votre achat d’origine.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_6BGqnr": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Absence de déclaration de nature médicale ou liée à la santé",
+            "icon": "check_mark",
+            "row_content": "<p>Tediber n’effectue aucune déclaration de nature médicale ou liée à la santé concernant ses produits . Les allergies, l’inconfort ou d’autres situations ne sont pas couvert(e)s au titre de cette garantie. Toute question ou préoccupation concernant les situations de nature médicale ou liées à la santé doit être adressée à un médecin habilité.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_YyX7MK": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Comment effectuer une réclamation au titre de cette garantie ?",
+            "icon": "check_mark",
+            "row_content": "<p>Pour effectuer une réclamation au titre de notre garantie, veuillez envoyer une brève description écrite (accompagnée de photos) du problème et la preuve d’achat du canapé ou de l’état qui selon vous constitue un défaut à l’adresse hello@tediber.com(mailto:hello@tediber.com). Par ailleurs, d’autres éléments comme des photos complémentaires ou des vidéos seront demandés selon notre processus qualité.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_HNrKia": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Informations sur les qualités et caractéristiques environnementales",
+            "icon": "check_mark",
+            "row_content": "<p>Conformément à la réglementation, Tediber fournit à ses clients les informations de mise en conformité concernant la présence de substances dangereuses, l'incorporation de matières recyclées, et la recyclabilité - découvrez les informations <a href=\"https://docs.google.com/spreadsheets/d/1vq86j7D2zjYq1guPzI7_0s8_1u3o3k-DKBSmS_BZrkY/edit?userstoinvite=elise%40tediber.com&sharingaction=manageaccess&role=writer&gid=0#gid=0\" title=\"https://docs.google.com/spreadsheets/d/1vq86j7D2zjYq1guPzI7_0s8_1u3o3k-DKBSmS_BZrkY/edit?userstoinvite=elise%40tediber.com&sharingaction=manageaccess&role=writer&gid=0#gid=0\">ici</a></p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_LtVhed",
+        "collapsible_row_49Bzxe",
+        "collapsible_row_cnJWbb",
+        "collapsible_row_6tYmMN",
+        "collapsible_row_6BGqnr",
+        "collapsible_row_YyX7MK",
+        "collapsible_row_HNrKia"
+      ],
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "full_width": true,
+        "caption": "",
+        "heading": "",
+        "heading_size": "h2",
+        "heading_alignment": "center",
+        "layout": "none",
+        "container_color_scheme": "",
+        "color_scheme": "",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "ax_richtext_pDHmLW": {
+      "type": "ax-richtext",
+      "blocks": {
+        "button_6cN73N": {
+          "type": "button",
+          "settings": {
+            "button_text": "Découvrir le canapé Tediber",
+            "url": "shopify://products/canape",
+            "link_blank": false,
+            "style_button": "button button--primary",
+            "button_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "button_6cN73N"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_DPpAhQ": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_BhAMkb": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Canapé-lit</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_BhAMkb"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "collapsible_content_TkjCpr": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_zGGBpH": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "La Garantie canapé-lit 2 ans",
+            "icon": "check_mark",
+            "row_content": "<p>Les conditions de notre garantie canapé-lit 2 ans sont les suivantes : Votre canapé-lit TEDIBER est couvert par une garantie de deux ans, qui vous donne des droits particuliers découlant de la loi.<br/><br/>Elle n’est pas transférable et vous couvre uniquement si vous êtes l’acheteur initial et le propriétaire actuel du canapé-lit TEDIBER pour lequel vous vous prévalez d’un recours au titre de la garantie et si vous l’avez acheté directement sur Tediber.com.<br/><br/>Ainsi, la garantie ne s’applique que pendant la période au cours de laquelle le canapé lit est la propriété et sous le contrôle de l’acheteur initial de ce canapé lit. La garantie canapé lit 2 ans est une garantie pleine couvrant l’intégralité des défauts de fabrication et notamment : – Une latte endommagée ou détruite lié à un problème de fabrication (noeud de bois au milieu, mauvaise fixation lors de l’assemblage). Si vous avez des questions, contactez-nous à hello@tediber.com. – Tout défaut physique du produit qui entraîne une fissure ou une déformation importante, malgré une utilisation normale et une manipulation appropriée du produit. – Tout défaut dans la fabrication de la housse du canapé lit comme le tissu qui se déchire ou la couture qui se défait. La garantie ne couvre pas l’usure normale du fait de l’utilisation prévue des produits, y compris causée par le nettoyage des tissus, une mauvaise utilisation du produit ou la détérioration lié à l’exposition directe au soleil.<br/><br/>La garantie ne couvre pas les défauts d’utilisation sur les pieds, notamment les chocs que ceux-ci peuvent subir pendant leur durée de vie.<br/><br/>Si le canapé lit est en effet défectueux, nous vous enverrons une pièce de rechange ou nous procéderons à son remplacement selon les cas.Dans le cas d’un remplacement d’une pièce simple, le changement sera effectué par vous-même. Les frais de livraison seront à notre charge. Par ailleurs, veuillez noter qu’aucun remboursement ne sera effectué en dehors de la garantie des 100 nuits d’essai.<br/><br/>Si nous effectuons un remplacement de produit dans le cadre de la garantie canapé-lit, l’offre des “100 nuits d’essai & Retour gratuit” n’est alors pas renouvelée.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_Wj4yiY": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "La Garantie canapé-lit ne couvre pas",
+            "icon": "check_mark",
+            "row_content": "<p>La garantie canapé-lit 2 ans ne couvre pas les canapés-lits vendus par des revendeurs non-agréés et ne couvre que les canapés-lits vendus directement par Tediber.<br/><br/>La garantie canapé-lit ne couvre pas votre canapé-lit si vous l’utilisez d’une façon incompatible avec sa destination et son utilisation prévue, par exemple, une situation non domestique. En outre, elle ne couvre pas les états découlant d’une mauvaise manipulation, d’une mauvaise utilisation ou de la négligence, par exemple, lors du transport du produit les défauts visibles sur les housses de coussins et de matelas devront ainsi être signalés dans la période des 100 jours suivant la livraison et ne pourront faire l’objet d’une demande de garantie 2 ans.<br/><br/>La garantie ne couvre pas votre canapé-lit si le matelas utilisé n’est pas celui fourni avec le canapé-lit.<br/><br/>Elle ne couvre pas l’usure normale du canapé lit et les situations susceptibles de causer une détérioration ou des dommages.<br/><br/>Plus particulièrement, cette garantie exclut : a) un défaut lié à l’utilisation du canapé lit sur un sol qui ne serait pas adapté, solide et plan ; b) l’usure normale du fait de l’utilisation prévue des produits, y compris causée par le nettoyage des tissus ou l’exposition directe au soleil ; c) si vous avez tenté d’altérer ou de réparer le canapé lit sans notre consentement ou si vous avez nettoyé les produits avec des produits ou des techniques inappropriés ; d) des imperfections mineures et de légers défauts esthétiques ; e) des déchirures, des tâches, de la salissure, des brûlures, des dommages liquides et la décoloration des matériaux qui surviennent au fil du temps ; f) l’humidité, les odeurs ou la moisissure (qui peut entre-autre être provoquée par l’utilisation d’un matelas endommagé ou trop vieux) ; g) les préférences individuelles ou personnelles concernant la fermeté, la texture, le confort, etc. ; h) des allergies ou des sensibilités individuelles ou personnelles. i) Toutes les contaminations par les puces, punaises de lit où autres parasites ; j) si le défaut résulte d’un cas de force majeure ou d’un phénomène naturel indépendant de notre volonté, y compris, sans limitation, d’un incendie, d’une inondation ou d’une catastrophe naturelle.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_Q7wCFW": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Que fera Tediber ?",
+            "icon": "check_mark",
+            "row_content": "<p>La demande d’exercice de la garantie se fait à l’adresse hello@tediber.com. Les demandes de garantie doivent comporter une description claire du défaut, des photos du défaut et du matelas utilisé, ainsi que la preuve d’achat du produit. L’absence de photographies ou une description imprécise pourront retarder la prise en charge du défaut au titre de la garantie 2 ans ou aboutir à son non-exercice.<br/><br/>Après inspection du défaut par l’équipe Tediber, elle décidera si le produit est défectueux et si les conditions d’application de la garantie sont remplies.<br/><br/>Si le défaut est considéré comme étant couvert par la garantie, notre obligation dans le cadre de la garantie 2 ans consistera à fournir une pièce de rechange, une réparation ou un remplacement du produit. Dans le cas où une partie isolée du produit serait concernée par le défaut (par exemple les pieds du canapé lit), seule cette partie sera remplacée par l’envoi d’une nouvelle pièce de rechange et vous pourrez remplacer la pièce défectueuse.<br/><br/>Dans le cas d’une remplacement de produit, les produits défectueux devront être retournés et les frais de retours seront remboursés si le défaut est constaté comme éligible à la garantie 2 ans. Les Produits réparés ou remplacés vous seront livrés gratuitement – veuillez noter que l’envoi ne peut être fait que dans le pays choisi lors de la livraison initiale du canapé lit.<br/><br/>Nous remplacerons le produit considéré comme défectueux par le modèle de taille identique ou, dans le cas où le modèle n’existe plus, par un modèle d’un prix équivalent ou inférieur.<br/><br/>Toute réclamation en vertu de cette garantie doit être reçue dans les 30 jours suivant votre constatation du défaut ou suivant la date à laquelle vous auriez raisonnablement dû constater le défaut, et, en tout état de cause, avant la fin de la période de garantie.<br/><br/>Veuillez noter qu’aucun remboursement ne sera effectué au titre de la garantie 2 ans, contrairement à la garantie des 100 nuits d’essai. La garantie 2 ans ouvre droit à une pièce de rechange, une réparation ou éventuellement à un remplacement.<br/><br/>La garantie est fournie par Tediber, 20 Rue Sainte Croix de la Bretonnerie 75004 Paris. Vous pouvez nous contacter à hello@tediber.com.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_6GAMeb": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Quelle est la durée de la garantie ?",
+            "icon": "check_mark",
+            "row_content": "<p>Cette garantie couvrant votre canapé lit TEDIBER dure pendant 2 ans à compter de la date de livraison. Nous ne proratisons pas les termes (c’est-à-dire que nous ne réduisons pas le montant total en fonction du temps écoulé). Un canapé lit remplacé ou réparé ne prolonge pas la durée de votre garantie. Le calcul de la durée de garantie se fait à partir du jour de la date de commande de votre achat d’origine.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_RpgBJj": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Absence de déclaration de nature médicale ou liée à la santé",
+            "icon": "check_mark",
+            "row_content": "<p>TEDIBER n’effectue aucune déclaration de nature médicale ou liée à la santé concernant ses canapé lit. Les allergies, l’inconfort ou d’autres situations ne sont pas couvert(e)s au titre de cette garantie. Toute question ou préoccupation concernant les situations de nature médicale ou liées à la santé doit être adressée à un médecin habilité.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_EkkxJj": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Comment effectuer une réclamation au titre de cette garantie ?",
+            "icon": "check_mark",
+            "row_content": "<p>Pour effectuer une réclamation au titre de notre garantie, veuillez envoyer une brève description écrite (accompagnée de photos, si possible) du problème ou de l’état qui selon vous constitue un défaut à l’adresse hello@tediber.com. Par ailleurs, d’autres éléments comme la preuve d’achat ou des photos complémentaires pourront être demandés.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_ydLjR3": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Informations sur les qualités et caractéristiques environnementales",
+            "icon": "check_mark",
+            "row_content": "<p>Conformément à la réglementation, Tediber fournit à ses clients les informations de mise en conformité concernant la présence de substances dangereuses, l'incorporation de matières recyclées, et la recyclabilité - découvrez les informations <a href=\"https://docs.google.com/spreadsheets/d/1vq86j7D2zjYq1guPzI7_0s8_1u3o3k-DKBSmS_BZrkY/edit?userstoinvite=elise%40tediber.com&sharingaction=manageaccess&role=writer&gid=0#gid=0\" target=\"_blank\"><span style=\"text-decoration:underline\"><strong>ici</strong></span></a></p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_zGGBpH",
+        "collapsible_row_Wj4yiY",
+        "collapsible_row_Q7wCFW",
+        "collapsible_row_6GAMeb",
+        "collapsible_row_RpgBJj",
+        "collapsible_row_EkkxJj",
+        "collapsible_row_ydLjR3"
+      ],
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "full_width": true,
+        "caption": "",
+        "heading": "",
+        "heading_size": "h2",
+        "heading_alignment": "center",
+        "layout": "none",
+        "container_color_scheme": "",
+        "color_scheme": "",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "ax_richtext_RU6bRN": {
+      "type": "ax-richtext",
+      "blocks": {
+        "button_aFDfYi": {
+          "type": "button",
+          "settings": {
+            "button_text": "Découvrir le canapé-lit Tediber",
+            "url": "shopify://products/canape-convertible",
+            "link_blank": false,
+            "style_button": "button button--primary",
+            "button_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "button_aFDfYi"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_4Aq3pA": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_H9zQPq": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Module d'angle</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_H9zQPq"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "collapsible_content_LL3BPe": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_Yyhahn": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "La Garantie module d’angle 2 ans",
+            "icon": "check_mark",
+            "row_content": "<p>Les conditions de notre garantie module d’angle 2 ans sont les suivantes : Votre module d’angle Tediber est couvert par une garantie de 2 ans, qui vous donne des droits particuliers découlant de la loi.<br/><br/>Elle n’est pas transférable et vous couvre uniquement si vous êtes l’acheteur initial et le propriétaire actuel du module d’angle Tediber pour lequel vous vous prévalez d’un recours au titre de la garantie et si vous l’avez acheté directement sur www.tediber.com ou dans les boutiques Tediber.<br/><br/>Ainsi, la garantie ne s’applique que pendant la période au cours de laquelle le module d’angle est la propriété et sous le contrôle de l’acheteur initial.<br/><br/>La garantie module d’angle Tediber 2 ans est une garantie pleine couvrant des défauts de fabrication et notamment :<br/><br/>    Tout défaut physique du produit qui entraîne une fissure ou une déformation importante, malgré une utilisation normale et une manipulation appropriée du produit. – Tout défaut dans la fabrication des pieds (coloration latérale, tige filetée mal fixée). La garantie ne couvre pas les défauts d’utilisation sur les pieds, notamment les chocs que ceux-ci peuvent subir pendant leur durée de vie.<br/>    Tout défaut dans la fabrication de la housse du module d’angle ainsi que dans celle de la languette comme le tissu qui se déchire, la couture qui se défait, le zip qui se casse. La garantie ne couvre pas l’usure normale du fait de l’utilisation prévue des produits, y compris causée par le nettoyage des tissus, une mauvaise utilisation du produit ou la détérioration liée à l’exposition directe au soleil.<br/><br/>Si le module d’angle est en effet défectueux, nous vous enverrons une pièce de rechange ou nous procéderons à son remplacement selon les cas. Dans le cas d’un remplacement d’une pièce simple, le changement sera effectué par vous-même. Les frais de livraison seront à notre charge. Par ailleurs, veuillez noter qu’aucun remboursement ne sera effectué en dehors de la garantie des 100 jours d’essai.<br/><br/>Si nous effectuons un remplacement de produit dans le cadre de la garantie module d’angle, l’offre des “100 jours d’essai & retour gratuit” n’est alors pas renouvelée.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_zFpUcz": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "La Garantie module d’angle ne couvre pas",
+            "icon": "check_mark",
+            "row_content": "<p>La garantie module d’angle 2 ans ne couvre pas les produits vendus par des revendeurs non-agréés et ne couvre que les modules d’angle vendus directement par Tediber.<br/><br/>La garantie module d’angle ne couvre pas votre module d’angle si vous l’utilisez d’une façon incompatible avec sa destination et son utilisation prévue, par exemple, une situation non domestique. En outre, elle ne couvre pas les états découlant d’une mauvaise manipulation, d’une mauvaise utilisation ou de la négligence, par exemple, lors du transport du produit.<br/><br/>Les défauts visibles sur la housse et le socle devront ainsi être signalés dans la période des 100 jours suivant la livraison et ne pourront faire l’objet d’une demande de garantie 2 ans.<br/><br/>La garantie ne couvre pas l’usure normale du module d’angle et les situations susceptibles de causer une détérioration ou des dommages.<br/><br/>Plus particulièrement, cette garantie exclut : a) un défaut lié à l’utilisation du module d’angle sur un sol qui ne serait pas adapté, solide et plan ; b) l’usure normale du fait de l’utilisation prévue des produits, y compris causée par le nettoyage des tissus ou l’exposition directe au soleil ; c) si vous avez tenté d’altérer ou de réparer le module d’angle sans notre consentement ou si vous avez nettoyé le tissu avec des produits trop agressifs ou des techniques inappropriées ; d) des imperfections mineures et de légers défauts esthétiques (léger accroc sur la housse, rayure discrète sur le bois des pieds, défaut léger caché sous le coussin d’assise ; e) des déchirures, des tâches, de la salissure, des brûlures, des dommages liquides et la décoloration des matériaux qui surviennent au fil du temps ; f) l’humidité, les odeurs ou la moisissure ; g) les préférences individuelles ou personnelles concernant la fermeté de l’assise, le toucher du tissu et l’appréciation des couleurs de tissu, etc ; h) des allergies ou des sensibilités individuelles ou personnelles. i) toutes les contaminations par les puces, punaises de lit ou autres parasites ; j) si le défaut résulte d’un cas de force majeure ou d’un phénomène naturel indépendant de notre volonté, y compris, sans limitation, d’un incendie, d’une inondation ou d’une catastrophe naturelle.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_DrXG3K": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Que fera Tediber ?",
+            "icon": "check_mark",
+            "row_content": "<p>La demande d’exercice de la garantie se fait à l’adresse hello@tediber.com(mailto:hello@tediber.com) et doit comporter une description claire du défaut et la preuve d’achat à votre nom.<br/><br/>En fonction du problème, des éléments complémentaires seront obligatoirement demandés (photographies ou vidéos par exemple) afin de valider le problème avec l’équipe qualité.<br/><br/>L’absence de photographies ou une description imprécise pourront retarder la prise en charge du défaut au titre de la garantie 2 ans ou aboutir à son non-exercice.<br/><br/>Après inspection du défaut par l’équipe Tediber, elle décidera si le produit est défectueux et si les conditions d’application de la garantie sont remplies.<br/><br/>Les produits défectueux devront être retournés si le défaut est constaté comme éligible à la garantie 2 ans. Le créneau pour l’échange du produit vous sera proposé par notre service client ; le retour du produit défectueux et la livraison du nouveau produit se feront au même moment.<br/><br/>Si le défaut est considéré comme étant couvert par la garantie, notre obligation dans le cadre de la garantie 2 ans consistera à fournir une réparation ou un remplacement du produit. Dans le cas où une partie isolée du produit serait concernée par le défaut (par exemple la housse de coussin endommagée), seule cette partie sera remplacée par l’envoi d’une nouvelle pièce de rechange, vous pourrez remplacer la pièce défectueuse.<br/><br/>Les produits réparés ou remplacés vous seront livrés gratuitement – veuillez noter que l’envoi ne peut être fait que dans le pays choisi lors de la livraison initiale du module d’angle.<br/><br/>Nous remplacerons le produit considéré comme défectueux par le modèle de taille identique ou, dans le cas où le modèle n’existe plus, par un modèle d’un prix équivalent ou inférieur.<br/><br/>Toute réclamation en vertu de cette garantie doit être reçue dans les 30 jours suivant votre constatation du défaut ou suivant la date à laquelle vous auriez raisonnablement dû constater le défaut, et, en tout état de cause, avant la fin de la période de garantie.<br/><br/>Veuillez noter qu’aucun remboursement ne sera effectué au titre de la garantie 2 ans, contrairement à la garantie des 100 jours d’essai. La garantie 2 ans ouvre droit à une réparation ou éventuellement à un remplacement.<br/><br/>La garantie est fournie par Tediber, 20 Rue Sainte Croix de la Bretonnerie 75004 Paris.<br/><br/>Vous pouvez nous contacter à hello@tediber.com(mailto:hello@tediber.com).</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_TcRCxz": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Quelle est la durée de la garantie ?",
+            "icon": "check_mark",
+            "row_content": "<p>Cette garantie couvrant votre module d’angle Tediber dure pendant 2 ans à compter de la date de livraison. Nous ne proratisons pas les termes (c’est-à-dire que nous ne réduisons pas le montant total en fonction du temps écoulé). Un module d’angle remplacé ou réparé ne prolonge pas la durée de votre garantie. Le calcul de la durée de garantie se fait à partir du jour de la date de livraison de votre achat d’origine.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_9TQhNW": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Absence de déclaration de nature médicale ou liée à la santé",
+            "icon": "check_mark",
+            "row_content": "<p>Tediber n’effectue aucune déclaration de nature médicale ou liée à la santé concernant ses produits . Les allergies, l’inconfort ou d’autres situations ne sont pas couvert(e)s au titre de cette garantie. Toute question ou préoccupation concernant les situations de nature médicale ou liées à la santé doit être adressée à un médecin habilité.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_pG9e6y": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Comment effectuer une réclamation au titre de cette garantie ?",
+            "icon": "check_mark",
+            "row_content": "<p>Pour effectuer une réclamation au titre de notre garantie, veuillez envoyer une brève description écrite (accompagnée de photos) du problème et la preuve d’achat du module d’angle ou de l’état qui selon vous constitue un défaut à l’adresse hello@tediber.com(mailto:hello@tediber.com). Par ailleurs, d’autres éléments comme des photos complémentaires ou des vidéos seront demandés selon notre processus qualité.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_Yyhahn",
+        "collapsible_row_zFpUcz",
+        "collapsible_row_DrXG3K",
+        "collapsible_row_TcRCxz",
+        "collapsible_row_9TQhNW",
+        "collapsible_row_pG9e6y"
+      ],
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "full_width": true,
+        "caption": "",
+        "heading": "",
+        "heading_size": "h2",
+        "heading_alignment": "center",
+        "layout": "none",
+        "container_color_scheme": "",
+        "color_scheme": "",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "ax_richtext_GTF7He": {
+      "type": "ax-richtext",
+      "blocks": {
+        "button_Rhzqh9": {
+          "type": "button",
+          "settings": {
+            "button_text": "Découvrir le module d'angle Tediber",
+            "url": "shopify://products/module-angle",
+            "link_blank": false,
+            "style_button": "button button--primary",
+            "button_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "button_Rhzqh9"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    }
+  },
+  "order": [
+    "main",
+    "ax_heading_6TphAp",
+    "ax_richtext_RkciMT",
+    "ax_richtext_6DaePa",
+    "collapsible_content_LTxXXF",
+    "ax_richtext_FM3xfE",
+    "collapsible_content_NwknYz",
+    "ax_richtext_pDHmLW",
+    "ax_richtext_DPpAhQ",
+    "collapsible_content_TkjCpr",
+    "ax_richtext_RU6bRN",
+    "ax_richtext_4Aq3pA",
+    "collapsible_content_LL3BPe",
+    "ax_richtext_GTF7He"
+  ]
+}

@@ -1,0 +1,562 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "banner": {
+      "type": "main-banner",
+      "settings": {
+        "heading": "<p>Comme un grand</p>",
+        "image": "shopify://shop_images/TEDIBER_2024_06_241158.jpg",
+        "color_scheme": "scheme-a6ba1938-1dcc-48fa-a1c5-cecd367da137",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "custom_liquid_f8Hdfj": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<!-- Bannière 10× Alma – HTML pur -->\n<div class=\"banner-alma\" role=\"region\" aria-label=\"Paiement 10× Alma sans frais\">\n  <div class=\"banner-alma__inner\">\n    <span class=\"banner-alma__badge\" aria-hidden=\"true\">\n      <img src=\"https://cdn.shopify.com/s/files/1/0903/1342/5220/files/Badge-Alma-orange-10x.svg?v=1758009341\" alt=\"10× Alma\" loading=\"lazy\" width=\"96\" height=\"28\">\n    </span>\n\n    <!-- Texte desktop -->\n    <p class=\"banner-alma__text banner-alma__text--desktop\">\n      Jusqu'au 30 septembre, le paiement en <strong>10x sans frais est offert</strong>.\n    </p>\n\n    <!-- Texte mobile -->\n    <p class=\"banner-alma__text banner-alma__text--mobile\">\n       Jusqu'au 30 septembre, le paiement en <strong>10x sans frais est offert</strong>.\n    </p>\n  </div>\n</div>\n\n<style>\n  :root {\n    --alma-blue: #010C27;\n    --alma-text: #ffffff;\n  }\n\n  .banner-alma {\n    background: var(--alma-blue);\n    color: var(--alma-text);\n    width: 100%;\n  }\n\n  .banner-alma__inner {\n    max-width: 1080px;\n    margin: 0 auto;\n    display: flex;                /* ✅ flex au lieu de grid */\n    justify-content: center;      /* ✅ centre horizontalement */\n    align-items: center;          /* aligne verticalement */\n    gap: 0.9rem;                  /* espace logo/texte */\n    padding: 0.75rem 0.4rem;\n    min-height: 56px;\n    text-align: center;           /* centre aussi le texte */\n  }\n\n  /* Badge */\n  .banner-alma__badge {\n    line-height: 0;\n    display: inline-flex;\n    align-items: center;\n  }\n  .banner-alma__badge img {\n    display: block;\n    height: 28px;\n    width: auto;\n  }\n\n  /* Texte */\n  .banner-alma__text {\n    margin: 4px;\n    line-height: 1.35;\n    font-size: 14px;\n    font-weight: 500;\n  }\n  .banner-alma__text strong { font-weight: 700; }\n\n  /* Cacher la version mobile par défaut */\n  .banner-alma__text--mobile { display: none; }\n\n  /* Responsive */\n  @media (max-width: 740px) {\n    .banner-alma__inner {\n      flex-direction: column;     /* ✅ passe en colonne */\n      justify-content: center;\n      gap: 0.55rem;\n      padding: 0.7rem 0.9rem;\n    }\n    .banner-alma__badge img { height: 28px; }\n    .banner-alma__text--desktop { display: none; }\n    .banner-alma__text--mobile { display: block; font-size: 12px; }\n  }\n</style>",
+        "color_scheme": "",
+        "padding_top": 16,
+        "padding_bottom": 0
+      }
+    },
+    "ax_image_with_text_n6J6Ac": {
+      "type": "ax-image-with-text",
+      "blocks": {
+        "heading_wbANjH": {
+          "type": "heading",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "heading": "<p>Pièces uniques, fabrication manuelle</p>",
+            "heading_size": "h2"
+          }
+        },
+        "text_KkgtiM": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "text": "<p>Quintessence de l’expertise Tediber acquise au fil des années, le lit Grand Ours incarne le lit d’une vie : une combinaison de matériaux unique au monde, un design haute-couture et un service client premium pour un confort inoubliable, réservé à ceux qui recherchent le meilleur du meilleur.</p>",
+            "description_hn_replace": false,
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "heading_wbANjH",
+        "text_KkgtiM"
+      ],
+      "disabled": true,
+      "name": "Ax Image with text",
+      "settings": {
+        "full_width": true,
+        "text_alignment": "left",
+        "no_vertical_padding": false,
+        "image": "shopify://shop_images/collection-image-2.webp",
+        "image_restricted_width": false,
+        "image_adapted_height_with_content": false,
+        "contain_image": false,
+        "layout": "image_first",
+        "mobile_layout": "image_first",
+        "overlay": true,
+        "overlay_opacity": 0.2,
+        "section_color_scheme": "scheme-3",
+        "color_scheme": "scheme-3",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "products_per_page": 12,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "enable_filtering": true,
+        "filter_type": "drawer",
+        "enable_sorting": true,
+        "compare_page": "",
+        "padding_top": 24,
+        "padding_bottom": 24
+      }
+    },
+    "ax_reassurances_QLHMhE": {
+      "type": "ax-reassurances",
+      "blocks": {
+        "reassurance_EEeAY9": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "100-nuits-essai",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_FqDRnx": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-mnd3qioq",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_XgUCwz": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-vfy3a8q5",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_7bGMir": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-87bgy0zq",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        }
+      },
+      "block_order": [
+        "reassurance_EEeAY9",
+        "reassurance_FqDRnx",
+        "reassurance_XgUCwz",
+        "reassurance_7bGMir"
+      ],
+      "disabled": true,
+      "settings": {
+        "heading": "Nos engagements",
+        "restricted_width": false,
+        "stack_mobile": false,
+        "border_top_mobile": true,
+        "border_bottom_mobile": true,
+        "show_content": false,
+        "autoplay": false,
+        "speed": 300,
+        "loop": false,
+        "pagination": true,
+        "color_scheme": "",
+        "color_scheme_popin": "scheme-2",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 48,
+        "padding_top": 24,
+        "padding_bottom": 48,
+        "mob_margin_top": 48,
+        "mob_margin_bottom": 36,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "ax_variants_grid_kRgxc6": {
+      "type": "ax-variants-grid",
+      "settings": {
+        "product_per_page": 12,
+        "color_scheme": "",
+        "mob_padding_top": 12,
+        "mob_padding_bottom": 24,
+        "padding_top": 24,
+        "padding_bottom": 48
+      }
+    },
+    "ax_image_with_text_TNeA4H": {
+      "type": "ax-image-with-text",
+      "blocks": {
+        "heading_UrikCR": {
+          "type": "heading",
+          "settings": {
+            "picto_size": 92,
+            "picto_size_mobile": 24,
+            "heading": "<p>Un lit de grand pour une rentrée de grand</p>",
+            "heading_size": "h2"
+          }
+        },
+        "text_fT8LfY": {
+          "type": "text",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "text": "<p>On ne choisit pas toujours le lit des vacances… mais on choisit celui qui les accompagne toute l’année. Offrez à votre enfant le confort Tediber : un vrai lit pour mieux dormir, mieux grandir et attaquer la rentrée du bon pied.</p>",
+            "description_hn_replace": false,
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "heading_UrikCR",
+        "text_fT8LfY"
+      ],
+      "settings": {
+        "full_width": true,
+        "text_alignment": "left",
+        "no_vertical_padding": false,
+        "image": "shopify://shop_images/TEDIBER_2024_06_241340_1_3b6c3c38-1d85-4732-87d2-5779cbabfdf3.jpg",
+        "image_restricted_width": false,
+        "image_adapted_height_with_content": false,
+        "contain_image": false,
+        "layout": "text_first",
+        "mobile_layout": "image_first",
+        "overlay": false,
+        "overlay_opacity": 0.2,
+        "section_color_scheme": "scheme-2",
+        "color_scheme": "scheme-2",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "ax_reassurances_Lgbb6g": {
+      "type": "ax-reassurances",
+      "blocks": {
+        "reassurance_Bwkazk": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "grand-ours-pays-de-fabrication-belgique",
+            "width": 40,
+            "margin_bottom": 10
+          }
+        },
+        "reassurance_pryD33": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "grand-ours-garantie-15-ans",
+            "width": 40,
+            "margin_bottom": 10
+          }
+        },
+        "reassurance_eXkmkB": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "grand-ours-bois-certifie-pefc-et-acier-recycle",
+            "width": 40,
+            "margin_bottom": 10
+          }
+        },
+        "reassurance_cK7GWn": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "grand-ours-nuits-dessai-100-nuits",
+            "width": 40,
+            "margin_bottom": 10
+          }
+        }
+      },
+      "block_order": [
+        "reassurance_Bwkazk",
+        "reassurance_pryD33",
+        "reassurance_eXkmkB",
+        "reassurance_cK7GWn"
+      ],
+      "disabled": true,
+      "name": "Ax Reassurances",
+      "settings": {
+        "heading": "Nos engagements",
+        "restricted_width": false,
+        "stack_mobile": false,
+        "border_top_mobile": false,
+        "border_bottom_mobile": false,
+        "show_content": false,
+        "autoplay": false,
+        "speed": 300,
+        "loop": false,
+        "pagination": true,
+        "color_scheme": "scheme-1",
+        "color_scheme_popin": "scheme-1",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 96,
+        "padding_bottom": 48,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "ax_image_text_tabs_YJdA3C": {
+      "type": "ax-media-with-tabs",
+      "blocks": {
+        "tab_mCg6mB": {
+          "type": "tab",
+          "settings": {
+            "tab_heading": "SURMATELAS",
+            "image": "shopify://shop_images/GO-layer-top.png",
+            "heading": "UN SURMATELAS",
+            "content": "<p>Abritant une technologie unique de “Labyrinthe 3D” qui permet de bénéficier d’une excellente respirabilité et d’un accueil ultra-enveloppant.</p>"
+          }
+        },
+        "tab_wafmKC": {
+          "type": "tab",
+          "settings": {
+            "tab_heading": "SOCLE",
+            "image": "shopify://shop_images/GO-layer-middle.png",
+            "heading": "UN SOCLE",
+            "content": "<p>Contenant 1600 ressorts ensachés TediHotelSprings™ répartis en 2 couches, accompagnés de 4 kg de laine aiguilletée d’exception et d’une mousse garantissant un confort et un soutien exceptionnels, ainsi qu’un effet thermorégulateur.</p>"
+          }
+        },
+        "tab_CDmiPt": {
+          "type": "tab",
+          "settings": {
+            "tab_heading": "BOXSPRING",
+            "image": "shopify://shop_images/GO-layer-bottom.png",
+            "heading": "UN BOXSPRING",
+            "content": "<p>Structure en bois massif certifié et ressorts ensachés TediHotelSprings™ pour assurer un confort dit “spring on spring” avec une progressivité du maintien.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "tab_mCg6mB",
+        "tab_wafmKC",
+        "tab_CDmiPt"
+      ],
+      "disabled": true,
+      "name": "Ax Media with tabs",
+      "settings": {
+        "heading": "<p>Des pièces uniques au monde </p>",
+        "layout": "image_first",
+        "mobile_layout": "image_first",
+        "section_color_scheme": "scheme-3",
+        "color_scheme": "scheme-3",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "ax_image_with_text_Mrcpbc": {
+      "type": "ax-image-with-text",
+      "blocks": {
+        "heading_aKpWe4": {
+          "type": "heading",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "heading": "<p>Le lit d'une vie</p>",
+            "heading_size": "h2"
+          }
+        },
+        "text_dFH7RF": {
+          "type": "text",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "text": "<p>Différent de tout ce que vous avez pu connaître jusqu’à présent, le pack Grand Ours incarne l’expérience de relaxation ultime : un confort inégalé et un plaisir inoubliable réservés à ceux qui recherchent le meilleur du meilleur. Du matelas au sommier, en passant par la tête de lit et le drap housse, tout a été pensé pour vous transporter chaque soir dans d’autres cieux grâce à un alliage de matériaux unique conçus pour se sublimer les uns les autres et épouser chaque centimètre de votre corps, couche après couche.</p>",
+            "description_hn_replace": false,
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "heading_aKpWe4",
+        "text_dFH7RF"
+      ],
+      "disabled": true,
+      "settings": {
+        "full_width": true,
+        "text_alignment": "left",
+        "no_vertical_padding": false,
+        "image": "shopify://shop_images/collection-image-1.png",
+        "image_restricted_width": false,
+        "image_adapted_height_with_content": false,
+        "contain_image": true,
+        "layout": "text_first",
+        "mobile_layout": "image_first",
+        "overlay": false,
+        "overlay_opacity": 0.2,
+        "section_color_scheme": "scheme-3",
+        "color_scheme": "scheme-3",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "ax_image_with_text_EfU89F": {
+      "type": "ax-image-with-text",
+      "blocks": {
+        "subheading_zbFYx4": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading": ""
+          }
+        },
+        "heading_E43Uqa": {
+          "type": "heading",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "heading": "<h2>Ils grandissent, leurs lits aussi</h2>",
+            "heading_size": "h3"
+          }
+        },
+        "text_UmVNPe": {
+          "type": "text",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "text": "<p>La rentrée, c’est déjà assez de nouveautés : nouvelle classe, nouveau cartable… Alors autant garder un classique qui rassure : de bonnes nuits dans un lit Tediber, pour grandir et commencer l’année du bon pied.</p>",
+            "description_hn_replace": false,
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center"
+          }
+        },
+        "button_nweRVr": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_text": "",
+            "button_link": "",
+            "link_blank": false,
+            "link_style": "button button--primary",
+            "button_alignment": ""
+          }
+        }
+      },
+      "block_order": [
+        "subheading_zbFYx4",
+        "heading_E43Uqa",
+        "text_UmVNPe",
+        "button_nweRVr"
+      ],
+      "name": "Ax Image with text",
+      "settings": {
+        "full_width": true,
+        "text_alignment": "left",
+        "no_vertical_padding": false,
+        "image": "shopify://shop_images/TEDIBER_2024_06_241048_2.jpg",
+        "image_restricted_width": false,
+        "image_adapted_height_with_content": false,
+        "contain_image": false,
+        "layout": "image_first",
+        "mobile_layout": "image_first",
+        "overlay": true,
+        "overlay_opacity": 0.2,
+        "section_color_scheme": "",
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "ax_collections_grid_nwGwg6": {
+      "type": "ax-collections-grid",
+      "blocks": {
+        "collection_YWMzRy": {
+          "type": "collection",
+          "settings": {
+            "collection": "matelas",
+            "title": ""
+          }
+        },
+        "collection_P3QVFi": {
+          "type": "collection",
+          "settings": {
+            "collection": "sommier",
+            "title": ""
+          }
+        },
+        "collection_npGJT6": {
+          "type": "collection",
+          "settings": {
+            "collection": "lit",
+            "title": ""
+          }
+        },
+        "collection_VCAfqx": {
+          "type": "collection",
+          "settings": {
+            "collection": "tete-de-lit",
+            "title": ""
+          }
+        },
+        "collection_aTAmP6": {
+          "type": "collection",
+          "settings": {
+            "collection": "canape",
+            "title": ""
+          }
+        },
+        "collection_Ew7fcV": {
+          "type": "collection",
+          "settings": {
+            "collection": "gamme-enfant-bebe",
+            "title": ""
+          }
+        },
+        "collection_nULL9L": {
+          "type": "collection",
+          "settings": {
+            "collection": "couette-et-oreiller",
+            "title": ""
+          }
+        },
+        "collection_7e6qGG": {
+          "type": "collection",
+          "settings": {
+            "collection": "linge-de-lit",
+            "title": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_YWMzRy",
+        "collection_P3QVFi",
+        "collection_npGJT6",
+        "collection_VCAfqx",
+        "collection_aTAmP6",
+        "collection_Ew7fcV",
+        "collection_nULL9L",
+        "collection_7e6qGG"
+      ],
+      "name": "Ax Collections Grid",
+      "settings": {
+        "heading": "GAMME TEDIBER",
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "custom_liquid_f8Hdfj",
+    "ax_image_with_text_n6J6Ac",
+    "product-grid",
+    "ax_reassurances_QLHMhE",
+    "ax_variants_grid_kRgxc6",
+    "ax_image_with_text_TNeA4H",
+    "ax_reassurances_Lgbb6g",
+    "ax_image_text_tabs_YJdA3C",
+    "ax_image_with_text_Mrcpbc",
+    "ax_image_with_text_EfU89F",
+    "ax_collections_grid_nwGwg6"
+  ]
+}

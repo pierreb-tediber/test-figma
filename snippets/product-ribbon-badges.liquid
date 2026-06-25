@@ -1,0 +1,44 @@
+{% comment %}
+  Renders the product ribbon badges (template_pack_new only).
+  Iterates over the `custom.ribbon_badges` metafield — a list of metaobjects
+  of type `ribbon_badge_special`.
+
+  Accepts:
+  - product: the current product
+  - block: parent product block (used for shopify_attributes)
+
+  Usage:
+  {%- render 'product-ribbon-badges', product: product, block: block -%}
+{% endcomment %}
+
+{%- if product.metafields.custom.ribbon_badges.value != blank -%}
+  <div class="product__ribbon-badges"{% if block %} {{ block.shopify_attributes }}{% endif %}>
+    {%- for badge in product.metafields.custom.ribbon_badges.value -%}
+      {%- liquid
+        assign badge_text_color = badge.text_color
+        assign badge_border_color = badge.border_color
+        assign badge_background_color = badge.background_color
+      -%}
+      {%- capture badge_style -%}
+        {%- if badge_text_color != blank %}color: {{ badge_text_color }};{% endif -%}
+        {%- if badge_border_color != blank %}border-color: {{ badge_border_color }};{% endif -%}
+        {%- if badge_background_color != blank %}background-color: {{ badge_background_color }};{% endif -%}
+      {%- endcapture -%}
+      <span class="product__ribbon-badge"{% if badge_style != blank %} style="{{ badge_style }}"{% endif %}>
+        {%- if badge.icon != blank -%}
+          <img
+            src="{{ badge.icon | image_url: width: 24 }}"
+            srcset="{{ badge.icon | image_url: width: 12 }} 12w, {{ badge.icon | image_url: width: 24 }} 24w"
+            sizes="12px"
+            loading="lazy"
+            width="12"
+            height="12"
+            alt=""
+            class="product__ribbon-badge__icon"
+          >
+        {%- endif -%}
+        <span class="product__ribbon-badge__text">{{ badge.text | metafield_tag }}</span>
+      </span>
+    {%- endfor -%}
+  </div>
+{%- endif -%}

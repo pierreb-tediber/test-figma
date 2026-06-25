@@ -1,0 +1,652 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "ax_media_with_text_xpdWcX": {
+      "type": "ax-media-with-text",
+      "blocks": {
+        "subheading_fiiWex": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "BONUS RÉPARATION"
+          }
+        },
+        "heading_mTznD6": {
+          "type": "heading",
+          "settings": {
+            "heading": "REPOSEZ-VOUS SUR NOUS, DURABLEMENT.",
+            "heading_size": "h2"
+          }
+        },
+        "text_qNKpPJ": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>Notre service réparation donne une seconde vie à vos produits Tediber.</strong></p>",
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center"
+          }
+        },
+        "button_gVnPP3": {
+          "type": "button",
+          "settings": {
+            "button_text": "",
+            "button_link": "shopify://products/axome-lit-scandi-beige-boucle",
+            "link_blank": true,
+            "link_style": "button button--primary"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_fiiWex",
+        "heading_mTznD6",
+        "text_qNKpPJ",
+        "button_gVnPP3"
+      ],
+      "name": "Ax Media with text",
+      "settings": {
+        "full_width": false,
+        "image": "shopify://shop_images/lp_bonus_reparation_canape_lit_reparation.png",
+        "layout": "text_first",
+        "overlay": false,
+        "overlay_opacity": 0,
+        "section_color_scheme": "scheme-2",
+        "color_scheme": "scheme-2",
+        "padding_top": 32,
+        "padding_bottom": 32
+      }
+    },
+    "ax_media_with_text_TkCCLz": {
+      "type": "ax-media-with-text",
+      "blocks": {
+        "heading_TeAhbR": {
+          "type": "heading",
+          "settings": {
+            "heading": "Nous créons des produits pensés pour durer.",
+            "heading_size": "h2"
+          }
+        },
+        "text_Lb3E6M": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Oui, mais nous ne sommes jamais à l’abri d’un choc ou d’une usure… C’est pourquoi nous avons développé un service de réparation labellisé par<strong> Écomaison</strong>, l’éco-organisme de l’univers de la maison agréé par l’État. Grâce au Bonus Réparation,<strong> vous bénéficiez d’une réduction immédiate</strong> pour réparer et donner une seconde vie à votre produit Tediber !</p>",
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center"
+          }
+        },
+        "button_DRgcae": {
+          "type": "button",
+          "settings": {
+            "button_text": "",
+            "button_link": "",
+            "link_blank": false,
+            "link_style": "button button--primary"
+          }
+        }
+      },
+      "block_order": [
+        "heading_TeAhbR",
+        "text_Lb3E6M",
+        "button_DRgcae"
+      ],
+      "name": "Ax Media with text",
+      "settings": {
+        "full_width": false,
+        "image": "shopify://shop_images/lp_bonus_reparation_eco_maison.png",
+        "layout": "image_first",
+        "overlay": true,
+        "overlay_opacity": 0,
+        "section_color_scheme": "scheme-3",
+        "color_scheme": "scheme-3",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_content": false,
+        "custom_h1": "",
+        "h1_size": "h1",
+        "h1_no_margin": false,
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "ax_image_with_text_Uic6bV": {
+      "type": "ax-image-with-text",
+      "blocks": {
+        "heading_Mt8Tiw": {
+          "type": "heading",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "heading": "<p>LOREM IPSUM DOLOR</p>",
+            "heading_size": "h2"
+          }
+        },
+        "text_tqAUVX": {
+          "type": "text",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "text": "<p>Lorem ipsum dolor sit amet consectetur. Turpis in in leo velit turpis at. Sed vivamus amet elementum lobortis pretium enim elit volutpat dignissim. Diam sit non amet at ipsum. In faucibus amet nulla amet. </p>",
+            "description_hn_replace": false,
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "heading_Mt8Tiw",
+        "text_tqAUVX"
+      ],
+      "settings": {
+        "full_width": true,
+        "text_alignment": "left",
+        "no_vertical_padding": false,
+        "image_restricted_width": false,
+        "image_adapted_height_with_content": false,
+        "contain_image": false,
+        "layout": "image_first",
+        "mobile_layout": "image_first",
+        "overlay": true,
+        "overlay_opacity": 0.2,
+        "section_color_scheme": "",
+        "color_scheme": "scheme-2",
+        "padding_top": 0,
+        "padding_bottom": 48
+      }
+    },
+    "ax_image_with_text_e7LeVX": {
+      "type": "ax-image-with-text",
+      "blocks": {
+        "heading_q86bJM": {
+          "type": "heading",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "heading": "<p>LOREM IPSUM DOLOR</p>",
+            "heading_size": "h2"
+          }
+        },
+        "text_t7Cbdq": {
+          "type": "text",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "text": "<p>Lorem ipsum dolor sit amet consectetur. Turpis in in leo velit turpis at. Sed vivamus amet elementum lobortis pretium enim elit volutpat dignissim. Diam sit non amet at ipsum. In faucibus amet nulla amet. </p>",
+            "description_hn_replace": false,
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "heading_q86bJM",
+        "text_t7Cbdq"
+      ],
+      "settings": {
+        "full_width": true,
+        "text_alignment": "left",
+        "no_vertical_padding": false,
+        "image_restricted_width": false,
+        "image_adapted_height_with_content": false,
+        "contain_image": false,
+        "layout": "image_first",
+        "mobile_layout": "image_first",
+        "overlay": true,
+        "overlay_opacity": 0.2,
+        "section_color_scheme": "",
+        "color_scheme": "scheme-2",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "ax_image_with_text_x3wFzW": {
+      "type": "ax-image-with-text",
+      "blocks": {
+        "subheading_JWwFUp": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "SUB HEADING"
+          }
+        },
+        "heading_LzyUxg": {
+          "type": "heading",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "heading": "<p>LOREM IPSUM DOLOR</p>",
+            "heading_size": "h2"
+          }
+        },
+        "text_mqaabX": {
+          "type": "text",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "text": "<p>Lorem ipsum dolor sit amet consectetur. Etiam ac tempor ut eleifend auctor egestas laoreet. Convallis est tempus at quisque elementum et integer morbi orci. Elit ornare magna purus at ullamcorper metus. Massa libero aenean iaculis ultrices enim elit quisque malesuada praesent. Blandit morbi urna venenatis urna quis fringilla cras pellentesque. Sed interdum massa aliquam duis gravida consequat risus pharetra sem. Aliquam feugiat justo sit vulputate. Donec blandit convallis donec sit volutpat duis morbi. Ultrices tellus in et risus viverra eu et massa sagittis. Lorem quam nulla mi rhoncus.</p>",
+            "description_hn_replace": false,
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_JWwFUp",
+        "heading_LzyUxg",
+        "text_mqaabX"
+      ],
+      "settings": {
+        "full_width": true,
+        "text_alignment": "left",
+        "no_vertical_padding": false,
+        "image_restricted_width": false,
+        "image_adapted_height_with_content": false,
+        "contain_image": false,
+        "layout": "text_first",
+        "mobile_layout": "image_first",
+        "overlay": true,
+        "overlay_opacity": 0.2,
+        "section_color_scheme": "",
+        "color_scheme": "scheme-3",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "ax_faq_Ge79NK": {
+      "type": "ax-faq",
+      "settings": {
+        "heading": "<p>Question <br/>fréquentes</p>",
+        "picto_size": 94,
+        "picto_size_mobile": 94,
+        "faq": [
+          "le-matelas-hybride-de-tediber-convient-il-aux-personnes-qui-ont-chaud-la-nuit",
+          "comment-fonctionnent-les-100-nuits-dessai",
+          "quels-sont-les-delais-de-livraison"
+        ],
+        "color_scheme": "scheme-e1828edc-858e-4a98-a2f7-4650db2b6838",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "rich_text_MMk9gV": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_nUjizm": {
+          "type": "heading",
+          "settings": {
+            "heading": "comment ça marche ?",
+            "heading_size": "h2"
+          }
+        },
+        "text_qigitX": {
+          "type": "text",
+          "settings": {
+            "text": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_nUjizm",
+        "text_qigitX"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-2",
+        "full_width": true,
+        "padding_top_desktop": 64,
+        "padding_bottom_desktop": 0
+      }
+    },
+    "multicolumn_6xDFke": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_wXPEzi": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/lp_bonus_reparation_demande_formulaire.png",
+            "title": "1. décrivez votre demande",
+            "text": "<p>Contactez-nous via <a href=\"https://hello.tediber.com/fr-FR/contact\" target=\"_blank\" title=\"https://hello.tediber.com/fr-FR/contact\"><strong>notre formulaire</strong></a> en décrivant votre demande, le produit concerné et les photos qui justifient le problème.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_Lbd7za": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/lp_bonus_reparation_rendez_vous_reparateur.png",
+            "title": "2. planifiez le rendez-vous",
+            "text": "<p>Nous vous contactons pour <strong>fixer la date de réparation et procéder au paiement</strong>. Le Bonus sera automatiquement déduit.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_Pntx8h": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/lp_bonus_reparation_reparateur_domicile.png",
+            "title": "3. nous réparons chez vous",
+            "text": "<p><strong>Inutile de renvoyer le produit</strong> : nos réparateurs certifiés se déplacent chez vous avec tout le matériel nécessaire.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_wXPEzi",
+        "column_Lbd7za",
+        "column_Pntx8h"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "Envoyer ma demande",
+        "button_link": "https://hello.tediber.com/fr-FR/contact",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "primary",
+        "color_scheme": "scheme-2",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "rich_text_U3aADG": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_a3nCij": {
+          "type": "heading",
+          "settings": {
+            "heading": "Quels sont nos produits éligibles ?",
+            "heading_size": "h2"
+          }
+        },
+        "text_JdawN4": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Découvrez la liste de nos produits éligibles. Pour plus de détails, consultez la liste des réparations</p>"
+          }
+        },
+        "button_ipQFGc": {
+          "type": "button",
+          "settings": {
+            "button_label": "Voir la liste des réparations",
+            "button_link": "https://cdn.shopify.com/s/files/1/0903/1342/5220/files/lp_bonus_reparation_pdf_grille.pdf?v=1751876318",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_a3nCij",
+        "text_JdawN4",
+        "button_ipQFGc"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "padding_top_desktop": 64,
+        "padding_bottom_desktop": 56
+      }
+    },
+    "ax_columns_MBbXTK": {
+      "type": "ax-columns",
+      "blocks": {
+        "column_RrLV98": {
+          "type": "column",
+          "settings": {
+            "title": "Canapé-lit",
+            "text": "<p>3 places</p>",
+            "truncate_text": true,
+            "button_text": "",
+            "link": "",
+            "color_scheme": "scheme-2"
+          }
+        },
+        "column_UzFV9V": {
+          "type": "column",
+          "settings": {
+            "title": "Bonus : 60 €",
+            "text": "",
+            "truncate_text": true,
+            "button_text": "",
+            "link": "",
+            "color_scheme": "scheme-e1828edc-858e-4a98-a2f7-4650db2b6838"
+          }
+        }
+      },
+      "block_order": [
+        "column_RrLV98",
+        "column_UzFV9V"
+      ],
+      "name": "Ax columns",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 32,
+        "padding_top": 0,
+        "padding_bottom": 16
+      }
+    },
+    "ax_columns_bEBCeb": {
+      "type": "ax-columns",
+      "blocks": {
+        "column_9N7gy9": {
+          "type": "column",
+          "settings": {
+            "title": "Sommier coffre",
+            "text": "<p>Largeur (cm) : 90, 140, 160, 180</p>",
+            "truncate_text": true,
+            "button_text": "",
+            "link": "",
+            "color_scheme": "scheme-2"
+          }
+        },
+        "column_AM9Mzm": {
+          "type": "column",
+          "settings": {
+            "title": "Bonus : de 30 à 60 €",
+            "text": "",
+            "truncate_text": true,
+            "button_text": "",
+            "link": "",
+            "color_scheme": "scheme-e1828edc-858e-4a98-a2f7-4650db2b6838"
+          }
+        }
+      },
+      "block_order": [
+        "column_9N7gy9",
+        "column_AM9Mzm"
+      ],
+      "name": "Ax columns",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 32,
+        "padding_top": 0,
+        "padding_bottom": 16
+      }
+    },
+    "ax_columns_MfJzz7": {
+      "type": "ax-columns",
+      "blocks": {
+        "column_FxLcKF": {
+          "type": "column",
+          "settings": {
+            "title": "Canapé de vie",
+            "text": "<p>2, 3 et 4 places</p>",
+            "truncate_text": true,
+            "button_text": "",
+            "link": "",
+            "color_scheme": "scheme-2"
+          }
+        },
+        "column_CVYcyP": {
+          "type": "column",
+          "settings": {
+            "title": "Bonus : de 30 à 60 €",
+            "text": "",
+            "truncate_text": true,
+            "button_text": "",
+            "link": "",
+            "color_scheme": "scheme-e1828edc-858e-4a98-a2f7-4650db2b6838"
+          }
+        }
+      },
+      "block_order": [
+        "column_FxLcKF",
+        "column_CVYcyP"
+      ],
+      "name": "Ax columns",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 32,
+        "padding_top": 0,
+        "padding_bottom": 48
+      }
+    },
+    "image_banner_VBamBJ": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_KqdB6n": {
+          "type": "heading",
+          "settings": {
+            "heading": "Réparez l'esprit léger",
+            "heading_size": "h1"
+          }
+        },
+        "text_8Naj3x": {
+          "type": "text",
+          "settings": {
+            "text": "<strong>Un accompagnement de A à Z pensé pour vous : </strong>de votre demande à la réparation, nos experts vous accompagnent pour réparer et donner une seconde vie à vos produits.",
+            "text_style": "body"
+          }
+        },
+        "buttons_gkXQi6": {
+          "type": "buttons",
+          "disabled": true,
+          "settings": {
+            "button_label_1": "Texte du bouton",
+            "button_link_1": "",
+            "button_style_secondary_1": false,
+            "button_label_2": "Texte du bouton",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_KqdB6n",
+        "text_8Naj3x",
+        "buttons_gkXQi6"
+      ],
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/lp_bonus_reparation_chambre_matelas_confort_tediber.png",
+        "image_overlay_opacity": 0,
+        "image_height": "medium",
+        "image_behavior": "ambient",
+        "desktop_content_position": "middle-center",
+        "desktop_content_alignment": "center",
+        "show_text_box": true,
+        "color_scheme": "scheme-2",
+        "stack_images_on_mobile": true,
+        "mobile_content_alignment": "center",
+        "show_text_below": true
+      }
+    },
+    "ax_faq_YfhBiX": {
+      "type": "ax-faq",
+      "name": "Ax faq",
+      "settings": {
+        "heading": "<p>Questions fréquentes</p>",
+        "picto_size": 24,
+        "picto_size_mobile": 24,
+        "image": "shopify://shop_images/lp_bonus_reparation_canape_tediber.png",
+        "faq": [
+          "que-faire-si-mon-produit-nest-pas-eligible-au-bonus",
+          "comment-sapplique-le-bonus",
+          "combien-de-temps-dure-la-reparation",
+          "la-reparation-est-elle-garantie"
+        ],
+        "color_scheme": "scheme-2",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "ax_image_banner_G3PcR4": {
+      "type": "ax-image-banner",
+      "name": "Ax Image Banner",
+      "settings": {
+        "image": "shopify://shop_images/lp_bonus_reparation_seconde_vie_produits_tediber.png",
+        "image_mobile": "shopify://shop_images/lp_bonus_reparation_economie_ecologie.png",
+        "subheading": "<strong>UNE ATTENTION POUR...</strong>",
+        "heading": "<p>LA PLANÈTE, VOUS ET VOTRE PORTEFEUILLE.</p>",
+        "button_text": "Demander une réparation",
+        "button_link": "https://hello.tediber.com/fr-FR/contact",
+        "link_blank": false,
+        "link_style": "button button--secondary",
+        "color_scheme": "scheme-3",
+        "overlay": true,
+        "overlay_opacity": 0.3
+      }
+    }
+  },
+  "order": [
+    "ax_media_with_text_xpdWcX",
+    "ax_media_with_text_TkCCLz",
+    "main",
+    "ax_image_with_text_Uic6bV",
+    "ax_image_with_text_e7LeVX",
+    "ax_image_with_text_x3wFzW",
+    "ax_faq_Ge79NK",
+    "rich_text_MMk9gV",
+    "multicolumn_6xDFke",
+    "rich_text_U3aADG",
+    "ax_columns_MBbXTK",
+    "ax_columns_bEBCeb",
+    "ax_columns_MfJzz7",
+    "image_banner_VBamBJ",
+    "ax_faq_YfhBiX",
+    "ax_image_banner_G3PcR4"
+  ]
+}

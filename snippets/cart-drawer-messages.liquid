@@ -1,0 +1,68 @@
+<cart-messages class="drawer__messages hidden">
+	<div class="drawer__message drawer__message--check-size hidden">
+		<div class="drawer__message-header">
+			<div class="drawer__message-icon">
+				<span class="svg-wrapper">
+					{{- 'icon-alert.svg' | inline_asset_content -}}
+				</span>
+			</div>
+			<div class="drawer__message-text">
+				{{ 'sections.cart.messages.warning' | t }}
+			</div>
+			<button
+				class="drawer__message-close"
+				type="button"
+				aria-label="{{ 'accessibility.close' | t }}"
+			>
+				<span class="svg-wrapper">
+					{{- 'icon-close.svg' | inline_asset_content -}}
+				</span>
+			</button>
+		</div>
+		<div class="drawer__message-content"></div>
+	</div>	
+	<div class="drawer__message drawer__message--warning hidden">
+		<div class="drawer__message-header">
+			<div class="drawer__message-icon">
+				<span class="svg-wrapper">
+					{{- 'icon-alert.svg' | inline_asset_content -}}
+				</span>
+			</div>
+			<div class="drawer__message-text">
+				{{ 'sections.cart.messages.warning' | t }}
+			</div>
+			<button
+				class="drawer__message-close"
+				type="button"
+				aria-label="{{ 'accessibility.close' | t }}"
+			>
+				<span class="svg-wrapper">
+					{{- 'icon-close.svg' | inline_asset_content -}}
+				</span>
+			</button>
+		</div>
+		<div class="drawer__message-content"></div>
+	</div>
+	<div class="drawer__message drawer__message--success hidden">
+		<div class="drawer__message-header">
+			<div class="drawer__message-icon">
+				<span class="svg-wrapper">
+					{{- 'icon-check.svg' | inline_asset_content -}}
+				</span>
+			</div>
+			<div class="drawer__message-text">
+				{{ 'sections.cart.messages.success' | t }}
+			</div>
+			<button
+				class="drawer__message-close"
+				type="button"
+				aria-label="{{ 'accessibility.close' | t }}"
+			>
+				<span class="svg-wrapper">
+					{{- 'icon-close.svg' | inline_asset_content -}}
+				</span>
+			</button>
+		</div>
+		<div class="drawer__message-content"></div>
+	</div>
+</cart-messages>

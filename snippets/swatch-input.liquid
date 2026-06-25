@@ -1,0 +1,75 @@
+{% comment %}
+	Renders a swatch input component.
+	Accepts:
+	- id: {String} unique input id
+	- type: {String} input type. Accepts 'radio' or 'checkbox', defaults to 'radio' (optional)
+	- name: {String} input name,
+	- value: {ProductOptionValueDrop} input value
+	- swatch: {SwatchDrop} the swatch drop
+	- product_form_id: {String} id of the form associted with the input
+	- checked: {Boolean} default checked status
+	- disabled: {Boolean} default disabled status (optional)
+	- visually_disabled: {Boolean} style the swatch as disabled, but leave the input enabled (optional)
+	- shape: {String} swatch shape. Accepts 'square', defaults to circle (optional)
+	- help_text: {String} additional content to render inside the label (optional)
+	- additional_props: {String} (optional) additional properties to attach to the inpu
+	- picker_type: {String} (optional) picker type. Accepts 'swatch', 'swatch_style', 'swatch_comfort'
+	- show_color_by_metafield: {Boolean} (optional) show the color by metafield
+	- value_variant_color_hexa: {String} (optional) color hexa value of the variant
+	- value_variant_color_image: {String} (optional) color image value of the variant
+	- value_variant_color_label: {String} (optional) color label value of the variant
+
+	Usage:
+	 {% render 'swatch-input',
+	    id: input_id,
+	    name: input_name,
+	    value: input_value,
+	    swatch: swatch,
+	    product_form_id: product_form_id,
+	    checked: checked
+	  %}
+{% endcomment %}
+
+{%- liquid
+	if swatch == blank and show_color_by_metafield
+		assign object_color = null | default: image: value_variant_color_image, label: value_variant_color_label, color: value_variant_color_hexa
+		assign swatch = object_color
+	endif
+-%}
+
+{% capture swatch_input %}
+	<input
+		type="{{ type | default: 'radio' }}"
+		id="{{ id | strip }}"
+		name="{{ name | strip }}"
+		value="{{ value }}"
+		form="{{ product_form_id }}"
+		class="swatch-input__input{% if visually_disabled %} visually-disabled{% endif %}{% if checked %} swatch-input__input--checked{% endif %}{% if value.product_url %} swatch-input__input--has-combined{% endif %}"
+		{% if checked %}
+			checked
+		{% endif %}
+		{% if disabled %}
+			disabled
+		{% endif %}
+		{% if not_show_value %} data-not-show-value{% endif %}
+		{% if additional_props %}
+			{{ additional_props }}
+		{% endif %}
+	>
+	<label
+		for="{{ id | strip }}"
+		title="{{ value }}"
+		class="swatch-input__label{% if shape == 'square' %} swatch-input__label--square{% endif %}"
+	>
+		{% render 'swatch', swatch: swatch, shape: shape, picker_type: picker_type %}
+		{{ help_text }}
+	</label>
+{% endcapture %}
+
+{% if show_color_by_metafield %}
+	<div class="product__variant-selects__swatch__item{% if not_show_value %} visually-hidden{% endif %}">
+		{{ swatch_input }}
+	</div>
+{% else %}
+	{{ swatch_input }}
+{% endif %}

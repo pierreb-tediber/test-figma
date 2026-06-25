@@ -1,0 +1,795 @@
+{% comment %}
+	Renders a product media gallery. Should be used with 'media-gallery.js'
+	Also see 'product-media-modal'
+
+	Accepts:
+	- product_media: {Array} Product media array
+	- selected_variant_child: {Object} Selected variant child liquid object
+	- product: {Object} Product liquid object
+	- variant_images: {Array} Product images associated with a variant
+	- limit: {Number} (optional) When passed, limits the number of media items to render
+	- selected_variant: {Object} Selected variant liquid object
+	- variant_option_string: {String} Variant option string
+	- template_new_offer: {Boolean} Template new offer
+	- option_position_size_array: {Array} Option position size array
+	- option_position_foot_array: {Array} Option position foot array
+
+	Usage:
+	{% render 'product-media-gallery' %}
+{% endcomment %}
+
+{%- liquid
+	assign product_media = product_media
+	assign selected_variant = selected_variant
+	if selected_variant_child != blank
+		assign selected_variant = selected_variant_child
+	endif
+
+	# Configuration existante
+	if section.settings.hide_variants and variant_images.size == product_media.size
+		assign single_media_visible = true
+	endif
+
+	if limit == 1
+		assign single_media_visible = true
+	endif
+
+	assign media_count = product_media.size
+	if section.settings.hide_variants and media_count > 1 and variant_images.size > 0
+		assign media_count = media_count | minus: variant_images.size | plus: 1
+	endif
+
+	if media_count == 1 or single_media_visible
+		assign single_media_visible_mobile = true
+	endif
+
+	if media_count == 0 or single_media_visible_mobile or section.settings.mobile_thumbnails == 'show' or section.settings.mobile_thumbnails == 'columns' and media_count < 3
+		assign hide_mobile_slider = true
+	endif
+
+	if section.settings.media_size == 'large'
+		assign media_width = 0.65
+	elsif section.settings.media_size == 'medium'
+		assign media_width = 0.55
+	elsif section.settings.media_size == 'small'
+		assign media_width = 0.45
+	endif
+
+	# Déterminer si on a des médias filtrés par variante
+	assign has_variant_filtered_images = false
+	assign visible_media_count = 0
+
+	for media in product_media
+		# Vérifier si c'est un média avec un alt de variante
+		assign is_media_visible = false
+
+		# Vérifier si c'est le média featured de la variante
+		if selected_variant.featured_media and media.id == selected_variant.featured_media.id
+			assign is_media_visible = true
+		endif
+
+		if media.alt contains '#'
+			# Séparer la chaîne par # pour obtenir les paires langue-valeur
+			assign media_alt_parts = media.alt | split: '#'
+			assign localized_alt = ''
+			assign current_lang = localization.language.iso_code
+
+			# Parcourir les parties pour trouver la valeur correspondant à la langue courante
+			for i in (0..media_alt_parts.size)
+				assign part = media_alt_parts[i]
+				if part == current_lang
+					# La valeur suivante est celle qu'on cherche
+					assign next_index = i | plus: 1
+					if next_index < media_alt_parts.size
+						assign localized_alt = media_alt_parts[next_index]
+						break
+					endif
+				endif
+			endfor
+
+			# Si on a trouvé une valeur localisée, l'utiliser pour la comparaison
+			if localized_alt != ''
+				assign has_variant_filtered_images = true
+				# Comparer avec la chaîne d'options de la variante (sans le #)
+				assign variant_option_string_clean = variant_option_string | remove_first: '#'
+				if localized_alt == variant_option_string_clean
+					assign is_media_visible = true
+				endif
+			else
+				# Fallback : comportement original si pas de traduction trouvée
+				assign has_variant_filtered_images = true
+				if media.alt == variant_option_string
+					assign is_media_visible = true
+				endif
+			endif
+		else
+			# Médias sans alt de variante sont toujours visibles
+			# (images générales, vidéos, modèles 3D, lifestyle, packaging, etc.)
+			assign is_media_visible = true
+		endif
+
+		# Compter tous les médias visibles (images, vidéos, modèles 3D, etc.)
+		if is_media_visible
+			assign visible_media_count = visible_media_count | plus: 1
+		endif
+	endfor
+
+	# Si on a des médias filtrés, utiliser le compte des médias visibles
+	if has_variant_filtered_images and visible_media_count > 0
+		assign media_count = visible_media_count
+	endif
+
+	# Pré-scan : trouve l'ID du 1er media dont l'alt localisé matche
+	# `variant_option_string` (sélection bundle/variante par défaut).
+	# Utilisé pour prioriser ce media comme `is-active` au SSR — sinon le
+	# fallback Shopify met `selected_variant.featured_media` en actif, qui
+	# pour un pack est souvent l'image générique (pas la combinaison
+	# matelas+sommier sélectionnée par défaut). JS faisait déjà cette
+	# correction post-load via media-gallery.js — on aligne le SSR pour
+	# éviter le flash d'image incorrecte au chargement.
+	#
+	# Détection en parallèle des médias `|checkout` (pack-new uniquement) :
+	# alt qui se termine par `|checkout` = image dédiée au cart properties
+	# (`_bundle_image`), JAMAIS rendue dans le slider/thumbnails. On
+	# stocke leurs IDs dans `checkout_media_ids` (CSV `|id1|id2|`) pour
+	# les skip dans les boucles de rendu, et on les ré-itère plus bas
+	# dans un conteneur caché pour que le JS pioche la bonne URL.
+	assign variant_option_string_clean = variant_option_string | remove_first: '#'
+	assign default_active_media_id = blank
+	assign is_pack_new_gallery = false
+	if product.template_suffix == 'pack-new'
+		assign is_pack_new_gallery = true
+	endif
+	assign checkout_media_ids = '|'
+	for media in product_media
+		# Récupère l'alt « utile » : alt localisé (parsing #lang#val) si présent,
+		# sinon media.alt brut.
+		assign scan_localized_alt = ''
+		assign scan_has_alt_custom = false
+		if media.alt contains '#'
+			assign scan_has_alt_custom = true
+			assign scan_alt_parts = media.alt | split: '#'
+			assign scan_current_lang = localization.language.iso_code
+			for i in (0..scan_alt_parts.size)
+				assign scan_part = scan_alt_parts[i]
+				if scan_part == scan_current_lang
+					assign scan_next_index = i | plus: 1
+					if scan_next_index < scan_alt_parts.size
+						assign scan_localized_alt = scan_alt_parts[scan_next_index]
+						break
+					endif
+				endif
+			endfor
+		endif
+		assign scan_alt_useful = scan_localized_alt
+		if scan_alt_useful == ''
+			assign scan_alt_useful = media.alt
+		endif
+
+		# Détection checkout : dernier segment `|`-séparé == "checkout"
+		# (pack-new uniquement). Ces médias sont skip du slider et rendus
+		# dans un conteneur caché en bas de page.
+		assign is_checkout_media = false
+		if is_pack_new_gallery and scan_alt_useful != blank
+			assign scan_alt_last_segment = scan_alt_useful | split: '|' | last
+			if scan_alt_last_segment == 'checkout'
+				assign is_checkout_media = true
+				assign checkout_media_ids = checkout_media_ids | append: media.id | append: '|'
+			endif
+		endif
+
+		# Match du media actif par défaut (skip les checkout).
+		if is_checkout_media == false and default_active_media_id == blank and variant_option_string != blank
+			if scan_has_alt_custom and scan_localized_alt != '' and scan_localized_alt == variant_option_string_clean
+				assign default_active_media_id = media.id
+			elsif scan_has_alt_custom and scan_localized_alt == '' and media.alt == variant_option_string
+				assign default_active_media_id = media.id
+			endif
+		endif
+	endfor
+-%}
+
+<media-gallery
+	id="MediaGallery-{{ section.id }}"
+	role="region"
+	class="{% if section.settings.enable_sticky_info %} product__column-sticky{% endif %}"
+	aria-label="{{ 'products.product.media.gallery_viewer' | t }}"
+	data-desktop-layout="{{ section.settings.gallery_layout }}"
+	data-option-position-size-array="{{ option_position_size_array }}"
+	data-option-position-foot-array="{{ option_position_foot_array }}"
+	data-variant-options="{{ variant_option_string | escape }}"
+	{% if template_new_offer == true %}
+		data-template-new-offer="true"
+	{% endif %}
+>
+	{%- render 'breadcrumbs' -%}
+	<div class="product__column-gallery">
+		{%- comment -%} Badges rendus une seule fois, déplacés dynamiquement par JavaScript {%- endcomment -%}
+		<div
+			id="ProductMediaBadges-{{ section.id }}"
+			class="product__media-item__badge product__media-item__badge--images bottom left"
+			style="display: none;"
+		>
+			{%- liquid
+				assign badge_classes = ''
+				render 'product-badges-images', class: badge_classes, product: product
+			-%}
+		</div>
+		<div id="GalleryStatus-{{ section.id }}" class="visually-hidden" role="status"></div>
+		<slider-component
+			id="GalleryViewer-{{ section.id }}"
+			class="slider-mobile-gutter{% if template_new_offer == true %} slider-mobile-gutter-new-offer{% endif %}"
+			data-media-count="{{ media_count }}"
+			data-slider-media-with-alt="true"
+		>
+			<a class="skip-to-content-link button visually-hidden quick-add-hidden" href="#ProductInfo-{{ section.id }}">
+				{{ 'accessibility.skip_to_product_info' | t }}
+			</a>
+			<ul
+				id="Slider-Gallery-{{ section.id }}"
+				class="product__media-list contains-media grid grid--peek list-unstyled slider slider--mobile {% if template_new_offer == true %} slider-mobile-new-offer{% endif %}"
+				role="list"
+			>
+				{%- liquid
+					assign media_position = 0
+					assign visible_media_position = 0
+					assign is_stacked_layout = false
+					if section.settings.gallery_layout == 'stacked'
+						assign is_stacked_layout = true
+					endif
+					assign first_visible_media_shown = false
+				-%}
+
+				{%- for media in product_media -%}
+					{%- liquid
+						# Skip les médias `|checkout` : rendus dans un conteneur
+						# caché plus bas, jamais dans le slider.
+						assign checkout_id_marker = '|' | append: media.id | append: '|'
+						if checkout_media_ids contains checkout_id_marker
+							continue
+						endif
+
+						# Déterminer si ce média doit être visible
+						assign is_visible = false
+						assign is_featured = false
+						assign has_alt_custom = false
+						assign show_first_visible_media_image = false
+						assign localized_media_alt = media.alt
+
+						# Vérifier si c'est le média featured de la variante
+						if selected_variant.featured_media and media.id == selected_variant.featured_media.id
+							assign is_visible = true
+							assign is_featured = true
+						endif
+
+						# Si le média a un alt de variante
+						if media.alt contains '#'
+							assign has_alt_custom = true
+							# Séparer la chaîne par # pour obtenir les paires langue-valeur
+							assign media_alt_parts = media.alt | split: '#'
+							assign localized_alt = ''
+							assign current_lang = localization.language.iso_code
+
+							# Parcourir les parties pour trouver la valeur correspondant à la langue courante
+							for i in (0..media_alt_parts.size)
+								assign part = media_alt_parts[i]
+								if part == current_lang
+									# La valeur suivante est celle qu'on cherche
+									assign next_index = i | plus: 1
+									if next_index < media_alt_parts.size
+										assign localized_alt = media_alt_parts[next_index]
+										break
+									endif
+								endif
+							endfor
+
+							# Si on a trouvé une valeur localisée, l'utiliser
+							if localized_alt != ''
+								# Comparer avec la chaîne d'options de la variante (sans le #)
+								assign variant_option_string_clean = variant_option_string | remove_first: '#'
+								assign localized_media_alt = localized_alt
+								if localized_alt == variant_option_string_clean
+									assign is_visible = true
+								endif
+							else
+								# Fallback : comportement original si pas de traduction trouvée
+								if media.alt == variant_option_string
+									assign is_visible = true
+								endif
+							endif
+						else
+							# Médias sans alt de variante sont toujours visibles
+							# (images générales, vidéos, modèles 3D, lifestyle, packaging, etc.)
+							assign is_visible = true
+						endif
+
+						assign media_position = media_position | plus: 1
+
+						# Déterminer les classes CSS
+						assign media_classes = 'product__media-item grid__item slider__slide'
+
+						# Ajouter la classe de visibilité
+						unless is_visible
+							assign media_classes = media_classes | append: ' product__media-item--hidden'
+						endunless
+
+						# Compter tous les médias visibles pour le système stacked (images, vidéos, modèles 3D, etc.)
+						if is_visible
+							assign visible_media_position = visible_media_position | plus: 1
+							# Si layout stacked et plus de 7 médias visibles, cacher ceux au-delà
+							if is_stacked_layout and visible_media_position > 7
+								assign media_classes = media_classes | append: ' product__media-item--hidden-stacked'
+							endif
+						endif
+
+						if single_media_visible
+							assign media_classes = media_classes | append: ' product__media-item--single'
+						endif
+
+						if media.media_type != 'image'
+							# Vérifier si la vidéo est dans le metafield des vidéos full width
+							if media.media_type == 'video' or media.media_type == 'external_video'
+								assign should_add_full_class = false
+								if product.metafields.custom.grille_visuels_desktop_liste_des_videos_full_width.value != blank
+									assign videos_full_width = product.metafields.custom.grille_visuels_desktop_liste_des_videos_full_width.value | compact
+									for video_full_width in videos_full_width
+										if video_full_width.id == media.id
+											assign should_add_full_class = true
+											break
+										endif
+									endfor
+								endif
+
+								if should_add_full_class
+									assign media_classes = media_classes | append: ' product__media-item--full'
+								endif
+							else
+								assign media_classes = media_classes | append: ' product__media-item--full'
+							endif
+						endif
+
+						if settings.animations_reveal_on_scroll
+							assign media_classes = media_classes | append: ' scroll-trigger animate--fade-in'
+						endif
+
+						# Logique `is-active` (priorités) :
+						# 1. Si pre-scan a trouvé un media matchant variant_option_string
+						#    (cas pack/bundle où la sélection bundle a une image dédiée) →
+						#    on force ce media en actif, et lui seul.
+						# 2. Sinon, fallback historique : featured_media OR 1er visible.
+						assign will_have_is_active = false
+						if default_active_media_id != blank
+							if media.id == default_active_media_id
+								assign media_classes = media_classes | append: ' is-active'
+								assign first_visible_media_shown = true
+								assign show_first_visible_media_image = true
+								assign first_visible_media_image = media.preview_image | image_url: width: 300
+								assign will_have_is_active = true
+							endif
+						else
+							if is_featured or first_visible_media_shown == false and selected_variant.featured_media == null and is_visible
+								assign media_classes = media_classes | append: ' is-active'
+								assign first_visible_media_shown = true
+								assign show_first_visible_media_image = true
+								assign first_visible_media_image = media.preview_image | image_url: width: 300
+								assign will_have_is_active = true
+							endif
+						endif
+
+						# Lazy loading basé sur les classes CSS
+						assign lazy_load = true
+						# Ne pas lazy load seulement si l'image sera active ET visible (pas hidden)
+						if will_have_is_active and is_visible
+							assign lazy_load = false
+						endif
+
+						assign localized_media_alt = localized_media_alt | remove_first: '#' | escape
+
+						if localized_media_alt != product.title
+							if product.metafields.custom.combined_listings_produit_parent.value != blank
+								assign product_title = product.metafields.custom.combined_listings_produit_parent.value.title
+							else
+								assign product_title = product.title
+							endif
+							assign media_alt = localized_media_alt | prepend: ' ' | prepend: product_title | replace: '|', '-'
+						endif
+					-%}
+
+					<li
+						id="Slide-{{ section.id }}-{{ media.id }}"
+						class="{{ media_classes }}"
+						data-media-id="{{ section.id }}-{{ media.id }}"
+						data-media-alt="{{ localized_media_alt }}"
+						{% if has_alt_custom %}
+							data-has-alt-custom="true"
+						{% endif %}
+						data-media-position="{{ media_position }}"
+						{% if show_first_visible_media_image %}
+							data-first-visible-media-shown="{{ first_visible_media_image }}"
+						{% endif %}
+					>
+						{% render 'product-thumbnail',
+							media: media,
+							media_count: media_count,
+							position: media_position,
+							desktop_layout: section.settings.gallery_layout,
+							mobile_layout: section.settings.mobile_thumbnails,
+							loop: section.settings.enable_video_looping,
+							controls: section.settings.enable_video_controls,
+							modal_id: section.id,
+							xr_button: true,
+							media_width: media_width,
+							media_fit: section.settings.media_fit,
+							constrain_to_viewport: section.settings.constrain_to_viewport,
+							lazy_load: lazy_load,
+							media_alt: media_alt
+						%}
+					</li>
+				{%- endfor -%}
+			</ul>
+			<div class="slider-buttons slider-buttons-with-dots quick-add-hidden{% if hide_mobile_slider %} small-hide{% endif %}">
+				<button
+					type="button"
+					class="slider-button slider-button--prev hidden"
+					name="previous"
+					aria-label="{{ 'general.slider.previous_slide' | t }}"
+					aria-disabled="true"
+					aria-hidden="true"
+				>
+					<span class="svg-wrapper">
+						{{- 'icon-caret.svg' | inline_asset_content -}}
+					</span>
+				</button>
+				<div class="slideshow__control-wrapper">
+					{%- for i in (1..media_count) -%}
+						<button
+							class="slider-counter__link slider-counter__link--dots link"
+							aria-label="{{ 'sections.slideshow.load_slide' | t }} {{ forloop.index }} {{ 'general.slider.of' | t }} {{ forloop.length }}"
+							aria-controls="Slider-{{ section.id }}"
+						>
+							<span class="dot"></span>
+						</button>
+					{%- endfor -%}
+				</div>
+				<button
+					type="button"
+					class="slider-button slider-button--next hidden"
+					name="next"
+					aria-label="{{ 'general.slider.next_slide' | t }}"
+					aria-disabled="true"
+					aria-hidden="true"
+				>
+					<span class="svg-wrapper">
+						{{- 'icon-caret.svg' | inline_asset_content -}}
+					</span>
+				</button>
+			</div>
+			{%- if is_stacked_layout and visible_media_position > 7 -%}
+				<div class="product__media-show-more-wrapper small-hide">
+					<button
+						type="button"
+						class="button button--reset product__media-show-more-button ax-link reversed"
+						id="ShowMoreMedia-{{ section.id }}"
+						aria-label="{{ 'accessibility.view_more' | t }}"
+						data-more-label="{{ 'accessibility.view_more' | t }}"
+						data-less-label="{{ 'accessibility.view_less' | t }}"
+					>
+						{{ 'accessibility.view_more' | t }}
+					</button>
+				</div>
+			{%- endif -%}
+		</slider-component>
+		{%- if first_3d_model -%}
+			<button
+				class="button button--full-width product__xr-button"
+				type="button"
+				aria-label="{{ 'products.product.xr_button_label' | t }}"
+				data-shopify-xr
+				data-shopify-model3d-id="{{ first_3d_model.id }}"
+				data-shopify-title="{{ product.title | escape }}"
+				data-shopify-xr-hidden
+			>
+				<span class="svg-wrapper">
+					{{- 'icon-3d-model.svg' | inline_asset_content -}}
+				</span>
+				{{ 'products.product.xr_button' | t }}
+			</button>
+		{%- endif -%}
+		{%- liquid
+			assign is_not_limited_to_single_item = false
+			if limit == null or limit > 1
+				assign is_not_limited_to_single_item = true
+			endif
+		-%}
+		{%- if is_not_limited_to_single_item
+			and media_count > 1
+			and section.settings.gallery_layout contains 'thumbnail'
+			or section.settings.mobile_thumbnails == 'show'
+		-%}
+			<slider-component
+				id="GalleryThumbnails-{{ section.id }}"
+				class="thumbnail-slider{% if template_new_offer == true %} thumbnail-slider-new-offer{% endif %} slider-mobile-gutter quick-add-hidden{% unless section.settings.gallery_layout contains 'thumbnail' %} medium-hide large-hide{% endunless %}{% if section.settings.mobile_thumbnails != 'show' %} small-hide{% endif %}{% if media_count <= 3 %} thumbnail-slider--no-slide{% endif %}"
+			>
+				<button
+					type="button"
+					class="slider-button slider-button--prev{% if media_count <= 3 %} small-hide{% endif %}{% if media_count <= 4 %} medium-hide large-hide{% endif %} hidden"
+					name="previous"
+					aria-label="{{ 'general.slider.previous_slide' | t }}"
+					aria-controls="GalleryThumbnails-{{ section.id }}"
+					data-step="3"
+				>
+					<span class="svg-wrapper">
+						{{- 'icon-caret.svg' | inline_asset_content -}}
+					</span>
+				</button>
+				<ul
+					id="Slider-Thumbnails-{{ section.id }}"
+					class="thumbnail-list list-unstyled slider slider--mobile{% if section.settings.gallery_layout == 'thumbnail_slider' %} slider--tablet-up{% endif %}{% if template_new_offer == true %} slider-mobile-new-offer{% endif %}"
+				>
+					{%- capture sizes -%}
+          (min-width: {{ settings.page_width }}px) calc(({{ settings.page_width | minus: 100 | times: media_width | round }} - 4rem) / 4),
+          (min-width: 990px) calc(({{ media_width | times: 100 }}vw - 4rem) / 4),
+          (min-width: 750px) calc((100vw - 15rem) / 8),
+          calc((100vw - 8rem) / 3)
+        {%- endcapture -%}
+
+					{%- assign thumbnail_position = 0 -%}
+					{%- assign first_thumbnail_shown = false -%}
+
+					{%- for media in product_media -%}
+						{%- liquid
+							# Skip les médias `|checkout` (idem slider principal).
+							assign checkout_id_marker = '|' | append: media.id | append: '|'
+							if checkout_media_ids contains checkout_id_marker
+								continue
+							endif
+
+							# Même logique de visibilité que pour la galerie principale
+							assign is_thumbnail_visible = false
+							assign is_featured_thumb = false
+							assign has_alt_custom = false
+							assign localized_thumbnail_alt = media.alt
+
+							if selected_variant.featured_media and media.id == selected_variant.featured_media.id
+								assign is_thumbnail_visible = true
+								assign is_featured_thumb = true
+							endif
+
+							if media.alt contains '#'
+								assign has_alt_custom = true
+								# Séparer la chaîne par # pour obtenir les paires langue-valeur
+								assign media_alt_parts = media.alt | split: '#'
+								assign localized_alt = ''
+								assign current_lang = localization.language.iso_code
+
+								# Parcourir les parties pour trouver la valeur correspondant à la langue courante
+								for i in (0..media_alt_parts.size)
+									assign part = media_alt_parts[i]
+									if part == current_lang
+										# La valeur suivante est celle qu'on cherche
+										assign next_index = i | plus: 1
+										if next_index < media_alt_parts.size
+											assign localized_alt = media_alt_parts[next_index]
+											break
+										endif
+									endif
+								endfor
+
+								# Si on a trouvé une valeur localisée, l'utiliser
+								if localized_alt != ''
+									# Comparer avec la chaîne d'options de la variante (sans le #)
+									assign variant_option_string_clean = variant_option_string | remove_first: '#'
+									assign localized_thumbnail_alt = localized_alt
+									if localized_alt == variant_option_string_clean
+										assign is_thumbnail_visible = true
+									endif
+								else
+									# Fallback : comportement original si pas de traduction trouvée
+									if media.alt == variant_option_string
+										assign is_thumbnail_visible = true
+									endif
+								endif
+							else
+								assign is_thumbnail_visible = true
+							endif
+
+							# Incrémenter thumbnail_position seulement pour les thumbnails visibles
+							if is_thumbnail_visible
+								assign thumbnail_position = thumbnail_position | plus: 1
+							endif
+						-%}
+
+						{%- liquid
+							capture media_index
+								if media.media_type == 'model'
+									increment model_index
+								elsif media.media_type == 'video' or media.media_type == 'external_video'
+									increment video_index
+								elsif media.media_type == 'image'
+									increment image_index
+								endif
+							endcapture
+							assign media_index = media_index | plus: 1
+
+							# Classes pour les miniatures
+							assign thumbnail_classes = 'thumbnail-list__item slider__slide'
+
+							# Ajouter la classe de visibilité
+							unless is_thumbnail_visible
+								assign thumbnail_classes = thumbnail_classes | append: ' thumbnail-list__item--hidden'
+							endunless
+
+							if section.settings.hide_variants and variant_images contains media.src
+								assign thumbnail_classes = thumbnail_classes | append: ' thumbnail-list_item--variant'
+							endif
+
+							# Détermine la miniature active — même logique de priorité que
+							# le slider principal (cf. plus haut).
+							assign is_current = false
+							if default_active_media_id != blank
+								if media.id == default_active_media_id
+									assign is_current = true
+									assign first_thumbnail_shown = true
+								endif
+							else
+								if is_featured_thumb or first_thumbnail_shown == false and selected_variant.featured_media == null and is_thumbnail_visible
+									assign is_current = true
+									assign first_thumbnail_shown = true
+								endif
+							endif
+
+							assign localized_thumbnail_alt = localized_thumbnail_alt | remove_first: '#' | escape
+
+							if localized_thumbnail_alt != product.title
+								if product.metafields.custom.combined_listings_produit_parent.value != blank
+									assign product_title = product.metafields.custom.combined_listings_produit_parent.value.title
+								else
+									assign product_title = product.title
+								endif
+								assign thumbnail_alt = localized_thumbnail_alt | prepend: ' ' | prepend: product_title | replace: '|', '-'
+							endif
+
+							# Lazy loading pour les thumbnails basé sur la visibilité
+							assign thumbnail_lazy_load = true
+							if is_thumbnail_visible
+								assign thumbnail_lazy_load = false
+							endif
+						-%}
+
+						<li
+							id="Slide-Thumbnails-{{ section.id }}-{{ thumbnail_position }}"
+							class="{{ thumbnail_classes }}"
+							data-target="{{ section.id }}-{{ media.id }}"
+							data-media-id="Thumbnails-{{ section.id }}-{{ media.id }}"
+							data-media-position="{{ media_index }}"
+							data-media-alt="{{ localized_thumbnail_alt | remove_first: '#' | escape }}"
+							{% if has_alt_custom %}
+								data-has-alt-custom="true"
+							{% endif %}
+						>
+							{%- if media.media_type == 'model' -%}
+								<span class="thumbnail__badge" aria-hidden="true">
+									<span class="svg-wrapper">
+										{{- 'icon-3d-model.svg' | inline_asset_content -}}
+									</span>
+								</span>
+							{%- elsif media.media_type == 'video' or media.media_type == 'external_video' -%}
+								<span class="thumbnail__badge" aria-hidden="true">
+									<span class="svg-wrapper">
+										{{- 'icon-play.svg' | inline_asset_content -}}
+									</span>
+								</span>
+							{%- endif -%}
+							{%- capture thumbnail_id -%}
+                Thumbnail-{{ section.id }}-{{ thumbnail_position }}
+              {%- endcapture -%}
+							<button
+								class="thumbnail global-media-settings global-media-settings--no-shadow"
+								aria-label="{%- if media.media_type == 'image' -%}{{ 'products.product.media.load_image' | t: index: media_index }}{%- elsif media.media_type == 'model' -%}{{ 'products.product.media.load_model' | t: index: media_index }}{%- elsif media.media_type == 'video' or media.media_type == 'external_video' -%}{{ 'products.product.media.load_video' | t: index: media_index }}{%- endif -%}"
+								{% if is_current %}
+									aria-current="true"
+								{% endif %}
+								aria-controls="GalleryViewer-{{ section.id }}"
+								aria-describedby="{{ thumbnail_id }}"
+							>
+								{%- capture thumnail_image -%}
+									{{
+										media.preview_image
+										| image_url: width: 416
+										| image_tag:
+											loading: 'lazy',
+											sizes: sizes,
+											widths: '54, 74, 104, 162, 208, 324, 416',
+											id: thumbnail_id,
+											alt: thumbnail_alt
+										| escape
+									}}
+								{%- endcapture -%}
+								{%- if thumbnail_lazy_load -%}
+									{{ thumnail_image | replace: 'src="', 'lazy-src="' | replace: 'srcset="', 'lazy-srcset="' }}
+								{%- else -%}
+									{{ thumnail_image }}
+								{%- endif -%}
+							</button>
+						</li>
+					{%- endfor -%}
+				</ul>
+				<button
+					type="button"
+					class="slider-button slider-button--next{% if media_count <= 3 %} small-hide{% endif %}{% if media_count <= 4 %} medium-hide large-hide{% endif %} hidden"
+					name="next"
+					aria-label="{{ 'general.slider.next_slide' | t }}"
+					aria-controls="GalleryThumbnails-{{ section.id }}"
+					data-step="3"
+				>
+					<span class="svg-wrapper">
+						{{- 'icon-caret.svg' | inline_asset_content -}}
+					</span>
+				</button>
+			</slider-component>
+		{%- endif -%}
+	</div>
+
+	{%- comment -%}
+		Conteneur caché des images `|checkout` (pack-new uniquement).
+		Jamais affiché (style hidden + visually-hidden). Sert au JS bundle
+		à piocher la bonne URL d'image pour `[properties][_bundle_image]`
+		selon le `variantOptionString` courant — l'alt stocké ici est
+		l'alt SANS le suffixe `|checkout` pour faciliter le matching.
+	{%- endcomment -%}
+	{%- if is_pack_new_gallery and checkout_media_ids != '|' -%}
+		<div
+			id="BundleCheckoutImages-{{ section.id }}"
+			class="bundle-checkout-images"
+			hidden
+			aria-hidden="true"
+			style="display: none;"
+		>
+			{%- for media in product_media -%}
+				{%- liquid
+					assign checkout_id_marker = '|' | append: media.id | append: '|'
+					unless checkout_media_ids contains checkout_id_marker
+						continue
+					endunless
+
+					# Extraction de l'alt utile (localisé ou brut), strip du `|checkout`.
+					assign chk_localized_alt = ''
+					if media.alt contains '#'
+						assign chk_alt_parts = media.alt | split: '#'
+						assign chk_current_lang = localization.language.iso_code
+						for i in (0..chk_alt_parts.size)
+							assign chk_part = chk_alt_parts[i]
+							if chk_part == chk_current_lang
+								assign chk_next_index = i | plus: 1
+								if chk_next_index < chk_alt_parts.size
+									assign chk_localized_alt = chk_alt_parts[chk_next_index]
+									break
+								endif
+							endif
+						endfor
+					endif
+					assign chk_alt_useful = chk_localized_alt
+					if chk_alt_useful == ''
+						assign chk_alt_useful = media.alt
+					endif
+					# Strip `|checkout` du dernier segment.
+					assign chk_alt_clean = chk_alt_useful | split: '|'
+					assign chk_alt_clean_size = chk_alt_clean.size | minus: 1
+					assign chk_alt_clean_joined = ''
+					for chk_seg in chk_alt_clean limit: chk_alt_clean_size
+						if chk_alt_clean_joined == ''
+							assign chk_alt_clean_joined = chk_seg
+						else
+							assign chk_alt_clean_joined = chk_alt_clean_joined | append: '|' | append: chk_seg
+						endif
+					endfor
+					assign chk_image_url = media.preview_image | image_url: width: 300
+				-%}
+				<div
+					data-bundle-checkout-alt="{{ chk_alt_clean_joined | escape }}"
+					data-bundle-checkout-url="{{ chk_image_url }}"
+				></div>
+			{%- endfor -%}
+		</div>
+	{%- endif -%}
+</media-gallery>

@@ -1,0 +1,15 @@
+{%- comment -%}
+	Renders a countdown timer for an announcement bar block.
+
+	Accepts:
+	- block: {Object} announcement block with countdown_* settings.
+{%- endcomment -%}
+
+<countdown-timer
+	class="announcement-bar__countdown"
+	data-end-date="{{ block.settings.countdown_end_date | strip }}"
+	data-prefix="{{ block.settings.countdown_prefix | escape }}"
+	data-finished-text="{{ block.settings.countdown_finished_text | escape }}"
+>
+	<span data-countdown-output></span>
+</countdown-timer>

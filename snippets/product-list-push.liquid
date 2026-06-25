@@ -1,0 +1,205 @@
+{%- comment -%}
+	theme-check-disable AssetUrlFilters
+{%- endcomment -%}
+{% liquid
+	assign image = push.image_de_fond
+	assign image_mobile = push.image_de_fond_mobile
+	assign surtitre = push.surtitre.value
+	assign titre = push.titre.value
+	assign description = push.description.value
+	assign link = push.lien.value
+	assign button_text = push.texte_du_bouton.value
+	assign overlay = push.overlay.value
+	assign switch_button_style = push.switch_button_style_mobile.value
+	assign extra_class = extra_class | default: ''
+	assign video = push.video.value
+	assign video_mobile = push.video_mobile.value
+
+	assign desktop_poster = image
+	assign mobile_poster = image
+
+	if video_mobile != blank
+		if video_mobile.preview_image != blank
+			assign mobile_poster = video_mobile.preview_image
+		elsif push.image_de_fond_mobile != blank
+			assign mobile_poster = push.image_de_fond_mobile
+		endif
+	endif
+
+	if video != blank
+		if video.preview_image != blank
+			assign desktop_poster = video.preview_image
+		elsif image != blank
+			assign desktop_poster = image
+		endif
+	endif
+
+	assign main_poster = desktop_poster
+	if main_poster == blank
+		assign main_poster = mobile_poster
+	endif
+
+	assign video_alt = video.alt | default: video_mobile.alt | default: 'accessibility.video_description' | t
+
+	assign video_mobile_url = blank
+	if video_mobile != blank
+		if video_mobile.sources[1].url != blank
+			assign video_mobile_url = video_mobile.sources[1].url
+		elsif video_mobile.sources[0].url != blank
+			assign video_mobile_url = video_mobile.sources[0].url
+		endif
+	endif
+
+	assign video_url = blank
+	if video != blank
+		if video.sources[1].url != blank
+			assign video_url = video.sources[1].url
+		elsif video.sources[0].url != blank
+			assign video_url = video.sources[0].url
+		endif
+	endif
+%}
+
+{%- assign base_image = image | default: image_mobile -%}
+
+{%- if base_image != blank -%}
+	{% comment %} theme-check-disable AssetUrlFilters {% endcomment %}
+	{% if list %}
+		<li
+			class="grid__item product-list__push{% if overlay %} product-list__push--overlay{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}{% if extra_class != blank %} {{ extra_class }}{% endif %}{% if horizontal_mobile_layout %} product-list__push--horizontal-mobile{% endif %}"
+			{% if settings.animations_reveal_on_scroll %}
+				data-cascade
+				style="--animation-order: {{ index }};"
+			{% endif %}
+		>
+	{% else %}
+		<div
+			class="product-list__push{% if overlay %} product-list__push--overlay{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}{% if extra_class != blank %} {{ extra_class }}{% endif %}{% if horizontal_mobile_layout %} product-list__push--horizontal-mobile{% endif %}"
+			{% if settings.animations_reveal_on_scroll %}
+				data-cascade
+				style="--animation-order: {{ index }};"
+			{% endif %}
+		>
+	{% endif %}
+	{% comment %} theme-check-enable AssetUrlFilters {% endcomment %}
+	{%- if link != blank -%}
+		<a class="product-list__push-link full-unstyled-link" href="{{ link }}">
+	{%- else -%}
+		<div class="product-list__push-link">
+	{%- endif -%}
+	<product-list-push-media class="product-list__push-image">
+		<div class="media media--transparent">
+			{% if video != blank or video_mobile != blank %}
+				<video
+					class="product-list__push-video"
+					autoplay
+					loop
+					muted
+					playsinline
+					width="{% if desktop_poster %}{{ desktop_poster.width | default: 1920 }}{% else %}1920{% endif %}"
+					height="{% if desktop_poster %}{{ desktop_poster.height | default: 1080 }}{% else %}1080{% endif %}"
+				>
+					{% if video_mobile_url != blank %}
+						<source
+							src="{{ video_mobile_url }}"
+							type="video/mp4"
+							media="(max-width: 749px)"
+						>
+					{% endif %}
+					{% if video_url != blank %}
+						<source
+							src="{{ video_url }}"
+							type="video/mp4"
+							{% if video_mobile != blank %}
+								media="(min-width: 750px)"
+							{% endif %}
+						>
+					{% endif %}
+				</video>
+
+				{% if main_poster %}
+					<picture class="video-poster-image">
+						{% if mobile_poster and mobile_poster != desktop_poster and mobile_poster != blank %}
+							<source
+								media="(max-width: 749px)"
+								srcset="
+									{{ mobile_poster | image_url: width: 400 }} 400w,
+									{{ mobile_poster | image_url: width: 600 }} 600w,
+									{{ mobile_poster | image_url: width: 800 }} 800w
+								"
+								sizes="100vw"
+							>
+						{% endif %}
+						<img
+							class="video-poster-img"
+							src="{{ main_poster | image_url: width: 1200 }}"
+							srcset="
+								{{ main_poster | image_url: width: 800 }} 800w,
+								{{ main_poster | image_url: width: 1200 }} 1200w,
+								{{ main_poster | image_url: width: 1600 }} 1600w,
+								{{ main_poster | image_url: width: 1920 }} 1920w
+							"
+							loading="lazy"
+							sizes="100vw"
+							alt="{{ video_alt }}"
+							width="{{ main_poster.width | default: 1200 }}"
+							height="{{ main_poster.height | default: 675 }}"
+						>
+					</picture>
+				{% endif %}
+			{% else %}
+				{% capture media_image %}
+					<picture>
+						{% if image_mobile != blank %}
+							<source
+								media="(max-width: 749px)"
+								srcset="
+									{{ image_mobile | image_url: width: 400 }} 400w,
+									{{ image_mobile | image_url: width: 600 }} 600w,
+									{{ image_mobile | image_url: width: 800 }} 800w
+								"
+								sizes="100vw"
+							>
+						{% endif %}
+						{{
+							base_image
+							| image_url: width: 500
+							| image_tag: loading: 'lazy', widths: '50, 100, 150, 200, 250, 300, 350, 400, 450', alt: img__alt
+						}}
+					</picture>
+				{% endcapture %}
+				{% if lazy_load %}
+					{{ media_image | replace: 'srcset="', 'lazy-srcset="' | replace: 'src="', 'lazy-src="' }}
+				{% else %}
+					{{ media_image }}
+				{% endif %}
+			{% endif %}
+		</div>
+	</product-list-push-media>
+	<div class="product-list__push-content">
+		{%- if surtitre != blank -%}
+			<div class="product-list__push-subtitle subtitle">{%- render 'legal-asterisk', text: surtitre -%}</div>
+		{%- endif -%}
+		{%- if titre != blank -%}
+			<div class="product-list__push-title h3">{%- render 'legal-asterisk', text: titre, newline_to_br: true -%}</div>
+		{%- endif -%}
+		{%- if description != blank -%}
+			<div class="product-list__push-description">{%- render 'legal-asterisk', text: description, newline_to_br: true -%}</div>
+		{%- endif -%}
+		{%- if button_text != blank -%}
+			<div class="product-list__push-button button button--secondary{% if switch_button_style %} product-list__push-button--switch{% endif %}">
+				{{ button_text }}
+			</div>
+		{%- endif -%}
+	</div>
+	{%- if link != blank -%}
+		</a>
+	{%- else -%}
+		</div>
+	{%- endif -%}
+	{% if list %}
+		</li>
+	{% else %}
+		</div>
+	{% endif %}
+{%- endif -%}

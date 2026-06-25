@@ -1,0 +1,30 @@
+{%- liquid
+	assign cart_discount_bundle = 0
+
+	for item in cart.items
+		if item.properties._bundle_discount != blank
+			assign prix_final = item.final_line_price
+			assign pourcentage_reduction = item.properties._bundle_discount | plus: 0
+
+			assign reduction_decimal = pourcentage_reduction | divided_by: 100.0
+			assign facteur_reduction = 1.0 | minus: reduction_decimal
+			assign prix_initial = prix_final | divided_by: facteur_reduction
+
+			assign economie = prix_initial | minus: prix_final
+			assign cart_discount_bundle = cart_discount_bundle | plus: economie
+		endif
+	endfor
+
+	assign cart_discount_bundle_formatted = cart_discount_bundle | money
+-%}
+
+{% if cart_discount_bundle > 0 %}
+	<div class="drawer__footer-discount-bundle">
+		<div class="drawer__footer-discount-bundle-label">
+			{{ 'sections.cart.bundle_discount' | t }}
+		</div>
+		<div class="drawer__footer-discount-bundle-value">
+			{{ cart_discount_bundle_formatted | prepend: '-' }}
+		</div>
+	</div>
+{% endif %}

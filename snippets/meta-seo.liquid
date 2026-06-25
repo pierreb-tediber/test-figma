@@ -1,0 +1,5 @@
+{%- if template.name == 'collection' and collection.handle == 'vendors' -%}
+	<meta name="robots" content="noindex, nofollow">
+{%- elsif template.name == 'collection' and current_tags -%}
+	<meta name="robots" content="noindex, nofollow" />
+{%- endif -%}

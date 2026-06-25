@@ -1,0 +1,267 @@
+{%- capture swiper_options -%}
+	{
+		"slidesPerView": 1,
+		"slidesPerGroup": 1,
+		"loop": {% if section.blocks.size > 1 %}true{% else %}false{% endif %},
+		"direction": "vertical",
+		"autoplay": {
+			"delay": {{ section.settings.delay }},
+			"disableOnInteraction": false,
+			"reverseDirection": true
+		},
+		"speed": {{ section.settings.speed }},
+		"effect": "slide",
+		"grabCursor": {% if section.blocks.size > 1 %}true{% else %}false{% endif %},
+		"allowTouchMove": {% if section.blocks.size > 1 %}true{% else %}false{% endif %}
+	}
+{%- endcapture -%}
+
+<div
+	class="announcement-bar color-{{ section.settings.color_scheme }}"
+	role="region"
+	data-ax-section="AnnouncementBar"
+	aria-label="{{ 'sections.header.announcement' | t }}"
+	aria-live="polite"
+>
+	<div class="announcement-bar__container page-width">
+		<div class="announcement-bar__content">
+			{%- if section.settings.show_trustpilot -%}
+				<div class="announcement-bar__trustpilot rte small-hide medium-hide">
+					{% if section.settings.trustpilot_url != blank %}
+						<a
+							href="{{ section.settings.trustpilot_url.url }}"
+						></a>
+					{% endif %}
+					<!-- TrustBox widget - Micro Star -->
+					<div
+						class="trustpilot-widget"
+						data-locale="fr-FR"
+						data-template-id="5419b732fbfb950b10de65e5"
+						data-businessunit-id="5a5cdcedf3b8320001d06ddf"
+						data-style-height="24px"
+						data-style-width="100%"
+						data-theme="dark"
+						data-token="6afe61c4-7917-4cdf-9bee-30651b8944be"
+					>
+						<a href="https://fr.trustpilot.com/review/www.tediber.com" target="_blank" rel="noopener">Trustpilot</a>
+					</div>
+					<!-- End TrustBox widget -->
+
+
+				</div>
+			{%- endif -%}
+
+			<announcement-bar class="announcement-bar__slider" role="marquee" aria-live="polite">
+				{%- if section.blocks.size > 0 -%}
+					<div
+						class="swiper announcement-bar__swiper"
+						id="Swiper-{{ section.id }}"
+						data-options="{{ swiper_options | escape }}"
+						aria-roledescription="carousel"
+						aria-label="{{ 'sections.announcement-bar.announcements' | t }}"
+					>
+						<div class="swiper-wrapper" role="list">
+							{%- for block in section.blocks -%}
+								{%- liquid
+									assign show_countdown = block.settings.show_countdown
+									assign countdown_end = block.settings.countdown_end_date | strip
+								-%}
+								<div class="swiper-slide" {{ block.shopify_attributes }} role="listitem">
+									<div class="announcement-bar__message rte">
+										{%- if block.settings.announcement_link != blank -%}
+											<a href="{{ block.settings.announcement_link }}" class="announcement-bar__link">
+												{%- render 'legal-asterisk', text: block.settings.announcement_text -%}
+												{%- if show_countdown and countdown_end != blank -%}
+													{%- render 'announcement-countdown', block: block -%}
+												{%- endif -%}
+											</a>
+										{%- else -%}
+											{%- render 'legal-asterisk', text: block.settings.announcement_text -%}
+											{%- if show_countdown and countdown_end != blank -%}
+												{%- render 'announcement-countdown', block: block -%}
+											{%- endif -%}
+										{%- endif -%}
+									</div>
+								</div>
+							{%- endfor -%}
+						</div>
+					</div>
+				{%- endif -%}
+			</announcement-bar>
+
+			{%- if section.settings.shop_link_text != blank or section.settings.help_link_text != blank -%}
+				<nav
+					class="small-hide medium-hide"
+					aria-label="{{ 'sections.announcement-bar.navigation' | t }}"
+				>
+					<ul class="announcement-bar__menu list-unstyled" role="list">
+						{%- if section.settings.shop_link_text != blank -%}
+							<li class="announcement-bar__menu-item" role="listitem">
+								<a
+									{% if section.settings.shop_link != blank %}
+										href="{{ section.settings.shop_link }}"
+									{% else %}
+										role="button" aria-disabled="true"
+									{% endif %}
+									class="announcement-bar__menu-link reversed"
+									aria-label="{{ section.settings.shop_link_text }}"
+								>
+									{{ section.settings.shop_link_text }}
+								</a>
+							</li>
+						{%- endif -%}
+
+						{%- if section.settings.help_link_text != blank -%}
+							<li class="announcement-bar__menu-item" role="listitem">
+								<a
+									{% if section.settings.help_link != blank %}
+										href="{{ section.settings.help_link }}"
+									{% else %}
+										role="button" aria-disabled="true"
+									{% endif %}
+									class="announcement-bar__menu-link reversed"
+									aria-label="{{ section.settings.help_link_text }}"
+								>
+									{{ section.settings.help_link_text }}
+								</a>
+							</li>
+						{%- endif -%}
+					</ul>
+				</nav>
+			{%- endif -%}
+		</div>
+	</div>
+</div>
+
+{% schema %}
+	{
+		"name": "t:sections.announcement-bar.name",
+		"class": "section-announcement-bar",
+		"max_blocks": 4,
+		"enabled_on": {
+			"groups": ["header"]
+		},
+		"settings": [
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "t:sections.all.colors.label",
+				"default": "background-1"
+			},
+			{
+				"type": "header",
+				"content": "Slider Settings"
+			},
+			{
+				"type": "number",
+				"id": "speed",
+				"label": "Speed (ms) between slides",
+				"default": 2000
+			},
+			{
+				"type": "number",
+				"id": "delay",
+				"label": "Delay (ms) between slides",
+				"default": 2000
+			},
+			{
+				"type": "header",
+				"content": "Trustpilot Settings"
+			},
+			{
+				"type": "checkbox",
+				"id": "show_trustpilot",
+				"label": "Show Trustpilot widget",
+				"default": true
+			},
+			{
+				"type": "url",
+				"id": "trustpilot_url",
+				"label": "Trustpilot URL"
+			},
+			{
+				"type": "header",
+				"content": "Navigation Links"
+			},
+			{
+				"type": "text",
+				"id": "shop_link_text",
+				"label": "Shop Link Text",
+				"default": "Nos boutiques"
+			},
+			{
+				"type": "url",
+				"id": "shop_link",
+				"label": "Shop Link"
+			},
+			{
+				"type": "text",
+				"id": "help_link_text",
+				"label": "Help Link Text",
+				"default": "Aide"
+			},
+			{
+				"type": "url",
+				"id": "help_link",
+				"label": "Help Link"
+			}
+		],
+		"blocks": [
+			{
+				"type": "announcement",
+				"name": "t:sections.announcement-bar.blocks.announcement.name",
+				"settings": [
+					{
+						"type": "richtext",
+						"id": "announcement_text",
+						"label": "Announcement Text",
+						"default": "<p>Welcome to our store</p>"
+					},
+					{
+						"type": "url",
+						"id": "announcement_link",
+						"label": "Announcement Link"
+					},
+					{
+						"type": "header",
+						"content": "Countdown"
+					},
+					{
+						"type": "checkbox",
+						"id": "show_countdown",
+						"label": "Show countdown",
+						"default": false
+					},
+					{
+						"type": "text",
+						"id": "countdown_end_date",
+						"label": "End date",
+						"info": "ISO format: YYYY-MM-DDTHH:MM:SS (e.g. 2026-05-19T23:55:00)"
+					},
+					{
+						"type": "text",
+						"id": "countdown_prefix",
+						"label": "Prefix text",
+						"default": "Plus que"
+					},
+					{
+						"type": "text",
+						"id": "countdown_finished_text",
+						"label": "Finished text",
+						"default": "Offre terminée"
+					}
+				]
+			}
+		],
+		"presets": [
+			{
+				"name": "t:sections.announcement-bar.presets.name",
+				"blocks": [
+					{
+						"type": "announcement"
+					}
+				]
+			}
+		]
+	}
+{% endschema %}

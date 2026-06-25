@@ -1,0 +1,117 @@
+{%- style -%}
+	.section-{{ section.id }}-padding {
+	  padding-top: {{ section.settings.mob_padding_top }}px;
+	  padding-bottom: {{ section.settings.mob_padding_bottom }}px;
+	}
+
+	@media screen and (min-width: 750px) {
+	  .section-{{ section.id }}-padding {
+	    padding-top: {{ section.settings.padding_top }}px;
+	    padding-bottom: {{ section.settings.padding_bottom }}px;
+	  }
+	}
+
+	#shopify-section-{{ section.id }} .breadcrumbs__container {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: center;
+		gap: 2.2rem;
+
+		@media screen and (min-width: 990px) {
+			flex-direction: row;
+		}
+	}
+{%- endstyle -%}
+
+<div
+	class="breadcrumbs gradient color-{{ section.settings.color_scheme }} section-{{ section.id }}-padding"
+>
+	<div class="breadcrumbs__container page-width">
+		{% render 'breadcrumbs' %}
+		{% if article.metafields.custom.lien_entete.value != blank %}
+			<a href="{{ article.metafields.custom.lien_entete.value.url}}" class="button button--primary article__discover-button">
+				{{ article.metafields.custom.lien_entete.value.text }}
+			</a>
+		{% endif %}
+	</div>
+</div>
+
+{% schema %}
+	{
+		"name": "Fil d'ariane (blog)",
+		"tag": "section",
+		"class": "section",
+		"limit": 1,
+		"enabled_on": {
+			"templates": ["blog", "article"]
+		},
+		"settings": [
+			{
+				"type": "header",
+				"content": "Content"
+			},
+			{
+				"type": "header",
+				"content": "Color"
+			},
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "Color scheme",
+				"default": "background-1"
+			},
+			{
+				"type": "header",
+				"content": "Padding (space)"
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 2,
+				"unit": "px",
+				"label": "(Mobile) Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 2,
+				"unit": "px",
+				"label": "(Mobile) Padding bottom",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 2,
+				"unit": "px",
+				"label": "Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 2,
+				"unit": "px",
+				"label": "Padding bottom",
+				"default": 0
+			}
+		],
+		"blocks": [],
+		"presets": [
+			{
+				"name": "Fil d'ariane (blog)",
+				"blocks": []
+			}
+		]
+	}
+{% endschema %}

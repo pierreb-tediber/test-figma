@@ -1,0 +1,245 @@
+{{ 'bundle.faq.css' | asset_url | stylesheet_tag }}
+
+<script>
+	window.assetsUrl.js.push({ faqSection: "{{ 'bundle.faq.js' | asset_url }}" });
+</script>
+
+{%- style -%}
+	.section-{{ section.id }}-padding {
+	  padding-top: {{ section.settings.mob_padding_top }}px;
+	  padding-bottom: {{ section.settings.mob_padding_bottom }}px;
+	}
+
+	@media screen and (min-width: 750px) {
+	  .section-{{ section.id }}-padding {
+	    padding-top: {{ section.settings.padding_top }}px;
+	    padding-bottom: {{ section.settings.padding_bottom }}px;
+	  }
+	}
+
+	@media screen and (min-width: 990px) {
+		{% if section.settings.reverse_layout %}
+			.section-{{ section.id }}-padding  .faq__wrapper {
+				flex-direction: row-reverse;
+			}
+		{% endif %}
+	}
+{%- endstyle -%}
+
+{%- liquid
+	assign lazyload = false
+	assign image = section.settings.image | default: blank
+	assign faqs = section.settings.faq | default: blank
+
+	if section.index > 1
+		assign lazyload = true
+	endif
+-%}
+
+{% if image != blank and faqs != blank %}
+	<div
+		class="faq gradient color-{{ section.settings.color_scheme }} section-{{ section.id }}-padding{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+		data-ax-section="faqSection"
+		aria-labelledby="faq-heading-{{ section.id }}"
+	>
+		<div class="faq__wrapper">
+			<div class="faq__media">
+				<div class="media media--transparent">
+					{% capture media_image %}
+						{{ image | image_url: width: 1000 | image_tag: alt: image.alt }}
+					{% endcapture %}
+					{% if lazyload %}
+						{{ media_image | replace: 'src="', 'lazy-src="' | replace: 'srcset="', 'lazy-srcset="' }}
+					{% else %}
+						{{ media_image }}
+					{% endif %}
+				</div>
+			</div>
+			<div class="faq__content">
+				{%- render 'section-heading',
+					heading: section.settings.heading,
+					heading_picto: section.settings.picto,
+					heading_picto_size: section.settings.picto_size,
+					heading_picto_size_mobile: section.settings.picto_size_mobile,
+					text_alignment: 'center'
+				-%}
+
+				<div class="faq__items" role="list">
+					{% for faq in faqs %}
+						{% assign dropdown_id = 'dropdown-' | append: section.id | append: '-' | append: forloop.index %}
+						{% assign summary_id = 'summary-' | append: section.id | append: '-' | append: forloop.index %}
+
+						<div class="faq__item">
+							<details
+								class="faq__details details-animate"
+								{% if forloop.first %}
+									open
+								{% endif %}
+							>
+								<summary
+									class="faq__summary"
+									aria-controls="{{ dropdown_id }}"
+									id="{{ summary_id }}"
+									tabindex="0"
+								>
+									<h3>{{- faq.question -}}</h3>
+									<div class="svg-wrapper" aria-hidden="true">
+										{{- 'icon-caret.svg' | inline_asset_content -}}
+									</div>
+								</summary>
+								<div
+									id="{{ dropdown_id }}"
+									class="faq__item-content details__content"
+									aria-labelledby="{{ summary_id }}"
+									role="region"
+								>
+									{{- faq.reponse -}}
+								</div>
+							</details>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endif %}
+
+{% schema %}
+	{
+		"name": "Ax faq",
+		"tag": "section",
+		"class": "section",
+		"disabled_on": {
+			"groups": ["header", "footer"]
+		},
+		"settings": [
+			{
+				"type": "header",
+				"content": "Titre"
+			},
+			{
+				"type": "richtext",
+				"id": "heading",
+				"label": "Titre",
+				"default": "<p>Questions fréquentes</p>"
+			},
+			{
+				"type": "image_picker",
+				"id": "picto",
+				"label": "Picto"
+			},
+			{
+				"type": "range",
+				"id": "picto_size",
+				"min": 0,
+				"max": 200,
+				"step": 2,
+				"unit": "px",
+				"label": "Taille du picto",
+				"default": 24
+			},
+			{
+				"type": "range",
+				"id": "picto_size_mobile",
+				"min": 0,
+				"max": 200,
+				"step": 2,
+				"unit": "px",
+				"label": "Taille du picto mobile",
+				"default": 24
+			},
+			{
+				"type": "header",
+				"content": "Disposition"
+			},
+			{
+				"type": "checkbox",
+				"id": "reverse_layout",
+				"label": "Inverser la disposition (sur desktop)",
+				"info": "L'image sera affichée à droite et le contenu à gauche",
+				"default": false
+			},
+			{
+				"type": "header",
+				"content": "Image"
+			},
+			{
+				"type": "image_picker",
+				"id": "image",
+				"label": "Image"
+			},
+			{
+				"type": "header",
+				"content": "Metaobject"
+			},
+			{
+				"type": "metaobject_list",
+				"id": "faq",
+				"label": "Faqs",
+				"metaobject_type": "faq",
+				"info": "Sélectionnez le metaobjet à afficher"
+			},
+			{
+				"type": "header",
+				"content": "Color"
+			},
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "Color scheme",
+				"default": "background-1"
+			},
+			{
+				"type": "header",
+				"content": "Padding (space)"
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding bottom",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding bottom",
+				"default": 0
+			}
+		],
+		"blocks": [],
+		"presets": [
+			{
+				"name": "Ax faq",
+				"blocks": []
+			}
+		]
+	}
+{% endschema %}

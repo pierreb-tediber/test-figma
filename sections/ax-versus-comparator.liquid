@@ -1,0 +1,934 @@
+{{ 'bundle.versus-comparator.css' | asset_url | stylesheet_tag }}
+
+<script>
+	window.assetsUrl.js.push({ versusComparator: "{{ 'bundle.versus-comparator.js' | asset_url }}" });
+</script>
+
+{%- style -%}
+	.section-{{ section.id }}-padding {
+	  padding-top: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px;
+	  padding-bottom: {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px;
+	}
+
+	@media screen and (min-width: 750px) {
+	  .section-{{ section.id }}-padding {
+	    padding-top: {{ section.settings.padding_top }}px;
+	    padding-bottom: {{ section.settings.padding_bottom }}px;
+	  }
+	}
+{%- endstyle -%}
+
+{%- liquid
+	assign bandeau_block = null
+	assign winner_side = 'none'
+	assign winner_label = ''
+	for block in section.blocks
+		if block.type == 'bandeau'
+			assign bandeau_block = block
+			assign winner_side = block.settings.winner_side | default: 'left'
+			assign winner_label = block.settings.winner_label
+		endif
+	endfor
+-%}
+{%- liquid
+	assign animate_class = ''
+	if settings.animations_reveal_on_scroll
+		assign animate_class = ' scroll-trigger animate--slide-in'
+	endif
+-%}
+<div
+	class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }} ax-versus-comparator"
+	id="{{ bandeau_block.settings.anchor }}"
+>
+	<ax-versus-comparator data-ax-section="versusComparator">
+		{%- if bandeau_block -%}
+			<div
+				class="ax-versus-comparator__bandeau color-{{ bandeau_block.settings.bandeau_color_scheme }}{{ animate_class }}"
+				{{ bandeau_block.shopify_attributes }}
+			>
+				<div class="ax-versus-comparator__bandeau-side ax-versus-comparator__bandeau-side--left">
+					{%- if bandeau_block.settings.left_image != blank -%}
+						{{
+							bandeau_block.settings.left_image
+							| image_url: width: 96
+							| image_tag: loading: 'lazy', width: 48, widths: '48, 96', class: 'ax-versus-comparator__bandeau-logo'
+						}}
+					{%- endif -%}
+
+					{%- if bandeau_block.settings.left_label != blank -%}
+						<span class="ax-versus-comparator__bandeau-label h4">{{ bandeau_block.settings.left_label }}</span>
+					{%- endif -%}
+
+					{%- if bandeau_block.settings.tooltip_content != blank
+						and bandeau_block.settings.tooltip_position != 'right'
+					-%}
+						{%- render 'versus-comparator-tooltip',
+							content: bandeau_block.settings.tooltip_content,
+							image: bandeau_block.settings.tooltip_image,
+							cs_class: 'content-square_' | append: section.id | append: '-' | append: bandeau_block.id | append: '-tooltip-bandeau-left'
+						-%}
+					{%- endif -%}
+
+					{%- if winner_label != blank and winner_side == 'left' -%}
+						<span
+							class="ax-versus-comparator__winner ax-versus-comparator__winner--bandeau"
+							{% if bandeau_block.settings.badge_bg_color != blank
+								or bandeau_block.settings.badge_text_color != blank
+							%}
+								style="{% if bandeau_block.settings.badge_bg_color != blank %}--vc-winner-bg:{{ bandeau_block.settings.badge_bg_color }};{% endif %}{% if bandeau_block.settings.badge_text_color != blank %}--vc-winner-color:{{ bandeau_block.settings.badge_text_color }};{% endif %}"
+							{% endif %}
+						>
+							{%- if bandeau_block.settings.winner_icon != blank -%}
+								{{
+									bandeau_block.settings.winner_icon
+									| image_url: width: 40
+									| image_tag: loading: 'lazy', widths: '20, 40', class: 'ax-versus-comparator__winner-icon', alt: ''
+								}}
+							{%- endif -%}
+							<span class="ax-versus-comparator__winner-label">{{ winner_label }}</span>
+						</span>
+					{%- endif -%}
+				</div>
+
+				<div class="ax-versus-comparator__bandeau-vs" aria-hidden="true">
+					{%- if bandeau_block.settings.versus_icon != blank -%}
+						{{
+							bandeau_block.settings.versus_icon
+							| image_url: width: 64
+							| image_tag: loading: 'lazy', widths: '32, 64', class: 'ax-versus-comparator__bandeau-vs-icon', alt: ''
+						}}
+					{%- else -%}
+						<span class="ax-versus-comparator__bandeau-vs-text">VS</span>
+					{%- endif -%}
+				</div>
+
+				<div class="ax-versus-comparator__bandeau-side ax-versus-comparator__bandeau-side--right">
+					{%- if bandeau_block.settings.right_image != blank -%}
+						{{
+							bandeau_block.settings.right_image
+							| image_url: width: 128
+							| image_tag: loading: 'lazy', width: 96, widths: '96, 128', class: 'ax-versus-comparator__bandeau-logo'
+						}}
+					{%- endif -%}
+
+					{%- if bandeau_block.settings.right_label != blank -%}
+						<span class="ax-versus-comparator__bandeau-label h4">{{ bandeau_block.settings.right_label }}</span>
+					{%- endif -%}
+
+					{%- if bandeau_block.settings.tooltip_content != blank
+						and bandeau_block.settings.tooltip_position != 'left'
+						and bandeau_block.settings.tooltip_position != ''
+						and bandeau_block.settings.tooltip_position != null
+					-%}
+						{%- if bandeau_block.settings.tooltip_position == 'right'
+							or bandeau_block.settings.tooltip_position == 'both'
+						-%}
+							{%- render 'versus-comparator-tooltip',
+								content: bandeau_block.settings.tooltip_content,
+								image: bandeau_block.settings.tooltip_image,
+								cs_class: 'content-square_' | append: section.id | append: '-' | append: bandeau_block.id | append: '-tooltip-bandeau-right'
+							-%}
+						{%- endif -%}
+					{%- endif -%}
+
+					{%- if winner_label != blank and winner_side == 'right' -%}
+						<span
+							class="ax-versus-comparator__winner ax-versus-comparator__winner--bandeau"
+							{% if bandeau_block.settings.badge_bg_color != blank
+								or bandeau_block.settings.badge_text_color != blank
+							%}
+								style="{% if bandeau_block.settings.badge_bg_color != blank %}--vc-winner-bg:{{ bandeau_block.settings.badge_bg_color }};{% endif %}{% if bandeau_block.settings.badge_text_color != blank %}--vc-winner-color:{{ bandeau_block.settings.badge_text_color }};{% endif %}"
+							{% endif %}
+						>
+							{%- if bandeau_block.settings.winner_icon != blank -%}
+								{{
+									bandeau_block.settings.winner_icon
+									| image_url: width: 40
+									| image_tag: loading: 'lazy', widths: '20, 40', class: 'ax-versus-comparator__winner-icon', alt: ''
+								}}
+							{%- endif -%}
+							<span class="ax-versus-comparator__winner-label">{{ winner_label }}</span>
+						</span>
+					{%- endif -%}
+				</div>
+			</div>
+		{%- endif -%}
+
+		<div class="ax-versus-comparator__grid{% unless section.settings.full_width %} page-width{% endunless %}{{ animate_class }}">
+			{%- liquid
+				assign pair_index = 0
+				assign pair_left_block = null
+				assign group_pair_count = 0
+			-%}
+			{%- for block in section.blocks -%}
+				{%- case block.type -%}
+					{%- when 'category' -%}
+						{%- if pair_index == 1 and pair_left_block -%}
+							{%- render 'versus-comparator-card', block: pair_left_block -%}
+							{%- liquid
+								assign left_has_content = false
+								if pair_left_block.settings.card_knowmore_1 != blank
+									assign left_has_content = true
+								elsif pair_left_block.settings.card_knowmore_2 != blank
+									assign left_has_content = true
+								elsif pair_left_block.settings.card_knowmore_3 != blank
+									assign left_has_content = true
+								endif
+							-%}
+							{%- if pair_left_block.settings.show_knowmore and left_has_content -%}
+								{%- render 'versus-comparator-mobile-drop',
+									left: pair_left_block,
+									right: null,
+									label: pair_left_block.settings.knowmore_label | default: 'En savoir plus'
+								-%}
+							{%- endif -%}
+							{%- assign pair_index = 0 -%}
+							{%- assign pair_left_block = null -%}
+						{%- endif -%}
+						{%- assign group_pair_count = 0 -%}
+						{%- if block.settings.category_title != blank or block.settings.category_tooltip != blank -%}
+							<div
+								id="{{ section.id }}-{{ block.id }}"
+								class="ax-versus-comparator__category"
+								{{ block.shopify_attributes }}
+							>
+								{%- if block.settings.category_title != blank -%}
+									<span class="ax-versus-comparator__category-title h4">{{ block.settings.category_title }}</span>
+								{%- endif -%}
+								{%- if block.settings.category_tooltip != blank -%}
+									{%- render 'versus-comparator-tooltip',
+										content: block.settings.category_tooltip,
+										cs_class: 'content-square_' | append: section.id | append: '-' | append: block.id | append: '-tooltip-category'
+									-%}
+								{%- endif -%}
+							</div>
+						{%- endif -%}
+
+					{%- when 'card' -%}
+						{%- if pair_index == 0 -%}
+							{%- assign pair_left_block = block -%}
+							{%- assign pair_index = 1 -%}
+						{%- else -%}
+							{%- liquid
+								# Look ahead two blocks via nested forloop + offset (section.blocks[var] is unreliable in Liquid).
+								assign current_outer_idx = forloop.index
+								assign lookahead_cards = 0
+							-%}
+							{%- for future_block in section.blocks offset: current_outer_idx limit: 2 -%}
+								{%- if future_block.type == 'card' -%}
+									{%- assign lookahead_cards = lookahead_cards | plus: 1 -%}
+								{%- endif -%}
+							{%- endfor -%}
+							{%- liquid
+								assign has_next_pair = false
+								if lookahead_cards == 2
+									assign has_next_pair = true
+								endif
+
+								assign pair_group_position = ''
+								if group_pair_count == 0 and has_next_pair
+									assign pair_group_position = 'start'
+								elsif group_pair_count > 0 and has_next_pair
+									assign pair_group_position = 'middle'
+								elsif group_pair_count > 0 and has_next_pair == false
+									assign pair_group_position = 'end'
+								endif
+							-%}
+							{%- render 'versus-comparator-card',
+								block: pair_left_block,
+								group_position: pair_group_position
+							-%}
+							{%- render 'versus-comparator-card',
+								block: block,
+								group_position: pair_group_position
+							-%}
+							{%- liquid
+								assign left_content = false
+								if pair_left_block.settings.card_knowmore_1 != blank
+									assign left_content = true
+								elsif pair_left_block.settings.card_knowmore_2 != blank
+									assign left_content = true
+								elsif pair_left_block.settings.card_knowmore_3 != blank
+									assign left_content = true
+								endif
+								assign left_has_knowmore = false
+								if pair_left_block.settings.show_knowmore and left_content
+									assign left_has_knowmore = true
+								endif
+
+								assign right_content = false
+								if block.settings.card_knowmore_1 != blank
+									assign right_content = true
+								elsif block.settings.card_knowmore_2 != blank
+									assign right_content = true
+								elsif block.settings.card_knowmore_3 != blank
+									assign right_content = true
+								endif
+								assign right_has_knowmore = false
+								if block.settings.show_knowmore and right_content
+									assign right_has_knowmore = true
+								endif
+							-%}
+							{%- if left_has_knowmore or right_has_knowmore -%}
+								{%- assign pair_label = pair_left_block.settings.knowmore_label | default: block.settings.knowmore_label | default: 'En savoir plus' -%}
+								{%- render 'versus-comparator-mobile-drop',
+									left: pair_left_block,
+									right: block,
+									label: pair_label
+								-%}
+							{%- endif -%}
+							{%- assign group_pair_count = group_pair_count | plus: 1 -%}
+							{%- assign pair_index = 0 -%}
+							{%- assign pair_left_block = null -%}
+						{%- endif -%}
+
+					{%- when 'warning' -%}
+						{%- if pair_index == 1 and pair_left_block -%}
+							{%- render 'versus-comparator-card', block: pair_left_block -%}
+							{%- liquid
+								assign left_content = false
+								if pair_left_block.settings.card_knowmore_1 != blank
+									assign left_content = true
+								elsif pair_left_block.settings.card_knowmore_2 != blank
+									assign left_content = true
+								elsif pair_left_block.settings.card_knowmore_3 != blank
+									assign left_content = true
+								endif
+							-%}
+							{%- if pair_left_block.settings.show_knowmore and left_content -%}
+								{%- render 'versus-comparator-mobile-drop',
+									left: pair_left_block,
+									right: null,
+									label: pair_left_block.settings.knowmore_label | default: 'En savoir plus'
+								-%}
+							{%- endif -%}
+							{%- assign pair_index = 0 -%}
+							{%- assign pair_left_block = null -%}
+						{%- endif -%}
+						{%- assign group_pair_count = 0 -%}
+						{%- liquid
+							assign warning_style = ''
+							if block.settings.warning_bg_color != blank
+								assign warning_style = warning_style | append: '--vc-warning-bg:' | append: block.settings.warning_bg_color | append: ';'
+							endif
+							if block.settings.warning_border_color != blank
+								assign warning_style = warning_style | append: '--vc-warning-border:' | append: block.settings.warning_border_color | append: ';'
+							endif
+							if block.settings.warning_title_color != blank
+								assign warning_style = warning_style | append: '--vc-warning-title-color:' | append: block.settings.warning_title_color | append: ';'
+							endif
+							if block.settings.warning_text_color != blank
+								assign warning_style = warning_style | append: '--vc-warning-text-color:' | append: block.settings.warning_text_color | append: ';'
+							endif
+						-%}
+						<aside
+							class="ax-versus-comparator__warning{% if block.settings.warning_color_scheme != blank %} color-{{ block.settings.warning_color_scheme }}{% endif %}"
+							{% if warning_style != blank %}style="{{ warning_style }}"{% endif %}
+							{{ block.shopify_attributes }}
+						>
+							{%- if block.settings.warning_icon != blank or block.settings.warning_title != blank -%}
+								<div class="ax-versus-comparator__warning-head">
+									{%- if block.settings.warning_icon != blank -%}
+										<div class="ax-versus-comparator__warning-icon">
+											{{
+												block.settings.warning_icon
+												| image_url: width: 64
+												| image_tag:
+													loading: 'lazy',
+													widths: '32, 64',
+													class: 'ax-versus-comparator__warning-icon-img',
+													alt: ''
+											}}
+										</div>
+									{%- endif -%}
+									{%- if block.settings.warning_title != blank -%}
+										<p class="ax-versus-comparator__warning-title">{{ block.settings.warning_title }}</p>
+									{%- endif -%}
+								</div>
+							{%- endif -%}
+
+							{%- if block.settings.warning_text != blank
+								or block.settings.warning_button_label != blank
+							-%}
+								<div class="ax-versus-comparator__warning-body">
+									{%- if block.settings.warning_text != blank -%}
+										<div class="ax-versus-comparator__warning-text rte">{{ block.settings.warning_text }}</div>
+									{%- endif -%}
+									{%- if block.settings.warning_button_label != blank and block.settings.warning_button_link != blank -%}
+										<a
+											class="ax-versus-comparator__warning-btn content-square_{{ section.id }}-{{ block.id }}-button-warning {{ block.settings.warning_button_style }}"
+											href="{{ block.settings.warning_button_link }}"
+										>
+											{{ block.settings.warning_button_label }}
+										</a>
+									{%- endif -%}
+								</div>
+							{%- endif -%}
+						</aside>
+				{%- endcase -%}
+			{%- endfor -%}
+
+			{%- if pair_index == 1 and pair_left_block -%}
+				{%- render 'versus-comparator-card', block: pair_left_block -%}
+				{%- liquid
+					assign left_content = false
+					if pair_left_block.settings.card_knowmore_1 != blank
+						assign left_content = true
+					elsif pair_left_block.settings.card_knowmore_2 != blank
+						assign left_content = true
+					elsif pair_left_block.settings.card_knowmore_3 != blank
+						assign left_content = true
+					endif
+				-%}
+				{%- if pair_left_block.settings.show_knowmore and left_content -%}
+					{%- render 'versus-comparator-mobile-drop',
+						left: pair_left_block,
+						right: null,
+						label: pair_left_block.settings.knowmore_label | default: 'En savoir plus'
+					-%}
+				{%- endif -%}
+			{%- endif -%}
+		</div>
+	</ax-versus-comparator>
+
+	{%- render 'versus-comparator-floating', section: section -%}
+</div>
+
+{% schema %}
+	{
+		"name": "Ax Versus Comparator",
+		"class": "section ax-section ax-versus-comparator",
+		"tag": "section",
+		"disabled_on": {
+			"groups": ["header", "footer"]
+		},
+		"settings": [
+			{
+				"type": "header",
+				"content": "Mise en page"
+			},
+			{
+				"type": "checkbox",
+				"id": "full_width",
+				"label": "Largeur complète",
+				"default": false
+			},
+			{
+				"type": "header",
+				"content": "Couleur"
+			},
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "t:sections.all.colors.label",
+				"default": "scheme-1"
+			},
+			{
+				"type": "header",
+				"content": "Widget flottant"
+			},
+			{
+				"type": "text",
+				"id": "floating_section_id",
+				"label": "ID unique de cette section",
+				"info": "Identifiant unique parmi les comparateurs présents sur la page (ex. tediber-vs-emma-premium). Doit correspondre à l'ID renseigné dans les autres comparateurs."
+			},
+			{
+				"type": "text",
+				"id": "floating_button_label",
+				"label": "Label du bouton flottant",
+				"default": "Accès rapide"
+			},
+			{
+				"type": "image_picker",
+				"id": "floating_button_icon",
+				"label": "Icône du bouton flottant"
+			},
+			{
+				"type": "text",
+				"id": "floating_verdict_label",
+				"label": "Label « Verdict final »",
+				"default": "Verdict final : le gagnant du match"
+			},
+			{
+				"type": "text",
+				"id": "floating_others_label",
+				"label": "Label « Comparer d'autres matelas »",
+				"default": "Comparer d'autres matelas"
+			},
+			{
+				"type": "text",
+				"id": "floating_other_1_name",
+				"label": "Comparateur 1 — Nom"
+			},
+			{
+				"type": "text",
+				"id": "floating_other_1_id",
+				"label": "Comparateur 1 — ID"
+			},
+			{
+				"type": "text",
+				"id": "floating_other_2_name",
+				"label": "Comparateur 2 — Nom"
+			},
+			{
+				"type": "text",
+				"id": "floating_other_2_id",
+				"label": "Comparateur 2 — ID"
+			},
+			{
+				"type": "text",
+				"id": "floating_other_3_name",
+				"label": "Comparateur 3 — Nom"
+			},
+			{
+				"type": "text",
+				"id": "floating_other_3_id",
+				"label": "Comparateur 3 — ID"
+			},
+			{
+				"type": "header",
+				"content": "t:sections.all.padding.section_padding_heading"
+			},
+			{
+				"type": "range",
+				"id": "padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "t:sections.all.padding.padding_top",
+				"default": 36
+			},
+			{
+				"type": "range",
+				"id": "padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "t:sections.all.padding.padding_bottom",
+				"default": 36
+			}
+		],
+		"blocks": [
+			{
+				"type": "bandeau",
+				"name": "Bandeau",
+				"limit": 1,
+				"settings": [
+					{
+						"type": "text",
+						"id": "anchor",
+						"label": "ID de l'ancre"
+					},
+					{
+						"type": "header",
+						"content": "Côté gauche"
+					},
+					{
+						"type": "image_picker",
+						"id": "left_image",
+						"label": "Logo gauche"
+					},
+					{
+						"type": "text",
+						"id": "left_label",
+						"label": "Produit gauche",
+						"default": "Hybride"
+					},
+					{
+						"type": "header",
+						"content": "Côté droit"
+					},
+					{
+						"type": "image_picker",
+						"id": "right_image",
+						"label": "Logo droit"
+					},
+					{
+						"type": "text",
+						"id": "right_label",
+						"label": "Produit droit",
+						"default": "Original Lite"
+					},
+					{
+						"type": "header",
+						"content": "Séparateur"
+					},
+					{
+						"type": "image_picker",
+						"id": "versus_icon",
+						"label": "Icône VS (optionnel)"
+					},
+					{
+						"type": "header",
+						"content": "Gagnant"
+					},
+					{
+						"type": "select",
+						"id": "winner_side",
+						"label": "Côté gagnant",
+						"options": [
+							{ "value": "none", "label": "Aucun" },
+							{ "value": "left", "label": "Gauche" },
+							{ "value": "right", "label": "Droite" }
+						],
+						"default": "left"
+					},
+					{
+						"type": "text",
+						"id": "winner_label",
+						"label": "Texte du badge gagnant",
+						"default": "Gagnant"
+					},
+					{
+						"type": "image_picker",
+						"id": "winner_icon",
+						"label": "Icône du badge gagnant"
+					},
+					{
+						"type": "color",
+						"id": "badge_bg_color",
+						"label": "Couleur fond badge"
+					},
+					{
+						"type": "color",
+						"id": "badge_text_color",
+						"label": "Couleur texte badge"
+					},
+					{
+						"type": "header",
+						"content": "Tooltip"
+					},
+					{
+						"type": "richtext",
+						"id": "tooltip_content",
+						"label": "Contenu du tooltip"
+					},
+					{
+						"type": "image_picker",
+						"id": "tooltip_image",
+						"label": "Image dans le tooltip"
+					},
+					{
+						"type": "select",
+						"id": "tooltip_position",
+						"label": "Position de l'icône tooltip",
+						"options": [
+							{ "value": "left", "label": "Gauche" },
+							{ "value": "right", "label": "Droite" },
+							{ "value": "both", "label": "Les deux côtés" }
+						],
+						"default": "right"
+					},
+					{
+						"type": "header",
+						"content": "Couleur"
+					},
+					{
+						"type": "color_scheme",
+						"id": "bandeau_color_scheme",
+						"label": "Couleur du bandeau",
+						"default": "scheme-1"
+					}
+				]
+			},
+			{
+				"type": "category",
+				"name": "Catégorie",
+				"settings": [
+					{
+						"type": "text",
+						"id": "category_title",
+						"label": "Titre",
+						"default": "ÉPAISSEUR TOTALE"
+					},
+					{
+						"type": "richtext",
+						"id": "category_tooltip",
+						"label": "Tooltip"
+					},
+					{
+						"type": "header",
+						"content": "Widget flottant"
+					},
+					{
+						"type": "checkbox",
+						"id": "floating_hide",
+						"label": "Masquer dans le widget flottant",
+						"default": false
+					},
+					{
+						"type": "text",
+						"id": "floating_label",
+						"label": "Libellé personnalisé (widget flottant)",
+						"info": "Si vide, le titre de la catégorie est utilisé."
+					}
+				]
+			},
+			{
+				"type": "card",
+				"name": "Carte",
+				"settings": [
+					{
+						"type": "header",
+						"content": "Visuel"
+					},
+					{
+						"type": "image_picker",
+						"id": "card_image",
+						"label": "Image desktop (259 × 160)"
+					},
+					{
+						"type": "image_picker",
+						"id": "card_image_mobile",
+						"label": "Image mobile (168 × 168, optionnel)"
+					},
+					{
+						"type": "image_picker",
+						"id": "card_icon",
+						"label": "Icône (alternative à l'image)"
+					},
+					{
+						"type": "range",
+						"id": "icon_size",
+						"min": 16,
+						"max": 160,
+						"step": 4,
+						"unit": "px",
+						"label": "Taille icône",
+						"default": 64
+					},
+					{
+						"type": "header",
+						"content": "Contenu"
+					},
+					{
+						"type": "text",
+						"id": "card_title",
+						"label": "Titre",
+						"default": "27 cm"
+					},
+					{
+						"type": "richtext",
+						"id": "card_subtitle",
+						"label": "Sous-titre"
+					},
+					{
+						"type": "header",
+						"content": "Badge"
+					},
+					{
+						"type": "text",
+						"id": "badge",
+						"label": "Texte du badge"
+					},
+					{
+						"type": "image_picker",
+						"id": "badge_icon",
+						"label": "Icône du badge"
+					},
+					{
+						"type": "color",
+						"id": "badge_bg_color",
+						"label": "Couleur fond badge"
+					},
+					{
+						"type": "color",
+						"id": "badge_border_color",
+						"label": "Couleur bordure badge"
+					},
+					{
+						"type": "color",
+						"id": "badge_text_color",
+						"label": "Couleur texte badge"
+					},
+					{
+						"type": "header",
+						"content": "Tooltip sous-titre"
+					},
+					{
+						"type": "richtext",
+						"id": "subtitle_tooltip",
+						"label": "Tooltip (affiché à la suite du sous-titre)"
+					},
+					{
+						"type": "header",
+						"content": "En savoir plus"
+					},
+					{
+						"type": "checkbox",
+						"id": "show_knowmore",
+						"label": "Afficher le dropdown « En savoir plus »",
+						"default": false
+					},
+					{
+						"type": "text",
+						"id": "knowmore_label",
+						"label": "Libellé du bouton « En savoir plus »",
+						"default": "En savoir plus"
+					},
+					{
+						"type": "richtext",
+						"id": "card_knowmore_1",
+						"label": "Point 1"
+					},
+					{
+						"type": "richtext",
+						"id": "card_knowmore_2",
+						"label": "Point 2"
+					},
+					{
+						"type": "richtext",
+						"id": "card_knowmore_3",
+						"label": "Point 3"
+					},
+					{
+						"type": "header",
+						"content": "Mise en page"
+					},
+					{
+						"type": "select",
+						"id": "layout",
+						"label": "Disposition desktop",
+						"options": [
+							{ "value": "image_first", "label": "Image/icône à gauche" },
+							{ "value": "text_first", "label": "Image/icône à droite" },
+							{ "value": "stack", "label": "Empilée (comme mobile)" }
+						],
+						"default": "image_first"
+					},
+					{
+						"type": "select",
+						"id": "text_alignment",
+						"label": "Alignement du texte",
+						"options": [
+							{ "value": "left", "label": "Gauche" },
+							{ "value": "center", "label": "Centré" },
+							{ "value": "right", "label": "Droite" }
+						],
+						"default": "center"
+					},
+					{
+						"type": "header",
+						"content": "Apparence"
+					},
+					{
+						"type": "color_scheme",
+						"id": "card_color_scheme",
+						"label": "Color scheme"
+					},
+					{
+						"type": "color",
+						"id": "background_color",
+						"label": "Couleur de fond (override)"
+					},
+					{
+						"type": "color",
+						"id": "border_color",
+						"label": "Couleur bordure"
+					},
+					{
+						"type": "color",
+						"id": "title_color",
+						"label": "Couleur titre"
+					},
+					{
+						"type": "color",
+						"id": "text_color",
+						"label": "Couleur texte/sous-titre"
+					}
+				]
+			},
+			{
+				"type": "warning",
+				"name": "Bloc d'information",
+				"settings": [
+					{
+						"type": "image_picker",
+						"id": "warning_icon",
+						"label": "Icône"
+					},
+					{
+						"type": "text",
+						"id": "warning_title",
+						"label": "Titre",
+						"default": "Besoin d'en savoir plus ?"
+					},
+					{
+						"type": "richtext",
+						"id": "warning_text",
+						"label": "Texte"
+					},
+					{
+						"type": "header",
+						"content": "Bouton"
+					},
+					{
+						"type": "text",
+						"id": "warning_button_label",
+						"label": "Libellé du bouton"
+					},
+					{
+						"type": "url",
+						"id": "warning_button_link",
+						"label": "Lien du bouton"
+					},
+					{
+						"type": "select",
+						"id": "warning_button_style",
+						"label": "Style du bouton",
+						"options": [
+							{ "value": "underlined-link", "label": "Underlined" },
+							{ "value": "button button--primary", "label": "Primary" },
+							{ "value": "button button--secondary", "label": "Secondary" },
+							{ "value": "ax-link", "label": "Ax link" },
+							{ "value": "ax-link reversed", "label": "Ax link reversed" }
+						],
+						"default": "underlined-link"
+					},
+					{
+						"type": "header",
+						"content": "Apparence"
+					},
+					{
+						"type": "color_scheme",
+						"id": "warning_color_scheme",
+						"label": "Color scheme"
+					},
+					{
+						"type": "color",
+						"id": "warning_bg_color",
+						"label": "Couleur de fond (override)"
+					},
+					{
+						"type": "color",
+						"id": "warning_border_color",
+						"label": "Couleur bordure"
+					},
+					{
+						"type": "color",
+						"id": "warning_title_color",
+						"label": "Couleur titre"
+					},
+					{
+						"type": "color",
+						"id": "warning_text_color",
+						"label": "Couleur texte"
+					}
+				]
+			}
+		],
+		"presets": [
+			{
+				"name": "Ax Versus Comparator",
+				"blocks": [
+					{
+						"type": "bandeau"
+					}
+				]
+			}
+		]
+	}
+{% endschema %}

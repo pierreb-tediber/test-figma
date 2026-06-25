@@ -1,0 +1,149 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_content": false,
+        "custom_h1": "",
+        "h1_size": "h1",
+        "h1_no_margin": false,
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "ax_image_with_text_EJRgJw": {
+      "type": "ax-image-with-text",
+      "blocks": {
+        "subheading_b9BymB": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "TEDIBER DANS LES MEDIAS"
+          }
+        },
+        "heading_AK4ArD": {
+          "type": "heading",
+          "settings": {
+            "picto_size": 92,
+            "picto_size_mobile": 92,
+            "heading": "<p>Espace presse</p>",
+            "heading_size": "h2"
+          }
+        },
+        "text_tpTU8g": {
+          "type": "text",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "text": "<p>Découvrez notre incroyable matelas Tediber sur M6 !</p>",
+            "description_hn_replace": false,
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_b9BymB",
+        "heading_AK4ArD",
+        "text_tpTU8g"
+      ],
+      "settings": {
+        "full_width": true,
+        "text_alignment": "left",
+        "no_vertical_padding": false,
+        "image": "shopify://shop_images/press.jpg",
+        "image_restricted_width": false,
+        "image_adapted_height_with_content": false,
+        "contain_image": false,
+        "layout": "text_first",
+        "mobile_layout": "image_first",
+        "overlay": false,
+        "overlay_opacity": 0.2,
+        "section_color_scheme": "scheme-3",
+        "color_scheme": "scheme-3",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "ax_richtext_CEwd7a": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_hXdfV4": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Contact presse</p>",
+            "heading_size": "h2",
+            "heading_alignment": "center"
+          }
+        },
+        "text_AmQFWU": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Nous vous partagerons les dernières actualités de Tediber <br/>et répondrons à toutes vos questions. </p>",
+            "text_alignment": "center"
+          }
+        },
+        "text_PVEbmd": {
+          "type": "text",
+          "settings": {
+            "text": "<p><a href=\"mailto:presse@tediber.com\" target=\"_blank\">presse@tediber.com</a></p>",
+            "text_alignment": "center"
+          }
+        },
+        "picto_VEFBMJ": {
+          "type": "picto",
+          "settings": {
+            "picto": "shopify://shop_images/logo_picto.svg",
+            "picto_size": 104,
+            "picto_size_mobile": 106,
+            "picto_position": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_hXdfV4",
+        "text_AmQFWU",
+        "text_PVEbmd",
+        "picto_VEFBMJ"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": true,
+        "color_scheme": "",
+        "color_scheme_container": "scheme-e2d6957f-c607-44ec-a66b-b3d13c782c29",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 12,
+        "padding_bottom": 12,
+        "mob_padding_top_content": 48,
+        "mob_padding_bottom_content": 48,
+        "mob_padding_left_content": 24,
+        "mob_padding_right_content": 24,
+        "padding_top_content": 48,
+        "padding_bottom_content": 48,
+        "padding_left_content": 24,
+        "padding_right_content": 24,
+        "mob_margin_top": 48,
+        "mob_margin_bottom": 48,
+        "margin_top": 48,
+        "margin_bottom": 48
+      }
+    }
+  },
+  "order": [
+    "main",
+    "ax_image_with_text_EJRgJw",
+    "ax_richtext_CEwd7a"
+  ]
+}

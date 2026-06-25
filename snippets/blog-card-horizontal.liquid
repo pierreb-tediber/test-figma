@@ -1,0 +1,47 @@
+{% comment %}
+	Renders an article card for a given blog with settings to either show the image or not.
+
+	Accepts:
+	- blog: {Object} Blog object
+	- color_scheme: {String} The color scheme of the card
+	- truncate: {Number} The number of words to truncate the excerpt to
+	- no_hn: {Boolean} If true, the heading will not have a hn style
+	Usage:
+	{% render 'blog-card-horizontal' blog: blog %}
+{% endcomment %}
+
+{%- if blog and blog != empty -%}
+	{%- liquid
+		assign card_article_tag = 'h2'
+        
+		if no_hn
+			assign card_article_tag = 'div'
+		endif
+
+	-%}
+
+	<div class="blog-card-horizontal {% if color_scheme != blank %} gradient color-{{ color_scheme }}{% endif %}">
+		<div class="blog-card-horizontal__content">
+			<a href="{{ blog.url }}" class="full-unstyled-link">
+				<div class="blog-card-horizontal__information">
+					<div class="blog-card-horizontal__heading-wrapper">
+						<{{ card_article_tag }} class="blog-card-horizontal__heading h4">
+							{% if blog.metafields.custom.main_title != blank %}
+								{{ blog.metafields.custom.main_title | escape }}
+							{% else %}
+								{{ blog.title | escape }}
+							{% endif %}
+						</{{ card_article_tag }}>
+
+						<span class="ax-link reversed" data-content="{{ 'blogs.article.discover' | t }}"></span>
+					</div>
+					{% if blog.metafields.custom.extrait != blank %}
+						<div class="blog-card-horizontal__excerpt rte-width">
+							{{ blog.metafields.custom.extrait }}
+						</div>
+					{% endif %}
+				</div>
+			</a>
+		</div>
+	</div>
+{%- endif -%}

@@ -1,0 +1,238 @@
+{%- if section.blocks.size > 0 -%}
+	{{ 'bundle.versus-anchor.css' | asset_url | stylesheet_tag }}
+
+	{%- style -%}
+		.section-{{ section.id }}-padding {
+		  padding-top: {{ section.settings.padding_top | times: 1 | round: 0 }}px;
+		  padding-bottom: {{ section.settings.padding_bottom | times: 1 | round: 0 }}px;
+		}
+
+		@media screen and (min-width: 750px) {
+		  .section-{{ section.id }}-padding {
+		    padding-top: {{ section.settings.padding_top }}px;
+		    padding-bottom: {{ section.settings.padding_bottom }}px;
+		  }
+		}
+	{%- endstyle -%}
+
+	<div
+		class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}"
+		data-ax-section="versusAnchor"
+	>
+		{%- unless section.settings.full_width -%}
+			<div class="page-width">
+		{%- endunless -%}
+
+		{%- if section.settings.heading != blank or section.settings.description != blank -%}
+			{%- render 'section-heading',
+				heading: section.settings.heading,
+				heading_size: 'h2',
+				heading_class: 'h2',
+				description: section.settings.description,
+				text_alignment: section.settings.text_alignment
+			-%}
+		{%- endif -%}
+
+		{%- if section.settings.subtitle != blank -%}
+			<p class="ax-versus-anchor__subtitle {{ section.settings.text_alignment }}">
+				{{ section.settings.subtitle }}
+			</p>
+		{%- endif -%}
+
+		<div class="ax-versus-anchor__cards">
+			{%- for block in section.blocks -%}
+				{%- if block.type == 'anchor' -%}
+					<a
+						href="{{ block.settings.link }}"
+						class="ax-versus-anchor__card content-square_{{ section.id }}-{{ block.id }}-link-anchor{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+						{% if settings.animations_reveal_on_scroll %}
+							data-cascade
+							style="--animation-order: {{ forloop.index }};"
+						{% endif %}
+						{{ block.shopify_attributes }}
+					>
+						<div class="ax-versus-anchor__side ax-versus-anchor__side--left">
+							{%- if block.settings.left_image != blank -%}
+								{{ block.settings.left_image | image_url: width: 96 | image_tag: loading: 'lazy', width: 48, widths: '48, 96', class: 'ax-versus-anchor__logo' }}
+							{%- endif -%}
+							{%- if block.settings.left_label != blank -%}
+								<span class="ax-versus-anchor__label">{{ block.settings.left_label }}</span>
+							{%- endif -%}
+						</div>
+
+						<div class="ax-versus-anchor__vs" aria-hidden="true">
+							<!--<span class="svg-wrapper">{{ 'icon-close-small.svg' | inline_asset_content }}</span>-->
+							⚔️
+						</div>
+
+						<div class="ax-versus-anchor__side ax-versus-anchor__side--right">
+							{%- if block.settings.right_image != blank -%}
+								{{ block.settings.right_image | image_url: width: 96 | image_tag: loading: 'lazy', width: 48, widths: '48, 96', class: 'ax-versus-anchor__logo' }}
+							{%- endif -%}
+							{%- if block.settings.right_label != blank -%}
+								<span class="ax-versus-anchor__label">{{ block.settings.right_label }}</span>
+							{%- endif -%}
+						</div>
+
+						<div class="ax-versus-anchor__arrow" aria-hidden="true">
+							<span class="svg-wrapper">{{ 'icon-arrow.svg' | inline_asset_content }}</span>
+						</div>
+					</a>
+				{%- endif -%}
+			{%- endfor -%}
+		</div>
+
+		{%- unless section.settings.full_width -%}
+			</div>
+		{%- endunless -%}
+	</div>
+{%- endif -%}
+
+{% schema %}
+	{
+		"name": "Ax Versus Anchor",
+		"class": "section ax-section ax-versus-anchor",
+		"tag": "section",
+		"disabled_on": {
+			"groups": ["header", "footer"]
+		},
+		"settings": [
+			{
+				"type": "header",
+				"content": "Contenu"
+			},
+			{
+				"type": "richtext",
+				"id": "heading",
+				"label": "Titre",
+				"default": "<p>Titre</p>"
+			},
+			{
+				"type": "richtext",
+				"id": "description",
+				"label": "Description"
+			},
+			{
+				"type": "inline_richtext",
+				"id": "subtitle",
+				"label": "Sous-titre"
+			},
+			{
+				"type": "header",
+				"content": "Mise en page"
+			},
+			{
+				"type": "select",
+				"id": "text_alignment",
+				"options": [
+					{
+						"value": "left",
+						"label": "t:sections.slideshow.blocks.slide.settings.text_alignment.option_1.label"
+					},
+					{
+						"value": "center",
+						"label": "t:sections.slideshow.blocks.slide.settings.text_alignment.option_2.label"
+					},
+					{
+						"value": "right",
+						"label": "t:sections.slideshow.blocks.slide.settings.text_alignment.option_3.label"
+					}
+				],
+				"default": "center",
+				"label": "t:sections.slideshow.blocks.slide.settings.text_alignment.label"
+			},
+			{
+				"type": "checkbox",
+				"id": "full_width",
+				"label": "Largeur compl\u00e8te",
+				"default": false
+			},
+			{
+				"type": "header",
+				"content": "Couleur"
+			},
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "t:sections.all.colors.label",
+				"default": "scheme-1"
+			},
+			{
+				"type": "header",
+				"content": "t:sections.all.padding.section_padding_heading"
+			},
+			{
+				"type": "range",
+				"id": "padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "t:sections.all.padding.padding_top",
+				"default": 36
+			},
+			{
+				"type": "range",
+				"id": "padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "t:sections.all.padding.padding_bottom",
+				"default": 36
+			}
+		],
+		"blocks": [
+			{
+				"type": "anchor",
+				"name": "Comparatif",
+				"limit": 6,
+				"settings": [
+					{
+						"type": "image_picker",
+						"id": "left_image",
+						"label": "Logo gauche"
+					},
+					{
+						"type": "text",
+						"id": "left_label",
+						"label": "Produit gauche",
+						"default": "Hybride Premium"
+					},
+					{
+						"type": "image_picker",
+						"id": "right_image",
+						"label": "Logo droit"
+					},
+					{
+						"type": "text",
+						"id": "right_label",
+						"label": "Produit droit",
+						"default": "Original"
+					},
+					{
+						"type": "url",
+						"id": "link",
+						"label": "Lien (ancre)"
+					}
+				]
+			}
+		],
+		"presets": [
+			{
+				"name": "Ax Versus Anchor",
+				"blocks": [
+					{
+						"type": "anchor"
+					},
+					{
+						"type": "anchor"
+					},
+					{
+						"type": "anchor"
+					}
+				]
+			}
+		]
+	}
+{% endschema %}

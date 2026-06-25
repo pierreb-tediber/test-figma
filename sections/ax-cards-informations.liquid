@@ -1,0 +1,223 @@
+{% if section.blocks.size > 0 %}
+	{{ 'bundle.cards-informations.css' | asset_url | stylesheet_tag }}
+
+	{%- style -%}
+		.section-{{ section.id }}-padding {
+		  padding-top: {{ section.settings.mob_padding_top }}px;
+		  padding-bottom: {{ section.settings.mob_padding_bottom }}px;
+		}
+
+		@media screen and (min-width: 750px) {
+		  .section-{{ section.id }}-padding {
+		    padding-top: {{ section.settings.padding_top }}px;
+		    padding-bottom: {{ section.settings.padding_bottom }}px;
+		  }
+		}
+	{%- endstyle -%}
+
+	{%- liquid
+		assign lazy_load = false
+		if section.index > 1
+			assign lazy_load = true
+		endif
+	-%}
+
+	<div
+		class="cards-informations gradient color-{{ section.settings.color_scheme }} section-{{ section.id }}-padding"
+		data-ax-section="cardsInformations"
+		aria-labelledby="cards-heading-{{ section.id }}"
+	>
+		<div class="page-width">
+			<div class="cards-informations__wrapper">
+				{% if section.settings.heading != blank %}
+					<{% if section.settings.use_hn %}h2{% else %}div{% endif %} class="cards-informations__heading center h3">
+						{{ section.settings.heading }}
+					</{% if section.settings.use_hn %}h2{% else %}div{% endif %}>
+				{% endif %}
+
+				<ul
+					class="cards-informations__cards grid grid--1-col grid--3-col-desktop{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+					{% if settings.animations_reveal_on_scroll %}
+						data-cascade
+					{% endif %}
+				>
+					{% for block in section.blocks %}
+						{% assign card_id = 'Card-' | append: section.id | append: '-' | append: forloop.index %}
+						<li
+							class="cards-informations__card grid__item color-{{ section.settings.color_scheme_cards }}{% if block.settings.image == blank %} cards-informations__card--no-image{% endif %}"
+							id="{{ card_id }}"
+							{% if settings.animations_reveal_on_scroll %}
+								data-cascade
+								style="--animation-order: {{ forloop.index }};"
+							{% endif %}
+						>
+							{% if block.settings.image != blank %}
+								{%- liquid
+									assign image_alt = block.settings.image.alt | default: block.settings.image.title | default: ''
+								-%}
+								<div class="cards-informations__card-image">
+									{% capture media_image %}
+										{{ block.settings.image | image_url: width: 1000 | image_tag: alt: image_alt }}
+									{% endcapture %}
+									{% if lazy_load %}
+										{{ media_image | replace: 'src=', 'lazy-src=' | replace: 'srcset=', 'lazy-srcset=' }}
+									{% else %}
+										{{ media_image }}
+									{% endif %}
+								</div>
+							{% endif %}
+							{% if block.settings.title != blank %}
+								<{% if section.settings.use_hn %}h3{% else %}div{% endif %} class="cards-informations__card-title h4">
+									{{ block.settings.title }}
+								</{% if section.settings.use_hn %}h3{% else %}div{% endif %}>
+							{% endif %}
+							{% if block.settings.text != blank %}
+								<div class="cards-informations__card-text">
+									{{ block.settings.text }}
+								</div>
+							{% endif %}
+						</li>
+					{% endfor %}
+				</ul>
+
+				{% if section.settings.content != blank %}
+					<div class="cards-informations__content h3 center">
+						{{ section.settings.content }}
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+{% endif %}
+
+{% schema %}
+	{
+		"name": "Ax cards informations",
+		"tag": "section",
+		"class": "section",
+		"disabled_on": {
+			"groups": ["header", "footer"]
+		},
+		"settings": [
+			{
+				"type": "header",
+				"content": "Contenu"
+			},
+			{
+				"type": "richtext",
+				"id": "heading",
+				"label": "Titre"
+			},
+			{
+				"type": "richtext",
+				"id": "content",
+				"label": "Texte sous les cartes"
+			},
+			{
+				"type": "checkbox",
+				"id": "use_hn",
+				"label": "Titre en h2 et cartes en h3",
+				"default": false
+			},
+			{
+				"type": "header",
+				"content": "Couleurs"
+			},
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "Couleurs de la section",
+				"default": "background-1"
+			},
+			{
+				"type": "color_scheme",
+				"id": "color_scheme_cards",
+				"label": "Couleurs des cartes",
+				"default": "background-1"
+			},
+			{
+				"type": "header",
+				"content": "Padding (space)"
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding bottom",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding bottom",
+				"default": 0
+			}
+		],
+		"blocks": [
+			{
+				"type": "card",
+				"name": "Carte",
+				"settings": [
+					{
+						"type": "image_picker",
+						"id": "image",
+						"label": "Image"
+					},
+					{
+						"type": "richtext",
+						"id": "title",
+						"label": "Titre"
+					},
+					{
+						"type": "richtext",
+						"id": "text",
+						"label": "Texte"
+					}
+				]
+			}
+		],
+		"presets": [
+			{
+				"name": "Ax cards informations",
+				"blocks": [
+					{
+						"type": "card"
+					},
+					{
+						"type": "card"
+					},
+					{
+						"type": "card"
+					}
+				]
+			}
+		]
+	}
+{% endschema %}

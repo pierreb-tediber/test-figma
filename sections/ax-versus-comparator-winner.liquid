@@ -1,0 +1,389 @@
+{{ 'bundle.versus-comparator-winner.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+	.section-{{ section.id }}-padding {
+	  padding-top: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px;
+	  padding-bottom: {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px;
+	}
+
+	@media screen and (min-width: 750px) {
+	  .section-{{ section.id }}-padding {
+	    padding-top: {{ section.settings.padding_top }}px;
+	    padding-bottom: {{ section.settings.padding_bottom }}px;
+	  }
+	}
+{%- endstyle -%}
+
+{%- liquid
+	assign has_image = false
+	if section.settings.side_image != blank
+		assign has_image = true
+	endif
+
+	assign image_position = section.settings.side_image_position | default: 'left'
+
+	assign lazy_load = false
+	if section.index > 1
+		assign lazy_load = true
+	endif
+
+	assign tag_style = ''
+	if section.settings.tag_bg_color != blank
+		assign tag_style = tag_style | append: '--vcw-tag-bg:' | append: section.settings.tag_bg_color | append: ';'
+	endif
+	if section.settings.tag_text_color != blank
+		assign tag_style = tag_style | append: '--vcw-tag-color:' | append: section.settings.tag_text_color | append: ';'
+	endif
+	if section.settings.tag_border_color != blank
+		assign tag_style = tag_style | append: '--vcw-tag-border:' | append: section.settings.tag_border_color | append: ';'
+	endif
+	if settings.animations_reveal_on_scroll
+		assign tag_style = tag_style | append: '--animation-order:1;'
+	endif
+-%}
+<ax-versus-comparator-winner
+	class="section-{{ section.id }}-padding{% unless section.settings.full_width %} page-width{% endunless %}"
+>
+	<div
+		class="ax-versus-comparator-winner__inner gradient color-{{ section.settings.color_scheme }} ax-versus-comparator-winner--img-{{ image_position }}{% unless has_image %} ax-versus-comparator-winner--no-image{% endunless %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+	>
+		{%- if has_image -%}
+			<div class="ax-versus-comparator-winner__media">
+				{%- capture media_image -%}
+					{{
+						section.settings.side_image
+						| image_url: width: 1068
+						| image_tag:
+							loading: lazy_load,
+							widths: '356, 534, 712, 1068',
+							sizes: '(min-width: 750px) 28vw, 0px',
+							class: 'ax-versus-comparator-winner__media-img'
+					}}
+				{%- endcapture -%}
+				{%- if lazy_load -%}
+					{{ media_image | replace: 'src=', 'lazy-src=' | replace: 'srcset=', 'lazy-srcset=' }}
+				{%- else -%}
+					{{ media_image }}
+				{%- endif -%}
+			</div>
+		{%- endif -%}
+
+		<div class="ax-versus-comparator-winner__content">
+			{%- if section.settings.tag_label != blank -%}
+				<span
+					class="ax-versus-comparator-winner__tag"
+					{% if tag_style != blank %}style="{{ tag_style }}"{% endif %}
+					{% if settings.animations_reveal_on_scroll %}data-cascade{% endif %}
+				>
+					{%- if section.settings.tag_icon != blank -%}
+						{%- capture tag_icon_image -%}
+							{{
+								section.settings.tag_icon
+								| image_url: width: 40
+								| image_tag:
+									loading: lazy_load,
+									widths: '20, 40',
+									class: 'ax-versus-comparator-winner__tag-icon',
+									alt: ''
+							}}
+						{%- endcapture -%}
+						{%- if lazy_load -%}
+							{{ tag_icon_image | replace: 'src=', 'lazy-src=' | replace: 'srcset=', 'lazy-srcset=' }}
+						{%- else -%}
+							{{ tag_icon_image }}
+						{%- endif -%}
+					{%- endif -%}
+					<span class="ax-versus-comparator-winner__tag-label">{{ section.settings.tag_label }}</span>
+				</span>
+			{%- endif -%}
+
+			{%- if section.settings.brand_logo != blank -%}
+				<span
+					class="ax-versus-comparator-winner__logo-wrap"
+					{% if settings.animations_reveal_on_scroll %}data-cascade style="--animation-order:2;"{% endif %}
+				>
+					{%- capture brand_logo_image -%}
+						{{
+							section.settings.brand_logo
+							| image_url: width: 224
+							| image_tag:
+								loading: lazy_load,
+								widths: '72, 112, 144, 224',
+								class: 'ax-versus-comparator-winner__logo'
+						}}
+					{%- endcapture -%}
+					{%- if lazy_load -%}
+						{{ brand_logo_image | replace: 'src=', 'lazy-src=' | replace: 'srcset=', 'lazy-srcset=' }}
+					{%- else -%}
+						{{ brand_logo_image }}
+					{%- endif -%}
+				</span>
+			{%- endif -%}
+
+			{%- if section.settings.heading != blank -%}
+				<h2
+					class="ax-versus-comparator-winner__heading {{ section.settings.heading_size }}"
+					{% if settings.animations_reveal_on_scroll %}data-cascade style="--animation-order: 3;"{% endif %}
+				>
+					{{ section.settings.heading }}
+				</h2>
+			{%- endif -%}
+
+			{%- if section.settings.paragraph_1 != blank
+				or section.settings.paragraph_2 != blank
+				or section.settings.paragraph_3 != blank
+			-%}
+				<div
+					class="ax-versus-comparator-winner__paragraphs"
+					{% if settings.animations_reveal_on_scroll %}data-cascade style="--animation-order: 4;"{% endif %}
+				>
+					{%- if section.settings.paragraph_1 != blank -%}
+						<div class="ax-versus-comparator-winner__paragraph rte">{{ section.settings.paragraph_1 }}</div>
+					{%- endif -%}
+					{%- if section.settings.paragraph_2 != blank -%}
+						<div class="ax-versus-comparator-winner__paragraph rte">{{ section.settings.paragraph_2 }}</div>
+					{%- endif -%}
+					{%- if section.settings.paragraph_3 != blank -%}
+						<div class="ax-versus-comparator-winner__paragraph rte">{{ section.settings.paragraph_3 }}</div>
+					{%- endif -%}
+				</div>
+			{%- endif -%}
+
+			{%- if section.settings.cta_label != blank -%}
+				<a
+					href="{{ section.settings.cta_link | default: '#' }}"
+					class="ax-versus-comparator-winner__cta {{ section.settings.cta_style }}"
+					{% if settings.animations_reveal_on_scroll %}data-cascade style="--animation-order: 5;"{% endif %}
+				>
+					{{ section.settings.cta_label }}
+				</a>
+			{%- endif -%}
+
+			{%- if section.settings.rtb_left != blank or section.settings.rtb_right != blank -%}
+				<p
+					class="ax-versus-comparator-winner__rtb"
+					{% if settings.animations_reveal_on_scroll %}data-cascade style="--animation-order: 6;"{% endif %}
+				>
+					{%- if section.settings.rtb_left != blank -%}
+						<span class="ax-versus-comparator-winner__rtb-item">{{ section.settings.rtb_left }}</span>
+					{%- endif -%}
+					{%- if section.settings.rtb_left != blank and section.settings.rtb_right != blank -%}
+						<span class="ax-versus-comparator-winner__rtb-sep" aria-hidden="true"></span>
+					{%- endif -%}
+					{%- if section.settings.rtb_right != blank -%}
+						<span class="ax-versus-comparator-winner__rtb-item">{{ section.settings.rtb_right }}</span>
+					{%- endif -%}
+				</p>
+			{%- endif -%}
+		</div>
+	</div>
+</ax-versus-comparator-winner>
+
+{% schema %}
+	{
+		"name": "Ax Versus Winner",
+		"class": "section ax-section ax-versus-comparator-winner",
+		"tag": "section",
+		"disabled_on": {
+			"groups": ["header", "footer"]
+		},
+		"settings": [
+			{
+				"type": "header",
+				"content": "Mise en page"
+			},
+			{
+				"type": "checkbox",
+				"id": "full_width",
+				"label": "Largeur complète",
+				"default": false
+			},
+			{
+				"type": "header",
+				"content": "Couleur"
+			},
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "t:sections.all.colors.label",
+				"default": "scheme-1"
+			},
+			{
+				"type": "header",
+				"content": "t:sections.all.padding.section_padding_heading"
+			},
+			{
+				"type": "range",
+				"id": "padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "t:sections.all.padding.padding_top",
+				"default": 36
+			},
+			{
+				"type": "range",
+				"id": "padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "t:sections.all.padding.padding_bottom",
+				"default": 36
+			},
+			{
+				"type": "header",
+				"content": "Tag gagnant"
+			},
+			{
+				"type": "text",
+				"id": "tag_label",
+				"label": "Texte du tag",
+				"default": "Gagnant du comparatif"
+			},
+			{
+				"type": "image_picker",
+				"id": "tag_icon",
+				"label": "Icône du tag (médaille)"
+			},
+			{
+				"type": "color",
+				"id": "tag_bg_color",
+				"label": "Couleur de fond"
+			},
+			{
+				"type": "color",
+				"id": "tag_text_color",
+				"label": "Couleur du texte"
+			},
+			{
+				"type": "color",
+				"id": "tag_border_color",
+				"label": "Couleur de la bordure"
+			},
+			{
+				"type": "header",
+				"content": "Logo marque"
+			},
+			{
+				"type": "image_picker",
+				"id": "brand_logo",
+				"label": "Logo (72 × 25 mobile, 112 × 39 desktop)"
+			},
+			{
+				"type": "header",
+				"content": "Titre"
+			},
+			{
+				"type": "text",
+				"id": "heading",
+				"label": "Titre",
+				"default": "Le matelas Hybride de Tediber gagne le match."
+			},
+			{
+				"type": "select",
+				"id": "heading_size",
+				"options": [
+					{
+						"value": "h3",
+						"label": "t:sections.all.heading_size.options__1.label"
+					},
+					{
+						"value": "h2",
+						"label": "t:sections.all.heading_size.options__2.label"
+					}
+				],
+				"default": "h2",
+				"label": "t:sections.all.heading_size.label"
+			},
+			{
+				"type": "header",
+				"content": "Paragraphes"
+			},
+			{
+				"type": "richtext",
+				"id": "paragraph_1",
+				"label": "Paragraphe 1"
+			},
+			{
+				"type": "richtext",
+				"id": "paragraph_2",
+				"label": "Paragraphe 2"
+			},
+			{
+				"type": "richtext",
+				"id": "paragraph_3",
+				"label": "Paragraphe 3"
+			},
+			{
+				"type": "header",
+				"content": "Bouton"
+			},
+			{
+				"type": "text",
+				"id": "cta_label",
+				"label": "Libellé du bouton",
+				"default": "Découvrir le matelas Hybride"
+			},
+			{
+				"type": "url",
+				"id": "cta_link",
+				"label": "Lien du bouton"
+			},
+			{
+				"type": "select",
+				"id": "cta_style",
+				"label": "Style du bouton",
+				"options": [
+					{ "value": "button button--primary", "label": "Primary" },
+					{ "value": "button button--secondary", "label": "Secondary" },
+					{ "value": "ax-link", "label": "Ax link" },
+					{ "value": "ax-link reversed", "label": "Ax link reversed" },
+					{ "value": "underlined-link", "label": "Underlined" }
+				],
+				"default": "button button--secondary"
+			},
+			{
+				"type": "header",
+				"content": "Sous-texte (RTB)"
+			},
+			{
+				"type": "text",
+				"id": "rtb_left",
+				"label": "Texte gauche",
+				"default": "100 nuits d'essai"
+			},
+			{
+				"type": "text",
+				"id": "rtb_right",
+				"label": "Texte droite",
+				"default": "Livraison sous 48h"
+			},
+			{
+				"type": "header",
+				"content": "Image latérale (desktop uniquement)"
+			},
+			{
+				"type": "image_picker",
+				"id": "side_image",
+				"label": "Image"
+			},
+			{
+				"type": "select",
+				"id": "side_image_position",
+				"label": "Position de l'image",
+				"options": [
+					{ "value": "left", "label": "Gauche" },
+					{ "value": "right", "label": "Droite" }
+				],
+				"default": "left"
+			}
+		],
+		"presets": [
+			{
+				"name": "Ax Versus Winner"
+			}
+		]
+	}
+{% endschema %}

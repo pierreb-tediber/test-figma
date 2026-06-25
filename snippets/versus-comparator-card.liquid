@@ -1,0 +1,305 @@
+{%- comment -%}
+	Renders a card for the versus-comparator section.
+
+	Accepts:
+	- block: the Shopify block object
+	- group_position: 'start' | 'middle' | 'end' — used when several consecutive card pairs
+	  are merged into one visual container (no category between them). Omit for standalone pairs.
+{%- endcomment -%}
+
+{%- liquid
+	assign layout = block.settings.layout | default: 'image_first'
+	assign text_alignment = block.settings.text_alignment | default: 'center'
+	assign has_image = false
+	if block.settings.card_image != blank
+		assign has_image = true
+	endif
+	assign has_icon = false
+	if block.settings.card_icon != blank
+		assign has_icon = true
+	endif
+
+	assign has_knowmore = false
+	if block.settings.show_knowmore
+		if block.settings.card_knowmore_1 != blank or block.settings.card_knowmore_2 != blank or block.settings.card_knowmore_3 != blank
+			assign has_knowmore = true
+		endif
+	endif
+
+	assign knowmore_label = block.settings.knowmore_label | default: 'En savoir plus'
+
+	assign wrapper_classes = 'ax-versus-comparator__card-wrapper'
+	if group_position == 'start'
+		assign wrapper_classes = wrapper_classes | append: ' ax-versus-comparator__card-wrapper--group-start'
+	elsif group_position == 'middle'
+		assign wrapper_classes = wrapper_classes | append: ' ax-versus-comparator__card-wrapper--group-middle'
+	elsif group_position == 'end'
+		assign wrapper_classes = wrapper_classes | append: ' ax-versus-comparator__card-wrapper--group-end'
+	endif
+
+	assign card_classes = 'ax-versus-comparator__card'
+	assign card_classes = card_classes | append: ' ax-versus-comparator__card--' | append: layout
+	assign card_classes = card_classes | append: ' ax-versus-comparator__card--text-' | append: text_alignment
+	if has_icon and has_image == false
+		assign card_classes = card_classes | append: ' ax-versus-comparator__card--icon-only'
+	endif
+	if group_position == 'start'
+		assign card_classes = card_classes | append: ' ax-versus-comparator__card--group-start'
+	elsif group_position == 'middle'
+		assign card_classes = card_classes | append: ' ax-versus-comparator__card--group-middle'
+	elsif group_position == 'end'
+		assign card_classes = card_classes | append: ' ax-versus-comparator__card--group-end'
+	endif
+	if block.settings.card_color_scheme != blank
+		assign card_classes = card_classes | append: ' color-' | append: block.settings.card_color_scheme
+	endif
+
+	assign card_style = ''
+	if block.settings.background_color != blank
+		assign card_style = card_style | append: '--vc-card-bg:' | append: block.settings.background_color | append: ';'
+	endif
+	if block.settings.border_color != blank
+		assign card_style = card_style | append: '--vc-card-border:' | append: block.settings.border_color | append: ';'
+	endif
+	if block.settings.text_color != blank
+		assign card_style = card_style | append: '--vc-card-color:' | append: block.settings.text_color | append: ';'
+	endif
+	if block.settings.title_color != blank
+		assign card_style = card_style | append: '--vc-card-title-color:' | append: block.settings.title_color | append: ';'
+	endif
+
+	assign image_alt = block.settings.card_image.alt | default: block.settings.card_title
+	assign mobile_image = block.settings.card_image_mobile | default: block.settings.card_image
+
+	# Mirror the lazy-load convention used elsewhere in the theme (e.g. ax-versus-comparator-winner):
+	# eager-load critical first-section media, lazy-load everything else via the `lazy-src` swap.
+	assign lazy_load = false
+	if section.index > 1
+		assign lazy_load = true
+	endif
+-%}
+
+{%- capture badge_html -%}
+	{%- if block.settings.badge != blank -%}
+		{%- assign badge_style = '' -%}
+		{%- if block.settings.badge_bg_color != blank -%}
+			{%- assign badge_style = badge_style | append: '--vc-badge-bg:' | append: block.settings.badge_bg_color | append: ';' -%}
+		{%- endif -%}
+		{%- if block.settings.badge_border_color != blank -%}
+			{%- assign badge_style = badge_style | append: '--vc-badge-border:' | append: block.settings.badge_border_color | append: ';' -%}
+		{%- endif -%}
+		{%- if block.settings.badge_text_color != blank -%}
+			{%- assign badge_style = badge_style | append: '--vc-badge-color:' | append: block.settings.badge_text_color | append: ';' -%}
+		{%- endif -%}
+		<span
+			class="ax-versus-comparator__badge"
+			{% if badge_style != blank %}style="{{ badge_style }}"{% endif %}
+		>
+			{%- if block.settings.badge_icon != blank -%}
+				{{
+					block.settings.badge_icon
+					| image_url: width: 48
+					| image_tag:
+						loading: 'lazy',
+						widths: '24, 48',
+						class: 'ax-versus-comparator__badge-icon',
+						alt: ''
+				}}
+			{%- endif -%}
+			<span class="ax-versus-comparator__badge-label">{{ block.settings.badge }}</span>
+		</span>
+	{%- endif -%}
+{%- endcapture -%}
+
+<div class="{{ wrapper_classes }}" {{ block.shopify_attributes }}>
+	<div class="{{ card_classes }}"{% if card_style != blank %} style="{{ card_style }}"{% endif %}>
+		{%- if layout == 'stack' -%}
+			{{ badge_html }}
+		{%- endif -%}
+
+		{%- if has_image -%}
+			<div class="ax-versus-comparator__card-visual ax-versus-comparator__card-visual--image">
+				<modal-opener data-modal="#VcImageModal-{{ block.id }}">
+					<button
+						type="button"
+						class="ax-versus-comparator__card-image-btn content-square_{{ section.id }}-{{ block.id }}-button-card-zoom"
+						aria-haspopup="dialog"
+						aria-label="{{ 'accessibility.zoom' | t }}"
+					>
+						{%- comment -%}
+							Same lazy-load pattern as ax-versus-comparator-winner: image_tag adds the
+							loading/decoding/width/height attrs, then `src=`/`srcset=` are swapped to
+							`lazy-src=`/`lazy-srcset=` only when this section is below the fold.
+							The <picture> + <source> wrapper lets us swap to a different mobile crop
+							(card_image_mobile) when the editor provides one.
+						{%- endcomment -%}
+						{%- capture card_picture -%}
+							<picture>
+								{%- if block.settings.card_image_mobile != blank -%}
+									<source
+										media="(max-width: 749px)"
+										srcset="{{ mobile_image | image_url: width: 336 }} 1x, {{ mobile_image | image_url: width: 504 }} 1.5x, {{ mobile_image | image_url: width: 672 }} 2x"
+										width="168"
+										height="168"
+									>
+								{%- endif -%}
+								{{
+									block.settings.card_image
+									| image_url: width: 518
+									| image_tag:
+										loading: lazy_load,
+										widths: '259, 518, 777',
+										sizes: '(min-width: 750px) 25.9rem, 16.8rem',
+										width: 259,
+										height: 160,
+										class: 'ax-versus-comparator__card-image',
+										alt: image_alt
+								}}
+							</picture>
+						{%- endcapture -%}
+						{%- if lazy_load -%}
+							{{ card_picture | replace: 'src=', 'lazy-src=' | replace: 'srcset=', 'lazy-srcset=' }}
+						{%- else -%}
+							{{ card_picture }}
+						{%- endif -%}
+					</button>
+				</modal-opener>
+			</div>
+		{%- elsif has_icon -%}
+			<div
+				class="ax-versus-comparator__card-visual ax-versus-comparator__card-visual--icon"
+				style="--vc-icon-size: {{ block.settings.icon_size | default: 64 }}px"
+			>
+				{%- capture card_icon_tag -%}
+					{{
+						block.settings.card_icon
+						| image_url: width: 240
+						| image_tag:
+							loading: lazy_load,
+							widths: '120, 240',
+							class: 'ax-versus-comparator__card-icon',
+							alt: block.settings.card_title
+					}}
+				{%- endcapture -%}
+				{%- if lazy_load -%}
+					{{ card_icon_tag | replace: 'src=', 'lazy-src=' | replace: 'srcset=', 'lazy-srcset=' }}
+				{%- else -%}
+					{{ card_icon_tag }}
+				{%- endif -%}
+			</div>
+		{%- endif -%}
+
+		<div class="ax-versus-comparator__card-content">
+			{%- if layout != 'stack' -%}
+				{{ badge_html }}
+			{%- endif -%}
+
+			<div class="ax-versus-comparator__card-body">
+				{%- if block.settings.card_title != blank -%}
+					<h3 class="ax-versus-comparator__card-title h4">{{ block.settings.card_title }}</h3>
+				{%- endif -%}
+
+				{%- if block.settings.card_subtitle != blank or block.settings.subtitle_tooltip != blank -%}
+					{%- comment -%}
+						Inject the tooltip *inside* the last paragraph (just before the closing </p>)
+						so the info icon stays inline with the final word instead of dropping to a new
+						line below the rich-text block.
+					{%- endcomment -%}
+					{%- capture subtitle_tooltip_html -%}
+						{%- if block.settings.subtitle_tooltip != blank -%}
+							{%- render 'versus-comparator-tooltip',
+								content: block.settings.subtitle_tooltip,
+								variant: 'inline',
+								cs_class: 'content-square_' | append: section.id | append: '-' | append: block.id | append: '-tooltip-card-subtitle'
+							-%}
+						{%- endif -%}
+					{%- endcapture -%}
+
+					{%- liquid
+						assign subtitle_html = ''
+						if block.settings.card_subtitle != blank
+							assign subtitle_raw = block.settings.card_subtitle | strip
+							assign subtitle_tail = subtitle_raw | slice: -4, 4
+							if subtitle_tooltip_html != blank and subtitle_tail == '</p>'
+								assign subtitle_body_len = subtitle_raw.size | minus: 4
+								assign subtitle_body = subtitle_raw | slice: 0, subtitle_body_len
+								assign subtitle_html = subtitle_body | append: subtitle_tooltip_html | append: '</p>'
+							else
+								assign subtitle_html = subtitle_raw | append: subtitle_tooltip_html
+							endif
+						else
+							assign subtitle_html = subtitle_tooltip_html
+						endif
+					-%}
+					<div class="ax-versus-comparator__card-subtitle rte">{{ subtitle_html }}</div>
+				{%- endif -%}
+			</div>
+
+			{%- if has_knowmore -%}
+				<button
+					type="button"
+					class="ax-versus-comparator__card-knowmore-toggle content-square_{{ section.id }}-{{ block.id }}-button-card-knowmore"
+					aria-expanded="false"
+					aria-controls="knowmore-{{ block.id }}"
+					aria-label="{{ knowmore_label }}"
+				>
+					<span class="ax-versus-comparator__card-knowmore-toggle-icon" aria-hidden="true"></span>
+				</button>
+			{%- endif -%}
+		</div>
+	</div>
+
+	{%- if has_knowmore -%}
+		<div
+			id="knowmore-{{ block.id }}"
+			class="ax-versus-comparator__card-knowmore-content"
+		>
+			{%- render 'versus-comparator-knowmore-list', card: block -%}
+		</div>
+	{%- endif -%}
+
+	{%- if has_image -%}
+		{%- capture modal_picture -%}
+			<picture>
+				{%- if block.settings.card_image_mobile != blank -%}
+					<source
+						media="(max-width: 749px)"
+						srcset="{{ mobile_image | image_url: width: 800 }} 800w, {{ mobile_image | image_url: width: 1200 }} 1200w, {{ mobile_image | image_url: width: 1600 }} 1600w"
+						sizes="100vw"
+					>
+				{%- endif -%}
+				{{
+					block.settings.card_image
+					| image_url: width: 1600
+					| image_tag:
+						widths: '800, 1200, 1600, 2000',
+						sizes: '(min-width: 990px) 80vw, 100vw',
+						loading: 'lazy',
+						class: 'ax-versus-comparator__image-modal-img',
+						alt: image_alt
+				}}
+			</picture>
+		{%- endcapture -%}
+		<modal-dialog id="VcImageModal-{{ block.id }}" class="modal-dialog ax-versus-comparator__image-modal">
+			<div
+				role="dialog"
+				aria-label="{{ image_alt | escape }}"
+				aria-modal="true"
+				class="ax-versus-comparator__image-modal-content modal-dialog__content"
+				tabindex="-1"
+			>
+				<button
+					id="ModalClose-VcImage-{{ block.id }}"
+					type="button"
+					class="modal-dialog__toggle ax-versus-comparator__image-modal-close content-square_{{ section.id }}-{{ block.id }}-button-card-modal-close"
+					aria-label="{{ 'accessibility.close' | t }}"
+				>
+					<span class="svg-wrapper">
+						{{- 'icon-close.svg' | inline_asset_content -}}
+					</span>
+				</button>
+				{{ modal_picture }}
+			</div>
+		</modal-dialog>
+	{%- endif -%}
+</div>

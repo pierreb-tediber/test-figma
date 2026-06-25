@@ -1,0 +1,260 @@
+{%- liquid
+	assign products = section.settings.products | default: blank
+-%}
+
+{%- if products != blank -%}
+	{{ 'bundle.products-comparator.css' | asset_url | stylesheet_tag }}
+
+	<script>
+		window.assetsUrl.js.push({ productsComparator: "{{ 'bundle.products-comparator.js' | asset_url }}" });
+	</script>
+
+	{%- style -%}
+		#shopify-section-{{ section.id }} {
+			overflow: hidden;
+		}
+
+		.section-{{ section.id }}-padding {
+		  padding-top: {{ section.settings.mob_padding_top }}px;
+		  padding-bottom: {{ section.settings.mob_padding_bottom }}px;
+		}
+
+		@media screen and (min-width: 750px) {
+		  .section-{{ section.id }}-padding {
+		    padding-top: {{ section.settings.padding_top }}px;
+		    padding-bottom: {{ section.settings.padding_bottom }}px;
+		  }
+		}
+	{%- endstyle -%}
+
+	{% capture swiper-options %}
+	{
+	"slideInView": "auto",
+	"slidesToMove": 1,
+	"loop": false,
+	"effect": "slide",
+	"autoplay": false,
+	"freeModeMobile": false,
+	"speed": 300
+	}
+{% endcapture %}
+
+	<div
+		class="products-comparator gradient color-{{ section.settings.color_scheme }} section-{{ section.id }}-padding"
+		data-ax-section="productsComparator"
+	>
+		<div class="page-width">
+			{%- if section.settings.heading != blank -%}
+				{%- render 'section-heading',
+					heading: section.settings.heading,
+					heading_size: 'h2',
+					text_alignment: 'center'
+				-%}
+			{%- endif -%}
+			<products-comparator>
+				<div
+					id="Swiper-{{ section.id }}"
+					class="swiper{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+					{% if settings.animations_reveal_on_scroll %}
+						data-cascade
+					{% endif %}
+					data-options="{{ swiper-options | escape }}"
+					aria-roledescription="carousel"
+					aria-label="{% if section.settings.heading != blank %}{{ section.settings.heading | strip_html }}{% else %}Product comparison{% endif %}"
+				>
+					<ul class="swiper-wrapper grid grid--1-7-col grid--2-col-tablet grid--{{ section.settings.columns_desktop }}-col-desktop">
+						{%- assign limit = section.settings.columns_desktop | plus: 0 -%}
+						{%- for product_item in products limit: limit -%}
+							{%- liquid
+								assign is_current_product = false
+								if product and product_item.id == product.id
+									assign is_current_product = true
+								endif
+							-%}
+							<li
+								class="swiper-slide grid__item{% if is_current_product %} is-current-product{% endif %}"
+								aria-label="{{ product_item.title }}"
+								{% if settings.animations_reveal_on_scroll %}
+									data-cascade
+									style="--animation-order: {{ forloop.index }};"
+								{% endif %}
+							>
+								{% render 'card-product',
+									card_product: product_item,
+									media_aspect_ratio: 'portrait',
+									image_shape: 'default',
+									show_secondary_image: true,
+									show_vendor: false,
+									show_rating: false,
+									lazy_load: true,
+									skip_styles: true,
+									quick_add: false,
+									section_id: section.id,
+									show_scores: true,
+									is_current_product: is_current_product
+								%}
+							</li>
+						{%- endfor -%}
+					</ul>
+				</div>
+			</products-comparator>
+
+			{%- if section.settings.button_text != blank and section.settings.button_link != blank -%}
+				<div class="products-comparator__button">
+					{%- render 'link-style',
+						link_label: section.settings.button_text,
+						link_url: section.settings.button_link,
+						link_style: section.settings.link_style,
+						link_attributes: section.shopify_attributes
+					-%}
+				</div>
+			{%- endif -%}
+		</div>
+	</div>
+{%- endif -%}
+
+{% schema %}
+	{
+		"name": "Ax products comparator",
+		"tag": "section",
+		"class": "section",
+		"disabled_on": {
+			"groups": ["header", "footer"]
+		},
+		"settings": [
+			{
+				"type": "header",
+				"content": "Contenu"
+			},
+			{
+				"type": "richtext",
+				"id": "heading",
+				"label": "Titre",
+				"default": "<p>Comparez nos matelas</p>"
+			},
+			{
+				"type": "text",
+				"id": "button_text",
+				"label": "Texte du bouton"
+			},
+			{
+				"type": "url",
+				"id": "button_link",
+				"label": "Lien du bouton"
+			},
+			{
+				"type": "select",
+				"id": "link_style",
+				"options": [
+					{
+						"value": "button button--primary",
+						"label": "Primary"
+					},
+					{
+						"value": "button button--secondary",
+						"label": "Secondary"
+					},
+					{
+						"value": "ax-link",
+						"label": "Link"
+					},
+					{
+						"value": "ax-link reversed",
+						"label": "Link inversé"
+					},
+					{
+						"value": "underlined-link",
+						"label": "Underline link"
+					}
+				],
+				"default": "button button--primary",
+				"label": "Style du bouton"
+			},
+			{
+				"type": "header",
+				"content": "Produits"
+			},
+			{
+				"type": "product_list",
+				"id": "products",
+				"label": "Produits"
+			},
+			{
+				"type": "select",
+				"id": "columns_desktop",
+				"label": "Nombre de colonnes sur desktop",
+				"options": [
+					{
+						"value": "3",
+						"label": "3"
+					},
+					{
+						"value": "4",
+						"label": "4"
+					},
+				],
+				"default": "4",
+			},
+			{
+				"type": "header",
+				"content": "Color"
+			},
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "Color scheme",
+				"default": "background-1"
+			},
+			{
+				"type": "header",
+				"content": "Padding (space)"
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding bottom",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding bottom",
+				"default": 0
+			}
+		],
+		"blocks": [],
+		"presets": [
+			{
+				"name": "Ax products comparator"
+			}
+		]
+	}
+{% endschema %}

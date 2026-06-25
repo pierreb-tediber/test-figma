@@ -1,0 +1,974 @@
+{% comment %}
+	Renders product variant options
+
+	Accepts:
+	- product: {Object} product object.
+	- option: {Object} current product_option object.
+	- block: {Object} block object.
+	- picker_type: {String} type of picker to dispay
+	- section_id: {String} id of the section
+	- show_size_information_price: {Boolean} whether to show the price information
+	- selected_variant: {Object} selected variant object.
+	- has_changed_option_for_hidden: {Boolean} True if the option has changed for a hidden variant.
+
+	Usage:
+	{% render 'product-variant-options',
+	  product: product,
+	  option: option,
+	  block: block,
+	  picker_type: picker_type,
+	  section_id: section_id,
+	  show_size_information_price: show_size_information_price,
+	  selected_variant: selected_variant,
+	  has_changed_option_for_hidden: has_changed_option_for_hidden
+	%}
+{% endcomment %}
+{%- liquid
+	if section_id == 'card-product-upsell'
+		assign section_id = section_id | append: '-' | append: product.id
+	endif
+
+	assign product_form_id = 'product-form-' | append: section_id
+
+	# Détection option taille + format par défaut (Monobloc) pour masquage du suffixe à l'affichage
+	# Les attributs value/data-value gardent la valeur Shopify brute, seul le texte affiché est nettoyé
+	# Contexte bundle : on désactive la logique (le picker du parent pack agrège des values
+	# avec et sans suffixe → le strip créerait des doublons visuels — bug pack-lit-2-places-hybride).
+	assign default_format_lc = 'products.product.default_format_for_size_value' | t | downcase | strip
+	assign options_names_for_size_translated = 'products.product.options_names_for_size' | t | downcase | replace: ', ', ','
+	assign options_names_for_size = options_names_for_size_translated | split: ',' | uniq
+	assign size_option_name_array = option.name | downcase | split: ' ' | uniq
+	assign is_size_option = false
+	unless is_bundle
+		for size_option_name in size_option_name_array
+			if options_names_for_size contains size_option_name
+				assign is_size_option = true
+				break
+			endif
+		endfor
+	endunless
+
+	# Pré-compute des dimensions qui ont une variante au format default (Monobloc).
+	# Sert au dédup conditionnel : on hide les Bibloc UNIQUEMENT si une Monobloc
+	# existe à la même dim (sinon le Bibloc serait l'unique option de cette dim
+	# et serait invisible → impossible à sélectionner).
+	assign dims_with_default_format_str = ','
+	if is_size_option
+		for size_value_check in option.values
+			assign sv_parts = size_value_check | split: ' - '
+			if sv_parts.size > 1
+				assign sv_format_lc = sv_parts | last | strip | downcase
+				if sv_format_lc == default_format_lc
+					assign sv_dim = sv_parts | first | strip
+					assign sv_dim_marker = sv_dim | prepend: ',' | append: ','
+					unless dims_with_default_format_str contains sv_dim_marker
+						assign dims_with_default_format_str = dims_with_default_format_str | append: sv_dim | append: ','
+					endunless
+				endif
+			endif
+		endfor
+	endif
+-%}
+
+{%- for value in option.values -%}
+	{%- liquid
+		assign swatch_focal_point = null
+
+		# Valeur d'affichage : strippe les suffixes Monobloc ET Bibloc (et seulement ceux-là)
+		# pour l'option taille. Le format est géré via la step Format (cf. Lot C).
+		# default_format_lc vient de la locale (= "monobloc"), bibloc hardcodé car
+		# convention métier Tediber non traduite.
+		assign value_display = value
+		assign is_hidden_for_dedup = false
+		if is_size_option
+			assign value_parts_display = value | split: ' - '
+			if value_parts_display.size > 1
+				assign value_format_display_lc = value_parts_display | last | strip | downcase
+				if value_format_display_lc == default_format_lc or value_format_display_lc == 'bibloc'
+					assign value_display = value_parts_display | first | strip
+				endif
+				# Dédup conditionnel : on hide un format non-default UNIQUEMENT si la
+				# dim a aussi un format default. Sinon (dim Bibloc-only par ex.) on
+				# laisse l'option visible — c'est la seule option de cette dim.
+				if value_format_display_lc != default_format_lc
+					assign value_dim = value_parts_display | first | strip
+					assign value_dim_marker = value_dim | prepend: ',' | append: ','
+					if dims_with_default_format_str contains value_dim_marker
+						assign is_hidden_for_dedup = true
+					endif
+				endif
+			endif
+		endif
+
+		if value.swatch.image
+			assign image_url = value.swatch.image | image_url: width: 50
+			assign swatch_value = 'url(' | append: image_url | append: ')'
+			assign swatch_focal_point = value.swatch.image.presentation.focal_point
+		elsif value.swatch.color
+			assign swatch_value = 'rgb(' | append: value.swatch.color.rgb | append: ')'
+		else
+			assign swatch_value = null
+		endif
+
+		assign option_disabled = true
+		if value.available
+			assign option_disabled = false
+		endif
+
+		# Récupère la variante
+		assign value_variant = value.variant
+
+		# Récupère la position de l'option actuelle
+		assign option_current = 'option' | append: option.position
+
+		# Récupère la première variante pour l'option actuelle correspondant à la valeur actuelle
+		assign first_variant_with_value_option = product.variants | where: option_current, value | first
+
+		# Assigne si la valeur doit être masquée
+		assign not_show_value = false
+
+		if is_bundle != true
+			if product.metafields.custom.combined_listings_produit_parent.value != blank
+				# Récupère la première variante pour l'option actuelle correspondant à la valeur actuelle
+				assign first_variant_with_value_option = product.metafields.custom.combined_listings_produit_parent.value.variants | where: option_current, value | first
+				# Récupère toutes les variantes possibles pour le produit parent
+				assign all_variants = product.metafields.custom.combined_listings_produit_parent.value.variants
+			else
+				assign all_variants = product.variants
+			endif
+
+			comment
+				VÉRIFICATION DES VARIANTES CACHÉES/INDISPONIBLES POUR LES OPTIONS
+
+				On ajoute une vérification supplémentaire pour cacher les valeurs dont toutes les variantes accessibles sont cachées/indisponibles
+			endcomment
+			if product.options.size == 1
+				assign has_hidden_variant_option = false
+
+				# Récupère les variantes possibles pour l'option actuelle
+				assign candidate_variants_matching_options = all_variants | where: 'option1', value
+
+				# Vérifie si toutes les variantes sont cachées/indisponibles pour l'option actuelle
+				assign option_all_hidden = true
+				for variant_check in candidate_variants_matching_options
+					if variant_check.metafields.custom.hidden_variant.value != true
+						assign option_all_hidden = false
+						break
+					endif
+				endfor
+
+				# Si toutes les variantes sont cachées/indisponibles, on assigne true à has_hidden_variant_option
+				if option_all_hidden == true
+					assign has_hidden_variant_option = true
+				else
+					# Sinon, on vérifie si la valeur actuelle est disponible sur une des variantes
+					for variant_check in candidate_variants_matching_options
+						if variant_check.options[0] == value
+							if variant_check.metafields.custom.hidden_variant.value == true
+								assign has_hidden_variant_option = true
+								break
+							endif
+						endif
+					endfor
+				endif
+
+				# Cross-option availability check : value.available est l'état AGRÉGÉ
+				# (toutes variantes confondues). Sur multi-options, un croisement
+				# spécifique peut être OOS alors que l'agrégat reste "dispo". Ce loop
+				# re-vérifie sur le pool `candidate_variants_matching_options` déjà
+				# filtré par les autres options sélectionnées. Le `value.product_url
+				# == blank` préserve la logique combined listings.
+				if value.product_url == blank
+					assign option_disabled = true
+					for variant_check in candidate_variants_matching_options
+						assign option_position = option.position | minus: 1
+						if variant_check.options[option_position] == value
+							if variant_check.available == true and variant_check.metafields.custom.hidden_variant.value != true
+								assign option_disabled = false
+								break
+							endif
+						endif
+					endfor
+				endif
+			elsif product.options.size == 2
+				assign has_hidden_variant_option = false
+				assign first_option_selected_variant_1 = selected_variant.options[0]
+				assign first_option_selected_variant_2 = selected_variant.options[1]
+
+				if first_option_selected_variant_1 == blank or first_option_selected_variant_2 == blank
+					for option_temp in product.options_with_values
+						if option_temp.position == 1
+							assign first_option_selected_variant_1 = option_temp.selected_value
+						elsif option_temp.position == 2
+							assign first_option_selected_variant_2 = option_temp.selected_value
+							break
+						endif
+					endfor
+				endif
+
+				# Récupère les variantes possibles pour l'option actuelle, LIMITE shopify 250 variantes avec le where
+				if value.product_url == blank and first_option_selected_variant_1.product_url != blank and first_option_selected_variant_1.variant != blank
+					assign all_variants = first_option_selected_variant_1.variant.product.variants
+				elsif value.product_url != blank and value.variant != blank
+					assign all_variants = value.variant.product.variants
+				endif
+
+				# Récupère les variantes possibles pour l'option actuelle
+				if option.position == 2
+					assign candidate_variants_matching_options = all_variants | where: 'option1', first_option_selected_variant_1 | where: 'option2', value
+				else
+					assign candidate_variants_matching_options = all_variants | where: 'option1', value
+					if value.product_url != blank and custom_position != option.position
+						assign candidate_variants_matching_options = all_variants | where: 'option1', value | where: 'option2', first_option_selected_variant_2
+					endif
+				endif
+
+				# Vérifie si toutes les variantes sont cachées/indisponibles pour l'option actuelle
+				assign option_all_hidden = true
+				for variant_check in candidate_variants_matching_options
+					if variant_check.metafields.custom.hidden_variant.value != true
+						assign option_all_hidden = false
+						break
+					endif
+				endfor
+
+				# Si toutes les variantes sont cachées/indisponibles, on assigne true à has_hidden_variant_option
+				if option_all_hidden == true
+					assign has_hidden_variant_option = true
+				else
+					# Sinon, on vérifie si la valeur actuelle est disponible sur une des variantes
+					for variant_check in candidate_variants_matching_options
+						if variant_check.options[0] == first_option_selected_variant_1 and variant_check.options[1] == value
+							if variant_check.metafields.custom.hidden_variant.value == true
+								assign has_hidden_variant_option = true
+								break
+							endif
+						endif
+					endfor
+				endif
+
+				# Cross-option availability check : value.available est l'état AGRÉGÉ
+				# (toutes variantes confondues). Sur multi-options, un croisement
+				# spécifique peut être OOS alors que l'agrégat reste "dispo". Ce loop
+				# re-vérifie sur le pool `candidate_variants_matching_options` déjà
+				# filtré par les autres options sélectionnées. Le `value.product_url
+				# == blank` préserve la logique combined listings.
+				if value.product_url == blank
+					assign option_disabled = true
+					for variant_check in candidate_variants_matching_options
+						assign option_position = option.position | minus: 1
+						if variant_check.options[option_position] == value
+							if variant_check.available == true and variant_check.metafields.custom.hidden_variant.value != true
+								assign option_disabled = false
+								break
+							endif
+						endif
+					endfor
+				endif
+
+			elsif product.options.size == 3
+				assign has_hidden_variant_option = false
+				assign first_option_selected_variant_1 = selected_variant.options[0]
+				assign first_option_selected_variant_2 = selected_variant.options[1]
+
+				if first_option_selected_variant_1 == blank or first_option_selected_variant_2 == blank
+					for option_temp in product.options_with_values
+						if option_temp.position == 1
+							assign first_option_selected_variant_1 = option_temp.selected_value
+						elsif option_temp.position == 2
+							assign first_option_selected_variant_2 = option_temp.selected_value
+							break
+						endif
+					endfor
+				endif
+
+				# Récupère les variantes possibles pour l'option actuelle, LIMITE shopify 250 variantes avec le where
+				if value.product_url == blank and first_option_selected_variant_1.product_url != blank and first_option_selected_variant_1.variant != blank
+					assign all_variants = first_option_selected_variant_1.variant.product.variants
+				elsif value.product_url != blank and value.variant != blank
+					assign all_variants = value.variant.product.variants
+				endif
+
+				# Récupère les variantes possibles pour l'option actuelle
+				if option.position == 3
+					assign candidate_variants_matching_options = all_variants | where: 'option1', first_option_selected_variant_1 | where: 'option2', first_option_selected_variant_2 | where: 'option3', value
+				elsif option.position == 2
+					assign candidate_variants_matching_options = all_variants | where: 'option1', first_option_selected_variant_1 | where: 'option2', value
+				else
+					assign candidate_variants_matching_options = all_variants | where: 'option1', value
+					if value.product_url != blank and custom_position != option.position
+						assign candidate_variants_matching_options = all_variants | where: 'option1', value | where: 'option2', first_option_selected_variant_2
+					endif
+				endif
+
+				# Vérifie si toutes les variantes sont cachées/indisponibles pour l'option actuelle
+				assign option_all_hidden = true
+				for variant_check in candidate_variants_matching_options
+					if variant_check.metafields.custom.hidden_variant.value != true
+						assign option_all_hidden = false
+						break
+					endif
+				endfor
+
+				# Si toutes les variantes sont cachées/indisponibles, on assigne true à has_hidden_variant_option
+				if option_all_hidden == true
+					assign has_hidden_variant_option = true
+				else
+					# Sinon, on vérifie si la valeur actuelle est disponible sur une des variantes
+					for variant_check in candidate_variants_matching_options
+						if variant_check.options[0] == first_option_selected_variant_1 and variant_check.options[1] == first_option_selected_variant_2 and variant_check.options[2] == value
+							if variant_check.metafields.custom.hidden_variant.value == true
+								assign has_hidden_variant_option = true
+								break
+							endif
+						endif
+					endfor
+				endif
+
+				# Cross-option availability check : value.available est l'état AGRÉGÉ
+				# (toutes variantes confondues). Sur multi-options, un croisement
+				# spécifique peut être OOS alors que l'agrégat reste "dispo". Ce loop
+				# re-vérifie sur le pool `candidate_variants_matching_options` déjà
+				# filtré par les autres options sélectionnées. Le `value.product_url
+				# == blank` préserve la logique combined listings.
+				if value.product_url == blank
+					assign option_disabled = true
+					for variant_check in candidate_variants_matching_options
+						assign option_position = option.position | minus: 1
+						if variant_check.options[option_position] == value
+							if variant_check.available == true and variant_check.metafields.custom.hidden_variant.value != true
+								assign option_disabled = false
+								break
+							endif
+						endif
+					endfor
+				endif
+			elsif product.options.size == 4
+				assign has_hidden_variant_option = false
+				assign first_option_selected_variant_1 = selected_variant.options[0]
+				assign first_option_selected_variant_2 = selected_variant.options[1]
+				assign first_option_selected_variant_3 = selected_variant.options[2]
+
+				if first_option_selected_variant_1 == blank or first_option_selected_variant_2 == blank or first_option_selected_variant_3 == blank
+					for option_temp in product.options_with_values
+						if option_temp.position == 1
+							assign first_option_selected_variant_1 = option_temp.selected_value
+						elsif option_temp.position == 2
+							assign first_option_selected_variant_2 = option_temp.selected_value
+						elsif option_temp.position == 3
+							assign first_option_selected_variant_3 = option_temp.selected_value
+						endif
+					endfor
+				endif
+
+				# Récupère les variantes possibles pour l'option actuelle, LIMITE shopify 250 variantes avec le where
+				if value.product_url == blank and first_option_selected_variant_1.product_url != blank and first_option_selected_variant_1.variant != blank
+					assign all_variants = first_option_selected_variant_1.variant.product.variants
+				elsif value.product_url != blank and value.variant != blank
+					assign all_variants = value.variant.product.variants
+				endif
+
+				# Récupère les variantes possibles pour l'option actuelle
+				if option.position == 4
+					assign candidate_variants_matching_options = all_variants | where: 'option1', first_option_selected_variant_1 | where: 'option2', first_option_selected_variant_2 | where: 'option3', first_option_selected_variant_3
+				elsif option.position == 3
+					assign candidate_variants_matching_options = all_variants | where: 'option1', first_option_selected_variant_1 | where: 'option2', first_option_selected_variant_2 | where: 'option3', value
+				elsif option.position == 2
+					assign candidate_variants_matching_options = all_variants | where: 'option1', first_option_selected_variant_1 | where: 'option2', value
+				else
+					assign candidate_variants_matching_options = all_variants | where: 'option1', value
+					if value.product_url != blank and custom_position != option.position
+						assign candidate_variants_matching_options = all_variants | where: 'option1', value | where: 'option2', first_option_selected_variant_2
+					endif
+				endif
+
+				# Vérifie si toutes les variantes sont cachées/indisponibles pour l'option actuelle
+				assign option_all_hidden = true
+				for variant_check in candidate_variants_matching_options
+					if variant_check.metafields.custom.hidden_variant.value != true
+						assign option_all_hidden = false
+						break
+					endif
+				endfor
+
+				# Si toutes les variantes sont cachées/indisponibles, on assigne true à has_hidden_variant_option
+				if option_all_hidden == true
+					assign has_hidden_variant_option = true
+				else
+					# Sinon, on vérifie si la valeur actuelle est disponible sur une des variantes
+					for variant_check in candidate_variants_matching_options
+						if variant_check.options[0] == first_option_selected_variant_1 and variant_check.options[1] == first_option_selected_variant_2 and variant_check.options[2] == first_option_selected_variant_3 and variant_check.options[3] == value
+							if variant_check.metafields.custom.hidden_variant.value == true
+								assign has_hidden_variant_option = true
+								break
+							endif
+						endif
+					endfor
+				endif
+
+				# Cross-option availability check : value.available est l'état AGRÉGÉ
+				# (toutes variantes confondues). Sur multi-options, un croisement
+				# spécifique peut être OOS alors que l'agrégat reste "dispo". Ce loop
+				# re-vérifie sur le pool `candidate_variants_matching_options` déjà
+				# filtré par les autres options sélectionnées. Le `value.product_url
+				# == blank` préserve la logique combined listings.
+				if value.product_url == blank
+					assign option_disabled = true
+					for variant_check in candidate_variants_matching_options
+						assign option_position = option.position | minus: 1
+						if variant_check.options[option_position] == value
+							if variant_check.available == true and variant_check.metafields.custom.hidden_variant.value != true
+								assign option_disabled = false
+								break
+							endif
+						endif
+					endfor
+				endif
+			endif
+
+			comment
+				Si aucune variante non cachée n'a été trouvée, on cache cette option
+			endcomment
+			if has_hidden_variant_option == true
+				assign not_show_value = true
+			endif
+		endif
+
+		# Assigne la première variante pour l'option actuelle correspondant à la valeur actuelle si aucune correspondance trouvée
+		assign variant_unavailable = false
+		if value_variant == blank and first_variant_with_value_option == blank
+			assign variant_unavailable = true
+			if product.metafields.custom.combined_listings_produit_parent.value != blank
+				assign first_variant_with_value_option = product.metafields.custom.combined_listings_produit_parent.value.variants | where: option_current, value | first
+			endif
+		endif
+
+		# Assigne la variante par défaut si aucune correspondance trouvée
+		if value_variant == blank and first_variant_with_value_option != blank
+			assign value_variant = first_variant_with_value_option
+		endif
+
+		# Assigne les valeurs par défaut
+		assign value_variant_price = blank
+		assign value_variant_compare_at_price = blank
+		assign value_variant_color_hexa = blank
+		assign value_variant_color_image = blank
+		assign value_variant_color_label = blank
+
+		# Assigne le prix si il est défini
+		assign value_variant_price = value_variant.price
+
+		# Assigne le prix de référence si il est défini
+		if value_variant.compare_at_price != blank
+			assign value_variant_compare_at_price = value_variant.compare_at_price
+		else
+			assign value_variant_compare_at_price = value_variant.price
+		endif
+
+		comment
+			Récupération du prix à utiliser : prix normal
+		endcomment
+		assign variant_price_to_use = value_variant.price
+		assign variant_compare_at_price_to_use = value_variant.compare_at_price | default: value_variant.price
+
+		comment
+			Calcul du surplus par rapport au prix de référence
+		endcomment
+		assign variant_price_surplus = 0
+		if is_bundle and value_variant != blank
+			if reference_price != blank
+				assign variant_price_surplus = variant_price_to_use | minus: reference_price
+			endif
+			if reference_price_compare_at_price != blank
+				assign variant_compare_at_price_surplus = variant_compare_at_price_to_use | minus: reference_price_compare_at_price
+			endif
+		endif
+
+		# Calcule la valeur sélectionnée pour cette option basée sur la variante spécifique
+		assign current_option_selected = false
+		if selected_variant != blank
+			assign option_index = option.position | minus: 1
+			# Si la valeur sélectionnée pour cette option est différente de la valeur de la variante sélectionnée, on assigne la valeur de la variante sélectionnée
+			if selected_variant.options[option_index] == value
+				assign current_option_selected = true
+			endif
+		else
+			assign current_option_selected = value.selected
+		endif
+
+		if current_option_selected == true and not_show_value == true
+			assign option_disabled = true
+			assign not_show_value = false
+		endif
+	-%}
+
+	{%- capture input_id -%}
+		{%- if is_bundle -%}
+			{{ section_id }}-{{ option.position }}-{{ forloop.index0 }}-bundle-parent-{{ value.id }}
+		{%- else -%}
+			{{ section_id }}-{{ option.position }}-{{ forloop.index0 }}
+		{%- endif -%}
+  {%- endcapture -%}
+
+	{%- capture input_name -%}
+		{%- if is_bundle -%}
+			{%- if value.product_url != blank and value_variant.product.metafields.custom.combined_listings_produit_parent.value != blank -%}
+				{{ option.name }}-{{ option.position }}-bundle-item-{{ value_variant.product.metafields.custom.combined_listings_produit_parent.value.id }}
+			{%- else -%}
+				{{ option.name }}-{{ option.position }}-bundle-item-{{ value_variant.product.id }}
+			{%- endif -%}
+		{%- else -%}
+			{{ option.name }}-{{ option.position }}
+		{%- endif -%}
+  {%- endcapture -%}
+
+	{%- capture input_dataset -%}
+    data-product-url="{{ value.product_url }}"
+    data-option-value-id="{{ value.id }}"
+  {%- endcapture -%}
+
+	{%- capture label_unavailable -%}
+    <span class="visually-hidden label-unavailable">
+      {{- 'products.product.variant_sold_out_or_unavailable' | t -}}
+    </span>
+  {%- endcapture -%}
+
+	{%- if picker_type == 'swatch'
+		or picker_type == 'swatch_style'
+		or picker_type == 'swatch_comfort'
+		or picker_type == 'swatch_foot'
+		or picker_type == 'swatch_structure'
+		or picker_type == 'swatch_shape'
+	-%}
+		{%- liquid
+			if bed_style != blank and picker_type == 'swatch_style'
+				assign value_bed_style = value | split: '-' | first | strip
+				unless value_bed_style == bed_style
+					continue
+				endunless
+
+				if value_variant != blank
+					# Assigne la couleur si elle est définie
+					assign value_variant_color_hexa = blank
+
+					# Assigne l'image si elle est définie
+					if value_variant.metafields.custom.style_de_lit.value.image.value != blank
+						assign value_variant_color_image = value_variant.metafields.custom.style_de_lit.value.image.value
+					endif
+
+					# Assigne le label si il est défini
+					if value_variant.metafields.custom.style_de_lit.value.forme.value != blank
+						assign value_variant_color_label = value_variant.metafields.custom.style_de_lit.value.forme.value
+					endif
+				endif
+			elsif picker_type == 'swatch_comfort'
+				if value_variant != blank
+					# Assigne l'image si elle est définie
+					if value_variant.metafields.custom.univers_couette_et_oreiller.value.image.value != blank
+						assign value_variant_color_hexa = value_variant.metafields.custom.univers_couette_et_oreiller.value.image.value
+					endif
+
+					# Assigne l'image si elle est définie
+					if value_variant.metafields.custom.univers_couette_et_oreiller.value.image.value != blank
+						assign value_variant_color_image = value_variant.metafields.custom.univers_couette_et_oreiller.value.image.value
+					endif
+
+					# Assigne le label si il est défini
+					if value_variant.metafields.custom.univers_couette_et_oreiller.value.forme.value != blank
+						assign value_variant_color_label = value_variant.metafields.custom.univers_couette_et_oreiller.value.forme.value
+					endif
+
+					if value_variant.metafields.custom.univers_couette_et_oreiller.value.features.value != blank
+						assign value_variant_style_features = value_variant.metafields.custom.univers_couette_et_oreiller.value.features.value
+					endif
+				endif
+			elsif picker_type == 'swatch'
+				# Assigne les valeurs si la variante est trouvée
+				if value_variant != blank
+					# Assigne la couleur si elle est définie
+					if value_variant.metafields.custom.color.value.color.value != blank
+						assign value_variant_color_hexa = value_variant.metafields.custom.color.value.color.value
+					endif
+
+					# Assigne l'image si elle est définie
+					if value_variant.metafields.custom.color.value.image.value != blank
+						assign value_variant_color_image = value_variant.metafields.custom.color.value.image.value
+					endif
+
+					# Assigne l'image si elle est définie
+					if value_variant.metafields.custom.color.value.image_de_la_variante.value != blank
+						assign value_variant_color_image = value_variant.metafields.custom.color.value.image_de_la_variante.value
+					endif
+
+					# Assigne le label si il est défini
+					if value_variant.metafields.custom.color.value.label.value != blank
+						assign value_variant_color_label = value_variant.metafields.custom.color.value.label.value
+					endif
+				endif
+			elsif picker_type == 'swatch_foot'
+				if value_variant != blank
+					assign value_variant_color_hexa = blank
+
+					# Assigne la couleur si elle est définie
+					if value_variant.metafields.custom.forme_et_couleur_des_pieds.value.color.value != blank
+						assign value_variant_color_hexa = value_variant.metafields.custom.forme_et_couleur_des_pieds.value.color.value
+					endif
+
+					# Assigne l'image si elle est définie
+					if value_variant.metafields.custom.forme_et_couleur_des_pieds.value.image.value != blank
+						assign value_variant_color_image = value_variant.metafields.custom.forme_et_couleur_des_pieds.value.image.value
+					endif
+
+					# Assigne l'image si elle est définie
+					if value_variant.metafields.custom.forme_et_couleur_des_pieds.value.image_de_la_variante.value != blank
+						assign value_variant_color_image = value_variant.metafields.custom.forme_et_couleur_des_pieds.value.image_de_la_variante.value
+					endif
+
+					# Assigne le label si il est défini
+					if value_variant.metafields.custom.forme_et_couleur_des_pieds.value.label.value != blank
+						assign value_variant_color_label = value_variant.metafields.custom.forme_et_couleur_des_pieds.value.label.value
+					endif
+				endif
+			elsif picker_type == 'swatch_structure'
+				if value_variant != blank
+					assign value_variant_color_hexa = blank
+
+					# Assigne la couleur si elle est définie
+					if value_variant.metafields.custom.color_structure_complete.value.color.value != blank
+						assign value_variant_color_hexa = value_variant.metafields.custom.color_structure_complete.value.color.value
+					endif
+
+					# Assigne l'image si elle est définie
+					if value_variant.metafields.custom.color_structure_complete.value.image.value != blank
+						assign value_variant_color_image = value_variant.metafields.custom.color_structure_complete.value.image.value
+					endif
+
+					# Assigne l'image si elle est définie
+					if value_variant.metafields.custom.color_structure_complete.value.image_de_la_variante.value != blank
+						assign value_variant_color_image = value_variant.metafields.custom.color_structure_complete.value.image_de_la_variante.value
+					endif
+
+					# Assigne le label si il est défini
+					if value_variant.metafields.custom.color_structure_complete.value.label.value != blank
+						assign value_variant_color_label = value_variant.metafields.custom.color_structure_complete.value.label.value
+					endif
+				endif
+			elsif picker_type == 'swatch_shape'
+				if value_variant != blank
+					# Assigne l'image si elle est définie
+					if value_variant.metafields.custom.option_forme_images.value != blank
+						assign value_variant_color_image = value_variant.metafields.custom.option_forme_images.value
+					endif
+				endif
+			endif
+		-%}
+
+		{%- capture help_text -%}
+			{%- if bed_style != blank and picker_type == 'swatch_style' -%}
+				{{ value | split: '-' | last | strip | escape }}
+			{%- elsif picker_type == 'swatch_comfort' -%}
+				<span class="product__variant-selects__swatch-comfort__summary">
+					<span class="product__variant-selects__swatch-comfort__summary__label">
+						<span class="product__variant-selects__swatch-comfort__summary__label__value">{{ value }}</span>
+						{%- if value_variant_style_features != blank -%}
+							<span class="product__variant-selects__swatch-comfort__summary__features">
+								{%- for feature in value_variant_style_features -%}
+									<span class="product__variant-selects__swatch-comfort__summary__features__item">
+										{{ feature }}
+									</span>
+								{%- endfor -%}
+							</span>
+						{%- endif -%}
+					</span>
+					{%- if is_bundle and reference_price != blank and value_variant != blank -%}
+						{%- if variant_price_surplus > 0 -%}
+							<span class="product__variant-selects__swatch-comfort__summary__price{% if variant_compare_at_price_surplus > 0 and variant_compare_at_price_surplus > variant_price_surplus %} product__variant-selects__swatch-comfort__summary__price--compare-price{% endif %}">
+								<span class="product__variant-selects__swatch-comfort__summary__price--last">
+									{{ variant_price_surplus | money | prepend: '+' }}
+								</span>
+								{%- if variant_compare_at_price_surplus > 0
+									and variant_compare_at_price_surplus > variant_price_surplus
+								-%}
+									<s class="product__variant-selects__swatch-comfort__summary__price--regular">
+										{{ variant_compare_at_price_surplus | money | prepend: '+' }}
+									</s>
+								{%- endif -%}
+							</span>
+						{%- endif -%}
+					{%- endif -%}
+				</span>
+			{%- else -%}
+				{{ value | escape }}
+			{%- endif -%}
+			{{ label_unavailable }}
+		{%- endcapture -%}
+		{%
+			render 'swatch-input',
+			id: input_id,
+			name: input_name,
+			value: value | escape,
+			swatch: value.swatch,
+			product_form_id: product_form_id,
+			checked: current_option_selected,
+			visually_disabled: option_disabled,
+			shape: block.settings.swatch_shape,
+			help_text: help_text,
+			additional_props: input_dataset,
+			picker_type: picker_type,
+			not_show_value: not_show_value,
+			show_color_by_metafield: true,
+			value_variant_color_hexa: value_variant_color_hexa,
+			value_variant_color_image: value_variant_color_image,
+			value_variant_color_label: value_variant_color_label
+		%}
+	{%- elsif picker_type == 'button' -%}
+		{%- liquid
+			# Récupération des métadonnées de la version
+			assign version_title = value
+			assign version_text = blank
+			assign version_image = blank
+			assign version_picto = blank
+
+			if value_variant != blank
+				if value_variant.metafields.custom.version_information.value.title.value != blank
+					assign version_title = value_variant.metafields.custom.version_information.value.title.value
+				endif
+
+				if value_variant.metafields.custom.version_information.value.text.value != blank
+					assign version_text = value_variant.metafields.custom.version_information.value.text.value
+				endif
+
+				if value_variant.metafields.custom.version_information.value.image.value != blank
+					assign version_image = value_variant.metafields.custom.version_information.value.image.value
+				endif
+
+				if value_variant.metafields.custom.version_information.value.picto.value != blank
+					assign version_picto = value_variant.metafields.custom.version_information.value.picto.value
+				endif
+			endif
+
+			# Calcul de la réduction si applicable
+			assign discount_percentage = blank
+			if value_variant_compare_at_price > value_variant_price
+				assign discount_amount = value_variant_compare_at_price | minus: value_variant_price
+				assign discount_percentage = discount_amount | times: 100.0 | divided_by: value_variant_compare_at_price | round
+			endif
+		-%}
+
+		{%- comment -%}
+			CALCUL DE L'ORDRE RELATIF POUR LE TRI VISUEL
+
+			Trouve la position du prix actuel dans le tableau trié pour obtenir un ordre relatif (1, 2, 3...)
+			au lieu d'utiliser le prix brut (49900, 59900...) qui ne fonctionne pas correctement
+		{%- endcomment -%}
+		{%- liquid
+			assign value_order = 999
+
+			if sorted_prices != blank and value_variant_price != blank
+				assign value_order = 1
+				assign current_price_str = value_variant_price
+
+				for sorted_price in sorted_prices
+					if sorted_price == current_price_str
+						break
+					endif
+					assign value_order = value_order | plus: 1
+				endfor
+			endif
+		-%}
+
+		<div
+			class="product__variant-selects__pill__block{% if not_show_value %} visually-hidden{% endif %}"
+			style="order: {{ value_order }};"
+		>
+			<input
+				type="radio"
+				id="{{ input_id }}"
+				name="{{ input_name | escape }}"
+				value="{{ value | escape }}"
+				form="{{ product_form_id }}"
+				class="{% if option_disabled %}visually-disabled{% endif %}"
+				{% if current_option_selected %}
+					checked
+				{% endif %}
+				{% if variant_unavailable %}
+					disabled
+				{% endif %}
+				{{ input_dataset }}
+			>
+			<label
+				for="{{ input_id }}"
+				class="product__variant-selects__pill__card{% if version_image != blank %} product__variant-selects__pill__card--with-image{% endif %}"
+			>
+				{%- if version_image != blank -%}
+					<div class="product__variant-selects__pill__card__image">
+						{{ version_image | image_url: width: 184 | image_tag: loading: 'lazy', alt: version_title }}
+					</div>
+				{%- endif -%}
+				<div class="product__variant-selects__pill__card__content">
+					<div class="product__variant-selects__pill__card__title">{{ version_title }}</div>
+					{%- if version_picto != blank -%}
+						{{ version_picto | image_url: width: 20 | image_tag: loading: 'lazy', alt: version_title, class: 'product__variant-selects__pill__card__picto' }}
+					{%- endif -%}
+					{%- if version_text != blank -%}
+						<div class="product__variant-selects__pill__card__description">{{ version_text }}</div>
+					{%- endif -%}
+					<div class="product__variant-selects__pill__card__price-wrapper{% if value_variant_compare_at_price > value_variant_price %} product__variant-selects__pill__card__price-wrapper--on-sale{% endif %}">
+						<div class="product__variant-selects__pill__card__price">
+							{{ value_variant_price | money_without_trailing_zeros }}
+						</div>
+						{%- if value_variant_compare_at_price > value_variant_price -%}
+							<div class="product__variant-selects__pill__card__compare-price">
+								{{ value_variant_compare_at_price | money_without_trailing_zeros }}
+							</div>
+						{%- endif -%}
+						{%- if discount_percentage != blank and discount_percentage > 0 -%}
+							<div class="product__variant-selects__pill__card__badge badge color-{{ settings.sale_badge_color_scheme }}">
+								{{ discount_percentage | prepend: '-' | append: '%' }}
+							</div>
+						{%- endif -%}
+					</div>
+					{%- if value_variant_compare_at_price > value_variant_price -%}
+						{%- assign value_savings_amount = value_variant_compare_at_price | minus: value_variant_price | money_without_trailing_zeros -%}
+						<div class="product__variant-selects__pill__card__savings">
+							{{- 'icon-multiple-star.svg' | inline_asset_content -}}
+							{{ 'products.product.variant_card_savings_html' | t: savings_amount: value_savings_amount }}
+						</div>
+					{%- endif -%}
+				</div>
+			</label>
+		</div>
+	{%- elsif picker_type == 'dropdown' or picker_type == 'swatch_dropdown' -%}
+		<option
+			id="{{ input_id }}"
+			value="{{ value | escape }}"
+			{% if current_option_selected %}
+				selected="selected"
+			{% endif %}
+			{% if is_hidden_for_dedup %}
+				data-format-dedup-hidden="true"
+				hidden
+			{% endif %}
+			{% if swatch_value and picker_type == 'swatch_dropdown' %}
+				data-option-swatch-value="{{ swatch_value }}"
+				{% if swatch_focal_point %}
+					data-option-swatch-focal-point="{{ swatch_focal_point }}"
+				{% endif %}
+			{% endif %}
+			{{ input_dataset }}
+		>
+			{% if option_disabled -%}
+				{{- 'products.product.value_unavailable' | t: option_value: value_display -}}
+			{%- else -%}
+				{{- value_display -}}
+			{%- endif %}
+		</option>
+	{%- elsif picker_type == 'variant_dropdown' or picker_type == 'swatch_variant_dropdown' -%}
+		<li
+			class="variant-dropdown__option{% if not_show_value or is_hidden_for_dedup %} visually-hidden{% endif %}"
+			role="option"
+			{% if is_hidden_for_dedup %}data-format-dedup-hidden="true"{% endif %}
+			data-value="{{ value | escape }}"
+			tabindex="-1"
+			{% if current_option_selected %}
+				aria-selected="true"
+			{% endif %}
+			{% if option_disabled %}
+				data-disabled="true"
+			{% endif %}
+		>
+			<span class="variant-dropdown__option__container">
+				{% if picker_type == 'swatch_variant_dropdown'
+					and value_variant_color_image != blank
+					or value_variant_color_hexa != blank
+				%}
+					<span class="variant-dropdown__option-swatch">
+						{% if value_variant_color_image != blank %}
+							{{
+								value_variant_color_image
+								| image_url: width: 50
+								| image_tag: loading: 'lazy', alt: value_variant_color_label
+							}}
+						{% else %}
+							<span
+								class="variant-dropdown__option-swatch__color"
+								style="background-color: {{ value_variant_color_hexa }};"
+							></span>
+						{% endif %}
+					</span>
+				{% endif %}
+				{% if option_disabled -%}
+					<span class="variant-dropdown__option-text variant-dropdown__option-text--disabled">
+						{%- if variant_unavailable -%}
+							{{- 'products.product.value_unavailable' | t: option_value: value_display -}}
+						{%- else -%}
+							{{- 'products.product.value_sold_out' | t: option_value: value_display -}}
+						{%- endif -%}
+					</span>
+				{%- else -%}
+					<span class="variant-dropdown__option-text">{{- value_display -}}</span>
+				{%- endif %}
+			</span>
+			{% if is_pack_new and value_variant != blank %}
+				{%- liquid
+					# Pack-new : on s'appuie sur compare_at_price natif de la variante
+					# (Shopify standard). Badge % via la formule standard arrondie.
+					assign pack_badge_percent = 0
+					if value_variant.compare_at_price > value_variant.price
+						assign pack_badge_percent = value_variant.compare_at_price | minus: value_variant.price | times: 100.0 | divided_by: value_variant.compare_at_price | round
+					endif
+				-%}
+				<span class="variant-dropdown__option-price">
+					<span class="variant-dropdown__option-price--last">
+						{{ value_variant.price | money }}
+					</span>
+					{%- if value_variant.compare_at_price > value_variant.price -%}
+						<s class="variant-dropdown__option-price--regular">
+							{{ value_variant.compare_at_price | money }}
+						</s>
+					{%- endif -%}
+					{%- if pack_badge_percent > 0 -%}
+						<span class="badge price__badge-sale color-{{ settings.sale_badge_color_scheme }}">
+							-{{ pack_badge_percent }}%
+						</span>
+					{%- endif -%}
+				</span>
+			{% elsif is_bundle and reference_price != blank and value_variant != blank %}
+				{%- if variant_price_surplus > 0 -%}
+					<span class="variant-dropdown__option-price{% if variant_compare_at_price_surplus > 0 and variant_compare_at_price_surplus > variant_price_surplus %} variant-dropdown__option-price--compare-price{% endif %}">
+						<span class="variant-dropdown__option-price--last">
+							{{ variant_price_surplus | money | prepend: '+' }}
+						</span>
+						{%- if variant_compare_at_price_surplus > 0 and variant_compare_at_price_surplus > variant_price_surplus -%}
+							<s class="variant-dropdown__option-price--regular">
+								{{ variant_compare_at_price_surplus | money | prepend: '+' }}
+							</s>
+						{%- endif -%}
+					</span>
+				{%- endif -%}
+			{% elsif value_variant != blank and picker_type != 'swatch_variant_dropdown' %}
+				{%- if show_size_information_price -%}
+					<span class="variant-dropdown__option-price{% if value_variant_compare_at_price > value_variant_price %} variant-dropdown__option-price--compare-price{% endif %}">
+						<span class="variant-dropdown__option-price--last">
+							{{ value_variant_price | money }}
+						</span>
+						{%- if value_variant_compare_at_price > value_variant_price -%}
+							<s class="variant-dropdown__option-price--regular">
+								{{ value_variant_compare_at_price | money }}
+							</s>
+						{%- endif -%}
+					</span>
+				{%- else -%}
+					{%- if product.metafields.custom.parures_affichage.value -%}
+						{%- liquid
+							assign selected_variant_price_surplus = value_variant.price | minus: value_variant_price
+							if selected_variant_price_surplus > 0
+								echo selected_variant_price_surplus | money | prepend: '+'
+							endif
+						-%}
+					{%- endif -%}
+				{%- endif -%}
+			{% endif %}
+		</li>
+	{%- endif -%}
+{%- endfor -%}

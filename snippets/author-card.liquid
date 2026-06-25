@@ -1,0 +1,47 @@
+{%- liquid
+	assign article_author = article_author | downcase
+	assign author_found = blank
+	# Recherche du métaobject blog_auteur correspondant à l'auteur
+	for auteur in metaobjects.blog_auteur.values
+		assign auteur_name = auteur.nom.value | downcase
+		if auteur_name contains article_author
+			assign author_found = auteur
+			break
+		endif
+	endfor
+
+	if author_found != blank
+		assign author_image = author_found.image.value
+		assign author_name = author_found.nom.value
+		assign author_bio = author_found.bio.value
+	endif
+-%}
+
+{% if author_found != blank %}
+	<div class="author-card">
+		<div class="author-card__image">
+			{% if author_image != blank %}
+				<div class="media media--transparent media--square">
+					{% capture media_image %}
+					{{ author_image | image_url: width: 200, height: 200 | image_tag: alt: author_image.alt }}
+				{% endcapture %}
+					{{ media_image | replace: 'src="', 'lazy-src="' | replace: 'srcset="', 'lazy-srcset="' }}
+				</div>
+			{% endif %}
+		</div>
+		<div class="author-card__content">
+			{% if article_date != blank %}
+				{% assign article_date_formatted = article_date | date: '%d/%m/%Y' %}
+				<div class="author-card__date subtitle uppercase">
+					{{ 'blogs.article.written_on' | t: date: article_date_formatted }}
+				</div>
+			{% endif %}
+			{% if author_name != blank %}
+				<div class="author-card__title">{{ 'blogs.article.author' | t: name: author_name }}</div>
+			{% endif %}
+			{% if author_bio != blank %}
+				<div class="author-card__bio">{{ author_bio }}</div>
+			{% endif %}
+		</div>
+	</div>
+{% endif %}

@@ -1,0 +1,208 @@
+{%- liquid
+	assign reassurances_block = section.blocks | where: 'type', 'reassurances' | first
+	assign reassurances_list = reassurances_block.settings.reassurances_list
+
+	assign lazy_load = false
+	if section.index > 1
+		assign lazy_load = true
+	endif
+
+	assign has_metafields = false
+	if section.settings.reassurances_list != blank
+		assign count = 0
+		for item in section.settings.reassurances_list.value
+			assign count = count | plus: 1
+		endfor
+		assign has_metafields = true
+	endif
+
+	assign icon_width = reassurances_block.settings.icon_width | default: 40
+	assign show_text = reassurances_block.settings.show_text | default: false
+-%}
+
+{% capture swiper_options %}
+	{
+	"slideInView": "auto",
+	"slidesToMove": 2,
+	"loop": false,
+	"autoplay": false,
+	"speed": 300,
+	"grabCursor": false,
+	"effect": "slide",
+	"blockLength": {{ reassurances_list.size }},
+	"stackMobile": false,
+	"freeModeMobile": false,
+	"spaceBetween": 16
+	}
+{% endcapture %}
+
+{%- if reassurances_list.size > 0 -%}
+	{{ 'bundle.reassurances.css' | asset_url | stylesheet_tag }}
+
+	<script>
+		window.assetsUrl.js.push({"reassurances": "{{ "bundle.reassurances.js" | asset_url }}"});
+	</script>
+
+	<div class="product__reassurances-wrapper" data-ax-section="reassurances">
+		<div class="reassurances product__reassurances">
+			<reassurances-component>
+				<div
+					id="Swiper-product-reassurances-{{ section.id }}"
+					class="swiper reassurances__content"
+					data-options="{{ swiper_options | escape }}"
+					role="region"
+					aria-roledescription="carousel"
+					aria-label="{{ 'general.slider.name' | t }}"
+				>
+					{%- liquid
+						if reassurances_list.size == 2
+							assign grid_class = 'grid--2-col-tablet'
+						elsif reassurances_list.size == 3
+							assign grid_class = 'grid--3-col-tablet grid--3-col-desktop'
+						elsif reassurances_list.size == 4
+							assign grid_class = 'grid--2-col-tablet grid--4-col-desktop'
+						elsif reassurances_list.size == 5
+							assign grid_class = 'grid--3-col-tablet grid--5-col-desktop'
+						elsif reassurances_list.size == 6
+							assign grid_class = 'grid--3-col-tablet grid--6-col-desktop'
+						endif
+					-%}
+					<div
+						class="swiper-wrapper grid grid--2-col {{ grid_class }}"
+						role="list"
+					>
+						{%- for reassurance in reassurances_list limit: 4 -%}
+							{%- liquid
+								assign source = reassurance
+								if has_metafields and forloop.index <= count
+									assign metaobject_index = forloop.index0
+									for item in section.settings.reassurances_list.value
+										if forloop.index0 == metaobject_index
+											assign source = item
+											break
+										endif
+									endfor
+								endif
+
+								assign has_img = false
+								if source.image != blank
+									assign has_img = true
+									assign img_alt = source.image.alt | default: source.heading
+								endif
+							-%}
+							<div
+								class="reassurances__item swiper-slide grid__item center"
+								role="listitem"
+							>
+								{%- if source.url != blank and source.popin_content == blank -%}
+									<a
+										href="{{ source.url }}"
+										class="reassurances__link full-unstyled-link"
+										aria-label="{{ source.heading | escape }}"
+									>
+								{%- endif -%}
+								<div
+									class="reassurances__media media"
+									style="--icon-width: {{ icon_width }}px; --icon-margin-bottom: 8px;"
+								>
+									{%- if has_img -%}
+										{% capture media_item %}
+										{{
+											source.image
+											| image_url: width: icon_width
+											| image_tag: widths: '20, 30, 40, 50, 60, 80, 100', class: 'icon', loading: 'lazy', alt: img_alt, role: 'img'
+										}}
+									{% endcapture %}
+										{%- if lazy_load -%}
+											{{ media_item | replace: 'srcset=', 'lazy-srcset=' | replace: 'src=', 'lazy-src=' }}
+										{%- else -%}
+											{{ media_item }}
+										{%- endif -%}
+									{%- else -%}
+										{{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+									{%- endif -%}
+								</div>
+
+								<div class="reassurances__content-wrapper">
+									{%- if source.heading != blank -%}
+										<h3 class="reassurances__heading">
+											{{ source.heading | newline_to_br }}
+										</h3>
+									{%- endif -%}
+
+									{%- if show_text and source.text != blank -%}
+										<div class="reassurances__content">
+											{{ source.text | newline_to_br }}
+										</div>
+									{%- endif -%}
+
+									{%- if source.button_text != blank -%}
+										{%- if source.popin_content != blank -%}
+											<modal-opener data-modal="#PopupModal-product-reassurances-{{ section.id }}-{{ forloop.index }}">
+												<button
+													class="reassurances__subheading ax-link reversed{% if source.popin_content == blank %} ax-link--disabled{% endif %}"
+													type="button"
+													aria-label="{{ 'sections.video.load_video' | t: description: source.heading | escape }}"
+													aria-haspopup="dialog"
+												>
+													{{ source.button_text }}
+												</button>
+											</modal-opener>
+										{%- else -%}
+											<div class="reassurances__subheading reassurances__popin-btn ax-link reversed">
+												{{ source.button_text }}
+											</div>
+										{%- endif -%}
+									{%- endif -%}
+								</div>
+								{%- if source.url != blank and source.popin_content == blank -%}
+									</a>
+								{%- endif -%}
+							</div>
+
+							{% if source.popin_content != blank and source.button_text != blank and source.url == blank %}
+								<modal-dialog
+									id="PopupModal-product-reassurances-{{ section.id }}-{{ forloop.index }}"
+									class="modal-dialog gradient color-background-1"
+								>
+									<div
+										class="modal-dialog__content reassurances__popin-wrapper"
+										role="dialog"
+										aria-label="{{ source.heading | escape }}"
+										aria-modal="true"
+										tabindex="-1"
+									>
+										<div class="modal-dialog__header reassurances__popin-header">
+											<div class="modal-dialog__header-title reassurances__popin-title h4">
+												{{ source.heading }}
+											</div>
+											<button
+												id="ModalClose-product-reassurances-{{ section.id }}-{{ forloop.index }}"
+												type="button"
+												class="modal-dialog__toggle reassurances__popin-close"
+												aria-label="{{ 'accessibility.close' | t }}"
+											>
+												<span class="svg-wrapper">
+													{{- 'icon-close.svg' | inline_asset_content -}}
+												</span>
+											</button>
+										</div>
+										<div class="reassurances__popin-content">
+											{{ source.popin_content | newline_to_br }}
+										</div>
+									</div>
+								</modal-dialog>
+							{% endif %}
+						{%- endfor -%}
+					</div>
+
+					<div
+						class="swiper-pagination"
+						role="tablist"
+						aria-label="{{ 'general.slider.pagination' | t }}"
+					></div>
+				</div>
+			</reassurances-component>
+		</div>
+	</div>
+{%- endif -%}

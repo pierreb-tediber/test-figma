@@ -1,0 +1,74 @@
+{%- liquid
+	# theme-check-disable
+	capture content_for_query_string
+		echo content_for_header
+	endcapture
+	assign get_url = content_for_query_string | split: '"pageurl":"' | last | split: '"' | first | split: '.myshopify.com' | last | replace: '\/', '/' | replace: '%20', ' ' | replace: '\u0026', '&' | split: '?' | last
+	# theme-check-enable
+
+	assign product_form_id = 'product-form-' | append: product.id
+
+	# Si l'URL contient 'section_id' ou 'sections', désactive le chargement paresseux
+	if get_url contains 'section_id=card-bundle-item-included'
+		# Parser les paramètres de l'URL
+		assign url_params = get_url | split: '&'
+
+		# Initialiser les variables
+		assign parent_section_id = ''
+		assign step_number = ''
+		assign is_invisible = ''
+		assign has_multiple_variants = ''
+		assign variant_ids = ''
+		assign is_pack_new = false
+		assign hide_extras = false
+
+		# Extraire chaque paramètre
+		for param in url_params
+			assign param_parts = param | split: '='
+			assign param_name = param_parts[0]
+			assign param_value = param_parts[1] | url_decode | default: ''
+
+			case param_name
+				when 'isInvisible'
+					if param_value == 'true'
+						assign is_invisible = true
+					else
+						assign is_invisible = false
+					endif
+				when 'stepNumber'
+					assign step_number = param_value
+				when 'hasMultipleVariants'
+					if param_value == 'true'
+						assign has_multiple_variants = true
+					else
+						assign has_multiple_variants = false
+					endif
+				when 'free'
+					if param_value == 'true'
+						assign variant_free = true
+					else
+						assign variant_free = false
+					endif
+				when 'variantIds'
+					assign variant_ids = param_value
+				when 'parentSectionId'
+					assign parent_section_id = param_value
+				when 'isPackNew'
+					if param_value == 'true'
+						assign is_pack_new = true
+					else
+						assign is_pack_new = false
+					endif
+				when 'hideExtras'
+					if param_value == 'true'
+						assign hide_extras = true
+					else
+						assign hide_extras = false
+					endif
+			endcase
+		endfor
+
+		assign product_form_id = 'product-form-' | append: parent_section_id
+		render 'card-bundle-item-included', variant: product.selected_or_first_available_variant, section_id: parent_section_id, product: product, product_form_id: product_form_id, has_multiple_variants: has_multiple_variants, variant_ids: variant_ids, is_invisible: is_invisible, variant_free: variant_free, is_fetched: true, step_number: step_number, is_pack_new: is_pack_new, hide_extras: hide_extras
+	endif
+-%}

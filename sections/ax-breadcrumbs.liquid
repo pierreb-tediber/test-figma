@@ -1,0 +1,112 @@
+{%- style -%}
+	.section-{{ section.id }}-padding {
+	  padding-top: {{ section.settings.mob_padding_top }}px;
+	  padding-bottom: {{ section.settings.mob_padding_bottom }}px;
+	}
+
+	@media screen and (min-width: 750px) {
+	  .section-{{ section.id }}-padding {
+	    padding-top: {{ section.settings.padding_top }}px;
+	    padding-bottom: {{ section.settings.padding_bottom }}px;
+	  }
+	}
+{%- endstyle -%}
+
+<div
+	class="breadcrumbs gradient color-{{ section.settings.color_scheme }} section-{{ section.id }}-padding"
+>
+	{% unless section.settings.full_width %}
+		<div class="page-width">
+	{% endunless %}
+
+	{% render 'breadcrumbs' %}
+
+	{% unless section.settings.full_width %}
+		</div>
+	{% endunless %}
+</div>
+
+{% schema %}
+	{
+		"name": "Fil d'ariane",
+		"tag": "section",
+		"class": "section",
+		"disabled_on": {
+			"groups": ["header", "footer"]
+		},
+		"limit": 1,
+		"settings": [
+			{
+				"type": "header",
+				"content": "Content"
+			},
+			{
+				"type": "checkbox",
+				"id": "full_width",
+				"label": "Pleine largeur",
+				"default": false
+			},
+			{
+				"type": "header",
+				"content": "Color"
+			},
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "Color scheme",
+				"default": "background-1"
+			},
+			{
+				"type": "header",
+				"content": "Padding (space)"
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 2,
+				"unit": "px",
+				"label": "(Mobile) Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 2,
+				"unit": "px",
+				"label": "(Mobile) Padding bottom",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 2,
+				"unit": "px",
+				"label": "Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 2,
+				"unit": "px",
+				"label": "Padding bottom",
+				"default": 0
+			}
+		],
+		"blocks": [],
+		"presets": [
+			{
+				"name": "Fil d'ariane",
+				"blocks": []
+			}
+		]
+	}
+{% endschema %}

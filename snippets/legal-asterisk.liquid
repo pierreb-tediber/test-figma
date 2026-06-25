@@ -1,0 +1,25 @@
+{%- comment -%}
+	Wraps `*` characters (legal footnote markers) in <sup class="legal-asterisk">
+	so they render as a smaller superscript (~50% size).
+
+	Accepts:
+	- text:          {String}  The text to transform
+	- escape:        {Boolean} If true, apply | escape before replacement (plain-text fields)
+	- newline_to_br: {Boolean} If true, apply | newline_to_br before replacement
+
+	Usage:
+		{% render 'legal-asterisk', text: section.settings.heading %}
+		{% render 'legal-asterisk', text: block.settings.heading, escape: true %}
+		{% render 'legal-asterisk', text: titre, newline_to_br: true %}
+{%- endcomment -%}
+{%- liquid
+	assign transformed = text
+	if escape
+		assign transformed = transformed | escape
+	endif
+	if newline_to_br
+		assign transformed = transformed | newline_to_br
+	endif
+	assign transformed = transformed | replace: '*', '<sup class="legal-asterisk">*</sup>'
+-%}
+{{- transformed -}}

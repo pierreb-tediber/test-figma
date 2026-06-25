@@ -1,0 +1,136 @@
+{%- liquid
+	# theme-check-disable
+	capture content_for_query_string
+		echo content_for_header
+	endcapture
+	assign get_url = content_for_query_string | split: '"pageurl":"' | last | split: '"' | first | split: '.myshopify.com' | last | replace: '\/', '/' | replace: '%20', ' ' | replace: '\u0026', '&' | split: '?' | last
+	# theme-check-enable
+
+	assign product_bundle = product
+	assign product_form_id = 'product-form-' | append: product.id
+
+	# Si l'URL contient 'section_id' ou 'sections', désactive le chargement paresseux
+	if get_url contains 'section_id=card-bundle-product'
+		# Parser les paramètres de l'URL
+		assign url_params = get_url | split: '&'
+
+		# Initialiser les variables
+		assign discount_value = 0
+		assign reference_price = 0
+		assign reference_price_compare_at_price = 0
+		assign parent_option_size_cleaned = ''
+		assign parent_section_id = ''
+		assign step_number = ''
+		assign unique_id = ''
+		assign current_custom_position = ''
+		assign current_item_index = ''
+		assign first_available_index = ''
+		assign step_has_available_items = ''
+		assign has_item_visible = ''
+		assign no_price_surplus = ''
+		assign products_bundle_option_version = ''
+		assign is_pack_new = false
+		assign is_solo_in_step = false
+		assign has_sommier_tapissier_in_bundle = false
+
+		# Extraire chaque paramètre
+		for param in url_params
+			assign param_parts = param | split: '='
+			assign param_name = param_parts[0]
+			assign param_value = param_parts[1] | url_decode | default: ''
+
+			case param_name
+				when 'discountValue'
+					assign discount_value = param_value | plus: 0
+				when 'referencePrice'
+					assign reference_price = param_value | plus: 0
+				when 'referencePriceCompareAtPrice'
+					assign reference_price_compare_at_price = param_value | plus: 0
+				when 'parentOptionSizeCleaned'
+					assign parent_option_size_cleaned = param_value
+				when 'stepNumber'
+					assign step_number = param_value
+				when 'uniqueId'
+					assign unique_id = param_value
+				when 'parentSectionId'
+					assign parent_section_id = param_value
+				when 'currentCustomPosition'
+					assign current_custom_position = param_value | plus: 0
+				when 'currentItemIndex'
+					assign current_item_index = param_value | plus: 0
+				when 'firstAvailableIndex'
+					assign first_available_index = param_value | plus: 0
+				when 'stepHasAvailableItems'
+					if param_value == 'true'
+						assign step_has_available_items = true
+					else
+						assign step_has_available_items = false
+					endif
+				when 'hasItemVisible'
+					if param_value == 'true'
+						assign has_item_visible = true
+					else
+						assign has_item_visible = false
+					endif
+				when 'noPriceSurplus'
+					if param_value == 'true'
+						assign no_price_surplus = true
+					else
+						assign no_price_surplus = false
+					endif
+				when 'productsBundleOptionVersion'
+					assign products_bundle_option_version = param_value
+				when 'isPackNew'
+					if param_value == 'true'
+						assign is_pack_new = true
+					else
+						assign is_pack_new = false
+					endif
+				when 'isSoloInStep'
+					if param_value == 'true'
+						assign is_solo_in_step = true
+					else
+						assign is_solo_in_step = false
+					endif
+				when 'hideExtras'
+					if param_value == 'true'
+						assign hide_extras = true
+					else
+						assign hide_extras = false
+					endif
+				when 'hasSommierTapissierInBundle'
+					if param_value == 'true'
+						assign has_sommier_tapissier_in_bundle = true
+					else
+						assign has_sommier_tapissier_in_bundle = false
+					endif
+			endcase
+		endfor
+
+		assign product_form_id = 'product-form-' | append: parent_section_id
+	endif
+-%}
+
+{%- render 'card-bundle-product',
+	product_bundle: product_bundle,
+	selected_variant: product_bundle.selected_or_first_available_variant,
+	unique_id: unique_id,
+	step_number: step_number,
+	parent_option_size_cleaned: parent_option_size_cleaned,
+	reference_price: reference_price,
+	reference_price_compare_at_price: reference_price_compare_at_price,
+	current_custom_position: current_custom_position,
+	current_index: current_item_index,
+	first_available_index: first_available_index,
+	step_has_available_items: step_has_available_items,
+	has_item_visible: has_item_visible,
+	product_form_id: product_form_id,
+	section_id: parent_section_id,
+	discount_value: discount_value,
+	no_price_surplus: no_price_surplus,
+	products_bundle_option_version: products_bundle_option_version,
+	is_pack_new: is_pack_new,
+	is_solo_in_step: is_solo_in_step,
+	hide_extras: hide_extras,
+	has_sommier_tapissier_in_bundle: has_sommier_tapissier_in_bundle
+-%}

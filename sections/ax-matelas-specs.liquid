@@ -1,0 +1,936 @@
+{% comment %}
+	Section de comparaison de produits avec notes et sticky headers
+{% endcomment %}
+
+{%- liquid
+	assign products_to_compare = blank
+	if section.settings.products_to_compare != blank
+		assign products_to_compare = section.settings.products_to_compare
+	endif
+
+	# Lazy loading logic
+	if section.index > 1
+		assign lazy_load = true
+	else
+		assign lazy_load = false
+	endif
+-%}
+
+{%- if products_to_compare != blank -%}
+	{{ 'bundle.matelas-specs.css' | asset_url | stylesheet_tag }}
+
+	<script>
+		window.assetsUrl.js.push({ matelasSpecs: "{{ 'bundle.matelas-specs.js' | asset_url }}" });
+	</script>
+
+	{%- style -%}
+		#shopify-section-{{ section.id }} {
+			overflow: hidden;
+		}
+
+			.section-{{ section.id }}-padding {
+				padding-top: {{ section.settings.mob_padding_top }}px;
+				padding-bottom: {{ section.settings.mob_padding_bottom }}px;
+			}
+
+			@media screen and (min-width: 750px) {
+				.section-{{ section.id }}-padding {
+					padding-top: {{ section.settings.padding_top }}px;
+					padding-bottom: {{ section.settings.padding_bottom }}px;
+				}
+			}
+	{%- endstyle -%}
+
+	{%- liquid
+		assign products_count = products_to_compare.size
+		assign desktop_columns = section.settings.columns_desktop | default: products_count
+		assign grid_class = 'grid--2-col grid--' | append: desktop_columns | append: '-col-desktop'
+	-%}
+
+	<div
+		class="ax-section ax-matelas-specs color-{{ section.settings.color_scheme }} section-{{ section.id }}-padding"
+		id="MatelasSpecs-{{ section.id }}"
+		data-ax-section="matelasSpecs"
+	>
+		<div class="page-width">
+			<matelas-specs class="ax-matelas-specs__container">
+				{%- comment -%} Sticky product headers (responsive) {%- endcomment -%}
+				<div
+					class="ax-matelas-specs__headers color-{{ section.settings.products_color_scheme | default: 'background-1' }}"
+					data-sticky-container
+				>
+					<div class="grid {{ grid_class }}">
+						{%- for product in products_to_compare limit: 4 -%}
+							<div class="grid__item ax-matelas-specs__product-card">
+								{% render 'card-product',
+									card_product: product,
+									media_aspect_ratio: 'portrait',
+									image_shape: 'default',
+									show_secondary_image: true,
+									show_vendor: false,
+									show_rating: false,
+									lazy_load: lazy_load,
+									skip_styles: true,
+									quick_add: 'none',
+									section_id: section.id,
+									horizontal_class: true,
+									horizontal_quick_add: true,
+									view_product: true,
+									no_hn: true
+								%}
+							</div>
+						{%- endfor -%}
+					</div>
+				</div>
+
+				{%- comment -%} Mobile: Dropdown selectors {%- endcomment -%}
+
+				<div class="ax-matelas-specs__mobile-selectors grid grid--2-col medium-hide large-hide" data-sticky-container>
+					{%- for product in products_to_compare limit: 2 -%}
+						<div class="grid__item ax-matelas-specs__mobile-selector">
+							{%- comment -%} Card product for mobile (en haut) {%- endcomment -%}
+							<div class="ax-matelas-specs__mobile-product" data-product-display="{{ forloop.index }}">
+								<div class="ax-matelas-specs__mobile-card-wrapper" data-product-id="{{ product.id }}">
+									{% render 'card-product',
+										card_product: product,
+										media_aspect_ratio: 'portrait',
+										image_shape: 'default',
+										show_secondary_image: true,
+										show_vendor: false,
+										show_rating: false,
+										lazy_load: true,
+										skip_styles: true,
+										quick_add: false,
+										section_id: section.id
+									%}
+								</div>
+							</div>
+
+							{%- comment -%} Sélecteur en dessous {%- endcomment -%}
+							<label for="product-selector-{{ forloop.index }}" class="visually-hidden">
+								{{ 'sections.matelas_specs.select_product' | t }}
+								{{ forloop.index }}
+							</label>
+							<select
+								id="product-selector-{{ forloop.index }}"
+								class="ax-matelas-specs__dropdown"
+								data-product-selector="{{ forloop.index }}"
+							>
+								{%- for option_product in products_to_compare -%}
+									<option
+										value="{{ option_product.id }}"
+										{%- if option_product.id == product.id -%}
+											selected
+										{%- endif -%}
+									>
+										{{ option_product.title }}
+									</option>
+								{%- endfor -%}
+							</select>
+						</div>
+					{%- endfor -%}
+				</div>
+
+				{%- comment -%} Comparison content {%- endcomment -%}
+				<div class="ax-matelas-specs__content">
+					{%- comment -%} Comparaison - Blocs dynamiques (sauf heading) {%- endcomment -%}
+					{%- for block in section.blocks -%}
+						{%- unless block.type == 'heading' -%}
+							<div
+								class="ax-matelas-specs__score-row ax-matelas-specs__score-row--{{ block.type }} color-{{ block.settings.color_scheme | default: 'background-1' }}"
+								{{ block.shopify_attributes }}
+							>
+								{%- comment -%} Titre et description du bloc avec section-heading {%- endcomment -%}
+								{%- render 'section-heading',
+									heading: block.settings.title,
+									description: block.settings.description,
+									block: block,
+									heading_size: 'h3'
+								-%}
+
+								{%- comment -%} Grid avec les notes/barres {%- endcomment -%}
+								<div class="grid {{ grid_class }}">
+									{%- for product in products_to_compare limit: 4 -%}
+										{%- liquid
+											# Logique intelligente par produit
+											assign product_metaobject = blank
+											assign final_value = blank
+											assign final_metafield = blank
+
+											# Essayer metaobject d'abord
+											if product.metafields.custom.comparateur_metaobjet.value != blank
+												assign product_metaobject = product.metafields.custom.comparateur_metaobjet.value
+												case block.type
+													when 'note_confort'
+														assign final_value = product_metaobject.note_confort.value
+														assign final_metafield = product_metaobject.note_confort
+													when 'note_fermete'
+														assign final_value = product_metaobject.note_fermete.value
+														assign final_metafield = product_metaobject.note_fermete
+													when 'note_respirabilite'
+														assign final_value = product_metaobject.note_respirabilite.value
+														assign final_metafield = product_metaobject.note_respirabilite
+													when 'note_duree_vie'
+														assign final_value = product_metaobject.note_duree_de_vie.value
+														assign final_metafield = product_metaobject.note_duree_de_vie
+													when 'note_independance'
+														assign final_value = product_metaobject.note_independance_de_couchage.value
+														assign final_metafield = product_metaobject.note_independance_de_couchage
+													when 'note_reparabilite'
+														assign final_value = product_metaobject.note_reparabilite.value
+														assign final_metafield = product_metaobject.note_reparabilite
+													when 'proprietes'
+														assign final_value = 'proprietes'
+														assign final_metafield = product_metaobject
+													when 'garantie'
+														assign final_value = product_metaobject.garantie.value
+														assign final_metafield = product_metaobject.garantie
+												endcase
+											endif
+
+											# Fallback sur metafields individuels si pas de metaobject
+											if final_value == blank
+												case block.type
+													when 'note_confort'
+														assign final_value = product.metafields.custom.note_confort.value
+														assign final_metafield = product.metafields.custom.note_confort
+													when 'note_fermete'
+														assign final_value = product.metafields.custom.note_fermete.value
+														assign final_metafield = product.metafields.custom.note_fermete
+													when 'note_respirabilite'
+														assign final_value = product.metafields.custom.note_respirabilite.value
+														assign final_metafield = product.metafields.custom.note_respirabilite
+													when 'note_duree_vie'
+														assign final_value = product.metafields.custom.note_duree_de_vie.value
+														assign final_metafield = product.metafields.custom.note_duree_de_vie
+													when 'note_independance'
+														assign final_value = product.metafields.custom.note_independance_de_couchage.value
+														assign final_metafield = product.metafields.custom.note_independance_de_couchage
+													when 'note_reparabilite'
+														assign final_value = product.metafields.custom.note_reparabilite.value
+														assign final_metafield = product.metafields.custom.note_reparabilite
+													when 'proprietes'
+														assign final_value = 'proprietes'
+														assign final_metafield = product.metafields.custom.comparateur_metaobjet
+													when 'garantie'
+														assign final_value = product.metafields.custom.garantie.value
+														assign final_metafield = product.metafields.custom.garantie
+												endcase
+											endif
+										-%}
+
+										<div
+											class="grid__item ax-matelas-specs__score-item ax-matelas-specs__score-item--{%- if block.type contains 'note_' -%}note{%- elsif block.type contains 'prop_' -%}property{%- else -%}guarantee{%- endif -%}"
+											data-product-id="{{ product.id }}"
+										>
+											{%- if final_value != blank -%}
+												{%- if block.type contains 'note_' -%}
+													{%- comment -%} RENDU NOTES : Adjectif + barre de progression {%- endcomment -%}
+													<div class="ax-matelas-specs__score-adjective">
+														{%- liquid
+															# Arrondir les décimales pour les adjectifs
+															assign rounded_value = final_value | round
+															# Construire la clé de traduction
+															assign adjective_key = 'sections.matelas_specs.adjectives.'
+															case block.type
+																when 'note_confort'
+																	assign adjective_key = adjective_key | append: 'confort.' | append: rounded_value
+																when 'note_fermete'
+																	assign adjective_key = adjective_key | append: 'fermete.' | append: rounded_value
+																when 'note_respirabilite'
+																	assign adjective_key = adjective_key | append: 'respirabilite.' | append: rounded_value
+																when 'note_duree_vie'
+																	assign adjective_key = adjective_key | append: 'duree_vie.' | append: rounded_value
+																when 'note_independance'
+																	assign adjective_key = adjective_key | append: 'independance.' | append: rounded_value
+																when 'note_reparabilite'
+																	assign adjective_key = adjective_key | append: 'reparabilite.' | append: rounded_value
+																else
+																	assign adjective_key = blank
+															endcase
+														-%}
+														{%- if adjective_key != blank -%}
+															{{ adjective_key | t }}
+														{%- else -%}
+															{{ rounded_value }}/5
+														{%- endif -%}
+													</div>
+													{%- comment -%} Barre de progression pour les notes {%- endcomment -%}
+													{%- assign note_percentage = final_value | times: 20 -%}
+													<div class="ax-matelas-specs__score-bar-container">
+														{%- comment -%} Labels min/max adaptatifs par critère {%- endcomment -%}
+														<div class="ax-matelas-specs__score-labels">
+															<span class="ax-matelas-specs__score-label-min">
+																{%- liquid
+																	assign min_key = 'sections.matelas_specs.adjectives.'
+																	case block.type
+																		when 'note_confort'
+																			assign min_key = min_key | append: 'confort.1'
+																		when 'note_fermete'
+																			assign min_key = min_key | append: 'fermete.1'
+																		when 'note_respirabilite'
+																			assign min_key = min_key | append: 'respirabilite.1'
+																		when 'note_duree_vie'
+																			assign min_key = min_key | append: 'duree_vie.1'
+																		when 'note_independance'
+																			assign min_key = min_key | append: 'independance.1'
+																		when 'note_reparabilite'
+																			assign min_key = min_key | append: 'reparabilite.1'
+																		else
+																			assign min_key = blank
+																	endcase
+																-%}
+																{%- if min_key != blank -%}
+																	{{ min_key | t }}
+																{%- else -%}
+																	1/5
+																{%- endif -%}
+															</span>
+															<span class="ax-matelas-specs__score-label-max">
+																{%- liquid
+																	assign max_key = 'sections.matelas_specs.adjectives.'
+																	case block.type
+																		when 'note_confort'
+																			assign max_key = max_key | append: 'confort.5'
+																		when 'note_fermete'
+																			assign max_key = max_key | append: 'fermete.5'
+																		when 'note_respirabilite'
+																			assign max_key = max_key | append: 'respirabilite.5'
+																		when 'note_duree_vie'
+																			assign max_key = max_key | append: 'duree_vie.5'
+																		when 'note_independance'
+																			assign max_key = max_key | append: 'independance.5'
+																		when 'note_reparabilite'
+																			assign max_key = max_key | append: 'reparabilite.5'
+																		else
+																			assign max_key = blank
+																	endcase
+																-%}
+																{%- if max_key != blank -%}
+																	{{ max_key | t }}
+																{%- else -%}
+																	5/5
+																{%- endif -%}
+															</span>
+														</div>
+														<div class="ax-matelas-specs__score-bar">
+															<div
+																class="ax-matelas-specs__score-bar-inner{% if note_percentage == 100 %} ax-matelas-specs__score-bar-inner--max{% endif %}"
+																style="width: {{ note_percentage }}%"
+															></div>
+															<span></span>
+															<span></span>
+															<span></span>
+															<span></span>
+														</div>
+													</div>
+												{%- elsif block.type == 'proprietes' -%}
+													{%- comment -%} RENDU PROPRIÉTÉS GROUPÉES : Toutes les propriétés du produit {%- endcomment -%}
+													<div class="ax-matelas-specs__properties-list">
+														{%- if product_metaobject != blank -%}
+															{%- comment -%} Épaisseur {%- endcomment -%}
+															{%- if product_metaobject.propriete_epaisseur.value != blank -%}
+																<div class="ax-matelas-specs__property-item">
+																	{%- if block.settings.icon_epaisseur != blank -%}
+																		<div class="ax-matelas-specs__property-icon">
+																			{{
+																				block.settings.icon_epaisseur
+																				| image_url: width: 32
+																				| image_tag: width: 32, height: 32, alt: 'Épaisseur', loading: 'lazy'
+																			}}
+																		</div>
+																	{%- endif -%}
+																	<div class="ax-matelas-specs__property-content">
+																		{{ product_metaobject.propriete_epaisseur | metafield_tag }}
+																	</div>
+																</div>
+															{%- endif -%}
+
+															{%- comment -%} Densité {%- endcomment -%}
+															{%- if product_metaobject.propriete_densite.value != blank -%}
+																<div class="ax-matelas-specs__property-item">
+																	{%- if block.settings.icon_densite != blank -%}
+																		<div class="ax-matelas-specs__property-icon">
+																			{{
+																				block.settings.icon_densite
+																				| image_url: width: 32
+																				| image_tag: width: 32, height: 32, alt: 'Densité', loading: 'lazy'
+																			}}
+																		</div>
+																	{%- endif -%}
+																	<div class="ax-matelas-specs__property-content">
+																		{{ product_metaobject.propriete_densite | metafield_tag }}
+																	</div>
+																</div>
+															{%- endif -%}
+
+															{%- comment -%} Structure {%- endcomment -%}
+															{%- if product_metaobject.propriete_structure.value != blank -%}
+																<div class="ax-matelas-specs__property-item">
+																	{%- if block.settings.icon_structure != blank -%}
+																		<div class="ax-matelas-specs__property-icon">
+																			{{
+																				block.settings.icon_structure
+																				| image_url: width: 32
+																				| image_tag: width: 32, height: 32, alt: 'Structure', loading: 'lazy'
+																			}}
+																		</div>
+																	{%- endif -%}
+																	<div class="ax-matelas-specs__property-content">
+																		{{ product_metaobject.propriete_structure | metafield_tag }}
+																	</div>
+																</div>
+															{%- endif -%}
+														{%- endif -%}
+
+														{%- comment -%} Lien dynamique vers le produit {%- endcomment -%}
+														{%- if block.settings.button_text != blank -%}
+															<div class="ax-matelas-specs__property-link {{ block.settings.button_alignment }}">
+																{%- render 'link-style',
+																	link_label: block.settings.button_text,
+																	link_url: product.url,
+																	link_style: block.settings.link_style,
+																	link_target: block.settings.link_blank
+																-%}
+															</div>
+														{%- endif -%}
+													</div>
+												{%- else -%}
+													{%- comment -%} RENDU GARANTIE : Valeur texte simple {%- endcomment -%}
+													<div class="ax-matelas-specs__text-value">
+														{{ final_metafield | metafield_tag }}
+													</div>
+												{%- endif -%}
+											{%- else -%}
+												<div class="ax-matelas-specs__score-empty">
+													{{ 'sections.matelas_specs.no_data' | t }}
+												</div>
+											{%- endif -%}
+										</div>
+									{%- endfor -%}
+								</div>
+							</div>
+						{%- endunless -%}
+					{%- endfor -%}
+				</div>
+			</matelas-specs>
+
+			{%- comment -%} Bouton de section {%- endcomment -%}
+			{%- if section.settings.button_text != blank and section.settings.button_url != blank -%}
+				<div class="ax-matelas-specs__section-button {{ section.settings.button_alignment }}">
+					{%- render 'link-style',
+						link_label: section.settings.button_text,
+						link_url: section.settings.button_url,
+						link_style: section.settings.button_style,
+						link_target: section.settings.button_blank
+					-%}
+				</div>
+			{%- endif -%}
+		</div>
+	</div>
+
+	{%- comment -%} Minimal data for mobile selectors {%- endcomment -%}
+	<script type="application/json" data-products-comparison-data>
+		{
+		  "products": [
+		    {%- for product in products_to_compare -%}
+		      {
+		        "id": {{ product.id | json }},
+		        "title": {{ product.title | json }},
+		        "featured_image": {%- if product.featured_image -%}{
+		          "url": {{ product.featured_image | image_url: width: 200 | json }},
+		          "alt": {{ product.featured_image.alt | json }}
+		        }{%- else -%}null{%- endif -%},
+		        "price_html": "{{ product.price | money }}"
+		      }{% unless forloop.last %},{% endunless %}
+		    {%- endfor -%}
+		  ]
+		}
+	</script>
+{%- endif -%}
+
+{% schema %}
+	{
+		"name": "Ax Matelas Specs",
+		"tag": "section",
+		"class": "section",
+		"disabled_on": {
+			"groups": ["header", "footer"]
+		},
+		"settings": [
+			{
+				"type": "header",
+				"content": "Contenu"
+			},
+			{
+				"type": "product_list",
+				"id": "products_to_compare",
+				"label": "Produits à comparer",
+				"limit": 4,
+				"info": "Sélectionnez jusqu'à 4 produits à comparer"
+			},
+			{
+				"type": "range",
+				"id": "columns_desktop",
+				"min": 2,
+				"max": 4,
+				"step": 1,
+				"unit": "col",
+				"label": "Colonnes desktop",
+				"default": 4,
+				"info": "Nombre de colonnes affichées sur desktop"
+			},
+			{
+				"type": "header",
+				"content": "Bouton de section"
+			},
+			{
+				"type": "text",
+				"id": "button_text",
+				"label": "Texte du bouton"
+			},
+			{
+				"type": "url",
+				"id": "button_url",
+				"label": "Lien du bouton"
+			},
+			{
+				"type": "checkbox",
+				"id": "button_blank",
+				"label": "Ouvrir dans un nouvel onglet",
+				"default": false
+			},
+			{
+				"type": "select",
+				"id": "button_style",
+				"options": [
+					{
+						"value": "button button--primary",
+						"label": "Primary"
+					},
+					{
+						"value": "button button--secondary",
+						"label": "Secondary"
+					},
+					{
+						"value": "ax-link",
+						"label": "Link"
+					},
+					{
+						"value": "ax-link reversed",
+						"label": "Link inversé"
+					},
+					{
+						"value": "underlined-link",
+						"label": "Underline link"
+					}
+				],
+				"default": "button button--primary",
+				"label": "Style du bouton"
+			},
+			{
+				"type": "select",
+				"id": "button_alignment",
+				"options": [
+					{
+						"value": "left",
+						"label": "Gauche"
+					},
+					{
+						"value": "center",
+						"label": "Centre"
+					},
+					{
+						"value": "right",
+						"label": "Droite"
+					}
+				],
+				"default": "center",
+				"label": "Alignement du bouton"
+			},
+			{
+				"type": "header",
+				"content": "Couleurs"
+			},
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "Couleurs de la section",
+				"default": "background-1"
+			},
+			{
+				"type": "color_scheme",
+				"id": "products_color_scheme",
+				"label": "Couleurs des produits",
+				"default": "background-1"
+			},
+			{
+				"type": "header",
+				"content": "Padding (space)"
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding bottom",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding bottom",
+				"default": 0
+			}
+		],
+		"blocks": [
+			{
+				"type": "note_confort",
+				"name": "Note confort",
+				"limit": 1,
+				"settings": [
+					{
+						"type": "text",
+						"id": "title",
+						"label": "Titre",
+						"default": "Confort"
+					},
+					{
+						"type": "text",
+						"id": "description",
+						"label": "Description (optionnelle)",
+						"info": "Explication du critère"
+					},
+					{
+						"type": "color_scheme",
+						"id": "color_scheme",
+						"label": "Color scheme",
+						"default": "background-1"
+					}
+				]
+			},
+			{
+				"type": "note_fermete",
+				"name": "Note fermeté",
+				"limit": 1,
+				"settings": [
+					{
+						"type": "text",
+						"id": "title",
+						"label": "Titre",
+						"default": "Fermeté"
+					},
+					{
+						"type": "text",
+						"id": "description",
+						"label": "Description (optionnelle)",
+						"info": "Explication du critère"
+					},
+					{
+						"type": "color_scheme",
+						"id": "color_scheme",
+						"label": "Color scheme",
+						"default": "background-1"
+					}
+				]
+			},
+			{
+				"type": "note_respirabilite",
+				"name": "Note respirabilité",
+				"limit": 1,
+				"settings": [
+					{
+						"type": "text",
+						"id": "title",
+						"label": "Titre",
+						"default": "Respirabilité"
+					},
+					{
+						"type": "text",
+						"id": "description",
+						"label": "Description (optionnelle)",
+						"info": "Explication du critère"
+					},
+					{
+						"type": "color_scheme",
+						"id": "color_scheme",
+						"label": "Color scheme",
+						"default": "background-1"
+					}
+				]
+			},
+			{
+				"type": "note_duree_vie",
+				"name": "Note durée vie",
+				"limit": 1,
+				"settings": [
+					{
+						"type": "text",
+						"id": "title",
+						"label": "Titre",
+						"default": "Durée de vie"
+					},
+					{
+						"type": "text",
+						"id": "description",
+						"label": "Description (optionnelle)",
+						"info": "Explication du critère"
+					},
+					{
+						"type": "color_scheme",
+						"id": "color_scheme",
+						"label": "Color scheme",
+						"default": "background-1"
+					}
+				]
+			},
+			{
+				"type": "note_independance",
+				"name": "Note indépendance",
+				"limit": 1,
+				"settings": [
+					{
+						"type": "text",
+						"id": "title",
+						"label": "Titre",
+						"default": "Indépendance de couchage"
+					},
+					{
+						"type": "text",
+						"id": "description",
+						"label": "Description (optionnelle)",
+						"info": "Explication du critère"
+					},
+					{
+						"type": "color_scheme",
+						"id": "color_scheme",
+						"label": "Color scheme",
+						"default": "background-1"
+					}
+				]
+			},
+			{
+				"type": "note_reparabilite",
+				"name": "Note réparabilité",
+				"limit": 1,
+				"settings": [
+					{
+						"type": "text",
+						"id": "title",
+						"label": "Titre",
+						"default": "Réparabilité"
+					},
+					{
+						"type": "text",
+						"id": "description",
+						"label": "Description (optionnelle)",
+						"info": "Explication du critère"
+					},
+					{
+						"type": "color_scheme",
+						"id": "color_scheme",
+						"label": "Color scheme",
+						"default": "background-1"
+					}
+				]
+			},
+			{
+				"type": "proprietes",
+				"name": "Propriétés du matelas",
+				"limit": 1,
+				"settings": [
+					{
+						"type": "text",
+						"id": "title",
+						"label": "Titre",
+						"default": "Propriété du matelas"
+					},
+					{
+						"type": "richtext",
+						"id": "description",
+						"label": "Description"
+					},
+					{
+						"type": "text",
+						"id": "button_text",
+						"label": "Texte du bouton",
+						"default": "Voir la fiche technique"
+					},
+					{
+						"type": "checkbox",
+						"id": "link_blank",
+						"label": "Lien _blank",
+						"info": "Ouvrir ce lien dans une nouvelle fenêtre",
+						"default": false
+					},
+					{
+						"type": "select",
+						"id": "link_style",
+						"options": [
+							{
+								"value": "button button--primary",
+								"label": "Primary"
+							},
+							{
+								"value": "button button--secondary",
+								"label": "Secondary"
+							},
+							{
+								"value": "ax-link",
+								"label": "Link"
+							},
+							{
+								"value": "ax-link reversed",
+								"label": "Link inversé"
+							},
+							{
+								"value": "underlined-link",
+								"label": "Underline link"
+							}
+						],
+						"default": "button button--primary",
+						"label": "Style du bouton"
+					},
+					{
+						"type": "select",
+						"id": "button_alignment",
+						"options": [
+							{
+								"value": "left",
+								"label": "Gauche"
+							},
+							{
+								"value": "center",
+								"label": "Centre"
+							},
+							{
+								"value": "right",
+								"label": "Droite"
+							}
+						],
+						"default": "center",
+						"label": "Alignement du bouton"
+					},
+					{
+						"type": "image_picker",
+						"id": "icon_epaisseur",
+						"label": "Icône épaisseur"
+					},
+					{
+						"type": "image_picker",
+						"id": "icon_densite",
+						"label": "Icône densité"
+					},
+					{
+						"type": "image_picker",
+						"id": "icon_structure",
+						"label": "Icône structure"
+					},
+					{
+						"type": "color_scheme",
+						"id": "color_scheme",
+						"label": "Color scheme",
+						"default": "background-1"
+					}
+				]
+			},
+			{
+				"type": "garantie",
+				"name": "Garantie",
+				"limit": 1,
+				"settings": [
+					{
+						"type": "text",
+						"id": "title",
+						"label": "Titre",
+						"default": "Garantie"
+					},
+					{
+						"type": "text",
+						"id": "description",
+						"label": "Description (optionnelle)",
+						"info": "Explication de la garantie"
+					},
+					{
+						"type": "color_scheme",
+						"id": "color_scheme",
+						"label": "Color scheme",
+						"default": "background-1"
+					}
+				]
+			}
+		],
+		"presets": [
+			{
+				"name": "Ax Matelas Specs",
+				"category": "Axome",
+				"settings": {
+					"columns_desktop": 4
+				},
+				"blocks": [
+					{
+						"type": "note_confort",
+						"settings": {
+							"title": "Confort",
+							"description": "Sensation de confort au coucher"
+						}
+					},
+					{
+						"type": "note_fermete",
+						"settings": {
+							"title": "Fermeté",
+							"description": "Niveau de maintien du matelas"
+						}
+					},
+					{
+						"type": "note_respirabilite",
+						"settings": {
+							"title": "Respirabilité",
+							"description": "Circulation de l'air dans le matelas"
+						}
+					},
+					{
+						"type": "proprietes",
+						"settings": {
+							"title": "Propriété du matelas",
+							"button_text": "Voir la fiche technique"
+						}
+					},
+					{
+						"type": "garantie",
+						"settings": {
+							"title": "Garantie",
+							"description": "Durée de la garantie produit"
+						}
+					}
+				]
+			}
+		]
+	}
+{% endschema %}

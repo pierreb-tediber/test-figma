@@ -1,0 +1,65 @@
+{%- style -%}
+	  @font-face {
+	  font-family: "Obviously";
+	  font-weight: 400;
+	  font-style: normal;
+	  font-display: swap;
+	  src: url("{{ 'obviously-regular.woff2' | file_url }}") format("woff2");
+	}
+
+	@font-face {
+	  font-family: "Obviously";
+	  font-weight: 700;
+	  font-style: normal;
+	  font-display: swap;
+	  src: url("{{ 'obviously-bold.woff2' | file_url }}") format("woff2");
+	}
+
+	@font-face {
+	  font-family: "ObviouslyNarrow";
+	  font-weight: 500;
+	  font-style: normal;
+	  font-display: swap;
+	  src: url("{{ 'obviously-narrow-medium.woff2' | file_url }}") format("woff2");
+	}
+
+	@font-face {
+	  font-family: "ObviouslyNarrow";
+	  font-weight: 700;
+	  font-style: normal;
+	  font-display: swap;
+	  src: url("{{ 'obviously-narrow-bold.woff2' | file_url }}") format("woff2");
+	}
+
+	@font-face {
+	  font-family: "ObviouslyNarrow";
+	  font-weight: 900;
+	  font-style: normal;
+	  font-display: swap;
+	  src: url("{{ 'obviously-narrow-black.woff2' | file_url }}") format("woff2");
+	}
+
+	@font-face {
+	  font-family: "ObviouslyWide";
+	  font-weight: 900;
+	  font-style: normal;
+	  font-display: swap;
+	  src: url("{{ 'obviously-wide-black.woff2' | file_url }}") format("woff2");
+	}
+
+	{%- for i in (1..4) -%}
+	  {%- assign name_key = 'campagne_' | append: i | append: '_font_name' -%}
+	  {%- assign weight_key = 'campagne_' | append: i | append: '_font_weight' -%}
+	  {%- assign font_name = settings[name_key] -%}
+	  {%- if font_name != blank -%}
+	    {%- assign font_file = font_name | append: '.woff2' -%}
+	    @font-face {
+	      font-family: "{{ font_name }}";
+	      font-weight: {{ settings[weight_key] | default: 400 }};
+	      font-style: normal;
+	      font-display: swap;
+	      src: url("{{ font_file | file_url }}") format("woff2");
+	    }
+	  {%- endif -%}
+	{%- endfor -%}
+{%- endstyle -%}

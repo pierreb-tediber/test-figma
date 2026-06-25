@@ -1,0 +1,636 @@
+{% comment %}
+	Renders special configuration mode for bundle
+	Configuration active with a single product and no variants
+
+	Accepts:
+	- product_bundle: {Object} Product to configure
+	- parent_option_size_cleaned: {String} Cleaned parent option size
+	- parent_option_color_cleaned: {String} Cleaned parent option color
+	- block: {Object} Block settings
+	- product_form_id: {String} Form ID
+	- current_custom_position: {Number} Current position
+	- step_number: {Number} Step number
+
+	Usage:
+	{% render 'card-bundle-special-config',
+		product_bundle: product_bundle,
+		parent_option_size_cleaned: parent_option_size_cleaned,
+		parent_option_color_cleaned: parent_option_color_cleaned,
+		block: block,
+		product_form_id: product_form_id,
+		current_custom_position: current_custom_position,
+		step_number: i
+	%}
+{% endcomment %}
+
+{%- liquid
+	comment
+		INITIALISATION DU MODE CONFIGURATION SPÉCIAL
+
+		Ce mode s'active quand une étape du bundle contient :
+		- Un seul produit avec configuration activée
+		- Aucune variante individuelle
+		Dans ce cas, on affiche directement le sélecteur de variantes
+		sans label d'étape pour une interface épurée
+	endcomment
+	assign bundle_product_variant = product_bundle.selected_or_first_available_variant
+	assign has_changed_option_for_hidden = false
+
+	comment
+		VÉRIFICATION ET REMPLACEMENT DES VARIANTES CACHÉES
+
+		Si la variante sélectionnée a le métafield hidden_variant à true,
+		on cherche une variante alternative disponible et non cachée
+	endcomment
+	if bundle_product_variant.metafields.custom.hidden_variant.value == true
+		if bundle_product_variant.options.size == 1
+			assign candidate_variants_all = product_bundle.variants
+		elsif bundle_product_variant.options.size == 2
+			assign candidate_variants_all = product_bundle.variants
+			assign candidate_variants_matching_first_options = product_bundle.variants | where: 'option1', bundle_product_variant.options[0] | where: 'option2', bundle_product_variant.options[1]
+		elsif bundle_product_variant.options.size == 3
+			assign candidate_variants_all = product_bundle.variants
+			assign candidate_variants_matching_first_options = product_bundle.variants | where: 'option1', bundle_product_variant.options[0] | where: 'option2', bundle_product_variant.options[1] | where: 'option3', bundle_product_variant.options[2]
+			assign candidate_variants_matching_two_options = product_bundle.variants | where: 'option1', bundle_product_variant.options[0] | where: 'option2', bundle_product_variant.options[1] | where: 'option3', bundle_product_variant.options[2]
+		elsif bundle_product_variant.options.size == 4
+			assign candidate_variants_all = product_bundle.variants
+			assign candidate_variants_matching_first_options = product_bundle.variants | where: 'option1', bundle_product_variant.options[0] | where: 'option2', bundle_product_variant.options[1]
+			assign candidate_variants_matching_two_options = product_bundle.variants | where: 'option1', bundle_product_variant.options[0] | where: 'option2', bundle_product_variant.options[1] | where: 'option3', bundle_product_variant.options[2]
+			assign candidate_variants_matching_three_options = product_bundle.variants | where: 'option1', bundle_product_variant.options[0] | where: 'option2', bundle_product_variant.options[1] | where: 'option3', bundle_product_variant.options[2]
+		endif
+
+		assign valid_variant_bundle_found = false
+		if valid_variant_bundle_found == false and candidate_variants_matching_three_options != blank
+			for variant in candidate_variants_matching_three_options
+				comment
+					Pour option4, on doit filtrer manuellement car where: 'option4' n'existe pas en Liquid
+				endcomment
+				if variant.options[3] != bundle_product_variant.options[3]
+					continue
+				endif
+
+				comment
+					VÉRIFICATION DE DISPONIBILITÉ COMPLÈTE
+
+					Même logique que dans le reste du fichier pour garantir
+					qu'on sélectionne une variante réellement disponible
+				endcomment
+				assign check_against_inventory = true
+				if variant.inventory_management != 'shopify' or variant.inventory_policy == 'continue'
+					assign check_against_inventory = false
+				endif
+
+				assign quantity_rule_soldout = false
+				if variant.quantity_rule.min > variant.inventory_quantity and check_against_inventory
+					assign quantity_rule_soldout = true
+				endif
+
+				assign variant_available = true
+				if variant.available == false or quantity_rule_soldout or variant == null
+					assign variant_available = false
+				endif
+
+				comment
+					Sélectionner cette variante si elle est disponible ET non cachée
+				endcomment
+				if variant_available and variant.metafields.custom.hidden_variant.value != true
+					assign bundle_product_variant = variant
+					assign valid_variant_bundle_found = true
+					break
+				endif
+			endfor
+		endif
+
+		if valid_variant_bundle_found == false and candidate_variants_matching_two_options != blank
+			for variant in candidate_variants_matching_two_options
+				comment
+					VÉRIFICATION DE DISPONIBILITÉ COMPLÈTE
+
+					Même logique que dans le reste du fichier pour garantir
+					qu'on sélectionne une variante réellement disponible
+				endcomment
+				assign check_against_inventory = true
+				if variant.inventory_management != 'shopify' or variant.inventory_policy == 'continue'
+					assign check_against_inventory = false
+				endif
+
+				assign quantity_rule_soldout = false
+				if variant.quantity_rule.min > variant.inventory_quantity and check_against_inventory
+					assign quantity_rule_soldout = true
+				endif
+
+				assign variant_available = true
+				if variant.available == false or quantity_rule_soldout or variant == null
+					assign variant_available = false
+				endif
+
+				comment
+					Sélectionner cette variante si elle est disponible ET non cachée
+				endcomment
+				if variant_available and variant.metafields.custom.hidden_variant.value != true
+					assign bundle_product_variant = variant
+					assign valid_variant_bundle_found = true
+					if candidate_variants_matching_three_options != blank
+						assign has_changed_option_for_hidden = true
+					endif
+					break
+				endif
+			endfor
+		endif
+
+		if valid_variant_bundle_found == false and candidate_variants_matching_first_options != blank
+			for variant in candidate_variants_matching_first_options
+				comment
+					VÉRIFICATION DE DISPONIBILITÉ COMPLÈTE
+
+					Même logique que dans le reste du fichier pour garantir
+					qu'on sélectionne une variante réellement disponible
+				endcomment
+				assign check_against_inventory = true
+				if variant.inventory_management != 'shopify' or variant.inventory_policy == 'continue'
+					assign check_against_inventory = false
+				endif
+
+				assign quantity_rule_soldout = false
+				if variant.quantity_rule.min > variant.inventory_quantity and check_against_inventory
+					assign quantity_rule_soldout = true
+				endif
+
+				assign variant_available = true
+				if variant.available == false or quantity_rule_soldout or variant == null
+					assign variant_available = false
+				endif
+
+				comment
+					Sélectionner cette variante si elle est disponible ET non cachée
+				endcomment
+				if variant_available and variant.metafields.custom.hidden_variant.value != true
+					assign bundle_product_variant = variant
+					assign valid_variant_bundle_found = true
+					if candidate_variants_matching_two_options != blank
+						assign has_changed_option_for_hidden = true
+					endif
+					break
+				endif
+			endfor
+		endif
+
+		if valid_variant_bundle_found == false and candidate_variants_all != blank
+			for variant in candidate_variants_all
+				comment
+					VÉRIFICATION DE DISPONIBILITÉ COMPLÈTE
+
+					Même logique que dans le reste du fichier pour garantir
+					qu'on sélectionne une variante réellement disponible
+				endcomment
+				assign check_against_inventory = true
+				if variant.inventory_management != 'shopify' or variant.inventory_policy == 'continue'
+					assign check_against_inventory = false
+				endif
+
+				assign quantity_rule_soldout = false
+				if variant.quantity_rule.min > variant.inventory_quantity and check_against_inventory
+					assign quantity_rule_soldout = true
+				endif
+
+				assign variant_available = true
+				if variant.available == false or quantity_rule_soldout or variant == null
+					assign variant_available = false
+				endif
+
+				comment
+					Sélectionner cette variante si elle est disponible ET non cachée
+				endcomment
+				if variant_available and variant.metafields.custom.hidden_variant.value != true
+					assign bundle_product_variant = variant
+					assign valid_variant_bundle_found = true
+					if candidate_variants_matching_first_options != blank
+						assign has_changed_option_for_hidden = true
+					endif
+					break
+				endif
+			endfor
+		endif
+	endif
+
+	assign special_config_reference_price = blank
+	assign has_matching_option = false
+	assign has_matching_size = true
+
+	comment
+		PRÉPARATION DES TRADUCTIONS POUR DÉTECTION D'OPTIONS
+
+		Même système que dans les autres cartes pour la reconnaissance
+		automatique des types d'options et règles de traitement
+	endcomment
+	assign options_names_for_foot_translated = 'products.product.options_names_for_foot' | t | downcase | replace: ', ', ','
+	assign options_names_for_foot = options_names_for_foot_translated | split: ',' | uniq
+	assign options_names_for_size_value_except_translated = 'products.product.options_names_for_size_value_except' | t | downcase | replace: ', ', ','
+	assign options_names_for_size_value_except = options_names_for_size_value_except_translated | split: ',' | uniq
+	assign options_names_for_size_value_strict_except_translated = 'products.product.options_names_for_size_value_strict_except' | t | downcase | replace: ', ', ','
+	assign options_names_for_size_value_strict_except = options_names_for_size_value_strict_except_translated | split: ',' | uniq
+	assign options_names_for_size_translated = 'products.product.options_names_for_size' | t | downcase | replace: ', ', ','
+	assign options_names_for_size = options_names_for_size_translated | split: ',' | uniq
+
+	# Format par défaut (Monobloc) : suffixe transparent dans la normalisation et la chaîne ALT
+	assign default_format_lc = 'products.product.default_format_for_size_value' | t | downcase | strip
+
+	comment
+		SYNCHRONISATION AVEC LE PRODUIT PARENT (MODE SPÉCIAL)
+
+		Même logique que dans card-bundle-product mais adaptée pour
+		le mode configuration spécial où seuls les sélecteurs sont affichés
+	endcomment
+	if product_bundle.has_only_default_variant == false
+		comment
+			DÉTECTION DES POSITIONS D'OPTIONS DANS LE PRODUIT
+
+			Identifie les positions des options taille et pieds pour
+			appliquer la synchronisation avec le produit parent
+		endcomment
+		assign bundle_option_position_size_array = blank
+		assign bundle_option_position_foot_array = blank
+
+		unless product_bundle.has_only_default_variant
+			for option in product_bundle.options_with_values
+				# Traitement du nom de l'option en minuscules pour comparaison
+				assign option_name_downcase = option.name | downcase
+				assign option_name_array = option_name_downcase | split: ' ' | uniq
+
+				# Vérification si cette option concerne les pieds
+				for translation in options_names_for_foot
+					assign has_foot_in_array = option_name_array | find: translation
+					if has_foot_in_array
+						assign has_foot_in_array = true
+						break
+					endif
+				endfor
+
+				if has_foot_in_array
+					assign bundle_option_position_foot_array = option.position | minus: 1
+				else
+					# Recherche de l'option taille si ce n'est pas une option pieds
+					for option_name in option_name_array
+						if options_names_for_size contains option_name
+							assign bundle_option_position_size_array = option.position | minus: 1
+							break
+						endif
+					endfor
+				endif
+			endfor
+		endunless
+
+		comment
+			RECHERCHE DE LA VARIANTE COMPATIBLE AVEC LE PRODUIT PARENT
+
+			Même algorithme que dans les autres cartes mais pour le mode spécial
+			où la synchronisation est cruciale pour l'expérience utilisateur
+		endcomment
+		if parent_option_size_cleaned != blank and bundle_option_position_size_array != blank
+			assign has_matching_size = false
+			assign has_matching_option = true
+
+			comment
+				Mémorise la variante initiale (selected_or_first_available_variant éventuellement
+				déjà corrigée par la logique anti-hidden ci-dessus) pour préserver les choix
+				utilisateur sur les options non-taille (pieds, version, etc.) si sa taille match.
+			endcomment
+			assign initial_bundle_product_variant = bundle_product_variant
+
+			for variant in product_bundle.variants
+				comment
+					VÉRIFICATION DES VARIANTES CACHÉES
+
+					Si la variante sélectionnée a le métafield hidden_variant à true,
+					on cherche une variante alternative disponible et non cachée
+				endcomment
+				if variant.metafields.custom.hidden_variant.value == true
+					continue
+				endif
+
+				assign variant_option_size = variant.options[bundle_option_position_size_array]
+
+				comment
+					NORMALISATION DES DIMENSIONS DE CETTE VARIANTE
+
+					Application du même algorithme de nettoyage pour
+					permettre la comparaison avec le produit parent
+				endcomment
+				assign variant_option_size_cleaned = blank
+				if variant_option_size != blank
+					assign variant_option_size_parts = variant_option_size | split: '-'
+					assign variant_dimensions_part = variant_option_size_parts[0] | strip
+					assign variant_type_part = blank
+
+					if variant_option_size_parts.size > 1
+						assign variant_type_part_raw = variant_option_size_parts[1] | strip
+						assign variant_type_part_raw_lc = variant_type_part_raw | downcase
+						if variant_type_part_raw_lc == default_format_lc
+							assign variant_type_part = blank
+						else
+							assign variant_type_part = variant_type_part_raw
+						endif
+					endif
+
+					assign variant_option_size_no_units = variant_dimensions_part | replace: 'cm', '' | replace: 'mm', '' | replace: 'CM', '' | replace: 'MM', '' | downcase | strip
+					assign variant_dimensions_array = variant_option_size_no_units | split: 'x'
+
+					if variant_dimensions_array.size >= 2
+						assign variant_dimension_1 = variant_dimensions_array[0] | strip
+						assign variant_dimension_2 = variant_dimensions_array[1] | strip
+						assign variant_option_size_cleaned = variant_dimension_1 | append: 'x' | append: variant_dimension_2
+					else
+						assign variant_option_size_cleaned = variant_dimensions_array | join: 'x'
+					endif
+
+					if variant_type_part != blank
+						assign variant_option_size_cleaned = variant_option_size_cleaned | append: '-' | append: variant_type_part
+					endif
+				endif
+
+				comment
+					VALIDATION ET SÉLECTION DE LA VARIANTE COMPATIBLE
+
+					Si les dimensions correspondent, sélectionne cette variante
+					comme base pour la configuration spéciale.
+
+					Pack-new uniquement : fallback dim-only quand l'un des deux
+					côtés n'a pas de suffixe format (cf. site product-bundle.liquid
+					et card-bundle-product.liquid pour le détail du cas).
+				endcomment
+				assign size_match_special = false
+				if parent_option_size_cleaned == variant_option_size_cleaned
+					assign size_match_special = true
+				elsif is_pack_new
+					assign parent_has_format_sp = false
+					if parent_option_size_cleaned contains '-'
+						assign parent_has_format_sp = true
+					endif
+					if parent_has_format_sp == false or variant_type_part == blank
+						assign parent_dim_only_sp = parent_option_size_cleaned | split: '-' | first
+						assign variant_dim_only_sp = variant_option_size_cleaned | split: '-' | first
+						if parent_dim_only_sp == variant_dim_only_sp
+							assign size_match_special = true
+						endif
+					endif
+				endif
+				if size_match_special
+					comment
+						PROTECTION ANTI-MISMATCH SUR LA VARIANTE INITIALE
+
+						initial_bundle_product_variant vient de product_bundle.selected_or_first_available_variant.
+						Si le fetch a transmis des option_values valides, Shopify l'a résolu en
+						une variante 140x190 reflétant les choix utilisateur (pieds, version).
+						Sinon (fetch sans option_values ou option_values invalides pour ce produit),
+						Shopify fallback sur la 1re variante qui peut être 80x190.
+						On ne respecte initial_bundle_product_variant que si sa taille match.
+					endcomment
+					assign initial_size_matches = false
+					if initial_bundle_product_variant != blank and bundle_option_position_size_array != blank
+						assign initial_size = initial_bundle_product_variant.options[bundle_option_position_size_array]
+						if initial_size == variant.options[bundle_option_position_size_array]
+							assign initial_size_matches = true
+						endif
+					endif
+
+					if initial_size_matches
+						# La variante initiale a la bonne taille : on préserve les choix utilisateur
+						assign bundle_product_variant = initial_bundle_product_variant
+						assign has_matching_size = true
+						break
+					else
+						# Mismatch : la variante initiale est sur une autre taille (cas du bug) → on prend variant
+						assign check_against_inventory = true
+						if variant.inventory_management != 'shopify' or variant.inventory_policy == 'continue'
+							assign check_against_inventory = false
+						endif
+
+						assign quantity_rule_soldout = false
+						if variant.quantity_rule.min > variant.inventory_quantity and check_against_inventory
+							assign quantity_rule_soldout = true
+						endif
+
+						assign variant_available = true
+						if variant.available == false or quantity_rule_soldout or variant == null
+							assign variant_available = false
+						endif
+
+						assign has_matching_size = true
+
+						if variant_available
+							assign bundle_product_variant = variant
+							break
+						endif
+					endif
+				endif
+			endfor
+		endif
+	endif
+
+	comment
+		CALCUL DU PRIX DE RÉFÉRENCE POUR LE MODE SPÉCIAL
+
+		Détermine le prix de référence qui sera utilisé pour
+		les calculs de supplément dans les sélecteurs intégrés
+	endcomment
+	assign special_config_reference_price = bundle_product_variant.price
+	assign special_config_compare_at_price = bundle_product_variant.compare_at_price | default: bundle_product_variant.price
+
+	comment
+		RÉCUPÉRATION DES INFORMATIONS D'AFFICHAGE
+
+		Extraction du titre et ID avec gestion des combined listings
+		pour l'identification unique dans le mode spécial
+	endcomment
+	assign selected_product_bundle_title = product_bundle.title
+	assign selected_product_bundle_id = product_bundle.id
+	if product_bundle.metafields.custom.combined_listings_produit_parent.value != blank
+		assign selected_product_bundle_title = product_bundle.metafields.custom.combined_listings_produit_parent.value.title
+		assign selected_product_bundle_id = product_bundle.metafields.custom.combined_listings_produit_parent.value.id
+	endif
+
+	comment
+		RÉCUPÉRATION DE LA DATE DE DISPONIBILITÉ DE LA VARIANTE BUNDLE
+
+		Extrait la date de disponibilité de la variante bundle
+	endcomment
+	assign selected_variant_bundle_date_dispo = blank
+	if bundle_product_variant.metafields.custom.date_de_dispo.value != blank
+		assign selected_variant_bundle_date_dispo = bundle_product_variant.metafields.custom.date_de_dispo.value
+	endif
+
+	comment
+		VÉRIFICATION FINALE DE DISPONIBILITÉ
+
+		Vérifie la disponibilité de la variante sélectionnée pour
+		le mode configuration spécial
+	endcomment
+	assign check_against_inventory = true
+	if bundle_product_variant.inventory_management != 'shopify' or bundle_product_variant.inventory_policy == 'continue'
+		assign check_against_inventory = false
+	endif
+
+	assign quantity_rule_soldout = false
+	if bundle_product_variant.quantity_rule.min > bundle_product_variant.inventory_quantity and check_against_inventory
+		assign quantity_rule_soldout = true
+	endif
+
+	assign product_bundle_available = true
+	if bundle_product_variant.available == false or quantity_rule_soldout or bundle_product_variant == null or has_matching_size == false and has_matching_option == true
+		assign product_bundle_available = false
+	endif
+
+	if bundle_product_variant.metafields.custom.hidden_variant.value == true
+		assign product_bundle_available = false
+	endif
+
+	comment
+		CONSTRUCTION DE LA CHAÎNE D'OPTIONS POUR LE MODE SPÉCIAL
+
+		Crée la chaîne d'identification unique pour cette configuration
+		avec le titre du produit en première position
+	endcomment
+	assign variant_option_string = ''
+
+	for option in bundle_product_variant.options
+		assign option_value = option
+		assign option_name_downcase = option.name | downcase
+		assign option_name_array = option_name_downcase | split: ' ' | uniq
+
+		# Traitement spécial selon le type d'option détecté
+		if bundle_option_position_size_array == forloop.index0
+			# Options de taille : application des règles d'exception
+			assign has_value_except = false
+			assign has_value_except_strict = false
+
+			for value_strict_except in options_names_for_size_value_strict_except
+				if option_name_downcase == value_strict_except
+					assign has_value_except_strict = true
+					break
+				endif
+			endfor
+
+			for option_name in option_name_array
+				if options_names_for_size_value_except contains option_name
+					assign has_value_except = true
+					break
+				endif
+			endfor
+
+			# Si pas d'exception : extrait le type après le tiret
+			unless has_value_except == true or has_value_except_strict == true
+				assign option_parts = option_value | split: '-'
+				assign type_part = blank
+
+				if option_parts.size > 1
+					assign type_part_raw = option_parts[1] | strip
+					assign type_part_raw_lc = type_part_raw | downcase
+					if type_part_raw_lc == default_format_lc
+						assign type_part = blank
+					else
+						assign type_part = type_part_raw
+					endif
+				endif
+
+				assign option_value = type_part | default: blank
+			endunless
+		elsif bundle_option_position_foot_array == forloop.index0
+			# Options de pieds : extrait toujours le type après le tiret
+			assign option_parts = option_value | split: '-'
+			assign type_part = blank
+
+			if option_parts.size > 1
+				assign type_part = option_parts[1] | strip
+			endif
+
+			assign option_value = type_part | default: blank
+		endif
+
+		# Ignore les valeurs par défaut et vides
+		if option_value == 'Default Title' or option_value == blank
+			continue
+		endif
+
+		# Construction spéciale : titre en premier, puis options
+		if forloop.first
+			assign variant_option_string = selected_product_bundle_title | append: '|' | append: option_value
+		else
+			assign variant_option_string = variant_option_string | append: '|' | append: option_value
+		endif
+	endfor
+
+	# Génération d'un ID unique pour ce mode spécial
+	assign unique_id = section.id | append: '-bundle-' | append: step_number | append: '-' | append: selected_product_bundle_id
+-%}
+
+<div class="product__variant-selects__bundle__item">
+	<product-bundle-item
+		data-section="card-bundle-special-config"
+		data-url="{{ product_bundle.url }}"
+	>
+		{% comment %}
+			Radio caché pour maintenir la logique de sélection
+			Toujours checked car c'est le seul élément de l'étape
+		{% endcomment %}
+		<input
+			type="radio"
+			class="product__variant-selects__bundle__radio visually-hidden"
+			id="bundle-item-{{ step_number }}-product-{{ selected_product_bundle_id }}"
+			name="bundle_items[{{ step_number }}]"
+			value="product:{{ product_bundle.id }}:{{ bundle_product_variant.id }}"
+			data-bundle-item="product"
+			data-product-id="{{ product_bundle.id }}"
+			data-variant-id="{{ bundle_product_variant.id }}"
+			data-variant-sku="{{ bundle_product_variant.sku }}"
+			data-title="{{ product_bundle.title | append: ' ' | append: bundle_product_variant.title }}"
+			data-parent-option-size-cleaned="{{ parent_option_size_cleaned }}"
+			data-step-number="{{ step_number }}"
+			data-parent-section-id="{{ section_id }}"
+			data-reference-price="{{ reference_price }}"
+			data-current-custom-position="{{ current_custom_position }}"
+			data-current-item-index="{{ current_index }}"
+			data-unique-id="{{ unique_id }}"
+			data-first-available-index="{{ first_available_index }}"
+			data-step-has-available-items="{{ step_has_available_items }}"
+			data-has-item-visible="{{ has_item_visible }}"
+			data-image-alt-string="{{ variant_option_string }}"
+			data-available="{{ product_bundle_available }}"
+			data-variant-hidden="{{ bundle_product_variant.metafields.custom.hidden_variant.value | default: false }}"
+			data-discount-value="{{ discount_value }}"
+			data-price="{{ special_config_reference_price }}"
+			data-compare-at-price="{{ special_config_compare_at_price }}"
+			data-price-eco-part="{{ bundle_product_variant.metafields.custom.exo_tax.value | default: 0 | times: 100 }}"
+			data-date-dispo="{{ selected_variant_bundle_date_dispo }}"
+			checked
+			{% unless product_bundle_available %}
+				disabled
+			{% endunless %}
+		>
+
+		{% comment %}
+			AFFICHAGE DIRECT DU SÉLECTEUR DE VARIANTES
+
+			Mode spécial : pas de carte produit, affichage direct
+			du sélecteur pour une interface épurée et focalisée
+		{% endcomment %}
+		<div class="product__variant-selects__bundle__special-config">
+			{% render 'product-bundle-picker',
+				product: product_bundle,
+				current_variant: bundle_product_variant,
+				has_changed_option_for_hidden: has_changed_option_for_hidden,
+				block: block,
+				product_form_id: product_form_id,
+				current_custom_position: current_custom_position,
+				unique_id: unique_id,
+				reference_price: reference_price,
+				hide_variant_size: has_matching_size,
+				has_matching_option: has_matching_option,
+				selected_product_bundle_id: selected_product_bundle_id,
+				discount_value: discount_value,
+				is_pack_new: is_pack_new,
+				hide_extras: hide_extras,
+				has_sommier_tapissier_in_bundle: has_sommier_tapissier_in_bundle
+			%}
+		</div>
+	</product-bundle-item>
+</div>

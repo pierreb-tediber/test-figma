@@ -1,0 +1,304 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_content": false,
+        "custom_h1": "",
+        "h1_size": "h1",
+        "h1_no_margin": false,
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "custom_liquid_b4gPrm": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<style>\n  .percale-hero {\n    background-color: #000B26;\n    color: #FFF;\n    font-family: Obviously, sans-serif;\n    display: flex;\n    flex-direction: column;\n    padding: 32px 20px;\n  }\n\n  @media (min-width: 1024px) {\n    .percale-hero {\n      flex-direction: row;\n      align-items: center;\n      justify-content: space-between;\n      padding: 80px 60px;\n    }\n  }\n\n  .percale-hero-left {\n    max-width: 620px;\n    display: flex;\n    flex-direction: column;\n    gap: 24px;\n  }\n\n  .percale-hero-title {\n    color: #FFF;\n    font-family: Obviously, sans-serif;\n    font-size: var(--font-size-xl2, 48px);\n    font-weight: 600;\n    line-height: var(--font-line-height-xl, 56px);\n    text-transform: uppercase;\n    margin-bottom: 0;\n  }\n\n  @media (max-width: 767px) {\n    .percale-hero-title {\n      font-size: 40px;\n      line-height: 44px;\n    }\n  }\n\n  .percale-hero-subtitle {\n    font-size: 16px;\n    font-weight: 700;\n    line-height: 20px;\n    text-transform: uppercase;\n    letter-spacing: -0.3px;\n    margin-top: -12px;\n    font-family: 'Obviously', sans-serif;\n  }\n\n  .percale-hero-box {\n    background-color: #FFF8F2;\n    color: #000B26;\n    padding: 24px;\n    border-radius: 8px;\n    margin-top: 16px;\n    display: flex;\n    flex-direction: column;\n    gap: 16px;\n    max-width: 100%;\n  }\n\n  .percale-hero-box p {\n    font-size: 16px;\n    line-height: 1.5;\n    margin: 0;\n  }\n\n  .percale-hero-box strong {\n    font-weight: 700;\n  }\n\n  .percale-hero-box a {\n    background-color: #000B26;\n    color: #FFF;\n    font-size: 16px;\n    font-weight: 700;\n    font-family: 'Obviously Narrow Bold', sans-serif;\n    height: 48px;\n    padding: 0 24px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    border-radius: 10px;\n    text-decoration: none;\n    width: fit-content;\n  }\n\n  .percale-hero-image {\n    margin-top: 40px;\n  }\n\n  @media (min-width: 1024px) {\n    .percale-hero-image {\n      margin-top: 0;\n      max-width: 50%;\n      padding-left: 40px;\n    }\n  }\n\n  .percale-hero-image img {\n    width: 100%;\n    height: auto;\n    border-radius: 0;\n    display: block;\n    transition: transform 0.3s ease;\n  }\n\n  .percale-hero-image a:hover img {\n    transform: scale(1.03);\n  }\n</style>\n\n<section class=\"percale-hero\">\n  <div class=\"percale-hero-left\">\n    <h2 class=\"percale-hero-title\">10 ans d’incroyable repos, ça change tout.</h2>\n    <p class=\"percale-hero-subtitle\"></p>\n    <div class=\"percale-hero-box\">\n      <p>On a l’impression de ne pas avoir vieilli, au contraire. On se sent plus fougueux qu’au début, plus vifs et plus forts, gonflés de nos 10 ans de savoir-faire. \nEt quand on vous regarde vous, on se dit même que notre repos de qualité vous a fait rajeunir. Pas vrai ?\n</p>\n      <a href=\"https://www.tediber.com\">Découvrir Tediber</a>\n    </div>\n  </div>\n  <div class=\"percale-hero-image\">\n    <a href=\"https://youtu.be/KTkSUopt8mo\" target=\"_blank\" rel=\"noopener noreferrer\">\n      <img src=\"https://cdn.shopify.com/s/files/1/0903/1342/5220/files/lp_10_ans_hero.jpg?v=1755868912\" alt=\"Vidéo respirabilité matelas\">\n    </a>\n  </div>\n</section>",
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "ax_text_with_cards_gr8LaN": {
+      "type": "ax-text-with-cards",
+      "blocks": {
+        "card_Qij4Gh": {
+          "type": "card",
+          "settings": {
+            "title": "PROMESSE N°1",
+            "description": "<p><strong>Innover, innover, toujours innover</strong></p>",
+            "color_scheme": "scheme-2"
+          }
+        },
+        "card_yk8y67": {
+          "type": "card",
+          "settings": {
+            "title": "PROMESSE N°2",
+            "description": "<p><strong>Avoir le meilleur produit, au meilleur prix, avec le meilleur service</strong></p>",
+            "color_scheme": "scheme-2"
+          }
+        },
+        "card_e8JirW": {
+          "type": "card",
+          "settings": {
+            "title": "PROMESSE N°3",
+            "description": "<p><strong>Amener un bout de l’hôtel à la maison </strong></p>",
+            "color_scheme": "scheme-2"
+          }
+        },
+        "card_BmdLLj": {
+          "type": "card",
+          "settings": {
+            "title": "PROMESSE N°4",
+            "description": "<p><strong>Changer la vie et le repos de milliers de gens</strong></p>",
+            "color_scheme": "scheme-2"
+          }
+        }
+      },
+      "block_order": [
+        "card_Qij4Gh",
+        "card_yk8y67",
+        "card_e8JirW",
+        "card_BmdLLj"
+      ],
+      "name": "Ax text with cards",
+      "settings": {
+        "heading": "<p>En 2015, on a créé Tediber en se faisant 4 promesses.</p>",
+        "subheading": "IL Y A 10 ANS...",
+        "description": "<p>À l’heure de souffler nos 10 bougies, on reprend nos notes et <strong>nos promesses</strong> pour faire le constat avec vous.</p>",
+        "color_scheme": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_margin_top": 48,
+        "mob_margin_bottom": 48,
+        "margin_top": 100,
+        "margin_bottom": 96
+      }
+    },
+    "custom_liquid_Mc9RAB": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<style>\n  .percale-hero {\n    background-color: #000B26;\n    color: #FFF;\n    font-family: Obviously, sans-serif;\n    display: flex;\n    flex-direction: column;\n    padding: 32px 20px;\n  }\n\n  @media (min-width: 1024px) {\n    .percale-hero {\n      flex-direction: row;\n      align-items: center;\n      justify-content: space-between;\n      padding: 56px 56px;\n    }\n  }\n\n  .percale-hero-left {\n    max-width: 620px;\n    display: flex;\n    flex-direction: column;\n    gap: 24px;\n  }\n\n  .percale-hero-title {\n    color: #FFF;\n    font-family: Obviously, sans-serif;\n    font-size: var(--font-size-xl2, 48px);\n    font-weight: 600;\n    line-height: var(--font-line-height-xl, 56px);\n    text-transform: uppercase;\n    margin-bottom: 0;\n  }\n\n  @media (max-width: 767px) {\n    .percale-hero-title {\n      font-size: 40px;\n      line-height: 44px;\n    }\n  }\n\n  .percale-hero-subtitle {\n    font-size: 16px;\n    font-weight: 700;\n    line-height: 20px;\n    text-transform: uppercase;\n    letter-spacing: -0.3px;\n    margin-top: -12px;\n    font-family: 'Obviously', sans-serif;\n  }\n\n  .percale-hero-box {\n    background-color: #FFF8F2;\n    color: #000B26;\n    padding: 24px;\n    border-radius: 8px;\n    margin-top: 16px;\n    display: flex;\n    flex-direction: column;\n    gap: 16px;\n    max-width: 100%;\n  }\n\n  .percale-hero-box p {\n    font-size: 16px;\n    line-height: 1.5;\n    margin: 0;\n  }\n\n  .percale-hero-box strong {\n    font-weight: 700;\n  }\n\n  .percale-hero-box a {\n    background-color: #000B26;\n    color: #FFF;\n    font-size: 16px;\n    font-weight: 700;\n    font-family: 'Obviously Narrow Bold', sans-serif;\n    height: 48px;\n    padding: 0 24px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    border-radius: 10px;\n    text-decoration: none;\n    width: fit-content;\n  }\n\n  .percale-hero-image {\n    margin-top: 40px;\n  }\n\n  @media (min-width: 1024px) {\n    .percale-hero-image {\n      margin-top: 0;\n      max-width: 50%;\n      padding-right: 40px; /* modif pour équilibrer quand l'image est à gauche */\n      padding-left: 0;\n    }\n  }\n\n  .percale-hero-image img {\n    width: 100%;\n    height: auto;\n    border-radius: 0;\n    display: block;\n    transition: transform 0.3s ease;\n  }\n\n  .percale-hero-image a:hover img {\n    transform: scale(1.03);\n  }\n</style>\n\n<section class=\"percale-hero\">\n  <div class=\"percale-hero-image\">\n    <a href=\"https://youtu.be/KKinPgU2oZg\" target=\"_blank\" rel=\"noopener noreferrer\">\n      <img src=\"https://cdn.shopify.com/s/files/1/0903/1342/5220/files/lp_10_ans_tediber_julien.jpg?v=1755869781\" alt=\"Vidéo 10 ans Tediber\">\n    </a>\n  </div>\n  <div class=\"percale-hero-left\">\n    <h2 class=\"percale-hero-title\">Évidemment, il y a eu des tonnes d’essais pour en arriver à là...</h2>\n    <p class=\"percale-hero-subtitle\"></p>\n    <div class=\"percale-hero-box\">\n      <p>Mais en ce mois d’anniversaire, on voulait surtout revenir sur ces 4 promesses qui nous rendent fiers du chemin parcouru et en profiter pour vous dire merci, à vous, d’être toujours là à nos côtés, bien après vos 100 nuits d’essai\n</p>\n      <a href=\"https://www.tediber.com\">Découvrir Tediber</a>\n    </div>\n  </div>\n</section>",
+        "color_scheme": "scheme-3",
+        "padding_top": 0,
+        "padding_bottom": 48
+      }
+    },
+    "ax_image_with_text_Uic6bV": {
+      "type": "ax-image-with-text",
+      "blocks": {
+        "heading_Mt8Tiw": {
+          "type": "heading",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "heading": "<p>LOREM IPSUM DOLOR</p>",
+            "heading_size": "h2"
+          }
+        },
+        "text_tqAUVX": {
+          "type": "text",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "text": "<p>Lorem ipsum dolor sit amet consectetur. Turpis in in leo velit turpis at. Sed vivamus amet elementum lobortis pretium enim elit volutpat dignissim. Diam sit non amet at ipsum. In faucibus amet nulla amet. </p>",
+            "description_hn_replace": false,
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "heading_Mt8Tiw",
+        "text_tqAUVX"
+      ],
+      "settings": {
+        "full_width": true,
+        "text_alignment": "left",
+        "no_vertical_padding": false,
+        "image_restricted_width": false,
+        "image_adapted_height_with_content": false,
+        "contain_image": false,
+        "layout": "image_first",
+        "mobile_layout": "image_first",
+        "overlay": true,
+        "overlay_opacity": 0.2,
+        "section_color_scheme": "",
+        "color_scheme": "scheme-2",
+        "padding_top": 0,
+        "padding_bottom": 48
+      }
+    },
+    "ax_faq_Ge79NK": {
+      "type": "ax-faq",
+      "settings": {
+        "heading": "<p>Question <br/>fréquentes</p>",
+        "picto_size": 94,
+        "picto_size_mobile": 94,
+        "faq": [
+          "le-matelas-hybride-de-tediber-convient-il-aux-personnes-qui-ont-chaud-la-nuit",
+          "comment-fonctionnent-les-100-nuits-dessai",
+          "quels-sont-les-delais-de-livraison"
+        ],
+        "color_scheme": "scheme-e1828edc-858e-4a98-a2f7-4650db2b6838",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "ax_collections_grid_xXfaeC": {
+      "type": "ax-collections-grid",
+      "blocks": {
+        "collection_kcrzXt": {
+          "type": "collection",
+          "settings": {
+            "collection": "matelas",
+            "title": ""
+          }
+        },
+        "collection_PX8agK": {
+          "type": "collection",
+          "settings": {
+            "collection": "sommier",
+            "title": ""
+          }
+        },
+        "collection_nejEND": {
+          "type": "collection",
+          "settings": {
+            "collection": "lit",
+            "title": ""
+          }
+        },
+        "collection_xPwejD": {
+          "type": "collection",
+          "settings": {
+            "collection": "tete-de-lit",
+            "title": ""
+          }
+        },
+        "collection_g7LhYD": {
+          "type": "collection",
+          "settings": {
+            "collection": "canape",
+            "title": ""
+          }
+        },
+        "collection_MbpXkt": {
+          "type": "collection",
+          "settings": {
+            "collection": "gamme-enfant-bebe",
+            "title": ""
+          }
+        },
+        "collection_cmrQ6d": {
+          "type": "collection",
+          "settings": {
+            "collection": "couette-et-oreiller",
+            "title": ""
+          }
+        },
+        "collection_XRyWqL": {
+          "type": "collection",
+          "settings": {
+            "collection": "linge-de-lit",
+            "title": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_kcrzXt",
+        "collection_PX8agK",
+        "collection_nejEND",
+        "collection_xPwejD",
+        "collection_g7LhYD",
+        "collection_MbpXkt",
+        "collection_cmrQ6d",
+        "collection_XRyWqL"
+      ],
+      "name": "Ax Collections Grid",
+      "settings": {
+        "heading": "GAMME TEDIBER",
+        "color_scheme": "",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "image_with_text_wYYVte": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_gFzqED": {
+          "type": "heading",
+          "settings": {
+            "heading": "Reposez-vous sur nous",
+            "heading_size": "h2"
+          }
+        },
+        "text_VhjBDB": {
+          "type": "text",
+          "settings": {
+            "text": "",
+            "text_style": "body"
+          }
+        },
+        "button_WL8JwD": {
+          "type": "button",
+          "settings": {
+            "button_label": "Découvrir Tediber",
+            "button_link": "shopify://collections/matelas",
+            "button_style_secondary": true
+          }
+        }
+      },
+      "block_order": [
+        "heading_gFzqED",
+        "text_VhjBDB",
+        "button_WL8JwD"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/lp_10_ans_reposez_vous_sur_nous.png",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "center",
+        "mobile_content_alignment": "center",
+        "section_color_scheme": "scheme-3",
+        "color_scheme": "scheme-3",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main",
+    "custom_liquid_b4gPrm",
+    "ax_text_with_cards_gr8LaN",
+    "custom_liquid_Mc9RAB",
+    "ax_image_with_text_Uic6bV",
+    "ax_faq_Ge79NK",
+    "ax_collections_grid_xXfaeC",
+    "image_with_text_wYYVte"
+  ]
+}

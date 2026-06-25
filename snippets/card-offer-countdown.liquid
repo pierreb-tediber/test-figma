@@ -1,0 +1,36 @@
+{% comment %}
+	Renders the offer-countdown ribbon for a product card.
+
+	Accepts:
+	- offre: {Metaobject} pack_offre_limitee instance (already resolved with .value)
+	- offre_initial_timer: {String} pre-computed countdown string "XXj YYh ZZm WWs"
+	- class: {String} additional classes (optional)
+{% endcomment %}
+{%- if offre != blank and offre_initial_timer != blank -%}
+	{%- capture offre_styles -%}
+		{%- if offre.couleur_label_fond != blank %}--offer-countdown-label-bg: {{ offre.couleur_label_fond }};{% endif -%}
+		{%- if offre.couleur_label_texte != blank %}--offer-countdown-label-color: {{ offre.couleur_label_texte }};{% endif -%}
+		{%- if offre.couleur_countdown_fond != blank %}--offer-countdown-timer-bg: {{ offre.couleur_countdown_fond }};{% endif -%}
+		{%- if offre.couleur_countdown_texte != blank %}--offer-countdown-timer-color: {{ offre.couleur_countdown_texte }};{% endif -%}
+		{%- if offre.couleur_bordure != blank %}--offer-countdown-border: {{ offre.couleur_bordure }};{% endif -%}
+	{%- endcapture -%}
+	<offer-countdown
+		class="offer-countdown {{ class }}"
+		data-end="{{ offre.date_fin | date: '%Y-%m-%dT%H:%M:%S%z' }}"
+		{% if offre_styles != blank %}style="{{ offre_styles | strip }}"{% endif %}
+	>
+		<span class="offer-countdown__label">
+			{%- if offre.icone != blank -%}
+				{%- assign icone_src = offre.icone | image_url: width: 24 -%}
+				{%- if icone_src == blank -%}
+					{%- assign icone_src = offre.icone -%}
+				{%- endif -%}
+				<span class="offer-countdown__icon">
+					<img src="{{ icone_src }}" alt="" width="12" height="12" loading="lazy" />
+				</span>
+			{%- endif -%}
+			<span class="offer-countdown__label-text">{{ offre.texte }}</span>
+		</span>
+		<span class="offer-countdown__timer" data-offer-countdown-timer>{{ offre_initial_timer }}</span>
+	</offer-countdown>
+{%- endif -%}

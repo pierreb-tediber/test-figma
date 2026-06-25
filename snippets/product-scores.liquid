@@ -1,0 +1,178 @@
+{% comment %}
+	Renders product scores (notes) with progress bars
+
+	Accepts:
+	- product: {Object} Product Liquid object (required)
+	- show_extended_scores: {Boolean} Show extended scores (durée de vie, indépendance, réparabilité). Default: false (optional)
+	- class_prefix: {String} CSS class prefix. Default: 'card__product' (optional)
+
+	Usage:
+	{% render 'product-scores', product: product, show_extended_scores: true %}
+{% endcomment %}
+
+{%- liquid
+	assign class_prefix = class_prefix | default: 'card__product'
+	assign show_extended_scores = show_extended_scores | default: false
+
+	# Logique intelligente : essayer metaobject d'abord, puis fallback
+	assign product_metaobject = blank
+	if product.metafields.custom.comparateur_metaobject.value != blank
+		assign product_metaobject = product.metafields.custom.comparateur_metaobject.value
+	endif
+
+	# Notes de base (toujours disponibles)
+	assign note_confort = blank
+	assign note_fermete = blank
+	assign note_respirabilite = blank
+
+	# Notes étendues (conditionnelles)
+	assign note_duree_de_vie = blank
+	assign note_independance_couchage = blank
+	assign note_reparabilite = blank
+
+	# Récupération des valeurs avec logique hybride
+	if product_metaobject != blank
+		assign note_confort = product_metaobject.note_confort.value
+		assign note_fermete = product_metaobject.note_fermete.value
+		assign note_respirabilite = product_metaobject.note_respirabilite.value
+
+		if show_extended_scores
+			assign note_duree_de_vie = product_metaobject.note_duree_de_vie.value
+			assign note_independance_couchage = product_metaobject.note_independance_de_couchage.value
+			assign note_reparabilite = product_metaobject.note_reparabilite.value
+		endif
+	else
+		# Fallback sur metafields individuels
+		assign note_confort = product.metafields.custom.note_confort.value
+		assign note_fermete = product.metafields.custom.note_fermete.value
+		assign note_respirabilite = product.metafields.custom.note_respirabilite.value
+
+		if show_extended_scores
+			assign note_duree_de_vie = product.metafields.custom.note_duree_de_vie.value
+			assign note_independance_couchage = product.metafields.custom.note_independance_de_couchage.value
+			assign note_reparabilite = product.metafields.custom.note_reparabilite.value
+		endif
+	endif
+
+	# Vérifier s'il y a au moins une note à afficher
+	assign has_basic_scores = false
+	assign has_extended_scores = false
+
+	if note_confort != blank or note_fermete != blank or note_respirabilite != blank
+		assign has_basic_scores = true
+	endif
+
+	if show_extended_scores and note_duree_de_vie != blank or note_independance_couchage != blank or note_reparabilite != blank
+		assign has_extended_scores = true
+	endif
+-%}
+
+{%- if has_basic_scores or has_extended_scores -%}
+	<div class="{{ class_prefix }}-scores">
+		{%- comment -%} Notes de base {%- endcomment -%}
+		{%- if note_confort != blank -%}
+			{%- assign note_confort_percentage = note_confort | times: 20 -%}
+			<div class="{{ class_prefix }}-score">
+				<span>{{ 'products.product.scores.confort' | t }}</span>
+				<div class="{{ class_prefix }}-score-bar">
+					<div
+						class="{{ class_prefix }}-score-bar--inner{% if note_confort_percentage == 100 %} {{ class_prefix }}-score-bar--inner-max{% endif %}"
+						style="width: {{ note_confort_percentage }}%"
+					></div>
+					<span></span>
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+			</div>
+		{%- endif -%}
+
+		{%- if note_fermete != blank -%}
+			{%- assign note_fermete_percentage = note_fermete | times: 20 -%}
+			<div class="{{ class_prefix }}-score">
+				<span>{{ 'products.product.scores.fermete' | t }}</span>
+				<div class="{{ class_prefix }}-score-bar">
+					<div
+						class="{{ class_prefix }}-score-bar--inner{% if note_fermete_percentage == 100 %} {{ class_prefix }}-score-bar--inner-max{% endif %}"
+						style="width: {{ note_fermete_percentage }}%"
+					></div>
+					<span></span>
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+			</div>
+		{%- endif -%}
+
+		{%- if note_respirabilite != blank -%}
+			{%- assign note_respirabilite_percentage = note_respirabilite | times: 20 -%}
+			<div class="{{ class_prefix }}-score">
+				<span>{{ 'products.product.scores.respirabilite' | t }}</span>
+				<div class="{{ class_prefix }}-score-bar">
+					<div
+						class="{{ class_prefix }}-score-bar--inner{% if note_respirabilite_percentage == 100 %} {{ class_prefix }}-score-bar--inner-max{% endif %}"
+						style="width: {{ note_respirabilite_percentage }}%"
+					></div>
+					<span></span>
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+			</div>
+		{%- endif -%}
+
+		{%- comment -%} Notes étendues (conditionnelles) {%- endcomment -%}
+		{%- if show_extended_scores -%}
+			{%- if note_duree_de_vie != blank -%}
+				{%- assign note_duree_de_vie_percentage = note_duree_de_vie | times: 20 -%}
+				<div class="{{ class_prefix }}-score">
+					<span>{{ 'products.product.scores.duree_de_vie' | t }}</span>
+					<div class="{{ class_prefix }}-score-bar">
+						<div
+							class="{{ class_prefix }}-score-bar--inner{% if note_duree_de_vie_percentage == 100 %} {{ class_prefix }}-score-bar--inner-max{% endif %}"
+							style="width: {{ note_duree_de_vie_percentage }}%"
+						></div>
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</div>
+				</div>
+			{%- endif -%}
+
+			{%- if note_independance_couchage != blank -%}
+				{%- assign note_independance_couchage_percentage = note_independance_couchage | times: 20 -%}
+				<div class="{{ class_prefix }}-score">
+					<span>{{ 'products.product.scores.independance_couchage' | t }}</span>
+					<div class="{{ class_prefix }}-score-bar">
+						<div
+							class="{{ class_prefix }}-score-bar--inner{% if note_independance_couchage_percentage == 100 %} {{ class_prefix }}-score-bar--inner-max{% endif %}"
+							style="width: {{ note_independance_couchage_percentage }}%"
+						></div>
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</div>
+				</div>
+			{%- endif -%}
+
+			{%- if note_reparabilite != blank -%}
+				{%- assign note_reparabilite_percentage = note_reparabilite | times: 20 -%}
+				<div class="{{ class_prefix }}-score">
+					<span>{{ 'products.product.scores.reparabilite' | t }}</span>
+					<div class="{{ class_prefix }}-score-bar">
+						<div
+							class="{{ class_prefix }}-score-bar--inner{% if note_reparabilite_percentage == 100 %} {{ class_prefix }}-score-bar--inner-max{% endif %}"
+							style="width: {{ note_reparabilite_percentage }}%"
+						></div>
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</div>
+				</div>
+			{%- endif -%}
+		{%- endif -%}
+	</div>
+{%- endif -%}

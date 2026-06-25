@@ -1,0 +1,136 @@
+{{ 'bundle.trustpilot-product.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+	.section-{{ section.id }}-padding {
+	  padding-top: {{ section.settings.mob_padding_top }}px;
+	  padding-bottom: {{ section.settings.mob_padding_bottom }}px;
+	}
+
+	@media screen and (min-width: 750px) {
+	  .section-{{ section.id }}-padding {
+	    padding-top: {{ section.settings.padding_top }}px;
+	    padding-bottom: {{ section.settings.padding_bottom }}px;
+	  }
+	}
+{%- endstyle -%}
+
+{%- liquid
+	assign skus = section.settings.skus
+-%}
+
+{% if skus != blank %}
+	<div
+		class="trustpilot-product section-{{ section.id }}-padding"
+		data-ax-section="trustpilotProduct"
+	>
+		<div class="page-width{% if section.settings.restrict_width %} page-width--restricted-width{% endif %}">
+			<!-- TrustBox widget - Product Reviews MultiSource -->
+			<div
+				class="trustpilot-widget"
+				data-locale="fr-FR"
+				data-template-id="57177697fdb1180308e3815f"
+				data-businessunit-id="5a5cdcedf3b8320001d06ddf"
+				data-style-height="700px"
+				data-style-width="100%"
+				data-sku="{{ skus }}"
+				data-review-languages="fr"
+				data-star-color="#218252"
+				data-link-color="#191919"
+				data-no-reviews="hide"
+				data-fullwidth="true"
+			>
+				<a href="https://fr.trustpilot.com/review/www.tediber.com" target="_blank" rel="noopener"></a>
+			</div>
+			<!-- End TrustBox widget -->
+		</div>
+	</div>
+{% endif %}
+
+{% schema %}
+	{
+		"name": "Ax trustpilot product",
+		"tag": "section",
+		"class": "section",
+		"disabled_on": {
+			"groups": ["header", "footer"]
+		},
+		"settings": [
+			{
+				"type": "checkbox",
+				"id": "restrict_width",
+				"label": "Restreindre la largeur",
+				"default": false
+			},
+			{
+				"type": "header",
+				"content": "Contenu"
+			},
+			{
+				"type": "text",
+				"id": "skus",
+				"label": "SKUs",
+				"info": "Séparer les SKUs par une virgule"
+			},
+			{
+				"type": "header",
+				"content": "Color"
+			},
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "Color scheme",
+				"default": "background-1"
+			},
+			{
+				"type": "header",
+				"content": "Padding (space)"
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding bottom",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding bottom",
+				"default": 0
+			}
+		],
+		"blocks": [],
+		"presets": [
+			{
+				"name": "Ax trustpilot product"
+			}
+		]
+	}
+{% endschema %}

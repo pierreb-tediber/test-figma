@@ -1,0 +1,388 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_content": false,
+        "custom_h1": "",
+        "h1_size": "h1",
+        "h1_no_margin": false,
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "ax_heading_Ufnqqj": {
+      "type": "ax-heading",
+      "name": "Ax heading",
+      "settings": {
+        "heading": "<p>Tediber ou Emma : comparatif des prix</p>",
+        "heading_size": "h2",
+        "heading_first": false,
+        "subheading": "RELEVÉ DES DONNÉES",
+        "description": "",
+        "full_width": false,
+        "text_alignment": "center",
+        "color_scheme": "",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 32,
+        "padding_top": 96,
+        "padding_bottom": 64
+      }
+    },
+    "ax_richtext_xYyipe": {
+      "type": "ax-richtext",
+      "blocks": {
+        "text_highlight_begiKb": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>Cette page centralise les données relevées de prix dans le cadre du comparateur <a href=\"https://www.tediber.com/pages/matelas-hybride-vs-emma\" title=\"https://www.tediber.com/pages/matelas-hybride-vs-emma\">Tediber ou Emma</a>.</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_3qKLMM": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Elle vise à garantir la transparence des informations présentées, documenter les sources et les données utilisées et conserver une trace datée des éléments observés au moment de l’<a href=\"https://www.tediber.com/pages/matelas-hybride-vs-emma\" title=\"https://www.tediber.com/pages/matelas-hybride-vs-emma\">analyse</a>. <br/><br/>Toutes les données présentées dans ce rapport sont accompagnées de captures horodatées.<br/><br/>Date de mise à jour : 20/03/2026</p>",
+            "text_alignment": "left"
+          }
+        },
+        "picto_K7PDjF": {
+          "type": "picto",
+          "settings": {
+            "picto": "shopify://shop_images/bulb-white.svg",
+            "picto_size": 136,
+            "picto_size_mobile": 112,
+            "picto_position": "left"
+          }
+        }
+      },
+      "block_order": [
+        "text_highlight_begiKb",
+        "text_3qKLMM",
+        "picto_K7PDjF"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": true,
+        "color_scheme": "scheme-1",
+        "color_scheme_container": "scheme-3",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 16,
+        "mob_padding_bottom_content": 16,
+        "mob_padding_left_content": 16,
+        "mob_padding_right_content": 16,
+        "padding_top_content": 48,
+        "padding_bottom_content": 48,
+        "padding_left_content": 112,
+        "padding_right_content": 112,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "ax_richtext_MGnUp3": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_HCx49C": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>MÉTHODOLOGIE</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_jepWdn": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Ce comparatif a pour objectif de présenter, de manière factuelle et transparente, les différences de prix des matelas des <a href=\"https://www.tediber.com/collections/matelas\" title=\"https://www.tediber.com/collections/matelas\">gammes Tediber</a> et Emma.<br/><br/><strong>L’ambition est d’apporter une information objectivée afin de faciliter la compréhension et la prise de décision, sans altération des éléments publiquement accessibles au moment du relevé.<br/><br/></strong>Les modèles sélectionnés sont des matelas 140 × 200 cm des <a href=\"https://www.tediber.com/collections/matelas\" title=\"https://www.tediber.com/collections/matelas\">gammes Tediber</a> (Hybride, Hybride Premium, Hybride Infinite) et Emma (Original Lite, Original, Original Pro) qui correspondent à un positionnement de gamme comparable au sein des deux marques (niveau de technologie, promesse de confort, segment tarifaire...). Cette cohérence de positionnement vise à garantir une comparaison pertinente, équilibrée et fondée sur des produits s’adressant à une cible et à un niveau de prestation similaires.</p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_HCx49C",
+        "text_jepWdn"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": true,
+        "color_scheme": "scheme-1",
+        "color_scheme_container": "scheme-1",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 48,
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "rich_text_dzpgzJ": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_CgHe8Y": {
+          "type": "heading",
+          "settings": {
+            "heading": "RELEVÉ DES PRIX",
+            "heading_size": "h2"
+          }
+        },
+        "text_wyiJCc": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Les prix présentés dans ce comparatif ont été vérifiés directement sur le site officiel de la marque Emma et le site officiel de la <a href=\"https://www.tediber.com/\" title=\"https://www.tediber.com/\">marque Tediber</a> afin de s’assurer de la fiabilité et de l’exactitude des informations collectées. <br/><br/>Les prix indiqués correspondent à la plus petite taille disponible pour chacun des modèles présentés dans leur version standard. Ce sont les prix avant promotion, fournis à titre indicatif et susceptibles d’évoluer en fonction des ajustements tarifaires ou des évènements marketing.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_CgHe8Y",
+        "text_wyiJCc"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-3",
+        "full_width": true,
+        "padding_top_desktop": 96,
+        "padding_bottom_desktop": 96
+      }
+    },
+    "multicolumn_jMJjhQ": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_RM3CE9": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/prix_hybride.png",
+            "title": "",
+            "text": "<p>HYBRIDE<br/><strong>429,00 €<br/><br/></strong>DATE <br/><strong>27/02/2026</strong></p>",
+            "link_label": "",
+            "link": "shopify://products/matelas-hybride"
+          }
+        },
+        "column_Ur7Veq": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/prix_hybride_premium.png",
+            "title": "",
+            "text": "<p>HYBRIDE PREMIUM<br/><strong>679,00 €<br/><br/></strong>DATE <br/><strong>27/02/2026</strong></p>",
+            "link_label": "",
+            "link": "shopify://products/matelas-hybride-premium"
+          }
+        },
+        "column_97XBbb": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/prix_hybride_infinite.png",
+            "title": "",
+            "text": "<p>HYBRIDE INFINITE<br/><strong>1069,00 €<br/><br/></strong>DATE<br/><strong>27/02/2026</strong></p>",
+            "link_label": "",
+            "link": "shopify://products/matelas-hybride-infinite"
+          }
+        }
+      },
+      "block_order": [
+        "column_RM3CE9",
+        "column_Ur7Veq",
+        "column_97XBbb"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "PRIX DES MATELAS TEDIBER",
+        "heading_size": "h2",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "Découvrir les matelas Tediber",
+        "button_link": "shopify://collections/matelas",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "primary",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "multicolumn_tzVci4": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_pcybcj": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/prix_original_lite.png",
+            "title": "",
+            "text": "<p>ORIGINAL LITE<br/><strong>342,00 €<br/><br/></strong>DATE <br/><strong>27/02/2026</strong></p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_pVckeJ": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/prix_original.png",
+            "title": "",
+            "text": "<p>ORIGINAL<br/><strong>599,00 €<br/><br/></strong>DATE <br/><strong>27/02/2026</strong></p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_pfLkt7": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/prix_original_pro_6c911da2-ff66-4c0f-812d-ab79346f4479.png",
+            "title": "",
+            "text": "<p>ORIGINAL PRO<br/><strong>909,00 €<br/><br/></strong>DATE <br/><strong>27/02/2026</strong></p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_pcybcj",
+        "column_pVckeJ",
+        "column_pfLkt7"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "PRIX DES MATELAS EMMA",
+        "heading_size": "h2",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "shopify://collections/matelas",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "primary",
+        "color_scheme": "scheme-2",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "image_with_text_Wqgni7": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_RLfjD9": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>Tediber vous garantit le meilleur rapport qualité/prix</strong>",
+            "heading_size": "h2"
+          }
+        },
+        "text_k4yUhD": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Si l’on compare Tediber et Emma, il est important de regarder au-delà des simples promotions proposées par les deux marques et de considérer la qualité, la durabilité et l’origine de fabrication. </p><p>Emma peut sembler attractive grâce à ses prix réduits, mais ses promotions peuvent masquer <strong>une qualité inférieure</strong> et une conception moins durable. </p><p>Tediber propose des promotions attractives sur <a href=\"https://www.tediber.com/collections/matelas\" title=\"https://www.tediber.com/collections/matelas\">chaque matelas</a> qui s’inscrivent dans une démarche de prix juste. Elle optimise ses coûts grâce à une conception réfléchie, des matériaux de haute qualité et une production locale. Le résultat ? <strong>Un prix réellement accessible, sans compromis sur la qualité</strong>. En résumé, si vous cherchez un matelas ou un produit alliant qualité, durabilité et savoir-faire français, <a href=\"https://www.tediber.com/\" title=\"https://www.tediber.com/\"><strong>Tediber</strong></a><strong> offre un meilleur rapport qualité-prix qu’Emma</strong>.</p>",
+            "text_style": "body"
+          }
+        },
+        "button_LNJBVa": {
+          "type": "button",
+          "settings": {
+            "button_label": "Découvrir les matelas Tediber",
+            "button_link": "shopify://collections/matelas",
+            "button_style_secondary": true
+          }
+        }
+      },
+      "block_order": [
+        "heading_RLfjD9",
+        "text_k4yUhD",
+        "button_LNJBVa"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/faq_matelas_premium.png",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "scheme-3",
+        "color_scheme": "scheme-3",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "ax_product_lists_WWTakx": {
+      "type": "ax-product-lists",
+      "blocks": {
+        "product_list_MkNdD7": {
+          "type": "product-list",
+          "settings": {
+            "title": "découvrez les matelas tediber",
+            "collection": "",
+            "product_list": [
+              "matelas-hybride-premium",
+              "matelas-hybride",
+              "matelas-hybride-infinite",
+              "matelas-signature",
+              "pack-lit-2-places-hybride-plus"
+            ],
+            "products_to_show": 5,
+            "button_text": "",
+            "button_link": "",
+            "link_style": "button button--primary"
+          }
+        }
+      },
+      "block_order": [
+        "product_list_MkNdD7"
+      ],
+      "name": "Ax product lists",
+      "settings": {
+        "surtitle": "GAMME TEDIBER",
+        "description": "",
+        "image_ratio": "square",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": true,
+        "quick_add": "none",
+        "color_scheme": "",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 48,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    }
+  },
+  "order": [
+    "main",
+    "ax_heading_Ufnqqj",
+    "ax_richtext_xYyipe",
+    "ax_richtext_MGnUp3",
+    "rich_text_dzpgzJ",
+    "multicolumn_jMJjhQ",
+    "multicolumn_tzVci4",
+    "image_with_text_Wqgni7",
+    "ax_product_lists_WWTakx"
+  ]
+}

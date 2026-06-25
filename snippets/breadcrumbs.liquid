@@ -1,0 +1,89 @@
+{%- unless template.name == 'index' -%}
+	{{ 'bundle.breadcrumbs.css' | asset_url | stylesheet_tag }}
+	<nav
+		class="breadcrumb{% if class %} {{ class }}{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger{% if template.name == 'product' %} animate--fade-in{% else %} animate--slide-in{% endif %}{% endif %}"
+		role="navigation"
+		aria-label="breadcrumbs"
+	>
+		{%- unless template.name == 'blog' or template.name == 'article' -%}
+			<a
+				href="{{ routes.root_url }}"
+				title="{{ 'general.breadcrumbs.home_link_title' | t }}"
+				aria-label="{{ 'general.breadcrumbs.home_link_title' | t }}"
+			>
+				{{ 'general.breadcrumbs.home' | t }}
+			</a>
+			{%- if template.name == 'product' -%}
+				{%- liquid
+					if product.metafields.custom.collections_principales.value != blank
+						assign collection_default = product.metafields.custom.collections_principales.value
+					endif
+				-%}
+
+				{%- if collection_default -%}
+					{%- for collection in collection_default -%}
+						<span class="divider" aria-hidden="true">/</span>
+						<a
+							href="{{ collection.url }}"
+							aria-label="{{ collection.title }}"
+						>
+							{{ collection.title }}
+						</a>
+					{%- endfor -%}
+				{%- endif -%}
+
+			{%- elsif template.name == 'collection' and collection.handle -%}
+				{%- liquid
+					if collection.metafields.custom.collection_principale.value != blank
+						assign collection_default = collection.metafields.custom.collection_principale.value
+					endif
+				-%}
+
+				{%- if collection_default -%}
+					{%- for collection in collection_default -%}
+						<span class="divider" aria-hidden="true">/</span>
+						<a
+							href="{{ collection.url }}"
+							aria-label="{{ collection.title }}"
+						>
+							{{ collection.title }}
+						</a>
+					{%- endfor -%}
+				{%- endif -%}
+
+				<span class="divider" aria-hidden="true">/</span>
+				<span aria-current="page">{{ collection.title }}</span>
+
+			{%- elsif template.name == 'page' -%}
+				<span class="divider" aria-hidden="true">/</span>
+				<span aria-current="page">{{ page.title }}</span>
+
+			{%- elsif template.name == 'search' -%}
+				<span class="divider" aria-hidden="true">/</span>
+				<span aria-current="page">{{ page_title | replace: '*', '' }}</span>
+
+			{%- else -%}
+				<span class="divider" aria-hidden="true">></span>
+				<span aria-current="page">{{ page_title }}</span>
+			{%- endif -%}
+		{%- else -%}
+			{%- if settings.cocon_page != blank -%}
+				<a href="{{ settings.cocon_page }}">
+					{{ 'general.breadcrumbs.all_tips' | t }}
+				</a>
+				<span class="divider" aria-hidden="true">/</span>
+			{%- endif -%}
+
+			{%- if template.name == 'blog' -%}
+				<span aria-current="page">{{ blog.title }}</span>
+
+			{%- elsif template.name == 'article' -%}
+				<a href="{{ blog.url }}">
+					{{ blog.title }}
+				</a>
+				<span class="divider" aria-hidden="true">/</span>
+				<span aria-current="page">{{ article.title }}</span>
+			{%- endif -%}
+		{%- endunless -%}
+	</nav>
+{%- endunless -%}

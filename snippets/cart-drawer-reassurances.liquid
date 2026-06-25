@@ -1,0 +1,129 @@
+{% comment %}
+	Renders reassurances block in the cart drawer.
+
+	Accepts:
+	- section: {Object} Section object
+	- use_lazy_loading: {Boolean} Whether to lazy load images
+
+	Usage:
+	{% render 'cart-drawer-reassurances', section: section, use_lazy_loading: use_lazy_loading %}
+
+	Two display modes controlled by the `slider_enabled` setting:
+	- Slider (default): Swiper carousel with images, titles and subtitles.
+	  Rendered in `drawer__content` above cart items.
+	- Static: Inline text layout with titles separated by "|", no images.
+	  Rendered in `drawer__footer` below express checkout buttons.
+{% endcomment %}
+
+{%- liquid
+	assign reassurances = section.blocks | where: 'type', 'reassurances' | first
+	assign slider_enabled = reassurances.settings.slider_enabled
+	assign autoplay = reassurances.settings.autoplay | default: false
+	assign speed = reassurances.settings.speed | default: 0
+-%}
+
+{%- if reassurances.settings.heading_1 != blank -%}
+	<div id="cart-drawer-reassurances">
+		{%- comment -%} Mode slider : carousel Swiper avec images et titres {%- endcomment -%}
+		{%- if slider_enabled -%}
+			<cart-reassurances
+				class="drawer__reassurances drawer__reassurances--slider color-{{ reassurances.settings.color_scheme }} gradient"
+				{{ reassurances.shopify_attributes }}
+				data-nosnippet
+			>
+				{% capture swiper_options %}
+					{
+					"slidesPerView": "auto",
+					"slidesPerGroup": 1,
+					"loop": false,
+					"grabCursor": true,
+					"autoplay": {{ autoplay }},
+					"speed": {{ speed }},
+					"effect": "slide",
+					"spaceBetween": 0
+					}
+				{% endcapture %}
+				<div
+					id="Swiper-drawer-reassurances"
+					class="swiper"
+					data-options="{{ swiper_options | escape }}"
+				>
+					<div class="swiper-wrapper grid grid--1-col">
+						{%- for i in (1..3) -%}
+							{%- liquid
+								assign name_image = 'image_' | append: i
+								assign name_title = 'heading_' | append: i
+								assign name_text = 'subheading_' | append: i
+
+								assign image = reassurances.settings[name_image]
+								assign title = reassurances.settings[name_title]
+								assign text = reassurances.settings[name_text]
+
+								assign alt = image.alt | default: title
+							-%}
+
+							{%- if title != blank and image != blank -%}
+								<div class="swiper-slide grid__item">
+									<div class="drawer__reassurances__item">
+										<div class="drawer__reassurances__item__image">
+											<div class="media media--square media--transparent">
+												{% capture image_tag %}
+													{{ image | image_url: width: 60 | image_tag: widths: '60, 100, 120', loading: 'lazy', alt: alt }}
+												{% endcapture %}
+												{% if use_lazy_loading %}
+													{{
+														image_tag
+														| replace: 'src=', 'lazy-src='
+														| replace: 'srcset=', 'lazy-srcset='
+														| replace: 'lazy-srcset=', 'data-lazy-keep lazy-srcset='
+													}}
+												{% else %}
+													{{ image_tag }}
+												{% endif %}
+											</div>
+										</div>
+										<div class="drawer__reassurances__item__content">
+											<div class="drawer__reassurances__item__title">
+												{{ title }}
+											</div>
+											{%- if text != blank -%}
+												<div class="drawer__reassurances__item__text">
+													{{ text }}
+												</div>
+											{%- endif -%}
+										</div>
+									</div>
+								</div>
+							{%- endif -%}
+						{%- endfor -%}
+					</div>
+					<div class="swiper-pagination"></div>
+				</div>
+			</cart-reassurances>
+
+		{%- comment -%} Mode statique : titres en ligne séparés par des | {%- endcomment -%}
+		{%- else -%}
+			<div
+				class="drawer__reassurances drawer__reassurances--static color-{{ reassurances.settings.color_scheme }} gradient"
+				{{ reassurances.shopify_attributes }}
+				data-nosnippet
+			>
+				<div class="drawer__reassurances__list">
+					{%- for i in (1..3) -%}
+						{%- liquid
+							assign name_title = 'heading_' | append: i
+							assign title = reassurances.settings[name_title]
+						-%}
+
+						{%- if title != blank -%}
+							{%- if forloop.first == false -%}
+								<span class="drawer__reassurances__separator" aria-hidden="true">|</span>
+							{%- endif -%}
+							<span class="drawer__reassurances__label">{{ title }}</span>
+						{%- endif -%}
+					{%- endfor -%}
+				</div>
+			</div>
+		{%- endif -%}
+	</div>
+{%- endif -%}

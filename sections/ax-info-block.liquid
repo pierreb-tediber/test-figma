@@ -1,0 +1,273 @@
+{% if section.settings.heading != blank or section.settings.content != blank %}
+	{{ 'bundle.info-block.css' | asset_url | stylesheet_tag }}
+
+	{%- style -%}
+		.section-{{ section.id }}-padding {
+		  padding-top: {{ section.settings.mob_padding_top }}px;
+		  padding-bottom: {{ section.settings.mob_padding_bottom }}px;
+		  margin-top: {{ section.settings.mob_margin_top }}px;
+		  margin-bottom: {{ section.settings.mob_margin_bottom }}px;
+
+			--image-width: {{ section.settings.image_width }}px;
+		}
+
+		@media screen and (min-width: 750px) {
+		  .section-{{ section.id }}-padding {
+		    padding-top: {{ section.settings.padding_top }}px;
+		    padding-bottom: {{ section.settings.padding_bottom }}px;
+		    margin-top: {{ section.settings.margin_top }}px;
+		    margin-bottom: {{ section.settings.margin_bottom }}px;
+		  }
+		}
+
+		#shopify-section-{{ section.id }} .highlight-text {
+		  color: {{ section.settings.highlight_color }};
+		}
+	{%- endstyle -%}
+
+	{%- liquid
+		assign lazy_load = false
+		if section.index > 1
+			assign lazy_load = true
+		endif
+
+		# Determine if image is decorative or informative
+		assign is_decorative = true
+		if section.settings.image.alt != blank
+			assign is_decorative = false
+		endif
+	-%}
+
+	<div
+		class="info-block gradient color-{{ section.settings.color_scheme }} section-{{ section.id }}-padding"
+		data-ax-section="infoBlock"
+		{% if section.settings.heading != blank %}
+			aria-labelledby="info-block-heading-{{ section.id }}"
+		{% endif %}
+	>
+		<div class="page-width{% if section.settings.restricted_width %} page-width--restricted--small{% endif %}">
+			<div
+				class="info-block__wrapper{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %} color-{{ section.settings.color_scheme_content }}"
+			>
+				{% if section.settings.image != blank %}
+					<div
+						class="info-block__image"
+						{% if is_decorative %}
+							aria-hidden="true"
+						{% endif %}
+					>
+						{% capture media_image %}
+							{{ section.settings.image | image_url: width: 35 | image_tag: alt: section.settings.image.alt }}
+						{% endcapture %}
+						{% if lazy_load %}
+							{{ media_image | replace: 'src="', 'lazy-src="' | replace: 'srcset="', 'lazy-srcset="' }}
+						{% else %}
+							{{ media_image }}
+						{% endif %}
+					</div>
+				{% endif %}
+
+				{% if section.settings.heading != blank %}
+					<div
+						class="info-block__heading"
+						id="info-block-heading-{{ section.id }}"
+						role="text"
+						aria-label="{{ 'sections.info_block.aria_title' | t: title: section.settings.heading }}"
+					>
+						<h2 class="info-block__title h3">{{ section.settings.heading }}</h2>
+					</div>
+				{% endif %}
+
+				{% if section.settings.content != blank %}
+					<div class="info-block__content">
+						{{
+							section.settings.content
+							| replace: '[color]', '<span class="highlight-text">'
+							| replace: '[/color]', '</span>'
+						}}
+					</div>
+				{% endif %}
+
+				{% if section.settings.caption != blank %}
+					<div class="info-block__caption">
+						{{ section.settings.caption }}
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+{% endif %}
+
+{% schema %}
+	{
+		"name": "Ax info block",
+		"tag": "section",
+		"class": "section",
+		"disabled_on": {
+			"groups": ["header", "footer"]
+		},
+		"settings": [
+			{
+				"type": "checkbox",
+				"id": "restricted_width",
+				"label": "Largeur restreinte",
+				"default": true
+			},
+			{
+				"type": "header",
+				"content": "Contenu"
+			},
+			{
+				"type": "image_picker",
+				"id": "image",
+				"label": "Image"
+			},
+			{
+				"type": "range",
+				"id": "image_width",
+				"label": "Largeur de l'image",
+				"min": 10,
+				"max": 100,
+				"step": 1,
+				"unit": "px",
+				"default": 32
+			},
+			{
+				"type": "text",
+				"id": "heading",
+				"label": "Titre",
+				"default": "Titre"
+			},
+			{
+				"type": "richtext",
+				"id": "content",
+				"label": "Contenu",
+				"default": "<p>Contenu</p>",
+				"info": "Mettre la partie à colorer entre les balises [color] et [/color]"
+			},
+			{
+				"type": "text",
+				"id": "caption",
+				"label": "Légende",
+				"default": "Légende"
+			},
+			{
+				"type": "header",
+				"content": "Couleurs"
+			},
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "Color scheme section",
+				"default": "background-1"
+			},
+			{
+				"type": "color_scheme",
+				"id": "color_scheme_content",
+				"label": "Color scheme content",
+				"default": "background-1"
+			},
+			{
+				"type": "color",
+				"id": "highlight_color",
+				"label": "Couleur de la partie à colorer",
+				"default": "#915935"
+			},
+			{
+				"type": "header",
+				"content": "Marges intérieures"
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding bottom",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding bottom",
+				"default": 0
+			},
+			{
+				"type": "header",
+				"content": "Marges extérieures"
+			},
+			{
+				"type": "range",
+				"id": "mob_margin_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Margin top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "mob_margin_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Margin bottom",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "margin_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Margin top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "margin_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Margin bottom",
+				"default": 0
+			}
+		],
+		"blocks": [],
+		"presets": [
+			{
+				"name": "Ax info block",
+				"blocks": []
+			}
+		]
+	}
+{% endschema %}

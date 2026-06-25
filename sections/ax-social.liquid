@@ -1,0 +1,226 @@
+{{ 'bundle.social.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+	.section-{{ section.id }}-padding {
+	  padding-top: {{ section.settings.mob_padding_top }}px;
+	  padding-bottom: {{ section.settings.mob_padding_bottom }}px;
+	}
+
+	@media screen and (min-width: 750px) {
+	  .section-{{ section.id }}-padding {
+	    padding-top: {{ section.settings.padding_top }}px;
+	    padding-bottom: {{ section.settings.padding_bottom }}px;
+	  }
+	}
+{%- endstyle -%}
+
+{% liquid
+	assign blocks = section.blocks
+	assign lazy_load = false
+
+	if section.index > 1
+		assign lazy_load = true
+	endif
+
+	assign blocks_size = blocks.size
+	assign counter = 0
+	if section.settings.title_1 != blank
+		assign counter = 1
+	endif
+	if section.settings.title_2 != blank
+	assign counter_total = 2
+	endif
+%}
+
+{% if blocks_size > 0 %}
+	<div
+		class="social gradient color-{{ section.settings.color_scheme }} section-{{ section.id }}-padding{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+		data-ax-section="socialSection"
+		{% if settings.animations_reveal_on_scroll %}
+			data-cascade
+		{% endif %}
+	>
+		<div class="page-width">
+			<div class="social__wrapper">
+				{%- if section.settings.title_1 != blank -%}
+					<h2
+						id="social-title-{{ section.id }}"
+						class="social__title h3"
+						{% if settings.animations_reveal_on_scroll %}
+							data-cascade
+							style="--animation-order: {{ counter }};"
+						{% endif %}
+					>
+						{{ section.settings.title_1 }}
+						{% if section.settings.title_2 != blank %}
+							<span class="visually-hidden">{{ section.settings.title_2 }}</span>
+						{% endif %}
+					</h2>
+				{%- endif -%}
+
+				<ul
+					class="social__media-wrapper grid grid--{{ blocks.size }}-col list-unstyled"
+					aria-labelledby="social-title-{{ section.id }}"
+				>
+					{% for block in blocks %}
+						<li
+							class="social__media grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+							{% if settings.animations_reveal_on_scroll %}
+								data-cascade
+								style="--animation-order: {{ counter | plus: forloop.index }};"
+							{% endif %}
+						>
+							{% if block.settings.link != blank %}
+								<a
+									href="{{ block.settings.link }}"
+									class="social__media-link"
+									aria-label="{{ 'accessibility.social_link' | t }}"
+									{% if section.settings.open_link_in_new_tab %}
+										target="_blank" rel="noopener"
+									{% endif %}
+								>
+							{% endif %}
+							{% if block.settings.image != blank %}
+								<div class="media media--transparent">
+									{% capture media_image %}
+										{{ block.settings.image | image_url: width: 1000 | image_tag: alt: block.settings.image.alt }}
+									{% endcapture %}
+									{% if lazy_load %}
+										{{ media_image | replace: 'src="', 'lazy-src="' | replace: 'srcset="', 'lazy-srcset="' }}
+									{% else %}
+										{{ media_image }}
+									{% endif %}
+								</div>
+							{% endif %}
+							{% if block.settings.link != blank %}
+								</a>
+							{% endif %}
+						</li>
+					{% endfor %}
+				</ul>
+
+				{%- if section.settings.title_2 != blank -%}
+					<div class="social__title h3"
+					{% if settings.animations_reveal_on_scroll %}
+						data-cascade
+						style="--animation-order: {{ counter_total }};"
+					{% endif %}
+					>
+						{{ section.settings.title_2 }}
+					</div>
+				{%- endif -%}
+			</div>
+		</div>
+	</div>
+{% endif %}
+{% schema %}
+	{
+		"name": "Ax social",
+		"tag": "section",
+		"class": "section",
+		"disabled_on": {
+			"groups": ["header", "footer"]
+		},
+		"settings": [
+			{
+				"type": "header",
+				"content": "Content"
+			},
+			{
+				"type": "text",
+				"id": "title_1",
+				"label": "Titre 1"
+			},
+			{
+				"type": "text",
+				"id": "title_2",
+				"label": "Titre 2"
+			},
+			{
+				"type": "checkbox",
+				"id": "open_link_in_new_tab",
+				"label": "Ouvrir le lien dans un nouvel onglet",
+				"default": true
+			},
+			{
+				"type": "header",
+				"content": "Color"
+			},
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "Color scheme",
+				"default": "background-1"
+			},
+			{
+				"type": "header",
+				"content": "Padding (space)"
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding bottom",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding bottom",
+				"default": 0
+			}
+		],
+		"blocks": [
+			{
+				"type": "image",
+				"name": "Image",
+				"limit": 3,
+				"settings": [
+					{
+						"type": "image_picker",
+						"id": "image",
+						"label": "Image"
+					},
+					{
+						"type": "url",
+						"id": "link",
+						"label": "Lien"
+					}
+				]
+			}
+		],
+		"presets": [
+			{
+				"name": "Ax social",
+				"blocks": []
+			}
+		]
+	}
+{% endschema %}

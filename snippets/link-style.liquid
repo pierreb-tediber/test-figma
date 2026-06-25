@@ -1,0 +1,74 @@
+{%- comment -%}
+	Renders a link with different style variants.
+
+	Accepts:
+	- link_label: {String} The text to display on the link (Required)
+	- link_url: {String} The URL the link links to (Required)
+	- link_style: {String} The style variant (ax-link, ax-link reversed, underlined-link) (Required)
+	- link_full_unstyled: {Boolean} Whether to add the full-unstyled-link class to the link (Optional)
+	- link_target: {Boolean} Whether to open the link in a new tab (Optional)
+	- link_aria_label: {String} Aria label for the link (Optional)
+	- link_attributes: {String} Additional HTML attributes to add to the link (Optional)
+	- no_link: {Boolean} Whether to render a span instead of a link (Optional)
+	- link_icon: {Image} The icon to display on the link (Optional)
+	Usage:
+	{%- render 'link-style',
+	  link_label: section.settings.link_label,
+	  link_url: section.settings.link_url,
+	  link_style: section.settings.link_style,
+	link_full_unstyled: section.settings.link_full_unstyled,
+	  link_target: section.settings.link_target,
+	  link_aria_label: section.settings.link_aria_label,
+	  link_attributes: block.shopify_attributes
+	-%}
+{%- endcomment -%}
+
+{%- liquid
+	# Traitement des données
+	assign has_link = false
+	if link_label != blank
+		assign has_link = true
+	endif
+	assign link_classes = link_style
+	if link_full_unstyled
+		assign link_classes = link_classes | append: ' full-unstyled-link'
+	endif
+
+	# Configuration des attributs conditionnels
+	assign link_attrs = ''
+	if link_url == blank
+		assign link_attrs = link_attrs | append: 'role="link" aria-disabled="true"'
+	else
+		assign link_attrs = link_attrs | append: 'href="' | append: link_url | append: '"'
+	endif
+
+	if link_target
+		assign link_attrs = link_attrs | append: ' target="_blank" rel="noopener"'
+	endif
+
+	if link_aria_label != blank
+		assign link_attrs = link_attrs | append: ' aria-label="' | append: link_aria_label | escape | append: '"'
+	endif
+
+	if link_attributes != blank
+		assign link_attrs = link_attrs | append: ' ' | append: link_attributes
+	endif
+-%}
+
+{%- if has_link -%}
+	{%- unless no_link -%}
+		<a {{ link_attrs }} class="{{ link_classes }}">
+			{% if link_icon != blank %}
+				{{ link_icon | image_url: width: 24 | image_tag: loading: 'lazy', width: 24, height: 24 }}
+			{% endif %}
+			{{- link_label | escape -}}
+		</a>
+	{%- else -%}
+		<span class="{{ link_classes }}">
+			{% if link_icon != blank %}
+				{{ link_icon | image_url: width: 24 | image_tag: loading: 'lazy', width: 24, height: 24 }}
+			{% endif %}
+			{{- link_label | escape -}}
+		</span>
+	{%- endunless -%}
+{%- endif -%}

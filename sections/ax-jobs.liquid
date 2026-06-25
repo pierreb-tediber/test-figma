@@ -1,0 +1,235 @@
+{{ 'bundle.jobs.css' | asset_url | stylesheet_tag }}
+
+<script>
+	window.assetsUrl.js.push({ jobsSection: "{{ 'bundle.jobs.js' | asset_url }}" });
+</script>
+
+{%- style -%}
+	.section-{{ section.id }}-padding {
+	  padding-top: {{ section.settings.mob_padding_top }}px;
+	  padding-bottom: {{ section.settings.mob_padding_bottom }}px;
+	}
+
+	@media screen and (min-width: 750px) {
+	  .section-{{ section.id }}-padding {
+	    padding-top: {{ section.settings.padding_top }}px;
+	    padding-bottom: {{ section.settings.padding_bottom }}px;
+	  }
+	}
+{%- endstyle -%}
+
+<div
+	class="jobs gradient color-{{ section.settings.color_scheme }} section-{{ section.id }}-padding"
+	data-ax-section="jobsSection"
+>
+	<div class="page-width page-width--restricted--small">
+		{%- render 'section-heading',
+			heading: section.settings.heading,
+			subheading: section.settings.subheading,
+			description: section.settings.description,
+			text_alignment: section.settings.text_alignment,
+			heading_size: section.settings.heading_size,
+			heading_first: section.settings.heading_first
+		-%}
+
+		{%- capture jobs_translations -%}
+		{
+			"loading": {{ 'sections.jobs.loading' | t | json }},
+			"no_offers": {{ 'sections.jobs.no_offers' | t | json }},
+			"error_loading": {{ 'sections.jobs.error_loading' | t | json }},
+			"start_date": {{ 'sections.jobs.start_date' | t | json }}
+		}
+		{%- endcapture -%}
+		<jobs-component
+			data-api-url="{{ section.settings.api_url }}"
+			data-color-scheme="{{ section.settings.color_scheme_cards }}"
+			data-translations="{{ jobs_translations | strip | escape }}"
+		></jobs-component>
+
+		<template id="job-card-template">
+			<div class="jobs__card grid__item">
+				<div class="jobs__card-header">
+					<div class="jobs__card-badges">
+						<span class="jobs__card-badge badge jobs__card-badge--department" data-department></span>
+						<span class="jobs__card-badge badge jobs__card-badge--contract" data-contract></span>
+					</div>
+				</div>
+
+				<div class="jobs__card-content">
+					<h3 class="jobs__card-title h3" data-title></h3>
+
+					<div class="jobs__card-meta">
+						<span class="jobs__card-location" data-location></span>
+						<span class="jobs__card-date" data-date></span>
+					</div>
+				</div>
+
+				<div class="jobs__card-footer">
+					<a class="button button--primary" data-url target="_blank" rel="noopener noreferrer">
+						{{ 'sections.jobs.postuler' | t }}
+					</a>
+				</div>
+			</div>
+		</template>
+	</div>
+</div>
+
+{% schema %}
+	{
+		"name": "Ax jobs",
+		"tag": "section",
+		"class": "section",
+		"disabled_on": {
+			"groups": ["header", "footer"]
+		},
+		"settings": [
+			{
+				"type": "header",
+				"content": "Contenu"
+			},
+			{
+				"type": "richtext",
+				"id": "heading",
+				"label": "Titre",
+				"default": "<p>Titre</p>"
+			},
+			{
+				"type": "select",
+				"id": "heading_size",
+				"options": [
+					{
+						"value": "h3",
+						"label": "Très petit"
+					},
+					{
+						"value": "h2",
+						"label": "t:sections.all.heading_size.options__1.label"
+					},
+					{
+						"value": "h1",
+						"label": "t:sections.all.heading_size.options__2.label"
+					},
+					{
+						"value": "hxl",
+						"label": "t:sections.all.heading_size.options__3.label"
+					}
+				],
+				"default": "h2",
+				"label": "t:sections.all.heading_size.label"
+			},
+			{
+				"type": "checkbox",
+				"id": "heading_first",
+				"label": "Afficher le titre en premier",
+				"default": false
+			},
+			{
+				"type": "text",
+				"id": "subheading",
+				"label": "Sur-titre",
+				"default": "Sur-titre"
+			},
+			{
+				"type": "richtext",
+				"id": "description",
+				"label": "Description"
+			},
+			{
+				"type": "select",
+				"id": "text_alignment",
+				"options": [
+					{
+						"value": "left",
+						"label": "t:sections.slideshow.blocks.slide.settings.text_alignment.option_1.label"
+					},
+					{
+						"value": "center",
+						"label": "t:sections.slideshow.blocks.slide.settings.text_alignment.option_2.label"
+					},
+					{
+						"value": "right",
+						"label": "t:sections.slideshow.blocks.slide.settings.text_alignment.option_3.label"
+					}
+				],
+				"default": "center",
+				"label": "Alignement"
+			},
+			{
+				"type": "header",
+				"content": "API"
+			},
+			{
+				"type": "text",
+				"id": "api_url",
+				"label": "URL de l'API"
+			},
+			{
+				"type": "header",
+				"content": "Couleurs"
+			},
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "Color scheme",
+				"default": "background-1"
+			},
+			{
+				"type": "color_scheme",
+				"id": "color_scheme_cards",
+				"label": "Color scheme des cartes",
+				"default": "background-1"
+			},
+			{
+				"type": "header",
+				"content": "Padding (space)"
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 2,
+				"unit": "px",
+				"label": "(Mobile) Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 2,
+				"unit": "px",
+				"label": "(Mobile) Padding bottom",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 2,
+				"unit": "px",
+				"label": "Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 2,
+				"unit": "px",
+				"label": "Padding bottom",
+				"default": 0
+			}
+		],
+		"blocks": [],
+		"presets": [
+			{
+				"name": "Ax jobs",
+				"blocks": []
+			}
+		]
+	}
+{% endschema %}

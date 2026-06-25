@@ -1,0 +1,270 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "ax_breadcrumbs_blog_jmELTT": {
+      "type": "ax-breadcrumbs-blog",
+      "name": "Fil d'ariane (blog)",
+      "settings": {
+        "color_scheme": "",
+        "mob_padding_top": 30,
+        "mob_padding_bottom": 16,
+        "padding_top": 18,
+        "padding_bottom": 30
+      }
+    },
+    "main": {
+      "type": "main-article",
+      "blocks": {
+        "summary_H69bFE": {
+          "type": "summary",
+          "settings": {}
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "show_read_time": true
+          }
+        },
+        "content": {
+          "type": "content",
+          "settings": {}
+        },
+        "author_3jkep8": {
+          "type": "author",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "summary_H69bFE",
+        "title",
+        "content",
+        "author_3jkep8"
+      ],
+      "settings": {}
+    },
+    "ax_article_products_xkNCxE": {
+      "type": "ax-article-products",
+      "name": "Ax article products",
+      "settings": {
+        "metaobject": "{{ article.metafields.custom.content_products_list.value }}",
+        "color_scheme": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "ax_blog_products_PiiW6A": {
+      "type": "ax-blog-products",
+      "name": "Ax blog products",
+      "settings": {
+        "heading": "produits associés",
+        "product_list": "{{ article.metafields.custom.produits_associes.value }}",
+        "color_scheme": "",
+        "mob_padding_top": 24,
+        "mob_padding_bottom": 24,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "ax_featured_blog_rL7xhf": {
+      "type": "ax-featured-blog",
+      "name": "Ax featured Blog",
+      "settings": {
+        "heading": "<p>Dans la même <br/>thématique</p>",
+        "picto": "shopify://shop_images/sewing.svg",
+        "picto_size": 94,
+        "picto_size_mobile": 94,
+        "color_scheme": "scheme-5",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 48,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "ax_featured_blog_tag_NgRPmE": {
+      "type": "ax-featured-blog-tag",
+      "name": "Ax featured Blog Tag",
+      "settings": {
+        "heading": "<p>Mais aussi :</p>",
+        "color_scheme": "",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 24,
+        "padding_top": 96,
+        "padding_bottom": 48
+      }
+    },
+    "ax_blogs_list_9VxXTk": {
+      "type": "ax-blogs-list",
+      "blocks": {
+        "blog_jLXzjN": {
+          "type": "blog",
+          "settings": {
+            "blog": "canape-convertible"
+          }
+        },
+        "blog_WecYgW": {
+          "type": "blog",
+          "settings": {
+            "blog": "lit"
+          }
+        },
+        "blog_Ni9ekx": {
+          "type": "blog",
+          "settings": {
+            "blog": "lit-coffre"
+          }
+        },
+        "blog_NAMUwj": {
+          "type": "blog",
+          "settings": {
+            "blog": "traversin"
+          }
+        },
+        "blog_6ymbdc": {
+          "type": "blog",
+          "settings": {
+            "blog": "oreiller"
+          }
+        },
+        "blog_mNkXhT": {
+          "type": "blog",
+          "settings": {
+            "blog": "canape"
+          }
+        },
+        "blog_wjjV4J": {
+          "type": "blog",
+          "settings": {
+            "blog": "matelas-enfant-bebe"
+          }
+        }
+      },
+      "block_order": [
+        "blog_jLXzjN",
+        "blog_WecYgW",
+        "blog_Ni9ekx",
+        "blog_NAMUwj",
+        "blog_6ymbdc",
+        "blog_mNkXhT",
+        "blog_wjjV4J"
+      ],
+      "name": "Ax blogs list",
+      "settings": {
+        "heading": "TOUS NOS CONSEILS SUR",
+        "color_scheme": "",
+        "mob_padding_top": 24,
+        "mob_padding_bottom": 24,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "ax_reassurances_MQAbLx": {
+      "type": "ax-reassurances",
+      "blocks": {
+        "reassurance_QNPPey": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "100-nuits-essai",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_XBV8Ky": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-mnd3qioq",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_iRetFk": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-vfy3a8q5",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_JxzcdF": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-87bgy0zq",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        }
+      },
+      "block_order": [
+        "reassurance_QNPPey",
+        "reassurance_XBV8Ky",
+        "reassurance_iRetFk",
+        "reassurance_JxzcdF"
+      ],
+      "name": "Ax Reassurances",
+      "settings": {
+        "heading": "Nos engagements",
+        "restricted_width": false,
+        "stack_mobile": false,
+        "border_top_mobile": false,
+        "border_bottom_mobile": false,
+        "show_content": false,
+        "autoplay": false,
+        "speed": 300,
+        "loop": false,
+        "pagination": true,
+        "color_scheme": "",
+        "color_scheme_popin": "",
+        "mob_padding_top": 24,
+        "mob_padding_bottom": 48,
+        "padding_top": 48,
+        "padding_bottom": 96,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "1762464329eb9773c9": {
+      "type": "apps",
+      "blocks": {
+        "join_stories_sticky_widget_integration_7XmWzT": {
+          "type": "shopify://apps/join-stories/blocks/sticky-widget-integration/01ec6b69-ffcd-4917-91ec-8e867f5f7704",
+          "disabled": true,
+          "settings": {
+            "alias": "blackmonth"
+          }
+        }
+      },
+      "block_order": [
+        "join_stories_sticky_widget_integration_7XmWzT"
+      ],
+      "settings": {
+        "include_margins": true,
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "ax_breadcrumbs_blog_jmELTT",
+    "main",
+    "ax_article_products_xkNCxE",
+    "ax_blog_products_PiiW6A",
+    "ax_featured_blog_rL7xhf",
+    "ax_featured_blog_tag_NgRPmE",
+    "ax_blogs_list_9VxXTk",
+    "ax_reassurances_MQAbLx",
+    "1762464329eb9773c9"
+  ]
+}

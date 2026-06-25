@@ -1,0 +1,917 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "badges_rating_M6rxAA": {
+          "type": "badges-rating",
+          "settings": {
+            "show_rating": true
+          }
+        },
+        "list_claims_matelas": {
+          "type": "list_claims_matelas",
+          "settings": {
+            "link_text": "Voir la fiche technique",
+            "link_target": ".bento",
+            "link_font_weight": "bold",
+            "link_font_family": "ObviouslyNarrow"
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "variant_dropdown",
+            "swatch_shape": "square"
+          }
+        },
+        "complementary_iyYBRc": {
+          "type": "complementary",
+          "disabled": true,
+          "settings": {
+            "block_heading": "Complétez votre commande",
+            "make_collapsible_row": false,
+            "icon": "none",
+            "product_list_limit": 2,
+            "products_per_page": 2,
+            "pagination_style": "counter",
+            "image_ratio": "square",
+            "enable_quick_add": false
+          }
+        },
+        "upsell": {
+          "type": "upsell",
+          "settings": {}
+        },
+        "disponibility_aRKHif": {
+          "type": "disponibility",
+          "disabled": true,
+          "settings": {}
+        },
+        "delivery_c46QyA": {
+          "type": "delivery",
+          "disabled": true,
+          "settings": {
+            "enable_only_pack": false,
+            "modal_link_text": "Estimer le délai de livraison",
+            "cgv_link_text": "Voir nos CGV",
+            "cgv_link_url": "shopify://pages/cgv"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_quantity_selector": true,
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": true
+          }
+        },
+        "description_tabs_jE6Eim": {
+          "type": "description_tabs",
+          "settings": {
+            "content_list": "{{ product.metafields.custom.onglets_description.value }}"
+          }
+        },
+        "custom_liquid_9A6JAt": {
+          "type": "custom_liquid",
+          "disabled": true,
+          "settings": {
+            "custom_liquid": "<style>\n  .btn-mystery {\n    background-color: #1a3a2a;\n    border-radius: 4px;\n    padding: 12px 24px;\n    display: flex;\n    align-items: center;\n    gap: 12px;\n    cursor: pointer;\n    width: 100%;\n    box-sizing: border-box;\n    background-image: repeating-linear-gradient(\n      0deg, transparent, transparent 28px, rgba(255,255,255,0.05) 28px, rgba(255,255,255,0.05) 29px\n    ),\n    repeating-linear-gradient(\n      90deg, transparent, transparent 28px, rgba(255,255,255,0.05) 28px, rgba(255,255,255,0.05) 29px\n    );\n  }\n\n  .btn-mystery .label {\n    color: white;\n    font-size: 14px;\n    font-weight: 700;\n    font-family: obviously;\n    white-space: nowrap;\n  }\n\n  .btn-mystery .cta {\n    color: white;\n    font-size: 18px;\n    letter-spacing: 0.1em;\n    text-transform: uppercase;\n    text-decoration: underline;\n    font-family: felt tip senior;\n    white-space: nowrap;\n  }\n\n  /* MOBILE */\n  @media (max-width: 768px) {\n    .btn-mystery {\n      padding: 10px 12px;\n      gap: 8px;\n    }\n    .btn-mystery .label {\n      font-size: 12px;\n    }\n    .btn-mystery .cta {\n      font-size: 14px;\n    }\n  }\n</style>\n\n<div \n  class=\"btn-mystery\"\n  onclick=\"window._klOnsite = window._klOnsite || []; window._klOnsite.push(['openForm', 'WvNK3A'])\">\n  <span class=\"label\">Trop fatigué ?</span>\n  <span class=\"cta\">Obtiens ton code de réduction</span>\n</div>"
+          }
+        },
+        "banner_pack_iYiWx6": {
+          "type": "banner_pack",
+          "disabled": true,
+          "settings": {
+            "item_metaobject": "{{ product.metafields.custom.pack_offer_item_metaobject_block.value }}",
+            "show_only_metaobject": true,
+            "image": "shopify://shop_images/push_317d9b8a-eaf8-4572-a655-c7f548401ab9.png",
+            "image_mobile": "shopify://shop_images/push-mobile.png",
+            "image_overlay_color": "",
+            "color_scheme": "scheme-a6ba1938-1dcc-48fa-a1c5-cecd367da137",
+            "title": "Offre pack lit complet",
+            "description": "<ul><li>1 matelas</li><li>1 couette</li><li>1 sommier</li><li>2 oreillers</li></ul>",
+            "badge_icon": "shopify://shop_images/sparkles_light.svg",
+            "badge": "2 oreillers offerts",
+            "badge_color": "#ce5558",
+            "badge_text_color": "#ffffff",
+            "button_icon": "shopify://shop_images/sparkles.svg",
+            "button_label": "{{ block.settings.item_metaobject.bouton_texte.value }}",
+            "button_link": ""
+          }
+        },
+        "reassurances_hh4mTj": {
+          "type": "reassurances",
+          "disabled": true,
+          "settings": {
+            "reassurances_list": "{{ product.metafields.custom.reassurance.value }}",
+            "icon_width": 40,
+            "show_text": true
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "price",
+        "badges_rating_M6rxAA",
+        "list_claims_matelas",
+        "variant_picker",
+        "complementary_iyYBRc",
+        "upsell",
+        "disponibility_aRKHif",
+        "delivery_c46QyA",
+        "buy_buttons",
+        "description_tabs_jE6Eim",
+        "custom_liquid_9A6JAt",
+        "banner_pack_iYiWx6",
+        "reassurances_hh4mTj"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "enable_sticky_bar_price": true,
+        "color_scheme": "scheme-1",
+        "enable_new_offer": true,
+        "media_size": "large",
+        "constrain_to_viewport": true,
+        "media_fit": "cover",
+        "gallery_layout": "stacked",
+        "mobile_thumbnails": "show",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": false,
+        "enable_video_looping": true,
+        "enable_video_controls": false,
+        "padding_top": 0,
+        "padding_bottom": 48
+      }
+    },
+    "ax_bento_bcMtMH": {
+      "type": "ax-bento",
+      "name": "Ax Bento Grid",
+      "settings": {
+        "bento_metaobject": "",
+        "color_scheme": "scheme-3",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 48,
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    },
+    "ax_couches_jBMaEw": {
+      "type": "ax-couches",
+      "name": "Ax couches",
+      "settings": {
+        "subtitle": "{{ product.metafields.custom.couches_de_confort_sur_titre.value }}",
+        "title": "{{ product.metafields.custom.couches_de_confort_titre.value }}",
+        "color_scheme": "",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 48,
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    },
+    "ax_matelas_comparator_HDk7wq": {
+      "type": "ax-matelas-comparator",
+      "name": "Ax Matelas Comparator",
+      "settings": {
+        "title": "<p>COMPARATEUR DE MATELAS</p>",
+        "products_to_compare": "{{ product.metafields.custom.compare_products.value }}",
+        "rows": "metafield_products",
+        "columns": 3,
+        "show_product_selector": true,
+        "cell_color": "#fbf5ed",
+        "cell_direction": "horizontal",
+        "product_link_text": "Découvrir le matelas",
+        "button_text": "",
+        "button_url": "",
+        "button_blank": false,
+        "button_style": "button button--primary",
+        "color_scheme": "scheme-1",
+        "mob_padding_top": 12,
+        "mob_padding_bottom": 12,
+        "padding_top": 24,
+        "padding_bottom": 24
+      }
+    },
+    "ax_media_text_slider_xtTJfa": {
+      "type": "ax-media-text-slider",
+      "blocks": {
+        "slide_PAUVdQ": {
+          "type": "slide",
+          "settings": {
+            "item_metaobject": "{{ product.metafields.custom.media_text_slide_metaobject_1.value }}",
+            "show_only_metaobject": true,
+            "content_position": "middle-right",
+            "overlay": false,
+            "overlay_opacity": 0.2,
+            "subheading": "",
+            "heading": "",
+            "heading_size": "h2",
+            "heading_class": "h2",
+            "text_alignment": "left",
+            "text": "",
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center",
+            "button_text": "",
+            "button_link": "",
+            "link_blank": false,
+            "link_style": "button button--primary",
+            "color_scheme": ""
+          }
+        },
+        "slide_UmUBJW": {
+          "type": "slide",
+          "settings": {
+            "item_metaobject": "{{ product.metafields.custom.media_text_slide_metaobject_2.value }}",
+            "show_only_metaobject": true,
+            "content_position": "middle-right",
+            "overlay": false,
+            "overlay_opacity": 0.2,
+            "subheading": "",
+            "heading": "",
+            "heading_size": "h2",
+            "heading_class": "h2",
+            "text_alignment": "left",
+            "text": "",
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center",
+            "button_text": "",
+            "button_link": "",
+            "link_blank": false,
+            "link_style": "button button--primary",
+            "color_scheme": ""
+          }
+        },
+        "slide_FNpQ6W": {
+          "type": "slide",
+          "settings": {
+            "item_metaobject": "{{ product.metafields.custom.media_text_slide_metaobject_3.value }}",
+            "show_only_metaobject": true,
+            "content_position": "middle-right",
+            "overlay": false,
+            "overlay_opacity": 0.2,
+            "subheading": "",
+            "heading": "",
+            "heading_size": "h2",
+            "heading_class": "h2",
+            "text_alignment": "left",
+            "text": "",
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center",
+            "button_text": "",
+            "button_link": "",
+            "link_blank": false,
+            "link_style": "button button--primary",
+            "color_scheme": ""
+          }
+        },
+        "slide_aPQTrb": {
+          "type": "slide",
+          "settings": {
+            "item_metaobject": "{{ product.metafields.custom.media_text_slide_metaobject_4.value }}",
+            "show_only_metaobject": true,
+            "content_position": "middle-right",
+            "overlay": false,
+            "overlay_opacity": 0.2,
+            "subheading": "",
+            "heading": "",
+            "heading_size": "h2",
+            "heading_class": "h2",
+            "text_alignment": "left",
+            "text": "",
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center",
+            "button_text": "",
+            "button_link": "",
+            "link_blank": false,
+            "link_style": "button button--primary",
+            "color_scheme": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_PAUVdQ",
+        "slide_UmUBJW",
+        "slide_FNpQ6W",
+        "slide_aPQTrb"
+      ],
+      "name": "Media / Texte - slider",
+      "settings": {
+        "hide_if_no_blocks": true,
+        "full_width": true,
+        "accessibility_info": "Slider de médias avec texte",
+        "autoplay": true,
+        "delay": 3,
+        "speed": 300,
+        "random": false,
+        "loop": true,
+        "pagination": true,
+        "swiper_arrows": true,
+        "enable_zoom": false,
+        "image_height": "adapt",
+        "section_color_scheme": "",
+        "color_scheme": "",
+        "container_style": "glass",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "ax_heading_metafield_FfXPqx": {
+      "type": "ax-heading-metafield",
+      "name": "Ax heading metafield",
+      "settings": {
+        "metafield_key": "{{ product.metafields.custom.alias_join_story.value }}",
+        "heading": "<p>Reposez-vous sur nous</p>",
+        "heading_size": "h2",
+        "heading_first": false,
+        "subheading": "",
+        "description": "",
+        "full_width": false,
+        "text_alignment": "center",
+        "color_scheme": "",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 0,
+        "padding_top": 48,
+        "padding_bottom": 0
+      }
+    },
+    "1751301925d3403870": {
+      "type": "apps",
+      "blocks": {
+        "join_stories_product_page_widget_integration_FfEE6d": {
+          "type": "shopify://apps/join-stories/blocks/product-page-widget-integration/01ec6b69-ffcd-4917-91ec-8e867f5f7704",
+          "settings": {
+            "alias": "{{ product.metafields.custom.alias_join_story.value }}",
+            "cls_config": "mobile: 114px\ndesktop: 132px",
+            "custom_css": "",
+            "load_async": false,
+            "enable_geo": true
+          }
+        }
+      },
+      "block_order": [
+        "join_stories_product_page_widget_integration_FfEE6d"
+      ],
+      "settings": {
+        "include_margins": true,
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 32,
+        "padding_top": 0,
+        "padding_bottom": 32
+      }
+    },
+    "ax_reassurances_pt6ctp": {
+      "type": "ax-reassurances",
+      "blocks": {
+        "reassurance_qwctTr": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "100-nuits-essai",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_WTzQcH": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-mnd3qioq",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_3ccfCD": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-vfy3a8q5",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_AQyTGC": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "paiement-en-3-x-ou-12-x",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        }
+      },
+      "block_order": [
+        "reassurance_qwctTr",
+        "reassurance_WTzQcH",
+        "reassurance_3ccfCD",
+        "reassurance_AQyTGC"
+      ],
+      "settings": {
+        "heading": "Nos engagements",
+        "restricted_width": false,
+        "stack_mobile": false,
+        "border_top_mobile": true,
+        "border_bottom_mobile": true,
+        "show_content": false,
+        "autoplay": false,
+        "speed": 300,
+        "loop": false,
+        "pagination": true,
+        "color_scheme": "",
+        "color_scheme_popin": "scheme-2",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 48,
+        "padding_top": 24,
+        "padding_bottom": 48,
+        "mob_margin_top": 48,
+        "mob_margin_bottom": 36,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "ax_image_with_text_rtb_rhAzQQ": {
+      "type": "ax-image-with-text-rtb",
+      "blocks": {
+        "heading_iYqicr": {
+          "type": "heading",
+          "settings": {
+            "picto": "shopify://shop_images/flag.png",
+            "picto_size": 96,
+            "picto_size_mobile": 96,
+            "heading": "<p>UN SAVOIR-FAIRE FRANÇAIS</p>",
+            "heading_size": "h2"
+          }
+        },
+        "rtb_rGL4bH": {
+          "type": "rtb",
+          "settings": {
+            "rtb_metaobject": "rtb-xvph0jcn"
+          }
+        },
+        "text_yj4JTQ": {
+          "type": "text",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "text": "<p>Chez Tediber, nous concevons et fabriquons nos produits en France et en Europe, avec des partenaires au savoir-faire reconnu. Ce choix nous permet de garantir la qualité, la durabilité et la juste fabrication de chaque produit.</p>",
+            "description_hn_replace": false,
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "heading_iYqicr",
+        "rtb_rGL4bH",
+        "text_yj4JTQ"
+      ],
+      "disabled": true,
+      "name": "Ax Image with text - RTB",
+      "settings": {
+        "full_width": true,
+        "text_alignment": "left",
+        "mobile_text_alignment": "center",
+        "no_vertical_padding": false,
+        "image": "shopify://shop_images/AdobeStock_1443523485.jpg",
+        "image_mobile": "shopify://shop_images/AdobeStock_1443523485.jpg",
+        "image_restricted_width": false,
+        "image_adapted_height_with_content": false,
+        "contain_image": false,
+        "layout": "image_first",
+        "mobile_layout": "image_first",
+        "overlay": true,
+        "overlay_opacity": 0.2,
+        "section_color_scheme": "scheme-3",
+        "color_scheme": "scheme-3",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "ax_pack_offer_dftPkH": {
+      "type": "ax-pack-offer",
+      "blocks": {
+        "pack_item_qTtJ6H": {
+          "type": "pack_item",
+          "settings": {
+            "item_metaobject": "{{ product.metafields.custom.pack_offer_item_metaobject_1.value }}",
+            "show_only_metaobject": true,
+            "image": "shopify://shop_images/Hero-section-collection-mobile.jpg",
+            "image_overlay_color": "",
+            "color_scheme": "scheme-a6ba1938-1dcc-48fa-a1c5-cecd367da137",
+            "title": "OFFRE PACK LIT COMPLET",
+            "description": "<p>Profitez d’une réduction exclusive pour l’achat d’un pack comprenant :</p><ul><li>1 matelas</li><li>1 sommier</li><li>1 couette</li><li>2 oreillers</li></ul>",
+            "badge": "Découvrir le pack",
+            "badge_color": "{{ block.settings.item_metaobject.badge_couleur.value }}",
+            "badge_text_color": "",
+            "button_label": "Découvrir",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "pack_item_qTtJ6H"
+      ],
+      "name": "Ax Pack Offer",
+      "settings": {
+        "hide_if_no_blocks": true,
+        "heading": "",
+        "heading_size": "h1",
+        "subheading": "",
+        "full_width": false,
+        "section_color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "disabled": true,
+      "settings": {
+        "heading": "À Découvrir aussi",
+        "heading_size": "h2",
+        "products_to_show": 5,
+        "columns_desktop": 5,
+        "columns_mobile": "1-7",
+        "color_scheme": "scheme-1",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "ax_key_points_9FWUzf": {
+      "type": "ax-key-points",
+      "name": "Ax points clés",
+      "settings": {
+        "heading": "{{ product.metafields.custom.key_points_title.value }}",
+        "image": "{{ product.metafields.custom.key_points_image.value }}",
+        "products_key_points": "{{ product.metafields.custom.key_points.value }}",
+        "color_scheme": "",
+        "mob_padding_top": 24,
+        "mob_padding_bottom": 24,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "ax_image_with_text_CBhUhd": {
+      "type": "ax-image-with-text",
+      "blocks": {
+        "heading_cxnfjk": {
+          "type": "heading",
+          "settings": {
+            "picto": "{{ product.metafields.custom.note_picto.value }}",
+            "picto_size": 136,
+            "picto_size_mobile": 102,
+            "heading": "<p>{{ product.metafields.custom.note_titre.value }}</p>",
+            "heading_size": "h3"
+          }
+        },
+        "text_4yHW9i": {
+          "type": "text",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "text": "<p>{{ product.metafields.custom.note_description | metafield_tag }}</p>",
+            "description_hn_replace": false,
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center"
+          }
+        },
+        "button_LmRanb": {
+          "type": "button",
+          "settings": {
+            "button_text": "Découvrir",
+            "button_link": "{{ product.metafields.custom.note_url.value }}",
+            "link_blank": false,
+            "link_style": "button button--primary",
+            "button_alignment": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_cxnfjk",
+        "text_4yHW9i",
+        "button_LmRanb"
+      ],
+      "settings": {
+        "full_width": false,
+        "text_alignment": "center",
+        "no_vertical_padding": false,
+        "image": "{{ product.metafields.custom.note_image.value }}",
+        "image_restricted_width": true,
+        "image_adapted_height_with_content": false,
+        "contain_image": false,
+        "layout": "text_first",
+        "mobile_layout": "image_first",
+        "overlay": false,
+        "overlay_opacity": 0.2,
+        "section_color_scheme": "",
+        "color_scheme": "",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "ax_product_reviews_TdXPLh": {
+      "type": "ax-product-reviews",
+      "name": "Ax Product Reviews",
+      "settings": {
+        "full_width": false,
+        "heading": "Nos clients vous en parlent",
+        "heading_class": "h2",
+        "button_text": "",
+        "button_link": "",
+        "link_blank": true,
+        "link_style": "button button--primary",
+        "image": "{{ product.metafields.custom.image_section_avis_desktop.value }}",
+        "image_mobile": "{{ product.metafields.custom.image_section_avis_mobile.value }}",
+        "adaptive_height": false,
+        "desktop_height": 250,
+        "mobile_height": 200,
+        "overlay": true,
+        "overlay_opacity": 0.1,
+        "section_color_scheme": "scheme-a6ba1938-1dcc-48fa-a1c5-cecd367da137",
+        "padding_top": 48,
+        "padding_bottom": 48,
+        "mobile_padding_top": 24,
+        "mobile_padding_bottom": 24
+      }
+    },
+    "ax_trustpilot_product_ahTB34": {
+      "type": "ax-trustpilot-product",
+      "disabled": true,
+      "name": "Ax trustpilot product",
+      "settings": {
+        "restrict_width": false,
+        "skus": "{{ product.metafields.custom.id_trustpilot.value }}",
+        "color_scheme": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 32,
+        "padding_top": 0,
+        "padding_bottom": 48
+      }
+    },
+    "ax_faq_zfmmnp": {
+      "type": "ax-faq",
+      "name": "Ax faq",
+      "settings": {
+        "heading": "<p>Questions fréquentes</p>",
+        "picto": "shopify://shop_images/sewing.svg",
+        "picto_size": 94,
+        "picto_size_mobile": 94,
+        "reverse_layout": false,
+        "image": "{{ product.metafields.custom.image_faq.value }}",
+        "faq": "{{ product.metafields.custom.faq.value }}",
+        "color_scheme": "scheme-e1828edc-858e-4a98-a2f7-4650db2b6838",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "ax_image_with_text_rH6pbX": {
+      "type": "ax-image-with-text",
+      "blocks": {
+        "heading_zbfY3g": {
+          "type": "heading",
+          "settings": {
+            "picto": "shopify://shop_images/graphic_border.png",
+            "picto_size": 92,
+            "picto_size_mobile": 92,
+            "heading": "<p>Où nous trouver ?</p>",
+            "heading_size": "h2"
+          }
+        },
+        "text_69xXjc": {
+          "type": "text",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "text": "<p>Lorem ipsum dolor sit amet consectetur. Etiam ac tempor ut eleifend auctor egestas laoreet. Convallis est tempus at quisque elementum et integer morbi orci. </p>",
+            "description_hn_replace": false,
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center"
+          }
+        },
+        "button_AqPVqW": {
+          "type": "button",
+          "settings": {
+            "button_text": "Nos magasins",
+            "button_link": "shopify://pages/contact",
+            "link_blank": false,
+            "link_style": "button button--secondary",
+            "button_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_zbfY3g",
+        "text_69xXjc",
+        "button_AqPVqW"
+      ],
+      "disabled": true,
+      "settings": {
+        "full_width": true,
+        "text_alignment": "left",
+        "no_vertical_padding": false,
+        "image": "shopify://shop_images/push-storeloc.png",
+        "image_restricted_width": false,
+        "image_adapted_height_with_content": false,
+        "contain_image": false,
+        "layout": "image_first",
+        "mobile_layout": "image_first",
+        "overlay": false,
+        "overlay_opacity": 0.2,
+        "section_color_scheme": "scheme-3",
+        "color_scheme": "scheme-3",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "ax_social_wUpRqM": {
+      "type": "ax-social",
+      "blocks": {
+        "image_Rf4fhH": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/social-1_ff01cf81-304a-4dc0-9fa2-979bff7e71e5.jpg",
+            "link": "shopify://pages/contact"
+          }
+        },
+        "image_LqwpLc": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/social-2_6625a64b-5cfb-4db3-8a78-6961cdbbdece.jpg",
+            "link": "shopify://pages/contact"
+          }
+        },
+        "image_AJdwQK": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/social-3_f301b4bc-f5de-47e7-bc2f-4d512534e149.jpg",
+            "link": "shopify://pages/contact"
+          }
+        }
+      },
+      "block_order": [
+        "image_Rf4fhH",
+        "image_LqwpLc",
+        "image_AJdwQK"
+      ],
+      "disabled": true,
+      "name": "Ax social",
+      "settings": {
+        "title_1": "TEDIBER",
+        "title_2": "CHEZ VOUS.",
+        "open_link_in_new_tab": true,
+        "color_scheme": "scheme-1",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 48,
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    },
+    "ax_richtext_aDnQNj": {
+      "type": "ax-richtext",
+      "blocks": {
+        "text_iUdLka": {
+          "type": "text",
+          "settings": {
+            "text": "<p>* Statistique issue d’une étude interne menée par Tediber sur 50 dormeurs.</p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "text_iUdLka"
+      ],
+      "disabled": true,
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 16,
+        "mob_padding_bottom": 16,
+        "padding_top": 32,
+        "padding_bottom": 32,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "rich_text_Y98bbr": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_EVrptt": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading": "Parler de sa marque",
+            "heading_size": "h1"
+          }
+        },
+        "text_KaWAbH": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.metafields.custom.asterisques | metafield_tag }}"
+          }
+        },
+        "button_K9WMQr": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_label": "Texte du bouton",
+            "button_link": "",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_EVrptt",
+        "text_KaWAbH",
+        "button_K9WMQr"
+      ],
+      "disabled": true,
+      "name": "Astérisques",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 52
+      }
+    }
+  },
+  "order": [
+    "main",
+    "ax_bento_bcMtMH",
+    "ax_couches_jBMaEw",
+    "ax_matelas_comparator_HDk7wq",
+    "ax_media_text_slider_xtTJfa",
+    "ax_heading_metafield_FfXPqx",
+    "1751301925d3403870",
+    "ax_reassurances_pt6ctp",
+    "ax_image_with_text_rtb_rhAzQQ",
+    "ax_pack_offer_dftPkH",
+    "related-products",
+    "ax_key_points_9FWUzf",
+    "ax_image_with_text_CBhUhd",
+    "ax_product_reviews_TdXPLh",
+    "ax_trustpilot_product_ahTB34",
+    "ax_faq_zfmmnp",
+    "ax_image_with_text_rH6pbX",
+    "ax_social_wUpRqM",
+    "ax_richtext_aDnQNj",
+    "rich_text_Y98bbr"
+  ]
+}

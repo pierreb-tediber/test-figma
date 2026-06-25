@@ -1,0 +1,215 @@
+{%- liquid
+	# Logique de priorité metaobject
+	assign item_metaobject = blank
+	if block.settings.item_metaobject != blank
+		assign item_metaobject = block.settings.item_metaobject
+	endif
+
+	# Vérifier si le bloc doit être affiché uniquement avec metaobject
+	assign should_display = true
+	if block.settings.show_only_metaobject
+		if item_metaobject == blank
+			assign should_display = false
+		endif
+	endif
+
+	# Images - priorité metaobject puis fallback
+	assign final_image = blank
+	assign final_image_mobile = blank
+	if item_metaobject != blank and item_metaobject.image.value != blank
+		assign final_image = item_metaobject.image.value
+	elsif block.settings.image != blank
+		assign final_image = block.settings.image
+	endif
+
+	if item_metaobject != blank and item_metaobject.image_mobile.value != blank
+		assign final_image_mobile = item_metaobject.image_mobile.value
+	elsif block.settings.image_mobile != blank
+		assign final_image_mobile = block.settings.image_mobile
+	endif
+
+	# Contenu - priorité metaobject puis fallback
+	assign final_title = blank
+	assign final_description = blank
+	if item_metaobject != blank and item_metaobject.titre.value != blank
+		assign final_title = item_metaobject.titre.value
+	elsif block.settings.title != blank
+		assign final_title = block.settings.title
+	endif
+
+	if item_metaobject != blank and item_metaobject.description.value != blank
+		assign final_description = item_metaobject.description | metafield_tag
+	elsif block.settings.description != blank
+		assign final_description = block.settings.description
+	endif
+
+	# Badge - priorité metaobject puis fallback
+	assign final_badge = blank
+	assign final_badge_icon = blank
+	if item_metaobject != blank and item_metaobject.badge_texte.value != blank
+		assign final_badge = item_metaobject.badge_texte.value
+	elsif block.settings.badge != blank
+		assign final_badge = block.settings.badge
+	endif
+
+	if item_metaobject != blank and item_metaobject.badge_icon.value != blank
+		assign final_badge_icon = item_metaobject.badge_icon.value
+	elsif block.settings.badge_icon != blank
+		assign final_badge_icon = block.settings.badge_icon
+	endif
+
+	# Badge colors - priorité metaobject puis fallback
+	assign style_badge_color = blank
+	assign style_badge_text_color = blank
+
+	if item_metaobject != blank
+		if item_metaobject.badge_color.value != blank
+			assign style_badge_color = item_metaobject.badge_color.value
+		elsif block.settings.badge_color != blank
+			assign style_badge_color = block.settings.badge_color
+		endif
+
+		if block.settings.badge_text_color != blank
+			assign style_badge_text_color = block.settings.badge_text_color
+		endif
+	else
+		if block.settings.badge_color != blank
+			assign style_badge_color = block.settings.badge_color
+		endif
+		if block.settings.badge_text_color != blank
+			assign style_badge_text_color = block.settings.badge_text_color
+		endif
+	endif
+
+	# Bouton - priorité metaobject puis fallback
+	assign final_button_label = blank
+	assign final_button_link = blank
+	assign final_button_icon = blank
+	if item_metaobject != blank and item_metaobject.bouton_texte.value != blank
+		assign final_button_label = item_metaobject.bouton_texte.value
+	elsif block.settings.button_label != blank
+		assign final_button_label = block.settings.button_label
+	endif
+
+	if item_metaobject != blank and item_metaobject.bouton_url.value != blank
+		# Si button_url est un champ de référence avec sous-champs
+		if item_metaobject.bouton_url.value.url != blank
+			assign final_button_link = item_metaobject.bouton_url.value.url
+		else
+			assign final_button_link = item_metaobject.bouton_url.value
+		endif
+	elsif block.settings.button_link != blank
+		assign final_button_link = block.settings.button_link
+	endif
+
+	if item_metaobject != blank and item_metaobject.bouton_icon.value != blank
+		assign final_button_icon = item_metaobject.bouton_icon.value
+	elsif block.settings.button_icon != blank
+		assign final_button_icon = block.settings.button_icon
+	endif
+-%}
+
+{% if should_display and final_image != blank %}
+<div class="product__banner-pack" {{ block.shopify_attributes }}>
+	{%- style -%}
+		#ProductBannerPack-{{ block.id }} {
+			{% if block.settings.image_overlay_color != blank %}
+				.overlay {
+					background: {{ block.settings.image_overlay_color }} !important;
+				}
+			{% endif %}
+			.badge--other {
+				{% if style_badge_text_color != blank %}
+					--text-color: {{ style_badge_text_color }};
+				{% endif %}
+				{% if style_badge_color != blank %}
+					--background-color: {{ style_badge_color }};
+				{% endif %}
+				{% if style_badge_text_color != blank %}
+					--border-color: {{ style_badge_text_color }};
+				{% endif %}
+			}
+		}
+	{%- endstyle -%}
+	<div
+		id="ProductBannerPack-{{ block.id }}"
+		class="product__banner-pack__item card gradient color-{{ block.settings.color_scheme }} gradient-overlay"
+	>
+		{%- if final_image != blank -%}
+			<div class="product__banner-pack__image-wrapper card__media">
+				{% capture media_image %}
+					{%- if final_image_mobile != blank -%}
+						<img
+							src="{{ final_image | image_url: width: 1200 }}"
+							srcset="
+								{% if final_image_mobile %}
+									{{ final_image_mobile | image_url: width: 375 }} 375w,
+									{{ final_image_mobile | image_url: width: 750 }} 750w,
+									{{ final_image_mobile | image_url: width: 900 }} 900w,
+								{% endif %}
+							"
+							sizes="50vw"
+							alt="{{ final_image.alt | escape | default: final_title }}"
+							width="{{ final_image.width }}"
+							height="{{ final_image.height }}"
+							loading="lazy"
+							class="product__banner-pack__image overlay"
+						>
+					{%- else -%}
+						<img
+							src="{{ final_image | image_url: width: 1000 }}"
+							srcset="{{ final_image | image_url: width: 375 }} 375w,
+								{{ final_image | image_url: width: 750 }} 750w,
+								{{ final_image | image_url: width: 900 }} 900w
+							"
+							sizes="45vw"
+							alt="{{ final_image.alt | escape | default: final_title }}"
+							width="{{ final_image.width }}"
+							height="{{ final_image.height }}"
+							loading="lazy"
+							class="product__banner-pack__image overlay"
+						>
+					{%- endif -%}
+				{% endcapture %}
+				{{ media_image | replace: 'src=', 'lazy-src=' | replace: 'srcset=', 'lazy-srcset=' }}
+				<div class="overlay">&nbsp;</div>
+			</div>
+		{%- endif -%}
+		<div class="product__banner-pack__text">
+			{%- if final_badge != blank -%}
+				<div class="product__banner-pack__badge badge badge--other">
+					{% if final_badge_icon != blank %}
+						{% assign badge_icon_alt = final_badge_icon.alt | escape | default: 'Badge icon' %}
+						{% capture badge_icon %}
+							{{ final_badge_icon | image_url: width: 20 | image_tag: width: 14, height: 14, alt: badge_icon_alt }}
+						{% endcapture %}
+						{{ badge_icon | replace: 'src=', 'lazy-src=' | replace: 'srcset=', 'lazy-srcset=' }}
+					{% endif %}
+					{{ final_badge }}
+				</div>
+			{%- endif -%}
+			{%- if final_title != blank -%}
+				<div class="product__banner-pack__item-title h3">
+					{{ final_title }}
+				</div>
+			{%- endif -%}
+			{%- if final_description != blank -%}
+				<div class="product__banner-pack__description">
+					{{ final_description }}
+				</div>
+			{%- endif -%}
+			{%- if final_button_label != blank or final_button_link != blank -%}
+				<a href="{{ final_button_link | default: '#' }}" class="button button--secondary">
+					{% if final_button_icon != blank %}
+						{% capture button_icon %}
+							{{ final_button_icon | image_url: width: 20 | image_tag: width: 14, height: 14 }}
+						{% endcapture %}
+						{{ button_icon | replace: 'src=', 'lazy-src=' | replace: 'srcset=', 'lazy-srcset=' }}
+					{% endif %}
+					{{ final_button_label | default: 'Découvrir' }}
+				</a>
+			{%- endif -%}
+		</div>
+	</div>
+</div>
+{% endif %}

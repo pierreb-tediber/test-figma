@@ -1,0 +1,486 @@
+{%- liquid
+	assign couches = product.metafields.custom.couches_de_confort.value | compact
+	assign couches_count = couches.size
+-%}
+
+{%- if couches_count > 0 -%}
+	{{ 'bundle.couches.css' | asset_url | stylesheet_tag }}
+
+	<script>
+		window.assetsUrl.js.push({ couchesSection: "{{ 'bundle.couches.js' | asset_url }}" });
+	</script>
+
+	{%- style -%}
+		.section-{{ section.id }}-padding {
+			padding-top: {{ section.settings.mob_padding_top }}px;
+			padding-bottom: {{ section.settings.mob_padding_bottom }}px;
+		}
+
+		@media screen and (min-width: 990px) {
+			.section-{{ section.id }}-padding {
+				padding-top: {{ section.settings.padding_top }}px;
+				padding-bottom: {{ section.settings.padding_bottom }}px;
+			}
+		}
+	{%- endstyle -%}
+
+	<couches-section
+		class="couches"
+		data-couches-count="{{ couches_count }}"
+	>
+		<div
+			class="gradient color-{{ section.settings.color_scheme }} section-{{ section.id }}-padding"
+			data-ax-section="couchesSection"
+		>
+			<div class="couches__wrapper">
+				{%- comment -%} Header / Title {%- endcomment -%}
+				<div class="page-width">
+					<div class="couches__header">
+						{% if section.settings.subtitle != blank %}
+							<span class="couches__subtitle">{{ section.settings.subtitle }}</span>
+						{% endif %}
+						{% if section.settings.title != blank %}
+							<h2 class="couches__title h2">{{ section.settings.title }}</h2>
+						{% endif %}
+					</div>
+				</div>
+
+				{%- comment -%} Main Content {%- endcomment -%}
+				<div class="couches__content">
+					{%- comment -%} Left Column - Detail Card (Desktop ONLY) {%- endcomment -%}
+					<div class="couches__detail">
+						{% for couche in couches %}
+							{%- assign index = forloop.index -%}
+							{%- liquid
+								assign desktop_image = couche.image.value
+								assign mobile_image = couche.image_mobile.value
+								assign video_desktop = couche.video.value
+								assign video_mobile = couche.video_mobile.value
+
+								# Desktop: Priorité desktop, fallback mobile
+								assign final_image = desktop_image
+								if final_image == blank
+									assign final_image = mobile_image
+								endif
+
+								assign final_video = video_desktop
+								if final_video == blank
+									assign final_video = video_mobile
+								endif
+
+								# Poster pour video
+								assign video_poster = blank
+								if final_video != blank
+									if final_video.preview_image != blank
+										assign video_poster = final_video.preview_image
+									elsif final_image != blank
+										assign video_poster = final_image
+									endif
+								endif
+
+								# Video URL
+								assign video_url = blank
+								if final_video != blank
+									if final_video.sources[1].url != blank
+										assign video_url = final_video.sources[1].url
+									elsif final_video.sources[0].url != blank
+										assign video_url = final_video.sources[0].url
+									endif
+								endif
+							-%}
+							<article
+								class="couches__card{% if forloop.first %} is-active{% endif %}"
+								data-couche-card="{{ index }}"
+							>
+								{%- comment -%} Media (Image or Video) {%- endcomment -%}
+								<div class="couches__card-media">
+									<div class="couches__media-wrapper">
+										{%- if video_url != blank -%}
+											<video
+												class="couches__card-video"
+												data-couche-video
+												data-desktop-media
+												autoplay
+												loop
+												muted
+												playsinline
+												width="{{ video_poster.width | default: 800 }}"
+												height="{{ video_poster.height | default: 450 }}"
+											>
+												<source data-src="{{ video_url }}" type="video/mp4">
+											</video>
+
+											{%- if video_poster != blank -%}
+												<img
+													class="couches__video-poster"
+													data-video-poster
+													data-desktop-media
+													data-src="{{ video_poster | image_url: width: 800 }}"
+													data-srcset="{{ video_poster | image_url: width: 400 }} 400w, {{ video_poster | image_url: width: 600 }} 600w, {{ video_poster | image_url: width: 800 }} 800w, {{ video_poster | image_url: width: 1200 }} 1200w"
+													sizes="474px"
+													alt="{{ couche.titre.value | escape }}"
+													width="{{ video_poster.width | default: 800 }}"
+													height="{{ video_poster.height | default: 450 }}"
+												>
+											{%- endif -%}
+										{%- elsif final_image != blank -%}
+											<img
+												class="couches__card-image"
+												data-desktop-media
+												data-src="{{ final_image | image_url: width: 800 }}"
+												data-srcset="{{ final_image | image_url: width: 400 }} 400w, {{ final_image | image_url: width: 600 }} 600w, {{ final_image | image_url: width: 800 }} 800w, {{ final_image | image_url: width: 1200 }} 1200w"
+												sizes="474px"
+												alt="{{ couche.titre.value | escape }}"
+												width="{{ final_image.width }}"
+												height="{{ final_image.height }}"
+											>
+										{%- endif -%}
+									</div>
+								</div>
+
+								{%- comment -%} Card Content {%- endcomment -%}
+								<div class="couches__card-content">
+									<div class="couches__card-badge">
+										<span>{{ index }}</span>
+									</div>
+
+									{% if couche.titre.value != blank %}
+										<div class="couches__card-title h3">{{ couche.titre.value }}</div>
+									{% endif %}
+
+									{%- assign description = couche.description -%}
+									{%- if description != blank -%}
+										<div class="couches__card-description">{{ description | metafield_tag }}</div>
+									{%- endif -%}
+
+									{%- if couche.insert_show and couche.insert_text != blank -%}
+									<div class="couches__card-insert">
+										{% if couche.insert_image != blank %}
+											{%- capture insert_image_tag -%}
+									      <img
+									        src="{{ couche.insert_image | image_url: width: 80 }}"
+									        srcset="{{ couche.insert_image | image_url: width: 80 }} 1x, {{ couche.insert_image | image_url: width: 80 }} 2x"
+									        loading="lazy"
+									        width="80"
+									        height="120"
+									        alt="{{ couche.titre.value | escape }}"
+									      >
+									    {%- endcapture -%}
+									    {{ insert_image_tag | replace: 'src=', 'lazy-src=' | replace: 'srcset=', 'lazy-srcset=' }}
+										{% endif %}
+										{{ couche.insert_text | metafield_tag }}
+									</div>
+									{%- endif -%}
+								</div>
+							</article>
+						{% endfor %}
+					</div>
+
+					{%- comment -%} Right Column - Layers Stack {%- endcomment -%}
+					<div class="couches__layers">
+						{% for couche in couches %}
+							{%- assign index = forloop.index -%}
+							<button
+								type="button"
+								class="couches__layer{% if forloop.first %} is-active{% endif %}"
+								data-couche-layer="{{ index }}"
+								aria-label="{{ couche.titre.value | escape }}"
+							>
+								{%- liquid
+									assign layer_image_desktop = couche.image_de_previsualisation.value
+									assign layer_image_mobile = couche.image_mobile_de_previsualisation.value
+
+									assign final_layer_image = layer_image_desktop
+									if final_layer_image == blank
+										assign final_layer_image = layer_image_mobile
+									endif
+
+									# Aspect ratios pour éviter CLS
+									assign mobile_aspect_ratio = 1
+									if layer_image_mobile != blank
+										assign mobile_aspect_ratio = layer_image_mobile.aspect_ratio
+									elsif final_layer_image != blank
+										assign mobile_aspect_ratio = final_layer_image.aspect_ratio
+									endif
+
+									assign desktop_aspect_ratio = final_layer_image.aspect_ratio | default: 1
+								-%}
+
+								{%- if final_layer_image != blank -%}
+									{%- capture layer_picture -%}
+									<picture>
+										{%- if layer_image_mobile != blank and layer_image_mobile != layer_image_desktop -%}
+											<source
+												media="(max-width: 749px)"
+												srcset="{{ layer_image_mobile | image_url: width: 375 }} 375w, {{ layer_image_mobile | image_url: width: 500 }} 500w, {{ layer_image_mobile | image_url: width: 750 }} 750w"
+												sizes="100vw"
+											>
+										{%- endif -%}
+										<img
+											class="couches__layer-image"
+											src="{{ final_layer_image | image_url: width: 1000 }}"
+											srcset="{{ final_layer_image | image_url: width: 500 }} 500w, {{ final_layer_image | image_url: width: 750 }} 750w, {{ final_layer_image | image_url: width: 1000 }} 1000w"
+											sizes="(max-width: 989px) 100vw, 800px"
+											alt="{{ couche.titre.value | escape }}"
+											width="{{ final_layer_image.width }}"
+											height="{{ final_layer_image.height }}"
+											style="--mobile-aspect: {{ mobile_aspect_ratio }}; --desktop-aspect: {{ desktop_aspect_ratio }}; aspect-ratio: var(--mobile-aspect);"
+											loading="lazy"
+										>
+									</picture>
+									{%- endcapture -%}
+									{{ layer_picture | replace: 'srcset="', 'lazy-srcset="' | replace: 'src="', 'lazy-src="' }}
+								{%- endif -%}
+
+								<span class="couches__layer-badge" aria-hidden="true">
+									<span>{{ index }}</span>
+								</span>
+							</button>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+
+			{% capture swiper_options %}
+				{
+				"slideInView": "auto",
+				"slidesToMove": 1,
+				"loop": false,
+				"autoplay": false,
+				"speed": 300,
+				"grabCursor": false,
+				"effect": "slide",
+				"stackMobile": false,
+				"freeModeMobile": false
+				}
+		{% endcapture %}
+
+			{%- comment -%} Mobile Popin {%- endcomment -%}
+			<div class="couches__popin" data-couches-popin aria-hidden="true">
+				<div class="couches__popin-overlay" data-couches-popin-close></div>
+				<div class="couches__popin-content">
+					<div id="Swiper-{{ section.id }}" class="swiper" data-swiper-options="{{ swiper_options | escape }}">
+						<div class="couches__popin-slider swiper-wrapper grid grid--1-col" data-couches-popin-slider>
+							{% for couche in couches %}
+								{%- assign index = forloop.index -%}
+								{%- liquid
+									assign desktop_image = couche.image.value
+									assign mobile_image = couche.image_mobile.value
+									assign video_desktop = couche.video.value
+									assign video_mobile = couche.video_mobile.value
+
+									# Mobile: Priorité mobile, fallback desktop
+									assign final_image = mobile_image
+									if final_image == blank
+										assign final_image = desktop_image
+									endif
+
+									assign final_video = video_mobile
+									if final_video == blank
+										assign final_video = video_desktop
+									endif
+
+									# Poster pour video
+									assign video_poster = blank
+									if final_video != blank
+										if final_video.preview_image != blank
+											assign video_poster = final_video.preview_image
+										elsif final_image != blank
+											assign video_poster = final_image
+										endif
+									endif
+
+									# Video URL
+									assign video_url = blank
+									if final_video != blank
+										if final_video.sources[1].url != blank
+											assign video_url = final_video.sources[1].url
+										elsif final_video.sources[0].url != blank
+											assign video_url = final_video.sources[0].url
+										endif
+									endif
+								-%}
+								<article
+									class="couches__popin-slide grid__item swiper-slide"
+									data-couche-slide="{{ index }}"
+								>
+									<div class="couches__popin-media">
+										<div class="couches__media-wrapper">
+											{%- if video_url != blank -%}
+												<video
+													class="couches__popin-video"
+													data-couche-video
+													data-mobile-media
+													playsinline
+													muted
+													loop
+													width="{{ video_poster.width | default: 600 }}"
+													height="{{ video_poster.height | default: 336 }}"
+												>
+													<source data-src="{{ video_url }}" type="video/mp4">
+												</video>
+
+												{%- if video_poster != blank -%}
+													<img
+														class="couches__video-poster"
+														data-video-poster
+														data-mobile-media
+														data-src="{{ video_poster | image_url: width: 600 }}"
+														data-srcset="{{ video_poster | image_url: width: 300 }} 300w, {{ video_poster | image_url: width: 450 }} 450w, {{ video_poster | image_url: width: 600 }} 600w"
+														sizes="100vw"
+														alt="{{ couche.titre.value | escape }}"
+														width="{{ video_poster.width | default: 600 }}"
+														height="{{ video_poster.height | default: 336 }}"
+													>
+												{%- endif -%}
+											{%- elsif final_image != blank -%}
+												<img
+													class="couches__popin-image"
+													data-mobile-media
+													data-src="{{ final_image | image_url: width: 600 }}"
+													data-srcset="{{ final_image | image_url: width: 300 }} 300w, {{ final_image | image_url: width: 450 }} 450w, {{ final_image | image_url: width: 600 }} 600w"
+													sizes="100vw"
+													alt="{{ couche.titre.value | escape }}"
+													width="{{ final_image.width }}"
+													height="{{ final_image.height }}"
+												>
+											{%- endif -%}
+										</div>
+									</div>
+
+									<div class="couches__popin-info">
+										<div class="couches__popin-badge">
+											<span>{{ index }}</span>
+										</div>
+
+										{% if couche.titre.value != blank %}
+											<h3 class="couches__popin-title h4">{{ couche.titre.value }}</h3>
+										{% endif %}
+
+										{%- assign description = couche.description -%}
+										{%- if description != blank -%}
+											<div class="couches__popin-description">{{ description | metafield_tag }}</div>
+										{%- endif -%}
+
+										{%- if couche.insert_show and couche.insert_text != blank -%}
+										<div class="couches__card-insert">
+											{% if couche.insert_image != blank %}
+												{%- capture popin_insert_image_tag -%}
+										      <img
+										        src="{{ couche.insert_image | image_url: width: 80 }}"
+										        srcset="{{ couche.insert_image | image_url: width: 80 }} 1x, {{ couche.insert_image | image_url: width: 80 }} 2x"
+										        loading="lazy"
+										        width="80"
+										        height="120"
+										        alt="{{ couche.titre.value | escape }}"
+										      >
+										    {%- endcapture -%}
+										    {{ popin_insert_image_tag | replace: 'src=', 'lazy-src=' | replace: 'srcset=', 'lazy-srcset=' }}
+											{% endif %}
+											{{ couche.insert_text | metafield_tag }}
+										</div>
+										{%- endif -%}
+									</div>
+								</article>
+							{% endfor %}
+						</div>
+					</div>
+
+					<div
+						class="swiper-pagination"
+						role="tablist"
+						aria-label="{{ 'general.slider.pagination' | t }}"
+					></div>
+
+					<button type="button" class="couches__popin-close" data-couches-popin-close>
+						{{ 'accessibility.close' | t }}
+					</button>
+				</div>
+			</div>
+		</div>
+	</couches-section>
+{%- endif -%}
+
+{% schema %}
+	{
+		"name": "Ax couches",
+		"tag": "section",
+		"class": "section",
+		"disabled_on": {
+			"groups": ["header", "footer"]
+		},
+		"settings": [
+			{
+				"type": "text",
+				"id": "subtitle",
+				"label": "Sur-titre",
+				"default": "Découvrez les différentes"
+			},
+			{
+				"type": "text",
+				"id": "title",
+				"label": "Titre",
+				"default": "Couches de confort"
+			},
+			{
+				"type": "header",
+				"content": "Couleurs"
+			},
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "Color scheme",
+				"default": "background-1"
+			},
+			{
+				"type": "header",
+				"content": "Padding (espace)"
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding top",
+				"default": 48
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding bottom",
+				"default": 48
+			},
+			{
+				"type": "range",
+				"id": "padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding top",
+				"default": 96
+			},
+			{
+				"type": "range",
+				"id": "padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding bottom",
+				"default": 96
+			}
+		],
+		"presets": [
+			{
+				"name": "Ax couches"
+			}
+		]
+	}
+{% endschema %}

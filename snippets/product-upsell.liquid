@@ -1,0 +1,158 @@
+{% doc %}
+	Render the upsell products
+
+	@param {object} product - The product to display
+	@param {object} selected_variant - The selected variant to display
+	@param {string} product_form_id - The ID of the product form
+	@param {string} section_id - The ID of the section that contains this upsell
+	@param {string} get_url - The URL of the page
+
+	@example
+	{% render 'product-upsell', product: product, product_form_id: product_form_id, section_id: section.id, get_url: get_url %}
+{% enddoc %}
+
+{%- liquid
+	assign show_upsell = false
+	assign upsell_products = product.metafields.custom.upsell.value | where: 'available', true
+	assign upsell_variants = product.metafields.custom.upsell_variants.value | where: 'available', true
+	assign upsell_by_variants = selected_variant.metafields.custom.upsell_by_variants.value | where: 'available', true
+
+	# Récupère les traductions des noms d'options pour les tailles
+	assign options_names_for_size_translated = 'products.product.options_names_for_size' | t | downcase | replace: ', ', ','
+	assign options_names_for_size = options_names_for_size_translated | split: ',' | uniq
+
+	# Récupère les traductions des noms d'options pour les couleurs
+	assign options_names_for_color_translated = 'products.product.options_names_for_color' | t | downcase | replace: ', ', ','
+	assign options_names_for_color = options_names_for_color_translated | split: ',' | uniq
+
+	# Récupère les traductions des noms d'options pour les pieds
+	assign options_names_for_foot_translated = 'products.product.options_names_for_foot' | t | downcase | replace: ', ', ','
+	assign options_names_for_foot = options_names_for_foot_translated | split: ',' | uniq
+
+	# Récupération de la position de l'option du produit pour la taille ou la couleur
+	assign option_position_color = blank
+	assign option_position_size = blank
+
+	unless product.has_only_default_variant
+		for option in product.options_with_values
+			# Traitement du nom de l'option en minuscules
+			assign option_name_downcase = option.name | downcase
+
+			# Divise le nom de l'option en tableau de mots uniques
+			assign option_name_array = option_name_downcase | split: ' ' | uniq
+
+			for translation in options_names_for_foot
+				assign has_foot_in_array = option_name_array | find: translation
+				if has_foot_in_array
+					assign has_foot_in_array = true
+					break
+				endif
+			endfor
+
+			if has_foot_in_array
+				continue
+			endif
+
+			for option_name in option_name_array
+				# Si le nom d'option est dans les noms d'options pour la taille, assigne la position de l'option pour la taille
+				if options_names_for_size contains option_name
+					assign option_position_size = option.position
+					break
+				endif
+
+				# Si le nom d'option est dans les noms d'options pour la couleur, assigne la position de l'option pour la couleur
+				if options_names_for_color contains option_name
+					assign option_position_color = option.position
+					break
+				endif
+			endfor
+		endfor
+	endunless
+
+	if upsell_products != blank or upsell_variants != blank or upsell_by_variants != blank
+		assign show_upsell = true
+	endif
+-%}
+
+<div id="ProductUpsell-{{ section_id }}">
+	{%- if show_upsell -%}
+		{%- capture upsell_items -%}
+			{%- for upsell_variant in upsell_by_variants -%}
+				{%- liquid
+					if upsell_variant.metafields.custom.hidden_variant.value == true
+						continue
+					endif
+				-%}
+				<li class="product-upsell__product">
+					{%- render 'card-product-upsell',
+						card_upsell: upsell_variant,
+						is_variant: true,
+						product_form_id: product_form_id,
+						get_url: get_url,
+						parent_product_id: product.id
+					-%}
+				</li>
+			{%- endfor -%}
+			{%- for upsell_variant in upsell_variants -%}
+				{%- liquid
+					if upsell_variant.metafields.custom.hidden_variant.value == true
+						continue
+					endif
+				-%}
+				<li class="product-upsell__product">
+					{%- render 'card-product-upsell',
+						card_upsell: upsell_variant,
+						is_variant: true,
+						product_form_id: product_form_id,
+						get_url: get_url,
+						parent_product_id: product.id
+					-%}
+				</li>
+			{%- endfor -%}
+			{%- for upsell_product in upsell_products -%}
+				{%- liquid
+					assign matching_with_color = product.metafields.custom.upsell_matching_with_color.value
+					assign matching_with_size = product.metafields.custom.upsell_matching_with_size.value
+					if matching_with_color == true
+						assign option_position_color_array = option_position_color | minus: 1
+						assign parent_option_value_color = selected_variant.options | slice: option_position_color_array | first
+					endif
+					if matching_with_size == true
+						assign option_position_size_array = option_position_size | minus: 1
+						assign parent_option_value_size = selected_variant.options | slice: option_position_size_array | first
+					endif
+				-%}
+				<li class="product-upsell__product">
+					{%- render 'card-product-upsell',
+						card_upsell: upsell_product,
+						parent_option_value_matching_color: parent_option_value_color,
+						parent_option_value_matching_size: parent_option_value_size,
+						is_variant: false,
+						product_form_id: product_form_id,
+						get_url: get_url,
+						parent_product_id: product.id,
+						matching_with_color: matching_with_color,
+						matching_with_size: matching_with_size
+					-%}
+				</li>
+			{%- endfor -%}
+		{%- endcapture -%}
+		{%- assign upsell_items_stripped = upsell_items | strip -%}
+		{%- if upsell_items_stripped != blank -%}
+			<div class="product-upsell">
+				<div class="product-upsell__title product__variant-selects__label">{{ 'products.product.upsell_title' | t }}</div>
+				<ul class="product-upsell__products list-unstyled">
+					{{ upsell_items }}
+				</ul>
+			</div>
+			<script
+				type="application/json"
+				data-product-selected-variant
+				data-option-position-color="{{ option_position_color }}"
+				data-option-position-size="{{ option_position_size }}"
+			>
+				{{ selected_variant | json }}
+			</script>
+		{%- endif -%}
+	{%- endif -%}
+</div>

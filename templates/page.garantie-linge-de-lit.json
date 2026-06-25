@@ -1,0 +1,209 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_content": false,
+        "custom_h1": "",
+        "h1_size": "h1",
+        "h1_no_margin": false,
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "ax_heading_6TphAp": {
+      "type": "ax-heading",
+      "name": "Ax heading",
+      "settings": {
+        "heading": "<p>Garantie linge de lit</p>",
+        "heading_size": "h2",
+        "heading_first": true,
+        "subheading": "",
+        "description": "",
+        "full_width": false,
+        "text_alignment": "center",
+        "color_scheme": "",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 32,
+        "padding_top": 96,
+        "padding_bottom": 64
+      }
+    },
+    "ax_richtext_RkciMT": {
+      "type": "ax-richtext",
+      "blocks": {
+        "text_JRbaPb": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Nous vous remercions d’avoir acheté un ou plusieurs nouveau(x) produit(s) TEDIBER. Notre exigence de qualité est élevée et ne doutons pas que vous serez très heureux de votre achat.<br/><br/>Cependant, si vous ne vous accoutumez pas à TEDIBER ou si vous découvrez un défaut dans votre produit, voici ci-dessous les conditions de notre garantie. Si vous estimez avoir le droit de vous prévaloir de leurs conditions, n’hésitez pas à nous contacter à hello@tediber.com pour recevoir des instructions sur la manière de procéder.<br/><br/>VEUILLEZ NOTER QUE NOTRE GARANTIE DES “30 NUITS D’ESSAI & RETOUR GRATUIT” ET NOS GARANTIES PRODUITS S’APPLIQUENT UNIQUEMENT AUX ACHETEURS INITIAUX DE PRODUITS TEDIBER AUTHENTIQUES, QUI ONT ÉTÉ ACHETÉS DIRECTEMENT ET SEULEMENT AUPRÈS DE TEDIBER. UNE PREUVE D’ACHAT VOUS SERA DEMANDÉE AFIN DE CERTIFIER DE L’AUTHENTICITÉ DE L’ACHAT. LA GARANTIE DES “100 NUITS D’ESSAI & RETOUR GRATUIT” S’APPLIQUE POUR CHAQUE PRODUIT TEDIBER MAIS N’EST EN AUCUN CAS RENOUVELABLE.</p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "text_JRbaPb"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "collapsible_content_LTxXXF": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_F7jM9c": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "La Garantie Linge de lit 2 ans",
+            "icon": "check_mark",
+            "row_content": "<p>Nous assurons 2 ans de garantie pleine contre tous les défauts (c’est-à-dire non dégressive : même après 6 mois, la garantie couvre l’intégralité et pas seulement la moitié de la valeur du linge de lit).<br/><br/>Cette garantie n’est pas transférable et vous couvre uniquement si vous êtes l’acheteur initial et le propriétaire actuel du linge de lit pour lequel vous vous prévalez d’un recours au titre de la garantie et si vous l’avez acheté directement sur www.tediber.com(https://www.tediber.com). Dans le cas d’un achat en boutique TEDIBER, une preuve d’achat ou vos coordonnées pourront être demandées.<br/><br/>Ainsi, la garantie Linge de lit ne s’applique que pendant la période au cours de laquelle le linge de lit est la propriété et sous le contrôle de l’acheteur initial.<br/><br/>Cette garantie Linge de lit est limitée aux défauts découlant de matériaux ou de main d’œuvre qui seraient de nature défectueuse. Les défauts couverts ne sont que les défauts constatés dans le cadre d’un usage domestique et pour du linge de lit entretenu sur selon les consignes de TEDIBER.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_8hRpWM": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "La Garantie linge de lit ne couvre pas",
+            "icon": "check_mark",
+            "row_content": "<p>La garantie Linge de lit 2 ans ne couvre pas le linge de lit vendu par des revendeurs non-agréés et ne couvre que le linge de lit vendu directement par Tediber.<br/><br/>Cette garantie ne couvre pas votre linge de lit si vous l’utilisez d’une façon incompatible avec sa destination et son utilisation prévue, par exemple, une situation non domestique. En outre, elle ne couvre pas les états découlant d’une mauvaise manipulation, d’une mauvaise utilisation ou de la négligence, par exemple, lors du transport du produit.<br/><br/>Elle ne couvre pas l’usure normale du linge de lit, les situations susceptibles de causer une détérioration ou des dommages et les dommages résultant d’un mauvais entretien.<br/><br/>Plus particulièrement, cette garantie exclut : a) des imperfections mineures ; b) des déchirures (qui ne viendraient pas d’un défaut du tissu), des tâches, de la salissure, des brûlures, des dommages liquides et la décoloration des matériaux qui surviennent au fil du temps ; c) l’humidité, les odeurs ou la moisissure ; d) les préférences individuelles ou personnelles concernant la fermeté, la texture, le confort, etc. ; e) des allergies ou des sensibilités individuelles ou personnelles ; f) l’usure normale du fait de l’utilisation prévue des produits, y compris le lavage domestique ; g) si vous avez tenté d’altérer ou de réparer le produit sans notre consentement ou si vous l’avez nettoyé avec des produits ou des techniques inappropriés ; h) Toutes les contaminations par les puces, punaises de lit ou autres parasites ; i) si le défaut résulte d’un cas de force majeure ou d’un phénomène naturel indépendant de notre volonté, y compris, sans limitation, d’un incendie, d’une inondation ou d’une catastrophe naturelle</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_q4NAzU": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Que fera Tediber ?",
+            "icon": "check_mark",
+            "row_content": "<p>La demande d’exercice de la garantie se fait à l’adresse hello@tediber.com(mailto:hello@tediber.com). Les demandes de garanties doivent comporter une description claire du défaut, des photos du défaut et la preuve d’achat du produit. L’absence de photographies ou une description imprécise pourront retarder la prise en charge du défaut au titre de la garantie 2 ans ou aboutir à son non-exercice. Après inspection du défaut par l’équipe Tediber, elle décidera si le produit est défectueux et si les conditions d’application de la garantie sont remplies. Nous nous réservons également le droit de faire appel à notre inspecteur indépendant, qui nous aidera à prendre une décision quant au remplacement du produit.<br/><br/>Les produits défectueux devront être retournés et les frais de retours seront remboursés si le défaut est constaté comme éligible à la garantie 2 ans. Si le défaut est considéré comme étant couvert par la garantie, notre obligation dans le cadre de la garantie 2 ans consistera à fournir le remplacement d’un produit identique.<br/><br/>Les produits réparés ou remplacés vous seront livrés gratuitement – veuillez noter que l’envoi ne peut être fait que dans le pays choisi lors de la livraison initiale du linge de lit.<br/><br/>Nous remplacerons le produit considéré comme défectueux par un modèle identique.<br/><br/>Dans le cas où le modèle n’existerait plus, il sera remplacé par un modèle d’un prix équivalent (ou inférieur s’il n’est pas disponible à prix équivalent). Si la taille n'est plus commercialisée, nous nous réservons le droit de vous remplacer le produit par une taille similaire.<br/><br/>Toute réclamation en vertu de cette garantie doit être reçue dans les 30 jours suivant votre constatation du défaut ou suivant la date à laquelle vous auriez raisonnablement dû constater le défaut, et, en tout état de cause, avant la fin de la période de garantie.<br/><br/>Par ailleurs, veuillez noter qu’aucun remboursement ne sera effectué au titre de la garantie 2 ans. La garantie 2 ans ouvre droit à un remplacement.<br/><br/>La garantie est fournie par Tediber, 20 rue sainte croix de la bretonnerie, 75004 Paris. Vous pouvez nous contacter à hello@tediber.com(mailto:hello@tediber.com).</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_4CEiTm": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Quelle est la durée de la garantie ?",
+            "icon": "check_mark",
+            "row_content": "<p>Cette garantie couvrant votre linge de lit TEDIBER dure pendant 1 an à compter de la date de livraison. La garantie est pleine (c’est-à-dire que nous ne réduisons pas le montant total en fonction du temps écoulé). Le linge de lit remplacé ne prolonge pas la durée de votre garantie. Le calcul de la durée de garantie se fait à partir du jour de la date de commande de votre achat d’origine.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_DQycMF": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Absence de déclaration de nature médicale ou liée à la santé",
+            "icon": "check_mark",
+            "row_content": "<p>TEDIBER n’effectue aucune déclaration de nature médicale ou liée à la santé concernant ses couettes. Les allergies, l’inconfort ou d’autres situations ne sont pas couvert(e)s au titre de cette garantie. Toute question ou préoccupation concernant les situations de nature médicale ou liées à la santé doit être adressée à un médecin habilité.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_imJzzb": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Comment effectuer une réclamation au titre de cette garantie ?",
+            "icon": "check_mark",
+            "row_content": "<p>Pour effectuer une réclamation au titre de notre garantie, veuillez envoyer une brève description écrite (accompagnée de photos, si possible) du problème ou de l’état qui selon vous constitue un défaut à l’adresse hello@tediber.com. Par ailleurs, d’autres éléments comme la preuve d’achat ou des photos complémentaires pourront être demandés.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_F7jM9c",
+        "collapsible_row_8hRpWM",
+        "collapsible_row_q4NAzU",
+        "collapsible_row_4CEiTm",
+        "collapsible_row_DQycMF",
+        "collapsible_row_imJzzb"
+      ],
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "full_width": true,
+        "caption": "",
+        "heading": "",
+        "heading_size": "h2",
+        "heading_alignment": "center",
+        "layout": "none",
+        "container_color_scheme": "",
+        "color_scheme": "",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "ax_richtext_wrQzWf": {
+      "type": "ax-richtext",
+      "blocks": {
+        "button_RpaFGh": {
+          "type": "button",
+          "settings": {
+            "button_text": "Découvrir le linge de lit Tediber",
+            "url": "shopify://collections/linge-de-lit",
+            "link_blank": false,
+            "style_button": "button button--primary",
+            "button_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "button_RpaFGh"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    }
+  },
+  "order": [
+    "main",
+    "ax_heading_6TphAp",
+    "ax_richtext_RkciMT",
+    "collapsible_content_LTxXXF",
+    "ax_richtext_wrQzWf"
+  ]
+}

@@ -1,0 +1,472 @@
+{%- liquid
+	if template.name == 'product'
+		assign bento = product.metafields.custom.bento.value
+	else
+		assign bento = section.settings.bento_metaobject
+	endif
+
+	assign bento_items = bento.bento_items.value | compact
+	assign bento_count = bento_items.size
+
+	assign specifications = product.metafields.custom.specifications_techniques.value
+
+	assign lazy_load = false
+	if section.index > 1
+		assign lazy_load = true
+	endif
+-%}
+
+{%- if bento_count > 0 or specifications.size > 0 -%}
+	{{ 'bundle.bento.css' | asset_url | stylesheet_tag }}
+
+	<script>
+		window.assetsUrl.js.push({ bentoSection: "{{ 'bundle.bento.js' | asset_url }}" });
+	</script>
+
+	{%- style -%}
+		.section-{{ section.id }}-padding {
+			padding-top: {{ section.settings.mob_padding_top }}px;
+			padding-bottom: {{ section.settings.mob_padding_bottom }}px;
+		}
+
+		@media screen and (min-width: 990px) {
+			.section-{{ section.id }}-padding {
+				padding-top: {{ section.settings.padding_top }}px;
+				padding-bottom: {{ section.settings.padding_bottom }}px;
+			}
+		}
+	{%- endstyle -%}
+
+	<div class="gradient color-{{ section.settings.color_scheme }} section-{{ section.id }}-padding"
+		style="--gradient-background: {{ bento.couleur_de_fond.value }};--color-background: {{ bento.couleur_de_fond.value.red }},{{ bento.couleur_de_fond.value.green }},{{ bento.couleur_de_fond.value.blue }};--color-foreground: {{ bento.couleur_du_texte.value.red }},{{ bento.couleur_du_texte.value.green }},{{ bento.couleur_du_texte.value.blue }};--color-link: {{ bento.couleur_du_texte.value.red }},{{ bento.couleur_du_texte.value.green }},{{ bento.couleur_du_texte.value.blue }};">
+		{%- if bento_count > 0 -%}
+			<bento-section
+				class="bento bento-section"
+				data-ax-section="bentoSection"
+				data-bento-count="{{ bento_count }}"
+			>
+				<div class="page-width">
+					{%- comment -%} Header / Title {%- endcomment -%}
+					{%- if bento.subheading.value != blank or bento.titre.value != blank -%}
+						<div class="bento__header">
+							{%- if bento.titre.value != blank -%}
+								<h2 class="bento__title">{{ bento.titre.value }}</h2>
+							{%- endif -%}
+							{%- if bento.subheading.value != blank -%}
+								<span class="bento__subtitle">{{ bento.subheading | metafield_tag }}</span>
+							{%- endif -%}
+						</div>
+					{%- endif -%}
+
+					{%- comment -%} Bento Grid {%- endcomment -%}
+					<div class="bento__grid">
+						{%- for item in bento_items limit: 8 -%}
+							{%- liquid
+								assign item_index = forloop.index
+								assign has_video = false
+								if item.video.value != blank
+									assign has_video = true
+								endif
+
+								assign item_image = blank
+								if item.image.value != blank
+									assign item_image = item.image.value
+								endif
+
+								# Type de bloc
+								assign item_type = item.type_de_fond | default: 'tall'
+								assign item_bg_color = item.background_color | default: ''
+								assign item_text_color = item.text_color | default: '#ffffff'
+								assign image_overflow = item.image_overflow | default: false
+								assign image_overflow_position = item.image_deborde_position | default: 'top'
+								assign image_position = item.position_image | default: 'top'
+								assign is_icon = item.icon | default: 'false'
+								assign content_position = item.content_position | default: 'left'
+
+								# Modal
+								assign has_modal = false
+								if item.modal_title != blank or item.modal_description != blank
+									assign has_modal = true
+								endif
+								assign modal_id = 'BentoItemModal-' | append: section.id | append: '-' | append: item_index
+
+								# Lazy loading pour items après le 2ème
+								assign item_lazy = lazy_load
+								if forloop.index > 2
+									assign item_lazy = true
+								endif
+							-%}
+
+							<article
+								class="bento__item bento__item--{{ item_type }}{% if image_overflow %} bento__item--overflow bento__item--overflow-{{ image_overflow_position }}{% endif %}{% if is_icon == true %} bento__item--icon{% endif %}{% if item_image != blank or has_video == true %} bento__item--image-position-{{ image_position }}{% endif %} bento__item--content-{{ content_position }}{% if has_modal %} bento__item--clickable{% endif %}"
+								data-bento-item="{{ item_index }}"
+								{%- if item_bg_color != blank %}
+									style="--bento-item-bg: {{ item_bg_color }}; --bento-item-color: {{ item_text_color }};"
+								{%- elsif item_text_color != blank %}
+									style="--bento-item-color: {{ item_text_color }};"
+								{%- endif %}
+							>
+								{%- comment -%} Background Media (Image ou Vidéo en fond) {%- endcomment -%}
+								{%- if item_image != blank or has_video -%}
+									<div
+										class="bento__item-media{% if image_overflow and has_video == false %} bento__item-media--overflow bento__item-media--overflow-{{ image_overflow_position }}{% endif %}{% if is_icon == true %} bento__item-media--icon{% endif %}"
+									>
+										{%- if has_video -%}
+											{%- liquid
+												assign video_desktop = item.video.value
+												assign video_mobile = item.video_mobile.value
+												assign video_poster = blank
+
+												if video_desktop != blank and video_desktop.preview_image != blank
+													assign video_poster = video_desktop.preview_image
+												elsif item_image != blank
+													assign video_poster = item_image
+												endif
+
+												assign video_desktop_url = blank
+												if video_desktop != blank
+													if video_desktop.sources[1].url != blank
+														assign video_desktop_url = video_desktop.sources[1].url
+													elsif video_desktop.sources[0].url != blank
+														assign video_desktop_url = video_desktop.sources[0].url
+													endif
+												endif
+
+												assign video_mobile_url = blank
+												if video_mobile != blank
+													if video_mobile.sources[1].url != blank
+														assign video_mobile_url = video_mobile.sources[1].url
+													elsif video_mobile.sources[0].url != blank
+														assign video_mobile_url = video_mobile.sources[0].url
+													endif
+												endif
+											-%}
+											{%- capture video_tag -%}
+												<div class="bento__media-wrapper">
+													<video
+														class="bento__item-video"
+														data-bento-video
+														autoplay
+														playsinline
+														muted
+														loop
+														width="{{ video_poster.width | default: 800 }}"
+														height="{{ video_poster.height | default: 450 }}"
+													>
+														{%- if video_mobile_url != blank -%}
+															<source
+																src="{{ video_mobile_url }}"
+																type="video/mp4"
+																media="(max-width: 749px)"
+															>
+														{%- endif -%}
+														{%- if video_desktop_url != blank -%}
+															<source
+																src="{{ video_desktop_url }}"
+																type="video/mp4"
+																{% if video_mobile_url != blank %}
+																	media="(min-width: 750px)"
+																{% endif %}
+															>
+														{%- endif -%}
+													</video>
+
+													{%- if video_poster != blank -%}
+														<img
+															class="bento__video-poster"
+															data-video-poster
+															src="{{ video_poster | image_url: width: 800 }}"
+															srcset="{{ video_poster | image_url: width: 400 }} 400w, {{ video_poster | image_url: width: 600 }} 600w, {{ video_poster | image_url: width: 800 }} 800w, {{ video_poster | image_url: width: 1200 }} 1200w"
+															sizes="(max-width: 989px) 100vw, 440px"
+															alt="{{ item_image.alt | default: 'Bento video' | escape }}"
+															width="{{ video_poster.width | default: 800 }}"
+															height="{{ video_poster.height | default: 450 }}"
+														>
+													{%- endif -%}
+												</div>
+											{%- endcapture -%}
+
+											{%- if item_lazy -%}
+												{{ video_tag | replace: 'src="', 'lazy-src="' | replace: 'srcset="', 'lazy-srcset="' }}
+											{%- else -%}
+												{{ video_tag }}
+											{%- endif -%}
+										{%- elsif item_image != blank -%}
+											{%- liquid
+												assign desktop_image = item_image
+												assign mobile_image = item.image_mobile.value
+
+												assign final_image = desktop_image
+												if final_image == blank
+													assign final_image = mobile_image
+												endif
+											-%}
+											{%- capture image_tag -%}
+												<picture>
+													{%- if mobile_image != blank and mobile_image != desktop_image -%}
+														<source
+															media="(max-width: 749px)"
+															srcset="{{ mobile_image | image_url: width: 375 }} 375w, {{ mobile_image | image_url: width: 750 }} 750w"
+															sizes="100vw"
+														>
+													{%- endif -%}
+													<img
+														class="bento__item-image"
+														src="{{ final_image | image_url: width: 800 }}"
+														srcset="{{ final_image | image_url: width: 400 }} 400w, {{ final_image | image_url: width: 600 }} 600w, {{ final_image | image_url: width: 800 }} 800w, {{ final_image | image_url: width: 1200 }} 1200w"
+														sizes="(max-width: 989px) 100vw, 440px"
+														alt="{{ final_image.alt | default: 'Bento image' | escape }}"
+														width="{{ final_image.width | default: 800 }}"
+														height="{{ final_image.height | default: 450 }}"
+													>
+												</picture>
+											{%- endcapture -%}
+
+											{%- if item_lazy -%}
+												{{ image_tag | replace: 'src="', 'lazy-src="' | replace: 'srcset="', 'lazy-srcset="' }}
+											{%- else -%}
+												{{ image_tag }}
+											{%- endif -%}
+										{%- endif -%}
+									</div>
+								{%- endif -%}
+
+								{%- comment -%} Content {%- endcomment -%}
+								{%- if item.title != blank or item.subtitle != blank -%}
+									<div class="bento__item-content">
+										{%- if item.title != blank -%}
+											<h3 class="bento__item-title">{{ item.title }}</h3>
+										{%- endif -%}
+										{%- if item.subtitle != blank -%}
+											<p class="bento__item-subtitle">{{ item.subtitle }}</p>
+										{%- endif -%}
+									</div>
+								{%- endif -%}
+
+								{%- comment -%} Modal trigger + dialog {%- endcomment -%}
+								{%- if has_modal -%}
+									{%- liquid
+										assign modal_label = item.modal_title | default: item.title
+										assign modal_title_id = modal_id | append: '-title'
+									-%}
+									<modal-opener
+										class="bento__item-modal-opener"
+										data-modal="#{{ modal_id }}"
+									>
+										<button
+											type="button"
+											class="bento__item-trigger"
+											aria-haspopup="dialog"
+											aria-controls="{{ modal_id }}"
+											aria-expanded="false"
+											aria-label="{{ modal_label | escape }}"
+										>
+											<span class="visually-hidden">{{ modal_label | escape }}</span>
+											{{- 'icon-info.svg' | inline_asset_content -}}
+										</button>
+									</modal-opener>
+
+									<modal-dialog id="{{ modal_id }}" class="modal-dialog bento__item-modal">
+										<div role="dialog" aria-labelledby="{{ modal_title_id }}" aria-modal="true" tabindex="-1">
+											<div class="modal-dialog__content" role="document">
+												<div class="modal-dialog__header bento__item-modal-header">
+													{%- if item.modal_title != blank -%}
+														<h2 id="{{ modal_title_id }}" class="h4">{{ item.modal_title }}</h2>
+													{%- endif -%}
+													<button
+														id="ModalClose-{{ modal_id }}"
+														type="button"
+														class="modal-dialog__toggle"
+														aria-label="{{ 'accessibility.close' | t | escape }}"
+													>
+														<span class="svg-wrapper">{{- 'icon-close.svg' | inline_asset_content -}}</span>
+													</button>
+												</div>
+												<div class="bento__item-modal-body rte">
+													{%- if item.modal_description != blank -%}
+														{{ item.modal_description | metafield_tag }}
+													{%- endif -%}
+													{%- if item.modal_link_url != blank and item.modal_link_text != blank -%}
+														<div class="bento__item-modal-actions">
+															<a
+																href="{{ item.modal_link_url }}"
+																class="bento__item-modal-link ax-link reversed"
+															>
+																{{ item.modal_link_text }}
+															</a>
+														</div>
+													{%- endif -%}
+												</div>
+											</div>
+										</div>
+									</modal-dialog>
+								{%- endif -%}
+							</article>
+						{%- endfor -%}
+					</div>
+				</div>
+			</bento-section>
+		{%- endif -%}
+
+		{%- if specifications.size > 0 -%}
+			<div class="page-width bento__specifications_page_width">
+				<div class="bento__specifications">
+					<modal-opener
+						class="bento__specifications-opener"
+						data-modal="#SpecificationsModal-{{ section.id }}"
+					>
+						<button
+							id="SpecificationsOpener-{{ section.id }}"
+							class="bento__specifications-button ax-link reversed"
+							type="button"
+							aria-haspopup="dialog"
+						>
+							<button-content class="button-content">
+								{{ 'products.product.specifications_title' | t }}
+							</button-content>
+						</button>
+					</modal-opener>
+
+					<modal-dialog id="SpecificationsModal-{{ section.id }}" class="modal-dialog bento__specifications-modal">
+						<div
+							role="dialog"
+							aria-label="{{ 'products.product.specifications_title' | t }}"
+							aria-modal="true"
+							class="bento__specifications-modal-content"
+							tabindex="-1"
+						>
+							<div
+								class="modal-dialog__content"
+								role="dialog"
+								aria-label="{{ 'products.product.specifications_title' | t }}"
+								aria-modal="true"
+								tabindex="-1"
+							>
+								<div class="modal-dialog__header bento__specifications-modal-header">
+								<h2 class="bento__specifications-modal-title h2">
+									{{ 'products.product.specifications_title' | t }}
+								</h2>
+								<button
+									id="ModalClose-{{ section.id }}"
+									type="button"
+									class="modal-dialog__toggle bento__specifications-modal-close"
+									aria-label="{{ 'accessibility.close' | t }}"
+								>
+									<span class="svg-wrapper">
+										{{- 'icon-close.svg' | inline_asset_content -}}
+									</span>
+								</button>
+							</div>
+							<div class="bento__specifications-modal-body">
+
+								<div class="bento__specifications-content">
+									<div class="grid grid--3-col-desktop grid--1-col-tablet-down">
+										{%- for spec in specifications -%}
+											<div class="grid__item bento__spec-item">
+												{%- if spec.titre.value != blank -%}
+													<h3 class="bento__spec-title">{{ spec.titre.value }}</h3>
+												{%- endif -%}
+												{%- if spec.contenu != blank -%}
+													<div class="bento__spec-content rte">
+														{{ spec.contenu | metafield_tag }}
+													</div>
+												{%- endif -%}
+											</div>
+										{%- endfor -%}
+									</div>
+								</div>
+								</div>
+							</div>
+						</div>
+					</modal-dialog>
+				</div>
+			</div>
+		{%- endif -%}
+	</div>
+{%- endif -%}
+
+{% schema %}
+	{
+		"name": "Ax Bento Grid",
+		"tag": "section",
+		"class": "section ax-section ax-bento",
+		"disabled_on": {
+			"groups": ["header", "footer"]
+		},
+		"settings": [
+			{
+				"type": "metaobject",
+				"id": "bento_metaobject",
+				"label": "Bento metaobject",
+				"metaobject_type": "bento"
+			},
+			{
+				"type": "paragraph",
+				"content": "Cette section affiche les blocs Bento définis dans le métaobject 'bento_items' du produit. L'ordre des items définit leur placement automatique dans la grille."
+			},
+			{
+				"type": "header",
+				"content": "Couleurs"
+			},
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "Schéma de couleurs",
+				"default": "scheme-1"
+			},
+			{
+				"type": "header",
+				"content": "Espacement Mobile"
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Marge haute (mobile)",
+				"default": 24
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Marge basse (mobile)",
+				"default": 48
+			},
+			{
+				"type": "header",
+				"content": "Espacement Desktop"
+			},
+			{
+				"type": "range",
+				"id": "padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Marge haute",
+				"default": 8
+			},
+			{
+				"type": "range",
+				"id": "padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Marge basse",
+				"default": 96
+			}
+		],
+		"presets": [
+			{
+				"name": "Ax Bento Grid"
+			}
+		]
+	}
+{% endschema %}

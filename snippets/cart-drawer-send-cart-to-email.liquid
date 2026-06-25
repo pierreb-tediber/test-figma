@@ -1,0 +1,37 @@
+{%- liquid
+	assign send_cart_to_email = section.blocks | where: 'type', 'send_cart_to_email' | first
+-%}
+
+<div id="cart-drawer-send-cart-to-email">
+	{%- if send_cart_to_email != blank and cart != empty -%}
+		<cart-send-to-email
+			class="drawer__send-cart-to-email"
+			data-klaviyo-list-id="{{ send_cart_to_email.settings.klaviyo_list_id }}"
+			data-klaviyo-public-key="{{ send_cart_to_email.settings.klaviyo_public_key }}"
+		>
+			<form class="drawer__send-cart-to-email__form">
+				<div class="drawer__send-cart-to-email__content">
+					<div class="drawer__send-cart-to-email__input-wrapper">
+						<input
+							type="email"
+							id="cart-email-input"
+							class="drawer__send-cart-to-email__input field__input"
+							placeholder="{{ 'sections.cart.send_cart_to_email_label' | t }}"
+							required
+						>
+						<label for="cart-email-input" class="drawer__send-cart-to-email__label field__label">
+							{{ 'sections.cart.send_cart_to_email_label' | t }}
+						</label>
+					</div>
+					<button type="submit" class="drawer__send-cart-to-email__button button button--reset">
+						<span class="ax-link reversed">{{ 'sections.cart.send_cart_to_email_button' | t }}</span>
+					</button>
+				</div>
+				<div class="drawer__send-cart-to-email__error"></div>
+				<div class="drawer__send-cart-to-email__success">
+					{{ 'sections.cart.send_cart_to_email_success' | t }}
+				</div>
+			</form>
+		</cart-send-to-email>
+	{%- endif -%}
+</div>

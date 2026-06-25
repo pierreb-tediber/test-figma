@@ -1,0 +1,767 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_content": false,
+        "custom_h1": "",
+        "h1_size": "h1",
+        "h1_no_margin": false,
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "ax_heading_Ufnqqj": {
+      "type": "ax-heading",
+      "name": "Ax heading",
+      "settings": {
+        "heading": "<p>Tediber ou Emma : comparatif technique</p>",
+        "heading_size": "h2",
+        "heading_first": false,
+        "subheading": "RELEVÉ DES DONNÉES",
+        "description": "",
+        "full_width": false,
+        "text_alignment": "center",
+        "color_scheme": "",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 32,
+        "padding_top": 96,
+        "padding_bottom": 64
+      }
+    },
+    "ax_richtext_xYyipe": {
+      "type": "ax-richtext",
+      "blocks": {
+        "text_highlight_begiKb": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>Cette page centralise l’ensemble des éléments factuels et données relevées dans le cadre du comparateur <a href=\"https://www.tediber.com/pages/matelas-hybride-vs-emma\" title=\"https://www.tediber.com/pages/matelas-hybride-vs-emma\">Tediber ou Emma</a>.</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_3qKLMM": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Elle vise à garantir la transparence des informations présentées, documenter les sources et les données utilisées et conserver une trace datée des éléments observés au moment de l’<a href=\"https://www.tediber.com/pages/matelas-hybride-vs-emma\" title=\"https://www.tediber.com/pages/matelas-hybride-vs-emma\">analyse</a>. <br/><br/>Toutes les données présentées dans ce rapport sont accompagnées de captures horodatées.<br/><br/>Date de mise à jour : 20/03/2026</p>",
+            "text_alignment": "left"
+          }
+        },
+        "picto_K7PDjF": {
+          "type": "picto",
+          "settings": {
+            "picto": "shopify://shop_images/bulb-white.svg",
+            "picto_size": 136,
+            "picto_size_mobile": 112,
+            "picto_position": "left"
+          }
+        }
+      },
+      "block_order": [
+        "text_highlight_begiKb",
+        "text_3qKLMM",
+        "picto_K7PDjF"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": true,
+        "color_scheme": "scheme-1",
+        "color_scheme_container": "scheme-3",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 16,
+        "mob_padding_bottom_content": 16,
+        "mob_padding_left_content": 16,
+        "mob_padding_right_content": 16,
+        "padding_top_content": 48,
+        "padding_bottom_content": 48,
+        "padding_left_content": 112,
+        "padding_right_content": 112,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "ax_richtext_MGnUp3": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_HCx49C": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>MÉTHODOLOGIE</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_jepWdn": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Ce comparatif a pour objectif de présenter, de manière factuelle et transparente, les différences concernant les critères techniques des matelas de la <a href=\"https://www.tediber.com/collections/matelas\" title=\"https://www.tediber.com/collections/matelas\">gamme Tediber</a> et Emma. Il doit permettre une lecture claire des caractéristiques techniques (épaisseur totale, nombre de couches de mousse...), de confort (respirabilité...) à partir de données vérifiables et datées. </p><p><strong>L’ambition est d’apporter une information objectivée afin de faciliter la compréhension et la prise de décision, sans altération des éléments publiquement accessibles au moment du relevé.<br/><br/></strong>Les modèles sélectionnés sont des matelas 140 × 200 cm des <a href=\"https://www.tediber.com/collections/matelas\" title=\"https://www.tediber.com/collections/matelas\">gammes Tediber</a> (Hybride, Hybride Premium, Hybride Infinite) et Emma (Original Lite, Original, Original Pro) qui correspondent à un positionnement de gamme comparable au sein des deux marques (niveau de technologie, promesse de confort, segment tarifaire...). Cette cohérence de positionnement vise à garantir une comparaison pertinente, équilibrée et fondée sur des produits s’adressant à une cible et à un niveau de prestation similaires.</p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_HCx49C",
+        "text_jepWdn"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": true,
+        "color_scheme": "scheme-1",
+        "color_scheme_container": "scheme-1",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 48,
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "rich_text_MmmcXk": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_HCTgh6": {
+          "type": "heading",
+          "settings": {
+            "heading": "RELEVÉ DES CRITÈRES TECHNIQUES",
+            "heading_size": "h2"
+          }
+        },
+        "text_fUEP86": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Les critères techniques présentés dans ce comparatif ont été mesurés à l’aide d’une règle de positionnement afin d’obtenir des données précises sur les épaisseurs (épaisseur totale et épaisseur des couches de mousse). Les données non mesurées, telles que la présence d’un carénage de maintien ou le nombre de ressorts, ont été vérifiées directement sur le site officiel de la marque Emma ainsi que sur celui de la <a href=\"https://www.tediber.com/collections/matelas\" title=\"https://www.tediber.com/collections/matelas\">marque Tediber</a>.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_HCTgh6",
+        "text_fUEP86"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-3",
+        "full_width": true,
+        "padding_top_desktop": 96,
+        "padding_bottom_desktop": 96
+      }
+    },
+    "multicolumn_74G6NP": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_wdaXaq": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/hybride_premium_hauteur_regle.png",
+            "title": "",
+            "text": "<p>ÉPAISSEUR TOTALE <br/><strong>27 CM<br/><br/></strong>DATE<br/><strong>18/03/2026</strong></p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_WbWRP7": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/hybride_premium_mousse_regle.png",
+            "title": "",
+            "text": "<p>ÉPAISSEUR DES MOUSSES<strong> </strong><br/><strong>8 cm</strong> (au dessus des ressorts)<br/><strong>10 cm</strong> <strong>au total</strong> avec la mousse de maintien*<strong><br/><br/></strong>DATE<br/><strong>18/03/2026</strong></p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_WUG9ym": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/mousse_maintien_hybride.png",
+            "title": "",
+            "text": "<p>*ÉPAISSEUR MOUSSE DE MAINTIEN<br/><strong>2 cm en dessous des ressorts<br/><br/></strong>DATE<br/><strong>18/03/2026</strong></p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_wdaXaq",
+        "column_WbWRP7",
+        "column_WUG9ym"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "MATELAS HYBRIDE PREMIUM DE TEDIBER",
+        "heading_size": "h2",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "Découvrir le matelas Hybride Premium",
+        "button_link": "shopify://products/matelas-hybride-premium",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "primary",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "rich_text_dJFApw": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_tmABPE": {
+          "type": "heading",
+          "settings": {
+            "heading": "Comment tiennent vraiment les couches ?",
+            "heading_size": "h2"
+          }
+        },
+        "text_tQUh6p": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Pour tester la fermeté et comparer les mousses entre <a href=\"/products/matelas-hybride-premium\" title=\"Matelas Hybride Premium\">l’<strong>Hybride</strong> <strong>Premium </strong></a> (gauche) et l’<strong>Original </strong>(droite), nous avons testé le soutien et le rebond des couches. Découvrez le résultat en vidéo :</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_tmABPE",
+        "text_tQUh6p"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-2",
+        "full_width": true,
+        "padding_top_desktop": 64,
+        "padding_bottom_desktop": 52
+      }
+    },
+    "video_f63hyC": {
+      "type": "video",
+      "name": "t:sections.video.presets.name",
+      "settings": {
+        "heading": "",
+        "heading_size": "h2",
+        "enable_video_looping": false,
+        "video": "shopify://files/videos/[Hybride Premium VS Original] Test mousse.mp4",
+        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "description": "",
+        "full_width": false,
+        "color_scheme": "scheme-2",
+        "padding_top": 0,
+        "padding_bottom": 36
+      }
+    },
+    "multicolumn_TKnJUf": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_CA8gWU": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/hybride_hauteur_regle.png",
+            "title": "",
+            "text": "<p>ÉPAISSEUR TOTALE <br/><strong>25 CM<br/><br/></strong>DATE <br/><strong>18/03/2026</strong></p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_NFDq9K": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/hybride_mousse_regle.png",
+            "title": "",
+            "text": "<p>ÉPAISSEUR DES MOUSSES<strong> </strong><br/><strong>5 cm</strong> (au dessus des ressorts)<br/><strong>7 cm</strong> <strong>au total</strong> avec la mousse de maintien*<strong><br/><br/></strong>DATE <br/><strong>18/03/2026</strong></p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_ndkd7g": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/mousse_maintien_hybride.png",
+            "title": "",
+            "text": "<p>*ÉPAISSEUR MOUSSE DE MAINTIEN<br/><strong>2 cm en dessous des ressorts<br/><br/></strong>DATE<br/><strong>18/03/2026</strong></p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_CA8gWU",
+        "column_NFDq9K",
+        "column_ndkd7g"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "MATELAS HYBRIDE DE TEDIBER",
+        "heading_size": "h2",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "Découvrir le matelas Hybride",
+        "button_link": "shopify://products/matelas-hybride",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "primary",
+        "color_scheme": "",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "rich_text_qVaQDT": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_JDAaGq": {
+          "type": "heading",
+          "settings": {
+            "heading": "Sous le poids des dormeurs : quel matelas assure le meilleur maintien ?",
+            "heading_size": "h2"
+          }
+        },
+        "text_cgfzeV": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Nous avons testé le soutien des mousses de <a href=\"/products/matelas-hybride\" title=\"Matelas Hybride\"><strong>l’Hybride de Tediber</strong></a> (gauche) et de <strong>l’Original Lite d'Emma</strong> (droite) avec deux personnes de 68 kg sur chaque matelas : les couches du matelas Hybride sont plus résistantes, et s’affaissent moins sous le poids. Découvrez le résultat en vidéo :</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_JDAaGq",
+        "text_cgfzeV"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-2",
+        "full_width": true,
+        "padding_top_desktop": 64,
+        "padding_bottom_desktop": 52
+      }
+    },
+    "video_aLGXQR": {
+      "type": "video",
+      "name": "t:sections.video.presets.name",
+      "settings": {
+        "heading": "",
+        "heading_size": "h2",
+        "enable_video_looping": false,
+        "video": "shopify://files/videos/[Hybride VS Original Lite] Test maintien.mp4",
+        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "description": "",
+        "full_width": false,
+        "color_scheme": "scheme-2",
+        "padding_top": 0,
+        "padding_bottom": 36
+      }
+    },
+    "multicolumn_Cjb69q": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_DaW7hb": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/hybride_infinite_hauteur_regle_715a9917-28db-420f-8809-b40c8b1c010d.png",
+            "title": "",
+            "text": "<p>ÉPAISSEUR TOTALE <br/><strong>31 CM<br/><br/></strong>DATE<br/><strong>18/03/2026</strong></p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_tJPMac": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/hybride_infinite_mousse_regle.png",
+            "title": "",
+            "text": "<p>ÉPAISSEUR DES MOUSSES<strong> </strong><br/><strong>11 cm</strong> (au dessus des ressorts)<br/><strong>13 cm</strong> <strong>au total</strong> avec la mousse de maintien*<strong><br/><br/></strong>DATE<br/><strong>18/03/2026</strong></p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_grMMh6": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/mousse_maintien_hybride.png",
+            "title": "",
+            "text": "<p>*ÉPAISSEUR MOUSSE DE MAINTIEN<br/><strong>2 cm en dessous des ressorts<br/><br/></strong>DATE<br/><strong>18/03/2026</strong></p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_DaW7hb",
+        "column_tJPMac",
+        "column_grMMh6"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "MATELAS HYBRIDE INFINITE DE TEDIBER",
+        "heading_size": "h2",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "Découvrir le matelas Hybride Infinite",
+        "button_link": "shopify://products/matelas-hybride-premium",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "primary",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 48,
+        "padding_bottom": 36
+      }
+    },
+    "rich_text_FQbQc3": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_hkY68y": {
+          "type": "heading",
+          "settings": {
+            "heading": "Résistance sous poids : quelle matelas reste stable ?",
+            "heading_size": "h2"
+          }
+        },
+        "text_nxUmVy": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Nous avons testé les couches des matelas <a href=\"/products/matelas-hybride-infinite\" title=\"Matelas Hybride Infinite®\"><strong>Hybride Infinite de Tediber</strong></a> (gauche) et <strong>Original Pro d’Emma</strong> (droite) pour comparer leur soutien et stabilité. On constate que le carénage de maintien du <a href=\"/products/matelas-hybride-infinite\" title=\"Matelas Hybride Infinite®\">Hybride Infinite</a> qui enveloppe les ressorts offre une meilleure stabilité et résistance au poids.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_hkY68y",
+        "text_nxUmVy"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-2",
+        "full_width": true,
+        "padding_top_desktop": 64,
+        "padding_bottom_desktop": 52
+      }
+    },
+    "video_J9kwt4": {
+      "type": "video",
+      "name": "t:sections.video.presets.name",
+      "settings": {
+        "heading": "",
+        "heading_size": "h2",
+        "enable_video_looping": false,
+        "video": "shopify://files/videos/[Hybride Infinite VS Original pro] Test maintien.mp4",
+        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "description": "",
+        "full_width": false,
+        "color_scheme": "scheme-2",
+        "padding_top": 0,
+        "padding_bottom": 36
+      }
+    },
+    "multicolumn_Y9AecF": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_hqK7nW": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/lite_hauteur_regle.png",
+            "title": "",
+            "text": "<p>ÉPAISSEUR TOTALE <br/><strong>22 CM<br/><br/></strong>DATE<br/><strong>18/03/2026</strong></p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_NmLwYY": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/lite_mousse_regle.png",
+            "title": "",
+            "text": "<p>ÉPAISSEUR DES MOUSSES<strong> </strong><br/><strong>2 cm</strong> (au dessus des ressorts)<br/>Absence de mousse de maintien sous les ressorts<strong><br/><br/></strong>DATE<br/><strong>18/03/2026</strong></p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_XMhHNK": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/lite_textile.png",
+            "title": "",
+            "text": "<p>Le matelas ne dispose pas de carénage de maintien pour stabiliser et contenir les ressorts contrairement aux matelas Tediber. Chez Emma, les ressorts sont simplement entourés d’une enveloppe textile très fine.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_hqK7nW",
+        "column_NmLwYY",
+        "column_XMhHNK"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "MATELAS ORIGINAL LITE D'EMMA",
+        "heading_size": "h2",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "shopify://products/matelas-hybride-premium",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "primary",
+        "color_scheme": "scheme-2",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "multicolumn_CMdiP8": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_DiAaCP": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/original_hauteur_regle.png",
+            "title": "",
+            "text": "<p>ÉPAISSEUR TOTALE <br/><strong>25 CM<br/><br/></strong>DATE<br/><strong>18/03/2026</strong></p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_LAmwVD": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/original_mousse_regle.png",
+            "title": "",
+            "text": "<p>ÉPAISSEUR DES MOUSSES<strong> </strong><br/><strong>4 cm</strong> (au dessus des ressorts)<br/>Absence de mousse de maintien sous les ressorts<strong><br/><br/></strong>DATE <br/><strong>18/03/2026</strong></p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_zah4A3": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/original_textile.png",
+            "title": "",
+            "text": "<p>Le matelas ne dispose pas de carénage de maintien pour stabiliser et contenir les ressorts contrairement aux matelas Tediber. Chez Emma, les ressorts sont simplement entourés d’une enveloppe textile très fine.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_DiAaCP",
+        "column_LAmwVD",
+        "column_zah4A3"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "MATELAS ORIGINAL D'EMMA",
+        "heading_size": "h2",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "shopify://products/matelas-hybride-premium",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "primary",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "multicolumn_F4F9qx": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_kz97jB": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/original_pro_hauteur.png",
+            "title": "",
+            "text": "<p>ÉPAISSEUR TOTALE <br/><strong>27 CM<br/><br/></strong>DATE<br/><strong>18/03/2026</strong></p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_TMG3G9": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/original_pro_mousse_regle.png",
+            "title": "",
+            "text": "<p>ÉPAISSEUR DES MOUSSES<strong> </strong><br/><strong>6 cm</strong> (au dessus des ressorts)<br/>Absence de mousse de maintien sous les ressorts<strong><br/><br/></strong>DATE<br/><strong>18/03/2026</strong></p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_VTBkPY": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/original_pro_textile.png",
+            "title": "",
+            "text": "<p>Le matelas ne dispose pas de carénage de maintien pour stabiliser et contenir les ressorts contrairement aux matelas Tediber. Chez Emma, les ressorts sont simplement entourés d’une enveloppe textile très fine.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_kz97jB",
+        "column_TMG3G9",
+        "column_VTBkPY"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "MATELAS ORIGINAL PRO D'EMMA",
+        "heading_size": "h2",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "shopify://products/matelas-hybride-premium",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "primary",
+        "color_scheme": "scheme-2",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "image_with_text_R4aqUP": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_XWNU6H": {
+          "type": "heading",
+          "settings": {
+            "heading": "Tediber : la maîtrise technique qui fait la différence",
+            "heading_size": "h2"
+          }
+        },
+        "text_3REpLF": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Les matelas Tediber se distinguent des matelas Emma sur le plan technique grâce à plusieurs atouts clés :</p><ul><li>Des <strong>mousses deux fois plus épaisses</strong>, pour un meilleur maintien dans le temps<br/></li><li>Une conception pensée pour être <strong>réparable et durable</strong>, avec une durabilité de plus de 10 ans<br/></li><li>Une <strong>structure multicouche robuste</strong>, intégrant un carénage de maintien qui renforce la stabilité des ressorts<br/></li><li>Une personnalisation du confort plus poussée, notamment grâce à un <a href=\"https://www.tediber.com/pages/surmatelas-reversible\" title=\"https://www.tediber.com/pages/surmatelas-reversible\"><strong>surmatelas réversible</strong></a> disponible sur deux modèles de la gamme<strong><br/></strong></li></ul>",
+            "text_style": "body"
+          }
+        },
+        "button_8iPiCY": {
+          "type": "button",
+          "settings": {
+            "button_label": "Découvrir les matelas Tediber",
+            "button_link": "https://www.tediber.com/collections/matelas",
+            "button_style_secondary": true
+          }
+        }
+      },
+      "block_order": [
+        "heading_XWNU6H",
+        "text_3REpLF",
+        "button_8iPiCY"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/technicite_matelas.webp",
+        "height": "medium",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "scheme-3",
+        "color_scheme": "scheme-3",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "ax_product_lists_XyTNib": {
+      "type": "ax-product-lists",
+      "blocks": {
+        "product_list_n4RBRR": {
+          "type": "product-list",
+          "settings": {
+            "title": "DÉCOUVREZ LES MATELAS TEDIBER",
+            "collection": "",
+            "product_list": [
+              "matelas-hybride-premium",
+              "matelas-hybride",
+              "matelas-hybride-infinite",
+              "matelas-signature",
+              "pack-lit-2-places-hybride-plus"
+            ],
+            "products_to_show": 5,
+            "button_text": "",
+            "button_link": "",
+            "link_style": "button button--primary"
+          }
+        }
+      },
+      "block_order": [
+        "product_list_n4RBRR"
+      ],
+      "name": "Ax product lists",
+      "settings": {
+        "surtitle": "GAMME TEDIBER",
+        "description": "",
+        "image_ratio": "square",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": true,
+        "quick_add": "none",
+        "color_scheme": "",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 48,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    }
+  },
+  "order": [
+    "main",
+    "ax_heading_Ufnqqj",
+    "ax_richtext_xYyipe",
+    "ax_richtext_MGnUp3",
+    "rich_text_MmmcXk",
+    "multicolumn_74G6NP",
+    "rich_text_dJFApw",
+    "video_f63hyC",
+    "multicolumn_TKnJUf",
+    "rich_text_qVaQDT",
+    "video_aLGXQR",
+    "multicolumn_Cjb69q",
+    "rich_text_FQbQc3",
+    "video_J9kwt4",
+    "multicolumn_Y9AecF",
+    "multicolumn_CMdiP8",
+    "multicolumn_F4F9qx",
+    "image_with_text_R4aqUP",
+    "ax_product_lists_XyTNib"
+  ]
+}

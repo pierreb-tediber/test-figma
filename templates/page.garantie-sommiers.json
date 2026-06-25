@@ -1,0 +1,1155 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_content": false,
+        "custom_h1": "",
+        "h1_size": "h1",
+        "h1_no_margin": false,
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "ax_heading_6TphAp": {
+      "type": "ax-heading",
+      "name": "Ax heading",
+      "settings": {
+        "heading": "<p>Garantie sommiers</p>",
+        "heading_size": "h2",
+        "heading_first": true,
+        "subheading": "",
+        "description": "",
+        "full_width": false,
+        "text_alignment": "center",
+        "color_scheme": "",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 32,
+        "padding_top": 96,
+        "padding_bottom": 64
+      }
+    },
+    "ax_richtext_RkciMT": {
+      "type": "ax-richtext",
+      "blocks": {
+        "text_JRbaPb": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Nous vous remercions d’avoir acheté un ou plusieurs nouveau(x) produit(s) TEDIBER. Notre exigence de qualité est élevée et ne doutons pas que vous serez très heureux de votre achat.<br/><br/>Cependant, si vous ne vous accoutumez pas à TEDIBER ou si vous découvrez un défaut dans votre produit, voici ci-dessous les conditions de notre garantie. Si vous estimez avoir le droit de vous prévaloir de leurs conditions, n’hésitez pas à nous contacter à hello@tediber.com(mailto:hello@tediber.com) pour recevoir des instructions sur la manière de procéder.<br/><br/>VEUILLEZ NOTER QUE NOTRE GARANTIE DES “100 NUITS D’ESSAI & RETOUR GRATUIT” ET NOS GARANTIES PRODUITS S’APPLIQUENT UNIQUEMENT AUX ACHETEURS INITIAUX DE PRODUITS TEDIBER AUTHENTIQUES, QUI ONT ÉTÉ ACHETÉS DIRECTEMENT ET SEULEMENT AUPRÈS DE TEDIBER. UNE PREUVE D’ACHAT VOUS SERA DEMANDÉE AFIN DE CERTIFIER DE L’AUTHENTICITÉ DE L’ACHAT. LA GARANTIE DES “100 NUITS D’ESSAI & RETOUR GRATUIT” S’APPLIQUE POUR CHAQUE PRODUIT TEDIBER MAIS N’EST EN AUCUN CAS RENOUVELABLE.</p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "text_JRbaPb"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_6DaePa": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_jUhgxB": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Sommier tapissier</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_jUhgxB"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "collapsible_content_LTxXXF": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_F7jM9c": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "La garantie Sommier 5 ans",
+            "icon": "check_mark",
+            "row_content": "<p>Les conditions de notre garantie Sommier 5 ans sont les suivantes :<br/><br/>Votre sommier TEDIBER est couvert par une garantie de cinq ans, qui vous donne des droits particuliers découlant de la loi.<br/><br/>Elle n’est pas transférable et vous couvre uniquement si vous êtes l’acheteur initial et le propriétaire actuel du sommier TEDIBER pour lequel vous vous prévalez d’un recours au titre de la garantie et si vous l’avez acheté directement sur www.tediber.com.<br/><br/>Ainsi, la garantie ne s’applique que pendant la période au cours de laquelle le sommier est la propriété et sous le contrôle de l’acheteur initial de ce sommier.<br/><br/>La garantie sommier 5 ans est une garantie pleine couvrant l’intégralité des défauts de fabrication et notamment :<br/>– Une latte endommagée ou détruite lié à un problème de fabrication (noeud de bois au milieu, mauvaise fixation lors de l’assemblage). Si vous avez des questions, contactez-nous à hello@tediber.com(mailto:hello@tediber.com).<br/>– Tout défaut physique du produit qui entraîne une fissure ou une déformation importante, malgré une utilisation normale et une manipulation appropriée du produit.<br/>– Tout défaut dans la fabrication de la housse du sommier comme le tissu qui se déchire ou la couture qui se défait. La garantie ne couvre pas l’usure normale du fait de l’utilisation prévue des produits, y compris causée par le nettoyage des tissus ou une mauvaise utilisation du produit.<br/>– Tout défaut dans la fabrication des pieds (coloration latérale, tige filetée mal fixée). La garantie ne couvre pas les défauts d’utilisation sur les pieds, notamment les chocs que ceux-ci peuvent subir pendant leur durée de vie.<br/><br/>Si le sommier est en effet défectueux, nous procéderons à son remplacement et les frais de livraison seront à notre charge. Par ailleurs, veuillez noter qu’aucun remboursement ne sera effectué en dehors de la garantie des 100 nuits d’essai.<br/><br/>Par ailleurs, si vous vous apercevez au-delà des 100 nuits d’essai que votre sommier est défectueux et que nous le confirmons, nous récupérerons le sommier défectueux puis nous vous ferons livrer un nouveau sommier. L’offre des “100 nuits d’essai & Retour gratuit” n’est alors pas renouvelée à partir de la date de livraison de votre nouveau produit.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_8hRpWM": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "La garantie sommier ne couvre pas :",
+            "icon": "check_mark",
+            "row_content": "<p>La garantie sommier 5 ans ne couvre pas les sommiers vendus par des revendeurs non-agréés et ne couvre que les sommiers vendus directement par Tediber.<br/><br/>La garantie sommier ne couvre pas votre sommier si vous l’utilisez d’une façon incompatible avec sa destination et son utilisation prévue, par exemple, une situation non domestique. En outre, elle ne couvre pas les états découlant d’une mauvaise manipulation, d’une mauvaise utilisation ou de la négligence, par exemple, lors du transport du produit Les défauts visibles sur la housse devront ainsi être signalés dans la période des 100 jours suivant la livraison et ne pourront faire l’objet d’une demande de garantie 5 ans.<br/><br/>La garantie sommier ne couvre pas votre sommier si le matelas utilisé avec celui-ci présente un défaut de surface inférieure quelconque qui pourrait induire un défaut sur le sommier, et notamment sur la partie supérieure de la housse du sommier.<br/><br/>La garantie sommier ne couvre pas les défauts de visserie des masses d’angle si il est utilisé avec des pieds non vendus par TEDIBER.<br/><br/>Elle ne couvre pas l’usure normale du sommier et les situations susceptibles de causer une détérioration ou des dommages.<br/><br/>Plus particulièrement, cette garantie exclut :<br/>a) un défaut lié à l’utilisation du sommier sur un sol qui ne serait pas adapté, solide et plan ;<br/>b) l’usure normale du fait de l’utilisation prévue des produits, y compris causée par le nettoyage des tissus ;<br/>c) si vous avez tenté d’altérer ou de réparer le sommier sans notre consentement ou si vous avez nettoyé les produits avec des produits ou des techniques inappropriés ;<br/>d) des imperfections mineures et de légers défauts esthétiques ;<br/>e) des déchirures, des tâches, de la salissure, des brûlures, des dommages liquides et la décoloration des matériaux qui surviennent au fil du temps ;<br/>f) l’humidité, les odeurs ou la moisissure (qui peut entre-autre être provoquée par l’utilisation d’un matelas endommagé ou trop vieux) ;<br/>g) les préférences individuelles ou personnelles concernant la fermeté, la texture, le confort, etc. ;<br/>h) des allergies ou des sensibilités individuelles ou personnelles.<br/>i) Toutes les contaminations par les puces, punaises de lit où autres parasites ;<br/>j) si le défaut résulte d’un cas de force majeure ou d’un phénomène naturel indépendant de notre volonté, y compris, sans limitation, d’un incendie, d’une inondation ou d’une catastrophe naturelle.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_q4NAzU": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Que fera Tediber ?",
+            "icon": "check_mark",
+            "row_content": "<p>La demande d’exercice de la garantie se fait à l’adresse hello@tediber.com(mailto:hello@tediber.com). Les demandes de garantie doivent comporter une description claire du défaut, des photos du défaut et du matelas utilisé, ainsi que la preuve d’achat du produit. L’absence de photographies ou une description imprécise pourront retarder la prise en charge du défaut au titre de la garantie 5 ans ou aboutir à son non-exercice.<br/><br/>Après inspection du défaut par l’équipe Tediber, elle décidera si le produit est défectueux et si les conditions d’application de la garantie sont remplies.<br/><br/>Les produits défectueux devront être retournés et les frais de retours seront remboursés si le défaut est constaté comme éligible à la garantie 5 ans.<br/><br/>Si le défaut est considéré comme étant couvert par la garantie, notre obligation dans le cadre de la garantie 5 ans consistera à fournir une réparation ou un remplacement du produit. Dans le cas où une partie isolée du produit serait concernée par le défaut (par exemple les pieds du sommier), seule cette partie sera réparée ou remplacée.<br/><br/>Les Produits réparés ou remplacés vous seront livrés gratuitement – veuillez noter que l’envoi ne peut être fait que dans le pays choisi lors de la livraison initiale du sommier.<br/><br/>Sur la base de justificatifs et dans un montant raisonnable, les frais éventuels d’envoi du produit défectueux seront remboursés.<br/><br/>Nous remplacerons le produit considéré comme défectueux par un modèle identique.<br/><br/>Dans le cas où le modèle n’existerait plus, il sera remplacé par un modèle d’un prix équivalent (ou inférieur s’il n’est pas disponible à prix équivalent). Si la taille n'est plus commercialisée, nous nous réservons le droit de vous remplacer le produit par une taille similaire.<br/><br/>Toute réclamation en vertu de cette garantie doit être reçue dans les 30 jours suivant votre constatation du défaut ou suivant la date à laquelle vous auriez raisonnablement dû constater le défaut, et, en tout état de cause, avant la fin de la période de garantie.<br/><br/>Veuillez noter qu’aucun remboursement ne sera effectué au titre de la garantie 5 ans, contrairement à la garantie des 100 nuits d’essai. La garantie 5 ans ouvre droit à une réparation ou éventuellement à un remplacement.<br/><br/>La garantie est fournie par Tediber, 20 rue sainte croix de la bretonnerie, 75004 Paris. Vous pouvez nous contacter à hello@tediber.com(mailto:hello@tediber.com).</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_4CEiTm": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Quelle est la durée de la garantie ?",
+            "icon": "check_mark",
+            "row_content": "<p>Cette garantie couvrant votre sommier TEDIBER dure pendant 5 ans à compter de la date de commande. Nous ne proratisons pas les termes (c’est-à-dire que nous ne réduisons pas le montant total en fonction du temps écoulé). Un sommier remplacé ou réparé ne prolonge pas la durée de votre garantie. Le calcul de la durée de garantie se fait à partir du jour de la date de commande de votre achat d’origine.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_DQycMF": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Absence de déclaration de nature médicale ou liée à la santé",
+            "icon": "check_mark",
+            "row_content": "<p>TEDIBER n’effectue aucune déclaration de nature médicale ou liée à la santé concernant ses sommiers. Les allergies, l’inconfort ou d’autres situations ne sont pas couvert(e)s au titre de cette garantie. Toute question ou préoccupation concernant les situations de nature médicale ou liées à la santé doit être adressée à un médecin habilité.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_imJzzb": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Comment effectuer une réclamation au titre de cette garantie ?",
+            "icon": "check_mark",
+            "row_content": "<p>Pour effectuer une réclamation au titre de notre garantie, veuillez envoyer une brève description écrite (accompagnée de photos, si possible) du problème ou de l’état qui selon vous constitue un défaut à l’adresse hello@tediber.com(mailto:hello@tediber.com). Par ailleurs, d’autres éléments comme la preuve d’achat ou des photos complémentaires pourront être demandés.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_jYnXiF": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Informations sur les qualités et caractéristiques environnementales",
+            "icon": "check_mark",
+            "row_content": "<p>Conformément à la réglementation, Tediber fournit à ses clients les informations de mise en conformité concernant la présence de substances dangereuses, l'incorporation de matières recyclées, et la recyclabilité - découvrez les informations <a href=\"https://docs.google.com/spreadsheets/d/1vq86j7D2zjYq1guPzI7_0s8_1u3o3k-DKBSmS_BZrkY/edit?userstoinvite=elise%40tediber.com&sharingaction=manageaccess&role=writer&gid=0#gid=0\" title=\"https://docs.google.com/spreadsheets/d/1vq86j7D2zjYq1guPzI7_0s8_1u3o3k-DKBSmS_BZrkY/edit?userstoinvite=elise%40tediber.com&sharingaction=manageaccess&role=writer&gid=0#gid=0\">ici</a></p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_F7jM9c",
+        "collapsible_row_8hRpWM",
+        "collapsible_row_q4NAzU",
+        "collapsible_row_4CEiTm",
+        "collapsible_row_DQycMF",
+        "collapsible_row_imJzzb",
+        "collapsible_row_jYnXiF"
+      ],
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "full_width": true,
+        "caption": "",
+        "heading": "",
+        "heading_size": "h2",
+        "heading_alignment": "center",
+        "layout": "none",
+        "container_color_scheme": "",
+        "color_scheme": "",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "ax_richtext_LHDXcQ": {
+      "type": "ax-richtext",
+      "blocks": {
+        "button_aiHen8": {
+          "type": "button",
+          "settings": {
+            "button_text": "Découvrir le sommier Tediber",
+            "url": "shopify://products/sommier",
+            "link_blank": false,
+            "style_button": "button button--primary",
+            "button_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "button_aiHen8"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_FM3xfE": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_4nnJEy": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Sommier coffre</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_4nnJEy"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "collapsible_content_NwknYz": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_LtVhed": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "La Garantie sommier coffre 2 ans",
+            "icon": "check_mark",
+            "row_content": "<p>Les conditions de notre garantie sommier coffre 2 ans sont les suivantes : Votre sommier coffre TEDIBER est couvert par une garantie de deux ans, qui vous donne des droits particuliers découlant de la loi.<br/><br/>Elle n’est pas transférable et vous couvre uniquement si vous êtes l’acheteur initial et le propriétaire actuel du sommier coffre TEDIBER pour lequel vous vous prévalez d’un recours au titre de la garantie et si vous l’avez acheté directement sur www.tediber.com.<br/><br/>Ainsi, la garantie ne s’applique que pendant la période au cours de laquelle le sommier coffre est la propriété et sous le contrôle de l’acheteur initial. La garantie sommier coffre 2 ans est une garantie pleine couvrant l’intégralité des défauts de fabrication et notamment :<br/><br/>– Une latte endommagée ou détruite lié à un problème de fabrication (noeud de bois au milieu, mauvaise fixation lors de l’assemblage). Si vous avez des questions, contactez-nous à hello@tediber.com(mailto:hello@tediber.com).<br/><br/>– Tout défaut physique du produit qui entraîne une fissure ou une déformation importante, malgré une utilisation normale et une manipulation appropriée du produit.<br/><br/>– Tout défaut dans la fabrication de la housse du sommier coffre comme le tissu qui se déchire ou la couture qui se défait. La garantie ne couvre pas l’usure normale du fait de l’utilisation prévue des produits, y compris causée par le nettoyage des tissus, une mauvaise utilisation du produit ou la détérioration lié à l’exposition directe au soleil.<br/><br/>La garantie ne couvre pas les défauts d’utilisation sur les pieds, notamment les chocs que ceux-ci peuvent subir pendant leur durée de vie.<br/><br/>Si le sommier coffre est en effet défectueux, nous vous enverrons une pièce de rechange ou nous procéderons à son remplacement selon les cas. Dans le cas d’un remplacement d’une pièce simple, le changement sera effectué par vous-même. Les frais de livraison seront à notre charge. Par ailleurs, veuillez noter qu’aucun remboursement ne sera effectué en dehors de la garantie des 100 nuits d’essai.<br/><br/>Si nous effectuons un remplacement de produit dans le cadre de la garantie sommier coffre, l’offre des “100 nuits d’essai & Retour gratuit” n’est alors pas renouvelée.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_49Bzxe": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "La Garantie sommier ne couvre pas",
+            "icon": "check_mark",
+            "row_content": "<p>La garantie sommier coffre 2 ans ne couvre pas les produits vendus par des revendeurs non-agréés et ne couvre que les sommiers coffres vendus directement par Tediber.<br/><br/>La garantie sommier coffre ne couvre pas votre sommier coffre si vous l’utilisez d’une façon incompatible avec sa destination et son utilisation prévue, par exemple, une situation non domestique. En outre, elle ne couvre pas les états découlant d’une mauvaise manipulation, d’une mauvaise utilisation ou de la négligence, par exemple, lors du transport du produit. Les défauts visibles sur la housse et la structure devront ainsi être signalés dans la période des 100 jours suivant la livraison et ne pourront faire l’objet d’une demande de garantie 2 ans.<br/><br/>La garantie ne couvre pas votre sommier coffre si le matelas utilisé n’est pas celui conforme à nos avertissements de sécurité concernant le poids et la taille du matelas utilisé avec le sommier coffre.<br/><br/>La garantie ne couvre donc pas votre sommier coffre s'il est utilisé avec un matelas dont le poids n'est pas compris entre 12 et 22kg pour un 90x190 cm et un 90x200 cm, entre 22 et 33kg pour un 140x190 cm ou un 140x200 cm et entre 32 et 42kg pour un 160x200 cm et entre 38 et 45kg pour un 180x200 cm.<br/><br/>Elle ne couvre pas l’usure normale du sommier coffre et les situations susceptibles de causer une détérioration ou des dommages.<br/><br/>Plus particulièrement, cette garantie exclut : a) un défaut lié à l’utilisation du sommier coffre sur un sol qui ne serait pas adapté, solide et plan ; b) l’usure normale du fait de l’utilisation prévue des produits, y compris causée par le nettoyage des tissus ou l’exposition directe au soleil ; c) si vous avez tenté d’altérer ou de réparer le sommier coffre sans notre consentement ou si vous avez nettoyé les produits avec des produits ou des techniques inappropriés ; d) des imperfections mineures et de légers défauts esthétiques ; e) des déchirures, des taches, de la salissure, des brûlures, des dommages liquides et la décoloration des matériaux qui surviennent au fil du temps ; f) l’humidité, les odeurs ou la moisissure (qui peut entre-autre être provoquée par l’utilisation d’un matelas endommagé ou trop vieux) ; g) les préférences individuelles ou personnelles concernant la fermeté, la texture, le confort, etc ; h) des allergies ou des sensibilités individuelles ou personnelles. i) toutes les contaminations par les puces, punaises de lit ou autres parasites ; j) si le défaut résulte d’un cas de force majeure ou d’un phénomène naturel indépendant de notre volonté, y compris, sans limitation, d’un incendie, d’une inondation ou d’une catastrophe naturelle.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_cnJWbb": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Que fera Tediber ?",
+            "icon": "check_mark",
+            "row_content": "<p>La demande d’exercice de la garantie se fait à l’adresse hello@tediber.com(mailto:hello@tediber.com). Les demandes de garantie doivent comporter une description claire du défaut, des photos du défaut et du matelas utilisé, ainsi que la preuve d’achat du produit. L’absence de photographies ou une description imprécise pourront retarder la prise en charge du défaut au titre de la garantie 2 ans ou aboutir à son non-exercice.<br/><br/>Après inspection du défaut par l’équipe Tediber, celle-ci décidera si le produit est défectueux et si les conditions d’application de la garantie sont remplies.<br/><br/>Si le défaut est considéré comme étant couvert par la garantie, notre obligation dans le cadre de la garantie 2 ans consistera à fournir une pièce de rechange, une réparation ou un remplacement du produit. Dans le cas où une partie isolée du produit serait concernée par le défaut (par exemple le vérin du sommier coffre), seule cette partie sera remplacée par l’envoi d’une nouvelle pièce de rechange, vous pourrez remplacer la pièce défectueuse.<br/><br/>Dans le cas d’un remplacement de produit, les produits défectueux devront être retournés et les frais de retours seront remboursés si le défaut est constaté comme éligible à la garantie 2 ans.<br/><br/>Les produits réparés ou remplacés vous seront livrés gratuitement – veuillez noter que l’envoi ne peut être fait que dans le pays choisi lors de la livraison initiale du sommier coffre.<br/><br/>Nous remplacerons le produit considéré comme défectueux par un modèle de taille identique ou, dans le cas où le modèle n’existe plus, par un modèle d’un prix équivalent ou inférieur.<br/><br/>Toute réclamation en vertu de cette garantie doit être reçue dans les 30 jours suivant votre constatation du défaut ou suivant la date à laquelle vous auriez raisonnablement dû constater le défaut, et, en tout état de cause, avant la fin de la période de garantie.<br/><br/>Veuillez noter qu’aucun remboursement ne sera effectué au titre de la garantie 2 ans, contrairement à la garantie des 100 nuits d’essai. La garantie 2 ans ouvre droit à une pièce de rechange, une réparation ou éventuellement à un remplacement.<br/><br/>La garantie est fournie par Tediber, 20 Rue Sainte Croix de la Bretonnerie 75004 Paris. Vous pouvez nous contacter à hello@tediber.com(mailto:hello@tediber.com).</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_6tYmMN": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Quelle est la durée de la garantie ?",
+            "icon": "check_mark",
+            "row_content": "<p>Cette garantie couvrant votre sommier coffre TEDIBER dure pendant 2 ans à compter de la date de livraison. Nous ne proratisons pas les termes (c’est-à-dire que nous ne réduisons pas le montant total en fonction du temps écoulé). Un sommier coffre remplacé ou réparé ne prolonge pas la durée de votre garantie. Le calcul de la durée de garantie se fait à partir du jour de la date de commande de votre achat d’origine.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_6BGqnr": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Absence de déclaration de nature médicale ou liée à la santé",
+            "icon": "check_mark",
+            "row_content": "<p>Tediber n’effectue aucune déclaration de nature médicale ou liée à la santé concernant ses sommiers. Les allergies, l’inconfort ou d’autres situations ne sont pas couvert(e)s au titre de cette garantie. Toute question ou préoccupation concernant les situations de nature médicale ou liées à la santé doit être adressée à un médecin habilité.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_YyX7MK": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Comment effectuer une réclamation au titre de cette garantie ?",
+            "icon": "check_mark",
+            "row_content": "<p>Pour effectuer une réclamation au titre de notre garantie, veuillez envoyer une brève description écrite (accompagnée de photos, si possible) du problème ou de l’état qui selon vous constitue un défaut à l’adresse hello@tediber.com(mailto:hello@tediber.com). Par ailleurs, d’autres éléments comme la preuve d’achat ou des photos complémentaires pourront être demandés.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_HNrKia": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Informations sur les qualités et caractéristiques environnementales",
+            "icon": "check_mark",
+            "row_content": "<p>Conformément à la réglementation, Tediber fournit à ses clients les informations de mise en conformité concernant la présence de substances dangereuses, l'incorporation de matières recyclées, et la recyclabilité - découvrez les informations <a href=\"https://docs.google.com/spreadsheets/d/1vq86j7D2zjYq1guPzI7_0s8_1u3o3k-DKBSmS_BZrkY/edit?userstoinvite=elise%40tediber.com&sharingaction=manageaccess&role=writer&gid=0#gid=0\" title=\"https://docs.google.com/spreadsheets/d/1vq86j7D2zjYq1guPzI7_0s8_1u3o3k-DKBSmS_BZrkY/edit?userstoinvite=elise%40tediber.com&sharingaction=manageaccess&role=writer&gid=0#gid=0\">ici</a></p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_LtVhed",
+        "collapsible_row_49Bzxe",
+        "collapsible_row_cnJWbb",
+        "collapsible_row_6tYmMN",
+        "collapsible_row_6BGqnr",
+        "collapsible_row_YyX7MK",
+        "collapsible_row_HNrKia"
+      ],
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "full_width": true,
+        "caption": "",
+        "heading": "",
+        "heading_size": "h2",
+        "heading_alignment": "center",
+        "layout": "none",
+        "container_color_scheme": "",
+        "color_scheme": "",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "ax_richtext_U7jP8G": {
+      "type": "ax-richtext",
+      "blocks": {
+        "button_FU67pp": {
+          "type": "button",
+          "settings": {
+            "button_text": "Découvrir le sommier coffre Tediber",
+            "url": "shopify://products/sommier-coffre",
+            "link_blank": false,
+            "style_button": "button button--primary",
+            "button_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "button_FU67pp"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_DPpAhQ": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_BhAMkb": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Sommier électrique</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_BhAMkb"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "collapsible_content_TkjCpr": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_zGGBpH": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "La Garantie Sommier électrique 3 ans",
+            "icon": "check_mark",
+            "row_content": "<p>Les conditions de notre garantie sommier électrique 3 ans sont les suivantes : Votre sommier électrique TEDIBER est couvert par une garantie de 3 ans, qui vous donne des droits particuliers découlant de la loi. Elle n’est pas transférable et vous couvre uniquement si vous êtes l’acheteur initial et le propriétaire actuel du sommier électrique TEDIBER pour lequel vous vous prévalez d’un recours au titre de la garantie et si vous l’avez acheté directement sur www.tediber.com ou dans les boutiques TEDIBER.<br/><br/>Ainsi, la garantie ne s’applique que pendant la période au cours de laquelle le sommier électrique est la propriété et sous le contrôle de l’acheteur initial. La garantie sommier électrique Tediber X ans est une garantie pleine couvrant des défauts de fabrication et notamment :<br/><br/>    Une latte endommagée ou détruite liée à un problème de fabrication (nœud de bois au milieu, mauvaise fixation lors de l’assemblage). Si vous avez des questions, contactez-nous à hello@tediber.com(mailto:hello@tediber.com).<br/>    Tout défaut physique du produit qui entraîne une fissure ou une déformation importante, malgré une utilisation normale et une manipulation appropriée du produit.<br/>    Tout défaut dans la fabrication des pieds (coloration latérale, tige filetée mal fixée). La garantie ne couvre pas les défauts d’utilisation sur les pieds, notamment les chocs que ceux-ci peuvent subir pendant leur durée de vie.<br/>    Tout défaut dans la fabrication de la housse du sommier électrique comme le tissu qui se déchire ou la couture qui se défait. La garantie ne couvre pas l’usure normale du fait de l’utilisation prévue des produits, y compris causée par le nettoyage des tissus, une mauvaise utilisation du produit ou la détérioration liée à l’exposition directe au soleil.<br/>    Tout dysfonctionnement ou panne du moteur et/ou de sa télécommande, malgré une utilisation correcte (notamment avec les piles correspondantes) et une manipulation appropriée.<br/><br/>Si le sommier électrique est en effet défectueux, nous vous enverrons une pièce de rechange ou nous procéderons à son remplacement selon les cas. Dans le cas d’un remplacement d’une pièce simple, le changement sera effectué par vous-même. Les frais de livraison seront à notre charge. Par ailleurs, veuillez noter qu’aucun remboursement ne sera effectué en dehors de la garantie des 100 nuits d’essai.<br/><br/>Si nous effectuons un remplacement de produit dans le cadre de la garantie sommier électrique, l’offre des “100 nuits d’essai & retour gratuit” n’est alors pas renouvelée.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_Wj4yiY": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "La Garantie sommier electrique ne couvre pas",
+            "icon": "check_mark",
+            "row_content": "<p>La garantie sommier électrique 3 ans ne couvre pas les produits vendus par des revendeurs non-agréés et ne couvre que les sommiers électriques vendus directement par Tediber.<br/><br/>La garantie sommier électrique ne couvre pas votre sommier électrique si vous l’utilisez d’une façon incompatible avec sa destination et son utilisation prévue, par exemple, une situation non domestique. En outre, elle ne couvre pas les états découlant d’une mauvaise manipulation, d’une mauvaise utilisation ou de la négligence, par exemple, lors du transport du produit. Par ailleurs votre sommier électrique n’est pas conçu pour permettre une assise sur les zones marquées d’un ⛔ sur le schéma ci-dessous. La garantie ne s’appliquera pas pour une dégradation consécutive à cette utilisation.<br/>sommier tpr<br/><br/>Les défauts visibles sur la housse et la structure devront ainsi être signalés dans la période des 100 jours suivant la livraison et ne pourront faire l’objet d’une demande de garantie 3 ans. La garantie ne couvre pas votre sommier électrique si le matelas utilisé n’est pas celui conforme à nos avertissements de sécurité concernant la composition et la taille du matelas utilisé avec le sommier électrique.<br/><br/>L’utilisation des moteurs électriques ne doit jamais dépasser les 2 minutes continues. Au delà de cette durée, la garantie ne pourra pas être appliquée Elle ne couvre pas l’usure normale du sommier électrique et les situations susceptibles de causer une détérioration ou des dommages.<br/><br/>Plus particulièrement, cette garantie exclut :<br/><br/>a. un défaut lié à l’utilisation du sommier électrique sur un sol qui ne serait pas adapté, solide et plat ; b. l’usure normale du fait de l’utilisation prévue des produits, y compris causée par le nettoyage des tissus ou l’exposition directe au soleil ; c. si vous avez tenté d’altérer ou de réparer le sommier électrique sans notre consentement ou si vous avez nettoyé les produits avec des produits ou des techniques inappropriés ; d. des imperfections mineures et de légers défauts esthétiques (léger accroc sur la housse, rayure discrète sur la structure qui est ensuite cachée par la housse…) ; e. des déchirures, des tâches, de la salissure, des brûlures, des dommages liquides et la décoloration des matériaux qui surviennent au fil du temps ; f. l’humidité, les odeurs ou la moisissure (qui peut entre-autre être provoquée par l’utilisation d’un matelas endommagé ou trop vieux) ; g. les préférences individuelles ou personnelles concernant la fermeté, le degré d’inclinaison, la texture, le confort, etc ; h. des allergies ou des sensibilités individuelles ou personnelles. i. toutes les contaminations par les puces, punaises de lit ou autres parasites ; j. si le défaut résulte d’un cas de force majeure ou d’un phénomène naturel indépendant de notre volonté, y compris, sans limitation, d’un incendie, d’une inondation ou d’une catastrophe naturelle.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_Q7wCFW": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Que fera Tediber ?",
+            "icon": "check_mark",
+            "row_content": "<p>La demande d’exercice de la garantie se fait à l’adresse hello@tediber.com(mailto:hello@tediber.com). En fonction du problème, des éléments complémentaires seront obligatoirement demandés (photographies ou vidéos par exemple) afin de valider le problème avec l’équipe qualité.<br/><br/>L’absence de photographies ou une description imprécise pourront retarder la prise en charge du défaut au titre de la garantie 3 ans ou aboutir à son non-exercice. Après inspection du défaut par l’équipe Tediber, elle décidera si le produit est défectueux et si les conditions d’application de la garantie sont remplies.<br/><br/>Les produits défectueux devront être retournés si le défaut est constaté comme éligible à la garantie 3 ans. Le créneau pour l’échange du produit vous sera proposé par notre service client ; le retour du produit défectueux et la livraison du nouveau produit se feront au même moment. Si le défaut est considéré comme étant couvert par la garantie, notre obligation dans le cadre de la garantie 3 ans consistera à fournir une réparation ou un remplacement du produit. Dans le cas où une partie isolée du produit serait concernée par le défaut (par exemple une latte de sommier électrique), seule cette partie sera remplacée par l’envoi d’une nouvelle pièce de rechange, vous pourrez remplacer la pièce défectueuse. Les produits réparés ou remplacés vous seront livrés gratuitement – veuillez noter que l’envoi ne peut être fait que dans le pays choisi lors de la livraison initiale du sommier électrique.<br/><br/>Nous remplacerons le produit considéré comme défectueux par le modèle de taille identique ou, dans le cas où le modèle n’existe plus, par un modèle d’un prix équivalent ou inférieur. Toute réclamation en vertu de cette garantie doit être reçue dans les 30 jours suivant votre constatation du défaut ou suivant la date à laquelle vous auriez raisonnablement dû constater le défaut, et, en tout état de cause, avant la fin de la période de garantie.<br/><br/>Veuillez noter qu’aucun remboursement ne sera effectué au titre de la garantie 3 ans, contrairement à la garantie des 100 nuits d’essai. La garantie 3 ans ouvre droit à une réparation ou éventuellement à un remplacement<br/><br/>La garantie est fournie par Tediber, 20 rue sainte croix de la bretonnerie, 75004 Paris. Vous pouvez nous contacter à hello@tediber.com(mailto:hello@tediber.com).</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_6GAMeb": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Quelle est la durée de la garantie ?",
+            "icon": "check_mark",
+            "row_content": "<p>Cette garantie couvrant votre matelas enfant et ado Grand Tedi by Tediber dure pendant 5 ans à compter de la date de livraison. Nous ne proratisons pas les termes (c’est-à-dire que nous ne réduisons pas le montant total en fonction du temps écoulé). Un matelas remplacé ou réparé ne prolonge pas la durée de votre garantie. Le calcul de la durée de garantie se fait à partir du jour de la date de commande de votre achat d’origine.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_RpgBJj": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Absence de déclaration de nature médicale ou liée à la santé",
+            "icon": "check_mark",
+            "row_content": "<p>Tediber n’effectue aucune déclaration de nature médicale ou liée à la santé concernant ses sommiers. Les allergies, l’inconfort ou d’autres situations ne sont pas couvert(e)s au titre de cette garantie. Toute question ou préoccupation concernant les situations de nature médicale ou liées à la santé doit être adressée à un médecin habilité.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_EkkxJj": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Comment effectuer une réclamation au titre de cette garantie ?",
+            "icon": "check_mark",
+            "row_content": "<p>Pour effectuer une réclamation au titre de notre garantie, veuillez envoyer une brève description écrite (accompagnée de photos, si possible) du problème ou de l’état qui selon vous constitue un défaut à l’adresse hello@tediber.com(mailto:hello@tediber.com). Par ailleurs, d’autres éléments comme la preuve d’achat ou des photos complémentaires pourront être demandés.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_ydLjR3": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Informations sur les qualités et caractéristiques environnementales",
+            "icon": "check_mark",
+            "row_content": "<p>Conformément à la réglementation, Tediber fournit à ses clients les informations de mise en conformité concernant la présence de substances dangereuses, l'incorporation de matières recyclées, et la recyclabilité - découvrez les informations <a href=\"https://docs.google.com/spreadsheets/d/1vq86j7D2zjYq1guPzI7_0s8_1u3o3k-DKBSmS_BZrkY/edit?userstoinvite=elise%40tediber.com&sharingaction=manageaccess&role=writer&gid=0#gid=0\" target=\"_blank\"><span style=\"text-decoration:underline\"><strong>ici</strong></span></a></p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_zGGBpH",
+        "collapsible_row_Wj4yiY",
+        "collapsible_row_Q7wCFW",
+        "collapsible_row_6GAMeb",
+        "collapsible_row_RpgBJj",
+        "collapsible_row_EkkxJj",
+        "collapsible_row_ydLjR3"
+      ],
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "full_width": true,
+        "caption": "",
+        "heading": "",
+        "heading_size": "h2",
+        "heading_alignment": "center",
+        "layout": "none",
+        "container_color_scheme": "",
+        "color_scheme": "",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "ax_image_banner_WnyJDH": {
+      "type": "ax-image-banner",
+      "name": "Ax Image Banner",
+      "settings": {
+        "image": "shopify://shop_images/garantieTPR.jpg",
+        "subheading": "",
+        "heading": "",
+        "button_text": "",
+        "button_link": "",
+        "link_blank": false,
+        "link_style": "button button--primary",
+        "color_scheme": "",
+        "overlay": true,
+        "overlay_opacity": 0.2
+      }
+    },
+    "ax_richtext_GWiLLP": {
+      "type": "ax-richtext",
+      "blocks": {
+        "button_4YMDDP": {
+          "type": "button",
+          "settings": {
+            "button_text": "Découvrir le sommier électrique Tediber",
+            "url": "shopify://products/sommier-electrique",
+            "link_blank": false,
+            "style_button": "button button--primary",
+            "button_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "button_4YMDDP"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 16,
+        "mob_margin_bottom": 32,
+        "margin_top": 32,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_4Aq3pA": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_H9zQPq": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Sommier et Tête de lit Grand Ours</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_H9zQPq"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "collapsible_content_LL3BPe": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_Yyhahn": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "La Garantie Sommier et Tête de lit Grand Ours 15 ans",
+            "icon": "check_mark",
+            "row_content": "<p>Les conditions de notre garantie Sommier et Tête de lit Grand Ours 15 ans sont les suivantes :<br/><br/>Votre lit Grand Ours est couvert par une garantie de quinze ans, qui vous donne des droits particuliers découlant de la loi.<br/><br/>Elle n’est pas transférable et vous couvre uniquement si vous êtes l’acheteur initial et le propriétaire actuel du sommier ou de la tête de lit Grand Ours pour lequel vous vous prévalez d’un recours au titre de la garantie et si vous l’avez acheté directement sur www.tediber.com.<br/><br/>Ainsi, la garantie ne s’applique que pendant la période au cours de laquelle le sommier et la tête de lit sont la propriété et sous le contrôle de l’acheteur initial du lit.<br/><br/>La garantie sommier 15 ans est une garantie pleine couvrant l’intégralité des défauts de fabrication et notamment : – La caisse ou les ressorts endommagés liés à un problème de fabrication (nœud de bois au milieu, mauvaise fixation lors de l’assemblage). Si vous avez des questions, contactez-nous à hello@tediber.com. – Tout défaut physique du produit qui entraîne une fissure ou une déformation importante, malgré une utilisation normale et une manipulation appropriée du produit. –Tout défaut dans la fabrication de la housse du lit comme le tissu qui se déchire ou la couture qui se défait. La garantie ne couvre pas l’usure normale du fait de l’utilisation prévue des produits, y compris causée par le nettoyage des tissus ou une mauvaise utilisation du produit. – Tout défaut dans la fabrication des pieds (coloration latérale, tige filetée mal fixée). La garantie ne couvre pas les défauts d’utilisation sur les pieds, notamment les chocs que ceux-ci peuvent subir pendant leur durée de vie.<br/><br/>Si le lit est en effet défectueux, nous procéderons à son remplacement et les frais de livraison seront à notre charge. Par ailleurs, veuillez noter qu’aucun remboursement ne sera effectué en dehors de la garantie des 100 nuits d’essai.<br/><br/>Par ailleurs, si vous vous apercevez au-delà des 100 nuits d’essai que votre lit est défectueux et que nous le confirmons, nous récupérerons le produit défectueux puis nous vous ferons livrer un nouveau. L’offre des “100 nuits d’essai & Retour gratuit” n’est alors pas renouvelée à partir de la date de livraison de votre nouveau produit.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_zFpUcz": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "La Garantie sommier et tête de lit Grand Ours ne couvre pas",
+            "icon": "check_mark",
+            "row_content": "<p>La garantie sommier et tête de lit Grand Ours 15 ans ne couvre pas les sommiers et tête de lit vendus par des revendeurs non-agréés et ne couvre que les lits vendus directement par Tediber. La garantie sommier et tête de lit ne couvre pas votre sommier si vous l’utilisez d’une façon incompatible avec sa destination et son utilisation prévue, par exemple, une situation non domestique. En outre, elle ne couvre pas les états découlant d’une mauvaise manipulation, d’une mauvaise utilisation ou de la négligence, par exemple, lors du transport du produit Les défauts visibles sur la housse devront ainsi être signalés dans la période des 100 jours suivant la livraison et ne pourront faire l’objet d’une demande de garantie 15 ans.<br/><br/>La garantie sommier ne couvre pas votre sommier si le matelas utilisé avec celui-ci présente un défaut de surface inférieure quelconque qui pourrait induire un défaut sur le sommier, et notamment sur la partie supérieure de la housse du sommier.<br/><br/>La garantie sommier ne couvre pas les défauts de visserie des masses d’angle si il est utilisé avec des pieds non vendus par TEDIBER.<br/><br/>Elle ne couvre pas l’usure normale du sommier et les situations susceptibles de causer une détérioration ou des dommages.<br/><br/>Plus particulièrement, cette garantie exclut : a) un défaut lié à l’utilisation du sommier sur un sol qui ne serait pas adapté, solide et plan ; b) l’usure normale du fait de l’utilisation prévue des produits, y compris causée par le nettoyage des tissus ou la détérioration liée à l’exposition au soleil ; c) si vous avez tenté d’altérer ou de réparer le sommier sans notre consentement ou si vous avez nettoyé les produits avec des produits ou des techniques inappropriés ; d) des imperfections mineures et de légers défauts esthétiques ; e) des déchirures, des tâches, de la salissure, des brûlures, des dommages liquides et la décoloration des matériaux qui surviennent au fil du temps ; f) l’humidité, les odeurs ou la moisissure (qui peut entre-autre être provoquée par l’utilisation d’un matelas endommagé ou trop vieu x) ; g) les préférences individuelles ou personnelles concernant la fermeté, la texture, le confort, etc. ; h) des allergies ou des sensibilités individuelles ou personnelles. i) Toutes les contaminations par les puces, punaises de lit où autres parasites ; j) si le défaut résulte d’un cas de force majeure ou d’un phénomène naturel indépendant de notre volonté, y compris, sans limitation, d’un incendie, d’une inondation ou d’une catastrophe naturelle.<br/><br/>La garantie ne peut s’exercer sur les dommages causés par la tête de lit : traces contre un mur…</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_DrXG3K": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Que fera Tediber ?",
+            "icon": "check_mark",
+            "row_content": "<p>La demande d’exercice de la garantie se fait à l’adresse hello@tediber.com. Les demandes de garantie doivent comporter une description claire du défaut, des photos du défaut et du matelas utilisé, ainsi que la preuve d’achat du produit. L’absence de photographies ou une description imprécise pourront retarder la prise en charge du défaut au titre de la garantie 15 ans ou aboutir à son non-exercice.<br/><br/>Après inspection du défaut par l’équipe Tediber, elle décidera si le produit est défectueux et si les conditions d’application de la garantie sont remplies.<br/><br/>Les produits défectueux devront être retournés et les frais de retours seront remboursés si le défaut est constaté comme éligible à la garantie 15 ans.<br/><br/>Si le défaut est considéré comme étant couvert par la garantie, notre obligation dans le cadre de la garantie 15 ans consistera à fournir une réparation ou un remplacement du produit. Dans le cas où une partie isolée du produit serait concernée par le défaut (par exemple les pieds du sommier), seule cette partie sera réparée ou remplacée.<br/><br/>Les Produits réparés ou remplacés vous seront livrés gratuitement – veuillez noter que l’envoi ne peut être fait que dans le pays choisi lors de la livraison initiale du sommier.<br/><br/>Sur la base de justificatifs et dans un montant raisonnable, les frais éventuels d’envoi du produit défectueux seront remboursés.<br/><br/>Nous remplacerons le produit considéré comme défectueux par un modèle identique. Dans le cas où le modèle n’existerait plus, il sera remplacé par un modèle d’un prix équivalent (ou inférieur s’il n’est pas disponible à prix équivalent). Si la taille n'est plus commercialisée, nous nous réservons le droit de vous remplacer le produit par une taille similaire.<br/><br/>Toute réclamation en vertu de cette garantie doit être reçue dans les 30 jours suivant votre constatation du défaut ou suivant la date à laquelle vous auriez raisonnablement dû constater le défaut, et, en tout état de cause, avant la fin de la période de garantie.<br/><br/>Veuillez noter qu’aucun remboursement ne sera effectué au titre de la garantie 15 ans, contrairement à la garantie des 100 nuits d’essai. La garantie 15 ans ouvre droit à une réparation ou éventuellement à un remplacement.<br/><br/>La garantie est fournie par Tediber, 20 rue sainte croix de la bretonnerie, 75004 Paris. Vous pouvez nous contacter à hello@tediber.com.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_TcRCxz": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Quelle est la durée de la garantie ?",
+            "icon": "check_mark",
+            "row_content": "<p>Cette garantie couvrant votre lit Grand Ours dure pendant 15 ans à compter de la date de livraison. Nous ne proratisons pas les termes (c’est-à-dire que nous ne réduisons pas le montant total en fonction du temps écoulé). Un sommier remplacé ou réparé ne prolonge pas la durée de votre garantie. Le calcul de la durée de garantie se fait à partir du jour de la date de livraison de votre achat d’origine.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_9TQhNW": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Absence de déclaration de nature médicale ou liée à la santé",
+            "icon": "check_mark",
+            "row_content": "<p>Tediber n’effectue aucune déclaration de nature médicale ou liée à la santé concernant ses sommiers. Les allergies, l’inconfort ou d’autres situations ne sont pas couvert(e)s au titre de cette garantie. Toute question ou préoccupation concernant les situations de nature médicale ou liées à la santé doit être adressée à un médecin habilité.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_pG9e6y": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Comment effectuer une réclamation au titre de cette garantie ?",
+            "icon": "check_mark",
+            "row_content": "<p>Pour effectuer une réclamation au titre de notre garantie, veuillez envoyer une brève description écrite (accompagnée de photos, si possible) du problème ou de l’état qui selon vous constitue un défaut à l’adresse hello@tediber.com. Par ailleurs, d’autres éléments comme la preuve d’achat, des photos ou vidéos complémentaires pourront être demandées.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_HVGfJF": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Informations sur les qualités et caractéristiques environnementales",
+            "icon": "check_mark",
+            "row_content": "<p>Conformément à la réglementation, Tediber fournit à ses clients les informations de mise en conformité concernant la présence de substances dangereuses, l'incorporation de matières recyclées, et la recyclabilité - découvrez les informations <a href=\"https://docs.google.com/spreadsheets/d/1vq86j7D2zjYq1guPzI7_0s8_1u3o3k-DKBSmS_BZrkY/edit?userstoinvite=elise%40tediber.com&sharingaction=manageaccess&role=writer&gid=0#gid=0\" target=\"_blank\"><span style=\"text-decoration:underline\"><strong>ici</strong></span></a></p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_Yyhahn",
+        "collapsible_row_zFpUcz",
+        "collapsible_row_DrXG3K",
+        "collapsible_row_TcRCxz",
+        "collapsible_row_9TQhNW",
+        "collapsible_row_pG9e6y",
+        "collapsible_row_HVGfJF"
+      ],
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "full_width": true,
+        "caption": "",
+        "heading": "",
+        "heading_size": "h2",
+        "heading_alignment": "center",
+        "layout": "none",
+        "container_color_scheme": "",
+        "color_scheme": "",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "ax_richtext_aBncmQ": {
+      "type": "ax-richtext",
+      "blocks": {
+        "button_RyrDWB": {
+          "type": "button",
+          "settings": {
+            "button_text": "Découvrir le sommier Grand Ours Tediber",
+            "url": "shopify://products/sommier-grand-ours",
+            "link_blank": false,
+            "style_button": "button button--primary",
+            "button_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "button_RyrDWB"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_A96Epf": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_iVhC6J": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Sommier en bois</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_iVhC6J"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "collapsible_content_xLMrHY": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_qgBdiQ": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "La garantie Lit en bois 5 ans",
+            "icon": "check_mark",
+            "row_content": "<p>Les conditions de notre garantie Lit en bois (incluant le sommier et la tête de lit en bois) 5 ans sont les suivantes :<br/><br/>Votre lit en bois TEDIBER est couvert par une garantie de 5 ans, qui vous donne des droits particuliers découlant de la loi. Elle n’est pas transférable et vous couvre uniquement si vous êtes l’acheteur initial et le propriétaire actuel du lit ou sommier en bois TEDIBER pour lequel vous vous prévalez d’un recours au titre de la garantie et si vous l’avez acheté directement sur www.tediber.com ou dans les boutiques TEDIBER. Ainsi, la garantie ne s’applique que pendant la période au cours de laquelle le lit en bois est la propriété et sous le contrôle de l’acheteur initial.<br/><br/>La garantie lit en bois TEDIBER 5 ans est une garantie pleine couvrant des défauts de fabrication et notamment :<br/><br/>    Une latte endommagée ou détruite liée à un problème de fabrication (nœud de bois au milieu, mauvaise fixation lors de l’assemblage). Si vous avez des questions, contactez-nous à hello@tediber.com.<br/>    Tout défaut physique visible sur la face avant de tête de lit en bois lié à un problème de fabrication ou causé durant le transport (impact, rayure…)<br/>    Tout défaut physique du produit qui entraîne une fissure ou une déformation importante, malgré une utilisation normale et une manipulation appropriée du produit, que ce soit sur les traverses en bois (sommier ou tête de lit) ou bien sur les pieds en bois. La garantie ne couvre pas les défauts d’utilisation sur les parties en bois, notamment les chocs que celles-ci peuvent subir pendant leur durée de vie.<br/><br/>    Si le lit en bois est en effet défectueux, nous vous enverrons une pièce de rechange ou nous procéderons à son remplacement selon les cas. Dans le cas d’un remplacement d’une pièce simple, le changement sera effectué par vous-même. Les frais de livraison seront à notre charge. Par ailleurs, veuillez noter qu’aucun remboursement ne sera effectué en dehors de la garantie des 100 nuits d’essai.<br/><br/>    Si nous effectuons un remplacement de produit dans le cadre de la garantie lit en bois, l’offre des “100 nuits d’essai & retour gratuit” n’est alors pas renouvelée.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_4KDeLH": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "La garantie sommier ne couvre pas",
+            "icon": "check_mark",
+            "row_content": "<p>La garantie sommier 5 ans ne couvre pas les sommiers vendus par des revendeurs non-agréés et ne couvre que les sommiers vendus directement par Tediber.<br/><br/>La garantie sommier ne couvre pas votre sommier si vous l’utilisez d’une façon incompatible avec sa destination et son utilisation prévue, par exemple, une situation non domestique. En outre, elle ne couvre pas les états découlant d’une mauvaise manipulation, d’une mauvaise utilisation ou de la négligence, par exemple, lors du transport du produit Les défauts visibles sur la housse devront ainsi être signalés dans la période des 100 jours suivant la livraison et ne pourront faire l’objet d’une demande de garantie 5 ans.<br/><br/>La garantie sommier ne couvre pas votre sommier si le matelas utilisé avec celui-ci présente un défaut de surface inférieure quelconque qui pourrait induire un défaut sur le sommier, et notamment sur la partie supérieure de la housse du sommier.<br/><br/>La garantie sommier ne couvre pas les défauts de visserie des masses d’angle si il est utilisé avec des pieds non vendus par TEDIBER.<br/><br/>Elle ne couvre pas l’usure normale du sommier et les situations susceptibles de causer une détérioration ou des dommages.<br/><br/>Plus particulièrement, cette garantie exclut :<br/>a) un défaut lié à l’utilisation du sommier sur un sol qui ne serait pas adapté, solide et plan ;<br/>b) l’usure normale du fait de l’utilisation prévue des produits, y compris causée par le nettoyage des tissus ;<br/>c) si vous avez tenté d’altérer ou de réparer le sommier sans notre consentement ou si vous avez nettoyé les produits avec des produits ou des techniques inappropriés ;<br/>d) des imperfections mineures et de légers défauts esthétiques ;<br/>e) des déchirures, des tâches, de la salissure, des brûlures, des dommages liquides et la décoloration des matériaux qui surviennent au fil du temps ;<br/>f) l’humidité, les odeurs ou la moisissure (qui peut entre-autre être provoquée par l’utilisation d’un matelas endommagé ou trop vieux) ;<br/>g) les préférences individuelles ou personnelles concernant la fermeté, la texture, le confort, etc. ;<br/>h) des allergies ou des sensibilités individuelles ou personnelles.<br/>i) Toutes les contaminations par les puces, punaises de lit où autres parasites ;<br/>j) si le défaut résulte d’un cas de force majeure ou d’un phénomène naturel indépendant de notre volonté, y compris, sans limitation, d’un incendie, d’une inondation ou d’une catastrophe naturelle.La garantie sommier 5 ans ne couvre pas les sommiers vendus par des revendeurs non-agréés et ne couvre que les sommiers vendus directement par Tediber.<br/><br/>La garantie sommier ne couvre pas votre sommier si vous l’utilisez d’une façon incompatible avec sa destination et son utilisation prévue, par exemple, une situation non domestique. En outre, elle ne couvre pas les états découlant d’une mauvaise manipulation, d’une mauvaise utilisation ou de la négligence, par exemple, lors du transport du produit Les défauts visibles sur la housse devront ainsi être signalés dans la période des 100 jours suivant la livraison et ne pourront faire l’objet d’une demande de garantie 5 ans.<br/><br/>La garantie sommier ne couvre pas votre sommier si le matelas utilisé avec celui-ci présente un défaut de surface inférieure quelconque qui pourrait induire un défaut sur le sommier, et notamment sur la partie supérieure de la housse du sommier.<br/><br/>La garantie sommier ne couvre pas les défauts de visserie des masses d’angle si il est utilisé avec des pieds non vendus par TEDIBER.<br/><br/>Elle ne couvre pas l’usure normale du sommier et les situations susceptibles de causer une détérioration ou des dommages.<br/><br/>Plus particulièrement, cette garantie exclut :<br/>a) un défaut lié à l’utilisation du sommier sur un sol qui ne serait pas adapté, solide et plan ;<br/>b) l’usure normale du fait de l’utilisation prévue des produits, y compris causée par le nettoyage des tissus ;<br/>c) si vous avez tenté d’altérer ou de réparer le sommier sans notre consentement ou si vous avez nettoyé les produits avec des produits ou des techniques inappropriés ;<br/>d) des imperfections mineures et de légers défauts esthétiques ;<br/>e) des déchirures, des tâches, de la salissure, des brûlures, des dommages liquides et la décoloration des matériaux qui surviennent au fil du temps ;<br/>f) l’humidité, les odeurs ou la moisissure (qui peut entre-autre être provoquée par l’utilisation d’un matelas endommagé ou trop vieux) ;<br/>g) les préférences individuelles ou personnelles concernant la fermeté, la texture, le confort, etc. ;<br/>h) des allergies ou des sensibilités individuelles ou personnelles.<br/>i) Toutes les contaminations par les puces, punaises de lit où autres parasites ;<br/>j) si le défaut résulte d’un cas de force majeure ou d’un phénomène naturel indépendant de notre volonté, y compris, sans limitation, d’un incendie, d’une inondation ou d’une catastrophe naturelle.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_hT9TQx": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "La garantie Lit en bois ne couvre pas",
+            "icon": "check_mark",
+            "row_content": "<p>La garantie lit en bois 5 ans ne couvre pas les produits vendus par des revendeurs non-agréés et ne couvre que les lits en bois vendus directement par Tediber. La garantie lit en bois ne couvre pas votre lit en bois si vous l’utilisez d’une façon incompatible avec sa destination et son utilisation prévue, par exemple, une situation non domestique. Elle ne couvre pas non plus toute utilisation de la tête de lit en bois avec un autre sommier que le sommier en bois Tediber. En outre, elle ne couvre pas les états découlant d’une mauvaise manipulation, d’une mauvaise utilisation ou de la négligence, par exemple, lors du transport du produit.<br/><br/>Les défauts visibles sur la structure et les pieds en bois ainsi que sur la cadre à lattes devront ainsi être signalés dans la période des 100 jours suivant la livraison et ne pourront faire l’objet d’une demande de garantie 5 ans. La garantie ne couvre pas l’usure normale du lit en bois et les situations susceptibles de causer une détérioration ou des dommages.<br/><br/>Plus particulièrement, cette garantie exclut :<br/>a) un défaut lié à l’utilisation du lit en bois sur un sol qui ne serait pas adapté, solide et plan ;<br/>b) l’usure normale du fait de l’utilisation prévue du produit, y compris causée par l’exposition directe au soleil ;<br/>c) si vous avez tenté d’altérer ou de réparer le lit en bois sans notre consentement ou si vous avez nettoyé les produits avec des produits ou des techniques inappropriés ;<br/>d) des imperfections mineures et de légers défauts esthétiques (rayure discrète sur le cadre à latte qui est ensuite cachée par la structure en bois, sur le dos de la tête de lit si celui-ci est ensuite caché…) ;<br/>e) des tâches, de la salissure, des brûlures, des dommages liquides et la décoloration des matériaux qui surviennent au fil du temps ;<br/>f) l’humidité, les odeurs ou la moisissure (qui peut entre-autre être provoquée par l’utilisation d’un matelas endommagé ou trop vieux) ;<br/>g) les préférences individuelles ou personnelles concernant la teinte, le confort, etc ;<br/>h) des allergies ou des sensibilités individuelles ou personnelles.<br/>i) toutes les contaminations par les puces, punaises de lit ou autres parasites ;<br/>j) si le défaut résulte d’un cas de force majeure ou d’un phénomène naturel indépendant de notre volonté, y compris, sans limitation, d’un incendie, d’une inondation ou d’une catastrophe naturelle.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_yWdrNE": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Que fera Tediber ?",
+            "icon": "check_mark",
+            "row_content": "<p>La demande d’exercice de la garantie se fait à l’adresse hello@tediber.com et doit comporter une description claire du défaut, du matelas utilisé et la preuve d’achat à votre nom. En fonction du problème, des éléments complémentaires seront obligatoirement demandés (photographies ou vidéos par exemple) afin de valider le problème avec l’équipe qualité. L’absence de photographies ou une description imprécise pourront retarder la prise en charge du défaut au titre de la garantie 5 ans ou aboutir à son non-exercice. Après inspection du défaut par l’équipe Tediber, elle décidera si le produit est défectueux et si les conditions d’application de la garantie sont remplies.<br/><br/>Les produits défectueux devront être retournés si le défaut est constaté comme éligible à la garantie 5 ans. Le créneau pour l’échange du produit vous sera proposé par notre service client ; le retour du produit défectueux et la livraison du nouveau produit se feront au même moment. Si le défaut est considéré comme étant couvert par la garantie, notre obligation dans le cadre de la garantie 5 ans consistera à fournir une réparation ou un remplacement du produit. Dans le cas où une partie isolée du produit serait concernée par le défaut (par exemple une latte de sommier en bois), seule cette partie sera remplacée par l’envoi d’une nouvelle pièce de rechange, vous pourrez remplacer la pièce défectueuse. Les produits réparés ou remplacés vous seront livrés gratuitement – veuillez noter que l’envoi ne peut être fait que dans le pays choisi lors de la livraison initiale du sommier en bois.<br/><br/>Nous remplacerons le produit considéré comme défectueux par le modèle de taille identique ou, dans le cas où le modèle n’existe plus, par un modèle d’un prix équivalent ou inférieur. Toute réclamation en vertu de cette garantie doit être reçue dans les 30 jours suivant votre constatation du défaut ou suivant la date à laquelle vous auriez raisonnablement dû constater le défaut, et, en tout état de cause, avant la fin de la période de garantie.<br/><br/>Veuillez noter qu’aucun remboursement ne sera effectué au titre de la garantie 5 ans, contrairement à la garantie des 100 nuits d’essai. La garantie 5 ans ouvre droit à une réparation ou éventuellement à un remplacement<br/><br/>La garantie est fournie par Tediber, 20 Rue Sainte Croix de la Bretonnerie 75004 Paris. Vous pouvez nous contacter à hello@tediber.com.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_h6DRHW": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Quelle est la durée de la garantie ?",
+            "icon": "check_mark",
+            "row_content": "<p>Cette garantie couvrant votre lit en bois Tediber dure pendant 5 ans à compter de la date de livraison. Nous ne proratisons pas les termes (c’est-à-dire que nous ne réduisons pas le montant total en fonction du temps écoulé). Un sommier en bois remplacé ou réparé ne prolonge pas la durée de votre garantie. Le calcul de la durée de garantie se fait à partir du jour de la date de livraison de votre achat d’origine.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_wKJwHN": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Absence de déclaration de nature médicale ou liée à la santé",
+            "icon": "check_mark",
+            "row_content": "<p>TEDIBER n’effectue aucune déclaration de nature médicale ou liée à la santé concernant ses produits. Les allergies, l’inconfort ou d’autres situations ne sont pas couvert(e)s au titre de cette garantie. Toute question ou préoccupation concernant les situations de nature médicale ou liées à la santé doit être adressée à un médecin habilité.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_k6mQTn": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Comment effectuer une réclamation au titre de cette garantie ?",
+            "icon": "check_mark",
+            "row_content": "<p>Pour effectuer une réclamation au titre de notre garantie, veuillez envoyer une brève description écrite (accompagnée de photos) du problème et la preuve d’achat du sommier en bois ou de l’état qui selon vous constitue un défaut à l’adresse hello@tediber.com. Par ailleurs, d’autres éléments comme des photos complémentaires ou des vidéos seront demandés selon notre processus qualité.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_UXFVmW": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Informations sur les qualités et caractéristiques environnementales",
+            "icon": "check_mark",
+            "row_content": "<p>Conformément à la réglementation, Tediber fournit à ses clients les informations de mise en conformité concernant la présence de substances dangereuses, l'incorporation de matières recyclées, et la recyclabilité - découvrez les informations <a href=\"https://docs.google.com/spreadsheets/d/1vq86j7D2zjYq1guPzI7_0s8_1u3o3k-DKBSmS_BZrkY/edit?userstoinvite=elise%40tediber.com&sharingaction=manageaccess&role=writer&gid=0#gid=0\" target=\"_blank\"><span style=\"text-decoration:underline\"><strong>ici</strong></span></a></p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_qgBdiQ",
+        "collapsible_row_4KDeLH",
+        "collapsible_row_hT9TQx",
+        "collapsible_row_yWdrNE",
+        "collapsible_row_h6DRHW",
+        "collapsible_row_wKJwHN",
+        "collapsible_row_k6mQTn",
+        "collapsible_row_UXFVmW"
+      ],
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "full_width": true,
+        "caption": "",
+        "heading": "",
+        "heading_size": "h2",
+        "heading_alignment": "center",
+        "layout": "none",
+        "container_color_scheme": "",
+        "color_scheme": "",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "ax_richtext_MtGPQN": {
+      "type": "ax-richtext",
+      "blocks": {
+        "button_Epgxi8": {
+          "type": "button",
+          "settings": {
+            "button_text": "Découvrir le sommier en bois Tediber",
+            "url": "shopify://products/sommier-bois",
+            "link_blank": false,
+            "style_button": "button button--primary",
+            "button_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "button_Epgxi8"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_UTxpaK": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_btnBwN": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Sommier à lattes</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_btnBwN"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "collapsible_content_kDXqr8": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_Aek4zU": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "La Garantie Sommier à lattes 5 ans",
+            "icon": "check_mark",
+            "row_content": "<p>Les conditions de notre garantie sommier à lattes 5 ans sont les suivantes : Votre sommier à lattes TEDIBER est couvert par une garantie de 5 ans, qui vous donne des droits particuliers découlant de la loi. Elle n’est pas transférable et vous couvre uniquement si vous êtes l’acheteur initial et le propriétaire actuel du sommier à lattes TEDIBER pour lequel vous vous prévalez d’un recours au titre de la garantie et si vous l’avez acheté directement sur www.tediber.com ou dans les boutiques TEDIBER. Ainsi, la garantie ne s’applique que pendant la période au cours de laquelle le sommier à lattes est la propriété et sous le contrôle de l’acheteur initial. La garantie sommier à lattes TEDIBER 5 ans est une garantie pleine couvrant des défauts de fabrication et notamment :<br/><br/>    Une latte endommagée ou détruite liée à un problème de fabrication (nœud de bois au milieu, mauvaise fixation lors de l’assemblage). Si vous avez des questions, contactez-nous à hello@tediber.com<br/>    Tout défaut physique du produit qui entraîne une fissure ou une déformation importante, malgré une utilisation normale et une manipulation appropriée du produit, que ce soit sur le cadre en acier ou bien sur les pieds en bois. La garantie ne couvre pas les défauts d’utilisation sur les parties en acier, notamment les chocs que celles-ci peuvent subir pendant leur durée de vie.<br/><br/>Si le sommier à lattes est en effet défectueux, nous vous enverrons une pièce de rechange ou nous procéderons à son remplacement selon les cas. Dans le cas d’un remplacement d’une pièce simple, le changement sera effectué par vous-même. Les frais de livraison seront à notre charge. Par ailleurs, veuillez noter qu’aucun remboursement ne sera effectué en dehors de la garantie des 100 nuits d’essai. Si nous effectuons un remplacement de produit dans le cadre de la garantie sommier à lattes, l’offre des “100 nuits d’essai & retour gratuit” n’est alors pas renouvelée.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_XQr7f8": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "La Garantie sommier à lattes ne couvre pas",
+            "icon": "check_mark",
+            "row_content": "<p>La garantie sommier à lattes 5 ans ne couvre pas les produits vendus par des revendeurs non-agréés et ne couvre que les sommiers à lattes vendus directement par Tediber.<br/><br/>La garantie sommier à lattes ne couvre pas votre sommier à lattes si vous l’utilisez d’une façon incompatible avec sa destination et son utilisation prévue, par exemple, une situation non domestique. En outre, elle ne couvre pas les états découlant d’une mauvaise manipulation, d’une mauvaise utilisation ou de la négligence, par exemple, lors du transport du produit.<br/><br/>Les défauts visibles sur les pieds en bois ainsi que sur le cadre à lattes devront ainsi être signalés dans la période des 100 jours suivant la livraison et ne pourront faire l’objet d’une demande de garantie 5 ans.<br/><br/>La garantie ne couvre pas l’usure normale du sommier à lattes et les situations susceptibles de causer une détérioration ou des dommages. Plus particulièrement, cette garantie exclut :<br/><br/>a) un défaut lié à l’utilisation du sommier sur un sol qui ne serait pas adapté, solide et plan ; b) un défaut lié à l'utilisation du sommier à lattes avec des pieds différents de ceux fournis et non adapté ; c) l’usure normale du fait de l’utilisation prévue des produits, y compris causée par le nettoyage des tissus ; d) si vous avez tenté d’altérer ou de réparer le sommier sans notre consentement ou si vous avez nettoyé les produits avec des produits ou des techniques inappropriés ; e) des imperfections mineures et de légers défauts esthétiques ; f) des déchirures, des tâches, de la salissure, des brûlures, des dommages liquides et la décoloration des matériaux qui surviennent au fil du temps ; g) l’humidité, les odeurs ou la moisissure (qui peut entre-autre être provoquée par l’utilisation d’un matelas endommagé ou trop vieux) ; h) les préférences individuelles ou personnelles concernant la fermeté, la texture, le confort, etc. ; i) des allergies ou des sensibilités individuelles ou personnelles. j) Toutes les contaminations par les puces, punaises de lit où autres parasites ; k) si le défaut résulte d’un cas de force majeure ou d’un phénomène naturel indépendant de notre volonté, y compris, sans limitation, d’un incendie, d’une inondation ou d’une catastrophe naturelle.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_ExJ4wD": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Que fera Tediber ?",
+            "icon": "check_mark",
+            "row_content": "<p>La demande d’exercice de la garantie se fait à l’adresse hello@tediber.com et doit comporter une description claire du défaut, du sommier utilisé et la preuve d’achat à votre nom. En fonction du problème, des éléments complémentaires seront obligatoirement demandés (photographies ou vidéos par exemple) afin de valider le problème avec l’équipe qualité. L’absence de photographies ou une description imprécise pourront retarder la prise en charge du défaut au titre de la garantie 5 ans ou aboutir à son non-exercice. Après inspection du défaut par l’équipe Tediber, elle décidera si le produit est défectueux et si les conditions d’application de la garantie sont remplies.<br/><br/>Les produits défectueux devront être retournés si le défaut est constaté comme éligible à la garantie 5 ans. Le créneau pour l’échange du produit vous sera proposé par notre service client ; le retour du produit défectueux et la livraison du nouveau produit se feront au même moment. Si le défaut est considéré comme étant couvert par la garantie, notre obligation dans le cadre de la garantie 5 ans consistera à fournir une réparation ou un remplacement du produit. Dans le cas où une partie isolée du produit serait concernée par le défaut (par exemple une latte de sommier en bois), seule cette partie sera remplacée par l’envoi d’une nouvelle pièce de rechange, vous pourrez remplacer la pièce défectueuse. Les produits réparés ou remplacés vous seront livrés gratuitement – veuillez noter que l’envoi ne peut être fait que dans le pays choisi lors de la livraison initiale du sommier en bois.<br/><br/>Nous remplacerons le produit considéré comme défectueux par le modèle de taille identique ou, dans le cas où le modèle n’existe plus, par un modèle d’un prix équivalent ou inférieur. Toute réclamation en vertu de cette garantie doit être reçue dans les 30 jours suivant votre constatation du défaut ou suivant la date à laquelle vous auriez raisonnablement dû constater le défaut, et, en tout état de cause, avant la fin de la période de garantie.<br/><br/>Veuillez noter qu’aucun remboursement ne sera effectué au titre de la garantie 5 ans, contrairement à la garantie des 100 nuits d’essai. La garantie 5 ans ouvre droit à une réparation ou éventuellement à un remplacement<br/><br/>La garantie est fournie par Tediber, 20 Rue Sainte Croix de la Bretonnerie 75004 Paris. Vous pouvez nous contacter à hello@tediber.com.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_HQ99yH": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Quelle est la durée de la garantie ?",
+            "icon": "check_mark",
+            "row_content": "<p>Cette garantie couvrant votre sommier à lattes Tediber dure pendant 5 ans à compter de la date de livraison. Nous ne proratisons pas les termes (c’est-à-dire que nous ne réduisons pas le montant total en fonction du temps écoulé). Un sommier en bois remplacé ou réparé ne prolonge pas la durée de votre garantie. Le calcul de la durée de garantie se fait à partir du jour de la date de livraison de votre achat d’origine.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_9788N6": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Absence de déclaration de nature médicale ou liée à la santé",
+            "icon": "check_mark",
+            "row_content": "<p>TEDIBER n’effectue aucune déclaration de nature médicale ou liée à la santé concernant ses produits. Les allergies, l’inconfort ou d’autres situations ne sont pas couvert(e)s au titre de cette garantie. Toute question ou préoccupation concernant les situations de nature médicale ou liées à la santé doit être adressée à un médecin habilité.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_i7irrE": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Comment effectuer une réclamation au titre de cette garantie ?",
+            "icon": "check_mark",
+            "row_content": "<p>Pour effectuer une réclamation au titre de notre garantie, veuillez envoyer une brève description écrite (accompagnée de photos) du problème et la preuve d’achat du sommier à lattes ou de l’état qui selon vous constitue un défaut à l’adresse hello@tediber.com. Par ailleurs, d’autres éléments comme des photos complémentaires ou des vidéos seront demandés selon notre processus qualité.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_D6i6qw": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Informations sur les qualités et caractéristiques environnementales",
+            "icon": "check_mark",
+            "row_content": "<p>Conformément à la réglementation, Tediber fournit à ses clients les informations de mise en conformité concernant la présence de substances dangereuses, l'incorporation de matières recyclées, et la recyclabilité - découvrez les informations <a href=\"https://docs.google.com/spreadsheets/d/1vq86j7D2zjYq1guPzI7_0s8_1u3o3k-DKBSmS_BZrkY/edit?userstoinvite=elise%40tediber.com&sharingaction=manageaccess&role=writer&gid=0#gid=0\" target=\"_blank\"><span style=\"text-decoration:underline\"><strong>ici</strong></span></a></p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_Aek4zU",
+        "collapsible_row_XQr7f8",
+        "collapsible_row_ExJ4wD",
+        "collapsible_row_HQ99yH",
+        "collapsible_row_9788N6",
+        "collapsible_row_i7irrE",
+        "collapsible_row_D6i6qw"
+      ],
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "full_width": true,
+        "caption": "",
+        "heading": "",
+        "heading_size": "h2",
+        "heading_alignment": "center",
+        "layout": "none",
+        "container_color_scheme": "",
+        "color_scheme": "",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "ax_richtext_EmiKY3": {
+      "type": "ax-richtext",
+      "blocks": {
+        "button_K9iHrH": {
+          "type": "button",
+          "settings": {
+            "button_text": "Découvrir le sommier à lattes Tediber",
+            "url": "shopify://products/sommier-lattes",
+            "link_blank": false,
+            "style_button": "button button--primary",
+            "button_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "button_K9iHrH"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    }
+  },
+  "order": [
+    "main",
+    "ax_heading_6TphAp",
+    "ax_richtext_RkciMT",
+    "ax_richtext_6DaePa",
+    "collapsible_content_LTxXXF",
+    "ax_richtext_LHDXcQ",
+    "ax_richtext_FM3xfE",
+    "collapsible_content_NwknYz",
+    "ax_richtext_U7jP8G",
+    "ax_richtext_DPpAhQ",
+    "collapsible_content_TkjCpr",
+    "ax_image_banner_WnyJDH",
+    "ax_richtext_GWiLLP",
+    "ax_richtext_4Aq3pA",
+    "collapsible_content_LL3BPe",
+    "ax_richtext_aBncmQ",
+    "ax_richtext_A96Epf",
+    "collapsible_content_xLMrHY",
+    "ax_richtext_MtGPQN",
+    "ax_richtext_UTxpaK",
+    "collapsible_content_kDXqr8",
+    "ax_richtext_EmiKY3"
+  ]
+}

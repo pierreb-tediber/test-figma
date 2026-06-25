@@ -1,0 +1,318 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "show_content": false,
+        "custom_h1": "",
+        "h1_size": "h1",
+        "h1_no_margin": false,
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "rich_text_3x73Na": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_8TmknV": {
+          "type": "heading",
+          "settings": {
+            "heading": "Avis alèse bébé",
+            "heading_size": "h1"
+          }
+        }
+      },
+      "block_order": [
+        "heading_8TmknV"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 52
+      }
+    },
+    "ax_testimonial_bEhDwJ": {
+      "type": "ax-testimonial",
+      "blocks": {
+        "heading_PVjWUQ": {
+          "type": "heading",
+          "settings": {
+            "picto_size": 100,
+            "heading": "4.9/5",
+            "heading_class": "h1"
+          }
+        },
+        "subheading_amQwEy": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Note fondée sur 264 évaluations"
+          }
+        },
+        "text_aVqPeH": {
+          "type": "text",
+          "settings": {
+            "picto_size": 24,
+            "text": "<p>Les clients sont extrêmement satisfaits de notre produit 2 en 1, à la fois alèse et drap magique, valorisant l’avantage d’avoir ces deux fonctionnalités en un seul article. Ils soulignent sa douceur idéale pour la peau sensible des bébés. Son imperméabilité et absorption optimale protègent efficacement le matelas. Cette alèse combine confort et praticité pour garantir des nuits sereines et hygiéniques.</p>"
+          }
+        },
+        "button_PrA3R9": {
+          "type": "button",
+          "settings": {
+            "button_text": "Découvrir l'alèse bébé Tediber",
+            "button_link": "shopify://products/alese-bebe",
+            "link_blank": false,
+            "link_style": "button button--primary"
+          }
+        }
+      },
+      "block_order": [
+        "heading_PVjWUQ",
+        "subheading_amQwEy",
+        "text_aVqPeH",
+        "button_PrA3R9"
+      ],
+      "name": "Ax Testimonial",
+      "settings": {
+        "full_width": false,
+        "show_trustpilot_shop": false,
+        "trustpilot_product_skus": "TEDDM60120",
+        "image": "shopify://shop_images/alese-bebe_packshot_humain.jpg",
+        "layout": "image_first",
+        "mobile_layout": "image_first",
+        "overlay": true,
+        "overlay_opacity": 0.2,
+        "section_color_scheme": "scheme-1",
+        "color_scheme": "scheme-2",
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "mobile_padding_top": 24,
+        "mobile_padding_bottom": 24
+      }
+    },
+    "ax_trustpilot_product_DWmJd6": {
+      "type": "ax-trustpilot-product",
+      "name": "Ax trustpilot product",
+      "settings": {
+        "restrict_width": false,
+        "skus": "TEDDM60120",
+        "color_scheme": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "ax_collections_grid_cqUXDN": {
+      "type": "ax-collections-grid",
+      "blocks": {
+        "collection_eHPKa8": {
+          "type": "collection",
+          "settings": {
+            "collection": "matelas",
+            "title": ""
+          }
+        },
+        "collection_KNMPE9": {
+          "type": "collection",
+          "settings": {
+            "collection": "sommier",
+            "title": ""
+          }
+        },
+        "collection_THJLVg": {
+          "type": "collection",
+          "settings": {
+            "collection": "lit",
+            "title": ""
+          }
+        },
+        "collection_mdh4Ch": {
+          "type": "collection",
+          "settings": {
+            "collection": "tete-de-lit",
+            "title": ""
+          }
+        },
+        "collection_amP9ka": {
+          "type": "collection",
+          "settings": {
+            "collection": "canape",
+            "title": ""
+          }
+        },
+        "collection_9GPCNL": {
+          "type": "collection",
+          "settings": {
+            "collection": "gamme-enfant-bebe",
+            "title": ""
+          }
+        },
+        "collection_WrKUr7": {
+          "type": "collection",
+          "settings": {
+            "collection": "couette-et-oreiller",
+            "title": ""
+          }
+        },
+        "collection_PLaiwc": {
+          "type": "collection",
+          "settings": {
+            "collection": "linge-de-lit",
+            "title": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_eHPKa8",
+        "collection_KNMPE9",
+        "collection_THJLVg",
+        "collection_mdh4Ch",
+        "collection_amP9ka",
+        "collection_9GPCNL",
+        "collection_WrKUr7",
+        "collection_PLaiwc"
+      ],
+      "name": "Ax Collections Grid",
+      "settings": {
+        "heading": "Gamme tediber",
+        "color_scheme": "",
+        "padding_top": 48,
+        "padding_bottom": 24
+      }
+    },
+    "ax_reassurances_cQcLPh": {
+      "type": "ax-reassurances",
+      "blocks": {
+        "reassurance_GwYeyP": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "100-nuits-essai",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_tTNg4j": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-mnd3qioq",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_wDyNcX": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-vfy3a8q5",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_LtQMN3": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-87bgy0zq",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        }
+      },
+      "block_order": [
+        "reassurance_GwYeyP",
+        "reassurance_tTNg4j",
+        "reassurance_wDyNcX",
+        "reassurance_LtQMN3"
+      ],
+      "settings": {
+        "heading": "Nos engagements",
+        "restricted_width": false,
+        "stack_mobile": false,
+        "border_top_mobile": false,
+        "border_bottom_mobile": false,
+        "show_content": false,
+        "autoplay": false,
+        "speed": 300,
+        "loop": false,
+        "pagination": true,
+        "color_scheme": "",
+        "color_scheme_popin": "scheme-2",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 24,
+        "padding_top": 96,
+        "padding_bottom": 48,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "ax_richtext_MUQEzR": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_BbRf7K": {
+          "type": "heading",
+          "settings": {
+            "heading": "<h2>NOTES ET AVIS DONNÉS PAR NOS CLIENTS APRÈS TEST DE L'ALESE BEBE</h2>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_K9N9px": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Les avis de clients sur le traversin Tediber se traduisent par des notes, mais aussi par des commentaires, souvent très détaillés et plein d'informations. Ils vous aideront à faire votre choix. Vous saurez ce que nos clients aiment à propos du drap magique Tediber, ce qu'ils regrettent (souvent de ne pas l'avoir acheté avant !) et ce qu'ils conseillent. Faites l'évaluation de notre incroyable drap magique Tediber en filtrant les avis par note (nombre d'étoiles attribuées), par position ou bien par âge. Pour faire ensuite votre propre test, commandez le traversin Tediber et profitez de 30 jours d'essai. Faites l'évaluation de notre incroyable traversin Tediber en filtrant les avis par note (nombre d'étoiles attribuées), par position ou bien par âge. Pour faire ensuite votre propre test, commandez le traversin Tediber et profitez de 100 nuits d'essai.</p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_BbRf7K",
+        "text_K9N9px"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": true,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 24,
+        "mob_padding_bottom": 48,
+        "padding_top": 24,
+        "padding_bottom": 48,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "rich_text_3x73Na",
+    "ax_testimonial_bEhDwJ",
+    "ax_trustpilot_product_DWmJd6",
+    "ax_collections_grid_cqUXDN",
+    "ax_reassurances_cQcLPh",
+    "ax_richtext_MUQEzR"
+  ]
+}

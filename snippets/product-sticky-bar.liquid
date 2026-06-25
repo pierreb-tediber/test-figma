@@ -1,0 +1,88 @@
+{%- liquid
+	assign sticky_variant = selected_variant
+	assign sticky_savings_raw = 0
+	assign sticky_savings_formatted = ''
+	assign show_price_block = false
+
+	if show_sticky_price and sticky_variant.compare_at_price > sticky_variant.price
+		assign sticky_savings_raw = sticky_variant.compare_at_price | minus: sticky_variant.price
+		assign sticky_savings_formatted = sticky_savings_raw | money_without_trailing_zeros
+		assign show_price_block = true
+	endif
+-%}
+<product-sticky-bar
+	class="product-sticky-bar quick-add-hidden{% if template_new_offer %} product-sticky-bar--new-offer{% endif %}"
+	data-section="{{ section.id }}"
+	data-show-price="{{ show_sticky_price }}"
+	aria-hidden="true"
+>
+	<div class="product-sticky-bar__container">
+		<div class="product-sticky-bar__content small-hide">
+			<div class="product-sticky-bar__title">
+				{% if product.metafields.custom.combined_listings_produit_parent.value != blank %}
+					{{ product.metafields.custom.combined_listings_produit_parent.value.title | escape }}
+				{% else %}
+					{{ product.title | escape }}
+				{% endif %}
+			</div>
+			<div class="product-sticky-bar__price">
+				{%- render 'price',
+					product: product,
+					use_variant: false,
+					show_badges: true,
+					price_class: '',
+					is_bundle: is_bundle
+				-%}
+			</div>
+			<div class="product-sticky-bar__savings{% unless show_price_block %} hidden{% endunless %}">
+				<div class="product-sticky-bar__savings__icon">
+					{{ 'icon-multiple-star.svg' | inline_asset_content }}
+				</div>
+				<div class="product-sticky-bar__savings__label">
+					{{ 'products.product.variant_savings_html' | t: savings_amount: sticky_savings_formatted }}
+				</div>
+			</div>
+		</div>
+		<div class="product-sticky-bar__mobile-price">
+			<div class="product-sticky-bar__price">
+				{%- render 'price',
+					product: product,
+					use_variant: false,
+					show_badges: true,
+					price_class: '',
+					is_bundle: is_bundle
+				-%}
+			</div>
+			<div class="product-sticky-bar__savings{% unless show_price_block %} hidden{% endunless %}">
+				<div class="product-sticky-bar__savings__icon">
+					{{ 'icon-multiple-star.svg' | inline_asset_content }}
+				</div>
+				<div class="product-sticky-bar__savings__label">
+					{{ 'products.product.variant_savings_html' | t: savings_amount: sticky_savings_formatted }}
+				</div>
+			</div>
+		</div>
+		{%- liquid
+			assign title = 'products.product.product_buy_choose_default' | t | downcase
+			if product.metafields.custom.information_sticky_bar.value != blank
+				assign title = product.metafields.custom.information_sticky_bar.value | downcase
+			endif
+		-%}
+		<button
+			type="button"
+			class="product-sticky-bar__button button button--primary"
+			aria-label="{{ 'products.product.product_buy_choose' | t: title: title }}"
+			data-aria-label-add="{{ 'products.product.add_to_cart' | t }}"
+		>
+			<span
+				class="product-sticky-bar__button-text"
+				data-mobile-label="{{ 'products.product.product_buy_choose_short' | t }}"
+				data-label-add="{{ 'products.product.add_to_cart' | t }}"
+				data-label-add-short="{{ 'products.product.add_to_cart_short' | t }}"
+			>
+				{{ 'products.product.product_buy_choose' | t: title: title }}
+			</span>
+			{%- render 'loading-spinner' -%}
+		</button>
+	</div>
+</product-sticky-bar>

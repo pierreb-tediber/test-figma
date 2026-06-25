@@ -1,0 +1,282 @@
+{% if section.blocks.size > 0 %}
+	{{ 'bundle.number-tabs.css' | asset_url | stylesheet_tag }}
+
+	<script>
+		window.assetsUrl.js.push({ numberTabs: "{{ 'bundle.number-tabs.js' | asset_url }}" });
+	</script>
+
+	{%- style -%}
+		.section-{{ section.id }}-padding {
+		  padding-top: {{ section.settings.mob_padding_top }}px;
+		  padding-bottom: {{ section.settings.mob_padding_bottom }}px;
+		}
+
+		@media screen and (min-width: 750px) {
+		  .section-{{ section.id }}-padding {
+		    padding-top: {{ section.settings.padding_top }}px;
+		    padding-bottom: {{ section.settings.padding_bottom }}px;
+		  }
+		}
+	{%- endstyle -%}
+
+	<div
+		class="number-tabs gradient color-{{ section.settings.color_scheme }} section-{{ section.id }}-padding"
+		data-ax-section="numberTabs"
+	>
+		<div class="page-width{% if section.settings.restricted_width %} page-width--restricted-width{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+			{% if section.settings.heading != blank %}
+				{% render 'section-heading', heading: section.settings.heading, heading_size: 'h2', text_alignment: 'left' %}
+			{% endif %}
+			<number-tabs
+				data-keyboard-navigation="true"
+				aria-orientation="horizontal"
+			>
+				<div class="number-tabs__wrapper">
+					<div class="number-tabs__tabs" role="tablist" aria-label="{{ section.settings.heading | strip_html }}">
+						{%- for block in section.blocks -%}
+							<button
+								type="button"
+								id="tab-{{ block.id }}"
+								class="number-tabs__tab{% if forloop.first %} active{% endif %}"
+								data-tab="{{ forloop.index }}"
+								role="tab"
+								aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+								aria-controls="panel-{{ block.id }}"
+								{% unless forloop.first %}
+									tabindex="-1"
+								{% endunless %}
+							>
+								<span aria-hidden="true">{{ forloop.index }}</span>
+								<span class="visually-hidden">{{ block.settings.heading | strip_html }}</span>
+							</button>
+						{%- endfor -%}
+					</div>
+					<div class="number-tabs__content">
+						<div class="visually-hidden" aria-live="polite" id="tabs-announcement-{{ section.id }}">
+							{% for block in section.blocks %}
+								{% if forloop.first %}
+									Tab {{ forloop.index }}: {{ block.settings.heading | strip_html }} selected
+								{% endif %}
+							{% endfor %}
+						</div>
+						<div class="number-tabs__content-item-wrapper">
+							{%- for block in section.blocks -%}
+								<div
+									id="panel-{{ block.id }}"
+									class="number-tabs__content-item{% if forloop.first %} active{% endif %}"
+									data-tab="{{ forloop.index }}"
+									role="tabpanel"
+									aria-labelledby="tab-{{ block.id }}"
+								>
+									{% if block.settings.heading != blank %}
+										<div class="number-tabs__content-title h3">
+											{{ block.settings.heading }}
+										</div>
+									{% endif %}
+									{% if block.settings.content != blank %}
+										<div class="number-tabs__content-text">
+											{{ block.settings.content }}
+										</div>
+									{% endif %}
+									{% if block.settings.button_text != blank %}
+										<div class="number-tabs__content-button {{ block.settings.button_alignment }}">
+											{%- render 'link-style',
+												link_label: block.settings.button_text,
+												link_url: block.settings.url,
+												link_style: block.settings.style_button,
+												link_target: block.settings.link_blank,
+												link_attributes: block.shopify_attributes
+											-%}
+										</div>
+									{% endif %}
+								</div>
+							{%- endfor -%}
+						</div>
+					</div>
+				</div>
+			</number-tabs>
+		</div>
+	</div>
+{% endif %}
+
+{% schema %}
+	{
+		"name": "Ax number tabs",
+		"tag": "section",
+		"class": "section",
+		"disabled_on": {
+			"groups": ["header", "footer"]
+		},
+		"settings": [
+			{
+				"type": "header",
+				"content": "Mise en page"
+			},
+			{
+				"type": "checkbox",
+				"id": "restricted_width",
+				"label": "Largeur restreinte",
+				"default": false
+			},
+			{
+				"type": "header",
+				"content": "Contenu"
+			},
+			{
+				"type": "richtext",
+				"id": "heading",
+				"label": "Titre"
+			},
+			{
+				"type": "header",
+				"content": "Color"
+			},
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "Color scheme",
+				"default": "background-1"
+			},
+			{
+				"type": "header",
+				"content": "Padding (space)"
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding bottom",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding bottom",
+				"default": 0
+			}
+		],
+		"blocks": [
+			{
+				"type": "tab",
+				"name": "Onglet",
+				"settings": [
+					{
+						"type": "header",
+						"content": "Onglet"
+					},
+					{
+						"type": "richtext",
+						"id": "heading",
+						"default": "<p>Titre de l'onglet</p>",
+						"label": "Titre de l'onglet"
+					},
+					{
+						"type": "richtext",
+						"id": "content",
+						"default": "<p>Contenu de l'onglet</p>",
+						"label": "Contenu"
+					},
+					{
+						"type": "text",
+						"id": "button_text",
+						"default": "Button label",
+						"label": "Texte du bouton"
+					},
+					{
+						"type": "url",
+						"id": "url",
+						"label": "Lien du bouton"
+					},
+					{
+						"type": "checkbox",
+						"id": "link_blank",
+						"label": "Lien _blank",
+						"info": "Ouvrir ce lien dans une nouvelle fenêtre",
+						"default": false
+					},
+					{
+						"type": "select",
+						"id": "style_button",
+						"options": [
+							{
+								"value": "button button--primary",
+								"label": "Primary"
+							},
+							{
+								"value": "button button--secondary",
+								"label": "Secondary"
+							},
+							{
+								"value": "ax-link",
+								"label": "Link"
+							},
+							{
+								"value": "ax-link reversed",
+								"label": "Link inversé"
+							},
+							{
+								"value": "underlined-link",
+								"label": "Underline link"
+							}
+						],
+						"default": "button button--primary",
+						"label": "Style du bouton"
+					},
+					{
+						"type": "select",
+						"id": "button_alignment",
+						"label": "Alignement du bouton",
+						"options": [
+							{
+								"value": "left",
+								"label": "Gauche"
+							},
+							{
+								"value": "center",
+								"label": "Centre"
+							},
+							{
+								"value": "right",
+								"label": "Droite"
+							}
+						],
+						"default": "left"
+					}
+				]
+			}
+		],
+		"presets": [
+			{
+				"name": "Ax number tabs",
+				"blocks": []
+			}
+		]
+	}
+{% endschema %}

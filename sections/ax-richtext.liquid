@@ -1,0 +1,555 @@
+{{ 'bundle.richtext.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+	.section-{{ section.id }}-padding {
+	  padding-top: {{ section.settings.mob_padding_top }}px;
+	  padding-bottom: {{ section.settings.mob_padding_bottom }}px;
+		margin-top: {{ section.settings.mob_margin_top }}px;
+		margin-bottom: {{ section.settings.mob_margin_bottom }}px;
+	}
+	.section-{{ section.id }}-padding .richtext__wrapper {
+	  padding-top: {{ section.settings.mob_padding_top_content }}px;
+	  padding-bottom: {{ section.settings.mob_padding_bottom_content }}px;
+		padding-left: {{ section.settings.mob_padding_left_content }}px;
+		padding-right: {{ section.settings.mob_padding_right_content }}px;
+	}
+
+	@media screen and (min-width: 750px) {
+	  .section-{{ section.id }}-padding {
+	    padding-top: {{ section.settings.padding_top }}px;
+	    padding-bottom: {{ section.settings.padding_bottom }}px;
+			margin-top: {{ section.settings.margin_top }}px;
+			margin-bottom: {{ section.settings.margin_bottom }}px;
+	  }
+
+		.section-{{ section.id }}-padding .richtext__wrapper {
+			padding-top: {{ section.settings.padding_top_content }}px;
+			padding-bottom: {{ section.settings.padding_bottom_content }}px;
+			padding-left: {{ section.settings.padding_left_content }}px;
+			padding-right: {{ section.settings.padding_right_content }}px;
+		}
+	}
+{%- endstyle -%}
+
+{%- liquid
+	assign has_picto = false
+	for block in section.blocks
+		if block.type == 'picto' and block.settings.picto != blank
+			assign has_picto = true
+			break
+		endif
+	endfor
+-%}
+
+<div
+	class="richtext gradient color-{{ section.settings.color_scheme }} section-{{ section.id }}-padding"
+	data-ax-section="richtextSection"
+	aria-labelledby="RichtextHeading-{{ section.id }}"
+>
+	<div class="page-width{% if section.settings.restricted_width %} page-width--restricted-width{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+		<div class="richtext__wrapper gradient color-{{ section.settings.color_scheme_container }}{% if has_picto %} richtext__wrapper--picto{% endif %}">
+			{% for block in section.blocks %}
+				{% case block.type %}
+					{% when 'heading' %}
+						{% if block.settings.heading != blank %}
+							{% render 'section-heading',
+								heading: block.settings.heading,
+								heading_size: block.settings.heading_size,
+								text_alignment: block.settings.heading_alignment
+							%}
+						{% endif %}
+					{% when 'text' %}
+						{% if block.settings.text != blank %}
+							<div class="richtext__text {{ block.settings.text_alignment }}">
+								{{ block.settings.text }}
+							</div>
+						{% endif %}
+					{% when 'text_highlight' %}
+						{% if block.settings.text != blank %}
+							<div class="richtext__text-highlight {{ block.settings.text_alignment }}">
+								{{ block.settings.text }}
+							</div>
+						{% endif %}
+					{% when 'picto' %}
+						{% if block.settings.picto != blank %}
+							{%- style -%}
+								#shopify-section-{{ section.id }} .richtext__picto--{{ block.id }} img {
+									width: {{ block.settings.picto_size_mobile }}px;
+									height: {{ block.settings.picto_size_mobile }}px;
+								}
+
+								@media (min-width: 750px) {
+									#shopify-section-{{ section.id }} .richtext__picto--{{ block.id }} img {
+										width: {{ block.settings.picto_size }}px;
+										height: {{ block.settings.picto_size }}px;
+									}
+								}
+							{%- endstyle -%}
+							<div class="richtext__picto richtext__picto--{{ block.id }} richtext__picto--{{ block.settings.picto_position }}">
+								{{ block.settings.picto | image_url: width: block.settings.picto_size | image_tag: loading: 'lazy' }}
+							</div>
+						{% endif %}
+					{% when 'button' %}
+						{% if block.settings.button_text != blank %}
+							<div class="richtext__button {{ block.settings.button_alignment }}">
+								{%- render 'link-style',
+									link_label: block.settings.button_text,
+									link_url: block.settings.url,
+									link_style: block.settings.style_button,
+									link_target: block.settings.link_blank,
+									link_attributes: block.shopify_attributes
+								-%}
+							</div>
+						{% endif %}
+				{% endcase %}
+			{% endfor %}
+		</div>
+	</div>
+</div>
+
+{% schema %}
+	{
+		"name": "Ax richtext",
+		"tag": "section",
+		"class": "section",
+		"disabled_on": {
+			"groups": ["header", "footer"]
+		},
+		"settings": [
+			{
+				"type": "header",
+				"content": "Mise en page"
+			},
+			{
+				"type": "checkbox",
+				"id": "restricted_width",
+				"label": "Largeur restreinte",
+				"default": false
+			},
+			{
+				"type": "header",
+				"content": "Couleurs"
+			},
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "Color scheme de la section",
+				"default": "background-1"
+			},
+			{
+				"type": "color_scheme",
+				"id": "color_scheme_container",
+				"label": "Color scheme du conteneur",
+				"default": "background-1"
+			},
+			{
+				"type": "header",
+				"content": "Espacement intérieurs"
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding bottom",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding bottom",
+				"default": 0
+			},
+			{
+				"type": "header",
+				"content": "Espacement intérieurs (contenu)"
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_top_content",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_bottom_content",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding bottom",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_left_content",
+				"min": 0,
+				"max": 100,
+				"step": 2,
+				"unit": "px",
+				"label": "(Mobile) Padding left",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_right_content",
+				"min": 0,
+				"max": 100,
+				"step": 2,
+				"unit": "px",
+				"label": "(Mobile) Padding right",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_top_content",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_bottom_content",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding bottom",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_left_content",
+				"min": 0,
+				"max": 200,
+				"step": 2,
+				"unit": "px",
+				"label": "Padding left",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_right_content",
+				"min": 0,
+				"max": 200,
+				"step": 2,
+				"unit": "px",
+				"label": "Padding right",
+				"default": 0
+			},
+			{
+				"type": "header",
+				"content": "Espacement extérieurs"
+			},
+			{
+				"type": "range",
+				"id": "mob_margin_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Margin top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "mob_margin_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Margin bottom",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "margin_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Margin top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "margin_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Margin bottom",
+				"default": 0
+			}
+		],
+		"blocks": [
+			{
+				"type": "heading",
+				"name": "Titre",
+				"settings": [
+					{
+						"type": "richtext",
+						"id": "heading",
+						"label": "Titre",
+						"default": "<p>Titre</p>"
+					},
+					{
+						"type": "select",
+						"id": "heading_size",
+						"options": [
+							{
+								"value": "h3",
+								"label": "Petit"
+							},
+							{
+								"value": "h2",
+								"label": "Moyen"
+							}
+						],
+						"default": "h2",
+						"label": "t:sections.all.heading_size.label"
+					},
+					{
+						"type": "select",
+						"id": "heading_alignment",
+						"options": [
+							{
+								"value": "left",
+								"label": "Gauche"
+							},
+							{
+								"value": "center",
+								"label": "Centre"
+							},
+							{
+								"value": "right",
+								"label": "Droite"
+							}
+						],
+						"default": "left",
+						"label": "Alignement du titre"
+					}
+				]
+			},
+			{
+				"type": "text",
+				"name": "Texte",
+				"settings": [
+					{
+						"type": "richtext",
+						"id": "text",
+						"label": "Texte"
+					},
+					{
+						"type": "select",
+						"id": "text_alignment",
+						"options": [
+							{
+								"value": "left",
+								"label": "Gauche"
+							},
+							{
+								"value": "center",
+								"label": "Centre"
+							},
+							{
+								"value": "right",
+								"label": "Droite"
+							}
+						],
+						"default": "left",
+						"label": "Alignement du texte"
+					}
+				]
+			},
+			{
+				"type": "text_highlight",
+				"name": "Texte en gras",
+				"settings": [
+					{
+						"type": "richtext",
+						"id": "text",
+						"label": "Texte en gras",
+						"info": "Texte en gras et taille de typo légérement supérieure"
+					},
+					{
+						"type": "select",
+						"id": "text_alignment",
+						"options": [
+							{
+								"value": "left",
+								"label": "Gauche"
+							},
+							{
+								"value": "center",
+								"label": "Centre"
+							},
+							{
+								"value": "right",
+								"label": "Droite"
+							}
+						],
+						"default": "left",
+						"label": "Alignement du texte"
+					}
+				]
+			},
+			{
+				"type": "picto",
+				"name": "Picto",
+				"settings": [
+					{
+						"type": "image_picker",
+						"id": "picto",
+						"label": "Picto"
+					},
+					{
+						"type": "range",
+						"id": "picto_size",
+						"label": "Taille du picto (desktop)",
+						"min": 10,
+						"max": 200,
+						"step": 2,
+						"default": 24
+					},
+					{
+						"type": "range",
+						"id": "picto_size_mobile",
+						"label": "Taille du picto (mobile)",
+						"min": 10,
+						"max": 200,
+						"step": 2,
+						"default": 24
+					},
+					{
+						"type": "select",
+						"id": "picto_position",
+						"label": "Position du picto (desktop)",
+						"options": [
+							{
+								"value": "left",
+								"label": "Gauche"
+							},
+							{
+								"value": "right",
+								"label": "Droite"
+							}
+						],
+						"default": "left"
+					}
+				]
+			},
+			{
+				"type": "button",
+				"name": "Bouton",
+				"settings": [
+					{
+						"type": "text",
+						"id": "button_text",
+						"default": "Button label",
+						"label": "Texte du bouton"
+					},
+					{
+						"type": "url",
+						"id": "url",
+						"label": "Lien du bouton"
+					},
+					{
+						"type": "checkbox",
+						"id": "link_blank",
+						"label": "Lien _blank",
+						"info": "Ouvrir ce lien dans une nouvelle fenêtre",
+						"default": false
+					},
+					{
+						"type": "select",
+						"id": "style_button",
+						"options": [
+							{
+								"value": "button button--primary",
+								"label": "Primary"
+							},
+							{
+								"value": "button button--secondary",
+								"label": "Secondary"
+							},
+							{
+								"value": "ax-link",
+								"label": "Link"
+							},
+							{
+								"value": "ax-link reversed",
+								"label": "Link inversé"
+							},
+							{
+								"value": "underlined-link",
+								"label": "Underline link"
+							}
+						],
+						"default": "button button--primary",
+						"label": "Style du bouton"
+					},
+					{
+						"type": "select",
+						"id": "button_alignment",
+						"label": "Alignement du bouton",
+						"options": [
+							{
+								"value": "left",
+								"label": "Gauche"
+							},
+							{
+								"value": "center",
+								"label": "Centre"
+							},
+							{
+								"value": "right",
+								"label": "Droite"
+							}
+						],
+						"default": "left"
+					}
+				]
+			}
+		],
+		"presets": [
+			{
+				"name": "Ax richtext",
+				"blocks": []
+			}
+		]
+	}
+{% endschema %}

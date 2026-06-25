@@ -1,0 +1,433 @@
+{{ 'bundle.dropdown-product-info.css' | asset_url | stylesheet_tag }}
+
+<script>
+	window.assetsUrl.js.push({ dropdownProductInfo: "{{ 'bundle.dropdown-product-info.js' | asset_url }}" });
+</script>
+
+{%- style -%}
+	.section-{{ section.id }}-padding {
+		padding-top: {{ section.settings.mob_padding_top }}px;
+		padding-bottom: {{ section.settings.mob_padding_bottom }}px;
+		margin-top: {{ section.settings.mob_margin_top }}px;
+		margin-bottom: {{ section.settings.mob_margin_bottom }}px;
+	}
+
+	@media screen and (min-width: 750px) {
+	  .section-{{ section.id }}-padding {
+	    padding-top: {{ section.settings.padding_top }}px;
+	    padding-bottom: {{ section.settings.padding_bottom }}px;
+			margin-top: {{ section.settings.margin_top }}px;
+			margin-bottom: {{ section.settings.margin_bottom }}px;
+	  }
+	}
+{%- endstyle -%}
+
+{%- liquid
+	assign image = section.settings.image | default: blank
+	assign video = section.settings.video | default: blank
+	assign product_info = section.blocks | where: 'type', 'product_info' | first
+	assign product_details_metaob = section.blocks | where: 'type', 'product_details_metaob' | first
+	assign product_delivery_metaob = section.blocks | where: 'type', 'product_delivery_metaob' | first
+
+	if image == blank
+		assign image = images['details_bf020c93-834f-456b-9ca4-b096a26870b1.jpg']
+	endif
+-%}
+
+{% if product_info != blank
+	or product_details_metaob.settings.metaobject != blank
+	or product_delivery_metaob.settings.metaobject != blank
+	and image != blank
+	or video != blank
+%}
+	<div
+		class="product-info-dropdown gradient color-{{ section.settings.color_scheme }} section-{{ section.id }}-padding"
+		data-ax-section="dropdownProductInfo"
+	>
+		<div class="product-info-dropdown__wrapper">
+			<div class="product-info-dropdown__media">
+				<div class="media media--transparent">
+					{% if video != blank %}
+						{% capture media_video %}
+							{{
+								video
+								| video_tag:
+								autoplay: true,
+								muted: true,
+								loop: true,
+								controls: false,
+								preload: 'auto',
+								class: 'product-info-dropdown__video'
+							}}
+						{% endcapture %}
+						{{
+							media_video
+							| replace: 'src=', 'lazy-src='
+							| replace: 'srcset=', 'lazy-srcset='
+							| replace: 'class=', 'lazy-source class='
+						}}
+					{% else %}
+						{% if image != blank %}
+							{% capture media_image %}
+							{{ image | image_url: width: 1000 | image_tag: alt: image.alt }}
+						{% endcapture %}
+							{{ media_image | replace: 'src="', 'lazy-src="' | replace: 'srcset="', 'lazy-srcset="' }}
+						{% endif %}
+					{% endif %}
+				</div>
+			</div>
+			<div class="product-info-dropdown__content">
+				{% if product_details_metaob != blank or product_delivery_metaob != blank %}
+					{% if product_details_metaob != blank %}
+						<div class="product-info-dropdown__content-item" role="region">
+							{% assign heading_id = 'product-details-heading-' | append: section.id %}
+							<h2 id="{{ heading_id }}" class="product-info-dropdown__content-item-title h3">
+								{{ product_details_metaob.settings.heading }}
+							</h2>
+
+							{% for metaobject in product_details_metaob.settings.metaobject %}
+								{% assign dropdown_id = 'dropdown-' | append: section.id | append: '-' | append: i %}
+								<details class="product-info-dropdown__details details-animate">
+									<summary class="product-info-dropdown__summary" aria-controls="{{ dropdown_id }}">
+										{% assign summary_id = 'summary-' | append: section.id | append: '-' | append: i %}
+										<h3 id="{{ summary_id }}">{{- metaobject.titre_accordeon -}}</h3>
+										<div class="svg-wrapper" aria-hidden="true">
+											{{- 'icon-caret.svg' | inline_asset_content -}}
+										</div>
+									</summary>
+									<div
+										id="{{ dropdown_id }}"
+										class="product-info-dropdown__details-content details__content rte"
+										aria-labelledby="{{ summary_id }}"
+										role="region"
+									>
+										{{
+											metaobject.contenu_accordeon
+											| replace: '<h2', '<div class="h2"'
+											| replace: '</h2>', '</div>'
+											| replace: '<h3', '<div class="h3"'
+											| replace: '</h3>', '</div>'
+											| replace: '<h4', '<div class="h4"'
+											| replace: '</h4>', '</div>'
+											| replace: '<h5', '<div class="h5"'
+											| replace: '</h5>', '</div>'
+											| replace: '<h6', '<div class="h6"'
+											| replace: '</h6>', '</div>'
+										}}
+									</div>
+								</details>
+							{% endfor %}
+						</div>
+					{% endif %}
+
+					{% if product_delivery_metaob != blank %}
+						<div class="product-info-dropdown__content-item" role="region">
+							{% assign heading_id = 'product-info-heading-' | append: section.id %}
+							<h2 id="{{ heading_id }}" class="product-info-dropdown__content-item-title h3">
+								{{ product_delivery_metaob.settings.heading }}
+							</h2>
+
+							{% for metaobject in product_delivery_metaob.settings.metaobject %}
+								{% assign dropdown_id = 'dropdown-' | append: section.id | append: '-' | append: i %}
+								<details class="product-info-dropdown__details details-animate">
+									<summary class="product-info-dropdown__summary" aria-controls="{{ dropdown_id }}">
+										{% assign summary_id = 'summary-' | append: section.id | append: '-' | append: i %}
+										<h3 id="{{ summary_id }}">{{- metaobject.titre_accordeon -}}</h3>
+										<div class="svg-wrapper" aria-hidden="true">
+											{{- 'icon-caret.svg' | inline_asset_content -}}
+										</div>
+									</summary>
+									<div
+										id="{{ dropdown_id }}"
+										class="product-info-dropdown__details-content details__content"
+										aria-labelledby="{{ summary_id }}"
+										role="region"
+									>
+										{{-
+											metaobject.contenu_accordeon
+											| replace: '<h2', '<div class="h2"'
+											| replace: '</h2>', '</div>'
+											| replace: '<h3', '<div class="h3"'
+											| replace: '</h3>', '</div>'
+											| replace: '<h4', '<div class="h4"'
+											| replace: '</h4>', '</div>'
+											| replace: '<h5', '<div class="h5"'
+											| replace: '</h5>', '</div>'
+											| replace: '<h6', '<div class="h6"'
+											| replace: '</h6>', '</div>'
+										-}}
+									</div>
+								</details>
+							{% endfor %}
+						</div>
+					{% endif %}
+
+				{% else %}
+					{% for block in section.blocks %}
+						{% if block.type == 'product_info' %}
+							<div class="product-info-dropdown__content-item" role="region">
+								{% assign heading_id = 'product-info-heading-' | append: section.id %}
+								<h2 id="{{ heading_id }}" class="product-info-dropdown__content-item-title h3">
+									{{ block.settings.heading }}
+								</h2>
+
+								{% for i in (1..3) %}
+									{% assign dropdown_title = 'dropdown_title_' | append: i %}
+									{% assign dropdown_content = 'dropdown_content_' | append: i %}
+									{% assign dropdown_id = 'dropdown-' | append: section.id | append: '-' | append: i %}
+
+									{% if block.settings[dropdown_title] != blank and block.settings[dropdown_content] != blank %}
+										<details class="product-info-dropdown__details details-animate">
+											<summary class="product-info-dropdown__summary" aria-controls="{{ dropdown_id }}">
+												{% assign summary_id = 'summary-' | append: section.id | append: '-' | append: i %}
+												<h3 id="{{ summary_id }}">{{- block.settings[dropdown_title] -}}</h3>
+												<div class="svg-wrapper" aria-hidden="true">
+													{{- 'icon-caret.svg' | inline_asset_content -}}
+												</div>
+											</summary>
+											<div
+												id="{{ dropdown_id }}"
+												class="product-info-dropdown__details-content details__content"
+												aria-labelledby="{{ summary_id }}"
+												role="region"
+											>
+												{{- block.settings[dropdown_content] -}}
+											</div>
+										</details>
+									{% endif %}
+								{% endfor %}
+							</div>
+						{% endif %}
+					{% endfor %}
+				{% endif %}
+			</div>
+		</div>
+	</div>
+{% endif %}
+{% schema %}
+	{
+		"name": "Ax accordéons infos",
+		"tag": "section",
+		"class": "section",
+		"enabled_on": {
+			"templates": ["product"]
+		},
+		"settings": [
+			{
+				"type": "header",
+				"content": "Média de la section"
+			},
+			{
+				"type": "image_picker",
+				"id": "image",
+				"label": "Image"
+			},
+			{
+				"type": "video",
+				"id": "video",
+				"label": "Vidéo"
+			},
+			{
+				"type": "header",
+				"content": "Color"
+			},
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "Color scheme",
+				"default": "background-1"
+			},
+			{
+				"type": "header",
+				"content": "Marges externes"
+			},
+			{
+				"type": "range",
+				"id": "mob_margin_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Margin top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "mob_margin_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Margin bottom",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "margin_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Margin top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "margin_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Margin bottom",
+				"default": 0
+			},
+			{
+				"type": "header",
+				"content": "Marges internes"
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding bottom",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding bottom",
+				"default": 0
+			}
+		],
+		"blocks": [
+			{
+				"type": "product_info",
+				"name": "Informations produit",
+				"settings": [
+					{
+						"type": "text",
+						"id": "heading",
+						"label": "Titre",
+						"default": "Informations produit"
+					},
+					{
+						"type": "header",
+						"content": "Accordéon 1"
+					},
+					{
+						"type": "text",
+						"id": "dropdown_title_1",
+						"label": "Titre de l'accordéon 1",
+						"default": "Titre de l'accordéon 1"
+					},
+					{
+						"type": "richtext",
+						"id": "dropdown_content_1",
+						"label": "Contenu de l'accordéon 1"
+					},
+					{
+						"type": "header",
+						"content": "Accordéon 2"
+					},
+					{
+						"type": "text",
+						"id": "dropdown_title_2",
+						"label": "Titre de l'accordéon 2",
+						"default": "Titre de l'accordéon 2"
+					},
+					{
+						"type": "richtext",
+						"id": "dropdown_content_2",
+						"label": "Contenu de l'accordéon 2"
+					},
+					{
+						"type": "header",
+						"content": "Accordéon 3"
+					},
+					{
+						"type": "text",
+						"id": "dropdown_title_3",
+						"label": "Titre de l'accordéon 3",
+						"default": "Titre de l'accordéon 3"
+					},
+					{
+						"type": "richtext",
+						"id": "dropdown_content_3",
+						"label": "Contenu de l'accordéon 3"
+					}
+				]
+			},
+			{
+				"type": "product_details_metaob",
+				"name": "Détails (meta)",
+				"limit": 1,
+				"settings": [
+					{
+						"type": "text",
+						"id": "heading",
+						"label": "Titre",
+						"default": "Détails"
+					},
+					{
+						"type": "metaobject_list",
+						"id": "metaobject",
+						"label": "Metaobjet",
+						"metaobject_type": "fiche_technique_details_produit"
+					}
+				]
+			},
+			{
+				"type": "product_delivery_metaob",
+				"name": "Livraison/retours (meta)",
+				"limit": 1,
+				"settings": [
+					{
+						"type": "text",
+						"id": "heading",
+						"label": "Titre",
+						"default": "Livraison et retour"
+					},
+					{
+						"type": "metaobject_list",
+						"id": "metaobject",
+						"label": "Metaobjet",
+						"metaobject_type": "fiche_technique_livraison_retour"
+					}
+				]
+			}
+		],
+		"presets": [
+			{
+				"name": "Ax accordéons infos",
+				"blocks": []
+			}
+		]
+	}
+{% endschema %}

@@ -1,0 +1,227 @@
+{%- liquid
+	assign articles_with_common_tags_count = 0
+	assign featured_blog_articles = ''
+	assign available_articles_ids = ''
+
+	if blog != blank and blog.articles_count > 0
+		# Boucle 1 : Reproduire ax-featured-blog + Préparer les articles disponibles
+		assign featured_count = 0
+		for blog_article in blog.articles
+			if blog_article.id != article.id
+				if featured_count < 3
+					assign featured_count = featured_count | plus: 1
+					assign featured_blog_articles = featured_blog_articles | append: blog_article.id | append: ','
+				else
+					# Vérifier tags communs seulement pour les articles après les 3 premiers
+					assign has_common_tag = false
+					for current_tag in article.tags
+						if blog_article.tags contains current_tag
+							assign has_common_tag = true
+							break
+						endif
+					endfor
+					if has_common_tag
+						assign articles_with_common_tags_count = articles_with_common_tags_count | plus: 1
+						assign available_articles_ids = available_articles_ids | append: blog_article.id | append: ','
+					endif
+				endif
+			endif
+		endfor
+	endif
+-%}
+
+{% if blog != blank and blog.articles_count > 0 and articles_with_common_tags_count > 0 %}
+	{{ 'bundle.featured-blog-tag.css' | asset_url | stylesheet_tag }}
+
+	<script>
+		window.assetsUrl.js.push({"featuredBlogTag": "{{ "bundle.featured-blog-tag.js" | asset_url }}"});
+	</script>
+
+	{%- style -%}
+		.section-{{ section.id }}-padding {
+		  padding-top: {{ section.settings.mob_padding_top }}px;
+		  padding-bottom: {{ section.settings.mob_padding_bottom }}px;
+		}
+
+		@media screen and (min-width: 750px) {
+		  .section-{{ section.id }}-padding {
+		    padding-top: {{ section.settings.padding_top }}px;
+		    padding-bottom: {{ section.settings.padding_bottom }}px;
+		  }
+		}
+	{%- endstyle -%}
+
+	<div data-ax-section="featuredBlogTag">
+		<div class="featured-blog-tag color-{{ section.settings.color_scheme }} gradient">
+			<div class="page-width page-width--narrow section-{{ section.id }}-padding isolate{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+				{% if section.settings.heading != blank %}
+					{%- render 'section-heading',
+						heading: section.settings.heading,
+						heading_size: 'h3',
+						text_alignment: 'left'
+					-%}
+				{% endif %}
+				<featured-blog-tag>
+					<!-- Articles toujours visibles (3 premiers avec même tag) -->
+					<ul class="featured-blog-tag__list featured-blog-tag__list--preview list-unstyled">
+						{%- assign articles_count = 0 -%}
+						{%- for blog_article in blog.articles -%}
+							{%- if blog_article.id != article.id and articles_count < 3 -%}
+								{%- assign article_id_string = blog_article.id | append: ',' -%}
+								{%- if available_articles_ids contains article_id_string -%}
+									{%- assign articles_count = articles_count | plus: 1 -%}
+									<li class="featured-blog-tag__item">
+										<a href="{{ blog_article.url }}" class="featured-blog-tag__link">
+											{{ blog_article.title }}
+										</a>
+									</li>
+								{%- endif -%}
+							{%- endif -%}
+						{%- endfor -%}
+					</ul>
+
+					<!-- Comptage des articles avec même tag pour le "Voir plus" -->
+					{%- assign more_articles_count = 0 -%}
+					{%- for blog_article in blog.articles -%}
+						{%- if blog_article.id != article.id -%}
+							{%- assign has_common_tag = false -%}
+							{%- for current_tag in article.tags -%}
+								{%- if blog_article.tags contains current_tag -%}
+									{%- assign has_common_tag = true -%}
+									{%- break -%}
+								{%- endif -%}
+							{%- endfor -%}
+							{%- if has_common_tag -%}
+								{%- assign more_articles_count = more_articles_count | plus: 1 -%}
+							{%- endif -%}
+						{%- endif -%}
+					{%- endfor -%}
+
+					{%- if more_articles_count > 3 -%}
+						{% assign dropdown_id = 'dropdown-' | append: section.id %}
+						{% assign summary_id = 'summary-' | append: section.id %}
+
+						<details class="featured-blog-tag__details details-animate">
+							<summary
+								class="featured-blog-tag__summary"
+								aria-controls="{{ dropdown_id }}"
+								id="{{ summary_id }}"
+								tabindex="0"
+							>
+								<span class="featured-blog-tag__summary-text ax-link reversed">
+									<span class="featured-blog-tag__summary-more">Voir plus</span>
+									<span class="featured-blog-tag__summary-less">Voir moins</span>
+								</span>
+							</summary>
+							<div
+								id="{{ dropdown_id }}"
+								class="featured-blog-tag__content details__content"
+								aria-labelledby="{{ summary_id }}"
+								role="region"
+							>
+								<ul class="featured-blog-tag__list featured-blog-tag__list--expanded list-unstyled">
+									{%- assign articles_count = 0 -%}
+									{%- for blog_article in blog.articles -%}
+										{%- if blog_article.id != article.id -%}
+											{%- assign article_id_string = blog_article.id | append: ',' -%}
+											{%- if available_articles_ids contains article_id_string -%}
+												{%- assign articles_count = articles_count | plus: 1 -%}
+												{%- if articles_count > 3 -%}
+													<li class="featured-blog-tag__item">
+														<a href="{{ blog_article.url }}" class="featured-blog-tag__link">
+															{{ blog_article.title }}
+														</a>
+													</li>
+												{%- endif -%}
+											{%- endif -%}
+										{%- endif -%}
+									{%- endfor -%}
+								</ul>
+							</div>
+						</details>
+					{%- endif -%}
+				</featured-blog-tag>
+			</div>
+		</div>
+	</div>
+{% endif %}
+
+{% schema %}
+	{
+		"name": "Ax featured Blog Tag",
+		"tag": "section",
+		"class": "section ax-section featured-blog-tag",
+		"enabled_on": {
+			"templates": ["article"]
+		},
+		"settings": [
+			{
+				"type": "header",
+				"content": "Contenu"
+			},
+			{
+				"type": "richtext",
+				"id": "heading",
+				"label": "Titre",
+				"default": "<p>Mais aussi :</p>"
+			},
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "Color scheme",
+				"default": "background-1"
+			},
+			{
+				"type": "header",
+				"content": "Padding (space)"
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding bottom",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding bottom",
+				"default": 0
+			}
+		],
+		"presets": [
+			{
+				"name": "Ax featured Blog Tag",
+				"category": "Axome",
+				"settings": {}
+			}
+		]
+	}
+{% endschema %}

@@ -1,0 +1,76 @@
+<div class="product-bundle-details-items__container">
+	{%- liquid
+		assign product_bundle = product.metafields.custom.combined_listings_produit_parent.value
+		if product_bundle != blank
+			assign product_bundle_id = product_bundle.id
+		else
+			assign product_bundle_id = product.id
+		endif
+	-%}
+	<modal-opener
+		class="modal-dialog__opener product-bundle-details-opener__button"
+		data-modal="#BundleDetails-{{ product_bundle_id }}"
+	>
+		<button
+			id="BundleDetailsOpener-{{ product_bundle_id }}"
+			class="modal-dialog__button button--reset ax-link reversed"
+			type="button"
+			aria-haspopup="dialog"
+		>
+			<span class="product-bundle-details-opener__button-text">{{ 'products.product.bundle_details_title' | t }}</span>
+		</button>
+	</modal-opener>
+	<product-bundle-details-items
+		id="BundleDetails-{{ product_bundle_id }}"
+		class="modal-dialog"
+		data-money-format="{{ shop.money_format }}"
+		data-sale-badge-color-scheme="{{ settings.sale_badge_color_scheme }}"
+	>
+		<div
+			role="dialog"
+			aria-label="Détails"
+			aria-modal="true"
+			class="modal-dialog__content product-bundle-details-popup"
+			tabindex="-1"
+		>
+			<button
+				id="BundleDetailsClose-{{ product_bundle_id }}"
+				type="button"
+				class="modal-dialog__toggle button--reset"
+				aria-label="{{ 'accessibility.close' | t }}"
+			>
+				{{- 'icon-close.svg' | inline_asset_content -}}
+			</button>
+			<div class="product-bundle-details__content">
+				<div class="product-bundle-details__header">
+					<h2 class="product-bundle-details__title">{{ 'products.product.bundle_details_title' | t }}</h2>
+				</div>
+				<div class="product-bundle-details__body">
+					<div class="product-bundle-details__items">
+						<!-- Les items du bundle seront ajoutés dynamiquement ici -->
+					</div>
+					<div class="product-bundle-details__separator"></div>
+					<div class="product-bundle-details__total">
+						<!-- Le total sera ajouté dynamiquement ici -->
+					</div>
+				</div>
+
+				<!-- Template pour les items -->
+				<template class="product-bundle-details__item-template">
+					<div class="product-bundle-details__item">
+						<div class="product-bundle-details__item-info">
+							<span class="product-bundle-details__item-name"></span>
+						</div>
+						<div class="product-bundle-details__item-pricing">
+							<span class="product-bundle-details__item-price-discount"></span>
+							<span class="product-bundle-details__item-price"></span>
+							<span class="product-bundle-details__item-original-price"></span>
+							<span class="product-bundle-details__item-compare-at-price"></span>
+							<span class="product-bundle-details__item-savings"></span>
+						</div>
+					</div>
+				</template>
+			</div>
+		</div>
+	</product-bundle-details-items>
+</div>

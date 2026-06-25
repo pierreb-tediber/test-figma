@@ -1,0 +1,43 @@
+{%- comment -%}
+	Renders the info tooltip used in the versus-comparator section.
+
+	Accepts:
+	- content: richtext — tooltip content
+	- image: image_picker — optional image shown in the tooltip
+	- variant: 'inline' to reduce the icon size (12px) for inline use (e.g. after a subtitle)
+	- cs_class: optional ContentSquare tracking class appended to the trigger span
+{%- endcomment -%}
+
+{%- comment -%}
+	The whole tooltip is wrapped in a <span> so it can be inlined inside an rte <p>. Rich-text
+	`content` from the editor often comes wrapped in <p>...</p> tags — those <p> blocks would
+	break the parent inline flow (browsers auto-close the outer <p> when they meet a <p> inside
+	a <span>). We strip the outer <p> wrappers and turn line breaks into <br> so the tooltip
+	stays valid inline HTML.
+{%- endcomment -%}
+{%- if content != blank -%}
+	{%- liquid
+		# Strip <p> wrappers and turn paragraph breaks into <br> so a single inline string remains.
+		assign tooltip_text = content | replace: '<p>', '' | replace: '</p>', '<br>'
+		# Trim trailing <br> left over from the final </p> (Liquid has no replace_last filter).
+		assign tooltip_tail = tooltip_text | slice: -4, 4
+		if tooltip_tail == '<br>'
+			assign tooltip_text_len = tooltip_text.size | minus: 4
+			assign tooltip_text = tooltip_text | slice: 0, tooltip_text_len
+		endif
+	-%}
+	<span
+		class="tooltip ax-versus-comparator__tooltip{% if variant == 'inline' %} ax-versus-comparator__tooltip--inline{% endif %}{% if cs_class != blank %} {{ cs_class }}{% endif %}"
+		tabindex="0"
+		role="button"
+		aria-describedby=""
+	>
+		{{- 'icon-info.svg' | inline_asset_content -}}
+		<span class="tooltip-content" role="tooltip">
+			{%- if image != blank -%}
+				{{ image | image_url: height: 80 | image_tag: loading: 'lazy', alt: '' }}
+			{%- endif -%}
+			<span class="ax-versus-comparator__tooltip-text">{{ tooltip_text }}</span>
+		</span>
+	</span>
+{%- endif -%}

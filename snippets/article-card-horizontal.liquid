@@ -1,0 +1,50 @@
+{% comment %}
+	Renders an article card for a given blog with settings to either show the image or not.
+
+	Accepts:
+	- blog: {Object} Blog object
+	- article: {Object} Article object
+	- color_scheme: {String} The color scheme of the card
+	- truncate: {Number} The number of words to truncate the excerpt to
+	- no_hn: {Boolean} If true, the heading will not have a hn style
+	Usage:
+	{% render 'article-card-horizontal' blog: blog, article: article %}
+{% endcomment %}
+
+{%- if article and article != empty -%}
+	{%- liquid
+		assign card_article_tag = 'h3'
+
+		if template.name == 'blog'
+			assign card_article_tag = 'h2'
+		endif
+
+		if no_hn
+			assign card_article_tag = 'div'
+		endif
+	-%}
+
+	<div class="article-card-horizontal {% if color_scheme != blank %} gradient color-{{ color_scheme }}{% endif %}">
+		<div class="article-card-horizontal__content">
+			<a href="{{ article.url }}" class="full-unstyled-link">
+				<div class="article-card-horizontal__information">
+					<div class="article-card-horizontal__heading-wrapper">
+						<{{ card_article_tag }} class="article-card-horizontal__heading">
+							{{ article.title | truncate: 70 | escape }}
+						</{{ card_article_tag }}>
+					</div>
+					<div class="article-card-horizontal__excerpt rte-width">
+						{% if article.excerpt.size > 0 %}
+							{{ article.excerpt | strip_html | truncatewords: truncate }}
+						{% else %}
+							{{ article.content | strip_html | truncatewords: truncate }}
+						{% endif %}
+					</div>
+					<span class="ax-link reversed">
+						{{ 'blogs.article.read_more' | t }}
+					</span>
+				</div>
+			</a>
+		</div>
+	</div>
+{%- endif -%}

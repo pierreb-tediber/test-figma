@@ -1,0 +1,76 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-404",
+      "disabled": true,
+      "custom_css": [],
+      "settings": {}
+    },
+    "custom_liquid_HCYnkK": {
+      "type": "custom-liquid",
+      "custom_css": [
+        "img {width: clamp(12em, 24vw, 20%);}"
+      ],
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<center><img src=\"https://cdn.shopify.com/s/files/1/0903/1342/5220/files/clock_404.svg?v=1754580513\"></center>",
+        "color_scheme": "scheme-3",
+        "padding_top": 100,
+        "padding_bottom": 20
+      }
+    },
+    "rich_text_H6rgL4": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_VAfyBz": {
+          "type": "heading",
+          "settings": {
+            "heading": "Il semblerait que vous soyez perdu dans un rêve...",
+            "heading_size": "h2"
+          }
+        },
+        "button_yzEhrF": {
+          "type": "button",
+          "settings": {
+            "button_label": "Retourner à l'accueil",
+            "button_link": "/",
+            "button_style_secondary": true,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_VAfyBz",
+        "button_yzEhrF"
+      ],
+      "custom_css": [
+        ".h2 {padding: 0% 10% 24px 10%; line-height: clamp(1.2em, 4vw, 48px);}"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-3",
+        "full_width": true,
+        "padding_top_desktop": 52,
+        "padding_bottom_desktop": 100
+      }
+    }
+  },
+  "order": [
+    "main",
+    "custom_liquid_HCYnkK",
+    "rich_text_H6rgL4"
+  ]
+}

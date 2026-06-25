@@ -1,0 +1,336 @@
+{% if section.settings.product_list != blank %}
+	{{ 'bundle.featured-products.css' | asset_url | stylesheet_tag }}
+
+	<script>
+		window.assetsUrl.js.push({ featuredProducts: "{{ 'bundle.featured-products.js' | asset_url }}" });
+	</script>
+
+	{%- style -%}
+		#shopify-section-{{ section.id }} {
+			overflow: hidden;
+		}
+		.section-{{ section.id }}-padding {
+			padding-top: {{ section.settings.mob_padding_top }}px;
+			padding-bottom: {{ section.settings.mob_padding_bottom }}px;
+		}
+
+		@media screen and (min-width: 750px) {
+			.section-{{ section.id }}-padding {
+				padding-top: {{ section.settings.padding_top }}px;
+				padding-bottom: {{ section.settings.padding_bottom }}px;
+			}
+		}
+	{%- endstyle -%}
+
+	{% capture swiper-options %}
+	{
+	"slideInView": "auto",
+	"slidesToMove": 1,
+	"loop": false,
+	"effect": "slide",
+	"autoplay": false,
+	"freeModeMobile": false,
+	"speed": 300,
+	"stackMobile": {{ section.settings.stack_mobile }}
+	}
+{% endcapture %}
+
+	{%- liquid
+		assign push = section.blocks | where: 'type', 'push' | first
+		assign lazy_load = false
+
+		if section.index > 2
+			assign lazy_load = true
+		endif
+
+		assign product_grid_class = 'grid--1-7-col grid--2-col-tablet grid--4-col-desktop'
+
+		if section.settings.stack_mobile
+			assign product_grid_class = product_grid_class | replace: 'grid--1-7-col', 'grid--2-col'
+		else
+
+		endif
+	-%}
+
+	{%- if push != blank and push.settings.metaobject != blank -%}
+		{% liquid
+			assign push_position = push.settings.position
+			assign display_index = 1
+			assign product_grid_class = product_grid_class | replace: 'grid--1-7-col', 'grid--2-col'
+			assign push_in_products = push.settings.push_in_products
+			assign reverse_mobile = false
+
+			if push_in_products
+				assign product_grid_class = product_grid_class | replace: 'grid--4-col-desktop', 'grid--5-col-desktop'
+			endif
+
+			if push_in_products == false and push_position == 'right'
+				assign reverse_mobile = true
+			endif
+		%}
+		{% capture push_content %}
+			{% render 'product-list-push',
+				push: push.settings.metaobject,
+				lazy_load: lazy_load,
+				list: push.settings.push_in_products
+			%}
+		{% endcapture %}
+	{%- endif -%}
+
+	<div
+		class="featured-products gradient color-{{ section.settings.color_scheme }} section-{{ section.id }}-padding"
+		data-ax-section="featuredProducts"
+	>
+		<featured-products
+			class="{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+		>
+			{% if section.settings.heading != blank %}
+				<div class="page-width">
+					{% render 'section-heading', heading: section.settings.heading, heading_size: 'h2', text_alignment: 'center' %}
+				</div>
+			{% endif %}
+			<div class="featured-products__wrapper{% if reverse_mobile %} reverse-mobile{% endif %}">
+				{% if push_content != blank and push_in_products == false and push_position == 'left' %}
+					<div class="featured-products__push">
+						{{ push_content }}
+					</div>
+				{% endif %}
+
+				<div class="page-width">
+					<div
+						id="Swiper-{{ section.id }}"
+						class="swiper{% if section.settings.stack_mobile %} stack-mobile{% endif %}"
+						data-options="{{ swiper-options | escape }}"
+						aria-roledescription="carousel"
+						aria-label="{{ 'accessibility.featured_products.carousel' | t }}"
+					>
+						<ul
+							class="swiper-wrapper grid product-grid {{ product_grid_class }}{% if push_in_products %} product-list__push--in{% endif %}"
+							role="list"
+							aria-live="polite"
+						>
+							{%- liquid
+								if push_content != blank and push_in_products
+									if push_position == 'left'
+										echo push_content
+									endif
+								endif
+							-%}
+							{% for product in section.settings.product_list %}
+								{%- liquid
+									assign skip_card_product_styles = false
+									assign display_index = forloop.index | plus: 1
+									# Vérifie si le produit est masqué via metafield seo.hidden
+									if product.metafields.seo.hidden.value == 1
+										continue
+									endif
+								-%}
+								<li
+									class="swiper-slide grid__item"
+									role="group"
+									aria-roledescription="slide"
+									aria-label="{{ 'accessibility.product.label' | t }}: {{ product.title }}"
+									data-index="{{ display_index }}"
+								>
+									{% render 'card-product',
+										card_product: product,
+										media_aspect_ratio: 'portrait',
+										image_shape: 'default',
+										show_secondary_image: true,
+										show_vendor: false,
+										show_rating: false,
+										skip_styles: skip_card_product_styles,
+										lazy_load: true
+									%}
+								</li>
+								{%- assign skip_card_product_styles = true -%}
+							{% endfor %}
+
+							{% liquid
+								if push_content != blank and push_in_products
+									if push_position == 'right'
+										echo push_content
+									endif
+								endif
+							%}
+						</ul>
+					</div>
+
+					{% if section.settings.button_text != blank and section.settings.button_url != blank %}
+						<div class="featured-products__button center">
+							{%- render 'link-style',
+								link_label: section.settings.button_text,
+								link_url: section.settings.button_url,
+								link_style: 'button button--primary',
+								link_target: section.settings.link_blank,
+								link_attributes: section.shopify_attributes
+							-%}
+						</div>
+					{% endif %}
+				</div>
+
+				{% if push_content != blank and push_in_products == false and push_position == 'right' %}
+					<div class="featured-products__push">
+						{{ push_content }}
+					</div>
+				{% endif %}
+			</div>
+		</featured-products>
+	</div>
+{% endif %}
+
+{% schema %}
+	{
+		"name": "Ax featured products",
+		"tag": "section",
+		"class": "section",
+		"disabled_on": {
+			"groups": ["header", "footer"]
+		},
+		"settings": [
+			{
+				"type": "header",
+				"content": "Contenu"
+			},
+			{
+				"type": "richtext",
+				"id": "heading",
+				"label": "Titre"
+			},
+			{
+				"type": "text",
+				"id": "button_text",
+				"label": "Texte du bouton"
+			},
+			{
+				"type": "url",
+				"id": "button_url",
+				"label": "URL du bouton"
+			},
+			{
+				"type": "checkbox",
+				"id": "link_blank",
+				"label": "Ouvrir le lien dans un nouvel onglet",
+				"default": false
+			},
+			{
+				"type": "header",
+				"content": "Produits"
+			},
+			{
+				"type": "product_list",
+				"id": "product_list",
+				"label": "Produits"
+			},
+			{
+				"type": "header",
+				"content": "Mise en page"
+			},
+			{
+				"type": "checkbox",
+				"id": "stack_mobile",
+				"label": "Empiler les produits sur mobile",
+				"default": false
+			},
+			{
+				"type": "header",
+				"content": "Color"
+			},
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "Color scheme",
+				"default": "background-1"
+			},
+			{
+				"type": "header",
+				"content": "Padding (space)"
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding bottom",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding bottom",
+				"default": 0
+			}
+		],
+		"blocks": [
+			{
+				"type": "push",
+				"name": "Push",
+				"limit": 1,
+				"settings": [
+					{
+						"type": "header",
+						"content": "Contenu"
+					},
+					{
+						"type": "metaobject",
+						"id": "metaobject",
+						"label": "Push",
+						"metaobject_type": "push_collection"
+					},
+					{
+						"type": "header",
+						"content": "Mise en page"
+					},
+					{
+						"type": "select",
+						"id": "position",
+						"label": "Position",
+						"options": [
+							{ "value": "left", "label": "Gauche" },
+							{ "value": "right", "label": "Droite" }
+						],
+						"default": "left"
+					},
+					{
+						"type": "checkbox",
+						"id": "push_in_products",
+						"label": "Afficher le push dans la liste des produits",
+						"default": false
+					}
+				]
+			}
+		],
+		"presets": [
+			{
+				"name": "Ax featured products",
+				"blocks": []
+			}
+		]
+	}
+{% endschema %}

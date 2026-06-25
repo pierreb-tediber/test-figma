@@ -1,0 +1,35 @@
+{%- if section.settings.menu != blank -%}
+	<nav
+		class="mega-menu-seo-links visually-hidden"
+		aria-hidden="true"
+		role="navigation"
+		aria-label="{{ section.settings.menu.title }}"
+	>
+		<div class="visually-hidden">{{ section.settings.menu.title }}</div>
+		<ul class="list-unstyled" role="menu">
+			{%- for link in section.settings.menu.links -%}
+				<li role="presentation">
+					<a href="{{ link.url }}" role="menuitem">{{ link.title }}</a>
+					{%- if link.links != blank -%}
+						<ul class="list-unstyled" role="menu" aria-label="{{ link.title }}">
+							{%- for childlink in link.links -%}
+								<li role="presentation">
+									<a href="{{ childlink.url }}" role="menuitem">{{ childlink.title }}</a>
+									{%- if childlink.links != blank -%}
+										<ul class="list-unstyled" role="menu" aria-label="{{ childlink.title }}">
+											{%- for grandchildlink in childlink.links -%}
+												<li role="presentation">
+													<a href="{{ grandchildlink.url }}" role="menuitem">{{ grandchildlink.title }}</a>
+												</li>
+											{%- endfor -%}
+										</ul>
+									{%- endif -%}
+								</li>
+							{%- endfor -%}
+						</ul>
+					{%- endif -%}
+				</li>
+			{%- endfor -%}
+		</ul>
+	</nav>
+{%- endif -%}

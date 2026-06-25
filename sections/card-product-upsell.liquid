@@ -1,0 +1,51 @@
+{%- liquid
+	# theme-check-disable
+	capture content_for_query_string
+		echo content_for_header
+	endcapture
+	assign get_url = content_for_query_string | split: '"pageurl":"' | last | split: '"' | first | split: '.myshopify.com' | last | replace: '\/', '/' | replace: '%20', ' ' | replace: '\u0026', '&' | split: '?' | last
+	# theme-check-enable
+
+	assign card_upsell = product
+	assign product_form_id = 'product-form-' | append: product.id
+
+	# Si l'URL contient 'section_id' ou 'sections', désactive le chargement paresseux
+	if get_url contains 'section_id=card-product-upsell'
+		# Parser les paramètres de l'URL
+		assign url_params = get_url | split: '&'
+
+		# Initialiser les variables
+		assign parent_product_id = ''
+		assign parent_option_value_matching_color = ''
+		assign parent_option_value_matching_size = ''
+		# Extraire chaque paramètre
+		for param in url_params
+			assign param_parts = param | split: '='
+			assign param_name = param_parts[0]
+			assign param_value = param_parts[1] | url_decode | default: ''
+
+			case param_name
+				when 'parentProductId'
+					assign parent_product_id = param_value
+				when 'matchingWithColor'
+					if param_value == 'true'
+						assign matching_with_color = true
+					else
+						assign matching_with_color = false
+					endif
+				when 'matchingWithSize'
+					if param_value == 'true'
+						assign matching_with_size = true
+					else
+						assign matching_with_size = false
+					endif
+				when 'parentOptionValueColor'
+					assign parent_option_value_matching_color = param_value
+				when 'parentOptionValueSize'
+					assign parent_option_value_matching_size = param_value
+			endcase
+		endfor
+	endif
+-%}
+
+{%- render 'card-product-upsell', card_upsell: card_upsell, product_form_id: product_form_id, get_url: get_url, is_variant: false, parent_product_id: parent_product_id, matching_with_color: matching_with_color, matching_with_size: matching_with_size, parent_option_value_matching_color: parent_option_value_matching_color, parent_option_value_matching_size: parent_option_value_matching_size -%}

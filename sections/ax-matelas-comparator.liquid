@@ -1,0 +1,661 @@
+{% comment %}
+	Section de comparaison de produits avec notes et sticky headers
+{% endcomment %}
+
+{%- liquid
+	assign products_to_compare = section.settings.products_to_compare
+	assign total_products_count = products_to_compare.size
+
+	# Find current product's column index (1-based) if on a product page
+	assign current_product_column = 0
+	if template.name == 'product' and product != blank and products_to_compare != blank
+		assign col_idx = 1
+		for p in products_to_compare
+			if p.id == product.id
+				assign current_product_column = col_idx
+				break
+			endif
+			assign col_idx = col_idx | plus: 1
+		endfor
+	endif
+-%}
+
+{%- comment -%}
+	═══════════════════════════════════════════════════════════════════════
+	CHARACTERISTICS COLLECTION & ORDERING
+	═══════════════════════════════════════════════════════════════════════
+	Collect characteristics based on the selected mode:
+	- caracteristics_products: From first product's metafield liste_des_caracteristiques_du_matelas
+	- blocks: From section blocks of type 'row'
+	- metafield_products: From first product's metafield caracteristiques_a_comparer
+{%- endcomment -%}
+
+{%- liquid
+	assign all_caracteristiques = ''
+	assign caracteristiques_array = ''
+	assign rows_mode = section.settings.rows | default: 'caracteristics_products'
+
+	# Determine reference product (first in the list)
+	assign reference_product = blank
+	if products_to_compare != blank
+		for p in products_to_compare
+			assign reference_product = p
+			break
+		endfor
+	endif
+
+	# MODE 1: Automatic - from first product's caracteristiques metafield (list of metaobjects)
+	if rows_mode == 'caracteristics_products'
+		assign metaobjects_list = reference_product.metafields.custom.liste_des_caracteristiques_du_matelas.value
+		for caracteristique in metaobjects_list
+			assign label_value = caracteristique.label
+			if label_value != blank
+				unless all_caracteristiques contains label_value
+					if all_caracteristiques == ''
+						assign all_caracteristiques = label_value
+					else
+						assign all_caracteristiques = all_caracteristiques | append: '|||' | append: label_value
+					endif
+				endunless
+			endif
+		endfor
+		assign caracteristiques_array = all_caracteristiques | split: '|||'
+
+	# MODE 2: Manual - from section blocks
+	elsif rows_mode == 'blocks'
+		for block in section.blocks
+			if block.type == 'row' and block.settings.label != blank
+				if all_caracteristiques == ''
+					assign all_caracteristiques = block.settings.label
+				else
+					assign all_caracteristiques = all_caracteristiques | append: '|||' | append: block.settings.label
+				endif
+			endif
+		endfor
+		assign caracteristiques_array = all_caracteristiques | split: '|||'
+
+	# MODE 3: Metafield list - from first product's caracteristiques_a_comparer
+	elsif rows_mode == 'metafield_products'
+		if reference_product != blank and reference_product.metafields.custom.caracteristiques_a_comparer != blank
+			assign caracteristiques_array = reference_product.metafields.custom.caracteristiques_a_comparer.value
+		endif
+	endif
+-%}
+
+{%- if products_to_compare != blank -%}
+	{{ 'bundle.matelas-comparator.css' | asset_url | stylesheet_tag }}
+	{{ 'component-price.css' | asset_url | stylesheet_tag }}
+
+	<script>
+		window.assetsUrl.js.push({ matelasComparator: "{{ 'bundle.matelas-comparator.js' | asset_url }}" });
+	</script>
+
+	{%- style -%}
+		#shopify-section-{{ section.id }} {
+			overflow-x: clip;
+
+			@media screen and (min-width: 990px) {
+				.section-heading:has(.large-hide) {
+					display: none !important;
+				}
+			}
+
+		.ax-matelas-comparator__row {
+			/* Force 3 CSS columns (1 label + 2 products) between 990px and 1280px */
+			@media screen and (min-width: 990px) and (max-width: 1279px) {
+				grid-template-columns: repeat(3, minmax(64px, 1fr)) !important;
+
+				/* Fallback: show first 2 product columns before JS kicks in */
+				[data-column-index="1"]:not([data-visible]),
+				[data-column-index="2"]:not([data-visible]) {
+					display: flex;
+				}
+			}
+
+			@media screen and (min-width: 1280px) {
+				{% assign max_columns = section.settings.columns | plus: 1 | at_most: total_products_count | plus: 1 %}
+				grid-template-columns: repeat({{ section.settings.columns | plus: 1 | at_most: max_columns }}, minmax(64px, 1fr)) !important;
+
+				/* Fallback: show first N columns before JS kicks in */
+				{% for i in (1..section.settings.columns) %}
+					[data-column-index="{{ i }}"]:not([data-visible]) {
+						display: flex;
+					}
+				{% endfor %}
+			}
+		}
+
+			.section-{{ section.id }}-padding {
+				padding-top: {{ section.settings.mob_padding_top }}px;
+				padding-bottom: {{ section.settings.mob_padding_bottom }}px;
+			}
+
+			@media screen and (min-width: 750px) {
+				.section-{{ section.id }}-padding {
+					padding-top: {{ section.settings.padding_top }}px;
+					padding-bottom: {{ section.settings.padding_bottom }}px;
+				}
+			}
+		}
+	{%- endstyle -%}
+
+	<div
+		class="ax-section ax-matelas-comparator color-{{ section.settings.color_scheme }} section-{{ section.id }}-padding"
+		id="MatelasComparator-{{ section.id }}"
+		data-ax-section="matelasComparator"
+	>
+		<div class="page-width">
+
+		<matelas-comparator
+			class="ax-matelas-comparator__container"
+			data-columns-mobile="2"
+			data-columns-desktop="{{ section.settings.columns }}"
+			data-total-products="{{ total_products_count }}"
+			{% if current_product_column > 0 %}data-current-product-column="{{ current_product_column }}"{% endif %}
+		>
+
+		{%- comment -%}
+			═══════════════════════════════════════════════════════════════════════
+			HEADER ROW - Title and Product Cards
+			═══════════════════════════════════════════════════════════════════════
+		{%- endcomment -%}
+		<div class="ax-matelas-comparator__row ax-matelas-comparator__row--header is-sticky">
+
+			{%- comment -%} Heading mobile{%- endcomment -%}
+			{% assign heading_tag = 'h2' %}
+			{%- render 'section-heading',
+				heading: section.settings.title,
+				block: section,
+				heading_size: heading_tag,
+				text_alignment: 'center',
+				heading_class: 'large-hide'
+			-%}
+
+			{%- comment -%} Heading desktop (column 0) {%- endcomment -%}
+			<div class="ax-matelas-comparator__column-header small-hide medium-hide" data-column-index="0">
+				<span class="h3">{{ section.settings.title }}</span>
+			</div>
+
+			{%- comment -%} Products from the list {%- endcomment -%}
+			{%- assign column_counter = 1 -%}
+
+			{%- for p in products_to_compare -%}
+				{%- render 'ax-matelas-comparator-product-card',
+					display_product: p,
+					column_index: column_counter,
+					show_product_selector: section.settings.show_product_selector,
+					is_current_product: false,
+					products_to_compare: products_to_compare,
+					current_product: product
+				-%}
+
+				{%- assign column_counter = column_counter | plus: 1 -%}
+			{%- endfor -%}
+		</div>
+
+		{%- comment -%}
+			═══════════════════════════════════════════════════════════════════════
+			COMPARISON ROWS - Rendering based on mode (auto/blocks/metafield)
+			═══════════════════════════════════════════════════════════════════════
+		{%- endcomment -%}
+
+		{%- for caracteristique_label in caracteristiques_array -%}
+			{%- comment -%} Find corresponding block (for blocks mode styling overrides) {%- endcomment -%}
+			{%- assign current_block = nil -%}
+			{%- if rows_mode == 'blocks' -%}
+				{%- for block in section.blocks -%}
+					{%- if block.type == 'row' and block.settings.label == caracteristique_label -%}
+						{%- assign current_block = block -%}
+						{%- break -%}
+					{%- endif -%}
+				{%- endfor -%}
+			{%- endif -%}
+
+			{%- comment -%} Determine cell styling (block override or section default) {%- endcomment -%}
+			{%- assign row_cell_color = section.settings.cell_color -%}
+			{%- assign row_cell_direction = section.settings.cell_direction -%}
+			{%- if current_block != nil -%}
+				{%- if current_block.settings.cell_color != blank and current_block.settings.cell_color != 'rgba(0,0,0,0)' -%}
+					{%- assign row_cell_color = current_block.settings.cell_color -%}
+				{%- endif -%}
+				{%- if current_block.settings.cell_direction != blank -%}
+					{%- assign row_cell_direction = current_block.settings.cell_direction -%}
+				{%- endif -%}
+			{%- endif -%}
+
+			{%- comment -%} Find sous_label, label_tooltip and modal from first product that has this characteristic {%- endcomment -%}
+			{%- assign caracteristique_sous_label = nil -%}
+			{%- assign caracteristique_label_tooltip = nil -%}
+			{%- assign caracteristique_modal = nil -%}
+
+			{%- comment -%} First check reference_product (source of caracteristique_label) {%- endcomment -%}
+			{%- if reference_product != blank -%}
+				{%- for caracteristique in reference_product.metafields.custom.liste_des_caracteristiques_du_matelas.value -%}
+					{%- if caracteristique.label == caracteristique_label -%}
+						{%- assign caracteristique_sous_label = caracteristique.sous_label.value -%}
+						{%- assign caracteristique_label_tooltip = caracteristique.label_tooltip -%}
+						{%- assign caracteristique_modal = caracteristique.modal.value -%}
+						{%- break -%}
+					{%- endif -%}
+				{%- endfor -%}
+			{%- endif -%}
+
+			{%- comment -%} If not found, search in products_to_compare {%- endcomment -%}
+			{%- if caracteristique_sous_label == nil and caracteristique_label_tooltip == nil and caracteristique_modal == nil -%}
+				{%- for compare_product in products_to_compare -%}
+					{%- for caracteristique in compare_product.metafields.custom.liste_des_caracteristiques_du_matelas.value -%}
+						{%- if caracteristique.label == caracteristique_label -%}
+							{%- assign caracteristique_sous_label = caracteristique.sous_label.value -%}
+							{%- assign caracteristique_label_tooltip = caracteristique.label_tooltip -%}
+							{%- assign caracteristique_modal = caracteristique.modal.value -%}
+							{%- break -%}
+						{%- endif -%}
+					{%- endfor -%}
+					{%- if caracteristique_sous_label != nil or caracteristique_label_tooltip != nil or caracteristique_modal != nil -%}
+						{%- break -%}
+					{%- endif -%}
+				{%- endfor -%}
+			{%- endif -%}
+
+			<div class="ax-matelas-comparator__row"{% if current_block %} {{ current_block.shopify_attributes }}{% endif %}>
+				{%- comment -%} Mobile header (full span) {%- endcomment -%}
+				<div class="full-column ax-matelas-comparator__row-header large-hide">
+					<div class="ax-matelas-comparator__row-header-label">
+						<span class="h4">{{ caracteristique_label }}</span>
+						{%- if caracteristique_label_tooltip != blank -%}
+							<div class="tooltip">
+								{{- 'icon-info.svg' | inline_asset_content -}}
+								<div class="tooltip-content">
+									{{ caracteristique_label_tooltip | metafield_tag }}
+								</div>
+							</div>
+						{%- endif -%}
+					</div>
+					{%- if caracteristique_sous_label != blank -%}
+						<span>{{ caracteristique_sous_label }}</span>
+					{%- endif -%}
+					{%- render 'ax-matelas-comparator-modal',
+						modal: caracteristique_modal,
+						unique_id: section.id | append: '-' | append: forloop.index | append: '-mobile',
+						section_index: section.index
+					-%}
+				</div>
+
+				{%- comment -%} Desktop header - characteristic name (column 0) {%- endcomment -%}
+				<div class="ax-matelas-comparator__row-header small-hide medium-hide" data-column-index="0">
+					<div class="ax-matelas-comparator__row-header-label">
+						<span class="h4">{{ caracteristique_label }}</span>
+						{%- if caracteristique_label_tooltip != blank -%}
+							<div class="tooltip">
+								{{- 'icon-info.svg' | inline_asset_content -}}
+								<div class="tooltip-content">
+									{{ caracteristique_label_tooltip | metafield_tag }}
+								</div>
+							</div>
+						{%- endif -%}
+					</div>
+					{%- if caracteristique_sous_label != blank -%}
+						<span>{{ caracteristique_sous_label }}</span>
+					{%- endif -%}
+					{%- render 'ax-matelas-comparator-modal',
+						modal: caracteristique_modal,
+						unique_id: section.id | append: '-' | append: forloop.index | append: '-desktop',
+						section_index: section.index
+					-%}
+				</div>
+
+				{%- comment -%} Row content - all products {%- endcomment -%}
+				{%- assign row_column = 1 -%}
+
+				{%- for row_product in products_to_compare -%}
+					{%- render 'ax-matelas-comparator-row-cell',
+						row_product: row_product,
+						caracteristique_label: caracteristique_label,
+						column_index: row_column,
+						row_cell_color: row_cell_color,
+						row_cell_direction: row_cell_direction
+					-%}
+
+					{%- assign row_column = row_column | plus: 1 -%}
+				{%- endfor -%}
+			</div>
+		{%- endfor -%}
+
+		{%- comment -%}
+			═══════════════════════════════════════════════════════════════════════
+			FINAL ROW - CTA and Product Links
+			═══════════════════════════════════════════════════════════════════════
+		{%- endcomment -%}
+
+		<div class="ax-matelas-comparator__row ax-matelas-comparator__row--cta">
+			<div class="small-hide medium-hide" data-column-index="0">
+				{%- if section.settings.button_text != blank -%}
+					<a
+						href="{{ section.settings.button_url }}"
+						class="{{ section.settings.button_style }}"
+						{% if section.settings.button_blank %}target="_blank" rel="noopener"{% endif %}
+					>
+						{{ section.settings.button_text }}
+					</a>
+				{%- endif -%}
+			</div>
+
+			{%- comment -%} CTA for all products {%- endcomment -%}
+			{%- assign cta_column = 1 -%}
+
+			{%- for cta_product in products_to_compare -%}
+				<div class="ax-matelas-comparator__row-content" data-product-id="{{ cta_product.id }}" data-column-index="{{ cta_column }}">
+					{%- if template.name == 'product' and product != blank and cta_product.id == product.id -%}
+						<a href="{{ cta_product.url }}" class="link" style="font-weight: 700; opacity: 0.5; cursor: not-allowed; pointer-events: none;">
+							{% if section.settings.product_link_text != blank %}{{ section.settings.product_link_text }}{% else %}{{ 'sections.matelas_comparator.view_product' | t }}{% endif %}
+						</a>
+					{%- else -%}
+						<a href="{{ cta_product.url }}" class="link" style="font-weight: 700;">
+							{% if section.settings.product_link_text != blank %}{{ section.settings.product_link_text }}{% else %}{{ 'sections.matelas_comparator.view_product' | t }}{% endif %}
+						</a>
+					{%- endif -%}
+				</div>
+				{%- assign cta_column = cta_column | plus: 1 -%}
+			{%- endfor -%}
+		</div>
+
+		</matelas-comparator>
+
+		</div>
+	</div>
+
+{%- endif -%}
+
+{% schema %}
+	{
+		"name": "Ax Matelas Comparator",
+		"tag": "section",
+		"class": "section",
+		"disabled_on": {
+			"groups": ["header", "footer"]
+		},
+		"settings": [
+			{
+				"type": "header",
+				"content": "Contenu"
+			},
+			{
+				"type": "richtext",
+				"id": "title",
+				"label": "Titre",
+				"default": "<p>COMPARATEUR DE MATELAS</p>"
+			},
+			{
+				"type": "product_list",
+				"id": "products_to_compare",
+				"label": "Produits à comparer",
+				"limit": 6,
+				"info": "Sélectionnez jusqu'à 4 produits à comparer"
+			},
+			{
+				"type": "select",
+				"id": "rows",
+				"label": "Lignes à comparer",
+				"options": [
+					{
+						"value": "caracteristics_products",
+						"label": "Caractéristiques du premier produit"
+					},
+					{
+						"value": "blocks",
+						"label": "Blocs"
+					},
+					{
+						"value": "metafield_products",
+						"label": "Metafield du produit"
+					}
+				],
+				"default": "caracteristics_products"
+			},
+			{
+				"type": "range",
+				"id": "columns",
+				"min": 2,
+				"max": 4,
+				"step": 1,
+				"unit": "col",
+				"label": "Colonnes",
+				"default": 3,
+				"info": "Nombre de colonnes affichées"
+			},
+			{
+				"type": "checkbox",
+				"id": "show_product_selector",
+				"label": "Afficher le sélecteur de produits",
+				"default": true,
+				"info": "Affiche un menu déroulant permettant de changer les produits affichés"
+			},
+			{
+				"type": "color",
+				"id": "cell_color",
+				"label": "Couleurs des cellules"
+			},
+			{
+				"type": "select",
+				"id": "cell_direction",
+				"label": "Direction des cellules",
+				"options": [
+					{
+						"value": "horizontal",
+						"label": "Horizontal"
+					},
+					{
+						"value": "horizontal-reverse",
+						"label": "Horizontal inversé"
+					},
+					{
+						"value": "vertical",
+						"label": "Vertical"
+					},
+					{
+						"value": "vertical-reverse",
+						"label": "Vertical inversé"
+					}
+				],
+				"default": "horizontal"
+			},
+			{
+				"type": "header",
+				"content": "Ligne CTA (dernière ligne)"
+			},
+			{
+				"type": "text",
+				"id": "product_link_text",
+				"label": "Texte du lien produit",
+				"default": "Voir le produit"
+			},
+			{
+				"type": "text",
+				"id": "button_text",
+				"label": "Texte du bouton"
+			},
+			{
+				"type": "url",
+				"id": "button_url",
+				"label": "Lien du bouton"
+			},
+			{
+				"type": "checkbox",
+				"id": "button_blank",
+				"label": "Ouvrir dans un nouvel onglet",
+				"default": false
+			},
+			{
+				"type": "select",
+				"id": "button_style",
+				"options": [
+					{
+						"value": "button button--primary",
+						"label": "Primary"
+					},
+					{
+						"value": "button button--secondary",
+						"label": "Secondary"
+					},
+					{
+						"value": "ax-link",
+						"label": "Link"
+					},
+					{
+						"value": "ax-link reversed",
+						"label": "Link inversé"
+					},
+					{
+						"value": "underlined-link",
+						"label": "Underline link"
+					}
+				],
+				"default": "button button--primary",
+				"label": "Style du bouton"
+			},
+			{
+				"type": "header",
+				"content": "Couleurs"
+			},
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "Couleurs de la section",
+				"default": "background-1"
+			},
+			{
+				"type": "header",
+				"content": "Padding (space)"
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding bottom",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding bottom",
+				"default": 0
+			}
+		],
+		"blocks": [
+			{
+				"type": "row",
+				"name": "Ligne",
+				"settings": [
+					{
+						"type": "select",
+						"id": "label",
+						"label": "Label",
+						"options": [
+							{
+								"value": "Hauteur",
+								"label": "Hauteur"
+							},
+							{
+								"value": "Confort",
+								"label": "Confort"
+							},
+							{
+								"value": "Stabilité",
+								"label": "Stabilité"
+							},
+							{
+								"value": "Thermorégulation",
+								"label": "Thermorégulation"
+							},
+							{
+								"value": "Mousses",
+								"label": "Mousses"
+							},
+							{
+								"value": "Ressorts ensachés",
+								"label": "Ressorts ensachés"
+							},
+							{
+								"value": "Surmatelas intégré",
+								"label": "Surmatelas intégré"
+							},
+							{
+								"value": "Poids",
+								"label": "Poids"
+							},
+							{
+								"value": "Réparable",
+								"label": "Réparable"
+							}
+						]
+					},
+					{
+						"type": "color",
+						"id": "cell_color",
+						"label": "Couleurs des cellules"
+					},
+					{
+						"type": "select",
+						"id": "cell_direction",
+						"label": "Direction des cellules",
+						"options": [
+							{
+								"value": "horizontal",
+								"label": "Horizontal"
+							},
+							{
+								"value": "horizontal-reverse",
+								"label": "Horizontal inversé"
+							},
+							{
+								"value": "vertical",
+								"label": "Vertical"
+							},
+							{
+								"value": "vertical-reverse",
+								"label": "Vertical inversé"
+							}
+						],
+						"default": "horizontal"
+					}
+				]
+			}
+		],
+		"presets": [
+			{
+				"name": "Ax Matelas Comparator",
+				"category": "Axome",
+				"settings": {
+					"columns": 3
+				}
+			}
+		]
+	}
+{% endschema %}

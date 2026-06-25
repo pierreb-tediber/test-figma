@@ -1,0 +1,66 @@
+{%- liquid
+	assign badges_empty = true
+
+	if product.metafields.custom.badges_ribbons_images != blank
+		assign badges_empty = false
+	endif
+
+	if badges_empty
+		assign class = class | append: ' product__badges--empty'
+	endif
+-%}
+
+<div class="{{ class }}">
+	{%- if product.metafields.custom.badges_ribbons_images != blank -%}
+		{% for badge in product.metafields.custom.badges_ribbons_images.value %}
+			{%- liquid
+				assign desktop_image = badge.image_desktop.value | default: badge.image_dekstop.value
+				assign mobile_image = badge.image_mobile.value
+			-%}
+
+			{%- if desktop_image != blank or mobile_image != blank -%}
+				{%- capture badge_image -%}
+					<picture class="product__badge-image">
+						{%- if mobile_image != blank -%}
+							<source
+								media="(max-width: 749px)"
+								srcset="
+									{{ mobile_image | image_url: width: 400 }} 1x,
+									{{ mobile_image | image_url: width: 800 }} 2x
+								"
+							>
+						{%- endif -%}
+	
+						{%- if desktop_image != blank -%}
+							<img
+								src="{{ desktop_image | image_url: width: 400 }}"
+								srcset="{{ desktop_image | image_url: width: 400 }} 1x, {{ desktop_image | image_url: width: 800 }} 2x"
+								alt="{{ desktop_image.alt | escape }}"
+								loading="lazy"
+								width="{{ desktop_image.width }}"
+								height="{{ desktop_image.height }}"
+								style="aspect-ratio: {{ desktop_image.width }}/{{ desktop_image.height }};"
+							>
+						{%- elsif mobile_image != blank -%}
+							<img
+								src="{{ mobile_image | image_url: width: 400 }}"
+								srcset="{{ mobile_image | image_url: width: 400 }} 1x, {{ mobile_image | image_url: width: 800 }} 2x"
+								alt="{{ mobile_image.alt | escape }}"
+								loading="lazy"
+								width="{{ mobile_image.width }}"
+								height="{{ mobile_image.height }}"
+								style="aspect-ratio: {{ desktop_image.width }}/{{ desktop_image.height }};"
+							>
+						{%- endif -%}
+					</picture>
+				{%- endcapture -%}
+
+				{%- if lazy_load -%}
+					{{ badge_image | replace: 'src="', 'lazy-src="' | replace: 'srcset="', 'lazy-srcset="' }}
+				{%- else -%}
+					{{ badge_image }}
+				{%- endif -%}
+			{%- endif -%}
+		{% endfor %}
+	{%- endif -%}
+</div>

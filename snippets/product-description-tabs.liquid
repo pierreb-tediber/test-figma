@@ -1,0 +1,32 @@
+{%- liquid
+	assign description_tabs_list = block.settings.content_list
+-%}
+
+{%- if description_tabs_list.size > 0 -%}
+	<div class="product__description-tabs-wrapper">
+		<product-description-tabs
+			class="product__description-tabs product__accordion accordion quick-add-hidden"
+			{{ block.shopify_attributes }}
+		>
+			{%- for description_tab in description_tabs_list -%}
+				<details id="Details-{{ description_tab.system.id }}-{{ section.id }}"{% if description_tab.ouvert.value %} open{% endif %}>
+					<summary>
+						<div class="summary__title">
+							<h2 class="h6 accordion__title inline-richtext">
+								{% if description_tab.icon.value != blank %}
+									{% assign icon_alt = description_tab.icon.value.alt | default: description_tab.icon.value.title %}
+									{{ description_tab.icon.value | image_url: width: 20 | image_tag: class: 'accordion__title-icon', alt: icon_alt }}
+								{% endif %}
+								{{ description_tab.titre_accordeon.value | escape }}
+							</h2>
+						</div>
+						{{- 'icon-caret.svg' | inline_asset_content -}}
+					</summary>
+					<div class="accordion__content rte" id="ProductAccordion-{{ description_tab.system.id }}-{{ section.id }}">
+						{{ description_tab.description_accordeon | metafield_tag }}
+					</div>
+				</details>
+			{%- endfor -%}
+		</product-description-tabs>
+	</div>
+{%- endif -%}

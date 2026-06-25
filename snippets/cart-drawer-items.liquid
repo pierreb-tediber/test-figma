@@ -1,0 +1,1061 @@
+{%- liquid
+	# Usage:
+	# - need_to_all_delete: doit être utilisé pour supprimer tous les articles du panier si les conditions sont remplies
+	# - need_to_special_products_delete: doit être utilisé pour supprimer les articles avec une propriété spéciale
+	# - array_properties_check: doit être utilisé pour vérifier les propriétés spéciales
+	# - has_normal_product: doit être utilisé pour vérifier si le panier contient des produits normaux
+	# - is_special_product: doit être utilisé pour vérifier si l'article est un produit spécial
+
+	# Vérifie si le panier n'est pas vide (use for webperfs)
+	if cart != empty
+		# Définit un tableau des propriétés spéciales à vérifier (_gift_wrap, _Gifted, _sample, ...)
+		assign array_properties_check = '_gift_wrap,_sample,_Gifted' | split: ','
+		assign need_to_all_delete = false
+		assign need_to_special_products_delete = false
+		assign has_normal_product = false
+
+		# Parcourt tous les articles du panier
+		for item in cart.items
+			assign is_special_product = false
+
+			# Vérifie si l'article a une des propriétés spéciales
+			for property in array_properties_check
+				if item.properties[property] != blank
+					assign is_special_product = true
+					break
+				endif
+			endfor
+
+			# Si l'article n'a pas de propriété spéciale, c'est un produit normal
+			unless is_special_product
+				assign has_normal_product = true
+				break
+			endunless
+		endfor
+
+		# Active la vérification de sécurité si le panier contient des articles mais aucun produit normal
+		if cart.items.size > 0 and has_normal_product == false
+			assign need_to_all_delete = true
+		endif
+	else
+		# Si le panier est vide, pas besoin de vérification de sécurité
+		assign need_to_all_delete = false
+		assign need_to_special_products_delete = false
+	endif
+
+	# Récupère les traductions des noms d'options pour les tailles
+	assign options_names_for_size_translated = 'products.product.options_names_for_size' | t | downcase | replace: ', ', ','
+	assign options_names_for_size = options_names_for_size_translated | split: ',' | uniq
+
+	# Récupère les traductions des noms d'options pour les accoudoirs
+	assign options_names_for_armrest_translated = 'products.product.options_names_for_armrest_html' | t | downcase | replace: ', ', ','
+	assign options_names_for_armrest = options_names_for_armrest_translated | split: ',' | uniq
+
+	# Récupère les traductions des noms d'options pour les pieds
+	assign options_names_for_foot_translated = 'products.product.options_names_for_foot' | t | downcase | replace: ', ', ','
+	assign options_names_for_foot = options_names_for_foot_translated | split: ',' | uniq
+
+	# Récupère les traductions des noms d'options pour les structures
+	assign options_names_for_structure_translated = 'products.product.options_names_for_structure' | t | downcase | replace: ', ', ','
+	assign options_names_for_structure = options_names_for_structure_translated | split: ',' | uniq
+
+	# Récupère les traductions des noms d'options pour le confort
+	assign options_names_for_comfort_translated = 'products.product.options_names_for_comfort' | t | downcase | replace: ', ', ','
+	assign options_names_for_comfort = options_names_for_comfort_translated | split: ',' | uniq
+
+	# Récupère les traductions des noms d'options pour les bonnets
+	assign options_names_for_bonnet_translated = 'products.product.options_names_for_bonnet' | t | downcase | replace: ', ', ','
+	assign options_names_for_bonnet = options_names_for_bonnet_translated | split: ',' | uniq
+
+	# Récupère les traductions des noms d'options pour les versions
+	assign options_names_for_version_translated = 'products.product.options_names_for_version' | t | downcase | replace: ', ', ','
+	assign options_names_for_version = options_names_for_version_translated | split: ',' | uniq
+-%}
+
+<div id="cart-drawer-items">
+	<cart-items
+		class="drawer__cart-items {% if cart == empty %} is-empty{% endif %}"
+		data-section-id="{{ section.id }}"
+		{% if need_to_special_products_delete %}
+			data-need-to-special-products-delete="true"
+			data-properties="{{ array_properties_check | join: ',' }}"
+		{% endif %}
+		{% if need_to_all_delete %}
+			data-need-to-all-delete="true"
+		{% endif %}
+	>
+		<form
+			action="{{ routes.cart_url }}"
+			id="CartDrawer-Form"
+			class="cart__contents cart-drawer__form"
+			method="post"
+		>
+			<div id="CartDrawer-CartItems" class="drawer__contents js-contents">
+				{%- if cart != empty -%}
+					<div class="drawer__cart-items-wrapper">
+						<table class="cart-items" role="table">
+							<thead role="rowgroup" class="hidden">
+								<tr role="row" class="hidden">
+									<th id="CartDrawer-ColumnProductImage" role="columnheader">
+										<span class="visually-hidden">{{ 'sections.cart.headings.image' | t }}</span>
+									</th>
+									<th
+										id="CartDrawer-ColumnProduct"
+										class="caption-with-letter-spacing"
+										scope="col"
+										role="columnheader"
+									>
+										{{ 'sections.cart.headings.product' | t }}
+									</th>
+									<th
+										id="CartDrawer-ColumnTotal"
+										class="right caption-with-letter-spacing"
+										scope="col"
+										role="columnheader"
+									>
+										{{ 'sections.cart.headings.total' | t }}
+									</th>
+									<th id="CartDrawer-ColumnQuantity" role="columnheader">
+										<span class="visually-hidden">{{ 'sections.cart.headings.quantity' | t }}</span>
+									</th>
+									<th id="CartDrawer-ColumnBundle" role="columnheader">
+										<span class="visually-hidden">{{ 'sections.cart.headings.bundle' | t }}</span>
+									</th>
+								</tr>
+							</thead>
+
+							<tbody role="rowgroup">
+								{%- for item in cart.items -%}
+									{%- liquid
+										assign no_need_quantity = false
+										if item.properties._gift_wrap != blank or item.properties._Gifted != blank
+											assign no_need_quantity = true
+										endif
+
+										assign no_need_remove = false
+										if item.properties._Gifted != blank
+											assign no_need_remove = true
+										endif
+
+										assign first_media_desktop = item.image
+										assign first_media_mobile = item.image
+										if item.variant.featured_image == blank or item.variant.featured_image.id != item.image.id
+											# Récupération des images depuis les métafields (logique de card-product.liquid)
+											assign first_media_images_desktop = item.product.metafields.custom.card_product_image_desktop.value | compact
+											assign first_media_images_mobile = item.product.metafields.custom.card_product_image_mobile.value | compact
+
+											# Images desktop: priorité au métachamp, ordre primaire
+											if first_media_images_desktop != blank and first_media_images_desktop[0] != blank
+												assign first_media_desktop = first_media_images_desktop[0]
+											endif
+
+											# Image mobile primaire
+											assign first_media_mobile = first_media_desktop
+											if first_media_images_mobile != blank and first_media_images_mobile[0] != blank
+												assign first_media_mobile = first_media_images_mobile[0]
+											endif
+										endif
+
+										if item.properties._bundle_image != blank
+											assign first_media_desktop = item.properties._bundle_image
+											assign first_media_mobile = item.properties._bundle_image
+										endif
+
+										assign title = item.product.title
+										if item.properties._bundle_title != blank
+											assign title = item.properties._bundle_title
+										elsif item.product.metafields.custom.combined_listings_produit_parent.value != blank
+											assign title = item.product.metafields.custom.combined_listings_produit_parent.value.title
+										endif
+
+										assign is_hidden = false
+										if item.product.metafields.seo.hidden.value == 1
+											unless item.product.tags contains 'phenix'
+												assign is_hidden = true
+											endunless
+										endif
+									-%}
+
+									<tr
+										id="CartDrawer-Item-{{ item.index | plus: 1 }}"
+										class="cart-item"
+										role="row"
+										data-item-key="{{ item.key }}"
+									>
+										<td class="cart-item__media" role="cell" headers="CartDrawer-ColumnProductImage">
+											{% if first_media_desktop %}
+												{% comment %} Leave empty space due to a:empty CSS display: none rule {% endcomment %}
+												<a
+													{% if is_hidden %}
+														role="link" aria-hidden="true"
+													{% else %}
+														href="{{ item.url }}"
+													{% endif %}
+													class="full-unstyled-link"
+												>
+													{% if item.properties._bundle_image != blank %}
+														<img
+															class="cart-item__image"
+															src="{{ item.properties._bundle_image }}"
+															alt="{{ title | escape }}"
+															loading="lazy"
+															width="150"
+															height="{{ 150 | divided_by: 0.875 | ceil }}"
+														>
+													{% else %}
+														<picture>
+															<source
+																media="(max-width: 749px)"
+																srcset="{{ first_media_mobile | image_url: width: 300 }}"
+															>
+															<img
+																class="cart-item__image"
+																src="{{ first_media_desktop | image_url: width: 300 }}"
+																srcset="
+																	{%- if first_media_desktop.width >= 150 -%}{{ first_media_desktop | image_url: width: 150 }} 150w,{%- endif -%}
+																	{%- if first_media_desktop.width >= 300 -%}{{ first_media_desktop | image_url: width: 300 }} 300w,{%- endif -%}
+																	{{ first_media_desktop | image_url }} {{ first_media_desktop.width }}w
+																"
+																sizes="150px"
+																alt="{{ first_media_desktop.alt | escape }}"
+																loading="lazy"
+																width="150"
+																height="{{ 150 | divided_by: first_media_desktop.aspect_ratio | ceil }}"
+																role="img"
+																aria-label="{{ first_media_desktop.alt | escape }}"
+															>
+														</picture>
+													{% endif %}
+												</a>
+											{% endif %}
+										</td>
+
+										<td class="cart-item__details" role="cell" headers="CartDrawer-ColumnProduct">
+											{%- if settings.show_vendor -%}
+												<p class="caption-with-letter-spacing light">{{ item.product.vendor }}</p>
+											{%- endif -%}
+
+											<a
+												{% if is_hidden %}
+													role="link" aria-hidden="true"
+												{% else %}
+													href="{{ item.url }}"
+												{% endif %}
+												class="cart-item__name break"
+											>
+												{{ title | escape }}
+											</a>
+
+											{%- if item.product.has_only_default_variant == false
+												or item.properties.size != 0
+												or item.selling_plan_allocation != null
+											-%}
+												<dl class="cart-item__options">
+													{%- if item.product.has_only_default_variant == false
+														and item.product.gift_card? == false
+														and item.item_components == blank
+													-%}
+														{%- liquid
+															assign custom_position = 0
+															assign custom_position_increment = 0
+
+															if item.product.metafields.custom.option_position_custom != true
+																assign custom_position = 1
+																assign custom_position_increment = 1
+															endif
+
+															assign use_custom_position_size = false
+															assign use_custom_position_comfort = false
+															assign use_custom_position_structure = false
+															assign use_custom_position_bonnet = false
+															assign use_custom_position_version = false
+															assign bonnet_extra_offset = 0
+															assign version_extra_offset = 0
+
+															# Pré-détection : vérifie si les options "bonnet", "taille" et "version" coexistent
+															assign prescan_has_size = false
+															assign prescan_has_bonnet = false
+															assign prescan_has_version = false
+															for prescan_option in item.options_with_values
+																assign prescan_name_array = prescan_option.name | downcase | split: ' ' | uniq
+																for prescan_name in prescan_name_array
+																	if options_names_for_size contains prescan_name
+																		assign prescan_has_size = true
+																	endif
+																	if options_names_for_bonnet contains prescan_name
+																		assign prescan_has_bonnet = true
+																	endif
+																	if options_names_for_version contains prescan_name
+																		assign prescan_has_version = true
+																	endif
+																endfor
+															endfor
+															if prescan_has_size and prescan_has_bonnet and item.product.metafields.custom.option_position_custom != true
+																assign bonnet_extra_offset = 1
+															endif
+															if prescan_has_version and item.product.metafields.custom.option_position_custom != true
+																assign version_extra_offset = 1
+															endif
+														-%}
+
+														{%- for option in item.options_with_values -%}
+															{%- liquid
+																assign custom_position_increment = custom_position_increment | plus: 1
+																assign custom_position = custom_position_increment
+																assign current_is_bonnet = false
+																assign current_is_version = false
+
+																# Traitement du nom de l'option en minuscules
+																assign option_name_downcase = option.name | downcase
+
+																# Divise le nom de l'option en tableau de mots uniques
+																assign option_name_array = option_name_downcase | split: ' ' | uniq
+
+																for translation in options_names_for_foot
+																	assign has_foot_in_array = option_name_array | find: translation
+																	if has_foot_in_array
+																		assign has_foot_in_array = true
+																		break
+																	endif
+																endfor
+
+																for translation in options_names_for_structure
+																	assign has_structure_in_array = option_name_array | find: translation
+																	if has_structure_in_array
+																		assign has_structure_in_array = true
+																		break
+																	endif
+																endfor
+
+																if has_foot_in_array
+																elsif has_structure_in_array
+																	if use_custom_position_structure == false
+																		if item.product.metafields.custom.option_position_custom != true
+																			assign custom_position_increment = custom_position_increment | minus: 1
+																			assign custom_position = 1
+																		endif
+																		assign use_custom_position_structure = true
+																	endif
+																else
+																	# Analyse chaque mot du nom de l'option pour déterminer le type de sélecteur approprié
+																	for option_name in option_name_array
+																		# Si l'option est liée à un accoudoir
+																		assign show_armrest_information = false
+																		if options_names_for_armrest contains option_name
+																			assign show_armrest_information = true
+																		endif
+
+																		# Si l'option est liée à une taille
+																		if options_names_for_size contains option_name or show_armrest_information == true
+																			if use_custom_position_size == false
+																				if item.product.metafields.custom.option_position_custom != true and show_armrest_information == false
+																					assign custom_position_increment = custom_position_increment | minus: 1
+																					assign custom_position = 1
+																				endif
+																				assign use_custom_position_size = true
+																			endif
+																			break
+																		endif
+
+																		# Si l'option est liée à un confort
+																		if options_names_for_comfort contains option_name
+																			if use_custom_position_comfort == false
+																				if item.product.metafields.custom.option_position_custom != true
+																					assign custom_position_increment = custom_position_increment | minus: 1
+																					assign custom_position = 1
+																				endif
+																				assign use_custom_position_comfort = true
+																			endif
+																			break
+																		endif
+
+																		# Si l'option est liée à une version
+																		if options_names_for_version contains option_name
+																			assign current_is_version = true
+																			if use_custom_position_version == false
+																				if item.product.metafields.custom.option_position_custom != true and prescan_has_size
+																					assign custom_position_increment = custom_position_increment | minus: 1
+																					assign custom_position = 2
+																					if prescan_has_bonnet
+																						assign custom_position = 3
+																					endif
+																				endif
+																				assign use_custom_position_version = true
+																			endif
+																			break
+																		endif
+
+																		# Si l'option est liée à un bonnet
+																		if options_names_for_bonnet contains option_name
+																			assign current_is_bonnet = true
+																			if use_custom_position_bonnet == false
+																				if item.product.metafields.custom.option_position_custom != true and prescan_has_size
+																					assign custom_position_increment = custom_position_increment | minus: 1
+																					assign custom_position = 2
+																				endif
+																				assign use_custom_position_bonnet = true
+																			endif
+																			break
+																		endif
+																	endfor
+																endif
+
+																# Décale les options non-prioritaires quand bonnet et taille coexistent
+																if bonnet_extra_offset > 0 and custom_position != 1 and current_is_bonnet == false
+																	assign custom_position = custom_position | plus: bonnet_extra_offset
+																endif
+
+																# Décale les options non-prioritaires quand version et taille coexistent
+																if version_extra_offset > 0 and custom_position != 1 and current_is_bonnet == false and current_is_version == false
+																	assign custom_position = custom_position | plus: version_extra_offset
+																endif
+
+																if item.product.metafields.custom.option_position_custom != true and item.product.options_with_values.size == 1 and forloop.last
+																	assign custom_position = 1
+																	assign custom_position_increment = 1
+																endif
+															-%}
+															<div class="product-option" style="order: {{ custom_position }};">
+																{%- if item.item_components == blank -%}
+																	<dt>{{ option.name | append: ' :' }}</dt>
+																{%- else -%}
+																	<dt class="visually-hidden">{{ option.name | append: ' :' }}</dt>
+																{%- endif -%}
+																<dd>
+																	{{ option.value -}}
+																</dd>
+															</div>
+														{%- endfor -%}
+													{%- endif -%}
+
+													{%- for property in item.properties -%}
+														{%- assign property_first_char = property.first | slice: 0 -%}
+														{%- if property.last != blank and property_first_char != '_' -%}
+															<div class="product-option">
+																<dt>{{ property.first }}:</dt>
+																<dd>
+																	{%- if property.last contains '/uploads/' -%}
+																		<a
+																			href="{{ property.last }}"
+																			class="link"
+																			target="_blank"
+																			aria-describedby="a11y-new-window-message"
+																		>
+																			{{ property.last | split: '/' | last }}
+																		</a>
+																	{%- else -%}
+																		{{ property.last }}
+																	{%- endif -%}
+																</dd>
+															</div>
+														{%- endif -%}
+													{%- endfor -%}
+												</dl>
+											{%- endif -%}
+										</td>
+
+										<td class="cart-item__totals right" role="cell" headers="CartDrawer-ColumnTotal">
+											{%- render 'loading-spinner' -%}
+											<div class="cart-item__price-wrapper">
+												{% liquid
+													assign compare_price = item.variant.compare_at_price
+													if compare_price == blank
+														assign compare_price = item.original_line_price
+													else
+														assign compare_price = compare_price | times: item.quantity
+													endif
+
+													if item.properties._bundle_items_compare_at_price != blank
+														assign compare_price_array = item.properties._bundle_items_compare_at_price | split: ':'
+														assign compare_price_sum = 0
+														for price in compare_price_array
+															assign price_num = price | plus: 0
+															assign compare_price_sum = compare_price_sum | plus: price_num
+														endfor
+														assign compare_price = compare_price_sum | times: item.quantity
+													endif
+
+													# Badge -X% : utilise les MÊMES valeurs que l'affichage prix
+													# (compare_price = somme bundle properties pour les packs, sinon
+													# compare_at_price natif ; final_line_price = prix réel facturé par
+													# Shopify). Avant : variant.compare_at_price vs variant.price natif —
+													# pouvait diverger du compare affiché + ignorait final_line_price.
+													assign discount_percentage = 0
+													if compare_price > item.final_line_price
+														assign discount_percentage = compare_price | minus: item.final_line_price | times: 100.0 | divided_by: compare_price | round
+														assign discount_percentage_string = discount_percentage | append: '%' | prepend: '-'
+													endif
+
+													assign badges_show_in_cart = item.product.metafields.custom.badges.value | where: 'show_ribbon_on_cart', true
+												%}
+												{%- if compare_price > item.final_line_price -%}
+													<div class="cart-item__discounted-prices">
+														<span class="visually-hidden">
+															{{ 'products.product.price.sale_price' | t }}
+														</span>
+														<span class="price price--end cart-item__sale-price">
+															{{ item.final_line_price | money_without_trailing_zeros }}
+														</span>
+														<span class="visually-hidden">
+															{{ 'products.product.price.regular_price' | t }}
+														</span>
+														<s class="cart-item__old-price price price--end">
+															{{ compare_price | money }}
+														</s>
+													</div>
+												{%- else -%}
+													<span class="price price--end">
+														{{ item.original_line_price | money }}
+													</span>
+												{%- endif -%}
+
+												{%- if item.variant.available and item.unit_price_measurement -%}
+													<div class="unit-price caption">
+														<span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
+														{{ item.unit_price | money }}
+														<span aria-hidden="true">/</span>
+														<span class="visually-hidden">
+															&nbsp;{{ 'accessibility.unit_price_separator' | t }}&nbsp;
+														</span>
+														{%- if item.unit_price_measurement.reference_value != 1 -%}
+															{{- item.unit_price_measurement.reference_value -}}
+														{%- endif -%}
+														{{ item.unit_price_measurement.reference_unit }}
+													</div>
+												{%- endif -%}
+
+												{%- if item.line_level_discount_allocations.size > 0
+													or discount_percentage > 0
+													or badges_show_in_cart.size > 0
+												-%}
+													<ul
+														class="discounts list-unstyled"
+														role="list"
+														aria-label="{{ 'customer.order.discount' | t }}"
+													>
+														{%- for discount in item.line_level_discount_allocations -%}
+															<li class="discounts__discount color-{{ settings.sale_badge_color_scheme }} badge price__badge-sale">
+																{%- if discount.discount_application.type == 'discount_code' -%}
+																	{{ 'sections.cart.discount.discount_code' | t }}
+																{%- endif -%}
+																{%- if discount.discount_application.value_type == 'fixed_amount' -%}
+																	{{ discount.discount_application.value | prepend: '-' | times: 100 | money }}
+																{%- elsif discount.discount_application.value_type == 'percentage' -%}
+																	{{ discount.discount_application.value | round: 0 | prepend: '-' | append: '%' }}
+																{%- endif -%}
+															</li>
+														{%- endfor -%}
+														{%- if discount_percentage > 0 -%}
+															<li class="discounts__discount color-{{ settings.sale_badge_color_scheme }} badge price__badge-sale">
+																{{ discount_percentage_string }}
+															</li>
+														{%- endif -%}
+														{%- for badge in badges_show_in_cart -%}
+															{%- if badge.texte != blank -%}
+																<li
+																	class="discounts__discount color-{{ settings.sale_badge_color_scheme }} badge price__badge-sale"
+																	style="
+																		{% if badge.text_color != blank %}color: {{ badge.text_color }};{% endif %}
+																		{% if badge.background_color != blank %}background-color: {{ badge.background_color }};{% endif %}
+																		{% if badge.border_color != blank %}border-color: {{ badge.border_color }};{% endif %}
+																	"
+																>
+																	{{ badge.texte }}
+																</li>
+															{%- endif -%}
+														{%- endfor -%}
+													</ul>
+												{%- endif -%}
+											</div>
+										</td>
+										{%- liquid
+											assign has_qty_rules = false
+											if item.variant.quantity_rule.increment > 1 or item.variant.quantity_rule.min > 1 or item.variant.quantity_rule.max != null
+												assign has_qty_rules = true
+											endif
+
+											assign has_vol_pricing = false
+											if item.variant.quantity_price_breaks.size > 0
+												assign has_vol_pricing = true
+											endif
+										-%}
+										<td
+											class="cart-item__quantity {% if has_qty_rules or has_vol_pricing %} cart-item__quantity--info{% endif %}"
+											role="cell"
+											headers="CartDrawer-ColumnQuantity"
+										>
+											<quantity-popover>
+												<div class="cart-item__quantity-wrapper quantity-popover-wrapper">
+													{%- unless no_need_quantity -%}
+														<div
+															class="quantity-popover-container{% if has_qty_rules or has_vol_pricing %} quantity-popover-container--hover{% endif %}"
+														>
+															<quantity-input class="quantity cart-quantity">
+																<button class="quantity__button" name="minus" type="button">
+																	<span class="visually-hidden">
+																		{{-
+																			'products.product.quantity.decrease'
+																			| t: product: item.product.title
+																			| escape
+																		-}}
+																	</span>
+																	<span class="svg-wrapper">
+																		{{- 'icon-minus.svg' | inline_asset_content -}}
+																	</span>
+																</button>
+																<input
+																	class="quantity__input"
+																	type="number"
+																	data-quantity-variant-id="{{ item.variant.id }}"
+																	name="updates[]"
+																	value="{{ item.quantity }}"
+																	{% # theme-check-disable %}
+																	data-cart-quantity="{{ cart | item_count_for_variant: item.variant.id }}"
+																	min="0"
+																	data-min="{{ item.variant.quantity_rule.min }}"
+																	{% if item.variant.quantity_rule.max != null %}
+																		max="{{ item.variant.quantity_rule.max }}"
+																	{% endif %}
+																	step="{{ item.variant.quantity_rule.increment }}"
+																	{% # theme-check-enable %}
+																	aria-label="{{ 'products.product.quantity.input_label' | t: product: item.product.title | escape }}"
+																	id="Drawer-quantity-{{ item.index | plus: 1 }}"
+																	data-index="{{ item.index | plus: 1 }}"
+																	data-item-key="{{ item.key }}"
+																>
+																<button class="quantity__button" name="plus" type="button">
+																	<span class="visually-hidden">
+																		{{-
+																			'products.product.quantity.increase'
+																			| t: product: item.product.title
+																			| escape
+																		-}}
+																	</span>
+																	<span class="svg-wrapper">
+																		{{- 'icon-plus.svg' | inline_asset_content -}}
+																	</span>
+																</button>
+															</quantity-input>
+														</div>
+													{%- endunless -%}
+													{%- unless no_need_remove -%}
+														<cart-remove-button
+															id="CartDrawer-Remove-{{ item.index | plus: 1 }}"
+															data-index="{{ item.index | plus: 1 }}"
+															data-variant-id="{{ item.variant.id }}"
+															data-item-key="{{ item.key }}"
+															{% if has_free_product_subscription %}
+																data-reference-key="_free_product_subscription_commitment_ref"
+																data-reference-id="{{ item.variant.id }}"
+															{% endif %}
+														>
+															<button
+																type="button"
+																class="button button--reset ax-link cart-remove-button"
+																aria-label="{{ 'sections.cart.remove_title' | t: title: item.title | escape }}"
+																data-variant-id="{{ item.variant.id }}"
+															>
+																<span class="svg-wrapper">
+																	{{- 'icon-close.svg' | inline_asset_content -}}
+																</span>
+															</button>
+														</cart-remove-button>
+													{%- endunless -%}
+												</div>
+												{%- if has_qty_rules or has_vol_pricing -%}
+													<button
+														type="button"
+														class="quantity-popover__info-button quantity-popover__info-button--icon-with-label button button--tertiary"
+														aria-expanded="false"
+													>
+														<span class="svg-wrapper">
+															{{- 'icon-info.svg' | inline_asset_content -}}
+														</span>
+														<span>
+															{%- if has_vol_pricing -%}
+																{{ 'products.product.volume_pricing.note' | t }}
+															{%- elsif has_qty_rules -%}
+																{{ 'products.product.quantity.note' | t }}
+															{%- endif -%}
+														</span>
+													</button>
+												{%- endif -%}
+												{%- if has_vol_pricing or has_qty_rules -%}
+													<div
+														class="cart-items__info global-settings-popup quantity-popover__info"
+														tabindex="-1"
+														hidden
+													>
+														{%- if has_qty_rules == false -%}
+															<span class="volume-pricing-label caption">
+																{{- 'products.product.volume_pricing.title' | t -}}
+															</span>
+														{%- endif -%}
+														<div class="quantity__rules caption">
+															{%- if item.variant.quantity_rule.increment > 1 -%}
+																<span class="divider">
+																	{{-
+																		'products.product.quantity.multiples_of'
+																		| t: quantity: item.variant.quantity_rule.increment
+																	-}}
+																</span>
+															{%- endif -%}
+															{%- if item.variant.quantity_rule.min > 1 -%}
+																<span class="divider">
+																	{{-
+																		'products.product.quantity.min_of'
+																		| t: quantity: item.variant.quantity_rule.min
+																	-}}
+																</span>
+															{%- endif -%}
+															{%- if item.variant.quantity_rule.max != null -%}
+																<span class="divider">
+																	{{-
+																		'products.product.quantity.max_of'
+																		| t: quantity: item.variant.quantity_rule.max
+																	-}}
+																</span>
+															{%- endif -%}
+														</div>
+														<button
+															class="button-close button button--tertiary"
+															type="button"
+															aria-label="{{ 'accessibility.close' | t }}"
+														>
+															<span class="svg-wrapper">
+																{{- 'icon-close.svg' | inline_asset_content -}}
+															</span>
+														</button>
+														{%- if item.variant.quantity_price_breaks.size > 0 -%}
+															<volume-pricing class="parent-display">
+																<ul class="list-unstyled">
+																	<li>
+																		<span>{{ item.variant.quantity_rule.min }}+</span>
+																		<span>{{ item.variant.price | money_with_currency }}/ea</span>
+																	</li>
+																	{%- for price_break in item.variant.quantity_price_breaks -%}
+																		<li>
+																			<span>
+																				{{- price_break.minimum_quantity -}}
+																				<span aria-hidden="true">+</span>
+																			</span>
+																			<span>{{ price_break.price | money_with_currency }}/ea</span>
+																		</li>
+																	{%- endfor -%}
+																</ul>
+															</volume-pricing>
+														{%- endif -%}
+													</div>
+												{%- endif -%}
+												<div
+													id="CartDrawer-LineItemError-{{ item.index | plus: 1 }}"
+													class="cart-item__error hidden"
+													role="alert"
+													data-item-key="{{ item.key }}"
+												>
+													<small class="cart-item__error-text"></small>
+													<span class="svg-wrapper">
+														{{- 'icon-error.svg' | inline_asset_content -}}
+													</span>
+												</div>
+											</quantity-popover>
+										</td>
+										<td class="cart-item__bundle" role="cell" headers="CartDrawer-ColumnBundle">
+											{%- if item.item_components != blank -%}
+												<div class="cart-item__bundle-title">
+													{{ 'sections.cart.bundle' | t }}
+												</div>
+												<div class="cart-item__bundle-wrapper">
+													{%- for component in item.item_components -%}
+														{%- liquid
+															# Overrides BO via metafield `pack_information` (variant-level d'abord,
+															# fallback product-level). Même convention que les "Produits inclus"
+															# de la PDP pack-new (cf. card-bundle-item-included.liquid:159 +
+															# product-bundle-included-picker.liquid:185-211) :
+															# - `inclus_titre`         → titre produit (override product.title)
+															# - `inclus_variant_title` → titre variante (override variant.title,
+															#                            ex. "60 x 60 cm")
+															# - `inclus_variant_label` → label de la variante (override
+															#                            variant.option1, ex. "Carré")
+															# Si l'un de ces deux derniers est posé, on remplace la liste
+															# native `<dl cart-item__options>` (sinon doublon visuel).
+															assign comp_pack_info_variant = component.variant.metafields.custom.pack_information.value
+															assign comp_pack_info_product = component.product.metafields.custom.pack_information.value
+
+															assign component_title_override = blank
+															if comp_pack_info_variant.inclus_titre != blank
+																assign component_title_override = comp_pack_info_variant.inclus_titre
+															elsif comp_pack_info_product.inclus_titre != blank
+																assign component_title_override = comp_pack_info_product.inclus_titre
+															endif
+
+															assign component_variant_title_override = blank
+															if comp_pack_info_variant.inclus_variant_title != blank
+																assign component_variant_title_override = comp_pack_info_variant.inclus_variant_title
+															elsif comp_pack_info_product.inclus_variant_title != blank
+																assign component_variant_title_override = comp_pack_info_product.inclus_variant_title
+															endif
+
+															assign component_variant_label_override = blank
+															if comp_pack_info_variant.inclus_variant_label != blank
+																assign component_variant_label_override = comp_pack_info_variant.inclus_variant_label
+															elsif comp_pack_info_product.inclus_variant_label != blank
+																assign component_variant_label_override = comp_pack_info_product.inclus_variant_label
+															endif
+
+															# `inclus_variant_label` ou `inclus_variant_title` posés ⇒ on
+															# remplace la liste d'options native.
+															assign component_has_variant_override = false
+															if component_variant_title_override != blank or component_variant_label_override != blank
+																assign component_has_variant_override = true
+															endif
+
+															# Titre final : override BO > parent combined listing > product.title
+															if component_title_override != blank
+																assign product_bundle_title = component_title_override
+															elsif component.product.metafields.custom.combined_listings_produit_parent.value != blank
+																assign product_bundle_title = component.product.metafields.custom.combined_listings_produit_parent.value.title
+															else
+																assign product_bundle_title = component.product.title
+															endif
+
+															assign first_media_desktop = component.image
+															if component.variant.featured_image == blank or component.variant.featured_image.id != component.image.id
+																# Récupération des images depuis les métafields (logique de card-product.liquid)
+																assign first_media_images_desktop = component.product.metafields.custom.card_product_image_desktop.value | compact
+
+																# Images desktop: priorité au métachamp, ordre primaire
+																if first_media_images_desktop != blank and first_media_images_desktop[0] != blank
+																	assign first_media_desktop = first_media_images_desktop[0]
+																endif
+															endif
+														-%}
+														<div class="cart-item__bundle-component">
+															{%- if first_media_desktop != blank -%}
+																<div class="cart-item__bundle-component-image">
+																	<img
+																		src="{{ first_media_desktop | image_url: width: 100 }}"
+																		alt="{{ component.title }}"
+																		width="100"
+																		height="100"
+																	>
+																</div>
+															{%- endif -%}
+															<div class="cart-item__bundle-component-content">
+																<div class="cart-item__bundle-component-title">
+																	{{ product_bundle_title }}
+																</div>
+																{%- comment -%}
+																	Liste variante :
+																	- override BO (`inclus_variant_label` et/ou `inclus_variant_title`)
+																	  → on rend une `<dl>` réutilisant la même classe `cart-item__options`
+																	  pour conserver le style legacy, avec un unique `.product-option`
+																	  contenant la valeur overridée. Pas de doublon avec la liste native.
+																	- sinon → liste native des options de la variante (legacy).
+																{%- endcomment -%}
+																{%- if component_has_variant_override -%}
+																	<dl class="cart-item__options">
+																		<div class="product-option">
+																			<dd>
+																				{%- if component_variant_label_override != blank -%}
+																					{{ component_variant_label_override }}
+																				{%- endif -%}
+																				{%- if component_variant_label_override != blank
+																					and component_variant_title_override != blank
+																				-%}
+																					{{ ' ' }}
+																				{%- endif -%}
+																				{%- if component_variant_title_override != blank -%}
+																					{{ component_variant_title_override }}
+																				{%- endif -%}
+																			</dd>
+																		</div>
+																	</dl>
+																{%- elsif component.product.has_only_default_variant == false
+																	and component.product.gift_card? == false
+																-%}
+																	{%- liquid
+																		assign comp_custom_position = 0
+																		assign comp_custom_position_increment = 0
+																		assign comp_use_custom_position_size = false
+																		assign comp_use_custom_position_comfort = false
+																		assign comp_use_custom_position_structure = false
+																		assign comp_use_custom_position_bonnet = false
+																		assign comp_use_custom_position_version = false
+																		assign comp_bonnet_extra_offset = 0
+																		assign comp_version_extra_offset = 0
+
+																		if component.product.metafields.custom.option_position_custom != true
+																			assign comp_custom_position = 1
+																			assign comp_custom_position_increment = 1
+																		endif
+
+																		# Pré-détection : vérifie si les options "bonnet", "taille" et "version" coexistent
+																		assign comp_prescan_has_size = false
+																		assign comp_prescan_has_bonnet = false
+																		assign comp_prescan_has_version = false
+																		for prescan_option in component.options_with_values
+																			assign prescan_name_array = prescan_option.name | downcase | split: ' ' | uniq
+																			for prescan_name in prescan_name_array
+																				if options_names_for_size contains prescan_name
+																					assign comp_prescan_has_size = true
+																				endif
+																				if options_names_for_bonnet contains prescan_name
+																					assign comp_prescan_has_bonnet = true
+																				endif
+																				if options_names_for_version contains prescan_name
+																					assign comp_prescan_has_version = true
+																				endif
+																			endfor
+																		endfor
+																		if comp_prescan_has_size and comp_prescan_has_bonnet and component.product.metafields.custom.option_position_custom != true
+																			assign comp_bonnet_extra_offset = 1
+																		endif
+																		if comp_prescan_has_version and component.product.metafields.custom.option_position_custom != true
+																			assign comp_version_extra_offset = 1
+																		endif
+																	-%}
+																	<dl class="cart-item__options">
+																		{%- for option in component.options_with_values -%}
+																			{%- liquid
+																				assign comp_custom_position_increment = comp_custom_position_increment | plus: 1
+																				assign comp_custom_position = comp_custom_position_increment
+																				assign comp_current_is_bonnet = false
+																				assign comp_current_is_version = false
+
+																				assign option_name_downcase = option.name | downcase
+																				assign option_name_array = option_name_downcase | split: ' ' | uniq
+
+																				for translation in options_names_for_foot
+																					assign has_foot_in_array = option_name_array | find: translation
+																					if has_foot_in_array
+																						assign has_foot_in_array = true
+																						break
+																					endif
+																				endfor
+
+																				for translation in options_names_for_structure
+																					assign has_structure_in_array = option_name_array | find: translation
+																					if has_structure_in_array
+																						assign has_structure_in_array = true
+																						break
+																					endif
+																				endfor
+
+																				if has_foot_in_array
+																				elsif has_structure_in_array
+																					if comp_use_custom_position_structure == false
+																						if component.product.metafields.custom.option_position_custom != true
+																							assign comp_custom_position_increment = comp_custom_position_increment | minus: 1
+																							assign comp_custom_position = 1
+																						endif
+																						assign comp_use_custom_position_structure = true
+																					endif
+																				else
+																					for option_name in option_name_array
+																						assign show_armrest_information = false
+																						if options_names_for_armrest contains option_name
+																							assign show_armrest_information = true
+																						endif
+
+																						if options_names_for_size contains option_name or show_armrest_information == true
+																							if comp_use_custom_position_size == false
+																								if component.product.metafields.custom.option_position_custom != true and show_armrest_information == false
+																									assign comp_custom_position_increment = comp_custom_position_increment | minus: 1
+																									assign comp_custom_position = 1
+																								endif
+																								assign comp_use_custom_position_size = true
+																							endif
+																							break
+																						endif
+
+																						if options_names_for_comfort contains option_name
+																							if comp_use_custom_position_comfort == false
+																								if component.product.metafields.custom.option_position_custom != true
+																									assign comp_custom_position_increment = comp_custom_position_increment | minus: 1
+																									assign comp_custom_position = 1
+																								endif
+																								assign comp_use_custom_position_comfort = true
+																							endif
+																							break
+																						endif
+
+																						if options_names_for_version contains option_name
+																							assign comp_current_is_version = true
+																							if comp_use_custom_position_version == false
+																								if component.product.metafields.custom.option_position_custom != true and comp_prescan_has_size
+																									assign comp_custom_position_increment = comp_custom_position_increment | minus: 1
+																									assign comp_custom_position = 2
+																									if comp_prescan_has_bonnet
+																										assign comp_custom_position = 3
+																									endif
+																								endif
+																								assign comp_use_custom_position_version = true
+																							endif
+																							break
+																						endif
+
+																						if options_names_for_bonnet contains option_name
+																							assign comp_current_is_bonnet = true
+																							if comp_use_custom_position_bonnet == false
+																								if component.product.metafields.custom.option_position_custom != true and comp_prescan_has_size
+																									assign comp_custom_position_increment = comp_custom_position_increment | minus: 1
+																									assign comp_custom_position = 2
+																								endif
+																								assign comp_use_custom_position_bonnet = true
+																							endif
+																							break
+																						endif
+																					endfor
+																				endif
+
+																				# Décale les options non-prioritaires quand bonnet et taille coexistent
+																				if comp_bonnet_extra_offset > 0 and comp_custom_position != 1 and comp_current_is_bonnet == false
+																					assign comp_custom_position = comp_custom_position | plus: comp_bonnet_extra_offset
+																				endif
+
+																				# Décale les options non-prioritaires quand version et taille coexistent
+																				if comp_version_extra_offset > 0 and comp_custom_position != 1 and comp_current_is_bonnet == false and comp_current_is_version == false
+																					assign comp_custom_position = comp_custom_position | plus: comp_version_extra_offset
+																				endif
+
+																				if component.product.metafields.custom.option_position_custom != true and component.options_with_values.size == 1 and forloop.last
+																					assign comp_custom_position = 1
+																					assign comp_custom_position_increment = 1
+																				endif
+																			-%}
+																			<div class="product-option" style="order: {{ comp_custom_position }};">
+																				<dt
+																					{% unless comp_current_is_version %}
+																						class="visually-hidden"
+																					{% endunless %}
+																				>
+																					{{ option.name | append: ' :' }}
+																				</dt>
+																				<dd>
+																					{{ option.value -}}
+																				</dd>
+																			</div>
+																		{%- endfor -%}
+																	</dl>
+																{%- endif -%}
+															</div>
+														</div>
+													{%- endfor -%}
+												</div>
+											{%- endif -%}
+										</td>
+									</tr>
+								{%- endfor -%}
+							</tbody>
+						</table>
+					</div>
+				{%- endif -%}
+				<p id="CartDrawer-LiveRegionText" class="visually-hidden" role="status"></p>
+				<p id="CartDrawer-LineItemStatus" class="visually-hidden" aria-hidden="true" role="status">
+					{{ 'accessibility.loading' | t }}
+				</p>
+			</div>
+		</form>
+	</cart-items>
+</div>

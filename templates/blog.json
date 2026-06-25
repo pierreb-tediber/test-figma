@@ -1,0 +1,264 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-blog",
+      "disabled": true,
+      "settings": {
+        "layout": "collage",
+        "show_image": true,
+        "image_height": "medium",
+        "show_date": true,
+        "show_author": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "ax_breadcrumbs_HYhHUk": {
+      "type": "ax-breadcrumbs",
+      "name": "Fil d'ariane",
+      "settings": {
+        "full_width": false,
+        "color_scheme": "",
+        "mob_padding_top": 30,
+        "mob_padding_bottom": 14,
+        "padding_top": 16,
+        "padding_bottom": 30
+      }
+    },
+    "ax_blog_title_WxMmy3": {
+      "type": "ax-blog-title",
+      "name": "Ax blog title",
+      "settings": {
+        "title": "{{ blog.metafields.custom.titre.value }}",
+        "color_scheme": "",
+        "mob_padding_top": 12,
+        "mob_padding_bottom": 24,
+        "padding_top": 32,
+        "padding_bottom": 48
+      }
+    },
+    "ax_blog_description_QReqgW": {
+      "type": "ax-blog-description",
+      "name": "Ax blog description",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 48,
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "mob_margin_top": 24,
+        "mob_margin_bottom": 24,
+        "margin_top": 48,
+        "margin_bottom": 48
+      }
+    },
+    "ax_featured_articles_tag_R8nxFC": {
+      "type": "ax-featured-articles-tag",
+      "disabled": true,
+      "name": "Ax featured articles tag",
+      "settings": {
+        "heading": "<p>Les astuces spécial matelas</p>",
+        "picto": "shopify://shop_images/sewing.svg",
+        "picto_size": 94,
+        "picto_size_mobile": 94,
+        "tag": "axome",
+        "color_scheme": "",
+        "color_scheme_content": "scheme-5",
+        "mob_padding_top": 24,
+        "mob_padding_bottom": 24,
+        "padding_top": 48,
+        "padding_bottom": 48,
+        "mob_padding_top_content": 32,
+        "mob_padding_bottom_content": 32,
+        "padding_top_content": 48,
+        "padding_bottom_content": 48
+      }
+    },
+    "ax_articles_tag_list_eHMYNi": {
+      "type": "ax-articles-tag-list",
+      "name": "Ax articles tag list",
+      "settings": {
+        "picto": "shopify://shop_images/sewing.svg",
+        "picto_size": 94,
+        "picto_size_mobile": 24,
+        "color_scheme": "",
+        "color_scheme_content": "scheme-5",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 24,
+        "mob_padding_bottom_content": 24,
+        "padding_top_content": 48,
+        "padding_bottom_content": 48,
+        "mob_margin_top_content": 24,
+        "mob_margin_bottom_content": 24,
+        "margin_top_content": 48,
+        "margin_bottom_content": 48
+      }
+    },
+    "ax_blogs_list_qd76Ww": {
+      "type": "ax-blogs-list",
+      "blocks": {
+        "blog_JQfrny": {
+          "type": "blog",
+          "settings": {
+            "blog": "canape-convertible"
+          }
+        },
+        "blog_mtwAdP": {
+          "type": "blog",
+          "settings": {
+            "blog": "lit"
+          }
+        },
+        "blog_6PEJdU": {
+          "type": "blog",
+          "settings": {
+            "blog": "lit-coffre"
+          }
+        },
+        "blog_icj6kr": {
+          "type": "blog",
+          "settings": {
+            "blog": "traversin"
+          }
+        },
+        "blog_ytMfJX": {
+          "type": "blog",
+          "settings": {
+            "blog": "oreiller"
+          }
+        },
+        "blog_bbGJmm": {
+          "type": "blog",
+          "settings": {
+            "blog": "canape"
+          }
+        },
+        "blog_aPUzE7": {
+          "type": "blog",
+          "settings": {
+            "blog": "matelas-enfant-bebe"
+          }
+        },
+        "blog_ibqYAC": {
+          "type": "blog",
+          "settings": {
+            "blog": "matelas"
+          }
+        },
+        "blog_feQQ9R": {
+          "type": "blog",
+          "settings": {
+            "blog": "matelas-enfant-ado-grand-tedi"
+          }
+        }
+      },
+      "block_order": [
+        "blog_JQfrny",
+        "blog_mtwAdP",
+        "blog_6PEJdU",
+        "blog_icj6kr",
+        "blog_ytMfJX",
+        "blog_bbGJmm",
+        "blog_aPUzE7",
+        "blog_ibqYAC",
+        "blog_feQQ9R"
+      ],
+      "name": "Ax blogs list",
+      "settings": {
+        "heading": "",
+        "color_scheme": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 24,
+        "padding_top": 0,
+        "padding_bottom": 48
+      }
+    },
+    "ax_reassurances_iXLh7c": {
+      "type": "ax-reassurances",
+      "blocks": {
+        "reassurance_ibnwPw": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "100-nuits-essai",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_hErNMK": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-mnd3qioq",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_F8e9Mh": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-vfy3a8q5",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_ge7Lwy": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-87bgy0zq",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        }
+      },
+      "block_order": [
+        "reassurance_ibnwPw",
+        "reassurance_hErNMK",
+        "reassurance_F8e9Mh",
+        "reassurance_ge7Lwy"
+      ],
+      "settings": {
+        "heading": "Nos engagements",
+        "restricted_width": false,
+        "stack_mobile": false,
+        "border_top_mobile": true,
+        "border_bottom_mobile": false,
+        "show_content": false,
+        "autoplay": true,
+        "speed": 300,
+        "loop": false,
+        "pagination": true,
+        "color_scheme": "",
+        "color_scheme_popin": "scheme-2",
+        "mob_padding_top": 24,
+        "mob_padding_bottom": 48,
+        "padding_top": 48,
+        "padding_bottom": 96,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "ax_breadcrumbs_HYhHUk",
+    "ax_blog_title_WxMmy3",
+    "ax_blog_description_QReqgW",
+    "ax_featured_articles_tag_R8nxFC",
+    "ax_articles_tag_list_eHMYNi",
+    "ax_blogs_list_qd76Ww",
+    "ax_reassurances_iXLh7c"
+  ]
+}

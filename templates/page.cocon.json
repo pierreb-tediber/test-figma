@@ -1,0 +1,401 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_content": true,
+        "custom_h1": "<p>LE GUIDE LITERIE<br/>ET CONSEILS SUR L’UNIVERS<br/>DU SOMMEIL</p>",
+        "h1_size": "h2",
+        "h1_no_margin": true,
+        "padding_top": 96,
+        "padding_bottom": 4
+      }
+    },
+    "ax_richtext_BPw6iw": {
+      "type": "ax-richtext",
+      "blocks": {
+        "text_highlight_yrF3DH": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>Vous souhaitez changer de matelas mais vous ne savez pas lequel choisir ? Vous hésitez entre des draps en coton ou des draps en flanelle ? Vous souhaitez vous renseigner sur les meilleures positions pour bien dormir ? Découvrez à travers nos différents guides literies, nos conseils et astuces pour choisir la meilleure literie mais aussi tout l’univers du sommeil, des différents troubles du sommeil ou encore des conseils santé et bien-être.</p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "text_highlight_yrF3DH"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": true,
+        "color_scheme": "",
+        "color_scheme_container": "scheme-3",
+        "mob_padding_top": 32,
+        "mob_padding_bottom": 32,
+        "padding_top": 64,
+        "padding_bottom": 32,
+        "mob_padding_top_content": 16,
+        "mob_padding_bottom_content": 16,
+        "mob_padding_left_content": 16,
+        "mob_padding_right_content": 16,
+        "padding_top_content": 48,
+        "padding_bottom_content": 48,
+        "padding_left_content": 112,
+        "padding_right_content": 112,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "ax_blogs_list_mMaf6F": {
+      "type": "ax-blogs-list",
+      "blocks": {
+        "blog_8qNyRK": {
+          "type": "blog",
+          "settings": {
+            "blog": "canape-convertible"
+          }
+        },
+        "blog_Fxwnqb": {
+          "type": "blog",
+          "settings": {
+            "blog": "lit"
+          }
+        },
+        "blog_XtFjEA": {
+          "type": "blog",
+          "settings": {
+            "blog": "lit-coffre"
+          }
+        },
+        "blog_wRjr3a": {
+          "type": "blog",
+          "settings": {
+            "blog": "traversin"
+          }
+        },
+        "blog_y6jLUK": {
+          "type": "blog",
+          "settings": {
+            "blog": "oreiller"
+          }
+        },
+        "blog_FKzhLU": {
+          "type": "blog",
+          "settings": {
+            "blog": "canape"
+          }
+        },
+        "blog_qATkwQ": {
+          "type": "blog",
+          "settings": {
+            "blog": "matelas-enfant-bebe"
+          }
+        },
+        "blog_Va6z4t": {
+          "type": "blog",
+          "settings": {
+            "blog": "matelas"
+          }
+        },
+        "blog_MdCjEn": {
+          "type": "blog",
+          "settings": {
+            "blog": "matelas-enfant-ado-grand-tedi"
+          }
+        }
+      },
+      "block_order": [
+        "blog_8qNyRK",
+        "blog_Fxwnqb",
+        "blog_XtFjEA",
+        "blog_wRjr3a",
+        "blog_y6jLUK",
+        "blog_FKzhLU",
+        "blog_qATkwQ",
+        "blog_Va6z4t",
+        "blog_MdCjEn"
+      ],
+      "name": "Ax blogs list",
+      "settings": {
+        "heading": "",
+        "color_scheme": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 24,
+        "padding_top": 0,
+        "padding_bottom": 48
+      }
+    },
+    "ax_image_with_text_ydrH9K": {
+      "type": "ax-image-with-text",
+      "blocks": {
+        "text_eHXrY9": {
+          "type": "text",
+          "settings": {
+            "picto": "shopify://shop_images/sewing-white.svg",
+            "picto_size": 94,
+            "picto_size_mobile": 94,
+            "text": "<p>Nous passons près d’1/3 de notre vie à dormir et négligeons pourtant parfois l’importance de la qualité de notre literie sur lequel nous passons nos nuits. Les réveils sont parfois difficiles : douleurs, maux de dos, engourdissements. Pour éviter cela et retrouver des nuits paisibles et des réveils heureux, vous avez besoin d’une literie de qualité, adapté à votre morphologie et à vos habitudes de sommeil. 10 ans pour le matelas, entre 5 et 10 ans pour une couette ou encore 2 ans pour un oreiller, la literie nous accompagne tout au long de nos nuits de sommeil. La durée de vie de votre literie en dépendra de votre usage, de vos habitudes de sommeil, des différentes matières mais aussi de son entretien. Que ce soit pour équiper la chambre des plus grands comme des plus petits, découvrez tous nos conseils literie pour choisir au mieux la couette, l'oreiller ou encore les draps qui correspondent à vos habitudes de sommeil et vos besoins.</p>",
+            "description_hn_replace": false,
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "text_eHXrY9"
+      ],
+      "name": "Ax Image with text",
+      "settings": {
+        "full_width": true,
+        "text_alignment": "left",
+        "no_vertical_padding": false,
+        "image": "shopify://shop_images/tete-de-lit-tapissier_concu-pour-vous.jpg",
+        "image_restricted_width": false,
+        "image_adapted_height_with_content": false,
+        "contain_image": false,
+        "layout": "image_first",
+        "mobile_layout": "image_first",
+        "overlay": false,
+        "overlay_opacity": 0.2,
+        "section_color_scheme": "scheme-1",
+        "color_scheme": "scheme-3",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "ax_blogs_list_excerpt_W4g7mt": {
+      "type": "ax-blogs-list-excerpt",
+      "blocks": {
+        "blog_HQFg8c": {
+          "type": "blog",
+          "settings": {
+            "blog": "matelas"
+          }
+        },
+        "blog_7DkNqt": {
+          "type": "blog",
+          "settings": {
+            "blog": "sommier"
+          }
+        },
+        "blog_BVnqmg": {
+          "type": "blog",
+          "settings": {
+            "blog": "lit"
+          }
+        },
+        "blog_nxx8UX": {
+          "type": "blog",
+          "settings": {
+            "blog": "couette"
+          }
+        },
+        "blog_DxChf8": {
+          "type": "blog",
+          "settings": {
+            "blog": "oreiller"
+          }
+        },
+        "blog_JfNMn9": {
+          "type": "blog",
+          "settings": {
+            "blog": "tete-de-lit"
+          }
+        },
+        "blog_at7YBd": {
+          "type": "blog",
+          "settings": {
+            "blog": "canape-convertible"
+          }
+        },
+        "blog_hfnJqm": {
+          "type": "blog",
+          "settings": {
+            "blog": "matelas-enfant-ado-grand-tedi"
+          }
+        },
+        "blog_TMPgDW": {
+          "type": "blog",
+          "settings": {
+            "blog": "matelas-enfant-bebe"
+          }
+        },
+        "blog_fMVbqx": {
+          "type": "blog",
+          "settings": {
+            "blog": "parure-lit"
+          }
+        },
+        "blog_PVKjwC": {
+          "type": "blog",
+          "settings": {
+            "blog": "linge-de-lit"
+          }
+        },
+        "blog_TnJ9nx": {
+          "type": "blog",
+          "settings": {
+            "blog": "housse-couette-satin-coton-lave"
+          }
+        },
+        "blog_zYKjNV": {
+          "type": "blog",
+          "settings": {
+            "blog": "sommeil"
+          }
+        },
+        "blog_FFjfLR": {
+          "type": "blog",
+          "settings": {
+            "blog": "canape"
+          }
+        },
+        "blog_PXrLQq": {
+          "type": "blog",
+          "settings": {
+            "blog": "surmatelas"
+          }
+        }
+      },
+      "block_order": [
+        "blog_HQFg8c",
+        "blog_7DkNqt",
+        "blog_BVnqmg",
+        "blog_nxx8UX",
+        "blog_DxChf8",
+        "blog_JfNMn9",
+        "blog_at7YBd",
+        "blog_hfnJqm",
+        "blog_TMPgDW",
+        "blog_fMVbqx",
+        "blog_PVKjwC",
+        "blog_TnJ9nx",
+        "blog_zYKjNV",
+        "blog_FFjfLR",
+        "blog_PXrLQq"
+      ],
+      "name": "Ax blogs list excerpt",
+      "settings": {
+        "color_scheme": "",
+        "color_scheme_card": "scheme-2",
+        "mob_padding_top": 24,
+        "mob_padding_bottom": 24,
+        "padding_top": 48,
+        "padding_bottom": 24
+      }
+    },
+    "ax_richtext_77fhg4": {
+      "type": "ax-richtext",
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 24,
+        "margin_top": 0,
+        "margin_bottom": 48
+      }
+    },
+    "ax_reassurances_ttgeEY": {
+      "type": "ax-reassurances",
+      "blocks": {
+        "reassurance_Q7iiNN": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "100-nuits-essai",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_Hwz3Bq": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-mnd3qioq",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_RkjCJg": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-vfy3a8q5",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_ddJPbb": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-87bgy0zq",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        }
+      },
+      "block_order": [
+        "reassurance_Q7iiNN",
+        "reassurance_Hwz3Bq",
+        "reassurance_RkjCJg",
+        "reassurance_ddJPbb"
+      ],
+      "settings": {
+        "heading": "Nos engagements",
+        "restricted_width": false,
+        "stack_mobile": false,
+        "border_top_mobile": true,
+        "border_bottom_mobile": false,
+        "show_content": false,
+        "autoplay": true,
+        "speed": 300,
+        "loop": false,
+        "pagination": true,
+        "color_scheme": "",
+        "color_scheme_popin": "scheme-2",
+        "mob_padding_top": 24,
+        "mob_padding_bottom": 48,
+        "padding_top": 48,
+        "padding_bottom": 96,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "ax_richtext_BPw6iw",
+    "ax_blogs_list_mMaf6F",
+    "ax_image_with_text_ydrH9K",
+    "ax_blogs_list_excerpt_W4g7mt",
+    "ax_richtext_77fhg4",
+    "ax_reassurances_ttgeEY"
+  ]
+}

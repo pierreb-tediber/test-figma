@@ -1,0 +1,35 @@
+{% comment %}
+  Renders a configurable badge next to a level-1 mobile menu item.
+
+  Accepts:
+  - block: the matched header block (mega-menu-info, mega-menu-products or custom-link)
+
+  Usage:
+  {%- render 'menu-mobile-badge', block: current_block -%}
+{% endcomment %}
+
+{%- if block != blank and block.settings.badge_text != blank -%}
+  {%- assign badge_text_color = block.settings.badge_text_color -%}
+  {%- assign badge_border_color = block.settings.badge_border_color -%}
+  {%- assign badge_background_color = block.settings.badge_background_color -%}
+  {%- capture badge_style -%}
+    {%- if badge_text_color != blank %}color: {{ badge_text_color }};{% endif -%}
+    {%- if badge_border_color != blank %}border-color: {{ badge_border_color }};{% endif -%}
+    {%- if badge_background_color != blank %}background-color: {{ badge_background_color }};{% endif -%}
+  {%- endcapture -%}
+  <span class="menu-drawer__menu-item__badge"{% if badge_style != blank %} style="{{ badge_style }}"{% endif %}>
+    {%- if block.settings.badge_icon != blank -%}
+      <img
+        src="{{ block.settings.badge_icon | image_url: width: 24 }}"
+        srcset="{{ block.settings.badge_icon | image_url: width: 12 }} 12w, {{ block.settings.badge_icon | image_url: width: 24 }} 24w"
+        sizes="12px"
+        loading="eager"
+        width="12"
+        height="12"
+        alt=""
+        class="menu-drawer__menu-item__badge__icon"
+      >
+    {%- endif -%}
+    <span class="menu-drawer__menu-item__badge__text">{{ block.settings.badge_text | escape }}</span>
+  </span>
+{%- endif -%}

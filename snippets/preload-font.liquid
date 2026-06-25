@@ -1,0 +1,53 @@
+{% comment %}theme-check-disable AssetPreload{% endcomment %}
+<link
+	rel="preload"
+	href="{{ 'obviously-regular.woff2' | file_url }}"
+	as="font"
+	type="font/woff2"
+	crossorigin
+>
+<link
+	rel="preload"
+	href="{{ 'obviously-bold.woff2' | file_url }}"
+	as="font"
+	type="font/woff2"
+	crossorigin
+>
+<link
+	rel="preload"
+	href="{{ 'obviously-narrow-medium.woff2' | file_url }}"
+	as="font"
+	type="font/woff2"
+	crossorigin
+>
+<link
+	rel="preload"
+	href="{{ 'obviously-narrow-bold.woff2' | file_url }}"
+	as="font"
+	type="font/woff2"
+	crossorigin
+>
+<link
+	rel="preload"
+	href="{{ 'obviously-wide-bold.woff2' | file_url }}"
+	as="font"
+	type="font/woff2"
+	crossorigin
+>
+<link
+	rel="preload"
+	href="{{ 'obviously-wide-black.woff2' | file_url }}"
+	as="font"
+	type="font/woff2"
+	crossorigin
+>
+{%- if template.name == 'product' -%}
+<link
+	rel="preload"
+	href="{{ 'obviously-narrow-black.woff2' | file_url }}"
+	as="font"
+	type="font/woff2"
+	crossorigin
+>
+{%- endif -%}
+{% comment %}theme-check-enable AssetPreload{% endcomment %}

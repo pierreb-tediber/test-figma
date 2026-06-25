@@ -1,0 +1,316 @@
+{% if section.blocks.size > 0 %}
+	{{ 'bundle.comparative-keypoints.css' | asset_url | stylesheet_tag }}
+
+	{%- style -%}
+		.section-{{ section.id }}-padding {
+		  padding-top: {{ section.settings.mob_padding_top }}px;
+		  padding-bottom: {{ section.settings.mob_padding_bottom }}px;
+			margin-top: {{ section.settings.mob_margin_top }}px;
+			margin-bottom: {{ section.settings.mob_margin_bottom }}px;
+		}
+
+		@media screen and (min-width: 750px) {
+		  .section-{{ section.id }}-padding {
+		    padding-top: {{ section.settings.padding_top }}px;
+		    padding-bottom: {{ section.settings.padding_bottom }}px;
+				margin-top: {{ section.settings.margin_top }}px;
+				margin-bottom: {{ section.settings.margin_bottom }}px;
+		  }
+		}
+	{%- endstyle -%}
+
+	{%- liquid
+		assign lazy_load = false
+		if section.index > 1
+			assign lazy_load = true
+		endif
+	-%}
+
+	<div
+		class="comparative-keypoints gradient color-{{ section.settings.color_scheme }} section-{{ section.id }}-padding"
+		data-ax-section="comparativeKeypoints"
+		role="region"
+		{% if section.settings.heading != blank %}
+			aria-labelledby="comparative-keypoints-heading-{{ section.id }}"
+		{% endif %}
+	>
+		<div class="page-width{% if section.settings.restricted_width %} page-width--restricted--small{% endif %}">
+			<div
+				class="comparative-keypoints__wrapper{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+				{% if settings.animations_reveal_on_scroll %}
+					data-cascade
+				{% endif %}
+			>
+				{% if section.settings.heading != blank %}
+					<div class="comparative-keypoints__heading"
+						{% if settings.animations_reveal_on_scroll %}
+							data-cascade
+							style="--animation-order: 1;"
+						{% endif %}>
+						{% if section.settings.image_top != blank %}
+							<div class="comparative-keypoints__image-top" aria-hidden="true">
+								{% capture media_image_top %}
+									{{ section.settings.image_top | image_url: width: 30 | image_tag: alt: section.settings.image_top.alt }}
+								{% endcapture %}
+								{% if lazy_load %}
+									{{ media_image_top | replace: 'src="', 'lazy-src="' | replace: 'srcset="', 'lazy-srcset="' }}
+								{% else %}
+									{{ media_image_top }}
+								{% endif %}
+							</div>
+						{% endif %}
+
+						<h2 class="comparative-keypoints__title h2" id="comparative-keypoints-heading-{{ section.id }}">
+							{{ section.settings.heading }}
+						</h2>
+
+						{% if section.settings.image_bottom != blank %}
+							<div class="comparative-keypoints__image-bottom" aria-hidden="true">
+								{% capture media_image_bottom %}
+									{{ section.settings.image_bottom | image_url: width: 200 | image_tag: alt: section.settings.image_bottom.alt }}
+								{% endcapture %}
+								{% if lazy_load %}
+									{{ media_image_bottom | replace: 'src="', 'lazy-src="' | replace: 'srcset="', 'lazy-srcset="' }}
+								{% else %}
+									{{ media_image_bottom }}
+								{% endif %}
+							</div>
+						{% endif %}
+					</div>
+				{% endif %}
+
+				<ul class="comparative-keypoints__content list-unstyled grid grid--1-col grid--2-col-desktop">
+					{% for block in section.blocks %}
+						{%- style -%}
+							#shopify-section-{{ section.id }} .comparative-keypoints__item-{{ block.id }} {
+								--border-color: {{ block.settings.border_color }};
+							}
+						{%- endstyle -%}
+
+						<li
+							class="comparative-keypoints__item comparative-keypoints__item-{{ block.id }} color-{{ block.settings.color_scheme }} grid__item"
+							{{ block.shopify_attributes }}
+							{% if settings.animations_reveal_on_scroll %}
+								data-cascade
+								style="--animation-order: {{ forloop.index | plus: 1 }};"
+							{% endif %}
+						>
+							{% if block.settings.badge != blank %}
+								<div class="comparative-keypoints__badge-wrapper">
+									<div
+										class="comparative-keypoints__badge badge"
+										role="text"
+										aria-label="Badge: {{ block.settings.badge }}"
+									>
+										{{ block.settings.badge }}
+									</div>
+
+									{% if block.settings.image != blank %}
+										<div class="comparative-keypoints__badge-image" aria-hidden="true">
+											{% capture media_image_block %}
+												{{ block.settings.image | image_url: width: 100 | image_tag: alt: block.settings.image.alt }}
+											{% endcapture %}
+											{% if lazy_load %}
+												{{ media_image_block | replace: 'src="', 'lazy-src="' | replace: 'srcset="', 'lazy-srcset="' }}
+											{% else %}
+												{{ media_image_block }}
+											{% endif %}
+										</div>
+									{% endif %}
+								</div>
+							{% endif %}
+
+							{% if block.settings.description != blank %}
+								<div class="comparative-keypoints__description" role="text">
+									{{ block.settings.description }}
+								</div>
+							{% endif %}
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+	</div>
+{% endif %}
+
+{% schema %}
+	{
+		"name": "Ax comparative keypoints",
+		"tag": "section",
+		"class": "section",
+		"disabled_on": {
+			"groups": ["header", "footer"]
+		},
+		"settings": [
+			{
+				"type": "checkbox",
+				"id": "restricted_width",
+				"label": "Largeur restreinte",
+				"default": true
+			},
+			{
+				"type": "header",
+				"content": "Contenu"
+			},
+			{
+				"type": "text",
+				"id": "heading",
+				"label": "Titre",
+				"default": "Titre"
+			},
+			{
+				"type": "image_picker",
+				"id": "image_top",
+				"label": "Picto haut"
+			},
+			{
+				"type": "image_picker",
+				"id": "image_bottom",
+				"label": "Picto bas"
+			},
+			{
+				"type": "header",
+				"content": "Color"
+			},
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "Color scheme",
+				"default": "background-1"
+			},
+			{
+				"type": "header",
+				"content": "Marges internes"
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding bottom",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding bottom",
+				"default": 0
+			},
+			{
+				"type": "header",
+				"content": "Marges externes"
+			},
+			{
+				"type": "range",
+				"id": "mob_margin_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Margin top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "mob_margin_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Margin bottom",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "margin_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Margin top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "margin_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Margin bottom",
+				"default": 0
+			}
+		],
+		"blocks": [
+			{
+				"type": "keypoint",
+				"name": "Point clé",
+				"settings": [
+					{
+						"type": "text",
+						"id": "badge",
+						"label": "Badge"
+					},
+					{
+						"type": "image_picker",
+						"id": "image",
+						"label": "Image"
+					},
+					{
+						"type": "richtext",
+						"id": "description",
+						"label": "Description"
+					},
+					{
+						"type": "header",
+						"content": "Couleur"
+					},
+					{
+						"type": "color_scheme",
+						"id": "color_scheme",
+						"label": "Couleur",
+						"default": "background-1"
+					},
+					{
+						"type": "color",
+						"id": "border_color",
+						"label": "Couleur de la bordure",
+						"default": "#F1DDC5"
+					}
+				]
+			}
+		],
+		"presets": [
+			{
+				"name": "Ax comparative keypoints",
+				"blocks": []
+			}
+		]
+	}
+{% endschema %}

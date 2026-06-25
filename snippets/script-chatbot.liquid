@@ -1,0 +1,42 @@
+<script type="text/javascript" id="yuma-widget">
+  !function() {
+    window.$yuma = window.$yuma || [];
+    window.$yuma.url = 'https://app.yuma.ai/w/8ea15f6c-39e1-4b14-924e-8d079f566cd1';
+    window.$yuma.config = {};
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = "https://js.yuma.ai/widget.js";
+    var x = document.getElementsByTagName('script')[0];
+    x.parentNode.insertBefore(s, x);
+  }();
+</script>
+
+<style>
+  iframe#yuma-widget {
+    z-index: 3 !important;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  body:has(.product-sticky-bar--visible) iframe#yuma-widget:not(.open) {
+    transform: translateY(calc(calc(var(--product-sticky-bar-height, 65px) - 20px) * -1)) !important;
+  }
+  body iframe#yuma-widget.open {
+  	z-index: 999 !important;
+  }
+</style>
+
+<script>
+  (function () {
+    const mo = new MutationObserver(function () {
+      const iframe = document.querySelector('iframe#yuma-widget');
+      if (!iframe) return;
+      mo.disconnect();
+
+      new ResizeObserver(function () {
+        iframe.classList.toggle('open', iframe.offsetWidth > 200);
+      }).observe(iframe);
+    });
+
+    mo.observe(document.body, { childList: true, subtree: true });
+  })();
+</script>

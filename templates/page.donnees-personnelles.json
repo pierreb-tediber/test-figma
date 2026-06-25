@@ -1,0 +1,939 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_content": false,
+        "custom_h1": "",
+        "h1_size": "h1",
+        "h1_no_margin": false,
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "ax_heading_6TphAp": {
+      "type": "ax-heading",
+      "name": "Ax heading",
+      "settings": {
+        "heading": "<p>DONNÉES PERSONNELLES</p>",
+        "heading_size": "h2",
+        "heading_first": true,
+        "subheading": "",
+        "description": "",
+        "full_width": false,
+        "text_alignment": "center",
+        "color_scheme": "",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 32,
+        "padding_top": 96,
+        "padding_bottom": 64
+      }
+    },
+    "ax_richtext_RkciMT": {
+      "type": "ax-richtext",
+      "blocks": {
+        "text_highlight_GXD6dh": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>Tediber met en oeuvre de nombreuses mesures et actions pour se mettre en conformité au niveau de la RGPD et pour assurer au mieux la protection de vos données personnelles. </p>",
+            "text_alignment": "left"
+          }
+        },
+        "heading_MLktXy": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Quelles sont les données personnelles collectées par Tediber ? </p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_JRbaPb": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Finalité et catégorie de données collectées Pour le bon déroulement et le suivi de votre commande, de nombreuses données personnelles sont collectées sur le site tel que : - Nom / Prénom - Adresse mail - Numéro de téléphone - Adresse postale, Adresse de livraison (si différente) - Détails de livraison (optionnel) - Nom de l’entreprise (optionnel) - Numéro de commande Ces données personnelles collectées lors de votre commande sont conservées plus de 36 mois. Il est essentiel de le faire afin de faire marcher la garantie de vos produits. <br/> Lors de jeux concours, dans des pages dédiées, le site peut récolter des données personnelles tel que : - Nom / Prénom - Adresse mail et recueillir votre consentement pour vous inscrire à la newsletter et recevoir des offres promotionnelles, conseils ou nouveautés. Vous pouvez vous désinscrire à tout moment en cliquant sur “Se désinscrire” en bas du mail. <br/> Lorsque vous remplissez une demande d'avis sur le site, nous récoltons : - Prénom - Adresse mail - Date de naissance - Numéro de commande La date de naissance est récupérée pour faire fonctionner le filtre par âge et pour assurer que vous êtes bien majeur. Transmission et destinataire Partenaires logistiques : Ces données sont transmises à nos partenaires logistiques afin qu'ils puissent effectuer la livraison. Nos partenaires sont : VIR, E-deliv, Chronopost (Point relais), France-Express, DPD, Olvo, La Poste, Quai 77 et DHL.<br/> Partenaires de paiement : Ces données sont transmises à PayPal, Adyen, Younited, Stripe ou Dalenys (en fonction de ce que vous avez choisi) afin de payer la commande. Gestion client : Ces données sont transmises à Drip pour gérer notre base client.<br/> Enquête de satisfaction : Votre adresse email, votre nom, prénom et votre référence de commande sont transmises à nos partenaires Avis-Vérifiés, Trustpilot ou Google Avis afin qu’ils vous adressent une enquête de satisfaction.</p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "text_highlight_GXD6dh",
+        "heading_MLktXy",
+        "text_JRbaPb"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_Bg9Fyx": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_FVq3AE": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Quelles sont les données personnelles collectées par les partenaires de Tediber ? </p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_FEpniE": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Comme tous les e-commerçants, nous récoltons des données sur nos internautes et nous travaillons avec plusieurs prestataires tiers, qui ont donc accès à une partie de nos données.<br/> Ces données sont indispensables pour vous offrir la meilleure expérience possible sur notre site.</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_highlight_cWh3pN": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>Admo</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_Lk7yED": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Admo permet de suivre et d’analyser l’impact des publicités TV sur le site internet. Ainsi, cela nous permet d’analyser le comportement des utilisateurs à la suite d’une campagne publicitaire. Il y a une transmission de données vers Captain Metrics et Rimdian. Politique de vie privée : https://www.admo.tv/en/privacy-policy</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_highlight_6P8EeK": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>Aircall</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_3j8rbN": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Aircall est une plateforme de téléphonie qui nous permet de gérer nos appels téléphoniques de manière efficace et de fournir un service client de qualité. Il y a une transmission des données collectées vers Zendesk. Politique de confidentialité : https://aircall.io/privacy/</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_highlight_ENbd4d": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>Affilae</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_9K9cmq": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Affilae permet de suivre les interactions des visiteurs sur le site qui proviennent d'affiliés partenaires inscrits sur la plateforme Affilae et permet de mesurer les performances des affiliés enregistrés sur la plateforme, en suivant le trafic qu'ils envoient sur le site, les conversions qu'ils génèrent etc. Il n’y a pas de transmissions de données en dehors de leur service. Politique de vie privée : https://affilae.com/en/privacy-cookie-policy/ </p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_highlight_tPyGdD": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>Allmysms</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_CNXKPU": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Allmysms est une plateforme de marketing par SMS qui nous permet de vous envoyer des communications (nouveautés, bons plans etc). Lorsque vous passez commande sur le site, vous consentez à recevoir des SMS. Il n’y a pas de transmissions de données en dehors de leur service. Politique de vie privée : https://www.allmysms.com/confidentialite/</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_highlight_Qh6xLL": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>Big Query</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_aFnA73": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Big Query nous permet d’analyser nos ventes et comprendre le comportement de nos clients et leurs besoins. Les données Big Query sont alimentés par notre base de données. Lorsque vous passez commande sur le site, vous consentez au profilage pour mieux comprendre vos habitudes d'achats et vos comportements. Il y a une transmission des données vers Butterfl.ai Politique de prive privée : https://cloud.google.com/bigquery/docs/privacy-policies?hl=fr </p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_highlight_rNrCKq": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>Butterfl.ai</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_gf38Jy": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Butterfl.ainous permet d'analyser notre base client et comprendre leurs comportements et besoins. Le plateforme est alimentée par les données personnelles récupérées sur Rimdian. Lorsque vous passez commande sur le site Il y a une transmission des données collectées vers Drip. Politique de vie privée : https://www.butterfl.ai/politique-de-confidentialite</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_highlight_BYBiTw": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>Captain Metrics</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_4Vbk4m": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Captain Metrics permet de collecter des données sur le comportement des visiteurs (ex : informations sur les pages visitées, la durée des visites, d’où ils proviennent, les conversions etc.) ainsi que des informations sur l’appareil utilisé (ex: marque, système d'exploitation, taille d'écran). Migration en cours pour devenir Rimdian. Il y a une transmission des données collectées vers PowerBI et Butterfl.ai. Politique de vie privée : https://www.rimdian.com/privacy-policy </p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_highlight_8qTiPR": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>Contentsquare</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_4nWWew": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Contentsquare permet de collecter des données sur l'interaction des utilisateurs avec le site (ex : suivi du parcours du visiteur, suivi des endroits où il clique etc.). La plateforme nous permet ensuite grâce à ces outils d’analyse d’interpréter et mieux comprendre le parcours des utilisateurs. Ainsi, cela nous permet de réfléchir à comment optimiser l’expérience utilisateur. Les statistiques produites sont anonymes. Au niveau du panier et du processus de commande, nous ne récupérons aucune données personnelles. Toutes les données que vous renseignez (nom, prénom, adresse e-mail, numéro de téléphone, adresse de facturation et de livraison etc.) sont anonymisées et ne sont pas transmises à Contentsquare. Nous récupérons uniquement le contenu de votre panier et le choix de votre méthode de livraison. Pour être exclu du suivi,veuillez cliquer ici. Il n’y a pas de transmissions de données en dehors de leur service. Politique de vie privée : https://contentsquare.com/fr-fr/privacy-center/privacy-policy/</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_highlight_NRj6nQ": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>Criteo</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_YUpXjc": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Criteo permet de collecter des données sur le comportement des visiteurs sur le site et en fonction de cela créer des campagnes publicitaires ciblées. Résultat, lorsque les visiteurs quittent le site, ils peuvent voir des annonces personnalisées basées sur leur comportement précédent. Ainsi, cela nous permet de faire du remarketing et inciter à revenir et pourquoi pas à effectuer un achat. Nous enregistrons un identifiant unique et chiffré ainsi qu'un identifiant de l'appareil et si ces visites proviennent d'une publicité. Il y a une transmission des données collectées à Criteo et ses régies publiciataires partenaires. Politique de vie privée : https://www.criteo.com/fr/privacy</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_highlight_zTh6Ey": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>Drip</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_TTAyFf": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Drip permet de personnaliser les campagnes marketing (newsletters) en fonction des intérêts et comportements des contacts. Nous enregistrons : - vos données de navigation sur le site (ex: pages visitées, boutons cliqués, produits ajoutés au panier, etc.). - si vous souhaitez recevoir notre newsletter - si vous souhaitez être recontactés par mail et SMS Cela peut par exemple vous permettre de : - sauvegarder votre panier et le recevoir par mail - vous envoyer des cartes cadeaux virtuelles dans le cadre de notre programme de récompense Tediber Récompense - recevoir des campagnes ciblées en fonction de vos intérêts Lorsque vous passez commande sur le site, vous consentez à être inscrit au programme de récompense [Tediber Récompense](https://www.tediber.com/cgu-tediber-recompense). Il y a une transmission des données collectées vers Allmysms, Rimdian, Captain Metrics et Butterfl.ai. Politique de vie privée : https://www.drip.com/privacy</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_highlight_W9jNUM": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>Google Ads</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_RWCWym": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Google Ads permet de collecter des données sur l’activité des visiteurs sur notre site après avoir cliqué sur une annonce Google Ads. On peut récupérer un certain nombres d’informations telles que les pages visités, les actions effectuées, la durée des visites etc. Ainsi, cela nous permet de mesurer le nombre de conversions générées par nos annonces publicitaires et en fonction des performances nous pouvons essayer de faire des stratégies et prévisions pour les futurs campagnes. Et donc de permettre un affichage de publicités personnalisés. Nous enregistrons un identifiant unique et chiffré ainsi qu'un identifiant de l'appareil et si ces visites proviennent d'une publicité. Il y a une transmission des données collectées à Google et ses outils ainsi que Rimdian. Politique de vie privée : https://privacy.google.com/businesses/adsservices/</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_highlight_tYUEDt": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>Google Analytics</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_Mmq3Y6": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Google Analytics permet de collecter des données sur le comportement des visiteurs (ex : informations sur les pages visitées, la durée des visites, d’où ils proviennent, les conversions etc.) ainsi que des informations sur l’appareil utilisé (ex: marque, système d'exploitation, taille d'écran). La plateforme nous permet ensuite grâce à ces outils d’analyses et ces rapports d’avoir des statistiques sur les différentes pages et à voir comment ils interagissent. Ainsi, cela nous permet de prendre des décisions au niveau des campagnes marketing pour atteindre au mieux nos KPI. Il y a une transmission des données collectées à Google et ses outils ainsi que Contentsquare. Politique de vie privée : https://policies.google.com/technologies/cookies </p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_highlight_zwLfzp": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>Meta</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_HQgc4T": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Le pixel Meta permet de suivre les actions sur le site des visiteurs (Clic sur produit, ajout au panier etc.) Cela nous permet d'avoir un suivi des conversions, d'optimiser nos annonces publicitaires, de faire du remarketing et de mesurer l'efficacité de ces annonces. Il y a une transmission des données collectées vers Rimdian. Politique de vie privée : https://www.facebook.com/privacy/policy/ </p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_highlight_Kjb4TY": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>Optimonk</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_dH4FDb": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Optimonk permet de créer des pop-up personnalisés sur le site afin d’encourager les visiteurs à remplir un formulaire ou à effectuer des achats. On pourra ensuite avoir des statistiques sur ces pop-up. Ainsi, on pourra optimiser nos campagnes pop-up en fonction des différentes conversions observées. Il y a une transmission des données collectées vers Zapier et Google Analytics. Il existe une fonctionnalité de sauvegarde de votre panier (si vous l’utilisez, cela enregistre votre adresse email et les produits ajoutés à votre panier). Politique de vie privée : https://www.optimonk.com/privacy-policy/</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_highlight_96ceD6": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>Pinterest</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_GqYab9": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Pinterest est utilisé pour la gestion des campagnes publicitaires. Cela permet de suivre les actions des visiteurs après qu'ils ont cliqué sur un pin ou une publicité Pinterest. Cela nous permet d’optimiser nos campagnes marketing par le remarketing, l’analyse des performances et statistiques etc. Il n’y a pas de transmissions de données en dehors de leur service. Politique de vie privée : https://policy.pinterest.com/fr/privacy-policy</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_highlight_hDik9K": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>PowerBI</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_KHqLpM": {
+          "type": "text",
+          "settings": {
+            "text": "<p>PowerBI nous permet d’analyser nos ventes et comprendre le comportement de nos clients et leurs besoins. Les données PowerBI sont alimentés par notre base de données. Il n'y a pas de transmissions de données en dehors de leur service. Politique de prive privée : https://learn.microsoft.com/en-us/power-bi/enterprise/service-security-data-protection-overview </p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_highlight_LxQGXR": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>Rimdian</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_xQMfUT": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Rimdian permet de collecter des données sur le comportement des visiteurs (ex : informations sur les pages visitées, la durée des visites, d’où ils proviennent, les conversions etc.) ainsi que des informations sur l’appareil utilisé (ex: marque, système d'exploitation, taille d'écran). Politique de vie privée : https://www.rimdian.com/privacy-policy</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_highlight_hKykfE": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>Sentry</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_4ca6TH": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Sentry permet de collecter des données sur le comportement des visiteurs (ex : informations sur les pages visitées, la durée des visites, d’où ils proviennent, les conversions etc.) ainsi que des informations sur l’appareil utilisé (ex: marque, système d'exploitation, taille d'écran). Cela permet de repérer les erreurs techniques du site et d’émettre des alertes. Pour cela, il y a notamment une détection des erreurs en temps réel, des rapports et analyses détaillés et une surveillance des performances etc. Il n’y a pas de transmissions de données en dehors de leur service. Politique de vie privée : https://sentry.io/privacy/</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_highlight_MRyA6W": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>Speedcurve</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_JWrMH9": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Speedcurve permet de collecter des données sur le comportement des visiteurs (ex : informations sur les pages visitées, la durée des visites, d’où ils proviennent, les conversions etc.) ainsi que des informations sur l’appareil utilisé (ex: marque, système d'exploitation, taille d'écran). Cela permet d’analyser les performances, surveiller et optimiser la vitesse de chargement du site. Il n’y a pas de transmissions de données en dehors de leur service. Politique de vie privée : https://www.speedcurve.com/terms/</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_highlight_gLiXFC": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>Stylight</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_dGNbeD": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Stylight est mis en place sur le site pour permettre l’affichage de publicités personnalisées sur l'ensemble des sites Stylight (.fr et .be). Nous enregistrons un identifiant unique et chiffré ainsi qu'un identifiant de l'appareil et si ces visites proviennent d'une publicité. Il y a une transmission des données collectées vers Kelkoogroup. Politique de vie privée : https://about.stylight.com/privacy-policy-fr_fr</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_highlight_EE9d67": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>yuma.ai</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_rJerMY": {
+          "type": "text",
+          "settings": {
+            "text": "<p>yuma.ai permet d’afficher un chatbot sur le site afin d’apporter une assistance instantanée aux clients afin de les aider en cas de question (portant sur les produits, les transporteurs, leur commande, le suivi d’une commande etc.) ou d’être en contact avec un membre de notre service client en cas de demande spécifique ou nécessitant une intervention non automatisée. Il y a une transmission des données collectées vers Zendesk. Politique de vie privée : https://www.tolk.ai/cgv</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_highlight_UB4C4m": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>Zendesk</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_hh7HLA": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Zendesk est une plateforme de service client. Il nous permet notamment de gérer tout sur une même plateforme : appels (Aircall) et messages sur le chat (Tolk.ai). Il n’y a pas de transmissions de données en dehors de leur service. Politique de confidentialité : https://www.zendesk.fr/company/agreements-and-terms/privacy-notice/</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_highlight_wi3e7J": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>Zapier</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_LcFbAE": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Zapier est une plateforme d’automatisation de tâches entre différentes applications / logiciels. Dans notre cas, Zapier est un connecteur qui nous permet de relier Optimonk et Drip. Optimonk passe par Zapier pour être relié à Drip. Il y a une transmission des données collectées vers Drip. Politique de confidentialité : https://zapier.com/privacy </p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_FVq3AE",
+        "text_FEpniE",
+        "text_highlight_cWh3pN",
+        "text_Lk7yED",
+        "text_highlight_6P8EeK",
+        "text_3j8rbN",
+        "text_highlight_ENbd4d",
+        "text_9K9cmq",
+        "text_highlight_tPyGdD",
+        "text_CNXKPU",
+        "text_highlight_Qh6xLL",
+        "text_aFnA73",
+        "text_highlight_rNrCKq",
+        "text_gf38Jy",
+        "text_highlight_BYBiTw",
+        "text_4Vbk4m",
+        "text_highlight_8qTiPR",
+        "text_4nWWew",
+        "text_highlight_NRj6nQ",
+        "text_YUpXjc",
+        "text_highlight_zTh6Ey",
+        "text_TTAyFf",
+        "text_highlight_W9jNUM",
+        "text_RWCWym",
+        "text_highlight_tYUEDt",
+        "text_Mmq3Y6",
+        "text_highlight_zwLfzp",
+        "text_HQgc4T",
+        "text_highlight_Kjb4TY",
+        "text_dH4FDb",
+        "text_highlight_96ceD6",
+        "text_GqYab9",
+        "text_highlight_hDik9K",
+        "text_KHqLpM",
+        "text_highlight_LxQGXR",
+        "text_xQMfUT",
+        "text_highlight_hKykfE",
+        "text_4ca6TH",
+        "text_highlight_MRyA6W",
+        "text_JWrMH9",
+        "text_highlight_gLiXFC",
+        "text_dGNbeD",
+        "text_highlight_EE9d67",
+        "text_rJerMY",
+        "text_highlight_UB4C4m",
+        "text_hh7HLA",
+        "text_highlight_wi3e7J",
+        "text_LcFbAE"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_9QeXzn": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_giNeLH": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Pourquoi Tediber collecte mes données personnelles ?</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_RhaGEk": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Tediber collecte vos données personnelles pour : - Traiter vos commandes et expéditions (confirmation de commande, suivi, facture, paiement etc.) - Réaliser un suivi de la relation client (demande d’avis, gestion des réclamations, service après-vente etc.) - Personnaliser les communications commerciales que nous vous adressons (mails, sms etc.) - Analyser et améliorer nos services (en analysant les statistiques concernant votre activité sur notre site notamment) </p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_giNeLH",
+        "text_RhaGEk"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_krdN4C": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_wDGdwb": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Quelles sont les communications que je peux recevoir ? </p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_YX87RX": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Mails de commande Suite à une commande sur le site, vous recevrez des mails permettant suivre le traitement de votre commande (confirmation de commande, informations de suivi etc.). Ces mails sont nécessaires pour le bon traitement de votre commande. Il n’est pas possible de ne pas recevoir ces mails.<br/> Newsletters Suite à votre inscription à notre newsletter, vous recevrez des mails de prospections pour vous tenir informé des nouveautés et actualités. Vous pouvez vous désinscrire à tout moment en cliquant sur “Se désinscrire” en bas du mail.<br/> SMS Suite à un achat sur le site, vous allez recevrez des communications par SMS pour vous tenir informé des nouveautés et bons plans. Lorsque vous passez commande sur le site, vous consentez à recevoir des communications par SMS. Vous pouvez vous désinscrire à tout moment par SMS, il suffit d’envoyer STOP au 36200 et vous ne recevrez plus de communications. À chacune de nos communications, ce message est affiché pour se désabonner.<br/> Mail de demande d’avis de Tediber, Avis Vérifiés, Trustpilot ou Google Avis Suite à un achat sur le site, vous pouvez être sollicité par Tediber, Avis Vérifiés, Trustpilot ou Google Avis pour laisser votre avis sur votre commande. Votre adresse email, votre nom, prénom et votre référence de commande sont transmises à ces différents partenaires. Si c’est sur le site Tediber, nous récupérons à ce moment là les données suivantes : Prénom, Adresse mail, Âge et Avis sur l’usage des produits (les questions diffèrent en fonction des produits).<br/> Contact téléphonique - SAV Suite à une demande d’aide de votre part (sur le site, par mail, par les réseaux sociaux ou par téléphone), notre service client peut vous appeler pour traiter votre requête. Nous sommes en fonction des cas, susceptibles de vous demander des informations personnelles notamment sur votre commande, pour vous aider à traiter votre demande.<br/> Contact téléphonique - Abandon panier Suite à une tentative d’achat sur le site, si vous avez commencé à remplir vos coordonnées dans le processus de commande mais que vous n’êtes pas allé au bout de celle-ci, vous recevrez un message pré-enregistré dans votre boîte vocale pour vous relancer suite à votre abandon panier.<br/> Mail - Abandon panier Suite à une tentative d’achat sur le site, si vous avez commencé à remplir vos coordonnées dans le processus de commande mais que vous n’êtes pas allé au bout de celle-ci, vous recevrez un mail pour vous relancer suite à votre abandon panier. Vous pouvez vous désinscrire à tout moment en cliquant sur “Se désinscrire” en bas du mail. </p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_wDGdwb",
+        "text_YX87RX"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_kK44GF": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_LeWpxK": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Où sont situés les serveurs de Tediber ?</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_7aKiBV": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Les serveurs de Tediber sont Netlify et Google.<br/> Netlify Adresse : 2325 3rd Street (Suite 296) 94107 San Francisco (California) Contact : support@netlify.com Site : netlify.com<br/> Google Adresse : 100 Rue de Ghlin 7331 Saint-Ghislain (Belgique) Contact : stghislain@google.com Site : google.com </p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_LeWpxK",
+        "text_7aKiBV"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_6biCGK": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_MGgmxh": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Est-ce que Tediber revend mes données personnelles ?</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_zMtjTY": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Non, c’est totalement illégal ! Toutes les données personnelles que nous récoltons ne sont ni vendues et ni échangées à une société tierce. </p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_MGgmxh",
+        "text_zMtjTY"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_N8jQzQ": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_knjytA": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Qu’en est-il de mes coordonnées bancaires ?</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_rP4nTy": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Aucune données concernant vos coordonnées bancaires (Numéro de carte, date d’expiration ou code de sécurité à 3 chiffres) ne sont stockés sur les serveurs de Tediber.<br/> La sécurité de vos données de paiement sont assurés directement par nos partenaires : PayPal, Adyen, Younited, Stripe et Dalenys.<br/> Vos données sont transmises cryptées aux serveurs de nos partenaires lors du règlement de votre commande. Cela signifie que les informations sont encodées de manière à ce qu'elles ne puissent pas être lues par des tiers non autorisés pendant la transmission.<br/> De plus, nos partenaires appliquent des protocoles de sécurités très strictes pour garantir la protection des données tel que la sécurisation des serveurs, la protection des accès, la mise en place de pare feux etc.<br/> Lors de votre paiement, un certificat électronique est généré, avec le montant et la date de la transaction conformément aux dispositions des articles 1316 et suivants du Code Civil.</p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_knjytA",
+        "text_rP4nTy"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_JmrhEW": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_UpWfa3": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Quels sont les cookies utilisés ?</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_rQBHKH": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Les cookies sont des petits fichiers textes qui peuvent être utilisés par les sites web pour rendre l'expérience utilisateur plus efficace.<br/> La loi stipule que nous ne pouvons stocker des cookies sur votre appareil que s’ils sont strictement nécessaires au fonctionnement de ce site. Pour tous les autres types de cookies, nous avons besoin de votre permission.<br/> Tediber utilise différents types de cookies. Certains cookies sont placés par les services tiers qui apparaissent sur nos pages.<br/> Voici les différents cookies et leur finalité : - *Nécessaires*: pour faire fonctionner le site - *Préférences :*pour en personnaliser le contenu et rendre votre navigation plus agréable - *Statistiques*: pour réaliser des analyses - *Marketing*: pour vous proposer des publicités en accord avec vos vos centres d’intérêt Votre consentement est conservé pendant 12 mois. </p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_UpWfa3",
+        "text_rQBHKH"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_dWJAcz": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_cdz8A9": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Quels sont mes droits ? Comment exercer mes droits ?</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_rNQdWr": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Vous pouvez exercer vos droits concernant le traitement de vos données personnelles, à savoir : - Droit d’accès : Vous avez le droit d’accéder aux données personnelles qui vous concernent. - Droit de rectification : Vous avez le droit à tout moment de compléter, corriger, faire supprimer ou bloquer vos données personnelles. - Droit d’opposition : Vous pouvez vous opposer au traitement de vos données. - Droit d’effacement : Si vous nous donnez votre consentement pour le traitement de vos données, vous avez le droit de révoquer ce consentement et de faire supprimer vos données personnelles. - Droit à la portabilité : Vous pouvez nous demander un export de toutes les données personnelles vous concernant. Comment exercer mes droits ? Pour exercer vos droits, vous pouvez contacter par mail notre Délégué à la Protection des Données (DPO) sur dpo@tediber.com.<br/> Votre demande sera traité dans un délai maximum légal d’un mois. </p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_cdz8A9",
+        "text_rNQdWr"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_MkgApx": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_a7YD4z": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Qui est le responsable de traitement de mes données personnelles ? </p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_M4Pn6h": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Le responsable du traitement de mes données personnelles est la société Tediber dont l’adresse est 20 rue Sainte-Croix de la Bretonnerie 75004 Paris. Vous pouvez nous joindre par mail sur hello@tediber.com ou par téléphone au 01 86 95 47 10.<br/> L’adresse mail du Délégué à la Protection des Données (Céline) est dpo@tediber.com. </p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_a7YD4z",
+        "text_M4Pn6h"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_iUwGVm": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_MMfEhz": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Comment nous contacter en cas de désaccord ?</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_hVKGUH": {
+          "type": "text",
+          "settings": {
+            "text": "<p>En cas de désaccord concernant le traitement de vos données personnelles, nous vous invitions à nous contacter pour trouver une solution.<br/> Nous sommes là pour vous apporter des précisions si vous avez des questions concernant le traitement de vos données personnelles, pour vous rassurer et vous apporter des réponses si vous avez des préoccupations, mettre en place des actions si vous souhaitez exercer vos droits (accès, rectification, opposition et effacement) etc.<br/> Vous pouvez nous contacter à tout moment sur dpo@tediber.com ou à l’adresse suivante 20 rue Sainte-Croix de la Bretonnerie 75004 Paris.<br/> Nous disposons d’un délai légal d’un mois pour répondre à votre demande.<br/> Si après avoir échangé avec nous, vous estimez que nous n’avons pas apporté une réponse satisfaisante à votre demande, vous avez le droit de déposer une plainte auprès de la CNIL. Nous nous réservons le droit de modifier la présente Politique de confidentialité à tout moment. Dernière mise à jour : _13/12/2023_ </p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_MMfEhz",
+        "text_hVKGUH"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    }
+  },
+  "order": [
+    "main",
+    "ax_heading_6TphAp",
+    "ax_richtext_RkciMT",
+    "ax_richtext_Bg9Fyx",
+    "ax_richtext_9QeXzn",
+    "ax_richtext_krdN4C",
+    "ax_richtext_kK44GF",
+    "ax_richtext_6biCGK",
+    "ax_richtext_N8jQzQ",
+    "ax_richtext_JmrhEW",
+    "ax_richtext_dWJAcz",
+    "ax_richtext_MkgApx",
+    "ax_richtext_iUwGVm"
+  ]
+}

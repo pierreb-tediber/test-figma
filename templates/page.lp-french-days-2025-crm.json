@@ -1,0 +1,377 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "custom_liquid_LLEGPQ": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "{% style %}\n.summer-sale-hero {\n  max-height: 1200px;\n  background-color: #EFF5FF;\n  background-size: cover;\n  background-position: center;\n  background-repeat: no-repeat;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  text-align: center;\n  padding: 48px 24px;\n}\n\n.summer-sale-hero h2 {\n  color: var(--primary, #010C27);\n  font-family: Obviously, sans-serif;\n  font-size: var(--font-size-xl2, 56px);\n  font-weight: 600;\n  line-height: var(--font-line-height-xl, 56px);\n  text-transform: uppercase;\n  margin-bottom: 8px;\n}\n\n.summer-sale-hero h4 {\n  color: #000;\n  font-family: Obviously, sans-serif;\n  font-size: var(--font-size-md, 16px);\n  font-weight: 600;\n  line-height: var(--font-line-height-xs, 16px);\n  margin-bottom: 32px;\n}\n\n.summer-sale-hero .promo-block {\n  font-family: Obviously, sans-serif;\n  font-size: var(--font-size-xl, 32px);\n  font-weight: 600;\n  line-height: var(--font-line-height-lg1, 40px);\n  text-transform: uppercase;\n  color: var(--primary, #010C27);\n  margin-bottom: 16px;\n}\n\n.summer-sale-hero .promo-block .tag {\n  background-color: #A25F33;\n  color: white;\n  padding: 4px 8px;\n  border-radius: 4px;\n  margin-right: 8px;\n  display: inline-block;\n}\n\n.summer-sale-hero .promo-block .code {\n  display: inline-block;\n  padding: 4px 12px;\n  border: 1px solid var(--primary, #010C27);\n  background-color: white;\n  border-radius: 4px;\n  font-weight: bold;\n  margin-left: 8px;\n}\n\n.summer-sale-hero .claim {\n  color: #A25F33;\n  font-weight: bold;\n  margin-bottom: 8px;\n  font-family: Obviously, sans-serif;\n  text-transform: uppercase;\n}\n\n.summer-sale-hero .date {\n  font-weight: bold;\n  font-family: Obviously, sans-serif;\n  margin-bottom: 24px;\n  text-transform: uppercase;\n}\n\n.summer-sale-hero .cta-button {\n  background-color: #010C27;\n  color: white;\n  padding: 16px 24px;\n  border-radius: 4px;\n  font-weight: 500;\n  text-decoration: none;\n  font-family: Obviously, sans-serif;\n  font-size: 16px;\n}\n\n.summer-sale-hero .visual {\n  width: 100%;\n  max-width: 600px;\n  padding-top: 56px;\n}\n\n@media (min-width: 768px) {\n  .summer-sale-hero {\n    max-height: 600px;\n    flex-direction: row;\n    justify-content: space-between;\n    text-align: left;\n    padding-left: 5%;\n    padding-right: 5%;\n  }\n\n  .summer-sale-hero .content {\n    max-width: 50%;\n  }\n\n  .summer-sale-hero .visual {\n    max-width: 50%;\n    height: 100%;\n    padding-top: 0px;\n  }\n}\n\n/* ✅ Réduction des tailles texte en mobile */\n@media (max-width: 767px) {\n  .summer-sale-hero h2 {\n    font-size: 40px;\n    line-height: 44px;\n  }\n\n  .summer-sale-hero h4 {\n    font-size: 14px;\n    line-height: 16px;\n  }\n\n  .summer-sale-hero .promo-block {\n    font-size: 24px;\n    line-height: 32px;\n  }\n\n  .summer-sale-hero .promo-block .code {\n    font-size: 16px;\n    padding: 2px 8px;\n  }\n\n  .summer-sale-hero .cta-button {\n    font-size: 14px;\n    padding: 12px 20px;\n  }\n}\n{% endstyle %}\n\n<section class=\"summer-sale-hero\">\n  <div class=\"content\">\n    <h2>Les Fresh & French Days</h2>\n    <h4>✨ RÉSERVÉ À NOS ABONNÉS</h4>\n\n    <div class=\"promo-block\">\n      <span class=\"tag\">-20&nbsp;%</span>sur tous nos produits<sup>*</sup> avec le code <span class=\"code\">TED6BD82 </span>\n    </div>\n\n    <br>\n    <div class=\"claim\">La meilleure offre, dès le départ.</div>\n    <br>\n    <div class=\"date\">Jusqu’au 7 mai inclus</div>\n    <br>\n    <a href=\"/\" class=\"cta-button\">Découvrir nos produits</a>\n  </div>\n\n  <img src=\"https://cdn.shopify.com/s/files/1/0903/1342/5220/files/visuel-couple-lit.jpg?v=1751459383\" alt=\"Visuel Soldes Tediber\" class=\"visual\">\n</section>",
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "ax_featured_products_BTHMrw": {
+      "type": "ax-featured-products",
+      "blocks": {
+        "push_i6Xeqa": {
+          "type": "push",
+          "settings": {
+            "metaobject": "100-nuits-essai",
+            "position": "right",
+            "push_in_products": false
+          }
+        }
+      },
+      "block_order": [
+        "push_i6Xeqa"
+      ],
+      "settings": {
+        "heading": "<h3>FAITES PLACE AU RENOUVEAU</h3>",
+        "button_text": "Voir tous les matelas",
+        "button_url": "shopify://collections/matelas",
+        "link_blank": false,
+        "product_list": [
+          "matelas",
+          "matelas-hybride",
+          "surmatelas-laine",
+          "surmatelas-universel"
+        ],
+        "stack_mobile": true,
+        "color_scheme": "",
+        "mob_padding_top": 24,
+        "mob_padding_bottom": 24,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "custom_liquid_cd3ywf": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<script>function sendAudienceData(a){window.jDataLayer=window.jDataLayer||[],window.jDataLayer.push({type:\"audience\",data:a})}</script><div id=\"join-widget-Matelas-x-Sommier-Unbounce\" style=\"display:block;\"></div> <style> #join-widget-Matelas-x-Sommier-Unbounce { margin: 5px 2px; min-height: 225.44px; width: 100%; } @media (min-aspect-ratio: 3/4) { #join-widget-Matelas-x-Sommier-Unbounce { min-height: 283px; } } </style>  <script src=\"https://tediber.my.join-stories.com/widgets/Matelas-x-Sommier-Unbounce/index.js\" data-join-widget-id=\"join-widget-Matelas-x-Sommier-Unbounce\" data-join-widget-alias=\"Matelas-x-Sommier-Unbounce\" type=\"text/javascript\" ></script>",
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "ax_featured_products_xM84wb": {
+      "type": "ax-featured-products",
+      "blocks": {
+        "push_Nc3mzQ": {
+          "type": "push",
+          "disabled": true,
+          "settings": {
+            "metaobject": "push-lp",
+            "position": "left",
+            "push_in_products": false
+          }
+        }
+      },
+      "block_order": [
+        "push_Nc3mzQ"
+      ],
+      "settings": {
+        "heading": "<h3>MOELLEUX MADE IN FRANCE</h3>",
+        "button_text": "Voir tous les oreillers et couettes",
+        "button_url": "shopify://collections/couette-et-oreiller",
+        "link_blank": false,
+        "product_list": [
+          "couette-legere",
+          "oreiller",
+          "couette-universelle",
+          "oreiller-universel"
+        ],
+        "stack_mobile": true,
+        "color_scheme": "",
+        "mob_padding_top": 24,
+        "mob_padding_bottom": 24,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "ax_featured_products_P39zeU": {
+      "type": "ax-featured-products",
+      "blocks": {
+        "push_GBJGDM": {
+          "type": "push",
+          "settings": {
+            "metaobject": "livraison-en-48-h",
+            "position": "right",
+            "push_in_products": false
+          }
+        }
+      },
+      "block_order": [
+        "push_GBJGDM"
+      ],
+      "settings": {
+        "heading": "<h3>CONFORTABLE ET ROBUSTE À LA FOIS</h3>",
+        "button_text": "Voir tous les sommiers",
+        "button_url": "shopify://collections/sommier",
+        "link_blank": false,
+        "product_list": [
+          "lit-scandinave",
+          "sommier-coffre",
+          "sommier",
+          "sommier-bois"
+        ],
+        "stack_mobile": true,
+        "color_scheme": "",
+        "mob_padding_top": 24,
+        "mob_padding_bottom": 24,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "ax_featured_products_Lfc9XD": {
+      "type": "ax-featured-products",
+      "blocks": {
+        "push_Yyf7LX": {
+          "type": "push",
+          "disabled": true,
+          "settings": {
+            "metaobject": "push-lp",
+            "position": "left",
+            "push_in_products": false
+          }
+        }
+      },
+      "block_order": [
+        "push_Yyf7LX"
+      ],
+      "settings": {
+        "heading": "<h3>LOOK FRAIS, LIT STYLÉ</h3>",
+        "button_text": "Voir toutes les parures",
+        "button_url": "shopify://collections/parure-lit",
+        "link_blank": false,
+        "product_list": [
+          "housse-couette-lin-ecru-naturel",
+          "housse-couette-satin-coton-lave-vert-sauge",
+          "housse-couette-gaze-coton-orange-corail",
+          "housse-couette-percale-coton-bleu-ocean"
+        ],
+        "stack_mobile": true,
+        "color_scheme": "",
+        "mob_padding_top": 24,
+        "mob_padding_bottom": 24,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "ax_featured_products_t8dJJW": {
+      "type": "ax-featured-products",
+      "blocks": {
+        "push_TThGdt": {
+          "type": "push",
+          "disabled": true,
+          "settings": {
+            "metaobject": "push-lp",
+            "position": "left",
+            "push_in_products": false
+          }
+        }
+      },
+      "block_order": [
+        "push_TThGdt"
+      ],
+      "settings": {
+        "heading": "<h3>DOUCEUR POUR PETITS DORMEURS</h3>",
+        "button_text": "Voir toute la gamme enfant",
+        "button_url": "shopify://collections/gamme-enfant-bebe",
+        "link_blank": false,
+        "product_list": [
+          "matelas-enfant-ado-grand-tedi",
+          "lit-bebe-bois-naturel",
+          "couette-enfant",
+          "lit-coffre-enfant-beige"
+        ],
+        "stack_mobile": true,
+        "color_scheme": "",
+        "mob_padding_top": 24,
+        "mob_padding_bottom": 24,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "ax_reassurances_GMJnP4": {
+      "type": "ax-reassurances",
+      "blocks": {
+        "reassurance_NyU4iV": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "100-nuits-essai",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_tUTyfY": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-mnd3qioq",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_mERJn6": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-vfy3a8q5",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_peUdyw": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-87bgy0zq",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        }
+      },
+      "block_order": [
+        "reassurance_NyU4iV",
+        "reassurance_tUTyfY",
+        "reassurance_mERJn6",
+        "reassurance_peUdyw"
+      ],
+      "settings": {
+        "heading": "Nos engagements",
+        "restricted_width": false,
+        "stack_mobile": false,
+        "border_top_mobile": true,
+        "border_bottom_mobile": false,
+        "show_content": false,
+        "autoplay": false,
+        "speed": 300,
+        "loop": false,
+        "pagination": true,
+        "color_scheme": "",
+        "color_scheme_popin": "",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 24,
+        "padding_top": 48,
+        "padding_bottom": 48,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "ax_media_with_text_XA4Vc8": {
+      "type": "ax-media-with-text",
+      "blocks": {
+        "heading_ggLeGD": {
+          "type": "heading",
+          "settings": {
+            "heading": "TEDIBER, C’EST FRAIS. ET C’EST FRANÇAIS.",
+            "heading_size": "h2"
+          }
+        },
+        "button_ja7whQ": {
+          "type": "button",
+          "settings": {
+            "button_text": "Découvrir nos produits",
+            "button_link": "/",
+            "link_blank": false,
+            "link_style": "button button--secondary"
+          }
+        },
+        "text_8hAwpn": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>Depuis 10 ans</strong>, on conçoit des produits qui transforment vos nuits<br/>et vos matins.</p><p>À l’occasion des <strong>Fresh & French Days</strong>, on vous invite à faire du tri, à tout remettre à neuf — et à redonner un coup de frais à votre chambre.</p>",
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "heading_ggLeGD",
+        "button_ja7whQ",
+        "text_8hAwpn"
+      ],
+      "name": "Ax Media with text",
+      "settings": {
+        "full_width": false,
+        "image": "shopify://shop_images/woman_comfort_spring_summer_bed_yoga.jpg",
+        "layout": "image_first",
+        "overlay": true,
+        "overlay_opacity": 0.2,
+        "section_color_scheme": "scheme-3",
+        "color_scheme": "scheme-3",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "rich_text_zABaaq": {
+      "type": "rich-text",
+      "blocks": {
+        "text_YPnE3F": {
+          "type": "text",
+          "settings": {
+            "text": "<p>* Cumulable sur les packs avec produits offerts. Pour les packs incluant déjà une remise, le pourcentage le plus élevé s'applique. Non applicable sur le pack Grand Ours et produits Grand Ours seuls.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "text_YPnE3F"
+      ],
+      "settings": {
+        "desktop_content_position": "left",
+        "content_alignment": "left",
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "padding_top_desktop": 48,
+        "padding_bottom_desktop": 0
+      }
+    },
+    "custom_liquid_FAGHkr": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "{% style %}\n.top-sticky-card {\n  position: fixed;\n  bottom: 16px;\n  left: 0;\n  right: 0;\n  margin-left: auto;\n  margin-right: auto;\n  width: fit-content;\n  z-index: 9999;\n  justify-content: center;\n}\n\n.top-sticky-card .card-content {\n  background-color: #FDF6EE;\n  border-radius: 9999px;\n  padding: 8px 16px;\n  display: flex;\n  align-items: center;\n  gap: 12px;\n  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);\n  border: 1px solid #010C27;\n  font-family: Obviously, sans-serif;\n}\n\n.top-sticky-card .icon {\n  font-size: 18px;\n  color: #A25F33;\n}\n\n.top-sticky-card .badge {\n  background-color: #A25F33;\n  color: white;\n  padding: 4px 10px;\n  border-radius: 4px;\n  font-weight: bold;\n  font-size: 14px;\n}\n\n.top-sticky-card .label {\n  color: #010C27;\n  font-weight: 600;\n  font-size: 14px;\n  text-transform: uppercase;\n}\n\n.top-sticky-card .code {\n  background-color: #FDF6EE;\n  border: 1px solid #010C27;\n  padding: 4px 10px;\n  border-radius: 4px;\n  font-weight: 800;\n  font-size: 16px;\n}\n{% endstyle %}\n\n<div class=\"top-sticky-card\">\n  <div class=\"card-content\">\n    <span class=\"icon\">✨</span>\n    <span class=\"badge\">-20 %</span>\n    <span class=\"label\">Avec le code</span>\n    <span class=\"code\">TED6BD82</span>\n  </div>\n</div>",
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_content": false,
+        "custom_h1": "<p><strong>SOLDES D'ÉTÉ 2025 TEDIBER : -20% SUR TOUT AVEC LE CODE TED56298 !</strong></p>",
+        "h1_size": "h1",
+        "h1_no_margin": false,
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    }
+  },
+  "order": [
+    "custom_liquid_LLEGPQ",
+    "ax_featured_products_BTHMrw",
+    "custom_liquid_cd3ywf",
+    "ax_featured_products_xM84wb",
+    "ax_featured_products_P39zeU",
+    "ax_featured_products_Lfc9XD",
+    "ax_featured_products_t8dJJW",
+    "ax_reassurances_GMJnP4",
+    "ax_media_with_text_XA4Vc8",
+    "rich_text_zABaaq",
+    "custom_liquid_FAGHkr",
+    "main"
+  ]
+}

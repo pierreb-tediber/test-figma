@@ -1,0 +1,25 @@
+{%- liquid
+	assign cart_eco_part = 0
+
+	for item in cart.items
+		if item.item_components != blank
+			for component in item.item_components
+				if component.variant.metafields.custom.exo_tax.value != blank
+					assign cart_eco_part = cart_eco_part | plus: component.variant.metafields.custom.exo_tax.value
+				endif
+			endfor
+		else
+			if item.variant.metafields.custom.exo_tax.value != blank
+				assign cart_eco_part = cart_eco_part | plus: item.variant.metafields.custom.exo_tax.value
+			endif
+		endif
+	endfor
+
+	assign cart_eco_part_formatted = cart_eco_part | times: 100 | money
+-%}
+
+{% if cart_eco_part > 0 %}
+	<div class="drawer__footer-eco-part">
+		{{ 'sections.cart.eco_part' | t: price: cart_eco_part_formatted }}
+	</div>
+{% endif %}

@@ -1,0 +1,151 @@
+{%- comment -%}
+	Floating quick-access CTA tied to a `<ax-versus-comparator>` section.
+
+	Shows when the parent section enters the viewport and hides when it leaves. Opens a panel
+	listing the section's category groups + a sub-panel listing the page's other comparators.
+
+	Accepts:
+	- section: the Shopify section object (used to read settings + scope IDs)
+
+	Anti-collision: this section is duplicated up to 4 times per template, so every DOM id is
+	prefixed with the unique `floating_section_id` setting (which the merchant defines per
+	section). The web component reads this id via `data-section-id` and uses it to identify
+	itself among other floating widgets on the page.
+{%- endcomment -%}
+
+{%- liquid
+	assign floating_id = section.settings.floating_section_id | strip
+	if floating_id == blank
+		assign floating_id = section.id
+	endif
+
+	assign button_label = section.settings.floating_button_label | default: 'Accès rapide'
+	assign verdict_label = section.settings.floating_verdict_label | default: 'Verdict final : le gagnant du match'
+	assign others_label = section.settings.floating_others_label | default: "Comparer d'autres matelas"
+-%}
+
+<ax-versus-floating
+	class="ax-versus-floating"
+	data-section-id="{{ floating_id }}"
+	data-comparator-id="{{ section.id }}"
+	hidden
+>
+	<button
+		type="button"
+		class="ax-versus-floating__toggle content-square_{{ section.id }}-button-floating-toggle"
+		aria-expanded="false"
+		aria-controls="VersusFloatingPanel-{{ floating_id }}"
+	>
+		<span class="ax-versus-floating__toggle-label">{{ button_label }}</span>
+		{%- comment -%}
+			Single toggle: when the panel is closed the chevron-up icon (or merchant-supplied
+			image) invites the user to expand the menu; when the panel is open the same button
+			shows a close cross instead. This keeps the floating CTA in one place — the cross
+			never appears as a separate corner control inside the panel.
+		{%- endcomment -%}
+		<span class="ax-versus-floating__toggle-icon-wrap" aria-hidden="true">
+			{%- if section.settings.floating_button_icon != blank -%}
+				{{
+					section.settings.floating_button_icon
+					| image_url: width: 32
+					| image_tag:
+						loading: 'lazy',
+						widths: '16, 32',
+						class: 'ax-versus-floating__toggle-icon ax-versus-floating__toggle-icon--open',
+						alt: ''
+				}}
+			{%- else -%}
+				<span class="ax-versus-floating__toggle-icon ax-versus-floating__toggle-icon--open">
+					{{- 'icon-caret.svg' | inline_asset_content -}}
+				</span>
+			{%- endif -%}
+			<span class="ax-versus-floating__toggle-icon ax-versus-floating__toggle-icon--close">
+				{{- 'icon-close-small.svg' | inline_asset_content -}}
+			</span>
+		</span>
+	</button>
+
+	<div
+		id="VersusFloatingPanel-{{ floating_id }}"
+		class="ax-versus-floating__panel"
+		role="dialog"
+		aria-label="{{ button_label | escape }}"
+		hidden
+	>
+		<ul class="ax-versus-floating__list" data-view="primary">
+			{%- comment -%}
+				Each category block in the parent section produces one panel entry. The id used
+				as the scroll target is the same one rendered on the category container in
+				ax-versus-comparator.liquid (`{{ section.id }}-{{ block.id }}`), so the link
+				resolves directly to the existing element without any JS lookup by title.
+			{%- endcomment -%}
+			{%- for block in section.blocks -%}
+				{%- if block.type == 'category'
+					and block.settings.category_title != blank
+					and block.settings.floating_hide != true
+				-%}
+					{%- assign floating_item_label = block.settings.floating_label | default: block.settings.category_title -%}
+					<li>
+						<button
+							type="button"
+							class="ax-versus-floating__item content-square_{{ section.id }}-{{ block.id }}-button-floating-goto-category"
+							data-action="goto-category"
+							data-target-id="{{ section.id }}-{{ block.id }}"
+						>
+							<span class="ax-versus-floating__dot" aria-hidden="true"></span>
+							<span class="ax-versus-floating__item-label">{{ floating_item_label }}</span>
+						</button>
+					</li>
+				{%- endif -%}
+			{%- endfor -%}
+
+			{%- comment -%}
+				"Verdict final" stays separate because it points to the next ax-versus-comparator-winner
+				section in the DOM — i.e. outside the category blocks of this section. The JS hides
+				the entry if no winner section follows.
+			{%- endcomment -%}
+			<li>
+				<button type="button" class="ax-versus-floating__item content-square_{{ section.id }}-button-floating-goto-verdict" data-action="goto-verdict">
+					<span class="ax-versus-floating__dot" aria-hidden="true"></span>
+					<span class="ax-versus-floating__item-label">{{ verdict_label }}</span>
+				</button>
+			</li>
+			<li>
+				<button type="button" class="ax-versus-floating__item ax-versus-floating__item--others content-square_{{ section.id }}-button-floating-open-others" data-action="open-others">
+					<span class="ax-versus-floating__item-label">{{ others_label }}</span>
+					<span class="ax-versus-floating__chevron" aria-hidden="true">→</span>
+				</button>
+			</li>
+		</ul>
+
+		<ul class="ax-versus-floating__list" data-view="others" hidden>
+			<li>
+				<button type="button" class="ax-versus-floating__item ax-versus-floating__item--back content-square_{{ section.id }}-button-floating-back" data-action="back">
+					<span class="ax-versus-floating__chevron ax-versus-floating__chevron--back" aria-hidden="true">←</span>
+					<span class="ax-versus-floating__item-label">{{ others_label }}</span>
+				</button>
+			</li>
+			{%- for index in (1..3) -%}
+				{%- liquid
+					assign name_key = 'floating_other_' | append: index | append: '_name'
+					assign id_key = 'floating_other_' | append: index | append: '_id'
+					assign other_name = section.settings[name_key]
+					assign other_id = section.settings[id_key] | strip
+				-%}
+				{%- if other_name != blank and other_id != blank -%}
+					<li>
+						<button
+							type="button"
+							class="ax-versus-floating__item ax-versus-floating__item--other content-square_{{ section.id }}-button-floating-goto-comparator-{{ index }}"
+							data-action="goto-comparator"
+							data-target-id="{{ other_id }}"
+						>
+							<span class="ax-versus-floating__dot" aria-hidden="true"></span>
+							<span class="ax-versus-floating__item-label">{{ other_name }}</span>
+						</button>
+					</li>
+				{%- endif -%}
+			{%- endfor -%}
+		</ul>
+	</div>
+</ax-versus-floating>

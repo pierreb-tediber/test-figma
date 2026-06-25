@@ -1,0 +1,73 @@
+{%- doc -%}
+	Renders a cart discount form.
+
+	@param {object} section - The section object
+{%- enddoc -%}
+
+{% liquid
+	assign discount_codes = cart.cart_level_discount_applications | where: 'type', 'discount_code' | map: 'title'
+	for item in cart.items
+		for allocation in item.line_level_discount_allocations
+			if allocation.discount_application.type == 'discount_code'
+				assign discount_codes = item.line_level_discount_allocations | slice: forloop.index0 | map: 'discount_application' | map: 'title' | concat: discount_codes
+			endif
+		endfor
+	endfor
+
+	assign discount_codes = discount_codes | uniq
+%}
+
+<cart-discount-code
+	data-section-id="{{ section.id }}"
+	section="{{ section.id }}"
+>
+	<form class="cart-discount__form">
+		<div class="cart-discount__content">
+			<div class="cart-discount__input-wrapper">
+				<input
+					type="text"
+					id="cart-discount"
+					class="cart-discount__input field__input"
+					placeholder="{{ 'sections.cart.discount.discount_label' | t }}"
+					name="discount"
+				>
+				<label
+					for="cart-discount"
+					class="cart-discount__label field__label"
+				>
+					{{ 'sections.cart.discount.discount_label' | t }}
+				</label>
+			</div>
+			<button
+				type="button"
+				class="cart-discount__button button button--reset"
+			>
+				{%- render 'loading-spinner' -%}
+				<span class="ax-link reversed">
+					{{ 'sections.cart.discount.discount_apply' | t }}
+				</span>
+			</button>
+		</div>
+	</form>
+	<ul class="cart-discount__codes">
+		{% for discount_code in discount_codes %}
+			<li
+				class="cart-discount__pill"
+				data-discount-code="{{ discount_code }}"
+				aria-label="{{ 'sections.cart.discount.discount_applied' | t: code: discount_code }}"
+			>
+				<p class="cart-discount__pill-code">
+					{{- 'icon-discount.svg' | inline_asset_content -}}
+					{{ discount_code }}
+				</p>
+				<button
+					type="button"
+					class="cart-discount__pill-remove svg-wrapper svg-wrapper--smaller button-unstyled"
+					aria-label="{{ 'sections.cart.discount.discount_remove' | t: code: discount_code }}"
+				>
+					{{- 'icon-close.svg' | inline_asset_content -}}
+				</button>
+			</li>
+		{% endfor %}
+	</ul>
+</cart-discount-code>

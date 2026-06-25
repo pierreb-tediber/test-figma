@@ -1,0 +1,216 @@
+{{ 'bundle.seo.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+	.section-{{ section.id }}-padding {
+	  padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+	  padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+	}
+
+	@media screen and (min-width: 750px) {
+	  .section-{{ section.id }}-padding {
+	    padding-top: {{ section.settings.padding_top }}px;
+	    padding-bottom: {{ section.settings.padding_bottom }}px;
+	  }
+	}
+{%- endstyle -%}
+
+<div id="section-{{ section.id }}" class="color-{{ section.settings.color_scheme }}" data-ax-section="seo">
+	<div class="page-width section-{{ section.id }}-padding">
+		<div class="seo-content row">
+			{% if section.settings.title != blank %}
+				<div class="col-12">
+					<h2 class="seo__title">
+						{{ section.settings.title | escape }}
+					</h2>
+				</div>
+			{% endif %}
+
+			{% for block in section.blocks %}
+				<div
+					class="
+						col-12
+						{% if section.blocks.size == 2 %} col-md-6{% endif %}
+						{% if section.blocks.size == 3 %} col-md-4{% endif %}
+					"
+				>
+					{% if block.settings.title != blank %}
+						<div class="seo__heading">
+							{{ block.settings.title | escape }}
+						</div>
+					{% endif %}
+
+					{% unless block.settings.image == blank %}
+						{% assign image_block = block.settings.image %}
+						<picture>
+							{%- if image_block.width >= 330 -%}
+								<source
+									media="(max-width: 330px)"
+									srcset="{{ image_block | image_url: width: 330, format: 'pjpg' }}"
+								>
+							{%- endif -%}
+							{%- if image_block.width >= 400 -%}
+								<source
+									media="(max-width: 400px)"
+									srcset="{{ image_block | image_url: width: 400, format: 'pjpg' }}"
+								>
+							{%- endif -%}
+							{%- if image_block.width >= 550 -%}
+								<source
+									media="(max-width: 550px)"
+									srcset="{{ image_block | image_url: width: 550, format: 'pjpg' }}"
+								>
+							{%- endif -%}
+							{%- if image_block.width >= 768 -%}
+								<source
+									media="(max-width: 768px)"
+									srcset="{{ image_block | image_url: width: 768, format: 'pjpg' }}"
+								>
+							{%- endif -%}
+							{%- if image_block.width >= 1200 -%}
+								<source
+									media="(max-width: 1200px)"
+									srcset="{{ image_block | image_url: width: 1200, format: 'pjpg' }}"
+								>
+							{%- endif -%}
+							{%- if image_block.width >= 1600 -%}
+								<source
+									media="(max-width: 1600px)"
+									srcset="{{ image_block | image_url: width: 1600, format: 'pjpg' }}"
+								>
+							{%- endif -%}
+							{%- if image_block.width >= 2560 -%}
+								<source
+									media="(max-width: 2500px)"
+									srcset="{{ image_block | image_url: width: 2500, format: 'pjpg' }}"
+								>
+							{%- endif -%}
+							<img
+								src="{{ image_block | image_url }}"
+								alt="{{ image_block.alt | escape }}"
+								width="{{ image_block.width }}"
+								height="{{ image_block.width | divided_by: image_block.aspect_ratio | round }}"
+								loading="lazy"
+							>
+						</picture>
+					{% endunless %}
+
+					{% if block.settings.text != blank %}
+						<div class="seo__text">
+							{{ block.settings.text }}
+						</div>
+					{% endif %}
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+
+{% schema %}
+	{
+		"name": "Ax Seo",
+		"tag": "section",
+		"class": "section ax-section ax-seo",
+		"disabled_on": {
+			"groups": ["header", "footer"]
+		},
+		"settings": [
+			{
+				"type": "header",
+				"content": "Paramètres globaux"
+			},
+			{
+				"type": "text",
+				"label": "Titre",
+				"id": "title"
+			},
+			{
+				"type": "select",
+				"id": "color_scheme",
+				"options": [
+					{
+						"value": "accent-1",
+						"label": "t:sections.all.colors.accent_1.label"
+					},
+					{
+						"value": "accent-2",
+						"label": "t:sections.all.colors.accent_2.label"
+					},
+					{
+						"value": "background-1",
+						"label": "t:sections.all.colors.background_1.label"
+					},
+					{
+						"value": "background-2",
+						"label": "t:sections.all.colors.background_2.label"
+					},
+					{
+						"value": "inverse",
+						"label": "t:sections.all.colors.inverse.label"
+					}
+				],
+				"default": "background-1",
+				"label": "t:sections.all.colors.label"
+			},
+			{
+				"type": "header",
+				"content": "t:sections.all.padding.section_padding_heading"
+			},
+			{
+				"type": "range",
+				"id": "padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "t:sections.all.padding.padding_top",
+				"default": 40
+			},
+			{
+				"type": "range",
+				"id": "padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "t:sections.all.padding.padding_bottom",
+				"default": 52
+			}
+		],
+		"blocks": [
+			{
+				"type": "seo",
+				"name": "Contenu SEO",
+				"limit": 3,
+				"settings": [
+					{
+						"type": "text",
+						"label": "Titre",
+						"id": "title"
+					},
+					{
+						"type": "image_picker",
+						"id": "image",
+						"label": "Image"
+					},
+					{
+						"type": "html",
+						"id": "text",
+						"default": "<p>Votre contenu SEO</p>",
+						"label": "Contenu SEO"
+					}
+				]
+			}
+		],
+		"presets": [
+			{
+				"name": "Ax Seo",
+				"category": "Axome",
+				"blocks": [
+					{
+						"type": "seo"
+					}
+				]
+			}
+		]
+	}
+{% endschema %}

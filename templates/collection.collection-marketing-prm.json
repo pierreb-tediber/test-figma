@@ -1,0 +1,503 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "banner": {
+      "type": "main-banner",
+      "disabled": true,
+      "settings": {
+        "heading": "<p>{{ collection.title }}<br/></p>",
+        "image": "shopify://shop_images/Hero-section-collection.jpg",
+        "color_scheme": "scheme-1",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "image_banner_yzXL63": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_gdL6Yw": {
+          "type": "heading",
+          "settings": {
+            "heading": "French DAYS",
+            "heading_size": "h1"
+          }
+        },
+        "text_3yRnjb": {
+          "type": "text",
+          "settings": {
+            "text": "<strong>Jusqu’à -15%</strong> de réduction avec le code <strong>DHABITUDECESTNON</strong>",
+            "text_style": "body"
+          }
+        },
+        "buttons_rF4tkd": {
+          "type": "buttons",
+          "disabled": true,
+          "settings": {
+            "button_label_1": "Texte du bouton",
+            "button_link_1": "",
+            "button_style_secondary_1": false,
+            "button_label_2": "Texte du bouton",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_gdL6Yw",
+        "text_3yRnjb",
+        "buttons_rF4tkd"
+      ],
+      "disabled": true,
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/Hero-section-collection.jpg",
+        "image_overlay_opacity": 0,
+        "image_height": "medium",
+        "image_behavior": "none",
+        "desktop_content_position": "middle-center",
+        "desktop_content_alignment": "center",
+        "show_text_box": false,
+        "color_scheme": "",
+        "stack_images_on_mobile": true,
+        "mobile_content_alignment": "center",
+        "show_text_below": true
+      }
+    },
+    "custom_liquid_P8Jab3": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<!doctype html>\n<html lang=\"fr\">\n<head>\n  <meta charset=\"utf-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n  <title>French Days – Hero</title>\n  <style>\n    * { box-sizing: border-box; }\n    body { margin: 0; font-family: system-ui, -apple-system, \"Segoe UI\", Roboto, Inter, Arial, sans-serif; }\n    \n    .hero {\n      position: relative;\n      color: #fff !important; /* force la typo en blanc */\n      isolation: isolate;\n      overflow: hidden;\n      display: flex;\n      align-items: center;\n      justify-content: center;\n      text-align: center;\n      min-height: clamp(220px, 25vw, 620px);\n      background-image: url(\"https://cdn.shopify.com/s/files/1/0903/1342/5220/files/Hero-section-collection_frenchdays-PRM.jpg?v=1758553253\");\n      background-size: cover;\n      background-position: center;\n      background-repeat: no-repeat;\n    }\n\n    /* Option : léger overlay pour lisibilité sur l'image */\n    .hero::before {\n      content: \"\";\n      position: absolute;\n      inset: 0;\n      background: linear-gradient(0deg, rgba(0,0,0,.35), rgba(0,0,0,.35));\n      z-index: 0;\n    }\n\n    .hero__inner {\n      position: relative;\n      z-index: 1;\n      max-width: 900px;\n    }\n\n    /* S'assure que tout le texte hérite du blanc */\n    .hero :is(h1,h2,h3,p,span,strong,em,a,small,li,.code,.subtitle,.title) {\n      color: inherit !important;\n    }\n\n    .title {\n      margin: 0;\n      line-height: .9;\n      font-weight: 800;\n      font-size: clamp(2.4rem, 10vw, 7rem);\n      letter-spacing: .02em;\n    }\n\n    .subtitle {\n      margin: clamp(10px, 2vw, 16px) 0 0;\n      font-size: 20px; /* desktop */\n      font-weight: 700;\n    }\n\n    .results {\n      margin-top: clamp(10px, 3vw, 24px);\n      font-size: clamp(0.9rem, 2.0vw, 1.6rem);\n      font-weight: 700;\n    }\n\n    /* Mobile styles */\n    @media (max-width: 749px) {\n      .hero {\n        background-image: url(\"https://cdn.shopify.com/s/files/1/0903/1342/5220/files/Hero-section-collection_mobile_frenchdays-PRM.jpg?v=1758553251\");\n      }\n      .subtitle {\n        font-size: 14px; /* mobile */\n      }\n    }\n  </style>\n</head>\n<body>\n\n  <section class=\"hero\" aria-label=\"Promotion French Days\">\n    <div class=\"hero__inner\">\n      <h1 class=\"title\">FRENCH DAYS</h1>\n      <p class=\"subtitle\">\n        Les French Days 2025 sont terminés.\n      </p>\n    </div>\n  </section>\n\n</body>\n</html>",
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "custom_liquid_zVKaLG": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<!-- Bannière 10× Alma – HTML pur -->\n<div class=\"banner-alma\" role=\"region\" aria-label=\"Paiement 10× Alma sans frais\">\n  <div class=\"banner-alma__inner\">\n    <span class=\"banner-alma__badge\" aria-hidden=\"true\">\n      <img src=\"https://cdn.shopify.com/s/files/1/0903/1342/5220/files/Badge-Alma-orange-10x.svg?v=1758009341\" alt=\"10× Alma\" loading=\"lazy\" width=\"96\" height=\"28\">\n    </span>\n\n    <!-- Texte desktop -->\n    <p class=\"banner-alma__text banner-alma__text--desktop\">\n      Jusqu'au 30 septembre, le paiement en <strong>10x sans frais est offert</strong>.\n    </p>\n\n    <!-- Texte mobile -->\n    <p class=\"banner-alma__text banner-alma__text--mobile\">\n       Jusqu'au 30 septembre, le paiement en <strong>10x sans frais est offert</strong>.\n    </p>\n  </div>\n</div>\n\n<style>\n  :root {\n    --alma-blue: #010C27;\n    --alma-text: #ffffff;\n  }\n\n  .banner-alma {\n    background: var(--alma-blue);\n    color: var(--alma-text);\n    width: 100%;\n  }\n\n  .banner-alma__inner {\n    max-width: 1080px;\n    margin: 0 auto;\n    display: flex;                /* ✅ flex au lieu de grid */\n    justify-content: center;      /* ✅ centre horizontalement */\n    align-items: center;          /* aligne verticalement */\n    gap: 0.9rem;                  /* espace logo/texte */\n    padding: 0.75rem 0.4rem;\n    min-height: 56px;\n    text-align: center;           /* centre aussi le texte */\n  }\n\n  /* Badge */\n  .banner-alma__badge {\n    line-height: 0;\n    display: inline-flex;\n    align-items: center;\n  }\n  .banner-alma__badge img {\n    display: block;\n    height: 28px;\n    width: auto;\n  }\n\n  /* Texte */\n  .banner-alma__text {\n    margin: 4px;\n    line-height: 1.35;\n    font-size: 14px;\n    font-weight: 500;\n  }\n  .banner-alma__text strong { font-weight: 700; }\n\n  /* Cacher la version mobile par défaut */\n  .banner-alma__text--mobile { display: none; }\n\n  /* Responsive */\n  @media (max-width: 740px) {\n    .banner-alma__inner {\n      flex-direction: column;     /* ✅ passe en colonne */\n      justify-content: center;\n      gap: 0.55rem;\n      padding: 0.7rem 0.9rem;\n    }\n    .banner-alma__badge img { height: 28px; }\n    .banner-alma__text--desktop { display: none; }\n    .banner-alma__text--mobile { display: block; font-size: 12px; }\n  }\n</style>",
+        "color_scheme": "",
+        "padding_top": 16,
+        "padding_bottom": 0
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "products_per_page": 16,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "enable_filtering": true,
+        "filter_type": "drawer",
+        "enable_sorting": true,
+        "compare_page": "",
+        "padding_top": 24,
+        "padding_bottom": 0
+      }
+    },
+    "ax_reassurances_w4aFWA": {
+      "type": "ax-reassurances",
+      "blocks": {
+        "reassurance_LMXCkP": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "100-nuits-essai",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_wy3GMj": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-mnd3qioq",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_WzdJiV": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-vfy3a8q5",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_Eb8iLP": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-87bgy0zq",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        }
+      },
+      "block_order": [
+        "reassurance_LMXCkP",
+        "reassurance_wy3GMj",
+        "reassurance_WzdJiV",
+        "reassurance_Eb8iLP"
+      ],
+      "settings": {
+        "heading": "Nos engagements",
+        "restricted_width": false,
+        "stack_mobile": false,
+        "border_top_mobile": true,
+        "border_bottom_mobile": true,
+        "show_content": false,
+        "autoplay": false,
+        "speed": 300,
+        "loop": false,
+        "pagination": true,
+        "color_scheme": "",
+        "color_scheme_popin": "scheme-2",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 48,
+        "padding_top": 48,
+        "padding_bottom": 48,
+        "mob_margin_top": 48,
+        "mob_margin_bottom": 36,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "ax_richtext_fprPrW": {
+      "type": "ax-richtext",
+      "blocks": {
+        "text_4JMXEN": {
+          "type": "text",
+          "settings": {
+            "text": "<p><em>*Jusqu’au 30 septembre 2025 seulement. Condition de l’offre </em><a href=\"https://www.tediber.com/policies/terms-of-sale\" title=\"https://www.tediber.com/policies/terms-of-sale\"><span style=\"text-decoration:underline\"><em>ici.</em></span></a></p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "text_4JMXEN"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 16,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 16,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "ax_variants_grid_kRgxc6": {
+      "type": "ax-variants-grid",
+      "settings": {
+        "product_per_page": 11,
+        "color_scheme": "",
+        "mob_padding_top": 12,
+        "mob_padding_bottom": 24,
+        "padding_top": 24,
+        "padding_bottom": 48
+      }
+    },
+    "ax_recently_viewed_wXEy3W": {
+      "type": "ax-recently-viewed",
+      "settings": {
+        "heading": "À DÉCOUVRIR AUSSI",
+        "product_list": "{{ collection.metafields.custom.vus_recemment.value }}",
+        "color_scheme": "",
+        "mob_padding_top": 24,
+        "mob_padding_bottom": 48,
+        "padding_top": 48,
+        "padding_bottom": 96
+      }
+    },
+    "ax_image_with_text_ACNcBn": {
+      "type": "ax-image-with-text",
+      "blocks": {
+        "heading_jV4G4D": {
+          "type": "heading",
+          "settings": {
+            "picto": "shopify://shop_images/graphic_border.png",
+            "picto_size": 92,
+            "picto_size_mobile": 92,
+            "heading": "",
+            "heading_size": "h2"
+          }
+        },
+        "text_AqqaWG": {
+          "type": "text",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "text": "{{ collection.description }}",
+            "description_hn_replace": false,
+            "show_more": true,
+            "text_max_lines": 8,
+            "text_more": "Lire la suite",
+            "text_less": "Lire moins",
+            "show_more_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_jV4G4D",
+        "text_AqqaWG"
+      ],
+      "settings": {
+        "full_width": true,
+        "text_alignment": "left",
+        "no_vertical_padding": false,
+        "image": "{{ collection.metafields.custom.section_seo_image.value }}",
+        "image_restricted_width": false,
+        "image_adapted_height_with_content": false,
+        "contain_image": false,
+        "layout": "image_first",
+        "mobile_layout": "image_first",
+        "overlay": false,
+        "overlay_opacity": 0.2,
+        "section_color_scheme": "scheme-3",
+        "color_scheme": "scheme-3",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "ax_variant_link_buttons_DpPXjK": {
+      "type": "ax-variant-link-buttons",
+      "settings": {
+        "heading": "Toutes les tailles (en cm)",
+        "color_scheme": "",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 24,
+        "padding_top": 96,
+        "padding_bottom": 48
+      }
+    },
+    "ax_image_with_text_Mrcpbc": {
+      "type": "ax-image-with-text",
+      "blocks": {
+        "heading_aKpWe4": {
+          "type": "heading",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "heading": "<p>SECTION SEO</p>",
+            "heading_size": "h2"
+          }
+        },
+        "text_dFH7RF": {
+          "type": "text",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "text": "<p>Lorem ipsum dolor sit amet consectetur. Etiam ac tempor ut eleifend auctor egestas laoreet. Convallis est tempus at quisque elementum et integer morbi orci. Lorem ipsum dolor sit amet consectetur. Etiam ac tempor ut eleifend auctor egestas laoreet. Convallis est tempus at quisque elementum et integer morbi orci. Lorem ipsum dolor sit amet consectetur. Etiam ac tempor ut eleifend auctor egestas laoreet. Convallis est tempus at quisque elementum et integer morbi orci. <br/><br/></p>",
+            "description_hn_replace": false,
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "heading_aKpWe4",
+        "text_dFH7RF"
+      ],
+      "disabled": true,
+      "settings": {
+        "full_width": false,
+        "text_alignment": "left",
+        "no_vertical_padding": false,
+        "image": "shopify://shop_images/push_3bda25f0-9edf-47d5-ac04-bb3e56f06ae0.png",
+        "image_restricted_width": true,
+        "image_adapted_height_with_content": false,
+        "contain_image": false,
+        "layout": "text_first",
+        "mobile_layout": "image_first",
+        "overlay": false,
+        "overlay_opacity": 0.2,
+        "section_color_scheme": "",
+        "color_scheme": "",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "ax_cards_links_RL9C8b": {
+      "type": "ax-cards-links",
+      "blocks": {
+        "card_KQ6tpV": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/conseil-black.svg",
+            "heading": "<p>{{ collection.metafields.custom.card_1_titre.value }}</p>",
+            "link_text": "Lire l’article",
+            "link": "",
+            "link_blank": false,
+            "color_scheme": "scheme-e50a3d25-8111-430b-a12b-76298bbc4e33",
+            "border_color": "#010c27"
+          }
+        },
+        "card_a3EwL9": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/conseil-black.svg",
+            "heading": "<p>{{ collection.metafields.custom.card_2_titre.value }}</p>",
+            "link_text": "Lire l’article",
+            "link": "shopify://blogs/tete-de-lit/hauteur-tete-de-lit",
+            "link_blank": false,
+            "color_scheme": "scheme-4",
+            "border_color": "#010c27"
+          }
+        },
+        "card_eX4RN9": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/conseil-black.svg",
+            "heading": "<p>{{ collection.metafields.custom.card_3_titre.value }}</p>",
+            "link_text": "Lire l’article",
+            "link": "shopify://blogs/tete-de-lit/couleur-tete-lit-beige-ou-bleue",
+            "link_blank": false,
+            "color_scheme": "scheme-63662268-9ea3-4531-80d0-ded5252e7502",
+            "border_color": "#010c27"
+          }
+        },
+        "card_Qf4ifY": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/conseil-cream.svg",
+            "heading": "<p>{{ collection.metafields.custom.card_4_titre.value }}</p>",
+            "link_text": "Lire l’article",
+            "link": "shopify://blogs/tete-de-lit/fixer-tete-lit-mur",
+            "link_blank": false,
+            "color_scheme": "scheme-fd8a6b7f-fb17-41ee-ac65-43143a48e740",
+            "border_color": "#010c27"
+          }
+        }
+      },
+      "block_order": [
+        "card_KQ6tpV",
+        "card_a3EwL9",
+        "card_eX4RN9",
+        "card_Qf4ifY"
+      ],
+      "disabled": true,
+      "settings": {
+        "heading": "<p>NOS CONSEILS</p>",
+        "button_text": "Voir tous nos conseils",
+        "button_link": "",
+        "link_blank": false,
+        "link_style": "button button--primary",
+        "color_scheme": "",
+        "mob_padding_top": 24,
+        "mob_padding_bottom": 48,
+        "padding_top": 48,
+        "padding_bottom": 96
+      }
+    },
+    "ax_testimonial_8yJrqR": {
+      "type": "ax-testimonial",
+      "blocks": {
+        "subheading_hkFUkj": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "NOS AVIS CLIENT 5/5"
+          }
+        },
+        "heading_9fwmaT": {
+          "type": "heading",
+          "settings": {
+            "picto_size": 24,
+            "heading": "{{ collection.metafields.custom.temoignage.value }}",
+            "heading_class": "h1"
+          }
+        },
+        "text_gtmVj3": {
+          "type": "text",
+          "settings": {
+            "picto": "shopify://shop_images/stars.png",
+            "picto_size": 78,
+            "text": "<p>{{ collection.metafields.custom.prenom_temoignage.value }}</p>"
+          }
+        },
+        "button_h7eAcH": {
+          "type": "button",
+          "settings": {
+            "button_text": "Voir tous nos avis",
+            "button_link": "shopify://pages/contact",
+            "link_blank": false,
+            "link_style": "button button--primary"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_hkFUkj",
+        "heading_9fwmaT",
+        "text_gtmVj3",
+        "button_h7eAcH"
+      ],
+      "disabled": true,
+      "settings": {
+        "full_width": true,
+        "show_trustpilot_shop": false,
+        "trustpilot_product_skus": "",
+        "image": "shopify://shop_images/push.png",
+        "image_mobile": "shopify://shop_images/reviews_widget.png",
+        "layout": "image_first",
+        "mobile_layout": "text_first",
+        "overlay": false,
+        "overlay_opacity": 0.2,
+        "section_color_scheme": "scheme-4",
+        "color_scheme": "scheme-4",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mobile_padding_top": 48,
+        "mobile_padding_bottom": 48
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "image_banner_yzXL63",
+    "custom_liquid_P8Jab3",
+    "custom_liquid_zVKaLG",
+    "product-grid",
+    "ax_reassurances_w4aFWA",
+    "ax_richtext_fprPrW",
+    "ax_variants_grid_kRgxc6",
+    "ax_recently_viewed_wXEy3W",
+    "ax_image_with_text_ACNcBn",
+    "ax_variant_link_buttons_DpPXjK",
+    "ax_image_with_text_Mrcpbc",
+    "ax_cards_links_RL9C8b",
+    "ax_testimonial_8yJrqR"
+  ]
+}

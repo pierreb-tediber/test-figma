@@ -1,0 +1,103 @@
+{% comment %}
+  Renders a product card for the matelas comparator section.
+
+  Accepts:
+  - display_product: {Object} Product object to display
+  - column_index: {Number} Column index for data attribute
+  - show_product_selector: {Boolean} Whether to show the product selector dropdown
+  - is_current_product: {Boolean} Whether this is the current product on the page
+  - products_to_compare: {Array} Array of products for the selector options
+  - current_product: {Object} The current product on the page (when on product template)
+
+  Usage:
+  {% render 'ax-matelas-comparator-product-card',
+    display_product: product,
+    column_index: 1,
+    show_product_selector: section.settings.show_product_selector,
+    is_current_product: false,
+    products_to_compare: products_to_compare,
+    current_product: product
+  %}
+{% endcomment %}
+
+{%- liquid
+  # Image retrieval from metafields (card-product.liquid logic)
+  assign card_product_featured_media = display_product.featured_media
+  assign card_product_images_desktop = display_product.metafields.custom.card_product_image_desktop.value | compact
+  assign card_product_images_mobile = display_product.metafields.custom.card_product_image_mobile.value | compact
+
+  # Combined listings support
+  if display_product.metafields.custom.combined_listings_premier_produit_enfant.value != blank
+    assign card_product_combined_listings = display_product.metafields.custom.combined_listings_premier_produit_enfant.value
+    assign card_product_featured_media = card_product_combined_listings.featured_media
+    assign card_product_images_desktop = card_product_combined_listings.metafields.custom.card_product_image_desktop.value | compact
+    assign card_product_images_mobile = card_product_combined_listings.metafields.custom.card_product_image_mobile.value | compact
+  endif
+
+  # Desktop images: priority to metafield, primary order
+  if card_product_images_desktop != blank and card_product_images_desktop[0] != blank
+    assign card_product_featured_media = card_product_images_desktop[0]
+  endif
+
+  # Mobile primary image
+  assign card_product_mobile_primary_media = card_product_featured_media
+  if card_product_images_mobile != blank and card_product_images_mobile[0] != blank
+    assign card_product_mobile_primary_media = card_product_images_mobile[0]
+  endif
+-%}
+
+<div class="ax-matelas-comparator__product product-miniature" data-product-id="{{ display_product.id }}" data-column-index="{{ column_index }}">
+  <div class="ax-matelas-comparator__column-header ax-matelas-comparator__product-card card">
+    <div class="ax-matelas-comparator__product-card-image-wrapper">
+      {%- if card_product_featured_media -%}
+        {%- capture product_card_image -%}
+          <picture>
+            <source
+              media="(max-width: 749px)"
+              srcset="{{ card_product_mobile_primary_media | image_url: width: 124 }} 1x, {{ card_product_mobile_primary_media | image_url: width: 248 }} 2x"
+            >
+            <img
+              src="{{ card_product_featured_media | image_url: width: 124 }}"
+              srcset="{{ card_product_featured_media | image_url: width: 1 }} 1w, {{ card_product_featured_media | image_url: width: 124 }} 124w, {{ card_product_featured_media | image_url: width: 248 }} 248w"
+              sizes="(max-width: 990px) 1px, 64px"
+              loading="lazy"
+              width="124" height="124"
+              alt="image {{- display_product.title | escape -}}"
+              class="ax-matelas-comparator__product-card-image"
+            >
+          </picture>
+        {%- endcapture -%}
+        {{ product_card_image | replace: 'src=', 'lazy-src=' | replace: 'srcset=', 'lazy-srcset=' }}
+      {%- endif -%}
+    </div>
+    <div class="ax-matelas-comparator__product-card-content card__content">
+      <span class="h5">{{ display_product.title }}</span>
+      {% render 'product-badges', class: 'card__badge card__badge--images bottom left', product: display_product, show_discount: true, show_rating: false %}
+      {% render 'price', product: display_product, price_class: '', show_compare_at_price: true, show_badges: false %}
+    </div>
+  </div>
+
+  {%- if current_product != blank and display_product.id == current_product.id -%}
+    <div class="ax-matelas-comparator__product-card-selector-current text-body-small">
+      <span>
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clip-path="url(#clip0_66_2653)"><path d="M0.5 5.66667L4.16667 9.33333L11.5 2" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></g>
+          <defs><clipPath id="clip0_66_2653"><rect width="12" height="9" fill="white" transform="translate(0 1.5)"/></clipPath></defs>
+        </svg>
+        {{ 'sections.matelas_comparator.currently_on_screen' | t }}
+      </span>
+    </div>
+  {%- endif -%}
+
+  {%- if show_product_selector -%}
+    <div class="ax-matelas-comparator__product-card-selector" data-placeholder="{{ 'sections.matelas_comparator.select_product' | t }}">
+      <select name="product-selector" id="product-selector-{{ display_product.id }}">
+        {%- assign opt_column = 1 -%}
+        {%- for opt_p in products_to_compare -%}
+          <option value="{{ opt_column }}" data-product-id="{{ opt_p.id }}" {% if opt_p.id == display_product.id %}selected{% endif %}>{{ opt_p.title }}</option>
+          {%- assign opt_column = opt_column | plus: 1 -%}
+        {%- endfor -%}
+      </select>
+    </div>
+  {%- endif -%}
+</div>

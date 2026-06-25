@@ -1,0 +1,634 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "custom_liquid_C6wrER": {
+      "type": "custom-liquid",
+      "name": "Hero_section",
+      "settings": {
+        "custom_liquid": "<style>\n  .percale-hero {\n    background-color: #000B26;\n    color: #FFF;\n    font-family: Obviously, sans-serif;\n    display: flex;\n    flex-direction: column;\n    padding: 32px 20px;\n  }\n\n  @media (min-width: 1024px) {\n    .percale-hero {\n      flex-direction: row;\n      align-items: center;\n      justify-content: space-between;\n      padding: 80px 60px;\n    }\n  }\n\n  .percale-hero-left {\n    max-width: 620px;\n    display: flex;\n    flex-direction: column;\n    gap: 24px;\n  }\n\n  .percale-hero-title {\n    color: #FFF;\n    font-family: Obviously, sans-serif;\n    font-size: var(--font-size-xl2, 48px);\n    font-weight: 600;\n    line-height: var(--font-line-height-xl, 56px);\n    text-transform: uppercase;\n    margin-bottom: 0;\n  }\n\n  @media (max-width: 767px) {\n    .percale-hero-title {\n      font-size: 40px;\n      line-height: 44px;\n    }\n  }\n\n  .percale-hero-subtitle {\n    font-size: 16px;\n    font-weight: 700;\nline-height: 20px;\n    text-transform: uppercase;\n    letter-spacing: -0.3px;\n    margin-top: -12px;\n    font-family: 'Obviously', sans-serif;\n  }\n\n  .percale-hero-box {\n    background-color: #FFF8F2;\n    color: #000B26;\n    padding: 24px;\n    border-radius: 8px;\n    margin-top: 16px;\n    display: flex;\n    flex-direction: column;\n    gap: 16px;\n    max-width: 100%;\n  }\n\n  .percale-hero-box p {\n    font-size: 16px;\n    line-height: 1.5;\n    margin: 0;\n  }\n\n  .percale-hero-box strong {\n    font-weight: 700;\n  }\n\n  .percale-hero-box a {\n    background-color: #000B26;\n    color: #FFF;\n    font-size: 16px;\n    font-weight: 700;\n    font-family: 'Obviously Narrow Bold', sans-serif;\n    height: 48px;\n    padding: 0 24px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    border-radius: 10px;\n    text-decoration: none;\n    width: fit-content;\n  }\n\n  .percale-hero-image {\n    margin-top: 40px;\n  }\n\n  @media (min-width: 1024px) {\n    .percale-hero-image {\n      margin-top: 0;\n      max-width: 50%;\n      padding-left: 40px;\n    }\n  }\n\n  .percale-hero-image img {\n    width: 100%;\n    height: auto;\n    border-radius: 0;\n    display: block;\n  }\n</style>\n\n<section class=\"percale-hero\">\n  <div class=\"percale-hero-left\">\n    <h2 class=\"percale-hero-title\">Vous vous réveillez en sueur la nuit&nbsp;?</h2>\n    <p class=\"percale-hero-subtitle\">Découvrez le matelas qui reste toujours frais</p>\n    <div class=\"percale-hero-box\">\n      <p>Adoptez un matelas qui laisse circuler l’air et régule la température, même quand il fait chaud.</p>\n      <a href=\"/products/matelas-hybride\">Découvrir le matelas idéal</a>\n    </div>\n  </div>\n  <div class=\"percale-hero-image\">\n    <img src=\"https://cdn.shopify.com/s/files/1/0903/1342/5220/files/lp_chaleur_matelas.png?v=1755875710\">\n  </div>\n</section>",
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_content": false,
+        "custom_h1": "",
+        "h1_size": "h1",
+        "h1_no_margin": false,
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "ax_image_with_text_Uic6bV": {
+      "type": "ax-image-with-text",
+      "blocks": {
+        "heading_Mt8Tiw": {
+          "type": "heading",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "heading": "<p>LOREM IPSUM DOLOR</p>",
+            "heading_size": "h2"
+          }
+        },
+        "text_tqAUVX": {
+          "type": "text",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "text": "<p>Lorem ipsum dolor sit amet consectetur. Turpis in in leo velit turpis at. Sed vivamus amet elementum lobortis pretium enim elit volutpat dignissim. Diam sit non amet at ipsum. In faucibus amet nulla amet. </p>",
+            "description_hn_replace": false,
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "heading_Mt8Tiw",
+        "text_tqAUVX"
+      ],
+      "settings": {
+        "full_width": true,
+        "text_alignment": "left",
+        "no_vertical_padding": false,
+        "image_restricted_width": false,
+        "image_adapted_height_with_content": false,
+        "contain_image": false,
+        "layout": "image_first",
+        "mobile_layout": "image_first",
+        "overlay": true,
+        "overlay_opacity": 0.2,
+        "section_color_scheme": "",
+        "color_scheme": "scheme-2",
+        "padding_top": 0,
+        "padding_bottom": 48
+      }
+    },
+    "ax_info_block_6rRTAA": {
+      "type": "ax-info-block",
+      "name": "Ax info block",
+      "settings": {
+        "restricted_width": true,
+        "image_width": 32,
+        "heading": "CERTAINS MATELAS RETIENNENT LA CHALEUR",
+        "content": "<p>De nombreux matelas sur le marché sont conçus avec des mousses fermées et des matériaux peu respirants. Résultat : la chaleur s’accumule, l’humidité stagne et vous vous réveillez en sueur.</p>",
+        "caption": "",
+        "color_scheme": "",
+        "color_scheme_content": "",
+        "highlight_color": "#915935",
+        "mob_padding_top": 24,
+        "mob_padding_bottom": 0,
+        "padding_top": 48,
+        "padding_bottom": 16,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "ax_info_block_tJMg9M": {
+      "type": "ax-info-block",
+      "settings": {
+        "restricted_width": true,
+        "image": "shopify://shop_images/bulb_2.svg",
+        "image_width": 32,
+        "heading": "LE SAVIEz -VOUS ?",
+        "content": "<p><strong>La qualité de sommeil de plus de 7 français sur 10 est affectée à cause de la chaleur la nuit.</strong></p>",
+        "caption": "Selon une enquête de l’IFOP - 2022",
+        "color_scheme": "scheme-1",
+        "color_scheme_content": "scheme-e1828edc-858e-4a98-a2f7-4650db2b6838",
+        "highlight_color": "#915935",
+        "mob_padding_top": 16,
+        "mob_padding_bottom": 24,
+        "padding_top": 0,
+        "padding_bottom": 16,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 48
+      }
+    },
+    "image_with_text_iGcqPD": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_GBWen4": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>Découvrez le matelas idéal</strong>",
+            "heading_size": "h2"
+          }
+        },
+        "text_Eh96ag": {
+          "type": "text",
+          "settings": {
+            "text": "",
+            "text_style": "body"
+          }
+        },
+        "button_rGtrR6": {
+          "type": "button",
+          "settings": {
+            "button_label": "Découvrir le matelas Hybride",
+            "button_link": "shopify://products/matelas-hybride",
+            "button_style_secondary": true
+          }
+        }
+      },
+      "block_order": [
+        "heading_GBWen4",
+        "text_Eh96ag",
+        "button_rGtrR6"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/matelas_chaleur_excessive.png",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "center",
+        "mobile_content_alignment": "center",
+        "section_color_scheme": "scheme-1",
+        "color_scheme": "scheme-3",
+        "padding_top": 32,
+        "padding_bottom": 32
+      }
+    },
+    "multicolumn_AzAfWW": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_CGJAJY": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/lp_matelas_hybride_icon_criteres_respirabilite_thermoregulation.png",
+            "title": "",
+            "text": "<p><strong>Hypoallergénique</strong> : prévient les réactions allergiques pensées pour les peaux sensibles.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_44xyFn": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/lp_matelas_hybride_icon_criteres_hypoallergenique.png",
+            "title": "",
+            "text": "<p><strong>Respirabilité et thermorégulation</strong> : favorise une bonne ventilation du matelas et évite les excès de chaleur durant la nuit.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_iETXFx": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/lp_matelas_hybride_icon_criteres_humidite.png",
+            "title": "",
+            "text": "<p><strong>Évacuation de l'humidité</strong> : absorbe efficacement la transpiration et élimine l'humidité</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_CGJAJY",
+        "column_44xyFn",
+        "column_iETXFx"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "L’importance des matériaux respirants",
+        "heading_size": "h2",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "Découvrir le matelas Hybride",
+        "button_link": "shopify://products/matelas-hybride",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "primary",
+        "color_scheme": "scheme-5",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "ax_image_with_text_e7LeVX": {
+      "type": "ax-image-with-text",
+      "blocks": {
+        "heading_q86bJM": {
+          "type": "heading",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "heading": "<p>LOREM IPSUM DOLOR</p>",
+            "heading_size": "h2"
+          }
+        },
+        "text_t7Cbdq": {
+          "type": "text",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "text": "<p>Lorem ipsum dolor sit amet consectetur. Turpis in in leo velit turpis at. Sed vivamus amet elementum lobortis pretium enim elit volutpat dignissim. Diam sit non amet at ipsum. In faucibus amet nulla amet. </p>",
+            "description_hn_replace": false,
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "heading_q86bJM",
+        "text_t7Cbdq"
+      ],
+      "settings": {
+        "full_width": true,
+        "text_alignment": "left",
+        "no_vertical_padding": false,
+        "image_restricted_width": false,
+        "image_adapted_height_with_content": false,
+        "contain_image": false,
+        "layout": "image_first",
+        "mobile_layout": "image_first",
+        "overlay": true,
+        "overlay_opacity": 0.2,
+        "section_color_scheme": "",
+        "color_scheme": "scheme-2",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "ax_image_with_text_x3wFzW": {
+      "type": "ax-image-with-text",
+      "blocks": {
+        "subheading_JWwFUp": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "SUB HEADING"
+          }
+        },
+        "heading_LzyUxg": {
+          "type": "heading",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "heading": "<p>LOREM IPSUM DOLOR</p>",
+            "heading_size": "h2"
+          }
+        },
+        "text_mqaabX": {
+          "type": "text",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "text": "<p>Lorem ipsum dolor sit amet consectetur. Etiam ac tempor ut eleifend auctor egestas laoreet. Convallis est tempus at quisque elementum et integer morbi orci. Elit ornare magna purus at ullamcorper metus. Massa libero aenean iaculis ultrices enim elit quisque malesuada praesent. Blandit morbi urna venenatis urna quis fringilla cras pellentesque. Sed interdum massa aliquam duis gravida consequat risus pharetra sem. Aliquam feugiat justo sit vulputate. Donec blandit convallis donec sit volutpat duis morbi. Ultrices tellus in et risus viverra eu et massa sagittis. Lorem quam nulla mi rhoncus.</p>",
+            "description_hn_replace": false,
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_JWwFUp",
+        "heading_LzyUxg",
+        "text_mqaabX"
+      ],
+      "settings": {
+        "full_width": true,
+        "text_alignment": "left",
+        "no_vertical_padding": false,
+        "image_restricted_width": false,
+        "image_adapted_height_with_content": false,
+        "contain_image": false,
+        "layout": "text_first",
+        "mobile_layout": "image_first",
+        "overlay": true,
+        "overlay_opacity": 0.2,
+        "section_color_scheme": "",
+        "color_scheme": "scheme-3",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "ax_media_with_text_emkHdT": {
+      "type": "ax-media-with-text",
+      "blocks": {
+        "subheading_ynxjtR": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "LA SOLUTION TEDIBER"
+          }
+        },
+        "heading_VfQVqh": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>LE MATELAS CONÇU POUR DES NUITS AU FRAIS</strong>",
+            "heading_size": "h2"
+          }
+        },
+        "text_9NQXQE": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Le matelas Hybride Tediber allie ressorts ensachés, mousse respirante et surface en Tencel®. Résultat : un matelas qui reste toujours frais, même quand les températures montent.</p>",
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center"
+          }
+        },
+        "button_pzKXbY": {
+          "type": "button",
+          "settings": {
+            "button_text": "Découvrir le matelas Hybride",
+            "button_link": "shopify://products/matelas-hybride",
+            "link_blank": false,
+            "link_style": "button button--secondary"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_ynxjtR",
+        "heading_VfQVqh",
+        "text_9NQXQE",
+        "button_pzKXbY"
+      ],
+      "name": "Ax Media with text",
+      "settings": {
+        "full_width": false,
+        "image": "shopify://shop_images/lp_chaleur_matelas_hybride_tediber.png",
+        "layout": "text_first",
+        "overlay": true,
+        "overlay_opacity": 0,
+        "section_color_scheme": "scheme-3",
+        "color_scheme": "scheme-3",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "ax_comparison_chart_AyhEKb": {
+      "type": "ax-comparison-chart",
+      "blocks": {
+        "table_1_nfAg9a": {
+          "type": "table_1",
+          "settings": {
+            "heading": "TEDIBER",
+            "is_winner": true
+          }
+        },
+        "table_item_1_Dda3Y6": {
+          "type": "table_item_1",
+          "settings": {
+            "text": "Excellente circulation de l’air",
+            "status": "check"
+          }
+        },
+        "table_item_1_hPBQJe": {
+          "type": "table_item_1",
+          "settings": {
+            "text": "Régulation thermique naturelle",
+            "status": "check"
+          }
+        },
+        "table_item_1_BVePjt": {
+          "type": "table_item_1",
+          "settings": {
+            "text": "Matériaux non nocifs labellisés OEKO-TEX® STANDARD 100",
+            "status": "check"
+          }
+        },
+        "table_item_1_zER4DK": {
+          "type": "table_item_1",
+          "settings": {
+            "text": "Idéal en toute saison",
+            "status": "check"
+          }
+        },
+        "table_item_1_byPUVq": {
+          "type": "table_item_1",
+          "disabled": true,
+          "settings": {
+            "text": "Peu de promotions",
+            "status": "cross"
+          }
+        },
+        "table_2_WEGHAH": {
+          "type": "table_2",
+          "settings": {
+            "heading": "AUTRES MARQUES",
+            "is_winner": false
+          }
+        },
+        "table_item_2_H6PHWx": {
+          "type": "table_item_2",
+          "settings": {
+            "text": "Accumulation de chaleur",
+            "status": "cross"
+          }
+        },
+        "table_item_2_PeDjeb": {
+          "type": "table_item_2",
+          "settings": {
+            "text": "Retient l’humidité",
+            "status": "cross"
+          }
+        },
+        "table_item_2_8j9Qk7": {
+          "type": "table_item_2",
+          "settings": {
+            "text": "Peu de transparence sur les matériaux",
+            "status": "cross"
+          }
+        },
+        "table_item_2_9VwXGw": {
+          "type": "table_item_2",
+          "settings": {
+            "text": "Confort inégal selon la température",
+            "status": "cross"
+          }
+        },
+        "table_item_2_3LEYkW": {
+          "type": "table_item_2",
+          "disabled": true,
+          "settings": {
+            "text": "Promotions toute l’année",
+            "status": "check"
+          }
+        }
+      },
+      "block_order": [
+        "table_1_nfAg9a",
+        "table_item_1_Dda3Y6",
+        "table_item_1_hPBQJe",
+        "table_item_1_BVePjt",
+        "table_item_1_zER4DK",
+        "table_item_1_byPUVq",
+        "table_2_WEGHAH",
+        "table_item_2_H6PHWx",
+        "table_item_2_PeDjeb",
+        "table_item_2_8j9Qk7",
+        "table_item_2_9VwXGw",
+        "table_item_2_3LEYkW"
+      ],
+      "name": "Ax comparison chart",
+      "settings": {
+        "heading": "<p><strong>Le matelas qui coche toutes vos cases</strong></p>",
+        "subheading": "TEDIBER VS AUTRES MARQUES",
+        "description": "",
+        "button_text": "Découvrir le matelas Hybride",
+        "button_link": "shopify://products/matelas-hybride",
+        "link_blank": false,
+        "link_style": "button button--secondary",
+        "caption": "100 nuits d’essai | Livraison sous 48h",
+        "winner_text": "",
+        "color_scheme": "scheme-3",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 48,
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "rich_text_A8CT8w": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_k8VPtN": {
+          "type": "heading",
+          "settings": {
+            "heading": "ILS ONT RETROUVÉ DES NUITS PAISIBLES",
+            "heading_size": "h1"
+          }
+        }
+      },
+      "block_order": [
+        "heading_k8VPtN"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-5",
+        "full_width": true,
+        "padding_top_desktop": 56,
+        "padding_bottom_desktop": 52
+      }
+    },
+    "custom_liquid_CNG43z": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<!-- TrustBox widget - Slider -->\n<div class=\"trustpilot-widget\" data-locale=\"fr-FR\" data-template-id=\"54ad5defc6454f065c28af8b\" data-businessunit-id=\"5a5cdcedf3b8320001d06ddf\" data-style-height=\"240px\" data-style-width=\"100%\" data-token=\"15e180d9-487f-4cde-a0b0-5c5388b79cd1\" data-tags=\"SelectedReview\" data-review-languages=\"fr\">\n  <a href=\"https://fr.trustpilot.com/review/www.tediber.com\" target=\"_blank\" rel=\"noopener\">Trustpilot</a>\n</div>\n<!-- End TrustBox widget -->",
+        "color_scheme": "scheme-5",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "image_with_text_PpPcAL": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_Be3V7Y": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>FAITES LE CHOIX DU CONFORT</strong>",
+            "heading_size": "h2"
+          }
+        },
+        "text_e7HTif": {
+          "type": "text",
+          "settings": {
+            "text": "",
+            "text_style": "body"
+          }
+        },
+        "button_N88Cid": {
+          "type": "button",
+          "settings": {
+            "button_label": "Découvrir les matelas Tediber",
+            "button_link": "shopify://collections/matelas",
+            "button_style_secondary": true
+          }
+        }
+      },
+      "block_order": [
+        "heading_Be3V7Y",
+        "text_e7HTif",
+        "button_N88Cid"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/lp_bonus_reparation_chambre_matelas_confort_tediber.png",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "center",
+        "mobile_content_alignment": "center",
+        "section_color_scheme": "scheme-1",
+        "color_scheme": "scheme-3",
+        "padding_top": 32,
+        "padding_bottom": 32
+      }
+    },
+    "ax_faq_Ge79NK": {
+      "type": "ax-faq",
+      "settings": {
+        "heading": "<p>Question <br/>fréquentes</p>",
+        "picto_size": 94,
+        "picto_size_mobile": 94,
+        "image": "shopify://shop_images/sommier-boxspring_faq.jpg",
+        "faq": [
+          "le-matelas-hybride-de-tediber-convient-il-aux-personnes-qui-ont-chaud-la-nuit",
+          "comment-fonctionnent-les-100-nuits-dessai",
+          "quels-sont-les-delais-de-livraison"
+        ],
+        "color_scheme": "scheme-e1828edc-858e-4a98-a2f7-4650db2b6838",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "custom_liquid_C6wrER",
+    "main",
+    "ax_image_with_text_Uic6bV",
+    "ax_info_block_6rRTAA",
+    "ax_info_block_tJMg9M",
+    "image_with_text_iGcqPD",
+    "multicolumn_AzAfWW",
+    "ax_image_with_text_e7LeVX",
+    "ax_image_with_text_x3wFzW",
+    "ax_media_with_text_emkHdT",
+    "ax_comparison_chart_AyhEKb",
+    "rich_text_A8CT8w",
+    "custom_liquid_CNG43z",
+    "image_with_text_PpPcAL",
+    "ax_faq_Ge79NK"
+  ]
+}

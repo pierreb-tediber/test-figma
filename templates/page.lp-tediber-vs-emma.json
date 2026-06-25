@@ -1,0 +1,340 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "custom_liquid_Amm8Dx": {
+      "type": "custom-liquid",
+      "name": "Hero",
+      "settings": {
+        "custom_liquid": "<div class=\"vs-mattress-comparison\">\n  <div class=\"comparison-content\">\n    <div class=\"comparison-header\">\n      <div class=\"brands\">\n        <img src=\"https://cdn.shopify.com/s/files/1/0903/1342/5220/files/ediber-logo.png?v=1751554118\" alt=\"Tediber\" class=\"brand-logo\">\n        <span class=\"vs-text\">vs</span>\n        <img src=\"https://cdn.shopify.com/s/files/1/0903/1342/5220/files/emma-logo.png?v=1751554118\" alt=\"Emma\" class=\"brand-logo\">\n      </div>\n      <h2 class=\"comparison-title\">\n        Quelle marque propose le meilleur matelas hybride ?\n      </h2>\n      <p class=\"comparison-desc\">\n        Nous avons analysé <strong>chaque détail</strong> selon vos <strong>vrais besoins</strong> : confort, soutien, durabilité, respirabilité et rapport qualité/prix.\n      </p>\n      <a href=\"/products/matelas-hybride\" class=\"comparison-button\">\n        Découvrir le meilleur matelas\n      </a>\n    </div>\n    <div class=\"mattress tediber-mattress\">\n      <img src=\"https://cdn.shopify.com/s/files/1/0903/1342/5220/files/mattress_emma-mattress.jpg?v=1751554118\" alt=\"Matelas Tediber\">\n    </div>\n  </div>\n</div>\n\n<style>\n.vs-mattress-comparison {\n  max-width: 1200px;\n  margin: 0 auto;\n  padding: 20px;\n}\n\n/* content area with flex */\n.comparison-content {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  flex-wrap: wrap;\n  gap: 20px;\n  margin-bottom: 30px;\n}\n\n/* header left, image right */\n.comparison-header {\n  flex: 1 1 50%;\n  text-align: left;\n}\n.comparison-header .brands {\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  margin-bottom: 15px;\n  line-height: 26px;\n}\n.brand-logo {\n  height: auto;\n  max-width: 100px;\n}\n.vs-text {\n  font-size: 24px;\n  font-weight: bold;\n}\n.comparison-title {\n  font-size: 24px;\n  font-weight: bold;\n  margin: 10px 0;\n  line-height: 26px;\n}\n.vs-mattress-comparison {\nbackground : #FBF5ED; }\n.comparison-desc {\n  font-size: 16px;\n  margin-bottom: 20px;\n  max-width: 500px;\n  line-height: 26px;\n}\n.comparison-button {\n  display: inline-block;\n  background-color: #001F3F;\n  color: white;\n  padding: 12px 24px;\n  text-decoration: none;\n  border-radius: 5px;\n  font-weight: bold;\n  transition: background-color 0.3s;\n}\n.comparison-button:hover {\n  background-color: #003366;\n}\n\n/* image right */\n.tediber-mattress {\n  flex: 1 1 45%;\n}\n.tediber-mattress img {\n  width: 100%;\n  border-radius: 8px;\n}\n\n/* images below (emma) */\n.comparison-images {\n  display: flex;\n  justify-content: center;\n  gap: 20px;\n}\n.emma-mattress img {\n  width: 100%;\n  max-width: 400px;\n  border-radius: 8px;\n}\n\n/* Responsive */\n@media (max-width: 768px) {\n  .comparison-content {\n    flex-direction: column;\n    text-align: center;\n  }\n  .comparison-header {\n    flex: 1 1 100%;\n    text-align: center;\n  }\n  .comparison-header .brands {\n    justify-content: center; /* centrage horizontal logos et vs */\n    text-align: center;\n  }\n  .tediber-mattress {\n    flex: 1 1 100%;\n  }\n  .comparison-title {\n    font-size: 20px;\n  }\n  .comparison-desc {\n    font-size: 14px;\n  }\n  .vs-text {\n    font-size: 20px;\n  }\n}\n</style>",
+        "color_scheme": "scheme-2",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "custom_liquid_dQiAh6": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "name": "comparateur ",
+      "settings": {
+        "custom_liquid": "<div class=\"resume-express\">\n  <h2 class=\"ma-couleur\">TEDIBER VS EMMA</h2>\n  <h3 class=\"ma-couleur\">LE RÉSUMÉ EXPRESS</h3>\n  <p>Découvrez en un coup d'œil les points forts et points faibles de chacun.</p>\n\n  <div class=\"comparatif-table\">\n    <!-- Ligne Tediber -->\n    <div class=\"line\">\n      <div class=\"logo-col\">\n        <img src=\"https://cdn.shopify.com/s/files/1/0903/1342/5220/files/lp_logo_tediber_white.png?v=1751874496\" alt=\"Tediber logo\" />\n        <div class=\"vainqueur\">🥇 Matelas vainqueur</div>\n      </div>\n      <div class=\"cell\">✔ Matériaux durables</div>\n      <div class=\"cell\">✔ 13 cm de mousse</div>\n      <div class=\"cell\">✔ Housse épaisse et respirante</div>\n      <div class=\"cell\">✔ Maintien idéal de la colonne</div>\n      <div class=\"cell\">✖ Peu de promotions</div>\n    </div>\n\n    <!-- Ligne Emma -->\n    <div class=\"line\">\n      <div class=\"logo-col\">\n        <img src=\"https://cdn.shopify.com/s/files/1/0903/1342/5220/files/lp_logo_emma_white.png?v=1751874500\" alt=\"Emma logo\" />\n      </div>\n      <div class=\"cell\">✖ Durabilité limitée</div>\n      <div class=\"cell\">✖ 3 cm de mousse</div>\n      <div class=\"cell\">✖ Housse fine et très chaude</div>\n      <div class=\"cell\">✖ Mou, ressorts perceptibles</div>\n      <div class=\"cell\">✔ Promotions toute l'année</div>\n    </div>\n  </div>\n\n  <div class=\"alert\">\n    ⚠️ <strong>Promotion trompeuse</strong> : Emma condamnée pour ses pratiques commerciales le 2 avril 2025\n  </div>\n\n  <a href=\"/collections/matelas\" class=\"cta-button\">Découvrir le meilleur matelas</a>\n\n  <div class=\"infos\">\n    100 nuits d'essai | Livraison sous 48h\n  </div>\n</div>\n\n<style>\n.vainqueur{\nbackground-color: #A5D4FA;\ncolor:#010C27;}\n.ma-couleur{color: white;}\n.resume-express {\n  background: #010C27;\n  color: #fff;\n  font-family: 'Obviously', sans-serif;\n  max-width: 1200px;\n  margin: 0 auto;\n  padding: 2rem 1rem;\n  text-align: center;\n}\n.resume-express h2 {\n  font-size: 1.2rem;\n  font-weight: bold;\n  margin-bottom: 0.3rem;\n}\n.resume-express h3 {\n  font-size: 2rem;\n  font-weight: bold;\n  margin-bottom: 1rem;\n}\n.resume-express p {\n  font-size: 1rem;\n  color: #d1d5db;\n  margin-bottom: 1.5rem;\n}\n\n.comparatif-table {\n  display: flex;\n  flex-direction: column;\n  gap: 1rem;\n  margin-bottom: 2rem;\n}\n.line {\n  display: flex;\n  align-items: center;\n  gap: 1rem;\n}\n.logo-col {\n  flex-shrink: 0;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  width: 130px;\n}\n.logo-col img {\n  width: 80px;\n  height: auto;\n  margin-bottom: 0.5rem;\n}\n.vainqueur {\n  font-size: 0.85rem;\n  margin-top: 0.2rem;\n}\n.cell {\n  flex: 1;\n  background: #1d273f;\n  border-radius: 8px;\n  padding: 1rem;\n  font-size: 0.95rem;\n}\n\n/* Alert, CTA & Infos */\n.alert {\n  background: #f8d7da;\n  color: #721c24;\n  padding: 1rem;\n  border-radius: 8px;\n  max-width: 800px;\n  margin: 1rem auto 2rem;\n  font-size: 0.95rem;\n}\n.cta-button {\n  display: inline-block;\n  background: #fff;\n  color: #010C27;\n  font-weight: bold;\n  padding: 1rem 2rem;\n  border-radius: 8px;\n  text-decoration: none;\n  margin-bottom: 1.5rem;\n}\n.infos {\n  font-size: 0.9rem;\n  color: #d1d5db;\n}\n\n/* Responsive mobile */\n@media (max-width: 768px) {\n  .comparatif-table {\n    gap: 2rem;\n  }\n  .line {\n    flex-direction: column;\n    align-items: center;\n  }\n  .logo-col {\n    width: auto;\n  }\n  .logo-col img {\n    width: 80px;\n  }\n  .cell {\n    width: 100%;\n  }\n}\n</style>",
+        "color_scheme": "scheme-3",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "ax_comparison_chart_AyhEKb": {
+      "type": "ax-comparison-chart",
+      "blocks": {
+        "table_1_nfAg9a": {
+          "type": "table_1",
+          "settings": {
+            "heading": "TEDIBER",
+            "image": "shopify://shop_images/lp_logo_tediber_white.png",
+            "is_winner": true
+          }
+        },
+        "table_item_1_Dda3Y6": {
+          "type": "table_item_1",
+          "settings": {
+            "text": "Matériaux durables",
+            "status": "check"
+          }
+        },
+        "table_item_1_hPBQJe": {
+          "type": "table_item_1",
+          "settings": {
+            "text": "13 cm de mousse",
+            "status": "check"
+          }
+        },
+        "table_item_1_BVePjt": {
+          "type": "table_item_1",
+          "settings": {
+            "text": "Housse épaisse et respirante",
+            "status": "check"
+          }
+        },
+        "table_item_1_zER4DK": {
+          "type": "table_item_1",
+          "settings": {
+            "text": "Maintien idéal de la colonne",
+            "status": "check"
+          }
+        },
+        "table_item_1_byPUVq": {
+          "type": "table_item_1",
+          "settings": {
+            "text": "Peu de promotions",
+            "status": "cross"
+          }
+        },
+        "table_2_WEGHAH": {
+          "type": "table_2",
+          "settings": {
+            "heading": "EMMA",
+            "image": "shopify://shop_images/lp_logo_emma_white.png",
+            "is_winner": false
+          }
+        },
+        "table_item_2_H6PHWx": {
+          "type": "table_item_2",
+          "settings": {
+            "text": "Durabilité limitée",
+            "status": "cross"
+          }
+        },
+        "table_item_2_PeDjeb": {
+          "type": "table_item_2",
+          "settings": {
+            "text": "3 cm de mousse",
+            "status": "cross"
+          }
+        },
+        "table_item_2_8j9Qk7": {
+          "type": "table_item_2",
+          "settings": {
+            "text": "Housse fine et très chaude",
+            "status": "cross"
+          }
+        },
+        "table_item_2_9VwXGw": {
+          "type": "table_item_2",
+          "settings": {
+            "text": "Mou, ressorts perceptibles",
+            "status": "cross"
+          }
+        },
+        "table_item_2_3LEYkW": {
+          "type": "table_item_2",
+          "settings": {
+            "text": "Promotions toute l’année",
+            "status": "check"
+          }
+        }
+      },
+      "block_order": [
+        "table_1_nfAg9a",
+        "table_item_1_Dda3Y6",
+        "table_item_1_hPBQJe",
+        "table_item_1_BVePjt",
+        "table_item_1_zER4DK",
+        "table_item_1_byPUVq",
+        "table_2_WEGHAH",
+        "table_item_2_H6PHWx",
+        "table_item_2_PeDjeb",
+        "table_item_2_8j9Qk7",
+        "table_item_2_9VwXGw",
+        "table_item_2_3LEYkW"
+      ],
+      "name": "Ax comparison chart",
+      "settings": {
+        "heading": "<p>LE Résumé<br/>express</p>",
+        "subheading": "TEDIBER VS EMMA",
+        "description": "<p>Découvrez en un coup d’œil les points forts <br/>et points faibles de chacun.</p>",
+        "button_text": "Découvrir le meilleur matelas",
+        "button_link": "shopify://products/matelas-hybride",
+        "link_blank": false,
+        "link_style": "button button--secondary",
+        "caption": "100 nuits d’essai | Livraison sous 48h",
+        "winner_picto": "shopify://shop_images/winner.svg",
+        "winner_text": "Matelas vainqueur",
+        "color_scheme": "scheme-3",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 48,
+        "padding_top": 96,
+        "padding_bottom": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "custom_liquid_AFyDiT": {
+      "type": "custom-liquid",
+      "name": "alerte",
+      "settings": {
+        "custom_liquid": "<div class=\"alert-banner\">\n <h4 class=\"alerte\"><strong>  ⚠️ Promotion trompeuse</strong> : Emma condamnée pour ses pratiques commerciales le 2 avril 2025\n</div></h2>\n\n<style>\n.alert-banner {\n  background: #f8d7da;\n  color: #721c24;\n  padding: 1rem 2rem;\n  border-radius: 8px;\n  max-width: 800px;\n  margin: 1rem auto 2rem;\n  font-family: 'Obviously', sans-serif;\n  text-align: center;\n  box-sizing: border-box;\n}\n\n/* Responsive mobile */\n@media (max-width: 480px) {\n  .alert-banner {\n    font-size: 0.9rem;\n    padding: 1rem;\n    margin: 1rem 1rem 2rem 1rem;\n  }\n}\n</style>",
+        "color_scheme": "scheme-4418cbb3-20c6-4a6c-9b95-6b490c772331",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "image_with_text_frfPpX": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_piXz7M": {
+          "type": "heading",
+          "settings": {
+            "heading": "VOICI LE MEILLEUR MATELAS HYBRIDE",
+            "heading_size": "h2"
+          }
+        },
+        "button_CgLi8A": {
+          "type": "button",
+          "settings": {
+            "button_label": "Découvrir le matelas Hybride",
+            "button_link": "shopify://products/matelas-hybride",
+            "button_style_secondary": true
+          }
+        }
+      },
+      "block_order": [
+        "heading_piXz7M",
+        "button_CgLi8A"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/lp_matelas_mou_ou_ferme_gamme_tediber.png",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "center",
+        "mobile_content_alignment": "center",
+        "section_color_scheme": "scheme-1",
+        "color_scheme": "scheme-3",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "custom_liquid_kCqxmQ": {
+      "type": "custom-liquid",
+      "name": "comparateur micro",
+      "settings": {
+        "custom_liquid": "<div class=\"comparatif-complet\">\n  <h2 class=\"titre\">TEDIBER VS EMMA</h2>\n  <h3 class=\"soustitre\">NOTRE COMPARATIF COMPLET</h3>\n  <p class=\"desc\">Découvrez notre <strong>analyse en 5 étapes</strong> pour mieux comprendre quel matelas est <strong>vraiment fait pour vous</strong>.</p>\n\n  <!-- Bloc 1 -->\n  <div class=\"ligne\">\n    <div class=\"icone-texte\">\n      <img src=\"https://cdn.shopify.com/s/files/1/0903/1342/5220/files/lp_matelas_bibloc_tediber_emma.png?v=1751876864\" alt=\"Poids du matelas\">\n      <h4>POIDS DU MATELAS</h4>\n    </div>\n    <div class=\"colonnes\">\n      <div class=\"bloc tediber\">\n        <div class=\"header\">\n          <span class=\"marque\">Tediber</span>\n          <img src=\"https://cdn.shopify.com/s/files/1/0903/1342/5220/files/lp_medaille_tediber.png?v=1751876864\" alt=\"Medaille\" class=\"medaille\">\n        </div>\n        <p><strong>Matelas plus lourd</strong>, synonyme d'une densité des matériaux plus élevée et d'une meilleure durabilité.</p>\n      </div>\n      <div class=\"bloc emma\">\n        <div class=\"header\">\n          <span class=\"marque\">Emma</span>\n        </div>\n        <p><strong>Matelas plus léger</strong>, plus simple à déplacer, mais la densité moindre peut influencer la durabilité.</p>\n      </div>\n    </div>\n  </div>\n\n  <!-- Bloc 2 -->\n  <div class=\"ligne\">\n    <div class=\"icone-texte\">\n      <img src=\"https://cdn.shopify.com/s/files/1/0903/1342/5220/files/lp_bloc_mousse_ressort_matelas_tediber.png?v=1751876864\" alt=\"Épaisseur des mousses\">\n      <h4>ÉPAISSEUR DES MOUSSES</h4>\n    </div>\n    <div class=\"colonnes\">\n      <div class=\"bloc tediber\">\n        <div class=\"header\">\n          <span class=\"marque\">Tediber</span>\n          <img src=\"https://cdn.shopify.com/s/files/1/0903/1342/5220/files/lp_medaille_tediber.png?v=1751876864\" class=\"medaille\">\n        </div>\n        <p><strong>13 cm de mousse</strong> répartie en plusieurs couches, assurant un amorti progressif et évitant tout contact perceptible avec les ressorts.</p>\n      </div>\n      <div class=\"bloc emma\">\n        <div class=\"header\">\n          <span class=\"marque\">Emma</span>\n        </div>\n        <p><strong>3 cm de mousse</strong> recouvrant les ressorts, laissant parfois apparaître une sensation de contact.</p>\n      </div>\n    </div>\n  </div>\n\n  <!-- Bloc 3 -->\n  <div class=\"ligne\">\n    <div class=\"icone-texte\">\n      <img src=\"https://cdn.shopify.com/s/files/1/0903/1342/5220/files/lp_tediber_qualite_housse_matelas.png?v=1751876863\" alt=\"Qualité de la housse\">\n      <h4>QUALITÉ DE LA HOUSSE</h4>\n    </div>\n    <div class=\"colonnes\">\n      <div class=\"bloc tediber\">\n        <div class=\"header\">\n          <span class=\"marque\">Tediber</span>\n          <img src=\"https://cdn.shopify.com/s/files/1/0903/1342/5220/files/lp_medaille_tediber.png?v=1751876864\" alt=\"Medaille\" class=\"medaille\">\n        </div>\n        <p><strong>Housse épaisse</strong>, douce et respirante, à base de Tencel®, favorisant la circulation de l’air et la régulation thermique.</p>\n      </div>\n      <div class=\"bloc emma\">\n        <div class=\"header\">\n          <span class=\"marque\">Emma</span>\n        </div>\n        <p><strong>Housse fine</strong>, translucide à la lumière et 100% polyester. Retient la chaleur, moins qualitative au toucher.</p>\n      </div>\n    </div>\n  </div>\n\n  <!-- Bloc 4 -->\n  <div class=\"ligne\">\n    <div class=\"icone-texte\">\n      <img src=\"https://cdn.shopify.com/s/files/1/0903/1342/5220/files/lp_confort_independance_tediber_lit.png?v=1751876863\" alt=\"Soutien et confort\">\n      <h4>SOUTIEN ET CONFORT</h4>\n    </div>\n    <div class=\"colonnes\">\n      <div class=\"bloc tediber\">\n        <div class=\"header\">\n          <span class=\"marque\">Tediber</span>\n          <img src=\"https://cdn.shopify.com/s/files/1/0903/1342/5220/files/lp_medaille_tediber.png?v=1751876864\" class=\"medaille\">\n        </div>\n        <p><strong>Confort équilibré</strong> : accueil moelleux combiné à une base ferme pour soutenir efficacement la colonne vertébrale.</p>\n      </div>\n      <div class=\"bloc emma\">\n        <div class=\"header\">\n          <span class=\"marque\">Emma</span>\n        </div>\n        <p><strong>Confort très souple</strong>, donnant une sensation d’enfoncement, maintenant moins bien la colonne et limitant la durabilité.</p>\n      </div>\n    </div>\n  </div>\n\n  <!-- Bloc 5 -->\n  <div class=\"ligne\">\n    <div class=\"icone-texte\">\n      <img src=\"https://cdn.shopify.com/s/files/1/0903/1342/5220/files/lp_tediber_analyse_meilleur.png?v=1751876864\" alt=\"Rapport qualité-prix\">\n      <h4>RAPPORT QUALITÉ-PRIX</h4>\n    </div>\n    <div class=\"colonnes\">\n      <div class=\"bloc tediber\">\n        <div class=\"header\">\n          <span class=\"marque\">Tediber</span>\n        </div>\n        <p><strong>Prix plus élevé</strong>, justifié par la densité des matériaux, la fabrication française et la qualité. Peu de promos mais un positionnement clair.</p>\n      </div>\n      <div class=\"bloc emma\">\n        <div class=\"header\">\n          <span class=\"marque\">Emma</span>\n        </div>\n        <p><strong>Promotions régulières</strong>, mais pouvant masquer une qualité moindre et limitant la durabilité.</p>\n      </div>\n    </div>\n  </div>\n\n  <!-- Bloc Verdict Final -->\n  <div class=\"ligne final\">\n    <div class=\"icone-texte verdict\">\n      <img class=\"logo-festif\" src=\"https://cdn.shopify.com/s/files/1/0903/1342/5220/files/lp_tediber_logo_festif.png?v=1751876864\" alt=\"Tediber vainqueur\">\n      <h4>VERDICT FINAL</h4>\n    </div>\n    <div class=\"colonnes\">\n      <div class=\"bloc tediber\">\n        <span class=\"marque\">Tediber</span>\n        <p><strong>Nous recommandons le matelas hybride Tediber !</strong> Pour un bon maintien, une housse respirante et une excellente durabilité.</p>\n      </div>\n      <div class=\"bloc emma\">\n        <span class=\"marque\">Emma</span>\n        <p>Un matelas à prix attractif, <strong>mais au détriment d’une qualité et d’une durabilité limitées</strong>.</p>\n      </div>\n    </div>\n  </div>\n</div>\n\n<style>\n.comparatif-complet {\n  font-family: 'Obviously', sans-serif;\n  background: #fef8f2;\n  padding: 2rem;\n  max-width: 1200px;\n  margin: 0 auto;\n}\n.comparatif-complet h2, .comparatif-complet h3 {\n  text-align: center;\n  color: #010C27;\n  margin: 0.5rem 0;\n}\n\n.comparatif-complet .desc {\n  text-align: center;\n  color: #010C27;\n  margin-bottom: 2rem;\n}\n.ligne {\n  display: flex;\n  gap: 2rem;\n  margin-bottom: 2rem;\n  align-items: center;\n}\n.icone-texte {\n  flex: 0 0 180px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  text-align: center;\n}\n.icone-texte img {\n  width: 80px;\n  height: auto;\n  object-fit: contain;\n  margin-bottom: 0.5rem;\n}\n.icone-texte h4 {\n  color: #010C27;\n  font-size: 2rem;\n}\n.colonnes {\n  display: flex;\n  gap: 1rem;\n  flex: 1;\n}\n.bloc {\n  flex: 1;\n  padding: 1rem;\n  border-radius: 6px;\n}\n.bloc.tediber {\n  background: #fcecdc;\n}\n\n.bloc.emma {\n  background: #fff;\n}\n.header {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin-bottom: 0.5rem;\n}\n.medaille {\n  width: 20px;\n}\n.ligne.final {\n  background: #010C27;\n  padding: 2rem;\n  border-radius: 10px;\n  align-items: flex-start;\n}\n.ligne.final .icone-texte img {\n  width: 80px;\n}\n.ligne.final .icone-texte h4 {\n  color: #fff;\n}\n.ligne.final .bloc.tediber, .ligne.final .bloc.emma {\n  background: transparent;\n  color: #fff;\n}\n\n/* Responsive */\n@media (max-width: 768px) {\n  .ligne {\n    flex-direction: column;\n    align-items: center;\n  }\n  .colonnes {\n    flex-direction: column;\n    width: 100%;\n  }\n  .icone-texte {\n    flex: none;\n    margin-bottom: 1rem;\n  }\n}\n</style>",
+        "color_scheme": "scheme-1",
+        "padding_top": 40,
+        "padding_bottom": 24
+      }
+    },
+    "image_with_text_xVWgyY": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_Agryn6": {
+          "type": "heading",
+          "settings": {
+            "heading": "CHOISISSEZ UNMATELAS DE QUALITÉ",
+            "heading_size": "h2"
+          }
+        },
+        "button_gV49zi": {
+          "type": "button",
+          "settings": {
+            "button_label": "Découvrir le matelas Hybride",
+            "button_link": "shopify://products/matelas-hybride",
+            "button_style_secondary": true
+          }
+        }
+      },
+      "block_order": [
+        "heading_Agryn6",
+        "button_gV49zi"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/lp_bonus_reparation_chambre_matelas_confort_tediber.png",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "center",
+        "mobile_content_alignment": "center",
+        "section_color_scheme": "scheme-1",
+        "color_scheme": "scheme-3",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_content": false,
+        "custom_h1": "",
+        "h1_size": "h1",
+        "h1_no_margin": false,
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "ax_faq_Ge79NK": {
+      "type": "ax-faq",
+      "disabled": true,
+      "settings": {
+        "heading": "<p>Question <br/>fréquentes</p>",
+        "picto": "shopify://shop_images/sewing.svg",
+        "picto_size": 94,
+        "picto_size_mobile": 94,
+        "reverse_layout": false,
+        "image": "shopify://shop_images/push-faq.webp",
+        "faq": [
+          "lincroyable-guide-du-matelas",
+          "fabrication-beige-et-francaise",
+          "compatible-avec-tous-les-sommiers"
+        ],
+        "color_scheme": "scheme-e1828edc-858e-4a98-a2f7-4650db2b6838",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "custom_liquid_cd3ywf": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<script>function sendAudienceData(a){window.jDataLayer=window.jDataLayer||[],window.jDataLayer.push({type:\"audience\",data:a})}</script><div id=\"join-widget-Lit-Scandi-Unbounce\" style=\"display:block;\"></div> <style> #join-widget-Lit-Scandi-Unbounce { margin: 5px 2px; min-height: 268px; width: 100%; } @media (min-aspect-ratio: 3/4) { #join-widget-Lit-Scandi-Unbounce { min-height: 352px; } } </style>  <script src=\"https://tediber.my.join-stories.com/widgets/Lit-Scandi-Unbounce/index.js\" data-join-widget-id=\"join-widget-Lit-Scandi-Unbounce\" data-join-widget-alias=\"Lit-Scandi-Unbounce\" type=\"text/javascript\" ></script>",
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "ax_faq_GHb7qe": {
+      "type": "ax-faq",
+      "disabled": true,
+      "name": "Ax faq",
+      "settings": {
+        "heading": "<p>Questions fréquentes</p>",
+        "picto_size": 24,
+        "picto_size_mobile": 24,
+        "reverse_layout": false,
+        "image": "shopify://shop_images/faq_6f14f05a-2f8a-445a-90fc-49a2ec7e7b32.jpg",
+        "faq": [
+          "comment-savoir-quel-matelas-me-convient",
+          "comment-choisir-entre-un-matelas-mou-ou-ferme",
+          "pourquoi-emma-propose-des-promotions-constantes"
+        ],
+        "color_scheme": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "custom_liquid_Amm8Dx",
+    "custom_liquid_dQiAh6",
+    "ax_comparison_chart_AyhEKb",
+    "custom_liquid_AFyDiT",
+    "image_with_text_frfPpX",
+    "custom_liquid_kCqxmQ",
+    "image_with_text_xVWgyY",
+    "main",
+    "ax_faq_Ge79NK",
+    "custom_liquid_cd3ywf",
+    "ax_faq_GHb7qe"
+  ]
+}

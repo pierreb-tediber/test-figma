@@ -1,0 +1,1178 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_content": false,
+        "custom_h1": "",
+        "h1_size": "h1",
+        "h1_no_margin": false,
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "ax_heading_6TphAp": {
+      "type": "ax-heading",
+      "name": "Ax heading",
+      "settings": {
+        "heading": "<p>Conditions générales de vente</p>",
+        "heading_size": "h2",
+        "heading_first": true,
+        "subheading": "",
+        "description": "",
+        "full_width": false,
+        "text_alignment": "center",
+        "color_scheme": "",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 32,
+        "padding_top": 96,
+        "padding_bottom": 64
+      }
+    },
+    "ax_richtext_RkciMT": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_MLktXy": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Article 1 : Dénomination </p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_JRbaPb": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Société Tediber SAS Société par Actions Simplifiée, dont le siège social est situé au 20 Rue Sainte Croix de la Bretonnerie - 75004 Paris, et immatriculée au RCS de Paris sous le numéro 813 089 638.</p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_MLktXy",
+        "text_JRbaPb"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_Bg9Fyx": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_FVq3AE": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Article 2 : Application des conditions générales de vente</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_FEpniE": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Société Tediber SAS Société par Actions Simplifiée, dont le siège social est situé au 20 Rue Sainte Croix de la Bretonnerie - 75004 Paris, et immatriculée au RCS de Paris sous le numéro 813 089 638. </p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_FVq3AE",
+        "text_FEpniE"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_ThE6gF": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_jLR8fE": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Article 3 : Validité de l’offre</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_eJg6qR": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Les produits vendus par la société Tediber sont destinés aux consommateurs ayant une adresse de livraison en France métropolitaine, en Corse, en Belgique, au Luxembourg, aux Pays-Bas, en Italie, en Espagne, en Allemagne, en Autriche, en Suisse, au Vatican et à Saint Marin. Les articles sont vendus dans la limite des stocks disponibles aux clients répondant à ce critère géographique. Les produits vendus par Tediber sont destinés exclusivement aux particuliers majeurs et la revente des articles achetés sur le site www.tediber.com est interdite.<br/><br/>En cas d’encaissement d’une commande pour laquelle un produit s’avèrerait indisponible au moment de la livraison, la société Tediber s’engage à prévenir le client et à lui proposer une nouvelle date de livraison le plus rapidement possible ou un remboursement dans un délai maximum de 2 jours après la demande d'annulation de commande.</p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_jLR8fE",
+        "text_eJg6qR"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "scheme-2",
+        "color_scheme_container": "scheme-2",
+        "mob_padding_top": 32,
+        "mob_padding_bottom": 32,
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "ax_richtext_X9c8aL": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_cr47EB": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Article 4 : Prix</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_mxDwVg": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Les prix indiqués sur le site www.tediber.com sont indiqués en euros, incluant les TVA (Toutes Taxes Comprises) et incluant les frais de port et de logistique pour la France métropolitaine, la Corse, la Belgique, le Luxembourg, les Pays-Bas, l’Italie, l’Espagne et l’Allemagne, l’Autriche.<br/><br/>Pour la Suisse, les prix indiqués sur le site www.tediber.com sont indiqués en euros (Toutes Taxes Comprises). Ce prix inclut la TVA Suisse (8,1%), les frais de logistique et les frais de douane. Si le taux de TVA en vigueur venait à être modifié, les prix des articles pourraient être modifiés en répercussion, sans que le client en soit préalablement informé.<br/><br/>La société Tediber se réserve le droit de modification de ses prix sans préavis et à tout moment. La facturation se fait au tarif en vigueur au moment de l’enregistrement et de l’acceptation de la commande. Les produits demeurent la propriété de Tediber jusqu’au complet paiement du prix. Ce prix est payable en totalité et en un seul versement (sauf dispositif spécifique de paiement en plusieurs fois). La société Tediber se réserve le droit d’annuler ou de ne pas valider une commande pour laquelle le paiement de cette commande ou d’une commande antérieure du client présenterait un litige.<br/><br/>Si Tediber accepte et traite votre commande lorsqu’une erreur de prix est évidente et sans équivoque et aurait raisonnablement pu être reconnue de votre coté comme une erreur de prix, Tediber peut demander le paiement de la différence de prix ou mettre fin au contrat en vous remboursant toutes les sommes que vous avez payées et exiger le retour de toute marchandise qui vous est fournie.</p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_cr47EB",
+        "text_mxDwVg"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "scheme-2",
+        "color_scheme_container": "scheme-2",
+        "mob_padding_top": 32,
+        "mob_padding_bottom": 32,
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_9QeXzn": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_giNeLH": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Article 5 : Confirmation et Gestion des commandes</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_RhaGEk": {
+          "type": "text",
+          "settings": {
+            "text": "<p>La société Tediber s’engage à confirmer chacune des commandes passées par l’envoi d’un courrier électronique. Cet email confirme que la commande a été prise en compte et que le montant de la commande est débité. Après envoi de l’email de confirmation de commande, la société Tediber ne peut garantir la possibilité au client d’annuler la commande. Si vous deviez effectuer une modification ou une annulation nous vous invitons donc à nous contacter le plus rapidement possible par mail à l'adresse suivante : hello@tediber.com. La société Tediber s’engage à vous informer ensuite des différentes étapes de votre commande et notamment de son expédition.</p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_giNeLH",
+        "text_RhaGEk"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_krdN4C": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_wDGdwb": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Article 6 : Présentation des produits</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_YX87RX": {
+          "type": "text",
+          "settings": {
+            "text": "<p>La société Tediber s’engage à décrire le plus précisément possible ses produits dans ses descriptions et sur les différentes rubriques du site www.tediber.com. Si des erreurs ou des omissions étaient constatées concernant ces présentations ou la description des produits, la responsabilité de la société Tediber ne pourrait être engagée. Les photographies et illustration n’entrent pas non plus dans le champ contractuel.</p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_wDGdwb",
+        "text_YX87RX"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_YEJCzT": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_EBfGPj": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Article 7 : Livraison</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_bE8DTU": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Les colis sont expédiés et livrés à l’adresse indiquée par le client lors de sa commande sur le site de la société Tediber. Les délais de livraison indiqués sur le site correspondent aux délais moyens constatés pour l’expédition et la livraison, en jour ouvrés et ne correspondent pas à un engagement contractuel.<br/><br/>Pour les produits volumineux (Sommiers, canapé, matelas…), nous passons par différents transporteurs en fonction du lieu de livraison : La livraison est gratuite à partir de 1000€ d’achats et est payante pour les paniers inférieurs. Plusieurs offres de livraison payantes sont proposées, à retrouver dans la page https://www.tediber.com/livraison.<br/><br/>En région parisienne, nous passons par le transporteur E-Deliv’. (livraison à l’étage), sous 24h/48h. En France (hors région parisienne), nous passons par les transporteurs France Express (livraison en bas de l’immeuble), sous 24h/48h ou JP Home (livraison à l’étage) en fonction du volume des produits et de votre code postal, sous 7 à 10 jours.<br/><br/>En Europe, nous livrons à l’étage avec JP Home pour la Belgique et le Luxembourg, sous 7 à 10 jours pour les autres pays nous livrons en bas de l’immeuble avec DHL sous 48h/72H.<br/><br/>Pour les produits peu volumineux (oreiller, couette, linge de lit…), nous passons par différents transporteurs en fonction du mode de livraison et du pays : En Europe, nous livrons avec le transporteur DHL (livraison en bas de l’immeuble), sous 48/72h. En France, nous livrons à domicile avec le transporteur DPD (livraison en bas de l’immeuble) pour 6€, ou gratuitement dans le point relais de votre choix avec le transporteur DPD, sous 48/72h.<br/><br/>Les tarifs des livraisons en dehors des zones où la société Tediber propose la livraison gratuite sont indiqués lors du passage de la commande. Pour les zones hors Union Européenne, des taxes et frais de douanes peuvent être réclamés par le transporteur (article 4).<br/><br/>Tediber n'est pas habilité à livrer ses produits dans les DOM-TOM, ni sur les îles en France métropolitaine non accessibles par la route (sauf Corse). Nous ne serons pas en mesure de vous fournir les documents nécessaires à cette livraison.<br/><br/>Le client est responsable des informations (adresse de livraison, adresse email, nom et téléphone) qu’il transmet lorsqu’il passe sa commande. La responsabilité de Tediber ne peut être engagée dans l’éventualité où une erreur empêche ou retarde la livraison.<br/><br/>L’impossibilité de livrer les colis volumineux à l’étage ou dans la pièce d’utilisation ne saurait engager la responsabilité de Tediber. Le cas échéant, vous aurez alors la possibilité de demander au transporteur de reprendre le produit en application de votre droit de rétractation. Lors de la livraison, le Client devra obligatoirement vérifier que le produit livré correspond bien à sa commande et qu’aucun dommage n’affecte son produit avant de signer le bon de livraison. En cas d’anomalie, le Client devra inscrire précisément la nature de ses réserves sur le bon de livraison. Toute réclamation adressée au-delà de ces délais ne pourra pas être acceptée. Si le Client n’émet pas de réserves, le Produit livré est réputé satisfaisant et ne pourra faire l’objet d’aucune contestation ultérieure. Toutes les réclamations concernant la livraison doivent être faites par email à l'adresse : hello@tediber.com, dans les 72h qui suivent la livraison. Au delà de ce délai, toute réclamation sera refusée.</p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_EBfGPj",
+        "text_bE8DTU"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "scheme-2",
+        "color_scheme_container": "scheme-2",
+        "mob_padding_top": 32,
+        "mob_padding_bottom": 32,
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "ax_richtext_HLNMgH": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_BYWrGB": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Article 8 : Paiement</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_highlight_RJbgCn": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>1. Moyen de paiement</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_RgRVjk": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Après l’ajout au panier du produit dans la taille désirée, la validation du montant, puis la saisie des informations relatives à la livraison et au paiement, le client valide le choix et les informations par un clic sur l’icône « confirmer ». Cette validation définitive de la commande entraîne l’acceptation pleine et entière des présentes conditions générales de vente.<br/><br/>Les paiements par carte bancaire s’effectuent en totalité à la commande, et en euros exclusivement. Le règlement des achats s’effectue par carte bancaire (CB, Visa, Mastercard, American Express) via notre partenaire Adyen. Le paiement par Paypal peut être proposé pour certaines zones géographiques. Dans ce cas, l’option Paypal est proposée lors de votre commande. Le paiement en 3 fois sans frais par carte bancaire (CB, Visa, Mastercard) est disponible via notre partenaire Dalenys pour les achats à partir de 100€. Le paiement en 12 fois avec intérêts est disponible via notre partenaire Younited pour les achats compris entre 300€ et 3 000€ inclus. En choisissant ce mode de paiement, vous contractez un crédit qui vous engage et doit être remboursé. Vérifiez vos capacités de remboursement avant de vous engager.<br/><br/>Tediber propose à ses clients le service de crédit de Younited pour le règlement de leurs achats et l'exécution du paiement. Cela est conditionné par l'acceptation par le client du contrat de crédit proposé par Younited. Tediber (n°ORIAS 20001574) agit en qualité de mandataire non-exclusif en opérations de banque de Younited. Tediber apporte son concours à la réalisation d'opérations de crédit sans agir en qualité de prêteur. Tout refus d’octroi de crédit par Younited pour une commande pourra entraîner l’annulation de celle-ci. Toute résiliation des CGV qui lient le client et Tediber entraîne la résiliation du contrat de crédit entre Younited et le client. Le montant est payé par un crédit octroyé par Younited inscrit sur le REGAFI sous le numéro 13156, agréé en qualité d’établissement de crédit par l’Autorité de Contrôle Prudentiel et de Résolution (ACPR) - 4 Place de Budapest - CS 92459 - 75436 PARIS CEDEX 09 - https://acpr.banque-france.fr/). Si vous souhaitez porter une réclamation, veuillez vous référer aux informations précisées sur le site de Younited : https://www.younited-credit.​com/media/202352/politique-de-​gestion-des-reclamations_site-​yc_2023-vf.pdf<br/><br/>Certains autres modes de paiement comme le chèque ou le virement, peuvent être acceptés mais l’expédition de la commande du client ne sera possible qu’à l’encaissement ferme du montant de la commande. Pour payer par chèque ou par virement, contactez notre équipe à hello@tediber.com.</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_highlight_eUdFzR": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>2. Vérification des paiements</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_dHDFt7": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Afin de se protéger des fraudeurs, l’équipe de Tediber contrôle chacune des commandes effectuées. A cette fin, et avant l’expédition de votre commande, la société Tediber se réserve le droit de vous demander toutes les pièces nécessaires pour prouver votre identité ou votre adresse de livraison (pièce d’identité, justificatif de domicile, etc.). Ces pièces sont demandées par téléphone ou par email notamment pour l’intégralité des nouveaux clients.</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_highlight_QDrqWN": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>3. Sécurité des paiements</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_qmCgxR": {
+          "type": "text",
+          "settings": {
+            "text": "<p>La sécurisation des paiements est assurée par nos partenaires : Stripe, Adyen, Dalenys, Paypal et Younited, parmi les leaders mondiaux de l’encaissement des paiements par carte bancaire. Ces services intègrent la norme de sécurité SSL. Tous les paiements sont protégés par le 3D Secure. Aucune donnée confidentielle (numéro de carte, date d’expiration ou code à 3 chiffres) n’est stockée sur les serveurs Tediber. Ces données sont directement transmises cryptées aux serveurs de nos partenaires. Les sociétés Stripe, Dalenys, Adyen et Paypal sont des gestionnaires de télé-paiement et délivrent un certificat électronique qui vaudra preuve du montant et de la date de la transaction conformément aux dispositions des articles 1316 et suivants du code civil.</p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_BYWrGB",
+        "text_highlight_RJbgCn",
+        "text_RgRVjk",
+        "text_highlight_eUdFzR",
+        "text_dHDFt7",
+        "text_highlight_QDrqWN",
+        "text_qmCgxR"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "scheme-2",
+        "color_scheme_container": "scheme-2",
+        "mob_padding_top": 32,
+        "mob_padding_bottom": 32,
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_3LNrQL": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_EwxgQM": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Article 9 : Retour et remboursement</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_RfhReY": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Tediber simplifie l’expérience d’articles de literie et propose de reprendre les produits vendus pendant une durée de 100 jours calendaires (sauf le linge de lit et la protection literie qui bénéficient de 30 nuits d'essai). Tous les articles achetés sur le site de la société Tediber (sauf le linge de lit et la protection literie qui bénéficient de 30 nuits d'essai) peuvent donc faire l’objet d’un retour et d’un remboursement aux conditions ci-après définies :</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_highlight_MLbxat": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>1. Éligibilité aux 100 nuits d’essai</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_a9Adjn": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Sauf cas particuliers, toutes les commandes (hors linge de lit et protection literie) sont éligibles à l’essai à la maison pendant 100 jours calendaires qui correspond à une période de rétractation de 100 jours soit 14 jours conformément à l’art. L121-21 du Code de la Consommation plus 86 jours de rétractation étendue.<br/><br/>Les cas particuliers sont : - Dans le cas d’un échange de taille d’un produit d’une même catégorie initié par le client pour des raisons autres que celles liées à un défaut de matière ou de confection, le délai de rétractation de 100 jours calendaires est interrompu dès la validation de cet échange par le client.<br/>- Dans le cas d’un matelas encore emballé et compressé. Les matelas doivent être ouverts dans les 30 jours suivants la livraison. Tediber ne reprend pas les matelas encore emballés sous le carton après 30 jours de livraison.<br/>- Dans les cas où le client a déjà effectué un retour d’un produit d’une même catégorie, il ne bénéficie plus de l’essai gratuit. Les produits commandés à nouveau ne pourront plus être récupérés par la société Tediber et aucun remboursement ne pourra être effectué.<br/>- Le linge de lit et la protection literie Tediber ne sont pas éligibles aux 100 nuits d'essai. Le retour est gratuit sous 30 jours calendaires (14 jours conformément à l’art. L121-21 du Code de la Consommation plus 16 jours de rétractation étendue). Il suffit de nous écrire à hello@tediber.com au maximum 30 jours calendaires après la livraison du produit. Les cartes cadeaux bénéficient d'un délai de rétractation de 14 jours calendaires à compter de la date de réception de la carte cadeau par l'acheteur.<br/><br/>Nous vous remboursons en 3 à 5 jours, une fois le produit réceptionné (détail des conditions ci-dessous).</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_highlight_LjtzMK": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>2. Délai pour le retour d’un article</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_ngadQ9": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Le client de la société Tediber peut faire valoir son droit à rétractation pendant une période de 100 jours calendaires (14 jours conformément à l’art. L121-21 du Code de la Consommation plus 86 jours de rétractation étendue) à compter de la date de réception du ou des articles. Pour le linge de lit et la protection literie, le délai de rétractation est de 30 jours calendaires (14 jours conformément à l’art. L121-21 du Code de la Consommation plus 16 jours de rétractation étendue). Pour exercer son droit de rétractation, le client doit contacter la société Tediber en envoyant un mail à hello@tediber.com. Les modalités et les conditions d’exercice de ce droit de rétractation sont mentionnées ci-dessous.</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_highlight_jeKMrV": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>3. Conditions de reprise et état des articles.</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_UAFRJx": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Pour les produits livrés en France métropolitaine, Corse, Espagne, Belgique, Italie, Luxembourg, Monaco, Saint-Marin, Suisse et dans l’Etat de la cité du Vatican, la société Tediber prend en charge les frais de transport pour les clients souhaitant exercer leur droit de rétractation. Les retours sont organisés dans le pays de livraison de la commande. Il est possible d’exercer votre droit de rétractation en envoyant un mail à hello@tediber.com. L’équipe Tediber reviendra vers vous avec les modalités de retours.<br/><br/>Pour les pays suivants : Allemagne, Autriche, Pays-Bas. Si vous changez d’avis cependant et souhaitez annuler votre commande après livraison, vous devrez payer les frais de retour ou d’enlèvement. Le montant des frais de retour ou d’enlèvement seront calculés en fonction de la valeur sous-total des articles que vous renverrez conformément au tableau ci-dessous.<br/><br/>Valeur des articles retournés + Frais de retour :<br/>- Strictement inférieure à 200€ = 39€<br/>- Strictement inférieure à 500€ = 79€<br/>- Strictement inférieure à 1500€ = 129€<br/>- Supérieure ou égale à 1500€ = 159€<br/><br/>Les articles peuvent avoir été utilisés et l’emballage d’origine n’est pas exigé pour le retour.<br/><br/>Les produits en retour, doivent toutefois ne présenter que les traces d’une utilisation normale et ne pas être endommagés.<br/><br/>La société Tediber se réserve le droit de demander des photos avant retour. Les produits présentant par exemple des taches trop importantes ne pourront être repris et donc remboursés. Le non respect de cette condition entraînera le refus du retour.<br/><br/>Dans le cas d’un échange de taille d’un produit du même type initié par le client pour des raisons autres que celles liées à un défaut de matière ou de confection, le délai de rétractation de 100 jours calendaires (30 jours calendaires pour le linge de lit et la protection literie) est interrompu dès la validation de cet échange par le client.<br/><br/>Si vous souhaitez retourner un ou des produits d'une commande car vous en avez passé une seconde identique en y appliquant un code avantage, le remboursement s'effectuera sur la commande ayant bénéficié de cet avantage</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_highlight_UBUmYt": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>4. Remboursement des retours des commandes contenant un matelas Tediber, un matelas Grand Tedi by Tediber, ou un sommier ou un canapé-lit</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_fJ9jJE": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Après la prise de contact par le client pour un retour, la récupération du matelas, du sommier ou du canapé-lit par le transporteur s’effectuera sous 15 jours selon les disponibilités du client. Un délai de transport de 7 jours est nécessaire ensuite pour le retour du colis à notre entrepôt. Le retour des produits doit être fait dans les 30 jours suivant la demande faite par écrit auprès du service client à l'adresse hello@tediber.com. Sous réserve du respect de ces conditions de retour, la société Tediber procédera au remboursement des articles retournés sous 3 à 5 jours suivant la réception de l’article en retour.<br/><br/>Sera refusé par Tediber tout article endommagé qui n’aurait pas fait l’objet de remarques ou de réserves expresses par le client dès la livraison. Dans le cas d'un paiement en 3 fois, Tediber ne sera en mesure de rembourser le montant des produits retournés que lorsque les mensualités payées couvrent le montant des produits conservés. Cela pourra être après la 2ème ou 3ème.<br/><br/>En cas de retour dans les 100 jours d'une commande payée en 12 fois via Younited, votre contrat de crédit sera résilié : Younited procèdera au remboursement des mensualités déjà prélevées, en dehors des intérêts des mois déjà commencés, qui correspondent aux frais engagés pour l'ouverture du dossier de crédit, et ne pourront pas excéder 75€.</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_highlight_RMX3dA": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>5. Remboursement des retours des commandes de linge de lit, protection literie, couette, oreiller et matelas bébé Tedi by Tediber</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_qEVUyc": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Concernant ces produits, le retour est effectué par envoi postal affranchi à nos frais. Le colis de retour est idéalement la boite d’emballage du produit, pensez donc à la garder durant la période d’essai. Le retour des produits doit être fait dans les 30 jours suivant la demande faite par écrit auprès du service client à l'adresse hello@tediber.com..<br/><br/>Sera refusé par Tediber tout article endommagé qui n’aurait pas fait l’objet de remarques ou de réserves expresses par le client dès la livraison. Tous les retours de linge de lit, de protection literie, couettes, oreillers et matelas bébés sont contrôlés dans notre entrepôt afin de vérifier que les produits n'ont pas été endommagés. Tout article abîmé sera systématiquement renvoyé au client et ne sera pas remboursé.<br/><br/>Dans le cas d'un paiement en 3 fois, Tediber ne sera en mesure de rembourser le montant des produits retournés que lorsque les mensualités payées couvrent le montant des produits conservés.<br/><br/>Cela pourra être après la 2ème ou 3ème. En cas de retour dans les 100 jours d'une commande payée en 12 fois via Younited, votre contrat de crédit sera résilié : Younited procèdera au remboursement des mensualités déjà prélevées, en dehors des intérêts des mois déjà commencés, qui correspondent aux frais engagés pour l'ouverture du dossier de crédit, et ne pourront pas excéder 75€.<br/><br/>Si un produit est offert dans votre commande et que vous retournez l’un des produits de la commande, le montant du remboursement du produit retourné sera calculé en prenant en compte le prorata de la valeur du produit retourné par rapport à la valeur totale de la commande incluant le prix du produit offert. Si le produit offert est également renvoyé avec le produit retourné, alors le remboursement correspondra à la valeur totale du produit retourné. Dans le cas d’un retour du seul produit offert, il n’y aura pas de remboursement.</p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_EwxgQM",
+        "text_RfhReY",
+        "text_highlight_MLbxat",
+        "text_a9Adjn",
+        "text_highlight_LjtzMK",
+        "text_ngadQ9",
+        "text_highlight_jeKMrV",
+        "text_UAFRJx",
+        "text_highlight_UBUmYt",
+        "text_fJ9jJE",
+        "text_highlight_RMX3dA",
+        "text_qEVUyc"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_kK44GF": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_LeWpxK": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Article 10 : Reprise ancienne literie</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_7aKiBV": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Les articles de literie récupérés sont remis à Eco-mobilier, organisme auquel nous reversons une cotisation à chaque vente, pour financer le recyclage de la literie usagée. Notre identifiant unique Eco-mobilier est le suivant : FR021285_10Z1ZG.</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_highlight_F7jhVA": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>1. Choisir la reprise ancienne literie</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_QYCk44": {
+          "type": "text",
+          "settings": {
+            "text": "<p>L’option de reprise doit être cochée lors de l’achat du produit. Si vous n’en faites pas la demande lors de votre achat, le service client ne pourra pas l’ajouter dans un second temps donc le transporteur ne pourra pas reprendre l’ancien produit.</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_highlight_rNtHAw": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>2. Les conditions de reprise</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_qQTnHx": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Le produit doit être démonté et pouvoir passer à travers les portes, les cages d’escalier, paliers, etc. Ils ne doivent pas excéder 45 kg ni être de dimension supérieure à 205 cm, par produit. L’achat d’un produit donne droit à la reprise d’un produit équivalent (ou moins complexe). Le produit à reprendre ne doit pas être sale, souillé. Il doit être sans traces de moisissures, taches ou puces de lit. L’adresse de livraison et reprise doit être en France métropolitaine, uniquement.</p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_LeWpxK",
+        "text_7aKiBV",
+        "text_highlight_F7jhVA",
+        "text_QYCk44",
+        "text_highlight_rNtHAw",
+        "text_qQTnHx"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_adq4iF": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_yHLPeL": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Article 11 : Politique de cookies</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_wdxKRa": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Le Client autorise expressément la société Tediber à déposer sur le disque dur du client un fichier dit « cookie ». Ce « cookie » a pour but de faciliter la collecte de statistiques, la reconnaissance du client et son identification dans l’espace « mon compte » du site de la société Tediber. Un cookie ne nous permet pas de vous identifier nominativement. De manière générale, il enregistre des informations relatives à votre navigation sur notre site, que nous pourrons lire lors de vos visites ultérieures. Ces données sont strictement destinées à un usage interne à Tediber et ne sont pas communiquées à des tiers. Vous pouvez vous opposer à l’utilisation de cookie en paramétrant votre navigateur. Certains cookies sont des cookies de publicité qui nous permettent de proposer des offres promotionnelles personnalisées et d’enregistrer les produits consultés pour vous présenter des bannières publicitaires en accord avec votre intérêt dans un délai maximum de 90 jours. Pour plus d'informations sur les cookies et vos droits, rendez-vous sur la page Données personnelles.</p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_yHLPeL",
+        "text_wdxKRa"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "scheme-2",
+        "color_scheme_container": "scheme-2",
+        "mob_padding_top": 32,
+        "mob_padding_bottom": 32,
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "ax_richtext_kagLhJ": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_kknkWD": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Article 12 : Responsabilité</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_bKAT6B": {
+          "type": "text",
+          "settings": {
+            "text": "<p>La société Tediber n’a qu’une obligation de moyen dans toutes les étapes d’accès au site, de visite, de saisie des formulaires, de passation des commandes, de préparation des commandes, de livraison des commandes, de retours des produits et de remboursements des commandes à rembourser. La responsabilité de la société Tediber ne saurait être engagée pour tous les inconvénients ou dommages inhérents à l’utilisation du réseau Internet et extérieurs aux précautions prises par la société. Tous cas de force majeure, d’intrusion extérieure ou présence de virus informatique ne sauraient engager la responsabilité de la société Tediber.</p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_kknkWD",
+        "text_bKAT6B"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "scheme-2",
+        "color_scheme_container": "scheme-2",
+        "mob_padding_top": 32,
+        "mob_padding_bottom": 32,
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_6biCGK": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_MGgmxh": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Article 13 : Propriété</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_zMtjTY": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Toutes les images, photographies, illustrations et design ainsi que les textes et commentaires reproduits sur le site de la société Tediber sont protégés par le droit d’auteur, le droit des marques et le droit à l’image et ce pour le monde entier. Ces contenus diffusés sur le site www.tediber.com sont la propriété pleine et entière de la société Tediber. A ce titre, seule l’utilisation pour un usage privé et sous respect des dispositions du code de la propriété intellectuelle et autorisée. Toute autre utilisation est constitutive de contrefaçon et sanctionnée au titre de la propriété intellectuelle sauf autorisation préalable de la société Tediber. La reproduction totale ou partielle du site Tediber est strictement interdite. Tout lien, même tacitement autorisé, renvoyant vers le site Tediber ou un de ses sites satellites, devra être retiré sur simple demande de la société Tediber.</p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_MGgmxh",
+        "text_zMtjTY"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_7eRX9z": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_FPYxt7": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Article 14 : Conditions de Garantie</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_highlight_bFVLAY": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>1. Garanties légales</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_TDQeka": {
+          "type": "text",
+          "settings": {
+            "text": "<p>La garantie commerciale de Tediber ne fait pas obstacle au bénéfice de la garantie légale des défauts de conformité des biens avisée aux articles L217-4 et suivants du code de la consommation.<br/><br/>La société Tediber en qualité de vendeur est également tenue de la garantie légale des vices cachés de la chose prévue par les articles 1641 et suivants du code Civil.<br/>Les dispositions ainsi visées sont les suivantes :<br/>- Article L217-4 Code de la Consommation « Le vendeur livre un bien conforme au contrat et répond des défauts de conformité existant lors de la délivrance. Il répond également des défauts de conformité résultant de l’emballage, des instructions de montage ou de l’installation lorsque celle-ci a été mise à sa charge par le contrat ou a été réalisée sous sa responsabilité. »<br/>- Article L217-5 code de la consommation « Le bien est conforme au contrat :1º S’il est propre à l’usage habituellement attendu d’un bien semblable et, le cas échéant : S’il correspond à la description donnée par le vendeur et possède les qualités que celui-ci a présentées à l’acheteur sous forme d’échantillon ou de modèle ; S’il présente les qualités qu’un acheteur peut légitimement attendre eu égard aux déclarations publiques faites par le vendeur, par le producteur ou par son représentant, notamment dans la publicité ou l’étiquetage ; 2º Ou s’il présente les caractéristiques définies d’un commun accord par les parties ou est propre à tout usage spécial recherché par l’acheteur, porté à la connaissance du vendeur et que ce dernier a accepté. »<br/>- Article 1641 code civil « Le vendeur est tenu de la garantie à raison des défauts cachés de la chose vendue qui la rendent impropre à l’usage auquel on la destine, ou qui diminuent tellement cet usage, que l’acheteur ne l’aurait pas acquise, ou n’en aurait donné qu’un moindre prix, s’il les avait connus. »<br/>Par ailleurs, et en application de l’arrêté du 18 décembre 2014, l’Utilisateur est informé de ce qui suit : Lorsqu’il agit en garantie légale de conformité (article L217-4 du Code de la consommation), l’Utilisateur consommateur : bénéficie d’un délai de 2 ans à compter de la délivrance du produit pour agir ; peut choisir entre la réparation et le remplacement du produit, sous réserve des conditions de coût prévues par l’article L217-9 du Code de la consommation ; est dispensé de rapporter la preuve de l’existence du défaut de conformité du bien durant les 24 mois suivant la délivrance du produit. La garantie légale de conformité s’applique indépendamment de toute garantie commerciale de nature contractuelle. L’Utilisateur peut mettre en œuvre la garantie contre les défauts cachés de la chose vendue au sens de l’article 1641 du Code civil et dans cette hypothèse, il peut choisir entre la résolution de la vente ou une réduction du prix de vente conformément à l’article 1644 du Code civil.</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_highlight_ACgcHg": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>2. Garanties légales</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_QnxqwA": {
+          "type": "text",
+          "settings": {
+            "text": "<p>C​ertains ​p​roduits vendus par la société Tediber font l’objet d’une garantie pleine ​d'une durée variable en fonction de la nature des produits. La période de garantie commence à la date de commande. L’ensemble des conditions de la garantie sont détaillées sur : www.tediber.com/garantie<br/><br/>Le bénéfice de la garantie doit être demandé par l’acheteur du produit, disposant de la facture de la commande. Afin de pouvoir bénéficier de la garantie, le produit devra pouvoir être retourné en bon état et propre. Dans le cas où un défaut de fabrication serait avéré, la société Tediber remplacera à sa charge le produit défectueux par un produit neuf.</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_highlight_YTGLRV": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>3. Échanges</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_eh7htD": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Dans le cadre d'un échange (pendant la période des 100 nuits ou au titre de la garantie), le produit devra obligatoirement être remis au transporteur. Dans le cas d'une absence de retour produit, après trois relances, le produit sera facturé ainsi que les frais de présentation du transporteur.</p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_FPYxt7",
+        "text_highlight_bFVLAY",
+        "text_TDQeka",
+        "text_highlight_ACgcHg",
+        "text_QnxqwA",
+        "text_highlight_YTGLRV",
+        "text_eh7htD"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_EDYeNm": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_PNEmxn": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Article 15 : Traitement des litiges</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_aGD6c6": {
+          "type": "text",
+          "settings": {
+            "text": "<p>La responsabilité de la société Tediber est, en tout état de cause, limitée au montant de la commande et ne saurait être mise en cause pour de simples erreurs ou omissions qui auraient pu subsister malgré toutes les précautions prises dans la présentation des produits et l’exécution de la prestation par la société Tediber.<br/><br/>La société Tediber ne pourra être tenue responsable, envers un membre ou un tiers, d’aucun dommage indirect, d’aucune perte d’exploitation, de profit ou de chiffre d’affaires, survenus de quelque manière que ce soit, même si ce dommage ou cette perte ou ce préjudice était prévisible par la société Tediber, ou si son éventualité avait été portée à son attention.<br/><br/>Conformément à la législation européenne qui oblige tous site marchands, Tediber est adhèrent au centre de Médiation et d’arbitrage de Paris dont les coordonnées sont les suivantes : 39 Avenu Franklin D. Roosevelt - 75008 Paris – https://www.cmap.fr/le-cmap/​nous-saisir/. Après démarche préalable écrite des consommateurs vis-à-vis de Tediber, le Service du Médiateur peut être saisi pour tout litige de consommation dont le règlement n’aurait pas abouti. En application de la directive européenne 2013/11/EU du 21 mai 2013 relative au règlement extrajudiciaire des litiges de consommation, veuillez-trouver ci-dessous le lien vers la plateforme européenne de <a href=\"https://webgate.​ec.europa.eu/odr/main/index.​cfm?event=main.home.show&lng=​FR\" title=\"https://webgate.​ec.europa.eu/odr/main/index.​cfm?event=main.home.show&lng=​FR\">règlement en ligne des litiges de consommation</a>.</p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_PNEmxn",
+        "text_aGD6c6"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "scheme-2",
+        "color_scheme_container": "scheme-2",
+        "mob_padding_top": 32,
+        "mob_padding_bottom": 32,
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "ax_richtext_it4DPH": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_XmtBbV": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Article 16 : Protection des données personnelles</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_QiBR6i": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Tediber met en oeuvre de nombreuses mesures et actions pour se mettre en conformité au niveau de la RGPD et pour assurer au mieux la protection de vos données personnelles. Le site www.tediber.com est déclaré auprès de la CNIL sous le numéro : 1882815. Pour plus d'informations sur le traitement des données personnelles et vos droits, rendez-vous sur la page Données personnelles.</p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_XmtBbV",
+        "text_QiBR6i"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "scheme-2",
+        "color_scheme_container": "scheme-2",
+        "mob_padding_top": 32,
+        "mob_padding_bottom": 32,
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_N8jQzQ": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_knjytA": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Article 17 : Modification des conditions générales de vente</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_rP4nTy": {
+          "type": "text",
+          "settings": {
+            "text": "<p>La société Tediber se réserve le droit de modifier les présentes conditions générales de vente et d’utilisation. Les membres qui ne souhaiteraient pas que les relations contractuelles soient régies par la nouvelle version des conditions générales de vente et d’utilisation, devront le notifier par écrit et devront cesser d’utiliser les services de la société Tediber. Dans l’hypothèse où un terme quelconque des conditions générales de vente et d’utilisation serait considéré comme illégal ou inopposable par une décision de justice les autres dispositions resteront en vigueur.</p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_knjytA",
+        "text_rP4nTy"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_9X6qUL": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_XT8Aak": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Article 18 : Codes promotionnels</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_LPBW8D": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Des codes promotionnels et offres personnalisées donnent le droit à des remises ponctuelles dans le cadre d’une commande d’un ou plusieurs produits. Chaque code est remis à son destinataire par mail et/ou par SMS. Il est strictement personnel et utilisable une fois. Pour qu’un code promotionnel donne lieu à une réduction, le propriétaire du code doit renseigner son code promotionnel reçu dans le champ prévu à cet effet sur la page panier, en cliquant sur “Code promo”. Les codes promotionnels ne sont pas cumulables entre eux et ne sont pas cumulables avec les packs.<br/><br/>Aucun remboursement ne sera effectué si le propriétaire du code valide sa commande sans que le code promotionnel n’ait été pris en compte. Tediber se réserve le droit d’annuler une transaction dans le cas où l’utilisation d’un code n’est pas réalisé par son propriétaire. Tediber se réserve également le droit de faire évoluer les conditions d’attribution et d’éligibilité des promotions.<br/><br/>En cas de retour d'un produit commandé avec un code de réduction, le montant du remboursement équivaudra au montant après réduction du produit payé en question.</p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_XT8Aak",
+        "text_LPBW8D"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "scheme-2",
+        "color_scheme_container": "scheme-2",
+        "mob_padding_top": 32,
+        "mob_padding_bottom": 32,
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "ax_richtext_eCgr9m": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_VgEwLe": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Article 19 : Éco-mobilier, Refashion & Citeo</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_8fbWwk": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Tediber est enregistré au registre national des metteurs sur le marché d’éléments d’ameublement sous le numéro FR021285_10Z1ZG. Ce numéro garantit que Tediber, adhérant à Éco-mobilier, se met en conformité avec les obligations réglementaires qui lui incombent en application de l’article L 541-10-1 10° du Code de l’Environnement. Tediber est enregistré au registre national des metteurs sur le marché de produits textiles sous le numéro FR354856_11ZWZF . Ce numéro garantit que Tediber, adhérant à Refashion, se met en conformité avec les obligations réglementaires qui lui incombent en application de l’article L 541-10-1 10° du Code de l’Environnement. Tediber est enregistré au registre national des metteurs sur le marché des emballages et papiers sous le numéro FR354856_01IDNB . Ce numéro garantit que Tediber, adhérant à CITEO, se met en conformité avec les obligations réglementaires qui lui incombent en application de l’article L 541-10-1 10° du Code de l’Environnement.</p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_VgEwLe",
+        "text_8fbWwk"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "scheme-2",
+        "color_scheme_container": "scheme-2",
+        "mob_padding_top": 32,
+        "mob_padding_bottom": 32,
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_JmrhEW": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_UpWfa3": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Article 20 : Contact</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_rQBHKH": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Nous répondrons avec plaisir à l’ensemble de vos questions dans un délai de 48h à 72h par email à hello@tediber.com.<br/><br/>Le service client est joignable par mail, chat ou par téléphone (appel gratuit) de 09h à 19h du lundi au vendredi, de 09h à 18h le samedi.<br/><br/>Dernière mise à jour : 22/05/2025</p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_UpWfa3",
+        "text_rQBHKH"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    }
+  },
+  "order": [
+    "main",
+    "ax_heading_6TphAp",
+    "ax_richtext_RkciMT",
+    "ax_richtext_Bg9Fyx",
+    "ax_richtext_ThE6gF",
+    "ax_richtext_X9c8aL",
+    "ax_richtext_9QeXzn",
+    "ax_richtext_krdN4C",
+    "ax_richtext_YEJCzT",
+    "ax_richtext_HLNMgH",
+    "ax_richtext_3LNrQL",
+    "ax_richtext_kK44GF",
+    "ax_richtext_adq4iF",
+    "ax_richtext_kagLhJ",
+    "ax_richtext_6biCGK",
+    "ax_richtext_7eRX9z",
+    "ax_richtext_EDYeNm",
+    "ax_richtext_it4DPH",
+    "ax_richtext_N8jQzQ",
+    "ax_richtext_9X6qUL",
+    "ax_richtext_eCgr9m",
+    "ax_richtext_JmrhEW"
+  ]
+}

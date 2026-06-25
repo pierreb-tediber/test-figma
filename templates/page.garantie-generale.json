@@ -1,0 +1,138 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_content": false,
+        "custom_h1": "",
+        "h1_size": "h1",
+        "h1_no_margin": false,
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "ax_heading_6TphAp": {
+      "type": "ax-heading",
+      "name": "Ax heading",
+      "settings": {
+        "heading": "<p>Garantie Générale</p>",
+        "heading_size": "h2",
+        "heading_first": true,
+        "subheading": "",
+        "description": "",
+        "full_width": false,
+        "text_alignment": "center",
+        "color_scheme": "",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 32,
+        "padding_top": 96,
+        "padding_bottom": 64
+      }
+    },
+    "ax_richtext_RkciMT": {
+      "type": "ax-richtext",
+      "blocks": {
+        "text_JRbaPb": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Nous vous remercions d’avoir acheté un ou plusieurs nouveau(x) produit(s) TEDIBER. Notre exigence de qualité est élevée et ne doutons pas que vous serez très heureux de votre achat.<br/><br/>Cependant, si vous ne vous accoutumez pas à TEDIBER ou si vous découvrez un défaut dans votre produit, voici ci-dessous les conditions de notre garantie. Si vous estimez avoir le droit de vous prévaloir de leurs conditions, n’hésitez pas à nous contacter à hello@tediber.com pour recevoir des instructions sur la manière de procéder.<br/><br/>VEUILLEZ NOTER QUE NOTRE GARANTIE DES “100 NUITS D’ESSAI & RETOUR GRATUIT” ET NOS GARANTIES PRODUITS S’APPLIQUENT UNIQUEMENT AUX ACHETEURS INITIAUX DE PRODUITS TEDIBER AUTHENTIQUES, QUI ONT ÉTÉ ACHETÉS DIRECTEMENT ET SEULEMENT AUPRÈS DE TEDIBER. UNE PREUVE D’ACHAT VOUS SERA DEMANDÉE AFIN DE CERTIFIER DE L’AUTHENTICITÉ DE L’ACHAT. LA GARANTIE DES “100 NUITS D’ESSAI & RETOUR GRATUIT” S’APPLIQUE POUR CHAQUE PRODUIT TEDIBER MAIS N’EST EN AUCUN CAS RENOUVELABLE.</p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "text_JRbaPb"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "collapsible_content_LTxXXF": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_F7jM9c": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "100 nuits d’essai & Retour Gratuit",
+            "icon": "check_mark",
+            "row_content": "<p>L’intégralité des produits TEDIBER dispose d’une “garantie des 100 nuits d’essai & retour gratuit” qui vous permet d’essayer les produits confortablement chez vous pendant une durée suffisamment longue. Cette garantie n’est pas renouvelable ou cumulable avec la garantie d’autres produits.<br/><br/>Si au cours des 100 premières nuits d’essai de vos produits TEDIBER vous n’êtes pas complètement satisfait, pour quelque raison que ce soit, nous organisons le retour des articles à nos frais et nous vous rembourserons l’intégralité du montant que vous avez engagé.<br/><br/>Dans le cas d’un matelas (non-défectueux), celui-ci sera donné à l’une des associations avec lesquelles nous travaillons. Notre plus important partenaire social à ce jour et qui récupère une grande partie de nos matelas est Emmaüs Défi , retrouvez aussi l'histoire de notre partenariat avec Emmaüs Défi<br/><br/>Notre politique des “100 nuits d’essai & Retour Gratuit” s’applique uniquement aux acheteurs initiaux de produits TEDIBER authentiques ayant été achetés directement auprès de TEDIBER. Elle ne s’applique pas aux achats de produits TEDIBER effectués par l’intermédiaire d’autres canaux de distribution, ou auprès de toute autre source. Ainsi, elle ne s’applique que pendant la période au cours de laquelle le produit est la propriété de l’acheteur initial de ce produit et sous son contrôle.<br/><br/>La garantie “100 nuits d’essai & retour gratuit” TEDIBER s’applique uniquement aux produits qui auront été utilisés dans le cadre d’une utilisation normale des articles. Avant l’enlèvement, des photos des articles à retourner pourront être exigées afin de confirmer le bon état de ceux-ci. A l’enlèvement, notre service de livraison pourra refuser d’emporter le matelas ou tout autre produit de la gamme TEDIBER s’il n’est pas en bon état. Nous conseillons donc l’utilisation d’un sommier de manière à éviter toutes traces d’humidité.<br/><br/>En cas de refus d’envoi des photographies par le client ou de produit constaté en mauvais état à l’enlèvement ou à la réception (sans que cela puisse être lié à un événement de transport), la “garantie des 100 nuits d’essai & retour gratuit” ne pourra pas être appliquée et le remboursement sera refusé.<br/><br/>Par ailleurs, veuillez noter qu’aucun remboursement ne sera effectué en dehors de la garantie des 100 nuits d’essai.<br/><br/>Aussi, la politique des “100 nuits d’essai & Retour gratuit” n’est pas renouvelable. Vous ne pouvez en aucun cas essayer un de nos produits TEDIBER pendant 100 nuits, nous le rendre et vous faire rembourser puis en commander un nouveau pour bénéficier des 100 nuits d’essai.<br/><br/>Enfin, si vous vous apercevez que votre article TEDIBER est défectueux dans les 100 nuits d’essai, nous le récupérerons puis nous vous ferons livrer un nouvel article. La période des “100 nuits d’essai & Retour gratuit” recommence à partir de la date de livraison de votre nouveau produit.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_8hRpWM": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Comment effectuer une réclamation au titre de cette garantie ?",
+            "icon": "check_mark",
+            "row_content": "<p>Pour effectuer une réclamation au titre de notre garantie, veuillez nous contacter sur notre formulaire.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_q4NAzU": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Garantie",
+            "icon": "check_mark",
+            "row_content": "<p>La garantie est fournie par TEDIBER SAS, 20 rue sainte croix de la bretonnerie, 75004 Paris.<br/><br/>Pour toute demande concernant notre garantie, il vous suffit de nous contacter sur notre formulaire.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_F7jM9c",
+        "collapsible_row_8hRpWM",
+        "collapsible_row_q4NAzU"
+      ],
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "full_width": true,
+        "caption": "",
+        "heading": "",
+        "heading_size": "h2",
+        "heading_alignment": "center",
+        "layout": "none",
+        "container_color_scheme": "",
+        "color_scheme": "",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main",
+    "ax_heading_6TphAp",
+    "ax_richtext_RkciMT",
+    "collapsible_content_LTxXXF"
+  ]
+}

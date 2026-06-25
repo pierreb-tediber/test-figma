@@ -1,0 +1,460 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_content": false,
+        "custom_h1": "",
+        "h1_size": "h1",
+        "h1_no_margin": false,
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "ax_heading_6TphAp": {
+      "type": "ax-heading",
+      "name": "Ax heading",
+      "settings": {
+        "heading": "<p>Nos mentions très légales</p>",
+        "heading_size": "h3",
+        "heading_first": true,
+        "subheading": "",
+        "description": "",
+        "full_width": false,
+        "text_alignment": "center",
+        "color_scheme": "",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 32,
+        "padding_top": 96,
+        "padding_bottom": 64
+      }
+    },
+    "ax_richtext_RkciMT": {
+      "type": "ax-richtext",
+      "blocks": {
+        "text_JRbaPb": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Conformément à la loi nous vous invitons à prendre connaissance des présentes conditions générales d’utilisation. La navigation et l’utilisation du site Tediber.com impliquent l’acception des conditions générales écrites ci-dessous. Elles peuvent être modifiées ou complétées à tout moment sans obligation d’en informer explicitement l’utilisateur. Nous vous invitons donc à les consulter régulièrement.<br/><br/>Les présentes conditions générales s’appliquent entre les utilisateurs et Tediber SAS, société au capital de 766,67€ dont le siège social est au 20 rue Sainte-Croix de la Bretonnerie 75004 Paris enregistré au RCS Lille Métropole 813 089 638<br/>N° de TVA Intracommunautaire : FR 32 813089638<br/><br/>Le directeur de la publication est Monsieur Julien Sylvain, Président Directeur Général<br/><br/>Pour nous contacter : hello@tediber.com Téléphone : 01.86.95.47.10<br/><br/>L’hébergement du site est confié à Shopify.</p><p>CONCEPTION & RÉALISATION Agence e-commerce <a href=\"https://www.axome.com/\" target=\"_blank\">Axome</a> - 30 rue Agricol Perdiguier 42100 Saint Etienne – France </p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "text_JRbaPb"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_9QeXzn": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_giNeLH": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Propriété intellectuelle</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_RhaGEk": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Le site est régi dans son intégralité par la législation française. Toutes les images, photographies, illustrations et design ainsi que les textes et commentaires reproduits sur le site de la société Tediber sont protégés par le droit d’auteur, le droit des marques et le droit à l’image et ce pour le monde entier. Le contenu diffusé sur ce site est la propriété pleine et entière de la société Tediber. Le contenu ne peut donc pas être utilisé, modifié ou adapté sans l’accord écrit express de la société Tediber.<br/><br/>Toute utilisation non autorisée du site Tediber.com ou de son contenu pourra être considéré comme constitutive d’un plagiat et pourra être poursuivie conformément aux articles L. 335-2 et suivants du Code de Propriété Intellectuelle. Tout lien, même tacitement autorisé, renvoyant vers le site Tediber ou un de ses sites satellites, devra être retiré sur simple demande de la société Tediber Les présentes conditions n’accordent pas à l’utilisateur les licences d’utilisation des marques, logos ou photographies de Tediber. La réutilisation, reproduction (totale ou partielle) ou extraction non autorisée est strictement interdite et engage la responsabilité de l’utilisateur. </p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_giNeLH",
+        "text_RhaGEk"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_krdN4C": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_wDGdwb": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Données nominatives</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_YX87RX": {
+          "type": "text",
+          "settings": {
+            "text": "<p>La société Tediber se réserve le droit, de collecter des données relatives aux utilisateurs du site et ce de manière nominative. Si vous souhaitez acheter l’un de nos produits en ligne, vous devrez nous fournir certaines informations personnelles afin de pouvoir passer votre commande. Ces informations sont conservées de façon sécurisée et pourront être mises à jour si l’utilisateur le demande. La société s’engage à ne pas diffuser les données personnelles collectées sur son site. Elle prend cependant le droit de les utiliser à des fins marketing, d’études, ou de statistiques interne à la société. En conformité avec la loi n°78-17 du 6 janvier 1978, Tediber.com a fait l’objet d’une déclaration auprès de la commission Nationale de l’Informatique et des Libertés (CNIL) sous le numéro 1882815 et limite Tediber dans la collecte et le traitement de ces informations à une utilisation interne. Ces informations sont nécessaires au traitement de la commande de l’acheteur.<br/><br/>En aucun cas les données collectées ne seront vendues à des tiers. Cependant, les commentaires, suggestions, avis seront traités en tant que tels et donc non confidentielles et non relevant de votre propriété privée. L’utilisateur dispose néanmoins d’un droit d’opposition, d’accès, de modification et de suppression de ses données (Art 40 de la loi informatique et liberté). Pour exercer ce droit l’utilisateur devra contacter Tediber soit par voie postale soit par mail. </p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_wDGdwb",
+        "text_YX87RX"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_kK44GF": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_LeWpxK": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Politique de cookies</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_7aKiBV": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Le Client autorise expressément la société Tediber à déposer sur le disque dur du client un fichier dit « cookie » Ce « cookie » a pour but de faciliter la collecte de statistiques, la reconnaissance du client et son identification dans l’espace « mon compte » du site de la société Tediber. Un cookie ne nous permet pas de vous identifier nominativement. De manière générale, il enregistre des informations relatives à votre navigation sur notre site, que nous pourrons lire lors de vos visites ultérieures. Ces données sont strictement destinées à un usage interne à Tediber et ne sont pas communiquées à des tiers. Vous pouvez vous opposer à l’utilisation de cookie en paramétrant votre navigateur.<br/><br/>Certains cookies sont des cookies de publicité qui nous permettent d’enregistrer les produits consultés pour vous présenter des bannières publicitaires en accord avec votre intérêt dans un délai maximum de 90 jours. Si vous ne souhaitez pas recevoir de cookie de publicité lors de votre navigation, vous devez le régler dans les paramètres de votre navigateur. </p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_LeWpxK",
+        "text_7aKiBV"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_6biCGK": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_MGgmxh": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Responsabilité</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_zMtjTY": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Tediber s’engage à tout mettre en œuvre afin de faire en sorte que les informations présentes sur ce site soient à jour et exactes. Toutefois en cas de force majeure, d’intrusion extérieure ou présence de virus informatique, Tediber pourra interrompre le site.<br/><br/>Il mettra tout en œuvre afin d’en avertir les utilisateurs. Dans cette éventualité la responsabilité de la société Tediber ne pourrait être engagée La responsabilité de la société Tediber ne saurait être engagée pour tous les inconvénients ou dommages inhérents à l’utilisation du réseau Internet et extérieurs aux précautions prises par la société. Tediber se réserve le droit de modifier tout élément du site. La société pourra également décider de modifier les présentes conditions à tout moment. </p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_MGgmxh",
+        "text_zMtjTY"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_N8jQzQ": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_knjytA": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Utilisations des photos et cessions des droits</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_rP4nTy": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Lorsque vous publiez un contenu sur les réseaux sociaux en indiquant en commentaire, “l'auteur de la photographie autorise la société Tediber S.A.S à utiliser la photographie” leur cède à cet effet, sans réserve, les droits de reproduction, de représentation et d'adaptation attachés à la photographie. Cette autorisation et cession de droits est valable pour le monde entier, pour une durée de cinq (5) années à compter de la publication du commentaire.<br/><br/>La société Tediber S.A.S pourra reproduire, représenter et adapter cette photographie à toutes fins commerciale, promotionnelle et publicitaire, via tout moyen et sur tout support, notamment via internet et presse écrite. Vous autorisez également la société Tediber S.A.S à mentionner votre compte en accompagnement de la photographie. Vous reconnaissez et acceptez que cette autorisation et cession sont consenties à titre gratuit, et ne pourront ainsi ouvrir droit à une quelconque rémunération. </p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_knjytA",
+        "text_rP4nTy"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_JmrhEW": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_UpWfa3": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Liens hypertextes</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_rQBHKH": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Les liens hypertextes envoyant vers des sites extérieurs ne sauraient engager la responsabilité de Tediber, notamment s’agissant des offres commerciales ou des publicités qui vous seraient proposées sur ce site. La décision d’activer un lien hypertexte reste propriété exclusive des utilisateurs du site. </p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_UpWfa3",
+        "text_rQBHKH"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_dWJAcz": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_cdz8A9": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Loi Applicable divisibilité des causes</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_rNQdWr": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Dans le cas ou, pour une raison quelconque, un utilisateur, une institution ou tout autre entité viendrait à contester une ou plusieurs dispositions de ces mentions, l’invalidité de cette ou ces dispositions n’affecterait en rien le reste des modalités et n’exonèrera pas l’utilisateur des obligations citées précédemment.<br/><br/>Le site est régi par la législation française. Les conditions citées ci-dessus sont interprétées conformément à la loi française. Les utilisateurs étrangers doivent s’assurer du respect des lois en vigueurs localement. </p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_cdz8A9",
+        "text_rNQdWr"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_richtext_MkgApx": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_a7YD4z": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Tediber et Éco-mobilier</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_M4Pn6h": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Tediber est enregistré au registre national des metteurs sur le marché d’éléments d’ameublement sous le numéro FR0121285. Ce numéro garantit que Tediber, adhérant à Éco-mobilier, se met en conformité avec les obligations réglementaires qui lui incombent en application de l’article L 541-10-1 10° du Code de l’Environnement. </p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_a7YD4z",
+        "text_M4Pn6h"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    }
+  },
+  "order": [
+    "main",
+    "ax_heading_6TphAp",
+    "ax_richtext_RkciMT",
+    "ax_richtext_9QeXzn",
+    "ax_richtext_krdN4C",
+    "ax_richtext_kK44GF",
+    "ax_richtext_6biCGK",
+    "ax_richtext_N8jQzQ",
+    "ax_richtext_JmrhEW",
+    "ax_richtext_dWJAcz",
+    "ax_richtext_MkgApx"
+  ]
+}

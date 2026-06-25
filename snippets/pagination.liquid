@@ -1,0 +1,136 @@
+{% comment %}
+	Renders a set of links for paginated results. Must be used within paginate tags.
+
+	Usage:
+	{% paginate results by 2 %}
+	  {% render 'pagination', paginate: paginate, anchor: '#yourID' %}
+	{% endpaginate %}
+
+	Accepts:
+	- paginate: {Object}
+	- anchor: {String} (optional) This can be added so that on page reload it takes you to wherever you've placed your anchor tag.
+	- obfuscate: {Boolean} (optional) When true, renders obfuscated links (span + data-obflink) instead of <a href> to prevent crawlers from following pagination URLs.
+{% endcomment %}
+
+{{ 'component-pagination.css' | asset_url | stylesheet_tag }}
+{{ 'bundle.pagination.css' | asset_url | stylesheet_tag }}
+
+{%- if paginate.parts.size > 0 -%}
+	<div class="pagination-wrapper" data-page="{{ paginate.current_page }}">
+		<nav class="pagination" role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
+			<ul class="pagination__list list-unstyled" role="list">
+				{%- if paginate.previous -%}
+					{%- liquid
+						if paginate.current_page == 2
+							assign url_part = paginate.previous.url | replace: '&amp;', '&' | replace: '?page=1&', '?' | replace: '&page=1&', '&' | replace: '&page=1', '' | replace: '?page=1', ''
+						else
+							assign url_part = paginate.previous.card-product-upsell__attributs
+						endif
+					-%}
+					<li>
+						{%- if obfuscate -%}
+							<span
+								data-obflink="{{ url_part | append: anchor | base64_encode }}"
+								class="pagination__item pagination__item--next pagination__item-arrow link motion-reduce"
+								aria-label="{{ 'general.pagination.previous' | t }}"
+								role="link"
+								tabindex="0"
+							>
+								<span class="svg-wrapper">
+									{{- 'icon-caret.svg' | inline_asset_content -}}
+								</span>
+							</span>
+						{%- else -%}
+							<a
+								href="{{ url_part }}{{ anchor }}"
+								class="pagination__item pagination__item--next pagination__item-arrow link motion-reduce"
+								aria-label="{{ 'general.pagination.previous' | t }}"
+							>
+								<span class="svg-wrapper">
+									{{- 'icon-caret.svg' | inline_asset_content -}}
+								</span>
+							</a>
+						{%- endif -%}
+					</li>
+				{%- endif -%}
+
+				{%- for part in paginate.parts -%}
+					<li>
+						{%- if part.is_link -%}
+							{%- liquid
+								assign url_part_two = part.title | plus: 0
+
+								if url_part_two == 1
+									assign url_part = part.url | replace: '&amp;', '&' | replace: '?page=1&', '?' | replace: '&page=1&', '&' | replace: '&page=1', '' | replace: '?page=1', ''
+								else
+									assign url_part = part.url
+								endif
+							-%}
+							{%- if obfuscate -%}
+								<span
+									data-obflink="{{ url_part | append: anchor | base64_encode }}"
+									class="pagination__item link"
+									aria-label="{{ 'general.pagination.page' | t: number: part.title }}"
+									role="link"
+									tabindex="0"
+								>
+									{{- part.title -}}
+								</span>
+							{%- else -%}
+								<a
+									href="{{ url_part }}{{ anchor }}"
+									class="pagination__item link"
+									aria-label="{{ 'general.pagination.page' | t: number: part.title }}"
+								>
+									{{- part.title -}}
+								</a>
+							{%- endif -%}
+						{%- else -%}
+							{%- if part.title == paginate.current_page -%}
+								<a
+									role="link"
+									aria-disabled="true"
+									class="pagination__item pagination__item--current light"
+									aria-current="page"
+									aria-label="{{ 'general.pagination.page' | t: number: part.title }}"
+								>
+									{{- part.title -}}
+								</a>
+							{%- else -%}
+								<span class="pagination__item">{{ part.title }}</span>
+							{%- endif -%}
+						{%- endif -%}
+					</li>
+				{%- endfor -%}
+
+				{%- if paginate.next -%}
+					<li>
+						{%- if obfuscate -%}
+							<span
+								data-obflink="{{ paginate.next.url | append: anchor | base64_encode }}"
+								class="pagination__item pagination__item--prev pagination__item-arrow link motion-reduce"
+								aria-label="{{ 'general.pagination.next' | t }}"
+								role="link"
+								tabindex="0"
+							>
+								<span class="svg-wrapper">
+									{{- 'icon-caret.svg' | inline_asset_content -}}
+								</span>
+							</span>
+						{%- else -%}
+							<a
+								href="{{ paginate.next.url }}{{ anchor }}"
+								class="pagination__item pagination__item--prev pagination__item-arrow link motion-reduce"
+								aria-label="{{ 'general.pagination.next' | t }}"
+							>
+								<span class="svg-wrapper">
+									{{- 'icon-caret.svg' | inline_asset_content -}}
+								</span>
+							</a>
+						{%- endif -%}
+					</li>
+				{%- endif -%}
+			</ul>
+		</nav>
+	</div>
+{%- endif -%}

@@ -1,0 +1,26 @@
+.totals {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.totals > * {
+  font-size: 1.6rem;
+  margin: 0;
+}
+
+.totals > h2 {
+  font-size: calc(var(--font-heading-scale) * 1.6rem);
+}
+
+.totals > * + * {
+  margin-left: 0.4rem;
+}
+
+.totals__total-value {
+  font-size: 1.6rem;
+}
+
+.cart__ctas + .totals {
+  margin-top: 2rem;
+}

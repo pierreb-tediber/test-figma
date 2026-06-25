@@ -1,0 +1,38 @@
+{%- comment -%}
+	Renders the mobile "En savoir plus" dropdown shared by a pair of cards.
+	Full width below the pair, visible on mobile only.
+
+	Accepts:
+	- left: the left card block
+	- right: the right card block (optional)
+	- label: the summary label (e.g. section.settings.knowmore_label)
+{%- endcomment -%}
+
+<details class="ax-versus-comparator__card-mobile-drop">
+	<summary class="ax-versus-comparator__card-mobile-drop-summary content-square_{{ section.id }}-{{ left.id }}-summary-card-mobile-drop">
+		<span class="ax-versus-comparator__card-mobile-drop-label">{{ label }}</span>
+		<span class="ax-versus-comparator__card-mobile-drop-icon" aria-hidden="true"></span>
+	</summary>
+	<div class="ax-versus-comparator__card-mobile-drop-content">
+		<ul class="ax-versus-comparator__card-knowmore-list">
+			{%- if left.settings.card_knowmore_1 != blank -%}
+				{%- render 'versus-comparator-knowmore-item', content: left.settings.card_knowmore_1 -%}
+			{%- endif -%}
+			{%- if left.settings.card_knowmore_2 != blank -%}
+				{%- render 'versus-comparator-knowmore-item', content: left.settings.card_knowmore_2 -%}
+			{%- endif -%}
+			{%- if left.settings.card_knowmore_3 != blank -%}
+				{%- render 'versus-comparator-knowmore-item', content: left.settings.card_knowmore_3 -%}
+			{%- endif -%}
+			{%- if right.settings.card_knowmore_1 != blank -%}
+				{%- render 'versus-comparator-knowmore-item', content: right.settings.card_knowmore_1 -%}
+			{%- endif -%}
+			{%- if right.settings.card_knowmore_2 != blank -%}
+				{%- render 'versus-comparator-knowmore-item', content: right.settings.card_knowmore_2 -%}
+			{%- endif -%}
+			{%- if right.settings.card_knowmore_3 != blank -%}
+				{%- render 'versus-comparator-knowmore-item', content: right.settings.card_knowmore_3 -%}
+			{%- endif -%}
+		</ul>
+	</div>
+</details>

@@ -1,0 +1,177 @@
+{% style %}
+	.badge--other {
+		--text-color: #010c27;
+		--background-color: #fbf5ed;
+		--border-color: #010c27;
+	}
+{% endstyle %}
+
+{%- liquid
+	comment
+		DÉTECTION ET INITIALISATION DU MODE BUNDLE
+
+		Vérifie si le produit actuel est configuré en bundle
+		via ses metafields de configuration
+	endcomment
+	assign is_bundle = false
+	assign bundle_configurator = product.metafields.custom.pack_configurateur.value
+	if bundle_configurator != blank
+		assign is_bundle = true
+	endif
+
+	comment
+		Cible des prix barrés / remise :
+		- pack : le produit parent du combined listing
+		- produit normal : le produit courant
+		Calculée avant badges_empty pour que la détection "vide"
+		s'appuie sur la même cible que le badge réellement rendu.
+	endcomment
+	if is_bundle and product.metafields.custom.combined_listings_produit_parent.value != blank
+		assign target = product.metafields.custom.combined_listings_produit_parent.value
+	else
+		assign target = product
+	endif
+
+	assign badges_empty = true
+	if product.metafields.custom.badges.value != blank
+		assign badges_empty = false
+	endif
+
+	if selected_variant.available == false
+		assign badges_empty = false
+	endif
+
+	assign hide_badge_sale = false
+	if product.metafields.custom.hidden_badge_sale.value
+		assign hide_badge_sale = true
+	endif
+
+	comment
+		Détection d'une remise pour l'état "vide" :
+		- pack : prix barré du produit parent (combined listing), comme le badge rendu
+		- produit normal : prix barré du variant sélectionné (comportement historique)
+	endcomment
+
+	if is_bundle
+		if target.compare_at_price and target.price and target.available and show_discount
+			assign badges_empty = false
+		endif
+	elsif selected_variant.compare_at_price and selected_variant.price and target.available and show_discount == false
+		assign badges_empty = false
+	endif
+
+	if badges_empty
+		assign class = class | append: ' product__badges--empty'
+	elsif show_discount
+		assign class = class | append: ' product__badges--show-discount'
+	endif
+-%}
+
+
+<div class="{{ class }}">
+	{%- if selected_variant.available == false -%}
+		<span class="badge price__badge-sold-out color-{{ settings.sold_out_badge_color_scheme }}">
+			{{ 'products.product.sold_out' | t }}
+		</span>
+	{%- elsif target.compare_at_price
+	and target.price
+	and target.available
+	-%}
+		{%- if show_discount -%}
+			<span
+				id="Badge-{{ section_id }}-{{ product.id }}"
+				class="badge price__badge-sale color-{{ settings.sale_badge_color_scheme }}"
+			>
+				{%- if settings.sale_badge_show_percent and hide_badge_sale == false -%}
+					{%- assign save = target.compare_at_price
+					| minus: target.price
+						| times: 100.0
+						| divided_by: target.compare_at_price
+						| round
+						| append: '%'
+						| prepend: '-'
+					-%}
+					{{ save }}
+				{%- else -%}
+					{{- 'products.product.on_sale' | t -}}
+				{%- endif -%}
+			</span>
+		{%- endif -%}
+	{%- endif -%}
+	{%- if product.metafields.custom.badges != blank -%}
+		{%- for badge in product.metafields.custom.badges.value -%}
+			{%- assign badge_handle = badge.texte | handleize -%}
+			{%- style -%}
+				.badge--other.badge-{{ badge_handle }} {
+					{% if badge.text_color != blank %}
+						--text-color: {{ badge.text_color }};
+					{% endif %}
+					{% if badge.background_color != blank %}
+						--background-color: {{ badge.background_color }};
+					{% endif %}
+					{% if badge.border_color != blank %}
+						--border-color: {{ badge.border_color }};
+					{% endif %}
+				}
+			{%- endstyle -%}
+			<span class="badge badge-{{ badge_handle }} badge--other color-{{ settings.others_badge_color_scheme }}">
+				{{- badge.texte -}}
+			</span>
+		{%- endfor -%}
+	{%- endif -%}
+</div>
+{%- liquid
+	# Récupération dynamique des SKUs du produit
+	assign product_skus = ''
+	for variant in product.variants
+		if variant.sku != blank
+			assign product_skus = product_skus | append: variant.sku | append: ','
+		endif
+	endfor
+	assign product_skus = product_skus | remove_last: ','
+
+	# Ajout des SKUs manuels du metafield custom.id_trustpilot
+	if product.metafields.custom.id_trustpilot.value != blank
+		assign manual_skus = product.metafields.custom.id_trustpilot.value | strip
+		if product_skus != blank and manual_skus != blank
+			assign product_skus = product_skus | append: ',' | append: manual_skus
+		elsif manual_skus != blank
+			assign product_skus = manual_skus
+		endif
+	endif
+-%}
+{%- if show_rating and product_skus != blank -%}
+	<div class="product__rating product-badges-rating">
+		{%- if product.metafields.custom.page_avis.value != blank -%}
+			<a href="{{ product.metafields.custom.page_avis.value.url }}" rel="noopener"></a>
+		{%- endif -%}
+		<!-- TrustBox widget - Product Mini MultiSource -->
+		<product-trustpilot
+			data-mode="badge"
+			data-widget=".trustpilot-widget"
+			data-element=".product-badges-rating"
+			data-threshold="10"
+			data-stable-ms="1200"
+			data-max-ms="0"
+			data-hidden-class="no-reviews"
+		>
+			<div
+				class="trustpilot-widget"
+				data-locale="fr-FR"
+				data-template-id="577258fb31f02306e4e3aaf9"
+				data-businessunit-id="5a5cdcedf3b8320001d06ddf"
+				data-style-height="24px"
+				data-style-width="100%"
+				data-sku="{{ product_skus }}"
+				data-star-color="#218252"
+				data-text-color="#1b1b21"
+				data-no-reviews="collapse"
+				data-scroll-to-list="true"
+				data-style-alignment="left"
+			>
+				<a href="https://fr.trustpilot.com/review/" target="_blank" rel="noopener"></a>
+			</div>
+			<!-- End TrustBox widget -->
+		</product-trustpilot>
+	</div>
+{%- endif -%}

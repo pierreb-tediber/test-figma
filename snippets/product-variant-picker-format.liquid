@@ -1,0 +1,283 @@
+{% comment %}
+	Renders the fake "Format" step (Monobloc/Bibloc) — UI-only option that
+	overlays the size option. The format isn't a real Shopify option ; clicking
+	a format radio dispatches a `change` on the matching size input which has
+	the raw value "{dim} - {format}". The standard VariantSelects cascade picks
+	up the change and updates the variant.
+
+	Réutilise les classes `product__variant-selects__pill product__variant-selects__pill--button`
+	pour rester visuellement cohérent avec la step version (même structure HTML).
+
+	Accepts:
+	- product: {Object}
+	- selected_variant: {Object}
+	- section_id: {String}
+	- size_option_index: {Number} 0-indexed position of the size option
+	- custom_position: {Number} display order in the picker (CSS order)
+	- custom_position_label: {String} "2. " or "3. " (or '' in new-offer mode)
+	- selected_variant_size_information: {Object|String} help text from variant metafield
+	- is_new_offer: {Boolean}
+
+	Usage:
+	{% render 'product-variant-picker-format',
+		product: product,
+		selected_variant: selected_variant,
+		section_id: section_id,
+		size_option_index: prescan_size_option_index,
+		custom_position: format_step_custom_position,
+		custom_position_label: format_step_custom_position_label,
+		selected_variant_size_information: selected_variant_size_information,
+		is_new_offer: is_new_offer
+	%}
+{% endcomment %}
+
+{%- liquid
+	# On utilise le produit courant : ses options_with_values contiennent les values
+	# explicites avec suffixe (post-migration Pauline) et ses variants ont l'option
+	# taille au même index. Le combined listing parent peut avoir un schéma d'options
+	# différent (souvent 1 seule option = taille à l'index 0), ce qui casserait
+	# `[size_option_index]` qui vient du prescan sur le produit enfant.
+	assign size_option_obj = product.options_with_values[size_option_index]
+	assign variants_pool = product.variants
+
+	# Position 0-indexed de l'option "version" pour LE PRODUIT COURANT + value
+	# de version à laquelle on aligne format_min_price + card_variant.
+	#
+	# Sans ce filtre, `format_min_price` pioche la 1ère variante trouvée toutes
+	# versions confondues — typiquement la Plus (plus chère) — alors qu'à version
+	# constante Mono = Bibloc en prix → +X € fantôme sur les cards format.
+	#
+	# 2 modes de détection :
+	# 1. Bundle (`products_bundle_option_version` défini) : on scanne les options
+	#    pour trouver celle dont une value matche la version forcée par le bundle
+	#    (la position varie selon l'item : matelas index 2, sommier coffre index 3).
+	# 2. Standalone PDP (pas de bundle) : on identifie l'option "version" via le
+	#    translation key `options_names_for_version` (= "version, la version"),
+	#    puis on prend `selected_variant.options[index]` comme version active —
+	#    sinon en PDP /products/sommier l'utilisateur voit +69 € sur Bibloc en
+	#    Standard alors que Standard Mono = Standard Bibloc en prix.
+	assign version_option_index = -1
+	assign effective_target_version = products_bundle_option_version
+
+
+
+	if effective_target_version == blank or effective_target_version == 'Aucun'
+		assign options_names_for_version_translated = 'products.product.options_names_for_version' | t | downcase | replace: ', ', ','
+		assign options_names_for_version_arr = options_names_for_version_translated | split: ',' | uniq
+		for opt in product.options_with_values
+			assign opt_name_words = opt.name | downcase | split: ' ' | uniq
+			assign opt_is_version = false
+			for opt_name_word in opt_name_words
+				if options_names_for_version_arr contains opt_name_word
+					assign opt_is_version = true
+					break
+				endif
+			endfor
+			if opt_is_version
+				assign version_option_index = opt.position | minus: 1
+				assign effective_target_version = selected_variant.options[version_option_index]
+				break
+			endif
+		endfor
+	else
+		for opt in product.options_with_values
+			assign version_match_found = false
+			for opt_value in opt.values
+				if opt_value == effective_target_version
+					assign version_match_found = true
+					break
+				endif
+			endfor
+			if version_match_found
+				assign version_option_index = opt.position | minus: 1
+				break
+			endif
+		endfor
+	endif
+
+	# Format par défaut (Monobloc) : fallback si une variante n'a pas de suffixe
+	assign default_format = 'products.product.default_format_for_size_value' | t | strip
+
+	# Dimension courante (parsée depuis la variante sélectionnée)
+	assign current_size_raw = selected_variant.options[size_option_index]
+	assign current_size_parts = current_size_raw | split: ' - '
+	assign current_dimensions = current_size_parts[0] | strip
+
+	# Pass 1 : compte les formats distincts pour la dim courante + min price.
+	# On boucle sur les VALUES du picker (explicites avec suffixes après migration Pauline),
+	# pas sur variants_pool dont l'option taille peut être encore en format implicite ancien.
+	# Le tracker est une CSV encadrée de virgules pour éviter les faux positifs `contains`.
+	assign formats_seen_lc = ','
+	assign formats_count = 0
+	assign format_min_price = -1
+
+	for size_value in size_option_obj.values
+		assign size_value_parts = size_value | split: ' - '
+		assign value_dim = size_value_parts[0] | strip
+
+		unless value_dim == current_dimensions
+			continue
+		endunless
+
+		assign value_format = default_format
+		if size_value_parts.size > 1
+			assign value_format = size_value_parts[1] | strip
+		endif
+
+		assign format_marker = value_format | downcase | prepend: ',' | append: ','
+		unless formats_seen_lc contains format_marker
+			assign formats_seen_lc = formats_seen_lc | append: value_format | downcase | append: ','
+			assign formats_count = formats_count | plus: 1
+		endunless
+
+		# Trouve la variante représentante pour récupérer le prix le plus bas.
+		# Match strict d'abord (size_value avec suffixe), fallback sur dim seule
+		# (Monobloc implicite legacy). Skip les variantes hors `option_version`
+		# forcée par le bundle (ex. Standard quand pack force Plus) pour éviter
+		# un format_min_price aspiré par la version Standard moins chère.
+		for v in variants_pool
+			if v.options[size_option_index] == size_value
+				if version_option_index >= 0 and v.options[version_option_index] != effective_target_version
+					continue
+				endif
+				if format_min_price < 0 or v.price < format_min_price
+					assign format_min_price = v.price
+				endif
+				break
+			endif
+		endfor
+		if value_format == default_format
+			for v in variants_pool
+				if v.options[size_option_index] == value_dim
+					if version_option_index >= 0 and v.options[version_option_index] != effective_target_version
+						continue
+					endif
+					if format_min_price < 0 or v.price < format_min_price
+						assign format_min_price = v.price
+					endif
+					break
+				endif
+			endfor
+		endif
+	endfor
+-%}
+
+{%- if formats_count < 2 -%}
+	{%- comment -%}
+		La taille courante n'a qu'UN SEUL format disponible (ou zéro) : le
+		sélecteur est inutile et on le masque. Le help text `taille_information`
+		est rendu côté parent picker (sous le picker taille, dans le wrapper
+		`<variant-dropdown>`) pour récupérer la bonne indentation — cf. condition
+		`prescan_current_size_format_count < 2` dans `product-variant-picker.liquid`.
+	{%- endcomment -%}
+{%- else -%}
+<product-variant-format
+	class="product__variant-selects__format"
+	data-section="{{ section_id }}"
+	data-size-option-index="{{ size_option_index }}"
+	data-current-dimensions="{{ current_dimensions | escape }}"
+	style="order: {{ custom_position }};"
+>
+	<fieldset
+		class="js product-form__input product-form__input--pill product__variant-selects__pill product__variant-selects__pill--button product__variant-selects__pill--format"
+	>
+		{%- comment -%}
+			Format est un step UI factice sans `option.name` Shopify (cf. en-tête
+			de snippet). On définit ici son "option_name" virtuel pour réutiliser
+			la convention partagée avec les autres pickers (size/version/color) :
+			- Legacy : `product_option_name_choose` = "Choisissez {option_name}"
+			- Pack-new : on n'affiche que l'option_name (sans verbe), aligné avec
+			  la maquette pack-new qui retire le "Choisissez".
+		{%- endcomment -%}
+		{%- assign format_option_name = 'products.product.format_option_name' | t -%}
+		<legend class="form__label product__variant-selects__label product__variant-selects__pill__label">
+			<span>
+				{{ custom_position_label -}}
+				{%- if is_pack_new -%}
+					{{- format_option_name | capitalize -}}
+				{%- else -%}
+					{{- 'products.product.product_option_name_choose' | t: option_name: format_option_name -}}
+				{%- endif -%}
+			</span>
+		</legend>
+
+		<div class="product__variant-selects__pill__container">
+			{%- liquid
+				# Pass 2 : rendu d'une carte par format distinct.
+				# On boucle sur les values du picker (l'ordre suit l'ordre Shopify admin —
+				# typiquement Monobloc avant Bibloc). Un tracker évite de re-rendre une carte
+				# pour un format déjà vu.
+				assign rendered_formats_lc = ','
+			-%}
+
+			{%- for size_value in size_option_obj.values -%}
+				{%- liquid
+					assign size_value_parts = size_value | split: ' - '
+					assign value_dim = size_value_parts[0] | strip
+				-%}
+				{%- unless value_dim == current_dimensions -%}{%- continue -%}{%- endunless -%}
+
+				{%- liquid
+					assign value_format = default_format
+					if size_value_parts.size > 1
+						assign value_format = size_value_parts[1] | strip
+					endif
+					assign value_format_lc = value_format | downcase
+				-%}
+
+				{%- assign rendered_marker = value_format_lc | prepend: ',' | append: ',' -%}
+				{%- if rendered_formats_lc contains rendered_marker -%}{%- continue -%}{%- endif -%}
+				{%- assign rendered_formats_lc = rendered_formats_lc | append: value_format_lc | append: ',' -%}
+
+				{%- liquid
+					# Cherche la variante associée à cette size_value (priorité au match strict,
+					# fallback sur la dim seule pour Monobloc implicite encore non migré).
+					# Skip les variantes hors option_version forcée par le bundle (cohérent
+					# avec le filtre de format_min_price ci-dessus).
+					assign card_variant = nil
+					for v in variants_pool
+						if v.options[size_option_index] == size_value
+							if version_option_index >= 0 and v.options[version_option_index] != effective_target_version
+								continue
+							endif
+							assign card_variant = v
+							break
+						endif
+					endfor
+					if card_variant == nil and value_format == default_format
+						for v in variants_pool
+							if v.options[size_option_index] == value_dim
+								if version_option_index >= 0 and v.options[version_option_index] != effective_target_version
+									continue
+								endif
+								assign card_variant = v
+								break
+							endif
+						endfor
+					endif
+				-%}
+
+				{%- if card_variant != nil -%}
+					{%- render 'product-variant-picker-format-card',
+						card_variant: card_variant,
+						value_format: value_format,
+						value_format_lc: value_format_lc,
+						value_size_raw: size_value,
+						current_size_raw: current_size_raw,
+						format_min_price: format_min_price,
+						section_id: section_id,
+						is_pack_new: is_pack_new,
+						hide_extras: hide_extras
+					-%}
+				{%- endif -%}
+			{%- endfor -%}
+		</div>
+
+		{%- if selected_variant_size_information != blank -%}
+			<p class="product__variant-selects__pill__help">
+				{{ selected_variant_size_information }}
+			</p>
+		{%- endif -%}
+	</fieldset>
+</product-variant-format>
+{%- endif -%}

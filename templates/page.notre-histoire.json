@@ -1,0 +1,347 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_content": false,
+        "custom_h1": "",
+        "h1_size": "h1",
+        "h1_no_margin": false,
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "ax_image_with_text_EJRgJw": {
+      "type": "ax-image-with-text",
+      "blocks": {
+        "subheading_b9BymB": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "NOTRE HISTOIRE"
+          }
+        },
+        "heading_AK4ArD": {
+          "type": "heading",
+          "settings": {
+            "picto_size": 92,
+            "picto_size_mobile": 92,
+            "heading": "<p>Tediber, à la <br/>poursuite <br/>du rêve originel</p>",
+            "heading_size": "h2"
+          }
+        },
+        "text_tpTU8g": {
+          "type": "text",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "text": "<p>Tediber s’est construit sur un rêve : transformer un simple matelas en un incroyable produit pour que se reposer deviennent un véritable plaisir.</p><p><br/>Nous souhaitions en effet redonner au matelas la place qu’il mérite en tant que produit le plus important de nos vies (et oui, nous nous passons ⅓ de notre temps à dormir !).<br/><br/>C’est ce rêve qui nous a animés à nos débuts, en 2015, lorsque nous avons créé l’incroyable matelas Tediber, l’équilibre parfait entre confort et fermeté pour toutes les morphologies.</p>",
+            "description_hn_replace": false,
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_b9BymB",
+        "heading_AK4ArD",
+        "text_tpTU8g"
+      ],
+      "settings": {
+        "full_width": true,
+        "text_alignment": "left",
+        "no_vertical_padding": false,
+        "image": "shopify://shop_images/cms-hero.webp",
+        "image_restricted_width": false,
+        "image_adapted_height_with_content": false,
+        "contain_image": false,
+        "layout": "text_first",
+        "mobile_layout": "image_first",
+        "overlay": false,
+        "overlay_opacity": 0.2,
+        "section_color_scheme": "scheme-3",
+        "color_scheme": "scheme-3",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "ax_reassurances_cQcLPh": {
+      "type": "ax-reassurances",
+      "blocks": {
+        "reassurance_GwYeyP": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "100-nuits-essai",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_tTNg4j": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-vfy3a8q5",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_wDyNcX": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-vfy3a8q5",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_LtQMN3": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-87bgy0zq",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        }
+      },
+      "block_order": [
+        "reassurance_GwYeyP",
+        "reassurance_tTNg4j",
+        "reassurance_wDyNcX",
+        "reassurance_LtQMN3"
+      ],
+      "disabled": true,
+      "settings": {
+        "heading": "Nos engagements",
+        "restricted_width": false,
+        "stack_mobile": false,
+        "border_top_mobile": false,
+        "border_bottom_mobile": false,
+        "show_content": false,
+        "autoplay": false,
+        "speed": 300,
+        "loop": false,
+        "pagination": true,
+        "color_scheme": "",
+        "color_scheme_popin": "scheme-2",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 24,
+        "padding_top": 96,
+        "padding_bottom": 48,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "ax_image_with_text_kCdcLr": {
+      "type": "ax-image-with-text",
+      "blocks": {
+        "heading_x4xxeK": {
+          "type": "heading",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "heading": "<p>fermez les yeux et rêvez...</p>",
+            "heading_size": "h3"
+          }
+        },
+        "text_KrgeM3": {
+          "type": "text",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "text": "<p>Passionnés par le développement de produits et experts de l’univers du sommeil, nos fondateurs Julien et Juan se sont tournés vers des solutions novatrices, en rupture avec les fabricants traditionnels, afin de faire de Tediber, la marque la plus forte de l’univers de la literie.<br/><br/>Après des dizaines de prototypes, fabricants, nuits inconfortables et housses trop chères, nous parvenons à mettre au point un matelas au confort parfait et produit localement, en France et en Belgique. <br/><br/>Afin que le plaisir soit total, nous repensons entièrement l’expérience client de l’achat jusqu’à l’entretien du matelas. Précurseur des 100 nuits d’essai, premier à vendre en direct sans intermédiaires coûteux, inventeur de la livraison en 48 heures, pionnier du matelas réparable à vie… Tediber place le service au cœur de sa stratégie en étant l’une des seules marques à avoir son service client dans ses bureaux, en plein centre de Paris.</p>",
+            "description_hn_replace": false,
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "heading_x4xxeK",
+        "text_KrgeM3"
+      ],
+      "name": "Ax Image with text",
+      "settings": {
+        "full_width": true,
+        "text_alignment": "left",
+        "no_vertical_padding": false,
+        "image": "shopify://shop_images/dream.jpg",
+        "image_restricted_width": false,
+        "image_adapted_height_with_content": false,
+        "contain_image": false,
+        "layout": "image_first",
+        "mobile_layout": "image_first",
+        "overlay": false,
+        "overlay_opacity": 0.2,
+        "section_color_scheme": "scheme-1",
+        "color_scheme": "scheme-2",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "ax_image_with_text_ngVpbj": {
+      "type": "ax-image-with-text",
+      "blocks": {
+        "heading_aVCY44": {
+          "type": "heading",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "heading": "<p>Tediber vous offre le repos dont vous rêvez</p>",
+            "heading_size": "h3"
+          }
+        },
+        "text_brg9pD": {
+          "type": "text",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "text": "<p>Au fil des années, les aspirations de nos clients évoluent, nous poussant à rêver toujours plus grand. C’est ainsi que nous avons imaginé trois univers au plus près de leurs attentes : Tediber, notre gamme iconique, Grand Ours, notre gamme luxe, et Tedi by Tediber, notre gamme enfant.</p>",
+            "description_hn_replace": false,
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "heading_aVCY44",
+        "text_brg9pD"
+      ],
+      "name": "Ax Image with text",
+      "settings": {
+        "full_width": true,
+        "text_alignment": "left",
+        "no_vertical_padding": false,
+        "image": "shopify://shop_images/push-cms-2.webp",
+        "image_restricted_width": false,
+        "image_adapted_height_with_content": false,
+        "contain_image": false,
+        "layout": "text_first",
+        "mobile_layout": "image_first",
+        "overlay": false,
+        "overlay_opacity": 0.2,
+        "section_color_scheme": "scheme-1",
+        "color_scheme": "scheme-2",
+        "padding_top": 0,
+        "padding_bottom": 48
+      }
+    },
+    "ax_cards_informations_YDirgC": {
+      "type": "ax-cards-informations",
+      "blocks": {
+        "card_tHcRm3": {
+          "type": "card",
+          "settings": {
+            "title": "<p>Une expertise technique</p>",
+            "text": "<p>plébiscitée par 95% d’avis clients satisfaits et récompensée par UFC-Que Choisir en 2024 (matelas Hybride)</p>"
+          }
+        },
+        "card_x6LVH9": {
+          "type": "card",
+          "settings": {
+            "title": "<p>Un service 5 étoiles</p>",
+            "text": "<p>favorisé par une relation privilégiée avec les hôtels français, nous poussant constamment à nous réinventer pour satisfaire nos clients</p>"
+          }
+        },
+        "card_ULF76K": {
+          "type": "card",
+          "settings": {
+            "title": "<p>L’excellence à la française</p>",
+            "text": "<p>basée sur une qualité sans compromis avec une vraie conscience environnementale et sociétale, une innovation perpétuelle, un soin du détail et un design inspirant pensés en France</p>"
+          }
+        }
+      },
+      "block_order": [
+        "card_tHcRm3",
+        "card_x6LVH9",
+        "card_ULF76K"
+      ],
+      "name": "Ax cards informations",
+      "settings": {
+        "heading": "<p>Aujourd’hui, Tediber s’est imposée comme la seule marque de literie<br/>sur laquelle on peut vraiment se reposer grâce à :</p>",
+        "content": "<p>En bref, Tediber pense à tout pour que vous n’ayez rien à faire. Vous, vous avez juste à vous reposer.</p>",
+        "use_hn": false,
+        "color_scheme": "",
+        "color_scheme_cards": "scheme-2",
+        "mob_padding_top": 24,
+        "mob_padding_bottom": 48,
+        "padding_top": 48,
+        "padding_bottom": 96
+      }
+    },
+    "ax_image_with_text_LBrMkL": {
+      "type": "ax-image-with-text",
+      "blocks": {
+        "heading_Xw9X94": {
+          "type": "heading",
+          "settings": {
+            "picto_size": 92,
+            "picto_size_mobile": 92,
+            "heading": "<p>COMME UN NUAGE</p>",
+            "heading_size": "h3"
+          }
+        },
+        "text_imfPEc": {
+          "type": "text",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "text": "<p>Dans les sombres forêts de l'imaginaire, où les étoiles dansent au rythme du vent, il existe un endroit où les rêves prennent forme. <br/><br/>C'est là que résident les ours de Tediber, dans un monde où la douceur des nuages se mêle à la chaleur du foyer. Dans cet univers onirique, les ours s'éveillent chaque nuit pour tisser des rêves de confort et de bien-être. <br/><br/>Leurs songes se transforment en matelas moelleux, en oreillers douillets et en couettes enveloppantes, offrant à chacun un sommeil réparateur. Car dans le monde enchanté de Tediber, les rêves deviennent réalité pour ceux qui osent se reposer sur nous…</p>",
+            "description_hn_replace": false,
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "heading_Xw9X94",
+        "text_imfPEc"
+      ],
+      "settings": {
+        "full_width": true,
+        "text_alignment": "left",
+        "no_vertical_padding": false,
+        "image": "shopify://shop_images/sommier_lit-tapissier_faq_ddcb736e-966b-4a69-a61c-cf09b96270e2.jpg",
+        "image_restricted_width": false,
+        "image_adapted_height_with_content": false,
+        "contain_image": false,
+        "layout": "image_first",
+        "mobile_layout": "image_first",
+        "overlay": false,
+        "overlay_opacity": 0.2,
+        "section_color_scheme": "scheme-3",
+        "color_scheme": "scheme-3",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "ax_image_with_text_EJRgJw",
+    "ax_reassurances_cQcLPh",
+    "ax_image_with_text_kCdcLr",
+    "ax_image_with_text_ngVpbj",
+    "ax_cards_informations_YDirgC",
+    "ax_image_with_text_LBrMkL"
+  ]
+}

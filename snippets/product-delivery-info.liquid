@@ -1,0 +1,336 @@
+{%- liquid
+	# Détection des bundles
+	assign is_bundle = false
+	assign bundle_configurator = product.metafields.custom.pack_configurateur.value
+	if bundle_configurator != blank
+		assign is_bundle = true
+	endif
+
+	# Détection des petits colis
+	assign is_petit_colis = false
+	assign petit_colis_metafield = selected_variant.metafields.custom.petit_colis.value
+	if petit_colis_metafield != blank
+		assign is_petit_colis = true
+	endif
+
+	# Détection de la livraison premium
+	assign has_livraison_premium = false
+	assign livraison_premium_metafield = selected_variant.metafields.custom.livraison_premium.value
+	if livraison_premium_metafield != blank or template.suffix contains 'grand-ours'
+		assign has_livraison_premium = true
+	endif
+
+	# Récupération de la date de disponibilité décalée (si existante)
+	assign date_dispo_decalee = product.selected_or_first_available_variant.metafields.custom.date_de_dispo.value
+
+	# Récupération des options de livraison et sélection intelligente de la principale
+	assign available_deliveries = shop.metaobjects.livraison.values
+	assign filtered_deliveries = available_deliveries
+	assign main_delivery = null
+
+	# Recherche de l'option principale (gratuite prioritaire)
+	for delivery in available_deliveries
+		# Vérifier si cette option est autorisée pour ce type de produit
+		assign is_allowed = false
+		if is_petit_colis
+			if delivery.system.handle == 'livraison-express-a-domicile' or delivery.system.handle == 'livraison-en-point-relais'
+				assign is_allowed = true
+			endif
+		else
+			# Produits classiques : express + confort (+ premium si metafield)
+			if delivery.system.handle == 'livraison-express' or delivery.system.handle == 'livraison-confort'
+				assign is_allowed = true
+			elsif has_livraison_premium and delivery.system.handle == 'livraison-premium'
+				assign is_allowed = true
+			endif
+		endif
+
+		if is_allowed
+			# Vérifier si c'est vraiment gratuit
+			assign is_free = false
+			if delivery.prix.value == 'Gratuite' or delivery.prix.value == 'Gratuit' or delivery.prix.value == blank
+				assign is_free = true
+			endif
+
+			# Sélection : gratuite prioritaire, sinon première trouvée
+			if main_delivery == null or is_free
+				assign main_delivery = delivery
+				if is_free
+					break
+				endif
+			endif
+		endif
+	endfor
+
+	# Comptage dynamique des options disponibles
+	assign delivery_options_count = 0
+	if is_petit_colis
+		assign delivery_options_count = 2
+	else
+		# Produits classiques : express + confort (+ premium si metafield)
+		assign delivery_options_count = 2
+		if has_livraison_premium
+			assign delivery_options_count = 3
+		endif
+	endif
+
+	# Vérifier si on peut afficher le bloc delivery
+	assign show_delivery_block = false
+	if main_delivery
+		if selected_variant.sku != blank or is_bundle
+			assign show_delivery_block = true
+		endif
+	endif
+
+	assign show_delivery_new_offer = false
+	if template_new_offer or block.settings.enable_only_pack == true and is_bundle == true
+		assign show_delivery_new_offer = true
+	endif
+-%}
+
+{%- if show_delivery_block -%}
+	<div
+		class="product-delivery-info{% if show_delivery_new_offer %} product-delivery-info--new-offer{% endif %}"
+		data-is-petit-colis="{{ is_petit_colis }}"
+		data-is-bundle="{{ is_bundle }}"
+		data-date-dispo="{{ date_dispo_decalee }}"
+		data-product-sku="{{ product.selected_or_first_available_variant.sku }}"
+		data-product-price="{{ product.selected_or_first_available_variant.price }}"
+		{{ block.shopify_attributes }}
+	>
+		<div class="product-delivery-info__content">
+			{%- comment -%} Affichage de l'option de livraison principale {%- endcomment -%}
+			<div class="product-delivery-info__main">
+				{%- if show_delivery_new_offer -%}
+					{%- comment -%} New Offer: Stock status + Info icon {%- endcomment -%}
+					<div class="product-delivery-info__stock-row">
+						<div class="product-delivery-info__stock">
+							<span class="product-delivery-info__stock-indicator"></span>
+							<span class="product-delivery-info__stock-text">{{ 'products.product.inventory_in_stock' | t }}</span>
+						</div>
+						<modal-opener data-modal="#DeliveryModal-{{ block.id }}">
+							<button
+								id="DeliveryModalButton-{{ block.id }}"
+								class="product-delivery-info__info-button"
+								type="button"
+								aria-haspopup="dialog"
+								aria-label="{{ 'products.product.delivery.modal.title' | t }}"
+							>
+								<span class="svg-wrapper">
+									{{- 'icon-bulle-info.svg' | inline_asset_content -}}
+								</span>
+								<span class="product-delivery-info__info-button-click-area">&nbsp;</span>
+							</button>
+						</modal-opener>
+					</div>
+					{%- comment -%} New Offer: Title + Estimation combined {%- endcomment -%}
+					<div class="product-delivery-info__delivery-row">
+						<span class="product-delivery-info__title">
+							{{ main_delivery.nom.value }}
+							{%- if main_delivery.prix.value != blank -%}
+								<span class="product-delivery-info__price">{{ main_delivery.prix.value | append: ' : ' }}</span>
+							{%- endif -%}
+						</span>
+						<span class="product-delivery-info__estimation"></span>
+					</div>
+				{%- else -%}
+					{%- comment -%} Default template layout {%- endcomment -%}
+					<div class="product-delivery-info__header">
+						<div class="product-delivery-info__title">
+							{{ main_delivery.nom.value }}
+							{%- if main_delivery.prix.value != blank -%}
+								<span class="product-delivery-info__price">{{ main_delivery.prix.value }}</span>
+							{%- endif -%}
+						</div>
+
+						{%- comment -%} Lien qui ouvre la modal avec toutes les options {%- endcomment -%}
+						<modal-opener
+							data-modal="#DeliveryModal-{{ block.id }}"
+						>
+							<button
+								id="DeliveryModalButton-{{ block.id }}"
+								class="product-delivery-info__modal-button ax-link reversed"
+								type="button"
+								aria-haspopup="dialog"
+							>
+								{{ block.settings.modal_link_text | default: 'Estimer le délai de livraison' | escape }}
+							</button>
+						</modal-opener>
+					</div>
+
+				<div class="product-delivery-info__estimation">
+					<span class="product-delivery-info__loader"></span>
+				</div>
+
+					{%- if main_delivery.description.value != blank -%}
+						<div class="product-delivery-info__description rte">
+							{{ main_delivery.description | metafield_tag }}
+						</div>
+					{%- endif -%}
+				{%- endif -%}
+			</div>
+			{%- comment -%} Informations produit volumineux {%- endcomment -%}
+			{%- render 'produit-volumineux', block: block -%}
+		</div>
+
+		{%- comment -%} Modal avec toutes les options de livraison {%- endcomment -%}
+		<modal-dialog id="DeliveryModal-{{ block.id }}" class="modal-dialog product-delivery-modal">
+			<div
+				role="dialog"
+				aria-label="Options de livraison"
+				aria-modal="true"
+				class="product-delivery-modal__content"
+				tabindex="-1"
+			>
+				<div
+					class="modal-dialog__content{% if show_delivery_new_offer %} modal-dialog__content--new-offer{% endif %}"
+					role="dialog"
+					aria-label="{{ source.heading | escape }}"
+					aria-modal="true"
+					tabindex="-1"
+				>
+					<div class="modal-dialog__header product-delivery-modal__header">
+						<div class="modal-dialog__header-title product-delivery-modal__title h2">
+							{{ 'products.product.delivery.modal.title' | t }}
+						</div>
+						<button
+							id="ModalClose-{{ block.id }}"
+							type="button"
+							class="modal-dialog__toggle product-delivery-modal__close"
+							aria-label="{{ 'accessibility.close' | t }}"
+						>
+							<span class="svg-wrapper">
+								{{- 'icon-close.svg' | inline_asset_content -}}
+							</span>
+						</button>
+					</div>
+					<div class="product-delivery-modal__content">
+						<div class="product-delivery-modal__estimation">
+							<product-delivery-estimator
+								data-product-sku="{{ selected_variant.sku }}"
+								data-product-title="{{ product.title }}"
+								data-variant-title="{{ selected_variant.title }}"
+								data-product-price="{{ selected_variant.price }}"
+								data-is-bundle="{{ is_bundle }}"
+								data-block-id="{{ block.id }}"
+							>
+								<p class="product-delivery-modal__estimation-text">
+									{%- liquid
+										assign delivery_product_name = product.title
+										if selected_variant.title != blank and selected_variant.title != 'Default Title'
+											assign delivery_variant_title = selected_variant.title | replace: ' / ', ' - '
+											assign delivery_product_name = product.title | append: ' - ' | append: delivery_variant_title
+										endif
+									-%}
+									{{ 'products.product.delivery.modal.estimate_text_html' | t: product_name: delivery_product_name }}
+								</p>
+
+								<div class="product-delivery-modal__form">
+									<div class="field">
+										<input
+											type="text"
+											id="postal_code_{{ block.id }}"
+											name="postal_code"
+											class="field__input"
+											placeholder="{{ 'products.product.delivery.modal.postal_code_placeholder' | t }}"
+											required
+										>
+										<label for="postal_code_{{ block.id }}" class="field__label">
+											{{ 'products.product.delivery.modal.postal_code_label' | t }}
+										</label>
+									</div>
+									<button
+										type="button"
+										class="product-delivery-modal__form-button button button--secondary"
+									>
+										{{ 'products.product.delivery.modal.estimate_button' | t }}
+										{%- render 'loading-spinner' -%}
+									</button>
+								</div>
+
+								<div class="product-delivery-modal__results">
+									<!-- Les résultats de l'estimation apparaîtront ici -->
+								</div>
+							</product-delivery-estimator>
+						</div>
+
+						{%- comment -%} Options de livraison en grid {%- endcomment -%}
+						<div class="product-delivery-modal__options grid grid--1-col{% if delivery_options_count > 2 %} grid--3-col-desktop{% elsif delivery_options_count > 1 %} grid--2-col-desktop{% endif %}">
+							{%- comment -%} Afficher d'abord l'option principale {%- endcomment -%}
+							{%- if main_delivery -%}
+								<div class="grid__item product-delivery-info__content">
+									<div class="product-delivery-info__title">
+										{{ main_delivery.nom.value }}
+										{%- if main_delivery.prix.value != blank -%}
+											<span class="product-delivery-info__price">{{ main_delivery.prix.value }}</span>
+										{%- endif -%}
+									</div>
+									{%- if main_delivery.description.value != blank -%}
+										<div class="product-delivery-info__description rte">
+											{{ main_delivery.description | metafield_tag }}
+										</div>
+									{%- endif -%}
+								</div>
+							{%- endif -%}
+
+							{%- comment -%} Autres options (sans répéter la principale) {%- endcomment -%}
+							{%- for delivery in filtered_deliveries -%}
+								{%- liquid
+									# Vérifier si cette option est autorisée et n'est pas la principale
+									assign should_display = false
+									if is_petit_colis
+										if delivery.system.handle == 'livraison-express-a-domicile' or delivery.system.handle == 'livraison-en-point-relais'
+											assign should_display = true
+										endif
+									else
+										# Produits classiques : express + confort (+ premium si metafield)
+										if delivery.system.handle == 'livraison-express' or delivery.system.handle == 'livraison-confort'
+											assign should_display = true
+										elsif has_livraison_premium and delivery.system.handle == 'livraison-premium'
+											assign should_display = true
+										endif
+									endif
+
+									# Exclure l'option principale (déjà affichée)
+									if main_delivery and delivery.system.handle == main_delivery.system.handle
+										assign should_display = false
+									endif
+								-%}
+
+								{%- if should_display -%}
+									<div class="grid__item product-delivery-info__content">
+										<div class="product-delivery-info__title">
+											{{ delivery.nom.value }}
+											{%- if delivery.prix.value != blank -%}
+												<span class="product-delivery-info__price">{{ delivery.prix.value }}</span>
+											{%- endif -%}
+										</div>
+										{%- if delivery.description.value != blank -%}
+											<div class="product-delivery-info__description rte">
+												{{ delivery.description | metafield_tag }}
+											</div>
+										{%- endif -%}
+									</div>
+								{%- endif -%}
+							{%- endfor -%}
+						</div>
+
+						{%- comment -%} Lien CGV {%- endcomment -%}
+						{%- if block.settings.cgv_link_url != blank and block.settings.cgv_link_text != blank -%}
+							<div class="product-delivery-modal__footer">
+								<a
+									href="{{ block.settings.cgv_link_url }}"
+									class="delivery-modal__cgv-link ax-link reversed"
+									target="_blank"
+									rel="noopener"
+								>
+									{{ block.settings.cgv_link_text | escape }}
+								</a>
+							</div>
+						{%- endif -%}
+					</div>
+				</div>
+			</div>
+		</modal-dialog>
+	</div>
+{%- endif -%}

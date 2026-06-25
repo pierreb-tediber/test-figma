@@ -1,0 +1,276 @@
+{%- liquid
+	assign start_raw = section.settings.start_date | strip
+	assign end_raw = section.settings.countdown_end_date | strip
+	assign now_ts = 'now' | date: '%s' | plus: 0
+	assign is_product_page = false
+	if template.name == 'product'
+		assign is_product_page = true
+	endif
+
+	assign within_start = true
+	if start_raw != blank
+		assign start_ts = start_raw | date: '%s' | plus: 0
+		if now_ts < start_ts
+			assign within_start = false
+		endif
+	endif
+
+	assign finished = false
+	if end_raw != blank
+		assign end_ts = end_raw | date: '%s' | plus: 0
+		if now_ts >= end_ts
+			assign finished = true
+		endif
+	endif
+
+	assign should_render = false
+	if section.settings.enabled
+		if request.design_mode
+			assign should_render = true
+		elsif within_start
+			assign should_render = true
+			if finished and section.settings.hide_when_finished
+				assign should_render = false
+			endif
+		endif
+	endif
+
+	assign show_countdown = false
+	assign days = 0
+	assign hours = 0
+	assign minutes = 0
+	assign seconds = 0
+	assign under_72 = false
+
+	if end_raw != blank
+		assign show_countdown = true
+		assign diff = end_ts | minus: now_ts
+		if diff < 0
+			assign diff = 0
+		endif
+		if diff < 259200
+			assign under_72 = true
+		endif
+		assign days = diff | divided_by: 86400
+		if under_72
+			assign hours = diff | divided_by: 3600
+		else
+			assign hours = diff | modulo: 86400 | divided_by: 3600
+		endif
+		assign minutes = diff | modulo: 3600 | divided_by: 60
+		assign seconds = diff | modulo: 60
+	endif
+-%}
+
+{%- if should_render -%}
+{{ 'bundle.countdown-bar.css' | asset_url | stylesheet_tag }}
+
+<script>
+	window.assetsUrl.js.push({ countdownBar: "{{ 'bundle.countdown-bar.js' | asset_url }}" });
+</script>
+
+{%- style -%}
+	.section-{{ section.id }}-padding {
+	  padding-top: {{ section.settings.mob_padding_block }}px;
+	  padding-bottom: {{ section.settings.mob_padding_block }}px;
+	}
+
+	@media screen and (min-width: 750px) {
+	  .section-{{ section.id }}-padding {
+	    padding-top: {{ section.settings.padding_block }}px;
+	    padding-bottom: {{ section.settings.padding_block }}px;
+	  }
+	}
+{%- endstyle -%}
+
+{%- capture bar_styles -%}
+	{%- if section.settings.bg_color != blank %}--countdown-bar-bg: {{ section.settings.bg_color }};{% endif -%}
+	{%- if section.settings.text_color != blank %}--countdown-bar-color: {{ section.settings.text_color }};{% endif -%}
+{%- endcapture -%}
+
+<countdown-bar
+	class="countdown-bar section-{{ section.id }}-padding"
+	data-ax-section="countdownBar"
+	{% if show_countdown %}data-end="{{ end_raw }}" data-hide-when-finished="{{ section.settings.hide_when_finished }}"{% endif %}
+	{% if bar_styles != blank %}style="{{ bar_styles | strip }}"{% endif %}
+	{{ section.shopify_attributes }}
+>
+	<div class="countdown-bar__container page-width {% if is_product_page %}countdown-bar__container--product{% endif %}">
+		{%- if section.settings.text != blank -%}
+			<div class="countdown-bar__text{% if section.settings.text_font contains 'campagne_' %} countdown-bar__text--font-{{ section.settings.text_font | replace: '_', '-' }}{% endif %}">{{ section.settings.text }}</div>
+		{%- endif -%}
+
+		{%- if show_countdown -%}
+			<div class="countdown-bar__timer" data-countdown-timer>
+				<div class="countdown-bar__segment" data-days-segment{% if under_72 %} hidden{% endif %}>
+					<span class="countdown-bar__value" data-days>{% if days < 10 %}0{% endif %}{{ days }}</span>
+					<span class="countdown-bar__label">{{ section.settings.label_days }}</span>
+				</div>
+				<span class="countdown-bar__separator" data-days-separator aria-hidden="true"{% if under_72 %} hidden{% endif %}></span>
+				<div class="countdown-bar__segment">
+					<span class="countdown-bar__value" data-hours>{% if hours < 10 %}0{% endif %}{{ hours }}</span>
+					<span class="countdown-bar__label">{{ section.settings.label_hours }}</span>
+				</div>
+				<span class="countdown-bar__separator" aria-hidden="true"></span>
+				<div class="countdown-bar__segment">
+					<span class="countdown-bar__value" data-minutes>{% if minutes < 10 %}0{% endif %}{{ minutes }}</span>
+					<span class="countdown-bar__label">{{ section.settings.label_minutes }}</span>
+				</div>
+				<span class="countdown-bar__separator" aria-hidden="true"></span>
+				<div class="countdown-bar__segment">
+					<span class="countdown-bar__value" data-seconds>{% if seconds < 10 %}0{% endif %}{{ seconds }}</span>
+					<span class="countdown-bar__label">{{ section.settings.label_seconds }}</span>
+				</div>
+			</div>
+		{%- endif -%}
+	</div>
+</countdown-bar>
+{%- endif -%}
+
+{% schema %}
+	{
+		"name": "Ax countdown bar",
+		"tag": "section",
+		"class": "section",
+		"disabled_on": {
+			"groups": ["header", "footer"]
+		},
+		"settings": [
+			{
+				"type": "checkbox",
+				"id": "enabled",
+				"label": "Activer la section",
+				"default": true
+			},
+			{
+				"type": "header",
+				"content": "Contenu"
+			},
+			{
+				"type": "richtext",
+				"id": "text",
+				"label": "Texte",
+				"default": "<p>Profitez des <strong>offres limitées</strong></p>"
+			},
+			{
+				"type": "select",
+				"id": "text_font",
+				"label": "Police du texte",
+				"options": [
+					{
+						"value": "default",
+						"label": "Classique"
+					},
+					{
+						"value": "campagne_1",
+						"label": "Campagne 1"
+					},
+					{
+						"value": "campagne_2",
+						"label": "Campagne 2"
+					},
+					{
+						"value": "campagne_3",
+						"label": "Campagne 3"
+					},
+					{
+						"value": "campagne_4",
+						"label": "Campagne 4"
+					}
+				],
+				"default": "default"
+			},
+			{
+				"type": "header",
+				"content": "Compte à rebours"
+			},
+			{
+				"type": "text",
+				"id": "start_date",
+				"label": "Date de début d'affichage",
+				"info": "La section apparaît à partir de cette date. Laisser vide pour l'afficher immédiatement. Format ISO : YYYY-MM-DDTHH:MM:SS"
+			},
+			{
+				"type": "text",
+				"id": "countdown_end_date",
+				"label": "Date de fin",
+				"info": "Format ISO : YYYY-MM-DDTHH:MM:SS (ex. 2026-05-19T23:55:00). Laisser vide pour masquer le compte à rebours."
+			},
+			{
+				"type": "checkbox",
+				"id": "hide_when_finished",
+				"label": "Masquer la section à la fin du compte à rebours",
+				"default": true
+			},
+			{
+				"type": "text",
+				"id": "label_days",
+				"label": "Libellé jours",
+				"default": "Jours"
+			},
+			{
+				"type": "text",
+				"id": "label_hours",
+				"label": "Libellé heures",
+				"default": "Heures"
+			},
+			{
+				"type": "text",
+				"id": "label_minutes",
+				"label": "Libellé minutes",
+				"default": "Minutes"
+			},
+			{
+				"type": "text",
+				"id": "label_seconds",
+				"label": "Libellé secondes",
+				"default": "Secondes"
+			},
+			{
+				"type": "header",
+				"content": "Couleurs"
+			},
+			{
+				"type": "color",
+				"id": "bg_color",
+				"label": "Fond",
+				"default": "#ce5558"
+			},
+			{
+				"type": "color",
+				"id": "text_color",
+				"label": "Texte",
+				"default": "#ffffff"
+			},
+			{
+				"type": "header",
+				"content": "Épaisseur (padding vertical)"
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_block",
+				"min": 0,
+				"max": 60,
+				"step": 2,
+				"unit": "px",
+				"label": "(Mobile) Padding vertical",
+				"default": 12
+			},
+			{
+				"type": "range",
+				"id": "padding_block",
+				"min": 0,
+				"max": 60,
+				"step": 2,
+				"unit": "px",
+				"label": "Padding vertical",
+				"default": 12
+			}
+		],
+		"presets": [
+			{
+				"name": "Ax countdown bar"
+			}
+		]
+	}
+{% endschema %}

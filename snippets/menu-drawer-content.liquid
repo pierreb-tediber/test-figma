@@ -1,0 +1,248 @@
+{%- for link in section.settings.menu.links -%}
+  {%- liquid
+    assign link_title = link.title | handle
+    assign current_block = blank
+
+    for block in section.blocks
+      if block.type != 'push-global'
+        assign block_title = block.settings.title | handle
+        if block_title == link_title
+          assign current_block = block
+          break
+        endif
+      endif
+    endfor
+
+    if current_block != blank
+      assign link_color = current_block.settings.color
+    endif
+
+    assign current_block_has_push = false
+    assign current_block_type = current_block.type
+    assign current_block_type_class = 'menu-drawer__content__wrapper--info'
+
+    if current_block != blank and current_block.settings.image_1 != blank or current_block != blank and current_block.settings.image_2 != blank
+      assign current_block_has_push = true
+      assign current_block_type_class = current_block_type_class | append: ' menu-drawer__content__wrapper--push'
+    endif
+
+    if current_block_type == 'mega-menu-products'
+      assign current_block_type_class = 'menu-drawer__content__wrapper--products'
+    endif
+
+    echo current_block_type | json
+  -%}
+
+  <li>
+    {%- if link.links != blank -%}
+      <details id="Details-menu-drawer-menu-item-{{ forloop.index }}">
+        <summary
+          id="HeaderDrawer-{{ link.handle }}"
+          class="menu-drawer__menu-item menu-drawer__menu-item--level-1 list-menu__item link link--text focus-inset{% if link_color != blank %} modified{% endif %}"
+        >
+          {{ link.title | escape }}
+          {%- render 'menu-mobile-badge', block: current_block -%}
+          <span class="svg-wrapper">
+            {{- 'icon-caret.svg' | inline_asset_content -}}
+          </span>
+        </summary>
+        <div
+          id="link-{{ link.handle | escape }}"
+          class="menu-drawer__submenu has-submenu gradient motion-reduce"
+          tabindex="-1"
+        >
+          <div class="menu-drawer__inner-submenu">
+            <button
+              class="menu-drawer__close-button link link--text focus-inset h6"
+              aria-expanded="true"
+            >
+              <span class="svg-wrapper">
+                {{- 'icon-arrow.svg' | inline_asset_content -}}
+              </span>
+              {{ link.title | escape }}
+            </button>
+            <div class="menu-drawer__content__wrapper {{ current_block_type_class }}">
+              {%- if current_block_type == 'mega-menu-products' -%}
+                <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
+                  {% liquid
+                    assign products_to_show = 5
+                    if current_block.settings.link_list != blank
+                      assign products_to_show = products_to_show | minus: 1
+                    endif
+                    if current_block.settings.image_1 != blank
+                      assign products_to_show = products_to_show | minus: 1
+                    endif
+                    if current_block.settings.image_2 != blank
+                      assign products_to_show = products_to_show | minus: 1
+                    endif
+                    if current_block.settings.layout_type == 'old'
+                      assign products_to_show = 6
+                    endif
+                  %}
+
+                  {%- for product in current_block.settings.product_list limit: products_to_show -%}
+                    {%- liquid
+                      # Vérifie si le produit est masqué via metafield seo.hidden
+                      if product.metafields.seo.hidden.value == 1
+                        continue
+                      endif
+                    -%}
+                    <li>
+                      {% render 'card-product',
+                        card_product: product,
+                        media_aspect_ratio: 'portrait',
+                        image_shape: 'default',
+                        show_secondary_image: true,
+                        show_vendor: false,
+                        show_rating: false,
+                        lazy_load: true,
+                        skip_styles: true,
+                        quick_add: 'none',
+                        section_id: section.id,
+                        horizontal_class: true,
+                        horizontal_layout_menu: true,
+                        horizontal_quick_add: true,
+                        hide_color_swatches: true,
+                        claims_position: 'horizontal',
+                        show_menu_image: true,
+												show_trustpilot: true,
+                        hide_offer_countdown: true
+                      %}
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              {%- else -%}
+                <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
+                  {%- for childlink in link.links -%}
+                    <li>
+                      <a
+                        id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}"
+                        href="{{ childlink.url }}"
+                        class="menu-drawer__menu-item menu-drawer__menu-item--level-2 link link--text list-menu__item focus-inset{% if childlink.links != blank %} menu-drawer__menu-item--has-submenu{% endif %}"
+                        {% if childlink.current %}
+                          aria-current="page"
+                        {% endif %}
+                      >
+                        {{ childlink.title | escape }}
+                      </a>
+                      {%- if childlink.links != blank -%}
+                        <ul
+                          class="menu-drawer__menu list-menu menu-drawer__menu--level-2"
+                          role="list"
+                          tabindex="-1"
+                        >
+                          {%- for grandchildlink in childlink.links -%}
+                            <li>
+                              <a
+                                id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
+                                href="{{ grandchildlink.url }}"
+                                class="menu-drawer__menu-item menu-drawer__menu-item--level-3 link link--text list-menu__item focus-inset"
+                                {% if grandchildlink.current %}
+                                  aria-current="page"
+                                {% endif %}
+                              >
+                                {{ grandchildlink.title | escape }}
+                              </a>
+                            </li>
+                          {%- endfor -%}
+                        </ul>
+                      {%- endif -%}
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+            </div>
+            {%- if current_block != blank -%}
+              <div class="menu-drawer__link-item">
+                {%- if current_block.settings.link_url != blank and current_block.settings.link_text != blank -%}
+                  {%- render 'link-style',
+                    link_label: current_block.settings.link_text,
+                    link_url: current_block.settings.link_url,
+                    link_full_unstyled: false,
+                    link_style: 'ax-link reversed'
+                  -%}
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+            {%- if current_block != blank and current_block.settings.compare_text != blank -%}
+              <div class="menu-drawer__compare">
+                {%- render 'link-style',
+                  link_label: current_block.settings.compare_text,
+                  link_url: current_block.settings.compare_url,
+                  link_full_unstyled: false,
+                  link_style: 'button button--primary button--full-width'
+                -%}
+              </div>
+            {%- endif -%}
+
+            {%- if current_block.settings.link_list != blank and current_block.settings.layout_type == 'new' -%}
+              <li class="mega-menu__list__item--links">
+                <ul class="list-unstyled" role="list">
+                  {%- for link in current_block.settings.link_list.links -%}
+                    <li>
+                      <a href="{{ link.url }}" class="mega-menu__link h5">{{ link.title }}</a>
+                    </li>
+                    <ul>
+                      {% for childlink in link.links %}
+                        <li>
+                          <a href="{{ childlink.url }}" class="mega-menu__link link">{{ childlink.title }}</a>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  {%- endfor -%}
+                </ul>
+              </li>
+            {%- endif -%}
+
+            {%- if current_block_has_push -%}
+              {%- if current_block.settings.image_1 != blank -%}
+                {%- render 'menu-push',
+                  block: current_block,
+                  push_color_scheme: current_block.settings.push_color_scheme,
+                  push_opacity: current_block.settings.push_opacity_1,
+                  image: current_block.settings.image_1,
+                  video: current_block.settings.video_1,
+                  title: current_block.settings.title_push_1,
+                  description: current_block.settings.description_push_1,
+                  url_text: current_block.settings.url_text_1,
+                  url: current_block.settings.url_1,
+                  link_style: current_block.settings.link_style,
+                  position: 'mobile-center'
+                -%}
+              {%- endif -%}
+              {% comment %}
+                {%- if current_block.settings.image_2 != blank and current_block.settings.layout_type == 'new' -%}
+                	{%- render 'menu-push',
+                		block: current_block,
+                		push_color_scheme: current_block.settings.push_color_scheme,
+                		push_opacity: current_block.settings.push_opacity_2,
+                		image: current_block.settings.image_2,
+                		video: current_block.settings.video_2,
+                		title: current_block.settings.title_push_2,
+                		description: current_block.settings.description_push_2,
+                		url_text: current_block.settings.url_text_2,
+                		url: current_block.settings.url_2,
+                		link_style: current_block.settings.link_style,
+                		position: 'mobile-center'
+                	-%}
+                {%- endif -%}
+              {% endcomment %}
+            {%- endif -%}
+          </div>
+        </div>
+      </details>
+    {%- else -%}
+      <a
+        id="HeaderDrawer-{{ link.handle }}"
+        href="{{ link.url }}"
+        class="menu-drawer__menu-item menu-drawer__menu-item--level-1 list-menu__item link link--text focus-inset{% if link_color != blank %} modified{% endif %}"
+        {% if link.current %}
+          aria-current="page"
+        {% endif %}
+      >
+        {{ link.title | escape }}
+        {%- render 'menu-mobile-badge', block: current_block -%}
+      </a>
+    {%- endif -%}
+  </li>
+{%- endfor -%}

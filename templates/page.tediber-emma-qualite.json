@@ -1,0 +1,669 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_content": false,
+        "custom_h1": "",
+        "h1_size": "h1",
+        "h1_no_margin": false,
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "ax_heading_Ufnqqj": {
+      "type": "ax-heading",
+      "name": "Ax heading",
+      "settings": {
+        "heading": "<p>Tediber ou Emma : comparatif des critères qualité</p>",
+        "heading_size": "h2",
+        "heading_first": false,
+        "subheading": "RELEVÉ DES DONNÉES",
+        "description": "",
+        "full_width": false,
+        "text_alignment": "center",
+        "color_scheme": "",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 32,
+        "padding_top": 96,
+        "padding_bottom": 64
+      }
+    },
+    "ax_richtext_xYyipe": {
+      "type": "ax-richtext",
+      "blocks": {
+        "text_highlight_begiKb": {
+          "type": "text_highlight",
+          "settings": {
+            "text": "<p>Cette page centralise les preuves reliées aux critères qualité dans le cadre du comparateur <a href=\"https://www.tediber.com/pages/matelas-hybride-vs-emma\" title=\"https://www.tediber.com/pages/matelas-hybride-vs-emma\">Tediber ou Emma</a>.</p>",
+            "text_alignment": "left"
+          }
+        },
+        "text_3qKLMM": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Elle vise à garantir la transparence des informations présentées, documenter les sources et les données utilisées et conserver une trace datée des éléments observés au moment de l’<a href=\"https://www.tediber.com/pages/matelas-hybride-vs-emma\" title=\"https://www.tediber.com/pages/matelas-hybride-vs-emma\">analyse</a>. <br/><br/>Toutes les données présentées dans ce rapport sont accompagnées de captures horodatées.<br/><br/>Date de mise à jour : 20/03/2026</p>",
+            "text_alignment": "left"
+          }
+        },
+        "picto_K7PDjF": {
+          "type": "picto",
+          "settings": {
+            "picto": "shopify://shop_images/bulb-white.svg",
+            "picto_size": 136,
+            "picto_size_mobile": 112,
+            "picto_position": "left"
+          }
+        }
+      },
+      "block_order": [
+        "text_highlight_begiKb",
+        "text_3qKLMM",
+        "picto_K7PDjF"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": true,
+        "color_scheme": "scheme-1",
+        "color_scheme_container": "scheme-3",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 16,
+        "mob_padding_bottom_content": 16,
+        "mob_padding_left_content": 16,
+        "mob_padding_right_content": 16,
+        "padding_top_content": 48,
+        "padding_bottom_content": 48,
+        "padding_left_content": 112,
+        "padding_right_content": 112,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "ax_richtext_MGnUp3": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_HCx49C": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>MÉTHODOLOGIE</p>",
+            "heading_size": "h2",
+            "heading_alignment": "left"
+          }
+        },
+        "text_jepWdn": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Cette page a pour objectif de présenter, de manière factuelle et transparente, les différences et les similitudes entre les matelas <a href=\"https://www.tediber.com/collections/matelas\" title=\"https://www.tediber.com/collections/matelas\">des gammes Tediber </a>et Emma. Il doit permettre une lecture claire des critères qualité (avis, fabrication, réparabilité...) à partir de données vérifiables et datées. <strong>L’ambition est d’apporter une information objectivée afin de faciliter la compréhension et la prise de décision, sans altération des éléments publiquement accessibles au moment du relevé.<br/><br/></strong>Les modèles sélectionnés sont des matelas 140 × 200 cm des <a href=\"https://www.tediber.com/collections/matelas\" title=\"https://www.tediber.com/collections/matelas\">gammes Tediber</a> (Hybride, Hybride Premium, Hybride Infinite) et Emma (Original Lite, Original, Original Pro) qui correspondent à un positionnement de gamme comparable au sein des deux marques (niveau de technologie, promesse de confort, segment tarifaire...). Cette cohérence de positionnement vise à garantir une comparaison pertinente, équilibrée et fondée sur des produits s’adressant à une cible et à un niveau de prestation similaires.</p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_HCx49C",
+        "text_jepWdn"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": true,
+        "color_scheme": "scheme-1",
+        "color_scheme_container": "scheme-1",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 48,
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "rich_text_hc8n63": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_rB3iYB": {
+          "type": "heading",
+          "settings": {
+            "heading": "RELEVÉ DES CRITÈRES QUALITÉ",
+            "heading_size": "h2"
+          }
+        },
+        "text_iqXfKF": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Les critères de qualité présentés dans ce comparatif ont été vérifiés directement sur le site officiel de la marque Emma et sur celui de la <a href=\"https://www.tediber.com/collections/matelas\" title=\"https://www.tediber.com/collections/matelas\">marque Tediber</a> afin de s’assurer de la fiabilité et de l’exactitude des informations collectées.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_rB3iYB",
+        "text_iqXfKF"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-3",
+        "full_width": true,
+        "padding_top_desktop": 96,
+        "padding_bottom_desktop": 96
+      }
+    },
+    "multicolumn_BA4TpR": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_Hi8qXr": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/avis_hybride.png",
+            "title": "",
+            "text": "<p>AVIS<br/><strong>4.6/5 SUR 30 097 AVIS<br/><br/></strong>DATE <br/><strong>27/02/2026</strong></p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_aEwNyL": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/avis_hybride_premium.png",
+            "title": "",
+            "text": "<p>AVIS<br/><a href=\"https://www.tediber.com/pages/avis-matelas-hybride\" title=\"https://www.tediber.com/pages/avis-matelas-hybride\"><strong>4.5/5 SUR 1555 AVIS</strong></a><strong><br/><br/></strong>DATE <br/><strong>27/02/2026</strong></p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_EnRWWx": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/avis_hybride_infinite.png",
+            "title": "",
+            "text": "<p>AVIS<br/><strong>5/5 SUR 4 AVIS<br/><br/></strong>DATE<br/><strong>27/02/2026</strong></p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_Hi8qXr",
+        "column_aEwNyL",
+        "column_EnRWWx"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "AVIS DES MATELAS TEDIBER",
+        "heading_size": "h2",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "shopify://collections/matelas",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "primary",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "multicolumn_np7zCq": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_PPY6xf": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/avis_lite.png",
+            "title": "",
+            "text": "<p>ORIGINAL LITE<br/><strong>4.2/5 SUR 251 AVIS<br/><br/></strong>DATE<br/><strong>27/02/2026</strong></p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_yctfcU": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/avis_original.png",
+            "title": "",
+            "text": "<p>ORIGINAL<br/><strong>4.4/5 SUR 2449 AVIS<br/><br/></strong>DATE<br/><strong>27/02/2026</strong></p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_Qw9zTC": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/avis_original_pro.png",
+            "title": "",
+            "text": "<p>ORIGINAL PRO<br/><strong>4.1/5 SUR 265 AVIS<br/><br/></strong>DATE<br/><strong>27/02/2026</strong></p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_PPY6xf",
+        "column_yctfcU",
+        "column_Qw9zTC"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "AVIS des MATELAS emma",
+        "heading_size": "h2",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "shopify://products/matelas-hybride-premium",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "primary",
+        "color_scheme": "scheme-2",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "ax_image_with_text_ChAnPQ": {
+      "type": "ax-image-with-text",
+      "blocks": {
+        "subheading_nrtB6E": {
+          "type": "subheading",
+          "settings": {
+            "subheading": ""
+          }
+        },
+        "heading_ePx7ML": {
+          "type": "heading",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "heading": "<p>lieu de fabrication des matelas Tediber</p>",
+            "heading_size": "h2"
+          }
+        },
+        "text_bKp9wN": {
+          "type": "text",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "text": "<p>Le lieu de fabrication des matelas Tediber est indiqué comme étant situé en France et en Europe. Cette donnée a été relevée le <strong>26/02/2026</strong>. Cette information est publiquement accessible sur le site officiel ainsi que sur les pages produits des trois modèles concernés : <a href=\"https://www.tediber.com/products/matelas-hybride\" title=\"https://www.tediber.com/products/matelas-hybride\">matelas Hybride</a>, <a href=\"https://www.tediber.com/products/matelas-hybride-premium\" title=\"https://www.tediber.com/products/matelas-hybride-premium\">matelas Hybride Premium</a> et <a href=\"https://www.tediber.com/products/matelas-hybride-infinite\" title=\"https://www.tediber.com/products/matelas-hybride-infinite\">matelas Hybride Infinite</a>. Les éléments mentionnés ont été relevés directement sur ces pages et font l’objet de captures justificatives afin d’en garantir la traçabilité.</p>",
+            "description_hn_replace": false,
+            "show_more": false,
+            "text_max_lines": 10,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center"
+          }
+        },
+        "button_TqJYiU": {
+          "type": "button",
+          "settings": {
+            "button_text": "",
+            "button_link": "",
+            "link_blank": false,
+            "link_style": "button button--primary",
+            "button_alignment": ""
+          }
+        }
+      },
+      "block_order": [
+        "subheading_nrtB6E",
+        "heading_ePx7ML",
+        "text_bKp9wN",
+        "button_TqJYiU"
+      ],
+      "name": "Ax Image with text",
+      "settings": {
+        "full_width": false,
+        "text_alignment": "left",
+        "no_vertical_padding": false,
+        "image": "shopify://shop_images/avis_tediber.png",
+        "image_mobile": "shopify://shop_images/tediber_savoir-faire.png",
+        "image_restricted_width": true,
+        "image_adapted_height_with_content": false,
+        "contain_image": true,
+        "layout": "text_first",
+        "mobile_layout": "image_first",
+        "overlay": true,
+        "overlay_opacity": 0,
+        "section_color_scheme": "scheme-1",
+        "color_scheme": "scheme-1",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "ax_image_with_text_xTjMTd": {
+      "type": "ax-image-with-text",
+      "blocks": {
+        "subheading_FANb6t": {
+          "type": "subheading",
+          "settings": {
+            "subheading": ""
+          }
+        },
+        "heading_JJNagE": {
+          "type": "heading",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "heading": "<p>lieu de fabrication des matelas Emma</p>",
+            "heading_size": "h2"
+          }
+        },
+        "text_fWGUpy": {
+          "type": "text",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "text": "<p>Le lieu de fabrication des matelas Tediber est indiqué comme étant situé en France et en Europe. Cette donnée a été relevée le <strong>26/02/2026</strong>. Cette information est publiquement accessible sur le site officiel ainsi que sur les pages produits des trois modèles concernés : <a href=\"https://www.tediber.com/products/matelas-hybride\" title=\"https://www.tediber.com/products/matelas-hybride\">matelas Hybride</a>, <a href=\"https://www.tediber.com/products/matelas-hybride-premium\" title=\"https://www.tediber.com/products/matelas-hybride-premium\">matelas Hybride Premium</a> et <a href=\"https://www.tediber.com/products/matelas-hybride-infinite\" title=\"https://www.tediber.com/products/matelas-hybride-infinite\">matelas Hybride Infinite</a>. Les éléments mentionnés ont été relevés directement sur ces pages et font l’objet de captures justificatives afin d’en garantir la traçabilité.</p>",
+            "description_hn_replace": false,
+            "show_more": false,
+            "text_max_lines": 10,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center"
+          }
+        },
+        "button_fU6YHg": {
+          "type": "button",
+          "settings": {
+            "button_text": "",
+            "button_link": "",
+            "link_blank": false,
+            "link_style": "button button--primary",
+            "button_alignment": ""
+          }
+        }
+      },
+      "block_order": [
+        "subheading_FANb6t",
+        "heading_JJNagE",
+        "text_fWGUpy",
+        "button_fU6YHg"
+      ],
+      "name": "Ax Image with text",
+      "settings": {
+        "full_width": false,
+        "text_alignment": "left",
+        "no_vertical_padding": false,
+        "image": "shopify://shop_images/emma_chat_lieu_fabrication_desktop.png",
+        "image_mobile": "shopify://shop_images/emma_chat_lieu_fabrication_mobile_01.png",
+        "image_restricted_width": true,
+        "image_adapted_height_with_content": false,
+        "contain_image": true,
+        "layout": "text_first",
+        "mobile_layout": "image_first",
+        "overlay": true,
+        "overlay_opacity": 0,
+        "section_color_scheme": "scheme-2",
+        "color_scheme": "scheme-2",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "ax_image_with_text_WmA96P": {
+      "type": "ax-image-with-text",
+      "blocks": {
+        "subheading_RVagBp": {
+          "type": "subheading",
+          "settings": {
+            "subheading": ""
+          }
+        },
+        "heading_YQwLT8": {
+          "type": "heading",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "heading": "<p>Réparabilité des matelas Tediber</p>",
+            "heading_size": "h2"
+          }
+        },
+        "text_4JwYTF": {
+          "type": "text",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "text": "<p>La mention <strong>“1er matelas réparable” est publiquement accessible sur le site officiel </strong>ainsi que sur les pages produits des trois modèles concernés : <a href=\"https://www.tediber.com/products/matelas-hybride\" title=\"https://www.tediber.com/products/matelas-hybride\">matelas Hybride</a>, <a href=\"https://www.tediber.com/products/matelas-hybride-premium\" title=\"https://www.tediber.com/products/matelas-hybride-premium\">matelas Hybride Premium</a> et <a href=\"https://www.tediber.com/products/matelas-hybride-infinite\" title=\"https://www.tediber.com/products/matelas-hybride-infinite\">matelas Hybride Infinite</a>.. Cette donnée a été relevée le <strong>27/02/2026</strong>. <br/><br/>Les éléments mentionnés ont été relevés directement sur ces pages et font l’objet de captures justificatives afin d’en garantir la traçabilité.</p>",
+            "description_hn_replace": false,
+            "show_more": false,
+            "text_max_lines": 10,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center"
+          }
+        },
+        "button_VHHmxq": {
+          "type": "button",
+          "settings": {
+            "button_text": "",
+            "button_link": "",
+            "link_blank": false,
+            "link_style": "button button--primary",
+            "button_alignment": ""
+          }
+        }
+      },
+      "block_order": [
+        "subheading_RVagBp",
+        "heading_YQwLT8",
+        "text_4JwYTF",
+        "button_VHHmxq"
+      ],
+      "name": "Ax Image with text",
+      "settings": {
+        "full_width": false,
+        "text_alignment": "left",
+        "no_vertical_padding": false,
+        "image": "shopify://shop_images/tediber_reparabilite_desktop.png",
+        "image_mobile": "shopify://shop_images/tediber_reparabilite.png",
+        "image_restricted_width": true,
+        "image_adapted_height_with_content": false,
+        "contain_image": true,
+        "layout": "text_first",
+        "mobile_layout": "image_first",
+        "overlay": true,
+        "overlay_opacity": 0,
+        "section_color_scheme": "scheme-1",
+        "color_scheme": "scheme-1",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "ax_image_with_text_rQG9Fr": {
+      "type": "ax-image-with-text",
+      "blocks": {
+        "subheading_wpcryc": {
+          "type": "subheading",
+          "settings": {
+            "subheading": ""
+          }
+        },
+        "heading_MAXGib": {
+          "type": "heading",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "heading": "<p>Réparabilité des matelas Emma</p>",
+            "heading_size": "h2"
+          }
+        },
+        "text_8EHh4Y": {
+          "type": "text",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "text": "<p>Afin d’identifier si les matelas de la marque Emma sont réparables, une demande explicite a été adressée à l’assistant IA disponible sur le site officiel d’Emma le <strong>27/02/2026</strong>. <br/><br/>La réponse fournie correspond aux informations communiquées publiquement via cet outil au moment de l’échange. Une capture horodatée de la conversation a été réalisée afin d’en garantir la traçabilité et l’exactitude.</p>",
+            "description_hn_replace": false,
+            "show_more": false,
+            "text_max_lines": 10,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center"
+          }
+        },
+        "button_q6z8nQ": {
+          "type": "button",
+          "settings": {
+            "button_text": "",
+            "button_link": "",
+            "link_blank": false,
+            "link_style": "button button--primary",
+            "button_alignment": ""
+          }
+        }
+      },
+      "block_order": [
+        "subheading_wpcryc",
+        "heading_MAXGib",
+        "text_8EHh4Y",
+        "button_q6z8nQ"
+      ],
+      "name": "Ax Image with text",
+      "settings": {
+        "full_width": false,
+        "text_alignment": "left",
+        "no_vertical_padding": false,
+        "image": "shopify://shop_images/emma_reparabilite_desktop_01.png",
+        "image_mobile": "shopify://shop_images/emma_chat_lieu_reparabilite_01.png",
+        "image_restricted_width": true,
+        "image_adapted_height_with_content": false,
+        "contain_image": true,
+        "layout": "text_first",
+        "mobile_layout": "image_first",
+        "overlay": true,
+        "overlay_opacity": 0,
+        "section_color_scheme": "scheme-2",
+        "color_scheme": "scheme-2",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "image_with_text_miHXLg": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_ymgyFt": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>Choisir Tediber, c’est choisir la meilleure qualité de matelas.</strong>",
+            "heading_size": "h2"
+          }
+        },
+        "text_PgHCqJ": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Pour un écart de prix relativement faible entre les modèles comparables, Tediber se distingue par une qualité clairement supérieure. <br/><br/><a href=\"https://www.tediber.com/pages/fabrication-francaise\" title=\"https://www.tediber.com/pages/fabrication-francaise\"><strong>Fabriqués en France</strong></a>, les matelas Tediber bénéficient d’un savoir-faire de <strong>plus de 10 ans</strong> et respectent des normes de fabrication très strictes. Chaque matelas est conçu avec des <strong>matériaux haut de gamme</strong>. Choisir Tediber, c’est opter pour un matelas au design abouti, durable et fabriqué localement, offrant un <strong>excellent rapport qualité-prix. </strong></p>",
+            "text_style": "body"
+          }
+        },
+        "button_p9Mt3q": {
+          "type": "button",
+          "settings": {
+            "button_label": "Découvrir les matelas Tediber",
+            "button_link": "shopify://collections/matelas",
+            "button_style_secondary": true
+          }
+        }
+      },
+      "block_order": [
+        "heading_ymgyFt",
+        "text_PgHCqJ",
+        "button_p9Mt3q"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/matelas-hybride-infinite_lifestyle.jpg",
+        "height": "medium",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "scheme-3",
+        "color_scheme": "scheme-3",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "ax_product_lists_MJW9GJ": {
+      "type": "ax-product-lists",
+      "blocks": {
+        "product_list_LDixKp": {
+          "type": "product-list",
+          "settings": {
+            "title": "DÉCOUVREZ LES MATELAS TEDIBER",
+            "collection": "",
+            "product_list": [
+              "matelas-hybride-premium",
+              "matelas-hybride",
+              "matelas-hybride-infinite",
+              "matelas-signature",
+              "pack-lit-2-places-hybride-plus",
+              "pack-lit-2-places-hybride"
+            ],
+            "products_to_show": 5,
+            "button_text": "",
+            "button_link": "",
+            "link_style": "button button--primary"
+          }
+        }
+      },
+      "block_order": [
+        "product_list_LDixKp"
+      ],
+      "name": "Ax product lists",
+      "settings": {
+        "surtitle": "GAMME TEDIBER",
+        "description": "",
+        "image_ratio": "square",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": true,
+        "quick_add": "none",
+        "color_scheme": "",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 48,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    }
+  },
+  "order": [
+    "main",
+    "ax_heading_Ufnqqj",
+    "ax_richtext_xYyipe",
+    "ax_richtext_MGnUp3",
+    "rich_text_hc8n63",
+    "multicolumn_BA4TpR",
+    "multicolumn_np7zCq",
+    "ax_image_with_text_ChAnPQ",
+    "ax_image_with_text_xTjMTd",
+    "ax_image_with_text_WmA96P",
+    "ax_image_with_text_rQG9Fr",
+    "image_with_text_miHXLg",
+    "ax_product_lists_MJW9GJ"
+  ]
+}

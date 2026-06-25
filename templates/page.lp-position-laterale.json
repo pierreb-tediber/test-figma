@@ -1,0 +1,586 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "custom_liquid_C6wrER": {
+      "type": "custom-liquid",
+      "name": "Hero_section",
+      "settings": {
+        "custom_liquid": "<style>\n  .percale-hero {\n    background-color: #000B26;\n    color: #FFF;\n    font-family: Obviously, sans-serif;\n    display: flex;\n    flex-direction: column;\n    padding: 32px 20px;\n  }\n\n  @media (min-width: 1024px) {\n    .percale-hero {\n      flex-direction: row;\n      align-items: center;\n      justify-content: space-between;\n      padding: 80px 60px;\n    }\n  }\n\n  .percale-hero-left {\n    max-width: 620px;\n    display: flex;\n    flex-direction: column;\n    gap: 24px;\n  }\n\n  .percale-hero-title {\n    color: #FFF;\n    font-family: Obviously, sans-serif;\n    font-size: var(--font-size-xl2, 48px);\n    font-weight: 600;\n    line-height: var(--font-line-height-xl, 56px);\n    text-transform: uppercase;\n    margin-bottom: 0;\n  }\n\n  @media (max-width: 767px) {\n    .percale-hero-title {\n      font-size: 40px;\n      line-height: 44px;\n    }\n  }\n\n  .percale-hero-subtitle {\n    font-size: 16px;\n    font-weight: 700;\nline-height:20px;\n    text-transform: uppercase;\n    letter-spacing: -0.3px;\n    margin-top: -12px;\n    font-family: 'Obviously', sans-serif;\n  }\n\n  .percale-hero-box {\n    background-color: #FFF8F2;\n    color: #000B26;\n    padding: 24px;\n    border-radius: 8px;\n    margin-top: 16px;\n    display: flex;\n    flex-direction: column;\n    gap: 16px;\n    max-width: 100%;\n  }\n\n  .percale-hero-box p {\n    font-size: 16px;\n    line-height: 1.5;\n    margin: 0;\n  }\n\n  .percale-hero-box strong {\n    font-weight: 700;\n  }\n\n  .percale-hero-box a {\n    background-color: #000B26;\n    color: #FFF;\n    font-size: 16px;\n    font-weight: 700;\n    font-family: 'Obviously Narrow Bold', sans-serif;\n    height: 48px;\n    padding: 0 24px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    border-radius: 10px;\n    text-decoration: none;\n    width: fit-content;\n  }\n\n  .percale-hero-image {\n    margin-top: 40px;\n  }\n\n  @media (min-width: 1024px) {\n    .percale-hero-image {\n      margin-top: 0;\n      max-width: 50%;\n      padding-left: 40px;\n    }\n  }\n\n  .percale-hero-image img {\n    width: 100%;\n    height: auto;\n    border-radius: 0;\n    display: block;\n  }\n</style>\n\n<section class=\"percale-hero\">\n  <div class=\"percale-hero-left\">\n    <h2 class=\"percale-hero-title\"> DORMIR SUR LE CÔTÉ SANS GÊNE DE CONFORT ?\n </h2>\n    <p class=\"percale-hero-subtitle\">NOUS AVONS LA SOLUTION !&nbsp;</p>\n    <div class=\"percale-hero-box\">\n      <p>Choisissez un matelas adapté à votre position qui maintient vos épaules et vos hanches pour un confort idéal.\n</p>\n      <a href=\"/collections/linge-de-lit\">Découvrir la solution\n</a>\n    </div>\n  </div>\n  <div class=\"percale-hero-image\">\n       <img src=\"https://cdn.shopify.com/s/files/1/0903/1342/5220/files/lp_position_lateral_confort_dos_matelas.png?v=1752175348\">\n  </div>\n</section>",
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_content": false,
+        "custom_h1": "",
+        "h1_size": "h1",
+        "h1_no_margin": false,
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "ax_image_with_text_Uic6bV": {
+      "type": "ax-image-with-text",
+      "blocks": {
+        "heading_Mt8Tiw": {
+          "type": "heading",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "heading": "<p>LOREM IPSUM DOLOR</p>",
+            "heading_size": "h2"
+          }
+        },
+        "text_tqAUVX": {
+          "type": "text",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "text": "<p>Lorem ipsum dolor sit amet consectetur. Turpis in in leo velit turpis at. Sed vivamus amet elementum lobortis pretium enim elit volutpat dignissim. Diam sit non amet at ipsum. In faucibus amet nulla amet. </p>",
+            "description_hn_replace": false,
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "heading_Mt8Tiw",
+        "text_tqAUVX"
+      ],
+      "settings": {
+        "full_width": true,
+        "text_alignment": "left",
+        "no_vertical_padding": false,
+        "image_restricted_width": false,
+        "image_adapted_height_with_content": false,
+        "contain_image": false,
+        "layout": "image_first",
+        "mobile_layout": "image_first",
+        "overlay": true,
+        "overlay_opacity": 0.2,
+        "section_color_scheme": "",
+        "color_scheme": "scheme-2",
+        "padding_top": 0,
+        "padding_bottom": 48
+      }
+    },
+    "ax_text_with_cards_QjAWpz": {
+      "type": "ax-text-with-cards",
+      "blocks": {
+        "card_pRWFmK": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/lp_position_laterale_matelas_ferme.png",
+            "title": "Un matelas trop ferme",
+            "description": "<p><strong>QUELS IMPACTS ?</strong></p><p>- Épaules et hanches compressées<br/>- Répartition inégale du corps<br/>- Courbatures au réveil</p>",
+            "color_scheme": "scheme-1"
+          }
+        },
+        "card_PibQEQ": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/lp_position_laterale_matelas_mou.png",
+            "title": "Un matelas trop mou",
+            "description": "<p><strong>QUELS IMPACTS ?<br/></strong><br/>- Colonne vertébrale non alignée <br/>- Affaissement du bassin<br/>- Tensions musculaires au réveil</p>",
+            "color_scheme": "scheme-1"
+          }
+        }
+      },
+      "block_order": [
+        "card_pRWFmK",
+        "card_PibQEQ"
+      ],
+      "name": "Ax text with cards",
+      "settings": {
+        "heading": "<p><strong>MON MATELAS EST-IL ADAPTÉ À MA POSITION ?</strong></p>",
+        "subheading": "VOUS ÊTES-VOUS DÉJÀ DEMANDÉ :",
+        "description": "<p>En dormant sur le côté, vos épaules et vos hanches supportent la majeure partie de votre poids. Un matelas inadapté peut donc accentuer l’inconfort, forcer une mauvaise position de sommeil <br/>et provoquer des douleurs :</p>",
+        "color_scheme": "scheme-2",
+        "mob_padding_top": 32,
+        "mob_padding_bottom": 32,
+        "padding_top": 48,
+        "padding_bottom": 48,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "image_with_text_iGcqPD": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_GBWen4": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>testez le matelas au confort idéal</strong>",
+            "heading_size": "h2"
+          }
+        },
+        "text_Eh96ag": {
+          "type": "text",
+          "settings": {
+            "text": "",
+            "text_style": "body"
+          }
+        },
+        "button_rGtrR6": {
+          "type": "button",
+          "settings": {
+            "button_label": "Découvrir le matelas Hybride",
+            "button_link": "shopify://products/matelas-hybride",
+            "button_style_secondary": true
+          }
+        }
+      },
+      "block_order": [
+        "heading_GBWen4",
+        "text_Eh96ag",
+        "button_rGtrR6"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/lp_matelas_hybride_confort_equilibre_fermete.png",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "center",
+        "mobile_content_alignment": "center",
+        "section_color_scheme": "scheme-1",
+        "color_scheme": "scheme-3",
+        "padding_top": 32,
+        "padding_bottom": 32
+      }
+    },
+    "ax_image_with_text_e7LeVX": {
+      "type": "ax-image-with-text",
+      "blocks": {
+        "heading_q86bJM": {
+          "type": "heading",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "heading": "<p>LOREM IPSUM DOLOR</p>",
+            "heading_size": "h2"
+          }
+        },
+        "text_t7Cbdq": {
+          "type": "text",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "text": "<p>Lorem ipsum dolor sit amet consectetur. Turpis in in leo velit turpis at. Sed vivamus amet elementum lobortis pretium enim elit volutpat dignissim. Diam sit non amet at ipsum. In faucibus amet nulla amet. </p>",
+            "description_hn_replace": false,
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "heading_q86bJM",
+        "text_t7Cbdq"
+      ],
+      "settings": {
+        "full_width": true,
+        "text_alignment": "left",
+        "no_vertical_padding": false,
+        "image_restricted_width": false,
+        "image_adapted_height_with_content": false,
+        "contain_image": false,
+        "layout": "image_first",
+        "mobile_layout": "image_first",
+        "overlay": true,
+        "overlay_opacity": 0.2,
+        "section_color_scheme": "",
+        "color_scheme": "scheme-2",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "ax_image_with_text_x3wFzW": {
+      "type": "ax-image-with-text",
+      "blocks": {
+        "subheading_JWwFUp": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "SUB HEADING"
+          }
+        },
+        "heading_LzyUxg": {
+          "type": "heading",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "heading": "<p>LOREM IPSUM DOLOR</p>",
+            "heading_size": "h2"
+          }
+        },
+        "text_mqaabX": {
+          "type": "text",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "text": "<p>Lorem ipsum dolor sit amet consectetur. Etiam ac tempor ut eleifend auctor egestas laoreet. Convallis est tempus at quisque elementum et integer morbi orci. Elit ornare magna purus at ullamcorper metus. Massa libero aenean iaculis ultrices enim elit quisque malesuada praesent. Blandit morbi urna venenatis urna quis fringilla cras pellentesque. Sed interdum massa aliquam duis gravida consequat risus pharetra sem. Aliquam feugiat justo sit vulputate. Donec blandit convallis donec sit volutpat duis morbi. Ultrices tellus in et risus viverra eu et massa sagittis. Lorem quam nulla mi rhoncus.</p>",
+            "description_hn_replace": false,
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_JWwFUp",
+        "heading_LzyUxg",
+        "text_mqaabX"
+      ],
+      "settings": {
+        "full_width": true,
+        "text_alignment": "left",
+        "no_vertical_padding": false,
+        "image_restricted_width": false,
+        "image_adapted_height_with_content": false,
+        "contain_image": false,
+        "layout": "text_first",
+        "mobile_layout": "image_first",
+        "overlay": true,
+        "overlay_opacity": 0.2,
+        "section_color_scheme": "",
+        "color_scheme": "scheme-3",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "ax_media_with_text_emkHdT": {
+      "type": "ax-media-with-text",
+      "blocks": {
+        "subheading_ynxjtR": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "LE MATELAS HYBRIDE TEDIBER"
+          }
+        },
+        "heading_VfQVqh": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>PENSÉ POUR CEUX QUI DORMENT SUR LE CÔTÉ</strong>",
+            "heading_size": "h2"
+          }
+        },
+        "text_9NQXQE": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Grâce à ses couches de mousse et ses ressorts ensachés, le matelas Hybride allie confort et soutien, s’adapte aux formes du corps et soulage les points de pression sur les épaules <br/>et les hanches. </p>",
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center"
+          }
+        },
+        "button_pzKXbY": {
+          "type": "button",
+          "settings": {
+            "button_text": "Découvrir le matelas Hybride",
+            "button_link": "shopify://products/matelas-hybride",
+            "link_blank": false,
+            "link_style": "button button--secondary"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_ynxjtR",
+        "heading_VfQVqh",
+        "text_9NQXQE",
+        "button_pzKXbY"
+      ],
+      "name": "Ax Media with text",
+      "settings": {
+        "full_width": false,
+        "image": "shopify://shop_images/lp_matelas_hybride_accueil_souple.png",
+        "layout": "text_first",
+        "overlay": true,
+        "overlay_opacity": 0,
+        "section_color_scheme": "scheme-3",
+        "color_scheme": "scheme-3",
+        "padding_top": 32,
+        "padding_bottom": 32
+      }
+    },
+    "ax_comparison_chart_UF6jRG": {
+      "type": "ax-comparison-chart",
+      "blocks": {
+        "table_1_tJd863": {
+          "type": "table_1",
+          "settings": {
+            "heading": "AVANT",
+            "is_winner": false
+          }
+        },
+        "table_item_1_9W7J6i": {
+          "type": "table_item_1",
+          "settings": {
+            "text": "Gêne en haut du corps et posture inconfortable",
+            "status": "cross"
+          }
+        },
+        "table_item_1_fHk7a9": {
+          "type": "table_item_1",
+          "settings": {
+            "text": "Pression excessive sur certaines zones du corps",
+            "status": "cross"
+          }
+        },
+        "table_item_1_PEPfrx": {
+          "type": "table_item_1",
+          "settings": {
+            "text": "Répartition homogène du poids du corps",
+            "status": "check"
+          }
+        },
+        "table_2_HpEArq": {
+          "type": "table_2",
+          "settings": {
+            "heading": "APRÈS",
+            "is_winner": false
+          }
+        },
+        "table_item_2_GVAka7": {
+          "type": "table_item_2",
+          "settings": {
+            "text": "Alignement naturel de la colonne vertébrale",
+            "status": "check"
+          }
+        },
+        "table_item_1_bpLV4W": {
+          "type": "table_item_1",
+          "settings": {
+            "text": "Affaissement et mauvais soutien",
+            "status": "cross"
+          }
+        },
+        "table_item_1_kdr66z": {
+          "type": "table_item_1",
+          "settings": {
+            "text": "Maintien équilibré et ergonomique",
+            "status": "check"
+          }
+        },
+        "table_item_1_AVE37T": {
+          "type": "table_item_1",
+          "settings": {
+            "text": "Sensation de courbatures au réveil",
+            "status": "cross"
+          }
+        },
+        "table_item_1_GKkmqw": {
+          "type": "table_item_1",
+          "settings": {
+            "text": "Sommeil réparateur, sans douleurs",
+            "status": "check"
+          }
+        }
+      },
+      "block_order": [
+        "table_1_tJd863",
+        "table_item_1_9W7J6i",
+        "table_item_1_fHk7a9",
+        "table_item_1_PEPfrx",
+        "table_2_HpEArq",
+        "table_item_2_GVAka7",
+        "table_item_1_bpLV4W",
+        "table_item_1_kdr66z",
+        "table_item_1_AVE37T",
+        "table_item_1_GKkmqw"
+      ],
+      "name": "Ax comparison chart",
+      "settings": {
+        "heading": "<p>Ressentez le changement dès la première nuit</p>",
+        "subheading": "VOS DOS MÉRITE LE MEILLEUR",
+        "description": "",
+        "button_text": "Tester le matelas Hybride",
+        "button_link": "shopify://products/matelas-hybride",
+        "link_blank": false,
+        "link_style": "button button--secondary",
+        "caption": "100 nuits d'essai l Livraison en 48h",
+        "winner_text": "",
+        "color_scheme": "scheme-3",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 56,
+        "padding_bottom": 56,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "image_with_text_PpPcAL": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_Be3V7Y": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>TRANSFORMEZ VOS NUITS DÈS CE SOIR</strong>",
+            "heading_size": "h2"
+          }
+        },
+        "text_e7HTif": {
+          "type": "text",
+          "settings": {
+            "text": "",
+            "text_style": "body"
+          }
+        },
+        "button_N88Cid": {
+          "type": "button",
+          "settings": {
+            "button_label": "Découvrir le matelas hybride",
+            "button_link": "shopify://products/matelas-hybride",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_Be3V7Y",
+        "text_e7HTif",
+        "button_N88Cid"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/lp_position_laterale_matelas_hybride_confort.png",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "center",
+        "mobile_content_alignment": "center",
+        "section_color_scheme": "scheme-2",
+        "color_scheme": "scheme-1",
+        "padding_top": 32,
+        "padding_bottom": 32
+      }
+    },
+    "ax_faq_Ge79NK": {
+      "type": "ax-faq",
+      "settings": {
+        "heading": "<p>Question <br/>fréquentes</p>",
+        "picto_size": 94,
+        "picto_size_mobile": 94,
+        "image": "shopify://shop_images/lp_matelas_hybride_tediber_chambre.png",
+        "faq": [
+          "le-matelas-hybride-est-il-adapte-a-toutes-les-morphologies",
+          "comment-fonctionnent-les-100-nuits-dessai",
+          "quels-sont-les-delais-de-livraison"
+        ],
+        "color_scheme": "scheme-2",
+        "mob_padding_top": 24,
+        "mob_padding_bottom": 24,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "ax_reassurances_kQn37E": {
+      "type": "ax-reassurances",
+      "blocks": {
+        "reassurance_qtwLDw": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "100-nuits-essai",
+            "width": 32,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_aepVjJ": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-mnd3qioq",
+            "width": 32,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_Rd6BFW": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-vfy3a8q5",
+            "width": 32,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_pEGcUT": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-87bgy0zq",
+            "width": 32,
+            "margin_bottom": 16
+          }
+        }
+      },
+      "block_order": [
+        "reassurance_qtwLDw",
+        "reassurance_aepVjJ",
+        "reassurance_Rd6BFW",
+        "reassurance_pEGcUT"
+      ],
+      "name": "Ax Reassurances",
+      "settings": {
+        "heading": "Nos engagements",
+        "restricted_width": false,
+        "stack_mobile": false,
+        "border_top_mobile": false,
+        "border_bottom_mobile": false,
+        "show_content": false,
+        "autoplay": false,
+        "speed": 300,
+        "loop": false,
+        "pagination": true,
+        "color_scheme": "scheme-2",
+        "color_scheme_popin": "",
+        "mob_padding_top": 24,
+        "mob_padding_bottom": 24,
+        "padding_top": 32,
+        "padding_bottom": 32,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "custom_liquid_C6wrER",
+    "main",
+    "ax_image_with_text_Uic6bV",
+    "ax_text_with_cards_QjAWpz",
+    "image_with_text_iGcqPD",
+    "ax_image_with_text_e7LeVX",
+    "ax_image_with_text_x3wFzW",
+    "ax_media_with_text_emkHdT",
+    "ax_comparison_chart_UF6jRG",
+    "image_with_text_PpPcAL",
+    "ax_faq_Ge79NK",
+    "ax_reassurances_kQn37E"
+  ]
+}

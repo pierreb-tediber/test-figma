@@ -1,0 +1,327 @@
+{%- liquid
+	# Variables initiales
+	assign articles_content = ''
+	assign has_articles_with_tags = false
+	assign processed_tags = blank
+-%}
+
+{% if blog != blank %}
+	{% paginate blog.articles by 99999 %}
+		{%- liquid
+			# Première étape : collecter tous les tags uniques
+			for article in blog.articles
+				for tag in article.tags
+					if tag contains '-'
+						assign tag_parts = tag | split: '-'
+						if tag_parts.size > 1
+							assign clean_tag = tag_parts[1] | strip
+							unless processed_tags contains clean_tag
+								if processed_tags == blank
+									assign processed_tags = clean_tag
+								else
+									assign processed_tags = processed_tags | append: ',' | append: clean_tag
+								endif
+							endunless
+						endif
+					endif
+				endfor
+			endfor
+
+			assign processed_tags_array = processed_tags | split: ','
+		-%}
+
+		{% capture articles_content %}
+			{%- for clean_tag in processed_tags_array -%}
+				{%- unless clean_tag == blank -%}
+					{%- assign tag_articles = blank -%}
+					{%- assign has_articles_for_tag = false -%}
+					{%- for article in blog.articles -%}
+						{%- for article_tag in article.tags -%}
+							{%- if article_tag contains '-' -%}
+								{%- assign tag_parts = article_tag | split: '-' -%}
+								{%- if tag_parts.size > 1 -%}
+									{%- assign article_clean_tag = tag_parts[1] | strip -%}
+									{%- if article_clean_tag == clean_tag -%}
+										{%- assign has_articles_for_tag = true -%}
+										{%- capture tag_articles -%}
+											{{ tag_articles }}
+											<li class="articles-tag-list__item grid__item">
+												<a
+													href="{{ article.url }}"
+													class="articles-tag-list__link"
+													aria-label="{{ 'blogs.article.read_more_title' | t: title: article.title }}"
+												>
+													{{ article.title }}
+													{{ 'icon-caret.svg' | inline_asset_content }}
+												</a>
+											</li>
+										{%- endcapture -%}
+										{%- break -%}
+									{%- endif -%}
+								{%- endif -%}
+							{%- endif -%}
+						{%- endfor -%}
+					{%- endfor -%}
+					
+					{%- if has_articles_for_tag -%}
+						{%- assign has_articles_with_tags = true -%}
+						<div class="page-width articles-tag-list__wrapper gradient color-{{ section.settings.color_scheme_content }}">
+							{%- render 'section-heading',
+								heading: clean_tag,
+								heading_size: 'h3',
+								heading_picto: section.settings.picto,
+								heading_picto_size: section.settings.picto_size,
+								heading_picto_size_mobile: section.settings.picto_size_mobile,
+								text_alignment: 'center'
+							-%}
+								<ul class="articles-tag-list__list grid grid--1-col grid--2-col-desktop list-unstyled">
+									{{ tag_articles }}
+								</ul>
+							</div>
+					{%- endif -%}
+				{%- endunless -%}
+			{%- endfor -%}
+		{% endcapture %}
+	{% endpaginate %}
+{% endif %}
+
+{% if has_articles_with_tags %}
+	{{ 'bundle.articles-tag-list.css' | asset_url | stylesheet_tag }}
+
+	<script>
+		window.assetsUrl.js.push({"articlesTagList": "{{ "bundle.articles-tag-list.js" | asset_url }}"});
+	</script>
+
+	{%- style -%}
+		.section-{{ section.id }}-padding {
+			padding-top: {{ section.settings.mob_padding_top }}px;
+			padding-bottom: {{ section.settings.mob_padding_bottom }}px;
+		}
+
+		.section-{{ section.id }}-padding .articles-tag-list__wrapper {
+			padding-top: {{ section.settings.mob_padding_top_content }}px;
+			padding-bottom: {{ section.settings.mob_padding_bottom_content }}px;
+			margin-top: {{ section.settings.mob_margin_top_content }}px;
+			margin-bottom: {{ section.settings.mob_margin_bottom_content }}px;
+		}
+
+		@media screen and (min-width: 750px) {
+			.section-{{ section.id }}-padding {
+				padding-top: {{ section.settings.padding_top }}px;
+				padding-bottom: {{ section.settings.padding_bottom }}px;
+			}
+
+			.section-{{ section.id }}-padding .articles-tag-list__wrapper {
+				padding-top: {{ section.settings.padding_top_content }}px;
+				padding-bottom: {{ section.settings.padding_bottom_content }}px;
+				margin-top: {{ section.settings.margin_top_content }}px;
+				margin-bottom: {{ section.settings.margin_bottom_content }}px;
+			}
+		}
+	{%- endstyle -%}
+
+	<div
+		class="articles-tag-list gradient color-{{ section.settings.color_scheme }} section-{{ section.id }}-padding"
+		data-ax-section="articlesTagList"
+	>
+		<div class="page-width">
+			<articles-tag-list>
+				{{ articles_content }}
+			</articles-tag-list>
+		</div>
+	</div>
+{% endif %}
+
+{% schema %}
+	{
+		"name": "Ax articles tag list",
+		"tag": "section",
+		"class": "section ax-section articles-tag-list",
+		"enabled_on": {
+			"templates": ["blog"]
+		},
+		"settings": [
+			{
+				"type": "header",
+				"content": "Contenu"
+			},
+			{
+				"type": "image_picker",
+				"id": "picto",
+				"label": "Picto"
+			},
+			{
+				"type": "range",
+				"id": "picto_size",
+				"min": 0,
+				"max": 200,
+				"step": 2,
+				"unit": "px",
+				"label": "Taille du picto",
+				"default": 24
+			},
+			{
+				"type": "range",
+				"id": "picto_size_mobile",
+				"min": 0,
+				"max": 200,
+				"step": 2,
+				"unit": "px",
+				"label": "Taille du picto mobile",
+				"default": 24
+			},
+			{
+				"type": "header",
+				"content": "Couleurs"
+			},
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "Schéma de couleurs",
+				"default": "background-1"
+			},
+			{
+				"type": "color_scheme",
+				"id": "color_scheme_content",
+				"label": "Schéma de couleurs contenu",
+				"default": "background-1"
+			},
+			{
+				"type": "header",
+				"content": "Espacements section"
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding bottom",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding bottom",
+				"default": 0
+			},
+			{
+				"type": "header",
+				"content": "Espacements contenu"
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_top_content",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_bottom_content",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding bottom",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_top_content",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_bottom_content",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding bottom",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "mob_margin_top_content",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Margin top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "mob_margin_bottom_content",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Margin bottom",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "margin_top_content",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Margin top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "margin_bottom_content",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Margin bottom",
+				"default": 0
+			}
+		],
+		"blocks": [],
+		"presets": [
+			{
+				"name": "Ax articles tag list",
+				"category": "Axome",
+				"settings": {}
+			}
+		]
+	}
+{% endschema %}

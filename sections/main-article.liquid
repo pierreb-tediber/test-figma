@@ -1,0 +1,363 @@
+{{ 'section-blog-post.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+	assign summary_block = section.blocks | where: 'type', 'summary' | first | default: blank
+	assign title_block = section.blocks | where: 'type', 'title' | first | default: blank
+	assign content_block = section.blocks | where: 'type', 'content' | first | default: blank
+	assign author_block = section.blocks | where: 'type', 'author' | first | default: blank
+-%}
+
+<article class="article-template">
+	<div class="page-width">
+		<div class="article__wrapper">
+			{%- assign article_content = article.content -%}
+			{% if summary_block != blank %}
+				<div class="article__aside">
+					{% liquid
+						assign summary_list = ''
+						assign content_split = article_content | split: '<h'
+						for content in content_split
+							if forloop.index != 1
+								assign title_dirty = content | split: '</h' | first | strip_html
+								assign heading_type = title_dirty | slice: 0
+								if title_dirty contains 'style'
+									assign style = title_dirty | split: ';"' | first
+									assign title_dirty = title_dirty | remove: style | remove: ';">'
+								endif
+								if title_dirty contains 'data-mce-fragment'
+									assign title_dirty = title_dirty | remove: ' data-mce-fragment="1"'
+								endif
+								assign content_to_remove = heading_type | append: '>'
+								assign title = title_dirty | remove: content_to_remove
+								if title != '' and heading_type == '2'
+									assign summary_list = summary_list | append: title | append: '|'
+								endif
+							endif
+						endfor
+					%}
+
+					{% assign summary_list = summary_list | split: '|' %}
+
+					{% if summary_list != blank %}
+						<div class="article__sommaire">
+							<div class="article__sommaire-content">
+								<div class="article__sommaire-title h4">{{ 'blogs.article.sommaire' | t }}</div>
+								<div class="article__sommaire-progress-container">
+									<ul class="list-unstyled">
+										{% for heading in summary_list %}
+											{% assign title_id = heading | handleize | prepend: ' id="' | append: '"' %}
+											{% assign heading_id = heading | handleize %}
+											<li>
+												<a href="#{{ heading_id }}">
+													{{ heading }}
+												</a>
+											</li>
+										{% endfor %}
+									</ul>
+								</div>
+							</div>
+						</div>
+					{% endif %}
+
+					{% for heading in summary_list %}
+						{% assign title_id = heading | handleize | prepend: ' id="' | append: '"' %}
+						{% assign new_span = '<span' | append: title_id | append: '>' | append: heading | append: '</span>' %}
+						{% assign article_content = article_content | replace: heading, new_span %}
+					{% endfor %}
+				</div>
+			{% endif %}
+
+			{% if title_block != blank or content_block != blank %}
+				<div class="article__content">
+					{% if title_block != blank %}
+						<header
+							class="{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+							{{ title_block.shopify_attributes }}
+						>
+							<h1
+								class="article-template__title h2 center"
+							>
+								{{ article.title | escape }}
+							</h1>
+							{%- if title_block.settings.show_read_time -%}
+								<div class="article__read-time center">
+									{%- liquid
+										assign content_clean = article.content | strip_html | strip_newlines
+										assign words_array = content_clean | split: ' '
+										assign words_count = words_array | size
+										assign read_time = words_count | divided_by: 200.0 | ceil
+										if read_time < 1
+											assign read_time = 1
+										endif
+									-%}
+									<span class="article__read-time-text subtitle uppercase">
+										{{ 'blogs.article.read_time' | t: time: read_time }}
+									</span>
+								</div>
+							{%- endif -%}
+						</header>
+					{% endif %}
+
+					{% if content_block != blank %}
+						<div
+							class="article-template__content rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+							{{ content_block.shopify_attributes }}
+						>
+							{{
+								article_content
+								| replace: '[section-article-products]',
+									'<article-section data-section="ax-article-products"></article-section>'
+								| replace: '<h2', '<h2 class="h3"'
+								| replace: '<h3', '<h3 class="h4"'
+							}}
+						</div>
+					{% endif %}
+
+					{% if author_block != blank %}
+						{% render 'author-card', article_author: article.author, article_date: article.published_at %}
+					{% endif %}
+				</div>
+			{% endif %}
+
+			{%- if blog.comments_enabled? -%}
+				<div class="article-template__comment-wrapper background-secondary">
+					<div
+						id="comments"
+						class="page-width page-width--narrow{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+					>
+						{%- if article.comments_count > 0 -%}
+							{%- assign anchorId = '#Comments-' | append: article.id -%}
+
+							<h2 id="Comments-{{ article.id }}" tabindex="-1">
+								{{ 'blogs.article.comments' | t: count: article.comments_count }}
+							</h2>
+							{% paginate article.comments by 5 %}
+								<div class="article-template__comments">
+									{%- if comment.status == 'pending' and comment.content -%}
+										<article id="{{ comment.id }}" class="article-template__comments-comment">
+											{{ comment.content }}
+											<footer class="right">
+												<span class="circle-divider caption-with-letter-spacing">{{ comment.author }}</span>
+											</footer>
+										</article>
+									{%- endif -%}
+
+									{%- for comment in article.comments -%}
+										<article id="{{ comment.id }}" class="article-template__comments-comment">
+											{{ comment.content }}
+											<footer class="right">
+												<span class="circle-divider caption-with-letter-spacing">{{ comment.author }}</span>
+												<span class="caption-with-letter-spacing">
+													{{- comment.created_at | time_tag: format: 'date' -}}
+												</span>
+											</footer>
+										</article>
+									{%- endfor -%}
+									{% render 'pagination', paginate: paginate, anchor: anchorId %}
+								</div>
+							{% endpaginate %}
+						{%- endif -%}
+						{% form 'new_comment', article %}
+							{%- liquid
+								assign post_message = 'blogs.article.success'
+								if blog.moderated? and comment.status == 'unapproved'
+									assign post_message = 'blogs.article.success_moderated'
+								endif
+							-%}
+							<h2>{{ 'blogs.article.comment_form_title' | t }}</h2>
+							{%- if form.errors -%}
+								<div class="form__message" role="alert">
+									<h3 class="form-status caption-large text-body" tabindex="-1" autofocus>
+										<span class="svg-wrapper">
+											{{- 'icon-error.svg' | inline_asset_content -}}
+										</span>
+										{{ 'templates.contact.form.error_heading' | t }}
+									</h3>
+								</div>
+								<ul class="form-status-list caption-large">
+									{%- for field in form.errors -%}
+										<li>
+											<a href="#CommentForm-{{ field }}" class="link">
+												{%- if form.errors.translated_fields[field] contains 'author' -%}
+													{{ 'blogs.article.name' | t }}
+												{%- elsif form.errors.translated_fields[field] contains 'body' -%}
+													{{ 'blogs.article.message' | t }}
+												{%- else -%}
+													{{ form.errors.translated_fields[field] }}
+												{%- endif -%}
+												{{ form.errors.messages[field] }}
+											</a>
+										</li>
+									{%- endfor -%}
+								</ul>
+							{%- elsif form.posted_successfully? -%}
+								<div class="form-status-list form__message" role="status">
+									<h3 class="form-status" tabindex="-1" autofocus>
+										<span class="svg-wrapper">
+											{{- 'icon-success.svg' | inline_asset_content -}}
+										</span>
+										{{ post_message | t }}
+									</h3>
+								</div>
+							{%- endif -%}
+
+							<div
+								{% if blog.moderated? == false %}
+									class="article-template__comments-fields"
+								{% endif %}
+							>
+								<div class="article-template__comment-fields">
+									<div class="field field--with-error">
+										<input
+											type="text"
+											name="comment[author]"
+											id="CommentForm-author"
+											class="field__input"
+											autocomplete="name"
+											value="{{ form.author }}"
+											aria-required="true"
+											required
+											{% if form.errors contains 'author' %}
+												aria-invalid="true"
+												aria-describedby="CommentForm-author-error"
+											{% endif %}
+											placeholder="{{ 'blogs.article.name' | t }}"
+										>
+										<label class="field__label" for="CommentForm-author">
+											{{- 'blogs.article.name' | t }}
+											<span aria-hidden="true">*</span>
+										</label>
+										{%- if form.errors contains 'author' -%}
+											<small id="CommentForm-author-error">
+												<span class="form__message">
+													<span class="svg-wrapper">
+														{{- 'icon-error.svg' | inline_asset_content -}}
+													</span>
+													{{- 'blogs.article.name' | t }}
+													{{ form.errors.messages.author }}.
+												</span>
+											</small>
+										{%- endif -%}
+									</div>
+									<div class="field field--with-error">
+										<input
+											type="email"
+											name="comment[email]"
+											id="CommentForm-email"
+											autocomplete="email"
+											class="field__input"
+											value="{{ form.email }}"
+											autocorrect="off"
+											autocapitalize="off"
+											aria-required="true"
+											required
+											{% if form.errors contains 'email' %}
+												aria-invalid="true"
+												aria-describedby="CommentForm-email-error"
+											{% endif %}
+											placeholder="{{ 'blogs.article.email' | t }}"
+										>
+										<label class="field__label" for="CommentForm-email">
+											{{- 'blogs.article.email' | t }}
+											<span aria-hidden="true">*</span>
+										</label>
+										{%- if form.errors contains 'email' -%}
+											<small id="CommentForm-email-error">
+												<span class="form__message">
+													<span class="svg-wrapper">
+														{{- 'icon-error.svg' | inline_asset_content -}}
+													</span>
+													{{- 'blogs.article.email' | t }}
+													{{ form.errors.messages.email }}.
+												</span>
+											</small>
+										{%- endif -%}
+									</div>
+								</div>
+								<div class="field field--with-error">
+									<textarea
+										rows="5"
+										name="comment[body]"
+										id="CommentForm-body"
+										class="text-area field__input"
+										aria-required="true"
+										required
+										{% if form.errors contains 'body' %}
+											aria-invalid="true"
+											aria-describedby="CommentForm-body-error"
+										{% endif %}
+										placeholder="{{ 'blogs.article.message' | t }}"
+									>{{ form.body }}</textarea>
+									<label class="form__label field__label" for="CommentForm-body">
+										{{- 'blogs.article.message' | t }}
+										<span aria-hidden="true">*</span>
+									</label>
+								</div>
+								{%- if form.errors contains 'body' -%}
+									<small id="CommentForm-body-error">
+										<span class="form__message">
+											<span class="svg-wrapper">
+												{{- 'icon-error.svg' | inline_asset_content -}}
+											</span>
+											{{- 'blogs.article.message' | t }}
+											{{ form.errors.messages.body }}.
+										</span>
+									</small>
+								{%- endif -%}
+							</div>
+							{%- if blog.moderated? -%}
+								<p class="article-template__comment-warning caption">{{ 'blogs.article.moderated' | t }}</p>
+							{%- endif -%}
+							<input type="submit" class="button" value="{{ 'blogs.article.post' | t }}">
+						{% endform %}
+					</div>
+				</div>
+			{%- endif -%}
+		</div>
+	</div>
+</article>
+
+<script type="application/ld+json">
+	{{ article | structured_data }}
+</script>
+
+{% schema %}
+	{
+		"name": "t:sections.main-article.name",
+		"tag": "section",
+		"class": "section",
+		"blocks": [
+			{
+				"type": "@app"
+			},
+			{
+				"type": "title",
+				"name": "t:sections.main-article.blocks.title.name",
+				"limit": 1,
+				"settings": [
+					{
+						"type": "checkbox",
+						"id": "show_read_time",
+						"default": true,
+						"label": "Afficher le temps de lecture"
+					}
+				]
+			},
+			{
+				"type": "content",
+				"name": "t:sections.main-article.blocks.content.name",
+				"limit": 1
+			},
+			{
+				"type": "summary",
+				"name": "Sommaire",
+				"limit": 1
+			},
+			{
+				"type": "author",
+				"name": "Auteur",
+				"limit": 1
+			}
+		]
+	}
+{% endschema %}

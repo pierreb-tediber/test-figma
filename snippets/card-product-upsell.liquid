@@ -1,0 +1,513 @@
+{% comment %}
+	Renders a product card for the upsell section
+
+	@param {object} card_upsell - The product or variant to display
+	@param {boolean} is_variant - True if the card_upsell is a variant, false if it is a product
+	@param {string} product_form_id - The ID of the product form.
+	@param {string} get_url - The URL of the page
+	@param {string} parent_product_id - The ID of the parent product
+
+	@example
+	{% render 'card-product-upsell', card_upsell: product, section_id: section.id, parent_product_id: product.id %}
+{% endcomment %}
+
+{%- liquid
+	if is_variant
+		assign card_upsell_product = card_upsell.product
+		assign upsell_variant = card_upsell
+		assign matching_with_color = false
+		assign matching_with_size = false
+	else
+		assign card_upsell_product = card_upsell
+		assign upsell_variant = card_upsell.selected_or_first_available_variant
+		assign has_changed_option_for_hidden = false
+	endif
+
+	# Initialisation des variables show_variant_color et show_variant_size
+	assign show_variant_color = false
+	assign show_variant_size = false
+
+	# Si le produit n'a pas de correspondance avec la couleur et la taille, affiche la couleur et la taille
+	if matching_with_color != true and matching_with_size != true
+		assign show_variant_color = true
+		assign show_variant_size = true
+	endif
+
+	# Si le produit a une correspondance avec la couleur mais pas avec la taille, affiche la taille
+	if matching_with_color and matching_with_size != true
+		assign show_variant_size = true
+		assign show_variant_color = false
+	endif
+
+	# Si le produit a une correspondance avec la taille mais pas avec la couleur, affiche la couleur
+	if matching_with_size and matching_with_color != true
+		assign show_variant_size = false
+		assign show_variant_color = true
+	endif
+
+	# Récupération de l'ID du formulaire du produit
+	assign product_form_id = 'product-form-card-product-upsell-' | append: card_upsell_product.id
+
+	# Récupère les traductions des noms d'options pour les tailles
+	assign options_names_for_size_translated = 'products.product.options_names_for_size' | t | downcase | replace: ', ', ','
+	assign options_names_for_size = options_names_for_size_translated | split: ',' | uniq
+
+	# Récupère les traductions des noms d'options pour les pieds
+	assign options_names_for_foot_translated = 'products.product.options_names_for_foot' | t | downcase | replace: ', ', ','
+	assign options_names_for_foot = options_names_for_foot_translated | split: ',' | uniq
+
+	# Récupère les traductions des noms d'options pour les couleurs
+	assign options_names_for_color_translated = 'products.product.options_names_for_color' | t | downcase | replace: ', ', ','
+	assign options_names_for_color = options_names_for_color_translated | split: ',' | uniq
+
+	# Récupération de la position de l'option du produit pour la taille ou la couleur
+	assign option_position_color = blank
+	assign option_position_size = blank
+
+	unless card_upsell_product.has_only_default_variant
+		for option in card_upsell_product.options_with_values
+			# Traitement du nom de l'option en minuscules
+			assign option_name_downcase = option.name | downcase
+
+			# Divise le nom de l'option en tableau de mots uniques
+			assign option_name_array = option_name_downcase | split: ' ' | uniq
+
+			for translation in options_names_for_foot
+				assign has_foot_in_array = option_name_array | find: translation
+				if has_foot_in_array
+					assign has_foot_in_array = true
+					break
+				endif
+			endfor
+
+			if has_foot_in_array
+				continue
+			else
+				# Parcours des noms d'options
+				for option_name in option_name_array
+					# Si le nom d'option est dans les noms d'options pour la taille, assigne la position de l'option pour la taille
+					if options_names_for_size contains option_name
+						assign option_position_size = option.position
+						break
+					endif
+
+					# Si le nom d'option est dans les noms d'options pour la couleur, assigne la position de l'option pour la couleur
+					if options_names_for_color contains option_name
+						assign option_position_color = option.position
+						break
+					endif
+				endfor
+			endif
+		endfor
+	endunless
+
+	if is_variant == false and card_upsell_product.selected_variant == null
+		comment
+			VÉRIFICATION ET REMPLACEMENT DES VARIANTES CACHÉES
+
+			Si la variante sélectionnée a le métafield hidden_variant à true,
+			on cherche une variante alternative disponible et non cachée
+		endcomment
+		if matching_with_color != true and matching_with_size != true
+			assign candidate_variants_all = card_upsell_product.variants
+		elsif matching_with_color == true
+			assign option_index = option_position_color
+			assign option_value_parent = parent_option_value_matching_color
+			assign option_key = 'option' | append: option_index
+			assign candidate_variants_all = card_upsell_product.variants | where: option_key, option_value_parent
+		elsif matching_with_size == true
+			assign option_index = option_position_size
+			assign option_value_parent = parent_option_value_matching_size
+			assign option_key = 'option' | append: option_index
+			assign option_key_array = option_key | minus: 1
+
+			# ========================================
+			# ÉTAPE 1 : Nettoyage de la taille du produit PARENT
+			# ========================================
+			# But : Normaliser la valeur pour pouvoir matcher avec le produit upsell
+			# Exemple : "160x200 cm - Standard" devient "160x200"
+
+			assign parent_option_size_value_check = option_value_parent
+			# Séparer par "-" pour enlever les suffixes type "Standard", "Confort", etc.
+			assign parent_option_size_parts_check = parent_option_size_value_check | split: '-'
+			# Prendre seulement la partie dimensions (avant le premier "-")
+			assign parent_option_size_dimensions_part_check = parent_option_size_parts_check[0] | strip
+
+			# Retirer toutes les unités possibles (cm, mm, CM, MM) pour avoir juste les chiffres
+			assign parent_option_size_no_units_check = parent_option_size_dimensions_part_check | replace: 'cm', '' | replace: 'mm', '' | replace: 'CM', '' | replace: 'MM', '' | downcase | strip
+			# Séparer par "x" pour identifier si on a 2 dimensions ou 1 seule
+			assign parent_option_size_dimensions_array_check = parent_option_size_no_units_check | split: 'x'
+
+			# Si on a 2 dimensions (ex: "160x200"), on reconstruit proprement
+			if parent_option_size_dimensions_array_check.size >= 2
+				assign parent_option_size_dimension_1_check = parent_option_size_dimensions_array_check[0] | strip
+				assign parent_option_size_dimension_2_check = parent_option_size_dimensions_array_check[1] | strip
+				assign parent_option_size_cleaned_check = parent_option_size_dimension_1_check | append: 'x' | append: parent_option_size_dimension_2_check
+			else
+				# Si 1 seule dimension, on garde la valeur d'origine
+				assign parent_option_size_cleaned_check = parent_option_size_value_check
+			endif
+
+			# ========================================
+			# ÉTAPE 2 : Nettoyage de la taille du produit UPSELL
+			# ========================================
+			# Même logique que pour le parent
+
+			assign upsell_option_size_value_check = upsell_variant.options[option_key_array]
+			assign upsell_option_size_parts_check = upsell_option_size_value_check | split: '-'
+			assign upsell_option_size_dimensions_part_check = upsell_option_size_parts_check[0] | strip
+
+			assign upsell_option_size_no_units_check = upsell_option_size_dimensions_part_check | replace: 'cm', '' | replace: 'mm', '' | replace: 'CM', '' | replace: 'MM', '' | downcase | strip
+			assign upsell_option_size_dimensions_array_check = upsell_option_size_no_units_check | split: 'x'
+
+			if upsell_option_size_dimensions_array_check.size >= 2
+				assign upsell_option_size_dimension_1_check = upsell_option_size_dimensions_array_check[0] | strip
+				assign upsell_option_size_dimension_2_check = upsell_option_size_dimensions_array_check[1] | strip
+				assign upsell_option_size_cleaned_check = upsell_option_size_dimension_1_check | append: 'x' | append: upsell_option_size_dimension_2_check
+			else
+				# Si 1 seule dimension, on garde juste les chiffres sans unité
+				assign upsell_option_size_cleaned_check = upsell_option_size_no_units_check
+			endif
+
+			# Vérifier si le produit upsell a 2 dimensions (contient "x")
+			assign upsell_option_size_cleaned_has_x = false
+			if upsell_option_size_cleaned_check contains 'x'
+				assign upsell_option_size_cleaned_has_x = true
+			endif
+
+			# ========================================
+			# ÉTAPE 3 : Matching intelligent des variants
+			# ========================================
+			# Problème : Si l'upsell a 1 dimension (ex: "160cm") et le parent 2 dimensions (ex: "160x200")
+			# Solution : On extrait la 1ère dimension du parent (160) et on teste avec différents suffixes
+
+			# CAS 1 : L'upsell a une seule dimension → on teste plusieurs variantes de suffixes
+			if upsell_option_size_cleaned_has_x == false
+				# Liste des suffixes possibles : avec/sans espace + minuscule/majuscule
+				assign suffixes_to_try = 'cm, cm,mm, mm,CM, CM,MM, MM' | split: ','
+				# Extraire la 1ère dimension du parent (ex: "160x200" → "160")
+				assign first_dimension = parent_option_size_cleaned_check | split: 'x' | first
+
+				# Boucler sur chaque suffixe jusqu'à trouver un match
+				assign candidate_variants_all = blank
+				for suffix in suffixes_to_try
+					if candidate_variants_all == blank
+						# Construire la valeur à tester (ex: "160cm", "160 cm", etc.)
+						assign test_value = first_dimension | append: suffix
+						# Chercher les variants qui matchent
+						assign candidate_variants_all = card_upsell_product.variants | where: option_key, test_value
+					endif
+				endfor
+			else
+				# CAS 2 : L'upsell a 2 dimensions → on doit comparer les valeurs nettoyées
+				# Exemple : parent "80 x 200 cm" doit matcher enfant "80 x 200cm" ou "80x200 cm"
+
+				# Array pour stocker les variants qui matchent
+				assign candidate_variants_all = '' | split: ''
+
+				# On parcourt tous les variants de l'upsell pour comparer les valeurs nettoyées
+				for variant in card_upsell_product.variants
+					# Récupérer la valeur de l'option pour ce variant
+					assign variant_option_value = variant.options[option_key_array]
+
+					# Nettoyer cette valeur de la même manière qu'on a nettoyé le parent
+					assign variant_size_parts = variant_option_value | split: '-'
+					assign variant_size_dims = variant_size_parts[0] | strip
+
+					# Retirer toutes les unités (cm, mm, CM, MM) et tous les espaces
+					assign variant_size_no_units = variant_size_dims | replace: 'cm', '' | replace: 'mm', '' | replace: 'CM', '' | replace: 'MM', '' | replace: ' ', '' | downcase | strip
+
+					# Séparer par "x" et reconstruire proprement pour normaliser
+					assign variant_dims_array = variant_size_no_units | split: 'x'
+					if variant_dims_array.size >= 2
+						assign variant_dim1 = variant_dims_array[0] | strip
+						assign variant_dim2 = variant_dims_array[1] | strip
+						assign variant_size_cleaned = variant_dim1 | append: 'x' | append: variant_dim2
+					else
+						assign variant_size_cleaned = variant_size_no_units
+					endif
+
+					# Comparer les valeurs nettoyées et normalisées
+					# Si match, on ajoute l'ID de ce variant à notre liste
+					if variant_size_cleaned == parent_option_size_cleaned_check
+						assign variant_array = variant | sort
+						assign candidate_variants_all = candidate_variants_all | concat: variant_array
+					endif
+				endfor
+			endif
+		endif
+
+		assign valid_variant_bundle_found = false
+		if valid_variant_bundle_found == false and candidate_variants_all != blank
+			for variant in candidate_variants_all
+				comment
+					VÉRIFICATION DE DISPONIBILITÉ COMPLÈTE
+
+					Même logique que dans le reste du fichier pour garantir
+					qu'on sélectionne une variante réellement disponible
+				endcomment
+				assign check_against_inventory = true
+				if variant.inventory_management != 'shopify' or variant.inventory_policy == 'continue'
+					assign check_against_inventory = false
+				endif
+
+				assign quantity_rule_soldout = false
+				if variant.quantity_rule.min > variant.inventory_quantity and check_against_inventory
+					assign quantity_rule_soldout = true
+				endif
+
+				assign variant_available = true
+				if variant.available == false or quantity_rule_soldout or variant == null
+					assign variant_available = false
+				endif
+
+				comment
+					Sélectionner cette variante si elle est disponible ET non cachée
+				endcomment
+				if variant_available and variant.metafields.custom.hidden_variant.value != true
+					assign upsell_variant = variant
+					assign valid_variant_bundle_found = true
+					break
+				endif
+			endfor
+		endif
+
+		if valid_variant_bundle_found == false
+			for variant in candidate_variants_all
+				comment
+					VÉRIFICATION DE DISPONIBILITÉ COMPLÈTE
+
+					Même logique que dans le reste du fichier pour garantir
+					qu'on sélectionne une variante réellement disponible
+				endcomment
+				assign check_against_inventory = true
+				if variant.inventory_management != 'shopify' or variant.inventory_policy == 'continue'
+					assign check_against_inventory = false
+				endif
+
+				assign quantity_rule_soldout = false
+				if variant.quantity_rule.min > variant.inventory_quantity and check_against_inventory
+					assign quantity_rule_soldout = true
+				endif
+
+				assign variant_available = true
+				if variant.available == false or quantity_rule_soldout or variant == null
+					assign variant_available = false
+				endif
+
+				comment
+					Sélectionner cette variante si elle est disponible ET non cachée
+				endcomment
+				if variant_available and variant.metafields.custom.hidden_variant.value != true
+					assign upsell_variant = variant
+					break
+				endif
+			endfor
+
+			if matching_with_color == true or matching_with_size == true
+				assign no_matching_variant_found = true
+			endif
+		endif
+	endif
+
+	# Utilisation du chargement paresseux
+	assign use_lazy_loading = true
+
+	# Si l'URL contient 'section_id' ou 'sections', désactive le chargement paresseux
+	if get_url contains 'section_id' or get_url contains 'sections' or get_url contains 'should_fetch_full_page'
+		assign use_lazy_loading = false
+	endif
+
+	assign check_against_inventory = true
+	if upsell_variant.inventory_management != 'shopify' or upsell_variant.inventory_policy == 'continue'
+		assign check_against_inventory = false
+	endif
+	if upsell_variant.quantity_rule.min > upsell_variant.inventory_quantity and check_against_inventory
+		assign quantity_rule_soldout = true
+	endif
+
+	assign upsell_variant_available = true
+	if upsell_variant.available == false or quantity_rule_soldout or upsell_variant == null
+		assign upsell_variant_available = false
+	endif
+
+	assign option_position_color_array = option_position_color | minus: 1
+	assign option_position_size_array = option_position_size | minus: 1
+
+	if upsell_variant.featured_image != blank
+		assign upsell_variant_featured_image_desktop = upsell_variant.featured_image
+		assign upsell_variant_featured_image_mobile = upsell_variant.featured_image
+	else
+		assign upsell_variant_featured_image_desktop = card_upsell_product.featured_image
+
+		# Récupération des images depuis les métafields (logique de card-product.liquid)
+		assign upsell_variant_images_desktop = card_upsell_product.metafields.custom.card_product_image_desktop.value | compact
+		assign upsell_variant_images_mobile = card_upsell_product.metafields.custom.card_product_image_mobile.value | compact
+
+		# Images desktop: priorité au métachamp, ordre primaire
+		if upsell_variant_images_desktop != blank and upsell_variant_images_desktop[0] != blank
+			assign upsell_variant_featured_image_desktop = upsell_variant_images_desktop[0]
+		endif
+
+		# Image mobile primaire
+		assign upsell_variant_featured_image_mobile = upsell_variant_featured_image_desktop
+		if upsell_variant_images_mobile != blank and upsell_variant_images_mobile[0] != blank
+			assign upsell_variant_featured_image_mobile = upsell_variant_images_mobile[0]
+		endif
+	endif
+-%}
+
+<div class="product-upsell__product--component">
+	<product-upsell
+		id="product-upsell-{{ is_variant }}-{{ card_upsell_product.id }}-{{ upsell_variant.id }}"
+		data-section="card-product-upsell"
+		data-parent-product-id="{{ parent_product_id }}"
+		data-product-id="{{ card_upsell_product.id }}"
+		data-variant-id="{{ upsell_variant.id }}"
+		data-title="{{ card_upsell_product.title | append: ' ' | append: upsell_variant.title }}"
+		data-url="{{ card_upsell_product.url }}"
+		data-available="{{ upsell_variant_available }}"
+		data-price="{{ upsell_variant.price }}"
+		data-compare-at-price="{{ upsell_variant.compare_at_price }}"
+		data-price-eco-part="{{ upsell_variant.metafields.custom.exo_tax.value | default: 0 | times: 100 }}"
+		data-matching-with-color="{{ matching_with_color }}"
+		data-matching-with-size="{{ matching_with_size }}"
+		data-option-position-color="{{ option_position_color }}"
+		data-option-position-size="{{ option_position_size }}"
+		data-parent-option-value-color="{{ parent_option_value_matching_color }}"
+		data-parent-option-value-size="{{ parent_option_value_matching_size }}"
+	>
+		<div
+			class="
+				card-product-upsell
+				{% if upsell_variant_available == false and card_upsell_product.has_only_default_variant == true %}
+					card-product-upsell--disabled
+				{% elsif no_matching_variant_found == true %}
+					card-product-upsell--disabled
+				{% endif %}
+			"
+		>
+			<div class="card-product-upsell__image">
+				{%- if upsell_variant_featured_image_desktop != blank -%}
+					{%- capture sizes -%}
+						(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)
+					{%- endcapture -%}
+
+					{%- capture upsell_image -%}
+						<picture>
+							<source
+								media="(max-width: 749px)"
+								srcset="{{ upsell_variant_featured_image_mobile | image_url: width: 533 }}"
+							>
+							<img
+								srcset="
+									{%- if upsell_variant_featured_image_desktop.width >= 165 -%}{{ upsell_variant_featured_image_desktop | image_url: width: 165 }} 165w,{%- endif -%}
+									{%- if upsell_variant_featured_image_desktop.width >= 360 -%}{{ upsell_variant_featured_image_desktop | image_url: width: 360 }} 360w,{%- endif -%}
+									{%- if upsell_variant_featured_image_desktop.width >= 533 -%}{{ upsell_variant_featured_image_desktop | image_url: width: 533 }} 533w,{%- endif -%}
+									{%- if upsell_variant_featured_image_desktop.width >= 720 -%}{{ upsell_variant_featured_image_desktop | image_url: width: 720 }} 720w,{%- endif -%}
+									{%- if upsell_variant_featured_image_desktop.width >= 940 -%}{{ upsell_variant_featured_image_desktop | image_url: width: 940 }} 940w,{%- endif -%}
+									{%- if upsell_variant_featured_image_desktop.width >= 1066 -%}{{ upsell_variant_featured_image_desktop | image_url: width: 1066 }} 1066w,{%- endif -%}
+									{{ upsell_variant_featured_image_desktop | image_url }} {{ upsell_variant_featured_image_desktop.width }}w
+								"
+								src="{{ upsell_variant_featured_image_desktop | image_url: width: 533 }}"
+								sizes="{{ sizes }}"
+								alt="{{ card_upsell_product.title | escape }}"
+								class="motion-reduce"
+								loading="lazy"
+								width="{{ upsell_variant_featured_image_desktop.width }}"
+								height="{{ upsell_variant_featured_image_desktop.height }}"
+								role="img"
+								aria-label="{{ upsell_variant_featured_image_desktop.alt | escape }}"
+							>
+						</picture>
+					{%- endcapture -%}
+
+					{%- if use_lazy_loading -%}
+						{{ upsell_image | replace: 'src="', 'lazy-src="' | replace: 'srcset="', 'lazy-srcset="' }}
+					{%- else -%}
+						{{ upsell_image }}
+					{%- endif -%}
+				{%- endif -%}
+			</div>
+
+			<div class="card-product-upsell__wrapper">
+				<div class="card-product-upsell__title">
+					{%- liquid
+						if card_upsell_product.metafields.custom.combined_listings_produit_parent.value != blank
+							assign card_upsell_product_title = card_upsell_product.metafields.custom.combined_listings_produit_parent.value.title
+						else
+							assign card_upsell_product_title = card_upsell_product.title
+						endif
+					-%}
+					{{ card_upsell_product_title }}
+				</div>
+
+				<div class="card-product-upsell__variant_title">
+					{%- if matching_with_color
+						and upsell_variant.options[option_position_color_array] != blank
+						and upsell_variant.options[option_position_color_array] != 'Default Title'
+					-%}
+						{{ upsell_variant.options[option_position_color_array] }}
+					{%- elsif matching_with_size
+						and upsell_variant.options[option_position_size_array] != blank
+						and upsell_variant.options[option_position_size_array] != 'Default Title'
+					-%}
+						{{ upsell_variant.options[option_position_size_array] }}
+					{%- else -%}
+						{%- if upsell_variant.title != blank and upsell_variant.title != 'Default Title' -%}
+							{{ upsell_variant.title }}
+						{%- endif -%}
+					{%- endif -%}
+				</div>
+
+				{%- unless card_upsell_product.has_only_default_variant or is_variant == true -%}
+					<div class="card-product-upsell__variant_picker">
+						{% render 'product-variant-upsell-picker',
+							product: card_upsell_product,
+							product_selected_variant: upsell_variant,
+							matching_with_color: matching_with_color,
+							matching_with_size: matching_with_size,
+							option_position_color: option_position_color,
+							option_position_size: option_position_size,
+							parent_option_value_matching_color: parent_option_value_matching_color,
+							parent_option_value_matching_size: parent_option_value_matching_size,
+							has_changed_option_for_hidden: has_changed_option_for_hidden,
+							product_form_id: product_form_id,
+							show_variant_size: show_variant_size,
+							show_variant_color: show_variant_color
+						%}
+					</div>
+				{%- endunless -%}
+
+				<div class="card-product-upsell__buy__wrapper">
+					<div class="card-product-upsell__buy__price">
+						{%- if upsell_variant != null -%}
+							{{ upsell_variant.price | money | prepend: '+ ' }}
+						{%- endif -%}
+					</div>
+
+					<div class="card-product-upsell__buy__button">
+						<button
+							class="button--reset ax-link reversed card-product-upsell__buy__button--add-to-cart"
+							data-upsell-add-to-cart="{{ upsell_variant.id }}"
+							data-upsell-price="{{ upsell_variant.price }}"
+							{% if upsell_variant_available == false %}
+								disabled
+							{% endif %}
+						>
+							<span data-upsell-add-to-cart-text>
+								{%- if upsell_variant == null or upsell_variant.metafields.custom.hidden_variant.value == true -%}
+									{{ 'products.product.unavailable' | t }}
+								{%- elsif upsell_variant_available == false -%}
+									{{ 'products.product.sold_out' | t }}
+								{%- else -%}
+									{{ 'products.product.add_to_cart_short' | t }}
+								{%- endif -%}
+							</span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</product-upsell>
+</div>

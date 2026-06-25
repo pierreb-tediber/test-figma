@@ -1,0 +1,120 @@
+{%- liquid
+	assign upsell = section.blocks | where: 'type', 'upsell-dynamic' | first
+	assign upsell_products = '' | split: ''
+	assign skip_card_product_styles = false
+	assign last_add_product_in_cart = blank
+
+	# Récupérer le dernier produit ajouté au panier
+	for item in cart.items
+		if item.final_price > 0
+			if item.properties._sample != 'true' and item.properties._gift_wrap != 'true'
+				assign last_add_product_in_cart = item.product
+				break
+			endif
+		endif
+	endfor
+
+	# Récupérer les produits de la collection
+	assign upsell_products_complementary = upsell.settings.collection.products | where: 'available', true
+
+	# Récupérer les produits via l'api recommendations
+	if recommendations.performed and recommendations.products_count > 0
+		assign upsell_products = recommendations.products | compact
+	endif
+
+	# Déterminer si les produits sont récupérés via l'api recommendations
+	assign fetch_complementary = false
+	if request.path contains '/recommendations'
+		assign fetch_complementary = true
+		assign use_lazy_loading = false
+	endif
+
+	# Ajouter les produits de la collection si les produits sont récupérés via l'api recommendations ou via fetch de la section
+	if upsell_products.size < 12 and fetch_complementary
+		assign upsell_products = upsell_products | concat: upsell_products_complementary
+	elsif last_add_product_in_cart == blank and use_lazy_loading == false
+		assign upsell_products = upsell_products | concat: upsell_products_complementary
+	elsif last_add_product_in_cart == blank and use_lazy_loading == true
+		assign upsell_products = upsell_products
+	endif
+
+	# Déterminer si les produits sont en cours de chargement
+	assign class_loading = 'loading__spinner hidden'
+	assign class_container = ''
+	if use_lazy_loading
+		assign class_loading = 'loading__spinner'
+		assign class_container = 'loading'
+	endif
+-%}
+
+<div id="cart-drawer-upsell-dynamic">
+	<div
+		class="color-{{ upsell.settings.color_scheme }} gradient drawer__upsell__gradient"
+		{{ upsell.shopify_attributes }}
+	>
+		<cart-upsell-dynamic
+			class="drawer__upsell drawer__upsell-dynamic"
+			data-url="{{ routes.product_recommendations_url | append: '?limit=12' }}"
+			data-section-id="{{ section.id }}"
+			data-product-id="{{ last_add_product_in_cart.id }}"
+			data-use-lazy-loading="{{ use_lazy_loading }}"
+		>
+			{%- if upsell.settings.heading != blank -%}
+				<div class="drawer__upsell__header">{{ upsell.settings.heading }}</div>
+			{%- endif -%}
+
+			{% capture swiper_options %}
+					{
+					"slidesPerView": "auto",
+					"slidesPerGroup": 1,
+					"loop": false,
+					"grabCursor": true,
+					"freeMode": false,
+					"effect": "slide",
+					"spaceBetweenDesktop": 8,
+					"spaceBetweenMobile": 8
+					}
+				{% endcapture %}
+
+			<div class="drawer__upsell__container {{ class_container }}">
+				{%- render 'loading-spinner', class: class_loading -%}
+				<div
+					id="Swiper-drawer-upsell-dynamic"
+					class="swiper"
+					data-options="{{ swiper_options | escape }}"
+				>
+					<ul
+						class="swiper-wrapper drawer__upsell__collection grid grid--1-90-col grid--60-col-desktop list-unstyled"
+						role="list"
+						aria-label="{{ 'general.slider.name' | t }}"
+					>
+						{%- for product in upsell_products limit: 12 -%}
+							{%- liquid
+								# Vérifie si le produit est masqué via metafield seo.hidden
+								if product.metafields.seo.hidden.value == 1
+									continue
+								endif
+							-%}
+							<li class="grid__item swiper-slide">
+								{% render 'card-product',
+									card_product: product,
+									media_aspect_ratio: upsell.settings.image_ratio,
+									image_shape: 'default',
+									show_secondary_image: upsell.settings.show_secondary_image,
+									show_vendor: upsell.settings.show_vendor,
+									show_rating: upsell.settings.show_rating,
+									lazy_load: lazy_load,
+									skip_styles: skip_card_product_styles,
+									quick_add: upsell.settings.quick_add,
+									section_id: section.id,
+									no_hn: true
+								%}
+							</li>
+							{%- assign skip_card_product_styles = true -%}
+						{%- endfor -%}
+					</ul>
+				</div>
+			</div>
+		</cart-upsell-dynamic>
+	</div>
+</div>

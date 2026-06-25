@@ -1,0 +1,423 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_content": false,
+        "custom_h1": "",
+        "h1_size": "h1",
+        "h1_no_margin": false,
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "ax_heading_9jfh3c": {
+      "type": "ax-heading",
+      "name": "Ax heading",
+      "settings": {
+        "heading": "<p>COMPARER<br/>NOS MATELAS</p>",
+        "heading_size": "h2",
+        "heading_first": false,
+        "subheading": "",
+        "description": "",
+        "full_width": false,
+        "text_alignment": "center",
+        "color_scheme": "",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 32,
+        "padding_top": 96,
+        "padding_bottom": 64
+      }
+    },
+    "ax_comparator_products_list_XB8Utw": {
+      "type": "ax-comparator-products-list",
+      "name": "Ax liste comparaison",
+      "settings": {
+        "product_list": [
+          "matelas",
+          "matelas-hybride",
+          "matelas-grand-ours"
+        ],
+        "columns_desktop": 3,
+        "color_scheme": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 32,
+        "padding_top": 0,
+        "padding_bottom": 64
+      }
+    },
+    "ax_cards_informations_CnGzqk": {
+      "type": "ax-cards-informations",
+      "blocks": {
+        "card_TjU4Hm": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/epaisseur.svg",
+            "title": "<p>25 cm</p>",
+            "text": "<p>d'épaisseur</p>"
+          }
+        },
+        "card_XFU6gf": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/epaisseur.svg",
+            "title": "<p>27 cm</p>",
+            "text": "<p>d'épaisseur</p>"
+          }
+        },
+        "card_hGVMX6": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/epaisseur.svg",
+            "title": "<p>38 cm</p>",
+            "text": "<p>d'épaisseur</p>"
+          }
+        }
+      },
+      "block_order": [
+        "card_TjU4Hm",
+        "card_XFU6gf",
+        "card_hGVMX6"
+      ],
+      "name": "Ax cards informations",
+      "settings": {
+        "heading": "<p>Propriété du matelas</p>",
+        "content": "",
+        "use_hn": false,
+        "color_scheme": "",
+        "color_scheme_cards": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "ax_cards_informations_awJq7A": {
+      "type": "ax-cards-informations",
+      "blocks": {
+        "card_RtPbtr": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/densite.svg",
+            "title": "<p>35kg / m3</p>",
+            "text": "<p>de densité</p>"
+          }
+        },
+        "card_YaPJcf": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/densite.svg",
+            "title": "<p>35kg / m3</p>",
+            "text": "<p>de densité</p>"
+          }
+        },
+        "card_nQDWFU": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/densite.svg",
+            "title": "<p>-</p>",
+            "text": "<p>de densité</p>"
+          }
+        }
+      },
+      "block_order": [
+        "card_RtPbtr",
+        "card_YaPJcf",
+        "card_nQDWFU"
+      ],
+      "name": "Ax cards informations",
+      "settings": {
+        "heading": "",
+        "content": "",
+        "use_hn": false,
+        "color_scheme": "",
+        "color_scheme_cards": "",
+        "mob_padding_top": 12,
+        "mob_padding_bottom": 12,
+        "padding_top": 24,
+        "padding_bottom": 0
+      }
+    },
+    "ax_cards_informations_68AEVW": {
+      "type": "ax-cards-informations",
+      "blocks": {
+        "card_xAUj9z": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/mousse.svg",
+            "title": "<p>3 couches</p>",
+            "text": "<p>de mousse</p>"
+          }
+        },
+        "card_NgGUyM": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/mousse.svg",
+            "title": "<p>750 ressorts</p>",
+            "text": "<p>et mousse</p>"
+          }
+        },
+        "card_pb4MpE": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/mousse.svg",
+            "title": "<p>2 couches de ressorts ensachés </p>",
+            "text": "<p>TediHotelSprings™</p>"
+          }
+        }
+      },
+      "block_order": [
+        "card_xAUj9z",
+        "card_NgGUyM",
+        "card_pb4MpE"
+      ],
+      "name": "Ax cards informations",
+      "settings": {
+        "heading": "",
+        "content": "",
+        "use_hn": false,
+        "color_scheme": "",
+        "color_scheme_cards": "",
+        "mob_padding_top": 12,
+        "mob_padding_bottom": 12,
+        "padding_top": 24,
+        "padding_bottom": 0
+      }
+    },
+    "ax_columns_dJaGcC": {
+      "type": "ax-columns",
+      "blocks": {
+        "column_EkRmxC": {
+          "type": "column",
+          "settings": {
+            "title": "",
+            "text": "",
+            "truncate_text": true,
+            "button_text": "Voir la fiche technique",
+            "link": "shopify://products/matelas",
+            "color_scheme": "background-1"
+          }
+        },
+        "column_dNx8V4": {
+          "type": "column",
+          "settings": {
+            "title": "",
+            "text": "",
+            "truncate_text": true,
+            "button_text": "Voir la fiche technique",
+            "link": "shopify://products/matelas-hybride",
+            "color_scheme": "background-1"
+          }
+        },
+        "column_8UrT9E": {
+          "type": "column",
+          "settings": {
+            "title": "",
+            "text": "",
+            "truncate_text": true,
+            "button_text": "Voir la fiche technique",
+            "link": "shopify://products/matelas-grand-ours",
+            "color_scheme": "background-1"
+          }
+        }
+      },
+      "block_order": [
+        "column_EkRmxC",
+        "column_dNx8V4",
+        "column_8UrT9E"
+      ],
+      "name": "Ax columns",
+      "settings": {
+        "color_scheme": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "ax_cards_informations_fRxBck": {
+      "type": "ax-cards-informations",
+      "blocks": {
+        "card_J3DkcR": {
+          "type": "card",
+          "settings": {
+            "title": "<p>10 ans</p>",
+            "text": "<p>de garantie</p>"
+          }
+        },
+        "card_UpVyjW": {
+          "type": "card",
+          "settings": {
+            "title": "<p>10 ans</p>",
+            "text": "<p>de garantie</p>"
+          }
+        },
+        "card_4KMCiC": {
+          "type": "card",
+          "settings": {
+            "title": "<p>Réparable</p>",
+            "text": "<p>à vie</p>"
+          }
+        }
+      },
+      "block_order": [
+        "card_J3DkcR",
+        "card_UpVyjW",
+        "card_4KMCiC"
+      ],
+      "name": "Ax cards informations",
+      "settings": {
+        "heading": "<p>Garanties</p>",
+        "content": "",
+        "use_hn": false,
+        "color_scheme": "",
+        "color_scheme_cards": "scheme-2",
+        "mob_padding_top": 24,
+        "mob_padding_bottom": 24,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "ax_richtext_mhp7y4": {
+      "type": "ax-richtext",
+      "blocks": {
+        "button_D9CRd3": {
+          "type": "button",
+          "settings": {
+            "button_text": "Voir tous nos matelas",
+            "url": "shopify://collections/matelas",
+            "link_blank": false,
+            "style_button": "button button--primary",
+            "button_alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "button_D9CRd3"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 32,
+        "margin_top": 0,
+        "margin_bottom": 64
+      }
+    },
+    "ax_matelas_specs_Tyc3QN": {
+      "type": "ax-matelas-specs",
+      "blocks": {
+        "note_confort_UGLC6K": {
+          "type": "note_confort",
+          "settings": {
+            "title": "Confort",
+            "description": "Sensation de confort au coucher",
+            "color_scheme": ""
+          }
+        },
+        "note_fermete_k6LQig": {
+          "type": "note_fermete",
+          "settings": {
+            "title": "Fermeté",
+            "description": "Niveau de maintien du matelas",
+            "color_scheme": ""
+          }
+        },
+        "note_respirabilite_jNUmra": {
+          "type": "note_respirabilite",
+          "settings": {
+            "title": "Respirabilité",
+            "description": "Circulation de l'air dans le matelas",
+            "color_scheme": ""
+          }
+        },
+        "proprietes_XMjfAr": {
+          "type": "proprietes",
+          "settings": {
+            "title": "Propriété du matelas",
+            "description": "",
+            "button_text": "Voir la fiche technique",
+            "link_blank": false,
+            "link_style": "button button--primary",
+            "button_alignment": "center",
+            "icon_epaisseur": "shopify://shop_images/icon-epaisseur.svg",
+            "icon_densite": "shopify://shop_images/icon-densite.svg",
+            "icon_structure": "shopify://shop_images/icon-structure.svg",
+            "color_scheme": ""
+          }
+        },
+        "garantie_7DMXLk": {
+          "type": "garantie",
+          "settings": {
+            "title": "Garantie",
+            "description": "Durée de la garantie produit",
+            "color_scheme": ""
+          }
+        }
+      },
+      "block_order": [
+        "note_confort_UGLC6K",
+        "note_fermete_k6LQig",
+        "note_respirabilite_jNUmra",
+        "proprietes_XMjfAr",
+        "garantie_7DMXLk"
+      ],
+      "disabled": true,
+      "name": "Ax Matelas Specs",
+      "settings": {
+        "products_to_compare": [
+          "matelas",
+          "matelas-hybride",
+          "matelas-grand-ours"
+        ],
+        "columns_desktop": 3,
+        "button_text": "",
+        "button_url": "",
+        "button_blank": false,
+        "button_style": "button button--primary",
+        "button_alignment": "center",
+        "color_scheme": "",
+        "products_color_scheme": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "ax_heading_9jfh3c",
+    "ax_comparator_products_list_XB8Utw",
+    "ax_cards_informations_CnGzqk",
+    "ax_cards_informations_awJq7A",
+    "ax_cards_informations_68AEVW",
+    "ax_columns_dJaGcC",
+    "ax_cards_informations_fRxBck",
+    "ax_richtext_mhp7y4",
+    "ax_matelas_specs_Tyc3QN"
+  ]
+}

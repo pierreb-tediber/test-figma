@@ -1,0 +1,211 @@
+{{ 'bundle.recently-viewed.css' | asset_url | stylesheet_tag }}
+
+<script>
+	window.assetsUrl.js.push({ recentlyViewed: "{{ 'bundle.recently-viewed.js' | asset_url }}" });
+</script>
+
+{%- style -%}
+	.section-{{ section.id }}-padding {
+	  padding-top: {{ section.settings.mob_padding_top }}px;
+	  padding-bottom: {{ section.settings.mob_padding_bottom }}px;
+	}
+
+	@media screen and (min-width: 750px) {
+	  .section-{{ section.id }}-padding {
+	    padding-top: {{ section.settings.padding_top }}px;
+	    padding-bottom: {{ section.settings.padding_bottom }}px;
+	  }
+	}
+{%- endstyle -%}
+
+{%- liquid
+	assign product_list = section.settings.product_list
+	assign skip_card_product_styles = false
+	assign lazy_load = false
+	assign strong_lazy_load = false
+
+	if section.index > 1
+		assign lazy_load = true
+		assign strong_lazy_load = true
+	endif
+-%}
+
+{% if product_list != blank %}
+	<div
+		class="recently-viewed gradient color-{{ section.settings.color_scheme }} section-{{ section.id }}-padding"
+		data-ax-section="recentlyViewed"
+	>
+		<div class="page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+			{% assign heading_tag = section.settings.heading_tag | default: 'h2' %}
+			{%- render 'section-heading',
+				heading: section.settings.heading,
+				heading_size: heading_tag,
+				heading_class: 'h2',
+				subheading: blank,
+				description: blank,
+				heading_picto: blank,
+				heading_picto_size: blank,
+				picto: blank,
+				picto_size: blank,
+				text_alignment: 'center'
+			-%}
+
+			<recently-viewed>
+				{% capture swiper_options %}
+					{
+						"loop": false,
+						"effect": "slide",
+						"grabCursor": false,
+						"speed": 240,
+						"slideInView": "auto",
+						"slidesToMove": 1
+					}
+				{% endcapture %}
+				<div
+					id="Swiper-{{ section.id }}-{{ block.id }}"
+					class="recently-viewed__products swiper"
+					data-options="{{ swiper_options | escape }}"
+					role="region"
+					aria-label="{% if section.settings.heading != blank %}{{ section.settings.heading }}{% else %}{{ 'accessibility.product.recently_viewed' | t }}{% endif %}"
+					aria-roledescription="carousel"
+				>
+					<ul
+						class="recently-viewed__products-wrapper swiper-wrapper grid grid--1-7-col grid--2-col-tablet grid--5-col-desktop"
+						aria-live="polite"
+					>
+						{%- for product in product_list limit: 5 -%}
+							{%- liquid
+								# Vérifie si le produit est masqué via metafield seo.hidden
+								if product.metafields.seo.hidden.value == 1
+									continue
+								endif
+							-%}
+							<li
+								class="recently-viewed__products-item swiper-slide grid__item"
+								role="group"
+								aria-label="{{ product.title }}"
+								aria-roledescription="slide"
+							>
+								{% render 'card-product',
+									card_product: product,
+									media_aspect_ratio: 'portrait',
+									image_shape: 'default',
+									show_secondary_image: true,
+									show_vendor: false,
+									show_rating: false,
+									show_trustpilot: true,
+									lazy_load: lazy_load,
+									skip_styles: skip_card_product_styles,
+									quick_add: false,
+									section_id: section.id,
+									strong_lazy_load: strong_lazy_load,
+									no_hn: true
+								%}
+							</li>
+
+							{%- assign skip_card_product_styles = true -%}
+						{%- endfor -%}
+					</ul>
+				</div>
+			</recently-viewed>
+		</div>
+	</div>
+{% endif %}
+
+{% schema %}
+	{
+		"name": "Ax recently viewed",
+		"tag": "section",
+		"class": "section ax-recently-viewed",
+		"enabled_on": {
+			"templates": ["collection"]
+		},
+		"settings": [
+			{
+				"type": "header",
+				"content": "Contenu"
+			},
+			{
+				"type": "inline_richtext",
+				"id": "heading",
+				"label": "Titre"
+			},
+			{
+				"type": "select",
+				"id": "heading_tag",
+				"label": "Tag HTML pour le titre",
+				"default": "h2",
+				"options": [
+					{"value": "h2", "label": "H2"},
+					{"value": "h3", "label": "H3"},
+					{"value": "span", "label": "Span"},
+				]
+			},
+			{
+				"type": "product_list",
+				"id": "product_list",
+				"label": "Liste des produits"
+			},
+			{
+				"type": "header",
+				"content": "Color"
+			},
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "Color scheme",
+				"default": "background-1"
+			},
+			{
+				"type": "header",
+				"content": "Padding (space)"
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding bottom",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding bottom",
+				"default": 0
+			}
+		],
+		"blocks": [],
+		"presets": [
+			{
+				"name": "Ax recently viewed"
+			}
+		]
+	}
+{% endschema %}

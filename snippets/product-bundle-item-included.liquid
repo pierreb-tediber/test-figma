@@ -1,0 +1,572 @@
+{%- liquid
+	comment
+		DÉTECTION DES VARIANTES GOUVERNANTES DU PACK
+
+		Cette section identifie s'il existe une étape du bundle qui "gouverne"
+		les variantes incluses. Une étape gouvernante contrôle automatiquement
+		quelles variantes sont incluses selon la sélection utilisateur.
+	endcomment
+	assign has_governs_variants = false
+	assign step_governs_variants = blank
+
+	comment
+		Parcourt les 3 étapes possibles du bundle pour trouver celle
+		qui a le flag "regit_les_variantes_inclus_dans_le_pack" activé
+	endcomment
+	for i in (1..3)
+		# Construction des clés dynamiques pour accéder aux metafields
+		assign key_bundle_configurator_variants = 'etape_' | append: i | append: '_variantes'
+		assign key_bundle_configurator_governs_variants = 'etape_' | append: i | append: '_regit_les_variantes_inclus_dans_le_pack'
+
+		# Extraction des valeurs pour cette étape
+		assign governs_variants = bundle_configurator[key_bundle_configurator_governs_variants].value
+		assign variants_bundle = bundle_configurator[key_bundle_configurator_variants].value
+
+		# Si cette étape gouverne les variantes incluses, on la sélectionne
+		if governs_variants == true
+			assign has_governs_variants = true
+			assign step_governs_variants = variants_bundle | compact
+			break
+		endif
+	endfor
+
+	comment
+		DÉTERMINATION DE L'AFFICHAGE DE LA SECTION "INCLUS DANS LE PACK"
+
+		Cette section détermine si on doit afficher la liste des éléments inclus
+		en vérifiant la disponibilité des variantes visibles et l'existence d'invisibles
+	endcomment
+	assign show_included_in_pack = false
+
+	# Récupération des variantes incluses (visibles et invisibles)
+	assign bundle_configurator_inclus_variantes_visible = bundle_configurator.inclus_variantes_visible.value
+	assign bundle_configurator_inclus_variantes_invisible = bundle_configurator.inclus_variantes_invisible.value
+
+	comment
+		VÉRIFICATION DE DISPONIBILITÉ DES VARIANTES VISIBLES
+
+		Parcourt toutes les variantes visibles pour vérifier s'il en existe
+		au moins une disponible avec la même logique complexe que le reste du bundle
+	endcomment
+	assign has_available_visible_variant = false
+	for variant in bundle_configurator_inclus_variantes_visible
+		comment
+			APPLICATION DES RÈGLES DE STOCK ET DISPONIBILITÉ
+
+			Même logique que dans les autres fichiers bundle :
+			- Gestion stock Shopify vs externe
+			- Règles de quantité minimum
+			- Status global de disponibilité
+		endcomment
+		assign check_against_inventory = true
+		if variant.inventory_management != 'shopify' or variant.inventory_policy == 'continue'
+			assign check_against_inventory = false
+		endif
+
+		assign quantity_rule_soldout = false
+		if variant.quantity_rule.min > variant.inventory_quantity and check_against_inventory
+			assign quantity_rule_soldout = true
+		endif
+
+		# Si au moins une variante est disponible, on peut afficher la section
+		if variant.available or quantity_rule_soldout == false
+			assign has_available_visible_variant = true
+			break
+		endif
+	endfor
+
+	comment
+		DÉCISION FINALE D'AFFICHAGE
+
+		Affiche la section si :
+		- Il y a au moins une variante visible disponible OU
+		- Il y a des variantes invisibles (toujours incluses)
+	endcomment
+	if has_available_visible_variant or bundle_configurator_inclus_variantes_invisible != blank
+		assign show_included_in_pack = true
+	endif
+
+	comment
+		GESTION DES VARIANTES OFFERTES (GRATUITES)
+
+		Identifie les variantes qui sont offertes gratuitement dans le pack.
+		⚠️ On NE filtre PAS sur `available=true` : une variante offerte en rupture
+		reste considérée comme offerte (data-free="true" propagé sur la card).
+		Sinon le JS de product-bundle.js compterait son prix dans `bundleItemsPrice`
+		(car !item.free), et l'utilisateur paierait un produit normalement gratuit.
+		L'add-to-cart est de toute façon bloqué par `#toggleSubmitButtonState()`
+		dès qu'un item a `available=false`.
+		Note: Les variantes cachées seront filtrées lors de l'utilisation.
+	endcomment
+	assign bundle_configurator_inclus_variants_free = bundle_configurator.inclus_variantes_offertes.value
+	assign variants_inclus_free = bundle_configurator_inclus_variants_free | compact
+
+	comment
+		VARIANTES PRÉ-SÉLECTIONNÉES (override du défaut)
+
+		Pour chaque produit ayant plusieurs variantes dans `inclus_variantes_visible`,
+		l'admin peut désigner une variante précise à cocher au chargement (au lieu
+		du fallback "première variante non cachée"). On extrait juste les IDs ici,
+		le matching effectif (par product groupé) se fait plus bas avant le render
+		de chaque card.
+	endcomment
+	assign bundle_configurator_inclus_preselected = bundle_configurator.inclus_variantes_preselectionnees.value
+	assign preselected_variant_ids = bundle_configurator_inclus_preselected | map: 'id' | compact
+
+	# Flag BO `masquer_surplus_et_inclus` (re-lu ici pour gater le surplus dans
+	# le picker pack-new). Le wrap `unless hide_extras` côté product-bundle.liquid
+	# masque déjà toute la section, mais on garde un gate explicite dans le picker
+	# pour rester robuste si la stratégie change (ex. masquer juste le surplus
+	# sans masquer la section entière).
+	assign hide_extras = false
+	if bundle_configurator.masquer_surplus_et_inclus.value == true
+		assign hide_extras = true
+	endif
+
+	comment
+		DÉTECTION DE LA VARIANTE GOUVERNANTE SÉLECTIONNÉE PAR DÉFAUT
+
+		En mode gouverné, on doit trouver la première variante gouvernante
+		disponible et non cachée qui sera sélectionnée par défaut.
+		Cela permet de déterminer quelle variante incluse doit être visible initialement.
+
+		PRIORITÉ À LA PRÉ-SÉLECTION BO :
+		Si `inclus_variantes_preselectionnees` contient une variante présente dans
+		`inclus_variantes_visible` ET que sa variante gouvernante associée (même
+		index) est dispo + non cachée, on utilise cet index comme défaut. Sinon
+		fallback sur la 1re gouvernante dispo non cachée (comportement legacy).
+	endcomment
+	assign default_governs_variant_index = -1
+	if has_governs_variants
+		# Pass 1 : cherche l'index d'une variante incluse pré-sélectionnée
+		# (préserve l'ordre — première match dans inclus_variantes_visible).
+		assign preselected_visible_index = -1
+		if preselected_variant_ids != blank
+			assign visible_idx_for_preselection = 0
+			for visible_variant in bundle_configurator_inclus_variantes_visible
+				if preselected_variant_ids contains visible_variant.id
+					assign preselected_visible_index = visible_idx_for_preselection
+					break
+				endif
+				assign visible_idx_for_preselection = visible_idx_for_preselection | plus: 1
+			endfor
+		endif
+
+		# Pass 2 : on parcourt les gouvernantes pour trouver le défaut.
+		# Si l'index pré-sélectionné est valide (governs dispo + non cachée) →
+		# on l'utilise direct. Sinon on prend la 1re dispo non cachée comme avant.
+		assign governs_variant_index = 0
+		for governs_variant in step_governs_variants
+			if governs_variant != blank
+				# Vérifie la disponibilité de la variante gouvernante
+				assign check_against_inventory_governs = true
+				if governs_variant.inventory_management != 'shopify' or governs_variant.inventory_policy == 'continue'
+					assign check_against_inventory_governs = false
+				endif
+
+				assign quantity_rule_soldout_governs = false
+				if governs_variant.quantity_rule.min > governs_variant.inventory_quantity and check_against_inventory_governs
+					assign quantity_rule_soldout_governs = true
+				endif
+
+				assign governs_variant_available = true
+				if governs_variant.available == false or quantity_rule_soldout_governs
+					assign governs_variant_available = false
+				endif
+
+				# Vérifie si la variante gouvernante n'est pas cachée
+				assign governs_variant_hidden = false
+				if governs_variant.metafields.custom.hidden_variant.value == true
+					assign governs_variant_hidden = true
+				endif
+
+				# Si c'est l'index pré-sélectionné ET valide → on le prend en priorité
+				if governs_variant_index == preselected_visible_index and governs_variant_available and governs_variant_hidden == false
+					assign default_governs_variant_index = governs_variant_index
+				endif
+
+				# Sinon, fallback legacy : 1re dispo non cachée (sans override si déjà fixé par la préselection)
+				if default_governs_variant_index == -1 and governs_variant_available and governs_variant_hidden == false
+					assign default_governs_variant_index = governs_variant_index
+				endif
+			endif
+			assign governs_variant_index = governs_variant_index | plus: 1
+		endfor
+	endif
+
+	comment
+		DÉTECTION DES PRODUITS AVEC MULTIPLES VARIANTES (MODE NON-GOUVERNÉ)
+
+		Dans le mode non-gouverné, cette logique détecte s'il y a des produits
+		qui ont plusieurs variantes disponibles. Cela affecte l'affichage :
+		- Si multiple variantes : affiche un sélecteur
+		- Si une seule variante : affichage simple
+	endcomment
+	# Détection multi-variants : exécutée
+	# - hors governance (legacy) : pour tous les items
+	# - en governance pack-new : pour permettre le grouping des items hors
+	#   governance (cas typique : oreillers offerts à 2 variantes 60×60/50×70
+	#   qui doivent être 1 seule card avec sélecteur, pas 2 cards distinctes).
+	#   Les items gouvernés (forloop.index0 < step_governs_variants.size)
+	#   sont eux skippés du grouping dans la boucle de rendu plus bas.
+	assign should_detect_multi_variants = false
+	unless has_governs_variants
+		assign should_detect_multi_variants = true
+	endunless
+	if has_governs_variants and is_pack_new
+		assign should_detect_multi_variants = true
+	endif
+	if should_detect_multi_variants
+		# Détection de TOUS les produits ayant >1 variante visible dispo.
+		# On stocke les product IDs dans un marker CSV `|id1|id2|` pour `contains`
+		# rapide. Un 2e marker `_rendered` track ce qui a déjà été rendu une
+		# fois dans la boucle de rendu — au 1er match on render, ensuite skip.
+		assign multi_variant_products_marker = '|'
+		for variant in bundle_configurator_inclus_variantes_visible
+			assign variant_product = variant.product
+			assign product_id_marker = variant_product.id | prepend: '|' | append: '|'
+			unless multi_variant_products_marker contains product_id_marker
+				assign product_variants_count = bundle_configurator_inclus_variantes_visible | where: 'available', true | where: 'product', variant_product | size
+				if product_variants_count > 1
+					assign multi_variant_products_marker = multi_variant_products_marker | append: variant_product.id | append: '|'
+				endif
+			endunless
+		endfor
+
+		# Tracker des produits multi-variants déjà rendus dans la boucle
+		# principale (réinitialisé à '|' pour démarrage). Au 1er rendu d'un
+		# produit multi-variants, on l'ajoute ici. Itérations suivantes du
+		# même produit → on `continue`.
+		assign multi_variant_products_rendered = '|'
+
+		# Flag legacy (lu plus bas pour le rendu du picker multi-variants) :
+		# vrai dès qu'au moins un produit multi-variants existe.
+		assign has_multiple_variants_same_product = false
+		if multi_variant_products_marker != '|'
+			assign has_multiple_variants_same_product = true
+		endif
+	endif
+-%}
+
+{% comment %}
+	CONTENEUR PRINCIPAL DE LA SECTION "INCLUS DANS LE PACK"
+
+	Cette section affiche tous les éléments automatiquement inclus dans le bundle,
+	qu'ils soient visibles, invisibles ou gratuits
+{% endcomment %}
+{%- comment -%}
+	`hide_extras` (BO `masquer_surplus_et_inclus`) : ne masque PLUS la section
+	entière — uniquement les surplus de prix internes (`+X€`). Le gating se
+	fait à 2 endroits :
+		- product-bundle-included-picker.liquid : `card_show_surplus = false`
+		  si `hide_extras` → cache les `+X€` du picker variantes.
+		- card-bundle-variant/-product.liquid : `no_price_surplus = true`
+		  côté product-bundle.liquid si `hide_extras` → cache les `+X€` des
+		  cards des étapes.
+	Le wrapper reste toujours visible pour que le client voie les items
+	inclus (couette, oreillers, etc.).
+{%- endcomment -%}
+<div id="ProductBundleItemIncluded-{{ section_id }}">
+	{%- if show_included_in_pack -%}
+		<div class="product__variant-selects__bundle__included{% if is_pack_new %} product__variant-selects__bundle__included--pack-new{% endif %}">
+			{%- if has_available_visible_variant -%}
+				{%- if is_pack_new -%}
+					{%- comment -%}
+						Header pack-new : pastille check primary + titre uppercase
+						"Produits également inclus". Différent du label legacy
+						"Compris dans votre pack" via une clé i18n dédiée.
+					{%- endcomment -%}
+					<div class="product__variant-selects__bundle__included__header">
+						<span class="product__variant-selects__bundle__included__header__icon">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 9" fill="none" aria-hidden="true">
+								<path d="M1 4.5 L4.5 8 L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+							</svg>
+						</span>
+						<p class="product__variant-selects__bundle__included__title product__variant-selects__bundle__included__title--pack-new">
+							{{ 'products.product.included_in_pack_title_pack_new' | t }}
+						</p>
+					</div>
+				{%- else -%}
+					<div class="product__variant-selects__bundle__included__title product__variant-selects__label form__label">
+						{{ 'products.product.included_in_pack_title' | t }}
+					</div>
+				{%- endif -%}
+				<ul class="product__variant-selects__bundle__included__products list-unstyled">
+					{% comment %}
+						RENDU DES VARIANTES VISIBLES INCLUSES
+
+						Pack-new : tri en 2 passes pour mettre les items avec picker
+						(multi-variants, ex. choix taille d'oreiller) EN PREMIER, puis
+						le reste dans l'ordre original (governance + items toujours
+						visibles sans choix).
+
+						Legacy : passe unique (ordre original).
+					{% endcomment %}
+
+					{%- comment -%} ====== PASSE 1 : items avec picker (pack-new uniquement) ====== {%- endcomment -%}
+					{%- if is_pack_new and has_multiple_variants_same_product -%}
+						{%- for variant in bundle_configurator_inclus_variantes_visible -%}
+							{%- liquid
+								# Gating : la passe 1 ne s'applique qu'aux items hors governance
+								# (au-delà de step_governs_variants.size).
+								assign apply_multi_variant_here = true
+								if has_governs_variants
+									assign governs_count_for_grouping = step_governs_variants | size
+									if forloop.index0 < governs_count_for_grouping
+										assign apply_multi_variant_here = false
+									endif
+								endif
+
+								assign render_in_pass1 = false
+								assign has_multiple_variants = false
+								assign variant_ids = blank
+
+								if apply_multi_variant_here
+									assign current_product_id_marker = variant.product.id | prepend: '|' | append: '|'
+									if multi_variant_products_marker contains current_product_id_marker
+										unless multi_variant_products_rendered contains current_product_id_marker
+											# 1re occurrence d'un produit multi-variants → render ici
+											assign render_in_pass1 = true
+											assign multi_variant_products_rendered = multi_variant_products_rendered | append: variant.product.id | append: '|'
+											assign current_product = variant.product
+											assign variant_ids = bundle_configurator_inclus_variantes_visible | where: 'available', true | where: 'product', current_product | map: 'id' | compact
+											if variant_ids != blank
+												assign variant_count = variant_ids.size
+												if variant_count > 1
+													assign has_multiple_variants = true
+												endif
+											endif
+										endunless
+									endif
+								endif
+							-%}
+							{%- if render_in_pass1 -%}
+								{%- liquid
+									# Items en passe 1 sont par définition hors governance.
+									assign get_governs_variant = blank
+									assign is_invisible = false
+
+									assign variant_free = false
+									assign find_variant_in_inclus_free = variants_inclus_free | find: 'id', variant.id
+									if find_variant_in_inclus_free != blank
+										assign variant_free = true
+									endif
+
+									# Pré-sélection BO si elle pointe vers une variante du groupe.
+									assign preselected_variant_id_for_card = blank
+									if has_multiple_variants and preselected_variant_ids != blank
+										for vid in variant_ids
+											if preselected_variant_ids contains vid
+												assign preselected_variant_id_for_card = vid
+												break
+											endif
+										endfor
+									endif
+								-%}
+								<li class="product__variant-selects__bundle__included__product">
+									{%- render 'card-bundle-item-included',
+										variant: variant,
+										section_id: section_id,
+										product_form_id: product_form_id,
+										has_multiple_variants: has_multiple_variants,
+										variant_ids: variant_ids,
+										preselected_variant_id: preselected_variant_id_for_card,
+										has_governs_variants: has_governs_variants,
+										get_governs_variant: get_governs_variant,
+										is_invisible: is_invisible,
+										variant_free: variant_free,
+										is_pack_new: is_pack_new,
+										hide_extras: hide_extras
+									-%}
+								</li>
+							{%- endif -%}
+						{%- endfor -%}
+					{%- endif -%}
+
+					{%- comment -%} ====== PASSE 2 : reste des items (governance + items sans picker) ====== {%- endcomment -%}
+					{%- for variant in bundle_configurator_inclus_variantes_visible -%}
+						{%- liquid
+							# Flags de contrôle pour cette variante
+							assign is_invisible = false
+							assign has_multiple_variants = false
+							assign variant_ids = blank
+
+							comment
+								GESTION DES PRODUITS AVEC MULTIPLES VARIANTES
+
+								En pack-new : la 1re occurrence d'un produit multi-variants a
+								déjà été rendue en passe 1 → on skip ici toutes les variantes
+								du même produit.
+								En legacy : comportement original (1re render, suivantes skip
+								via tracker).
+							endcomment
+							# En governance pack-new : le multi-variant grouping s'applique
+							# UNIQUEMENT pour les items hors gouvernance (au-delà de
+							# step_governs_variants.size). Les items gouvernés (couette,
+							# draps liés à chaque matelas) sont rendus individuellement.
+							assign apply_multi_variant_here = true
+							if has_governs_variants
+								assign governs_count_for_grouping = step_governs_variants | size
+								if forloop.index0 < governs_count_for_grouping
+									assign apply_multi_variant_here = false
+								endif
+							endif
+
+							if has_multiple_variants_same_product and apply_multi_variant_here
+								assign current_product_id_marker = variant.product.id | prepend: '|' | append: '|'
+								if multi_variant_products_marker contains current_product_id_marker
+									# Pack-new : tous les multi-variants ont été rendus en passe 1
+									if is_pack_new
+										continue
+									endif
+
+									# Legacy : on garde le rendu inline avec dédup.
+									if multi_variant_products_rendered contains current_product_id_marker
+										continue
+									endif
+									assign multi_variant_products_rendered = multi_variant_products_rendered | append: variant.product.id | append: '|'
+
+									assign current_product = variant.product
+									assign variant_ids = bundle_configurator_inclus_variantes_visible | where: 'available', true | where: 'product', current_product | map: 'id' | compact
+
+									assign variant_count = 0
+									if variant_ids != blank
+										assign variant_count = variant_ids.size
+									endif
+
+									if variant_count > 1
+										assign has_multiple_variants = true
+									endif
+								endif
+							endif
+
+							comment
+								APPLICATION DES RÈGLES DE GOUVERNANCE
+
+								En mode gouverné, les variantes incluses sont masquées par défaut
+								SAUF celle qui correspond à la variante gouvernante sélectionnée par défaut.
+								Si la variante gouvernante correspondante est cachée, la variante incluse devient invisible.
+							endcomment
+							if has_governs_variants
+								# Récupère la variante gouvernante correspondante par index
+								assign get_governs_variant = step_governs_variants[forloop.index0]
+
+								if get_governs_variant != blank
+									# Vérifie si la variante gouvernante est cachée
+									assign governs_variant_hidden = false
+									if get_governs_variant.metafields.custom.hidden_variant.value == true
+										assign governs_variant_hidden = true
+									endif
+
+									# Si la variante gouvernante est cachée, la variante incluse devient invisible
+									if governs_variant_hidden
+										assign is_invisible = true
+									else
+										# Par défaut, toutes les variantes incluses sont masquées
+										# SAUF celle qui correspond à la variante gouvernante sélectionnée par défaut
+										if forloop.index0 != default_governs_variant_index
+											assign is_invisible = true
+										endif
+									endif
+								else
+									# Pas de variante gouvernante correspondante à cet index
+									# (= visible list plus longue que step_governs_variants).
+									# Pack-new : on laisse l'item visible (sortie du système
+									# governance — cas typique des oreillers/protège offerts
+									# qui sont toujours inclus quel que soit le matelas).
+									# Legacy : on conserve l'ancien comportement (masquer par
+									# défaut) pour ne pas casser les packs existants.
+									unless is_pack_new
+										assign is_invisible = true
+									endunless
+								endif
+							endif
+
+							comment
+								DÉTECTION DES VARIANTES GRATUITES
+
+								Vérifie si cette variante fait partie des variantes
+								offertes gratuitement dans le pack
+							endcomment
+							assign variant_free = false
+							assign find_variant_in_inclus_free = variants_inclus_free | find: 'id', variant.id
+
+							if find_variant_in_inclus_free != blank
+								assign variant_free = true
+							endif
+						-%}
+
+						{%- liquid
+							# Pour les groupes multi-variants, on cherche un ID dans variant_ids
+							# qui soit aussi dans `preselected_variant_ids` (BO override).
+							# Si trouvé → c'est cette variante qui devient le défaut, sinon
+							# fallback comportement actuel (1re non cachée).
+							assign preselected_variant_id_for_card = blank
+							if has_multiple_variants and preselected_variant_ids != blank
+								for vid in variant_ids
+									if preselected_variant_ids contains vid
+										assign preselected_variant_id_for_card = vid
+										break
+									endif
+								endfor
+							endif
+						-%}
+
+						<li class="product__variant-selects__bundle__included__product">
+							{%- render 'card-bundle-item-included',
+								variant: variant,
+								section_id: section_id,
+								product_form_id: product_form_id,
+								has_multiple_variants: has_multiple_variants,
+								variant_ids: variant_ids,
+								preselected_variant_id: preselected_variant_id_for_card,
+								has_governs_variants: has_governs_variants,
+								get_governs_variant: get_governs_variant,
+								is_invisible: is_invisible,
+								variant_free: variant_free,
+								is_pack_new: is_pack_new,
+								hide_extras: hide_extras
+							-%}
+						</li>
+					{%- endfor -%}
+				</ul>
+			{%- endif -%}
+
+			{% comment %}
+				RENDU DES VARIANTES INVISIBLES (CACHÉES)
+
+				Ces variantes sont automatiquement incluses dans le pack
+				mais ne sont pas visibles dans l'interface utilisateur.
+				Elles sont rendues de manière cachée pour la gestion du panier.
+			{% endcomment %}
+			{%- for variant in bundle_configurator_inclus_variantes_invisible -%}
+				{%- liquid
+					# Variable conservée pour compatibilité (non utilisée actuellement)
+					assign check_against_inventory = true
+
+					comment
+						VÉRIFICATION DES VARIANTES INVISIBLES GRATUITES
+
+						Même les variantes invisibles peuvent être offertes,
+						ce qui affecte leur traitement dans le panier
+					endcomment
+					assign variant_free = false
+					assign find_variant_in_inclus_free = variants_inclus_free | find: 'id', variant.id
+
+					if find_variant_in_inclus_free != blank
+						assign variant_free = true
+					endif
+				-%}
+
+				{%- render 'card-bundle-item-included',
+					variant: variant,
+					section_id: section_id,
+					product_form_id: product_form_id,
+					is_invisible: true,
+					variant_free: variant_free,
+					is_pack_new: is_pack_new
+				-%}
+			{%- endfor -%}
+		</div>
+	{%- endif -%}
+</div>

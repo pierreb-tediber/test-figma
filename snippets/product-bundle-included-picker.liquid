@@ -1,0 +1,425 @@
+{% comment %}
+	Renders product variant-picker
+
+	Accepts:
+	- product: {Object} product object.
+	- variant: {Object} current selected variant.
+	- product_form_id: {String} Id of the product form to which the variant picker is associated.
+	- section_id: {String} Section ID.
+	- variant_ids: {String} Comma-separated list of allowed variant IDs.
+
+	Usage:
+	{% render 'product-bundle-included-picker', product: product, variant: variant, product_form_id: product_form_id %}
+{% endcomment %}
+
+{%- unless product.has_only_default_variant -%}
+	{%- liquid
+		assign picker_type = 'variant_dropdown'
+		assign class_hidden = 'hidden visually-hidden'
+
+		# Format par défaut (Monobloc) : suffixe masqué à l'affichage dans le picker taille
+		assign default_format_lc = 'products.product.default_format_for_size_value' | t | downcase | strip
+		assign options_names_for_size_translated = 'products.product.options_names_for_size' | t | downcase | replace: ', ', ','
+		assign options_names_for_size = options_names_for_size_translated | split: ',' | uniq
+
+		comment
+			SÉLECTION DE LA VARIANTE DE DÉPART
+
+			Utilise la variante passée en paramètre si disponible,
+			sinon utilise la variante par défaut du produit
+		endcomment
+		if selected_variant == blank
+			assign selected_variant = product.selected_or_first_available_variant
+		endif
+
+		comment
+			VÉRIFICATION ET REMPLACEMENT DES VARIANTES CACHÉES
+
+			Si la variante sélectionnée a le métafield hidden_variant à true,
+			on cherche une variante alternative disponible et non cachée
+		endcomment
+		if selected_variant.metafields.custom.hidden_variant.value == true
+			for variant_check in product.variants
+				comment
+					FILTRAGE PAR IDS AUTORISÉS
+
+					Si variant_ids est fourni, ne chercher que parmi ces variantes
+				endcomment
+				if variant_ids != blank
+					unless variant_ids contains variant_check.id
+						continue
+					endunless
+				endif
+
+				comment
+					VÉRIFICATION DE DISPONIBILITÉ COMPLÈTE
+
+					Même logique que dans le reste du fichier pour garantir
+					qu'on sélectionne une variante réellement disponible
+				endcomment
+				assign check_against_inventory = true
+				if variant_check.inventory_management != 'shopify' or variant_check.inventory_policy == 'continue'
+					assign check_against_inventory = false
+				endif
+
+				assign quantity_rule_soldout = false
+				if variant_check.quantity_rule.min > variant_check.inventory_quantity and check_against_inventory
+					assign quantity_rule_soldout = true
+				endif
+
+				assign variant_available = true
+				if variant_check.available == false or quantity_rule_soldout or variant_check == null
+					assign variant_available = false
+				endif
+
+				comment
+					Sélectionner cette variante si elle est disponible ET non cachée
+				endcomment
+				if variant_available and variant_check.metafields.custom.hidden_variant.value != true
+					assign selected_variant = variant_check
+					break
+				endif
+			endfor
+		endif
+	-%}
+	<variant-selects-included-in-pack
+		id="variant-selects-included-in-pack-{{ section_id }}-{{ product.id }}"
+		data-section="{{ section_id }}"
+		class="product__variant-selects-included-in-pack{% if is_pack_new %} product__variant-selects-included-in-pack--pack-new{% endif %}"
+	>
+		{%- if is_pack_new and product.options.size == 1 -%}
+			{%- comment -%}
+				Pack-new : layout radio cards. Une carte par valeur d'option
+				(filtrée par `variant_ids`). Chaque carte affiche un label
+				(override metaobject `pack_information.inclus_variant_label` ou
+				`variant.option1`) + la taille (override `inclus_variant_title`
+				ou `variant.title`). Le <fieldset> + radios déclenchent un `change`
+				bubblant que ProductBundleItemIncluded capte (cf. selector
+				`fieldset input:checked`), et `data-option-value-id` est passé pour
+				que `selectedOptionValues` reconstruise l'URL fetch correctement.
+				Restreint au cas product.options.size == 1 (cas typique du pack :
+				couette/oreillers avec axe Format unique) — fallback dropdown sinon.
+			{%- endcomment -%}
+			{%- assign included_option = product.options_with_values | first -%}
+			{%- liquid
+				# Pré-calcul prix de référence (le plus bas du groupe) pour afficher
+				# le surplus +X€ sur les cards plus chères. Si toutes les variantes
+				# ont le même prix → aucun surplus affiché (min == max).
+				# Gate explicite par `hide_extras` (BO `masquer_surplus_et_inclus`) :
+				# si actif, on ne calcule même pas, surplus jamais affiché.
+				assign card_ref_price = -1
+				assign card_max_price = 0
+				assign card_show_surplus = false
+				unless hide_extras
+					for ref_value in included_option.values
+						assign ref_variant = ref_value.variant
+						if ref_variant == blank
+							continue
+						endif
+						unless variant_ids contains ref_variant.id
+							continue
+						endunless
+						if ref_variant.metafields.custom.hidden_variant.value == true
+							continue
+						endif
+						if card_ref_price < 0 or ref_variant.price < card_ref_price
+							assign card_ref_price = ref_variant.price
+						endif
+						if ref_variant.price > card_max_price
+							assign card_max_price = ref_variant.price
+						endif
+					endfor
+					if card_ref_price >= 0 and card_max_price > card_ref_price
+						assign card_show_surplus = true
+					endif
+				endunless
+
+				# ── Mode "tombant" (couettes) ──────────────────────────────
+				# Pour les couettes, les cartes du picker affichent "Petit tombant" /
+				# "Grand tombant" au lieu de la taille brute. Déclencheur : le handle
+				# du metaobject pack_information (niveau produit) figure dans la liste
+				# de traduction `tombant_pack_information_handles`.
+				# La correspondance matelas→couette est monotone (Petit < Grand en
+				# dimension), donc trier les tailles offertes suffit : la plus petite
+				# = Petit tombant, la plus grande = Grand tombant. Aucune table à
+				# maintenir, et ça marche aussi au re-rendu AJAX (on n'a besoin que des
+				# variantes du picker, pas de la taille du matelas).
+				assign tombant_mode = false
+				assign tombant_product_handle = product.metafields.custom.pack_information.value.system.handle
+				if tombant_product_handle != blank
+					assign tombant_handles = 'products.product.tombant_pack_information_handles' | t | replace: ' ', '' | split: ','
+					if tombant_handles contains tombant_product_handle
+						assign tombant_mode = true
+					endif
+				endif
+
+				# Repère la plus petite et la plus grande taille parmi les variantes
+				# offertes (1re dimension du titre, ex. "240 x 220 cm" → 240).
+				assign tombant_min_id = blank
+				assign tombant_max_id = blank
+				if tombant_mode
+					assign tombant_min_dim = 0
+					assign tombant_max_dim = 0
+					for tombant_value in included_option.values
+						assign tombant_variant = tombant_value.variant
+						if tombant_variant == blank
+							continue
+						endif
+						unless variant_ids contains tombant_variant.id
+							continue
+						endunless
+						if tombant_variant.metafields.custom.hidden_variant.value == true
+							continue
+						endif
+						assign tombant_dim = tombant_variant.title | split: ' ' | first | times: 1
+						if tombant_min_id == blank or tombant_dim < tombant_min_dim
+							assign tombant_min_dim = tombant_dim
+							assign tombant_min_id = tombant_variant.id
+						endif
+						if tombant_max_id == blank or tombant_dim > tombant_max_dim
+							assign tombant_max_dim = tombant_dim
+							assign tombant_max_id = tombant_variant.id
+						endif
+					endfor
+					# Libellés depuis les métaobjets dédiés (éditables au BO).
+					assign tombant_label_petit = metaobjects['pack_information']['petit-tombant'].inclus_variant_label
+					assign tombant_label_grand = metaobjects['pack_information']['grand-tombant'].inclus_variant_label
+				endif
+			-%}
+			<fieldset
+				class="product__variant-selects__bundle__included-card__variant-picker product-form__input"
+				form="{{ product_form_id }}"
+			>
+				<legend class="visually-hidden">
+					{{ included_option.name }}
+				</legend>
+				<div class="product__variant-selects__bundle__included-card__variant-picker__container">
+					{%- for value in included_option.values -%}
+						{%- liquid
+							assign card_variant = value.variant
+							if card_variant == blank
+								continue
+							endif
+							unless variant_ids contains card_variant.id
+								continue
+							endunless
+							if card_variant.metafields.custom.hidden_variant.value == true
+								continue
+							endif
+
+							assign card_pack_info = card_variant.metafields.custom.pack_information.value
+							assign card_label = card_pack_info.inclus_variant_label
+							if card_label == blank
+								assign card_label = value
+							endif
+							# Mode tombant : remplace le libellé (taille brute) par "Petit/Grand
+							# tombant" selon que la variante est la plus petite ou la plus grande.
+							if tombant_mode
+								if card_variant.id == tombant_min_id and tombant_label_petit != blank
+									assign card_label = tombant_label_petit
+								elsif card_variant.id == tombant_max_id and tombant_label_grand != blank
+									assign card_label = tombant_label_grand
+								endif
+							endif
+							assign card_title = card_pack_info.inclus_variant_title
+							if card_title == blank
+								if card_variant.title != 'Default Title'
+									assign card_title = card_variant.title
+								endif
+							endif
+
+							assign card_is_selected = false
+							if card_variant.id == selected_variant.id
+								assign card_is_selected = true
+							endif
+
+							assign card_radio_id = 'bundle-included-variant-' | append: section_id | append: '-' | append: product.id | append: '-' | append: card_variant.id
+						-%}
+						<label
+							class="product__variant-selects__bundle__included-card__variant-card{% if card_is_selected %} product__variant-selects__bundle__included-card__variant-card--selected{% endif %}"
+							for="{{ card_radio_id }}"
+						>
+							<input
+								type="radio"
+								id="{{ card_radio_id }}"
+								name="options[{{ included_option.name | escape }}]"
+								value="{{ value | escape }}"
+								data-option-value-id="{{ value.id }}"
+								data-variant-id="{{ card_variant.id }}"
+								class="visually-hidden product__variant-selects__bundle__included-card__variant-card__input"
+								{% if card_is_selected %}checked{% endif %}
+							>
+							<span class="product__variant-selects__bundle__included-card__variant-card__label">
+								{{ card_label }}
+							</span>
+							{%- if card_title != blank -%}
+								<span class="product__variant-selects__bundle__included-card__variant-card__size">
+									{{ card_title }}
+								</span>
+							{%- endif -%}
+							{%- if card_show_surplus -%}
+								{%- assign card_variant_surplus = card_variant.price | minus: card_ref_price -%}
+								{%- if card_variant_surplus > 0 -%}
+									<span class="product__variant-selects__bundle__included-card__variant-card__surplus">
+										{{ card_variant_surplus | money | prepend: '+' }}
+									</span>
+								{%- endif -%}
+							{%- endif -%}
+							<span class="product__variant-selects__bundle__included-card__variant-card__check" aria-hidden="true">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 9" fill="none">
+									<path d="M1 4.5 L4.5 8 L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+								</svg>
+							</span>
+						</label>
+					{%- endfor -%}
+				</div>
+			</fieldset>
+		{%- else -%}
+		{%- for option in product.options_with_values -%}
+			{%- liquid
+				# Variables de contrôle de l'affichage
+				assign hide_information = false
+
+				# Traitement du nom de l'option en minuscules
+				assign option_name_downcase = option.name | downcase
+
+				# Calcule la valeur sélectionnée pour cette option basée sur la variante spécifique
+				assign current_option_selected_value = blank
+				if selected_variant != blank
+					assign option_index = option.position | minus: 1
+					assign current_option_selected_value = selected_variant.options[option_index]
+				endif
+
+				if current_option_selected_value == blank
+					assign current_option_selected_value = option.selected_value
+				endif
+
+				# Détection option taille (pour masquage suffixe " - Monobloc" à l'affichage)
+				assign option_name_array_size_check = option_name_downcase | split: ' ' | uniq
+				assign current_is_size = false
+				for option_name in option_name_array_size_check
+					if options_names_for_size contains option_name
+						assign current_is_size = true
+						break
+					endif
+				endfor
+
+				# Valeur affichée du sélecteur (texte uniquement) : strippe " - Monobloc" si option taille
+				assign current_option_selected_value_display = current_option_selected_value
+				if current_is_size
+					assign current_value_parts_display = current_option_selected_value | split: ' - '
+					if current_value_parts_display.size > 1
+						assign current_value_format_display_lc = current_value_parts_display | last | strip | downcase
+						if current_value_format_display_lc == default_format_lc or current_value_format_display_lc == 'bibloc'
+							assign current_option_selected_value_display = current_value_parts_display | first | strip
+						endif
+					endif
+				endif
+
+				# Hide the option picker
+				assign product_parent = product.metafields.custom.combined_listings_premier_produit_enfant.value
+				if product_parent != blank
+					assign options_need_hide = product_parent.metafields.custom.hide_options.value | compact
+				else
+					assign options_need_hide = product.metafields.custom.hide_options.value | compact
+				endif
+				if options_need_hide.size > 0
+					for option_need_hide in options_need_hide
+						assign option_need_hide_downcase = option_need_hide | downcase
+						if option_name_downcase == option_need_hide_downcase
+							assign hide_information = true
+							break
+						endif
+					endfor
+				endif
+			-%}
+
+			<div
+				class="product-form__input product-form__input--dropdown product__variant-selects__dropdown product__variant-selects__dropdown--{{ picker_type }}{% if hide_information %} {{ class_hidden }}{% endif %}{% if is_pack_new %} product__variant-selects__dropdown--pack-new-included{% endif %}"
+			>
+				<variant-dropdown class="variant-dropdown">
+					<label
+						class="form__label product__variant-selects__label product__variant-selects__dropdown__label visually-hidden"
+						id="label-{{ section_id }}-{{ product.id }}-{{ forloop.index0 }}"
+						for="Option-Included-{{ section_id }}-{{ product.id }}-{{ forloop.index0 }}"
+					>
+						{%- if is_pack_new -%}
+						{{- option.name -}}
+					{%- else -%}
+						{{- 'products.product.product_option_name_choose' | t: option_name: option_name_downcase }}
+					{%- endif -%}
+					</label>
+
+					<div class="variant-dropdown__container">
+						<button
+							type="button"
+							class="variant-dropdown__selected"
+							aria-haspopup="listbox"
+							aria-expanded="false"
+							aria-labelledby="label-{{ section_id }}-{{ product.id }}-{{ forloop.index0 }}"
+							id="variant-dropdown-button-{{ section_id }}-{{ product.id }}-{{ forloop.index0 }}"
+						>
+							<span class="variant-dropdown__selected__left">
+								<span class="variant-dropdown__selected__text">
+									{{ current_option_selected_value_display }}
+								</span>
+							</span>
+
+							<span class="variant-dropdown__selected__right">
+								<span class="svg-wrapper">
+									{{- 'icon-caret.svg' | inline_asset_content -}}
+								</span>
+							</span>
+						</button>
+
+						<ul
+							class="variant-dropdown__options"
+							role="listbox"
+							aria-labelledby="label-{{ section_id }}-{{ product.id }}-{{ forloop.index0 }}"
+							aria-hidden="true"
+							id="variant-dropdown-options-{{ section_id }}-{{ product.id }}-{{ forloop.index0 }}"
+						>
+							{%- render 'product-bundle-included-options',
+								product: product,
+								selected_variant: selected_variant,
+								option: option,
+								position: option.position,
+								picker_type: picker_type,
+								section_id: section_id,
+								variant_ids: variant_ids,
+								is_pack_new: is_pack_new
+							-%}
+						</ul>
+
+						<div class="select visually-hidden" aria-hidden="true">
+							<select
+								id="Option-Included-{{ section_id }}-{{ product.id }}-{{ forloop.index0 }}"
+								class="select__select"
+								name="options[{{ option.name | escape }}]"
+								form="{{ product_form_id }}"
+								data-product-url="{{ product.url }}"
+								aria-hidden="true"
+								tabindex="-1"
+							>
+								{%- render 'product-bundle-included-options',
+									product: product,
+									selected_variant: selected_variant,
+									option: option,
+									position: option.position,
+									picker_type: 'dropdown',
+									section_id: section_id,
+									variant_ids: variant_ids
+								-%}
+							</select>
+						</div>
+					</div>
+				</variant-dropdown>
+			</div>
+		{%- endfor -%}
+		{%- endif -%}
+
+		<script type="application/json" data-selected-variant>
+			{{ selected_variant | json }}
+		</script>
+	</variant-selects-included-in-pack>
+{%- endunless -%}

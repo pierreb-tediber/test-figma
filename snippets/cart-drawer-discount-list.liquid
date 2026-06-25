@@ -1,0 +1,70 @@
+{% liquid
+	# Récupérer les discount applications avec leurs montants
+	assign discount_applications = cart.cart_level_discount_applications | where: 'type', 'discount_code'
+
+	# Pour les discounts au niveau du panier
+	assign discount_data = blank
+	for discount_app in discount_applications
+		assign discount_entry = discount_app.title | append: '|' | append: discount_app.total_allocated_amount
+		if discount_data == ''
+			assign discount_data = discount_entry
+		else
+			assign discount_data = discount_data | append: '||' | append: discount_entry
+		endif
+	endfor
+
+	# Pour les discounts au niveau des lignes
+	for item in cart.items
+		for allocation in item.line_level_discount_allocations
+			if allocation.discount_application.type == 'discount_code'
+				assign discount_entry = allocation.discount_application.title | append: '|' | append: allocation.amount
+				if discount_data == ''
+					assign discount_data = discount_entry
+				else
+					assign discount_data = discount_data | append: '||' | append: discount_entry
+				endif
+			endif
+		endfor
+	endfor
+
+	# Créer un tableau unique des codes avec leurs montants
+	assign discount_entries = discount_data | split: '||'
+	assign processed_codes = ''
+%}
+
+<div class="cart-discount__list">
+	<ul class="cart-discount__list-items list-unstyled">
+		{%- for discount_entry in discount_entries -%}
+			{%- liquid
+				assign entry_parts = discount_entry | split: '|'
+				assign discount_code = entry_parts[0] %}
+
+			{%- unless processed_codes contains discount_code -%}
+				{%- liquid
+					assign processed_codes = processed_codes | append: discount_code | append: ','
+					assign total_discount = 0
+					for entry in discount_entries
+						assign check_parts = entry | split: '|'
+						if check_parts[0] == discount_code
+							assign total_discount = total_discount | plus: check_parts[1]
+						endif
+					endfor
+				-%}
+
+				<li
+					class="cart-discount__list-item"
+					data-discount-code="{{ discount_code }}"
+					data-discount-amount="{{ total_discount }}"
+					aria-label="{{ 'sections.cart.discount.discount_applied' | t: code: discount_code }}"
+				>
+					<p class="cart-discount__list-item-code">
+						<span class="cart-discount__list-item-code-text">
+							{{ discount_code }}
+						</span>
+						<span class="cart-discount__list-item-amount">-{{ total_discount | money }}</span>
+					</p>
+				</li>
+			{%- endunless -%}
+		{%- endfor -%}
+	</ul>
+</div>

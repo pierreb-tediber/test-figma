@@ -1,0 +1,36 @@
+.newsletter__wrapper {
+  padding-right: 1.6rem;
+  padding-left: 1.6rem;
+}
+
+@media screen and (min-width: 750px) {
+  .newsletter__wrapper {
+    padding-right: 6rem;
+    padding-left: 6rem;
+  }
+}
+
+.newsletter__wrapper>* {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.newsletter__wrapper>*+.newsletter-form {
+  margin-top: 3rem;
+}
+
+.newsletter-form__field-wrapper .newsletter-form__message {
+  margin-top: 1.5rem;
+}
+
+.newsletter__button {
+  margin-top: 3rem;
+  width: fit-content;
+}
+
+@media screen and (min-width: 750px) {
+  .newsletter__button {
+    flex-shrink: 0;
+    margin: 0 0 0 1rem;
+  }
+}

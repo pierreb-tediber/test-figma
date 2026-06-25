@@ -1,0 +1,180 @@
+{%- comment -%}
+	Renders a standard section header with heading, subheading, and description.
+
+	Accepts:
+	- heading: {String} The main heading text
+	- subheading: {String} The subheading text that appears above the main heading
+	- heading_picto: {Object} Image object for the picto (from heading block settings)
+	- heading_picto_size: {Object} Size for the picto (from heading block settings)
+	- heading_picto_alt: {String} Alt text for the heading picto (optional)
+	- picto: {Object} Image object for the picto (from text block settings)
+	- picto_size: {Object} Size for the picto (from heading block settings)
+	- picto_alt: {String} Alt text for the picto (optional)
+	- description: {String|HTML} Rich text description
+	- text_alignment: {String} Alignment class (left, center, right)
+	- heading_size: {String} Heading size class (h2, h3, h4, h5, h6)
+	- heading_class: {String} Heading class (optional)
+	- heading_id: {String} ID for the heading (for accessibility, optional)
+	- metafield_tag: {Boolean} If true, the description will be rendered as a metafield tag (optional)
+	- description_hn_replace: {Boolean} If true, the description will be replaced by the text in the description_hn_replace field (optional)
+	- show_more: {Boolean} If true, the more button will be displayed (optional)
+	- text_more: {String} Text for the more button (optional)
+	- text_less: {String} Text for the less button (optional)
+	- text_max_lines: {Number} Maximum number of lines to display (optional)
+	- show_more_alignment: {String} Alignment class for the show more button (left, center, right)
+	Usage:
+	{%- render 'section-heading',
+	  heading: section.settings.heading,
+	  heading_size: 'h2',
+	  heading_id: 'MyHeadingID',
+	  subheading: section.settings.subheading,
+	  description: section.settings.description,
+	  heading_picto: heading.settings.picto,
+	  heading_picto_size: heading.settings.picto_size,
+	  heading_picto_size_mobile: heading.settings.picto_size_mobile,
+	  heading_picto_alt: heading.settings.picto_alt,
+	  picto: text.settings.picto,
+	  picto_size: text.settings.picto_size,
+	  picto_size_mobile: text.settings.picto_size_mobile,
+	  picto_alt: text.settings.picto_alt,
+	  text_alignment: section.settings.alignment
+	-%}
+{%- endcomment -%}
+
+{%- liquid
+	if show_more
+		if text_more == blank
+			assign text_more = 'accessibility.show_more' | t
+		endif
+		if text_less == blank
+			assign text_less = 'accessibility.show_less' | t
+		endif
+		assign max_lines = text_max_lines | default: 3
+	endif
+-%}
+
+{%- style -%}
+	#shopify-section-{{ section.id }} .section-heading__picto-heading img {
+		width: {{ heading_picto_size }}px;
+		height: auto
+	}
+
+	#shopify-section-{{ section.id }} .section-heading__picto img {
+		width: {{ picto_size }}px;
+		height: auto
+	}
+
+	{% if show_more %}
+		#shopify-section-{{ section.id }} {
+			--show-more-lines: {{ max_lines }};
+		}
+	{% endif %}
+
+	@media (max-width: 749px) {
+		#shopify-section-{{ section.id }} .section-heading__picto-heading img {
+			width: {{ heading_picto_size_mobile }}px;
+		}
+
+		#shopify-section-{{ section.id }} .section-heading__picto img {
+			width: {{ picto_size_mobile }}px;
+		}
+	}
+{%- endstyle -%}
+
+{%- if subheading != blank or heading != blank or description != blank -%}
+	{%- assign heading_size = heading_size | default: 'h2' -%}
+	<div class="section-heading">
+		<div class="section-heading__container {{ text_alignment }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}{% if heading_first %} section-heading__container-title-first{% endif %}">
+			{%- if subheading != blank -%}
+				<div class="section-heading__subtitle subtitle">
+					{{ subheading }}
+				</div>
+			{%- endif -%}
+
+			{%- if heading_picto != blank -%}
+				{%- liquid
+					assign heading_picto_alt_text = heading_picto_alt | default: heading_picto.alt | default: ''
+					assign heading_picto_mobile_size = heading_picto_size_mobile | default: heading_picto_size
+					assign heading_picto_src_width = heading_picto_size | times: 2
+					assign heading_picto_sizes = '(max-width: 749px) ' | append: heading_picto_mobile_size | append: 'px, ' | append: heading_picto_size | append: 'px'
+				-%}
+				<div class="section-heading__picto-heading">
+					{{
+						heading_picto
+						| image_url: width: heading_picto_src_width
+						| image_tag:
+							width: heading_picto_size,
+							widths: '20, 40, 60, 80, 100, 120, 160, 200, 240, 320, 400',
+							sizes: heading_picto_sizes,
+							loading: 'lazy',
+							alt: heading_picto_alt_text
+					}}
+				</div>
+			{%- endif -%}
+
+			{%- if heading != blank -%}
+				<{{ heading_size }}
+					class="section-heading__title {{ heading_class }}"
+					{% if heading_id != blank %}
+						id="{{ heading_id }}"
+					{% endif %}
+				>
+					{{ heading }}
+				</{{ heading_size }}>
+			{%- endif -%}
+
+			{%- if description != blank -%}
+				<div class="section-heading__description{% if show_more %} show-more{% endif %}">
+					{%- if picto != blank -%}
+						{%- liquid
+							assign picto_alt_text = picto_alt | default: picto.alt | default: ''
+							assign picto_mobile_size = picto_size_mobile | default: picto_size
+							assign picto_src_width = picto_size | times: 2
+							assign picto_sizes = '(max-width: 749px) ' | append: picto_mobile_size | append: 'px, ' | append: picto_size | append: 'px'
+						-%}
+						<div class="section-heading__picto">
+							{{
+								picto
+								| image_url: width: picto_src_width
+								| image_tag:
+									width: picto_size,
+									widths: '20, 40, 60, 80, 100, 120, 160, 200, 240, 320, 400',
+									sizes: picto_sizes,
+									loading: 'lazy',
+									alt: picto_alt_text
+							}}
+						</div>
+					{%- endif -%}
+					<div class="section-heading__description-content{% if show_more %} show-more__content{% endif %}{% if description_hn_replace %} rte{% endif %}">
+						{%- if metafield_tag -%}
+							{{ description | metafield_tag }}
+						{%- elsif description_hn_replace -%}
+							{{
+								description
+								| replace: '<h2', '<div class="h2"'
+								| replace: '</h2>', '</div>'
+								| replace: '<h3', '<div class="h3"'
+								| replace: '</h3>', '</div>'
+								| replace: '<h4', '<div class="h4"'
+								| replace: '</h4>', '</div>'
+								| replace: '<h5', '<div class="h5"'
+								| replace: '</h5>', '</div>'
+								| replace: '<h6', '<div class="h6"'
+								| replace: '</h6>', '</div>'
+							}}
+						{%- else -%}
+							{{ description }}
+						{%- endif -%}
+					</div>
+					{%- if show_more -%}
+						<div
+							class="show-more__button ax-link reversed {{ show_more_alignment }}"
+							data-more-text="{{ text_more }}"
+							data-less-text="{{ text_less }}"
+						></div>
+					{%- endif -%}
+				</div>
+			{%- endif -%}
+		</div>
+	</div>
+{%- endif -%}

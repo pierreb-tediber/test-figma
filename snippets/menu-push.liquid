@@ -1,0 +1,155 @@
+{%- comment -%}
+	Renders a menu push with image, title and link.
+
+	Accepts:
+	- block: {Object} The block containing the menu push settings (Required)
+	- push_color_scheme: {String} The color scheme for the push (Required)
+	- push_opacity: {Number} The opacity for the push overlay (Required)
+	- image: {Object} The image to display (Optional)
+	- video: {Object} The video to display (Optional)
+	- title: {String} The title to display (Optional)
+	- url_text: {String} The text for the link (Optional)
+	- url: {String} The URL for the link (Optional)
+	- link_style: {String} The style for the link (Optional)
+	- lazy_load: {Boolean} Whether to lazy load the image (Default: false)
+	- position: {String} The position of the content (Default: middle-center)
+
+	Usage:
+	{%- render 'menu-push',
+	  block: current_block,
+	  push_color_scheme: current_block.settings.push_color_scheme,
+	  push_opacity: current_block.settings.push_opacity,
+	  image: current_block.settings.image,
+	  video: current_block.settings.video,
+	  title: current_block.settings.title,
+	  url_text: current_block.settings.url_text,
+	  url: current_block.settings.url,
+	  link_style: current_block.settings.link_style,
+	  lazy_load: false,
+	  position: 'middle-center'
+	-%}
+{%- endcomment -%}
+
+{%- liquid
+	# Set default values
+	assign position = position | default: 'middle-center'
+
+	# Calculate opacity
+	assign opacity_value = push_opacity | times: 0.01
+
+	# Set lazy load
+	assign lazy_load = lazy_load | default: false
+
+	# Extract video URL from video object
+	assign video_url = blank
+	if video != blank
+		if video.sources[1].url != blank
+			assign video_url = video.sources[1].url
+		elsif video.sources[0].url != blank
+			assign video_url = video.sources[0].url
+		endif
+	endif
+
+	# Determine poster image (video preview or fallback to provided image)
+	assign poster_image = image
+	if video != blank and video.preview_image != blank
+		assign poster_image = video.preview_image
+	endif
+
+	# Set alt text for media (image or video)
+	assign media_alt = blank
+	if video != blank
+		assign media_alt = video.alt | default: title | default: 'accessibility.video_description' | t
+	elsif poster_image != blank
+		assign media_alt = poster_image.alt | default: title
+	endif
+-%}
+
+<div
+	class="menu__push color-{{ push_color_scheme }}"
+	style="--push-overlay-opacity: {{ opacity_value }};"
+>
+	{%- if url != blank -%}
+		<a href="{{ url }}" class="menu__push__link full-unstyled-link link-hover-button">
+	{%- endif -%}
+	<div class="menu__push__media menu__push__media-{{ block.id }}">
+		{%- if video != blank and video_url != blank -%}
+			{%- comment -%} Video with poster image fallback {%- endcomment -%}
+			<video
+				class="menu__push__media-video"
+				autoplay
+				loop
+				muted
+				playsinline
+				width="{{ poster_image.width | default: 600 }}"
+				height="{{ poster_image.height | default: 400 }}"
+			>
+				<source src="{{ video_url }}" type="video/mp4">
+			</video>
+			{%- if poster_image != blank -%}
+				{%- capture poster_tag -%}
+					{{
+						poster_image
+						| image_url: width: 600
+						| image_tag:
+							class: 'menu__push__poster-image',
+							loading: 'lazy',
+							widths: '400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000',
+							alt: media_alt
+					}}
+				{%- endcapture -%}
+
+				{%- if lazy_load -%}
+					{{
+						poster_tag
+						| replace: 'srcset=', 'lazy-srcset='
+						| replace: 'src=', 'lazy-src='
+						| replace: 'lazy-src=', 'data-lazy-keep lazy-src='
+					}}
+				{%- else -%}
+					{{ poster_tag }}
+				{%- endif -%}
+			{%- endif -%}
+		{%- elsif poster_image != blank -%}
+			{%- comment -%} Image only (no video) {%- endcomment -%}
+			{%- capture image_tag -%}
+				{{
+					poster_image
+					| image_url: width: 600
+					| image_tag:
+						class: 'menu__push__media-image',
+						loading: 'lazy',
+						widths: '400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000',
+						alt: media_alt
+				}}
+			{%- endcapture -%}
+
+			{%- if lazy_load -%}
+				{{
+					image_tag
+					| replace: 'srcset=', 'lazy-srcset='
+					| replace: 'src=', 'lazy-src='
+					| replace: 'lazy-src=', 'data-lazy-keep lazy-src='
+				}}
+			{%- else -%}
+				{{ image_tag }}
+			{%- endif -%}
+		{%- endif -%}
+	</div>
+	<div class="menu__push__info position {{ position }}">
+		{%- if title != blank -%}
+			<div class="h3">
+				{{ title }}
+			</div>
+		{%- endif -%}
+		{%- if description != blank -%}
+			<p class="description">
+				{{ description }}
+			</p>
+		{%- endif -%}
+		{%- render 'link-style', link_label: url_text, link_url: url, link_style: link_style, no_link: true -%}
+	</div>
+	{%- if url != blank -%}
+		</a>
+	{%- endif -%}
+</div>

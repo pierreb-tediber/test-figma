@@ -1,0 +1,521 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "custom_liquid_Rx3F4Y": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<style>\n  .percale-hero {\n    background-color: #000B26;\n    color: #FFF;\n    font-family: Obviously, sans-serif;\n    display: flex;\n    flex-direction: column;\n    padding: 32px 20px;\n  }\n\n  @media (min-width: 1024px) {\n    .percale-hero {\n      flex-direction: row;\n      align-items: center;\n      justify-content: space-between;\n      padding: 80px 60px;\n    }\n  }\n\n  .percale-hero-left {\n    max-width: 620px;\n    display: flex;\n    flex-direction: column;\n    gap: 24px;\n  }\n\n  .percale-hero-title {\n    color: #FFF;\n    font-family: Obviously, sans-serif;\n    font-size: var(--font-size-xl2, 48px);\n    font-weight: 600;\n    line-height: var(--font-line-height-xl, 56px);\n    text-transform: uppercase;\n    margin-bottom: 0;\n  }\n\n  @media (max-width: 767px) {\n    .percale-hero-title {\n      font-size: 40px;\n      line-height: 44px;\n    }\n  }\n\n  .percale-hero-subtitle {\n    font-size: 16px;\n    font-weight: 700;\nline-height:20px;\n    text-transform: uppercase;\n    letter-spacing: -0.3px;\n    margin-top: -12px;\n    font-family: 'Obviously', sans-serif;\n  }\n\n  .percale-hero-box {\n    background-color: #FFF8F2;\n    color: #000B26;\n    padding: 24px;\n    border-radius: 8px;\n    margin-top: 16px;\n    display: flex;\n    flex-direction: column;\n    gap: 16px;\n    max-width: 100%;\n  }\n\n  .percale-hero-box p {\n    font-size: 16px;\n    line-height: 1.5;\n    margin: 0;\n  }\n\n  .percale-hero-box strong {\n    font-weight: 700;\n  }\n\n  .percale-hero-box a {\n    background-color: #000B26;\n    color: #FFF;\n    font-size: 16px;\n    font-weight: 700;\n    font-family: 'Obviously Narrow Bold', sans-serif;\n    height: 48px;\n    padding: 0 24px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    border-radius: 4px;\n    text-decoration: none;\n    width: fit-content;\n  }\n\n  .percale-hero-image {\n    margin-top: 40px;\n  }\n\n  @media (min-width: 1024px) {\n    .percale-hero-image {\n      margin-top: 0;\n      max-width: 50%;\n      padding-left: 40px;\n    }\n  }\n\n  .percale-hero-image img {\n    width: 100%;\n    height: auto;\n    border-radius: 0;\n    display: block;\n  }\n</style>\n\n<section class=\"percale-hero\">\n  <div class=\"percale-hero-left\">\n    <h2 class=\"percale-hero-title\">CHOISIR SON MATELAS :\nCOMMENT ÉVITER LES PIÈGES DU MARCHÉ ?</h2>\n    <p class=\"percale-hero-subtitle\">CHOISIR UN MATELAS EN TOUTE CONFIANCE</p>\n    <div class=\"percale-hero-box\">\n      <p>Entre fausses promos, comparateurs biaisés et discours marketing trompeurs, difficile d’y voir clair.\nDécouvrez les pièges à éviter pour faire un choix éclairé.</p>\n      <a href=\"/products/matelas-hybride\">En savoir plus</a>\n    </div>\n  </div>\n  <div class=\"percale-hero-image\">\n     <img src=\"https://cdn.shopify.com/s/files/1/0903/1342/5220/files/lp_piege_matelas.png?v=1755588818\">\n  </div>\n</section>",
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "show_content": false,
+        "custom_h1": "",
+        "h1_size": "h1",
+        "h1_no_margin": false,
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "ax_image_with_text_Uic6bV": {
+      "type": "ax-image-with-text",
+      "blocks": {
+        "heading_Mt8Tiw": {
+          "type": "heading",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "heading": "<p>LOREM IPSUM DOLOR</p>",
+            "heading_size": "h2"
+          }
+        },
+        "text_tqAUVX": {
+          "type": "text",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "text": "<p>Lorem ipsum dolor sit amet consectetur. Turpis in in leo velit turpis at. Sed vivamus amet elementum lobortis pretium enim elit volutpat dignissim. Diam sit non amet at ipsum. In faucibus amet nulla amet. </p>",
+            "description_hn_replace": false,
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "heading_Mt8Tiw",
+        "text_tqAUVX"
+      ],
+      "settings": {
+        "full_width": true,
+        "text_alignment": "left",
+        "no_vertical_padding": false,
+        "image_restricted_width": false,
+        "image_adapted_height_with_content": false,
+        "contain_image": false,
+        "layout": "image_first",
+        "mobile_layout": "image_first",
+        "overlay": true,
+        "overlay_opacity": 0.2,
+        "section_color_scheme": "",
+        "color_scheme": "scheme-2",
+        "padding_top": 0,
+        "padding_bottom": 48
+      }
+    },
+    "ax_text_with_cards_NLRCiT": {
+      "type": "ax-text-with-cards",
+      "blocks": {
+        "card_3gxTQd": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/piege_01_72779d97-3a2a-4d46-9e12-fb6f5c28bc1c.png",
+            "title": "Faux comparateurs",
+            "description": "<p>Méfiez-vous des sites de comparaison en ligne, souvent payés pour promouvoir certaines marques.</p>",
+            "color_scheme": "background-1"
+          }
+        },
+        "card_e4FY6X": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/piege_02.png",
+            "title": "Promotions trompeuses",
+            "description": "<p>Des matelas en promo toute l’année.<br/>Comparez les prix nets, pas les pourcentages.</p>",
+            "color_scheme": "background-1"
+          }
+        },
+        "card_tafpKc": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/piege_03.png",
+            "title": "Technologies inutiles",
+            "description": "<p>Oubliez les couches complexes.<br/>Un bon matelas, c’est du confort et de la durabilité.</p>",
+            "color_scheme": "background-1"
+          }
+        },
+        "card_gW8ft7": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/piege_04.png",
+            "title": "Origines douteuses",
+            "description": "<p>Beaucoup de matelas viennent de loin (ex. Chine) avec des normes de qualité et de sécurité incertaines.</p>",
+            "color_scheme": "background-1"
+          }
+        }
+      },
+      "block_order": [
+        "card_3gxTQd",
+        "card_e4FY6X",
+        "card_tafpKc",
+        "card_gW8ft7"
+      ],
+      "settings": {
+        "heading": "<p>LES PIÈGES DU MARCHÉ À ÉVITER</p>",
+        "subheading": "",
+        "description": "<p>Chez Tediber, nous savons que la recherche d'un bon matelas est cruciale. Grâce à notre expertise, nous vous accompagnons pour comprendre les pièges du marché dans lesquels il ne faut pas tomber.</p>",
+        "color_scheme": "scheme-2",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 48,
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "ax_featured_products_BTHMrw": {
+      "type": "ax-featured-products",
+      "blocks": {
+        "push_i6Xeqa": {
+          "type": "push",
+          "settings": {
+            "metaobject": "push-lp",
+            "position": "left",
+            "push_in_products": false
+          }
+        }
+      },
+      "block_order": [
+        "push_i6Xeqa"
+      ],
+      "settings": {
+        "heading": "",
+        "button_text": "",
+        "button_url": "shopify://pages/contact",
+        "link_blank": false,
+        "product_list": [
+          "matelas-ted80200",
+          "matelas-tediber-copie1",
+          "matelas-tediber-copie2",
+          "matelas-tediber-copie3"
+        ],
+        "stack_mobile": true,
+        "color_scheme": "",
+        "mob_padding_top": 24,
+        "mob_padding_bottom": 24,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "ax_featured_products_N3RWAP": {
+      "type": "ax-featured-products",
+      "blocks": {
+        "push_fB9XiX": {
+          "type": "push",
+          "settings": {
+            "metaobject": "push-lp",
+            "position": "right",
+            "push_in_products": false
+          }
+        }
+      },
+      "block_order": [
+        "push_fB9XiX"
+      ],
+      "settings": {
+        "heading": "",
+        "button_text": "",
+        "button_url": "shopify://pages/contact",
+        "link_blank": false,
+        "product_list": [
+          "matelas-ted80200",
+          "matelas-tediber-copie1",
+          "matelas-tediber-copie2",
+          "matelas-tediber-copie3"
+        ],
+        "stack_mobile": true,
+        "color_scheme": "",
+        "mob_padding_top": 24,
+        "mob_padding_bottom": 24,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "ax_featured_products_4LhCnq": {
+      "type": "ax-featured-products",
+      "blocks": {
+        "push_hjGwFr": {
+          "type": "push",
+          "settings": {
+            "metaobject": "push-lp",
+            "position": "right",
+            "push_in_products": true
+          }
+        }
+      },
+      "block_order": [
+        "push_hjGwFr"
+      ],
+      "settings": {
+        "heading": "<p>Lorem ipsum</p>",
+        "button_text": "Voir tout",
+        "button_url": "shopify://pages/contact",
+        "link_blank": false,
+        "product_list": [
+          "matelas-ted80200",
+          "matelas-tediber-copie1",
+          "matelas-tediber-copie2",
+          "matelas-tediber-copie3"
+        ],
+        "stack_mobile": true,
+        "color_scheme": "",
+        "mob_padding_top": 24,
+        "mob_padding_bottom": 24,
+        "padding_top": 52,
+        "padding_bottom": 48
+      }
+    },
+    "ax_image_with_text_e7LeVX": {
+      "type": "ax-image-with-text",
+      "blocks": {
+        "heading_q86bJM": {
+          "type": "heading",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "heading": "<p>LOREM IPSUM DOLOR</p>",
+            "heading_size": "h2"
+          }
+        },
+        "text_t7Cbdq": {
+          "type": "text",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "text": "<p>Lorem ipsum dolor sit amet consectetur. Turpis in in leo velit turpis at. Sed vivamus amet elementum lobortis pretium enim elit volutpat dignissim. Diam sit non amet at ipsum. In faucibus amet nulla amet. </p>",
+            "description_hn_replace": false,
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "heading_q86bJM",
+        "text_t7Cbdq"
+      ],
+      "settings": {
+        "full_width": true,
+        "text_alignment": "left",
+        "no_vertical_padding": false,
+        "image_restricted_width": false,
+        "image_adapted_height_with_content": false,
+        "contain_image": false,
+        "layout": "image_first",
+        "mobile_layout": "image_first",
+        "overlay": true,
+        "overlay_opacity": 0.2,
+        "section_color_scheme": "",
+        "color_scheme": "scheme-2",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "ax_image_with_text_x3wFzW": {
+      "type": "ax-image-with-text",
+      "blocks": {
+        "subheading_JWwFUp": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "SUB HEADING"
+          }
+        },
+        "heading_LzyUxg": {
+          "type": "heading",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "heading": "<p>LOREM IPSUM DOLOR</p>",
+            "heading_size": "h2"
+          }
+        },
+        "text_mqaabX": {
+          "type": "text",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "text": "<p>Lorem ipsum dolor sit amet consectetur. Etiam ac tempor ut eleifend auctor egestas laoreet. Convallis est tempus at quisque elementum et integer morbi orci. Elit ornare magna purus at ullamcorper metus. Massa libero aenean iaculis ultrices enim elit quisque malesuada praesent. Blandit morbi urna venenatis urna quis fringilla cras pellentesque. Sed interdum massa aliquam duis gravida consequat risus pharetra sem. Aliquam feugiat justo sit vulputate. Donec blandit convallis donec sit volutpat duis morbi. Ultrices tellus in et risus viverra eu et massa sagittis. Lorem quam nulla mi rhoncus.</p>",
+            "description_hn_replace": false,
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_JWwFUp",
+        "heading_LzyUxg",
+        "text_mqaabX"
+      ],
+      "settings": {
+        "full_width": true,
+        "text_alignment": "left",
+        "no_vertical_padding": false,
+        "image_restricted_width": false,
+        "image_adapted_height_with_content": false,
+        "contain_image": false,
+        "layout": "text_first",
+        "mobile_layout": "image_first",
+        "overlay": true,
+        "overlay_opacity": 0.2,
+        "section_color_scheme": "",
+        "color_scheme": "scheme-3",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "image_with_text_yRw3fJ": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_Up8H9Q": {
+          "type": "heading",
+          "settings": {
+            "heading": "LE CHOIX SIMPLE POUR UN SOMMEIL DE QUALITÉ",
+            "heading_size": "h2"
+          }
+        },
+        "text_rM3bBm": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>TEDIBER, LA MARQUE DE CONFIANCE</strong></p><ul><li><strong>Confort durable</strong> : matériaux denses et premium pour un soutien optimal, nuit après nuit.</li></ul><p></p><ul><li><strong>Fabriqué en Europe</strong> : normes strictes, labellisé OEKO-TEX®STANDARD 100, pour votre santé et celle de la planète.</li></ul><p></p><ul><li><strong>Prix transparent</strong> : pas de fausses promos, seulement un prix juste toute l’année.</li></ul><p></p><ul><li><strong>Satisfaction garantie</strong> : 100 nuits pour essayer et retour gratuit si vous n’êtes pas convaincu.</li></ul>",
+            "text_style": "body"
+          }
+        },
+        "button_QrnFNa": {
+          "type": "button",
+          "settings": {
+            "button_label": "Découvrir les matelas Tediber",
+            "button_link": "shopify://collections/matelas",
+            "button_style_secondary": true
+          }
+        }
+      },
+      "block_order": [
+        "heading_Up8H9Q",
+        "text_rM3bBm",
+        "button_QrnFNa"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/lp_dormir_cote_sans_gene.png",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "scheme-3",
+        "color_scheme": "scheme-3",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "ax_richtext_wCYmy4": {
+      "type": "ax-richtext",
+      "blocks": {
+        "heading_wEBptU": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>FAITES LE BON CHOIX EN TOUTE CONFIANCE</p>",
+            "heading_size": "h2",
+            "heading_alignment": "center"
+          }
+        },
+        "text_MEWCfV": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>100 nuits d'essai</strong> l <strong>Livraison sous 48h</strong> l <strong>95% de clients satisfaits</strong></p>",
+            "text_alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "heading_wEBptU",
+        "text_MEWCfV"
+      ],
+      "name": "Ax richtext",
+      "settings": {
+        "restricted_width": false,
+        "color_scheme": "scheme-1",
+        "color_scheme_container": "",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 64,
+        "margin_bottom": 0
+      }
+    },
+    "custom_liquid_cd3ywf": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<script>function sendAudienceData(a){window.jDataLayer=window.jDataLayer||[],window.jDataLayer.push({type:\"audience\",data:a})}</script><div id=\"join-widget-matelas-hybride-pdp\" style=\"display:block;\"></div> <style> #join-widget-matelas-hybride-pdp { margin: 5px 2px; min-height: 268px; width: 100%; } @media (min-aspect-ratio: 3/4) { #join-widget-matelas-hybride-pdp { min-height: 352px; } } </style>  <script src=\"https://tediber.my.join-stories.com/widgets/matelas-hybride-pdp/index.js\" data-join-widget-id=\"join-widget-matelas-hybride-pdp\" data-join-widget-alias=\"matelas-hybride-pdp\" type=\"text/javascript\" ></script>",
+        "color_scheme": "scheme-1",
+        "padding_top": 24,
+        "padding_bottom": 24
+      }
+    },
+    "rich_text_ViiDWd": {
+      "type": "rich-text",
+      "blocks": {
+        "button_aH8XPz": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_label": "Découvrir le matelas Hybride",
+            "button_link": "shopify://products/matelas-hybride",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "button_aH8XPz"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 56
+      }
+    },
+    "ax_faq_fQtwGa": {
+      "type": "ax-faq",
+      "name": "Ax faq",
+      "settings": {
+        "heading": "<p>Questions fréquentes</p>",
+        "picto_size": 24,
+        "picto_size_mobile": 24,
+        "reverse_layout": false,
+        "image": "shopify://shop_images/sommier_lit-coffre_faq.jpg",
+        "faq": [
+          "pourquoi-tediber-est-il-different-des-autres-marques",
+          "dou-viennent-les-matelas-tediber",
+          "comment-reconnaitre-un-matelas-de-qualite",
+          "comment-fonctionnent-les-100-nuits-dessai"
+        ],
+        "color_scheme": "scheme-2",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "custom_liquid_Rx3F4Y",
+    "main",
+    "ax_image_with_text_Uic6bV",
+    "ax_text_with_cards_NLRCiT",
+    "ax_featured_products_BTHMrw",
+    "ax_featured_products_N3RWAP",
+    "ax_featured_products_4LhCnq",
+    "ax_image_with_text_e7LeVX",
+    "ax_image_with_text_x3wFzW",
+    "image_with_text_yRw3fJ",
+    "ax_richtext_wCYmy4",
+    "custom_liquid_cd3ywf",
+    "rich_text_ViiDWd",
+    "ax_faq_fQtwGa"
+  ]
+}

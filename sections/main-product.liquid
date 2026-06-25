@@ -1,0 +1,4286 @@
+{%- liquid
+	assign product_media = product.media
+	assign selected_default_option_string = blank
+	if product.metafields.custom.combined_listings_premier_produit_enfant.value != blank
+		assign product_media = product.metafields.custom.combined_listings_premier_produit_enfant.value.media
+		assign selected_variant_child = product.metafields.custom.combined_listings_premier_produit_enfant.value.selected_or_first_available_variant
+		assign all_variants_combined_listings = product.metafields.custom.combined_listings_premier_produit_enfant.value.variants
+
+		comment
+			VÉRIFICATION ET REMPLACEMENT DES VARIANTES CACHÉES
+
+			Si la variante sélectionnée a le métafield hidden_variant à true,
+			on cherche une variante alternative disponible et non cachée
+		endcomment
+		if selected_variant_child.metafields.custom.hidden_variant.value == true
+			if selected_variant_child.options.size == 1
+				assign candidate_variants_all = all_variants_combined_listings
+			elsif selected_variant_child.options.size == 2
+				assign candidate_variants_all = all_variants_combined_listings
+				assign candidate_variants_matching_first_options = all_variants_combined_listings | where: 'option1', selected_variant_child.options[0] | where: 'option2', selected_variant_child.options[1]
+			elsif selected_variant_child.options.size == 3
+				assign candidate_variants_all = all_variants_combined_listings
+				assign candidate_variants_matching_first_options = all_variants_combined_listings | where: 'option1', selected_variant_child.options[0] | where: 'option2', selected_variant_child.options[1]
+				assign candidate_variants_matching_two_options = all_variants_combined_listings | where: 'option1', selected_variant_child.options[0] | where: 'option2', selected_variant_child.options[1] | where: 'option3', selected_variant_child.options[2]
+			elsif selected_variant_child.options.size == 4
+				assign candidate_variants_all = all_variants_combined_listings
+				assign candidate_variants_matching_first_options = all_variants_combined_listings | where: 'option1', selected_variant_child.options[0] | where: 'option2', selected_variant_child.options[1]
+				assign candidate_variants_matching_two_options = all_variants_combined_listings | where: 'option1', selected_variant_child.options[0] | where: 'option2', selected_variant_child.options[1] | where: 'option3', selected_variant_child.options[2]
+				assign candidate_variants_matching_three_options = all_variants_combined_listings | where: 'option1', selected_variant_child.options[0] | where: 'option2', selected_variant_child.options[1] | where: 'option3', selected_variant_child.options[2]
+			endif
+
+			assign valid_variant_child_found = false
+			if valid_variant_child_found == false and candidate_variants_matching_three_options != blank
+				for variant in candidate_variants_matching_three_options
+					comment
+						Pour option4, on doit filtrer manuellement car where: 'option4' n'existe pas en Liquid
+					endcomment
+					if variant.options[3] != selected_variant_child.options[3]
+						continue
+					endif
+
+					comment
+						VÉRIFICATION DE DISPONIBILITÉ COMPLÈTE
+
+						Même logique que dans le reste du fichier pour garantir
+						qu'on sélectionne une variante réellement disponible
+					endcomment
+					assign check_against_inventory = true
+					if variant.inventory_management != 'shopify' or variant.inventory_policy == 'continue'
+						assign check_against_inventory = false
+					endif
+
+					assign quantity_rule_soldout = false
+					if variant.quantity_rule.min > variant.inventory_quantity and check_against_inventory
+						assign quantity_rule_soldout = true
+					endif
+
+					assign variant_available = true
+					if variant.available == false or quantity_rule_soldout or variant == null
+						assign variant_available = false
+					endif
+
+					comment
+						Sélectionner cette variante si elle est disponible ET non cachée
+					endcomment
+					if variant_available and variant.metafields.custom.hidden_variant.value != true
+						assign selected_variant_child = variant
+						assign valid_variant_child_found = true
+						break
+					endif
+				endfor
+			endif
+
+			if valid_variant_child_found == false and candidate_variants_matching_two_options != blank
+				for variant in candidate_variants_matching_two_options
+					comment
+						VÉRIFICATION DE DISPONIBILITÉ COMPLÈTE
+
+						Même logique que dans le reste du fichier pour garantir
+						qu'on sélectionne une variante réellement disponible
+					endcomment
+					assign check_against_inventory = true
+					if variant.inventory_management != 'shopify' or variant.inventory_policy == 'continue'
+						assign check_against_inventory = false
+					endif
+
+					assign quantity_rule_soldout = false
+					if variant.quantity_rule.min > variant.inventory_quantity and check_against_inventory
+						assign quantity_rule_soldout = true
+					endif
+
+					assign variant_available = true
+					if variant.available == false or quantity_rule_soldout or variant == null
+						assign variant_available = false
+					endif
+
+					comment
+						Sélectionner cette variante si elle est disponible ET non cachée
+					endcomment
+					if variant_available and variant.metafields.custom.hidden_variant.value != true
+						assign selected_variant_child = variant
+						assign valid_variant_child_found = true
+						break
+					endif
+				endfor
+			endif
+
+			if valid_variant_child_found == false and candidate_variants_matching_first_options != blank
+				for variant in candidate_variants_matching_first_options
+					comment
+						VÉRIFICATION DE DISPONIBILITÉ COMPLÈTE
+
+						Même logique que dans le reste du fichier pour garantir
+						qu'on sélectionne une variante réellement disponible
+					endcomment
+					assign check_against_inventory = true
+					if variant.inventory_management != 'shopify' or variant.inventory_policy == 'continue'
+						assign check_against_inventory = false
+					endif
+
+					assign quantity_rule_soldout = false
+					if variant.quantity_rule.min > variant.inventory_quantity and check_against_inventory
+						assign quantity_rule_soldout = true
+					endif
+
+					assign variant_available = true
+					if variant.available == false or quantity_rule_soldout or variant == null
+						assign variant_available = false
+					endif
+
+					comment
+						Sélectionner cette variante si elle est disponible ET non cachée
+					endcomment
+					if variant_available and variant.metafields.custom.hidden_variant.value != true
+						assign selected_variant_child = variant
+						assign valid_variant_child_found = true
+						break
+					endif
+				endfor
+			endif
+
+			if valid_variant_child_found == false and candidate_variants_all != blank
+				for variant in candidate_variants_all
+					comment
+						VÉRIFICATION DE DISPONIBILITÉ COMPLÈTE
+
+						Même logique que dans le reste du fichier pour garantir
+						qu'on sélectionne une variante réellement disponible
+					endcomment
+					assign check_against_inventory = true
+					if variant.inventory_management != 'shopify' or variant.inventory_policy == 'continue'
+						assign check_against_inventory = false
+					endif
+
+					assign quantity_rule_soldout = false
+					if variant.quantity_rule.min > variant.inventory_quantity and check_against_inventory
+						assign quantity_rule_soldout = true
+					endif
+
+					assign variant_available = true
+					if variant.available == false or quantity_rule_soldout or variant == null
+						assign variant_available = false
+					endif
+
+					comment
+						Sélectionner cette variante si elle est disponible ET non cachée
+					endcomment
+					if variant_available and variant.metafields.custom.hidden_variant.value != true
+						assign selected_variant_child = variant
+						assign valid_variant_child_found = true
+						break
+					endif
+				endfor
+			endif
+		endif
+
+		comment
+			DÉTECTION DE LA POSITION DE L'OPTION VERSION POUR LE PRODUIT ENFANT
+
+			Identifie automatiquement l'option "version" du produit enfant
+			en utilisant les mêmes traductions que pour le produit principal
+		endcomment
+		assign options_names_for_version_child_translated = 'products.product.options_names_for_version' | t | downcase | replace: ', ', ','
+		assign options_names_for_version_child = options_names_for_version_child_translated | split: ',' | uniq
+		assign option_position_version_child_array = blank
+
+		unless product.metafields.custom.combined_listings_premier_produit_enfant.value.has_only_default_variant
+			for option in product.metafields.custom.combined_listings_premier_produit_enfant.value.options_with_values
+				assign option_name_downcase = option.name | downcase
+				assign option_name_array = option_name_downcase | split: ' ' | uniq
+
+				for option_name in option_name_array
+					if options_names_for_version_child contains option_name
+						assign option_position_version_child_array = option.position | minus: 1
+						break
+					endif
+				endfor
+
+				if option_position_version_child_array != blank
+					break
+				endif
+			endfor
+		endunless
+
+		comment
+			SÉLECTION DE LA VARIANTE LA MOINS CHÈRE POUR L'OPTION VERSION (PRODUIT ENFANT)
+
+			Même logique que pour le produit principal (lignes 548-628),
+			mais appliquée aux variantes du produit enfant (combined listings)
+		endcomment
+		if product.metafields.custom.combined_listings_premier_produit_enfant.value.selected_variant == null and option_position_version_child_array != blank
+			assign cheapest_variant_child = blank
+			assign cheapest_price_child = blank
+
+			for variant in all_variants_combined_listings
+				if variant.metafields.custom.hidden_variant.value == true
+					continue
+				endif
+
+				assign check_against_inventory = true
+				if variant.inventory_management != 'shopify' or variant.inventory_policy == 'continue'
+					assign check_against_inventory = false
+				endif
+
+				assign quantity_rule_soldout = false
+				if variant.quantity_rule.min > variant.inventory_quantity and check_against_inventory
+					assign quantity_rule_soldout = true
+				endif
+
+				assign variant_available = true
+				if variant.available == false or quantity_rule_soldout or variant == null
+					assign variant_available = false
+				endif
+
+				unless variant_available
+					continue
+				endunless
+
+				comment
+					Vérifie que toutes les options non-version correspondent
+					à celles de la variante actuellement sélectionnée
+				endcomment
+				assign matches_other_options = true
+
+				if product.metafields.custom.combined_listings_premier_produit_enfant.value.options.size >= 1 and option_position_version_child_array != 0
+					if variant.options[0] != selected_variant_child.options[0]
+						assign matches_other_options = false
+					endif
+				endif
+
+				if matches_other_options and product.metafields.custom.combined_listings_premier_produit_enfant.value.options.size >= 2 and option_position_version_child_array != 1
+					if variant.options[1] != selected_variant_child.options[1]
+						assign matches_other_options = false
+					endif
+				endif
+
+				if matches_other_options and product.metafields.custom.combined_listings_premier_produit_enfant.value.options.size >= 3 and option_position_version_child_array != 2
+					if variant.options[2] != selected_variant_child.options[2]
+						assign matches_other_options = false
+					endif
+				endif
+
+				if matches_other_options and product.metafields.custom.combined_listings_premier_produit_enfant.value.options.size >= 4 and option_position_version_child_array != 3
+					if variant.options[3] != selected_variant_child.options[3]
+						assign matches_other_options = false
+					endif
+				endif
+
+				if matches_other_options
+					if cheapest_variant_child == blank
+						assign cheapest_variant_child = variant
+						assign cheapest_price_child = variant.price
+					elsif variant.price < cheapest_price_child
+						assign cheapest_variant_child = variant
+						assign cheapest_price_child = variant.price
+					endif
+				endif
+			endfor
+
+			if cheapest_variant_child != blank
+				assign selected_variant_child = cheapest_variant_child
+			endif
+		endif
+
+		assign selected_default_option_string = selected_variant_child.options | first
+	endif
+
+	assign template_pack_new = false
+	if product.template_suffix == 'pack-new'
+		assign template_pack_new = true
+	endif
+
+	assign template_new_offer = false
+	assign new_offer_suffixes = 'matelas-new-offer,new-matelas-hybride,new-matelas-hybride-premium,new-matelas-hybride-infinite' | split: ','
+	if section.settings.enable_new_offer == true or new_offer_suffixes contains product.template_suffix
+		assign template_new_offer = true
+	endif
+
+	assign template_new_offer_sommier = false
+	if product.template_suffix == 'sommier-new-offer'
+		assign template_new_offer_sommier = true
+	endif
+
+	# Layout visuel new-offer (classe CSS product__main--new-offer + classes slider de la galerie).
+	# Distinct du flag template_new_offer qui pilote la logique des autres snippets
+	# (sticky-bar, delivery-info, exclusion du block reassurances, conditions is_new_offer
+	# dans product-variant-picker) — non répliquée sur le pack.
+	assign use_new_offer_layout = template_new_offer
+	if template_pack_new
+		assign use_new_offer_layout = true
+	endif
+-%}
+
+<product-info
+	id="MainProduct-{{ section.id }}"
+	class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }} product__main{% if use_new_offer_layout %} product__main--new-offer{% endif %}{% if template_new_offer_sommier %} product__main--new-offer-sommier{% endif %}{% if template_pack_new %} product__main--pack-new{% endif %}"
+	data-section="{{ section.id }}"
+	data-product-id="{{ product.id }}"
+	data-update-url="true"
+	data-url="{{ product.url }}"
+	{% if selected_default_option_string != blank %}
+		data-selected-default-option="{{ selected_default_option_string }}"
+	{% endif %}
+	{% if section.settings.image_zoom == 'hover' %}
+		data-zoom-on-hover
+	{% endif %}
+>
+	{{ 'section-main-product.css' | asset_url | stylesheet_tag }}
+	{{ 'component-accordion.css' | asset_url | stylesheet_tag }}
+	{{ 'component-price.css' | asset_url | stylesheet_tag }}
+	{{ 'component-slider.css' | asset_url | stylesheet_tag }}
+	{{ 'component-rating.css' | asset_url | stylesheet_tag }}
+	{{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
+
+	{% unless product.has_only_default_variant %}
+		{{ 'component-product-variant-picker.css' | asset_url | stylesheet_tag }}
+		{{ 'component-swatch-input.css' | asset_url | stylesheet_tag }}
+		{{ 'component-swatch.css' | asset_url | stylesheet_tag }}
+	{% endunless %}
+	{%- if product.quantity_price_breaks_configured? -%}
+		{{ 'component-volume-pricing.css' | asset_url | stylesheet_tag }}
+	{%- endif -%}
+
+	{%- style -%}
+		.section-{{ section.id }}-padding {
+		  padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+		  padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+		}
+
+		@media screen and (min-width: 750px) {
+		  .section-{{ section.id }}-padding {
+		    padding-top: {{ section.settings.padding_top }}px;
+		    padding-bottom: {{ section.settings.padding_bottom }}px;
+		  }
+		}
+	{%- endstyle -%}
+
+	<script src="{{ 'bundle.product-manager.js' | asset_url }}" defer="defer"></script>
+	{%- if product.quantity_price_breaks_configured? -%}
+		<script src="{{ 'show-more.js' | asset_url }}" defer="defer"></script>
+		<script src="{{ 'price-per-item.js' | asset_url }}" defer="defer"></script>
+	{%- endif -%}
+
+	{% if section.settings.image_zoom == 'hover' %}
+		<script id="EnableZoomOnHover-main" src="{{ 'magnify.js' | asset_url }}" defer="defer"></script>
+	{% endif %}
+	{%- if request.design_mode -%}
+		<script src="{{ 'theme-editor.js' | asset_url }}" defer="defer"></script>
+	{%- endif -%}
+
+	{%- liquid
+		# Récupère toutes les images attachées à des variantes spécifiques
+		assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src'
+
+		# theme-check-disable
+		comment
+			EXTRACTION DE L'URL ET DES PARAMÈTRES DE REQUÊTE
+
+			Cette section complexe extrait les paramètres d'URL depuis content_for_header
+			pour permettre la gestion des états de produit via l'URL
+		endcomment
+		capture content_for_query_string
+			echo content_for_header
+		endcapture
+		assign get_url = content_for_query_string | split: '"pageurl":"' | last | split: '"' | first | split: '.myshopify.com' | last | replace: '\/', '/' | replace: '%20', ' ' | replace: '\u0026', '&' | split: '?' | last
+		# theme-check-enable
+
+		comment
+			DÉTECTION ET INITIALISATION DU MODE BUNDLE
+
+			Vérifie si le produit actuel est configuré en bundle
+			via ses metafields de configuration
+		endcomment
+		assign is_bundle = false
+		assign bundle_configurator = product.metafields.custom.pack_configurateur.value
+		if bundle_configurator != blank
+			assign is_bundle = true
+		endif
+
+		# Vérifie si le produit est masqué via metafield seo.hidden
+		assign is_hidden = false
+		if product.metafields.seo.hidden.value == 1
+			unless product.tags contains 'phenix'
+				assign is_hidden = true
+			endunless
+		endif
+
+		comment
+			CONSTRUCTION DE LA CHAÎNE D'OPTIONS DE VARIANTE
+
+			Cette chaîne servira pour :
+			- L'identification unique des configurations sélectionnées
+			- La synchronisation entre produits du bundle
+			- Le suivi des choix utilisateur
+
+			Format final: "TitreBundle|Option1|Option2|Option3"
+		endcomment
+		assign selected_variant = product.selected_or_first_available_variant
+		assign has_changed_option_for_hidden = false
+
+		comment
+			VÉRIFICATION ET REMPLACEMENT DES VARIANTES CACHÉES
+
+			Si la variante sélectionnée a le métafield hidden_variant à true,
+			on cherche une variante alternative disponible et non cachée
+		endcomment
+		if product.selected_variant == null and selected_variant.metafields.custom.hidden_variant.value == true
+			if selected_variant.options.size == 1
+				assign candidate_variants_all = product.variants
+			elsif selected_variant.options.size == 2
+				assign candidate_variants_all = product.variants
+				assign candidate_variants_matching_first_options = product.variants | where: 'option1', selected_variant.options[0] | where: 'option2', selected_variant.options[1]
+			elsif selected_variant.options.size == 3
+				assign candidate_variants_all = product.variants
+				assign candidate_variants_matching_first_options = product.variants | where: 'option1', selected_variant.options[0] | where: 'option2', selected_variant.options[1]
+				assign candidate_variants_matching_two_options = product.variants | where: 'option1', selected_variant.options[0] | where: 'option2', selected_variant.options[1] | where: 'option3', selected_variant.options[2]
+			elsif selected_variant.options.size == 4
+				assign candidate_variants_all = product.variants
+				assign candidate_variants_matching_first_options = product.variants | where: 'option1', selected_variant.options[0] | where: 'option2', selected_variant.options[1]
+				assign candidate_variants_matching_two_options = product.variants | where: 'option1', selected_variant.options[0] | where: 'option2', selected_variant.options[1] | where: 'option3', selected_variant.options[2]
+				assign candidate_variants_matching_three_options = product.variants | where: 'option1', selected_variant.options[0] | where: 'option2', selected_variant.options[1] | where: 'option3', selected_variant.options[2]
+			endif
+
+			assign valid_variant_found = false
+			if valid_variant_found == false and candidate_variants_matching_three_options != blank
+				for variant in candidate_variants_matching_three_options
+					comment
+						Pour option4, on doit filtrer manuellement car where: 'option4' n'existe pas en Liquid
+					endcomment
+					if variant.options[3] != selected_variant.options[3]
+						continue
+					endif
+
+					comment
+						VÉRIFICATION DE DISPONIBILITÉ COMPLÈTE
+
+						Même logique que dans le reste du fichier pour garantir
+						qu'on sélectionne une variante réellement disponible
+					endcomment
+					assign check_against_inventory = true
+					if variant.inventory_management != 'shopify' or variant.inventory_policy == 'continue'
+						assign check_against_inventory = false
+					endif
+
+					assign quantity_rule_soldout = false
+					if variant.quantity_rule.min > variant.inventory_quantity and check_against_inventory
+						assign quantity_rule_soldout = true
+					endif
+
+					assign variant_available = true
+					if variant.available == false or quantity_rule_soldout or variant == null
+						assign variant_available = false
+					endif
+
+					comment
+						Sélectionner cette variante si elle est disponible ET non cachée
+					endcomment
+					if variant_available and variant.metafields.custom.hidden_variant.value != true
+						assign selected_variant = variant
+						assign valid_variant_found = true
+						break
+					endif
+				endfor
+			endif
+
+			if valid_variant_found == false and candidate_variants_matching_two_options != blank
+				for variant in candidate_variants_matching_two_options
+					comment
+						VÉRIFICATION DE DISPONIBILITÉ COMPLÈTE
+
+						Même logique que dans le reste du fichier pour garantir
+						qu'on sélectionne une variante réellement disponible
+					endcomment
+					assign check_against_inventory = true
+					if variant.inventory_management != 'shopify' or variant.inventory_policy == 'continue'
+						assign check_against_inventory = false
+					endif
+
+					assign quantity_rule_soldout = false
+					if variant.quantity_rule.min > variant.inventory_quantity and check_against_inventory
+						assign quantity_rule_soldout = true
+					endif
+
+					assign variant_available = true
+					if variant.available == false or quantity_rule_soldout or variant == null
+						assign variant_available = false
+					endif
+
+					comment
+						Sélectionner cette variante si elle est disponible ET non cachée
+					endcomment
+					if variant_available and variant.metafields.custom.hidden_variant.value != true
+						assign selected_variant = variant
+						assign valid_variant_found = true
+						if candidate_variants_matching_three_options != blank
+							assign has_changed_option_for_hidden = true
+						endif
+						break
+					endif
+				endfor
+			endif
+
+			if valid_variant_found == false and candidate_variants_matching_first_options != blank
+				for variant in candidate_variants_matching_first_options
+					comment
+						VÉRIFICATION DE DISPONIBILITÉ COMPLÈTE
+
+						Même logique que dans le reste du fichier pour garantir
+						qu'on sélectionne une variante réellement disponible
+					endcomment
+					assign check_against_inventory = true
+					if variant.inventory_management != 'shopify' or variant.inventory_policy == 'continue'
+						assign check_against_inventory = false
+					endif
+
+					assign quantity_rule_soldout = false
+					if variant.quantity_rule.min > variant.inventory_quantity and check_against_inventory
+						assign quantity_rule_soldout = true
+					endif
+
+					assign variant_available = true
+					if variant.available == false or quantity_rule_soldout or variant == null
+						assign variant_available = false
+					endif
+
+					comment
+						Sélectionner cette variante si elle est disponible ET non cachée
+					endcomment
+					if variant_available and variant.metafields.custom.hidden_variant.value != true
+						assign selected_variant = variant
+						assign valid_variant_found = true
+						if candidate_variants_matching_two_options != blank
+							assign has_changed_option_for_hidden = true
+						endif
+						break
+					endif
+				endfor
+			endif
+
+			if valid_variant_found == false and candidate_variants_all != blank
+				for variant in candidate_variants_all
+					comment
+						VÉRIFICATION DE DISPONIBILITÉ COMPLÈTE
+
+						Même logique que dans le reste du fichier pour garantir
+						qu'on sélectionne une variante réellement disponible
+					endcomment
+					assign check_against_inventory = true
+					if variant.inventory_management != 'shopify' or variant.inventory_policy == 'continue'
+						assign check_against_inventory = false
+					endif
+
+					assign quantity_rule_soldout = false
+					if variant.quantity_rule.min > variant.inventory_quantity and check_against_inventory
+						assign quantity_rule_soldout = true
+					endif
+
+					assign variant_available = true
+					if variant.available == false or quantity_rule_soldout or variant == null
+						assign variant_available = false
+					endif
+
+					comment
+						Sélectionner cette variante si elle est disponible ET non cachée
+					endcomment
+					if variant_available and variant.metafields.custom.hidden_variant.value != true
+						assign selected_variant = variant
+						assign valid_variant_found = true
+						if candidate_variants_matching_first_options != blank
+							assign has_changed_option_for_hidden = true
+						endif
+						break
+					endif
+				endfor
+			endif
+		endif
+
+		assign variant_option_string = blank
+
+		comment
+			PRÉPARATION DES TRADUCTIONS POUR LA DÉTECTION D'OPTIONS
+
+			Ces traductions permettent de reconnaître automatiquement :
+			- Les options de taille vs pieds vs autres
+			- Les valeurs d'exception qui ne doivent pas être transformées
+			- Les règles de nettoyage spécifiques par type d'option
+		endcomment
+		assign options_names_for_size_translated = 'products.product.options_names_for_size' | t | downcase | replace: ', ', ','
+		assign options_names_for_size = options_names_for_size_translated | split: ',' | uniq
+
+		assign options_names_for_foot_translated = 'products.product.options_names_for_foot' | t | downcase | replace: ', ', ','
+		assign options_names_for_foot = options_names_for_foot_translated | split: ',' | uniq
+
+		# Valeurs d'options de taille à exclure du nettoyage automatique
+		assign options_names_for_size_value_except_translated = 'products.product.options_names_for_size_value_except' | t | downcase | replace: ', ', ','
+		assign options_names_for_size_value_except = options_names_for_size_value_except_translated | split: ',' | uniq
+
+		# Valeurs d'options de taille à exclure du nettoyage (correspondance stricte)
+		assign options_names_for_size_value_strict_except_translated = 'products.product.options_names_for_size_value_strict_except' | t | downcase | replace: ', ', ','
+		assign options_names_for_size_value_strict_except = options_names_for_size_value_strict_except_translated | split: ',' | uniq
+
+		# Format par défaut (Monobloc) : suffixe transparent dans la normalisation et la chaîne ALT
+		assign default_format_lc = 'products.product.default_format_for_size_value' | t | downcase | strip
+
+		# Valeurs d'options de pieds à exclure du nettoyage automatique
+		assign options_names_for_foot_value_except_translated = 'products.product.options_names_for_foot_value_except' | t | downcase | replace: ', ', ','
+		assign options_names_for_foot_value_except = options_names_for_foot_value_except_translated | split: ',' | uniq
+
+		# Traductions des noms d'options pour les versions
+		assign options_names_for_version_translated = 'products.product.options_names_for_version' | t | downcase | replace: ', ', ','
+		assign options_names_for_version = options_names_for_version_translated | split: ',' | uniq
+
+		comment
+			DÉTECTION DES POSITIONS D'OPTIONS DANS LE PRODUIT PRINCIPAL
+
+			Identifie automatiquement quelles options correspondent à :
+			- La taille (pour synchronisation avec les bundles)
+			- Les pieds (traitement spécial)
+		endcomment
+		unless product.has_only_default_variant
+			assign option_position_size_array = blank
+			assign option_position_foot_array = blank
+			assign option_position_version_array = blank
+
+			for option in product.options_with_values
+				# Traitement du nom de l'option en minuscules pour comparaison
+				assign option_name_downcase = option.name | downcase
+				assign option_name_array = option_name_downcase | split: ' ' | uniq
+
+				# Vérification si cette option concerne les pieds
+				for translation in options_names_for_foot
+					assign has_foot_in_array = option_name_array | find: translation
+					if has_foot_in_array
+						assign has_foot_in_array = true
+						break
+					endif
+				endfor
+
+				if has_foot_in_array
+					assign option_position_foot_array = option.position | minus: 1
+				else
+					# Recherche de l'option taille si ce n'est pas une option pieds
+					for option_name in option_name_array
+						if options_names_for_size contains option_name
+							assign option_position_size_array = option.position | minus: 1
+							break
+						endif
+					endfor
+
+					# Recherche de l'option version
+					for option_name in option_name_array
+						if options_names_for_version contains option_name
+							assign option_position_version_array = option.position | minus: 1
+							break
+						endif
+					endfor
+				endif
+			endfor
+		endunless
+
+		comment
+			SÉLECTION DE LA VARIANTE LA MOINS CHÈRE POUR L'OPTION VERSION
+
+			Si aucune variante n'a été explicitement sélectionnée via l'URL
+			et qu'une option "version" existe, on sélectionne la variante
+			la moins chère parmi celles partageant les mêmes options non-version
+			(ex: même taille) tout en étant disponible et non cachée
+		endcomment
+		if product.selected_variant == null and option_position_version_array != blank
+			assign cheapest_variant = blank
+			assign cheapest_price = blank
+
+			for variant in product.variants
+				if variant.metafields.custom.hidden_variant.value == true
+					continue
+				endif
+
+				assign check_against_inventory = true
+				if variant.inventory_management != 'shopify' or variant.inventory_policy == 'continue'
+					assign check_against_inventory = false
+				endif
+
+				assign quantity_rule_soldout = false
+				if variant.quantity_rule.min > variant.inventory_quantity and check_against_inventory
+					assign quantity_rule_soldout = true
+				endif
+
+				assign variant_available = true
+				if variant.available == false or quantity_rule_soldout or variant == null
+					assign variant_available = false
+				endif
+
+				unless variant_available
+					continue
+				endunless
+
+				comment
+					Vérifie que toutes les options non-version correspondent
+					à celles de la variante actuellement sélectionnée
+				endcomment
+				assign matches_other_options = true
+
+				if product.options.size >= 1 and option_position_version_array != 0
+					if variant.options[0] != selected_variant.options[0]
+						assign matches_other_options = false
+					endif
+				endif
+
+				if matches_other_options and product.options.size >= 2 and option_position_version_array != 1
+					if variant.options[1] != selected_variant.options[1]
+						assign matches_other_options = false
+					endif
+				endif
+
+				if matches_other_options and product.options.size >= 3 and option_position_version_array != 2
+					if variant.options[2] != selected_variant.options[2]
+						assign matches_other_options = false
+					endif
+				endif
+
+				if matches_other_options and product.options.size >= 4 and option_position_version_array != 3
+					if variant.options[3] != selected_variant.options[3]
+						assign matches_other_options = false
+					endif
+				endif
+
+				if matches_other_options
+					if cheapest_variant == blank
+						assign cheapest_variant = variant
+						assign cheapest_price = variant.price
+					elsif variant.price < cheapest_price
+						assign cheapest_variant = variant
+						assign cheapest_price = variant.price
+					endif
+				endif
+			endfor
+
+			if cheapest_variant != blank
+				assign selected_variant = cheapest_variant
+			endif
+		endif
+
+		comment
+			TRAITEMENT SPÉCIFIQUE POUR LES PRODUITS BUNDLE
+
+			Cette section gère la logique complexe des bundles :
+			- Normalisation des dimensions pour synchronisation
+			- Vérification de disponibilité de chaque étape
+			- Construction de la chaîne d'options finale
+		endcomment
+		if is_bundle
+			comment
+				NORMALISATION DES DIMENSIONS DU PRODUIT PARENT
+
+				Transforme "140 cm x 190 cm x 25 cm - Bibloc" en "140x190-Bibloc"
+				Cette normalisation permet la comparaison avec les produits du bundle
+			endcomment
+			assign parent_option_size = selected_variant.options[option_position_size_array]
+			assign parent_option_size_cleaned = blank
+			assign price_eco_part = 0
+
+			if parent_option_size != blank
+				comment
+					ALGORITHME DE NETTOYAGE DES DIMENSIONS AVEC EXCEPTIONS
+
+					1. Vérifie d'abord si la valeur fait partie des exceptions
+					2. Si exception : garde la valeur telle quelle
+					3. Sinon : applique l'algorithme de nettoyage standard
+					   - Sépare dimensions et type par '-'
+					   - Supprime les unités (cm, mm)
+					   - Garde les 2 premières dimensions
+					   - Reconstruit avec le type
+				endcomment
+
+				assign has_value_except = false
+				assign has_value_except_strict = false
+
+				assign option_name_downcase = parent_option_size | downcase
+				assign option_name_array = option_name_downcase | split: ' ' | uniq
+
+				# Vérification des exceptions strictes (correspondance exacte)
+				for value_strict_except in options_names_for_size_value_strict_except
+					if option_name_downcase == value_strict_except
+						assign has_value_except_strict = true
+						break
+					endif
+				endfor
+
+				# Vérification des exceptions partielles (mots contenus)
+				for option_name in option_name_array
+					if options_names_for_size_value_except contains option_name
+						assign has_value_except = true
+						break
+					endif
+				endfor
+
+				if has_value_except or has_value_except_strict
+					# Exception détectée : garde la valeur originale
+					assign parent_option_size_cleaned = parent_option_size | downcase | strip
+				else
+					# Application de l'algorithme de nettoyage standard
+					assign option_parts = parent_option_size | split: '-'
+					assign dimensions_part = option_parts[0] | strip
+					assign type_part = blank
+
+					if option_parts.size > 1
+						assign type_part_raw = option_parts[1] | strip
+						assign type_part_raw_lc = type_part_raw | downcase
+						if type_part_raw_lc == default_format_lc
+							assign type_part = blank
+						else
+							assign type_part = type_part_raw
+						endif
+					endif
+
+					assign dimensions_no_units = dimensions_part | replace: 'cm', '' | replace: 'mm', '' | replace: 'CM', '' | replace: 'MM', '' | downcase | strip
+					assign dimensions_array = dimensions_no_units | split: 'x'
+
+					if dimensions_array.size >= 2
+						assign dimension_1 = dimensions_array[0] | strip
+						assign dimension_2 = dimensions_array[1] | strip
+						assign parent_option_size_cleaned = dimension_1 | append: 'x' | append: dimension_2
+					else
+						assign parent_option_size_cleaned = dimensions_array | join: 'x'
+					endif
+
+					if type_part != blank
+						assign parent_option_size_cleaned = parent_option_size_cleaned | append: '-' | append: type_part
+					endif
+				endif
+			endif
+
+			comment
+				TRAITEMENT DES ÉTAPES DU BUNDLE (1-3)
+
+				Pour chaque étape, cette logique :
+				1. Vérifie la disponibilité des éléments
+				2. Sélectionne le premier élément disponible par défaut
+				3. Construit la chaîne d'options pour cet élément
+			endcomment
+			for i in (1..3)
+				# Construction dynamique des clés pour accéder aux metafields
+				assign key_bundle_configurator_products = 'etape_' | append: i | append: '_produits'
+				assign key_bundle_configurator_variants = 'etape_' | append: i | append: '_variantes'
+				assign key_bundle_configurator_matching_size_with_variants = 'etape_' | append: i | append: '_correspondance_avec_la_taille'
+				assign key_bundle_configurator_option_version = 'etape_' | append: i | append: '_option_version'
+
+				# Extraction des données de configuration pour cette étape
+				assign products_bundle = bundle_configurator[key_bundle_configurator_products].value
+				assign variants_bundle = bundle_configurator[key_bundle_configurator_variants].value
+				assign matching_size_with_variants = bundle_configurator[key_bundle_configurator_matching_size_with_variants].value
+				assign products_bundle_option_version = bundle_configurator[key_bundle_configurator_option_version].value
+
+				# Calcul du nombre total d'éléments dans cette étape
+				assign number_of_products = products_bundle | compact | size
+				assign number_of_variants = variants_bundle | compact | size
+				assign item_count = number_of_products | plus: number_of_variants
+
+				if item_count > 0
+					comment
+						ALGORITHME DE DISPONIBILITÉ POUR CETTE ÉTAPE
+
+						Même logique que dans product-bundle.liquid mais adaptée pour
+						la construction de la chaîne d'options de la page principale
+
+						Priorité : 1) Variantes individuelles, 2) Produits avec variantes
+					endcomment
+					assign step_has_available_items = false
+
+					comment
+						PHASE 1: VÉRIFICATION DES VARIANTES INDIVIDUELLES
+
+						Chaque variante individuelle est un choix direct sans configuration
+					endcomment
+
+					for variant_bundle in variants_bundle
+						comment
+							DÉTECTION DES POSITIONS D'OPTIONS DANS LE PRODUIT BUNDLE
+
+							Identifie les options taille et pieds pour traitement spécifique
+						endcomment
+						assign bundle_option_position_size_array_check = blank
+						assign bundle_option_position_foot_array_check = blank
+
+						unless variant_bundle.product.has_only_default_variant
+							for option in variant_bundle.product.options_with_values
+								assign option_name_downcase = option.name | downcase
+								assign option_name_array = option_name_downcase | split: ' ' | uniq
+
+								for translation in options_names_for_foot
+									assign has_foot_in_array = option_name_array | find: translation
+									if has_foot_in_array
+										assign has_foot_in_array = true
+										break
+									endif
+								endfor
+
+								if has_foot_in_array
+									assign bundle_option_position_foot_array_check = option.position | minus: 1
+								else
+									for option_name in option_name_array
+										if options_names_for_size contains option_name
+											assign bundle_option_position_size_array_check = option.position | minus: 1
+											break
+										endif
+									endfor
+								endif
+							endfor
+						endunless
+
+						comment
+							VÉRIFICATION DE SYNCHRONISATION DES DIMENSIONS
+
+							Si activée, vérifie que la variante bundle a une taille compatible
+							avec le produit parent pour maintenir la cohérence du pack
+						endcomment
+						if matching_size_with_variants == true
+							assign has_matching_size_variant_main = true
+							if parent_option_size_cleaned != blank and variant_bundle.product.has_only_default_variant == false
+								assign has_matching_size_variant_main = false
+								comment
+									COMPARAISON DES DIMENSIONS NORMALISÉES
+
+									Compare les dimensions nettoyées entre produit parent et bundle
+								endcomment
+								if bundle_option_position_size_array_check != blank
+									assign has_matching_size_variant_main = false
+									assign variant_option_size_check = variant_bundle.options[bundle_option_position_size_array_check]
+
+									comment
+										Application du même algorithme de nettoyage
+										que pour le produit parent
+									endcomment
+									assign variant_option_size_cleaned_check = blank
+									if variant_option_size_check != blank
+										assign variant_option_size_parts_check = variant_option_size_check | split: '-'
+										assign variant_dimensions_part_check = variant_option_size_parts_check[0] | strip
+										assign variant_type_part_check = blank
+										
+										if variant_option_size_parts_check.size > 1
+											assign variant_type_part_check_raw = variant_option_size_parts_check[1] | strip
+											assign variant_type_part_check_raw_lc = variant_type_part_check_raw | downcase
+											if variant_type_part_check_raw_lc == default_format_lc
+												assign variant_type_part_check = blank
+											else
+												assign variant_type_part_check = variant_type_part_check_raw
+											endif
+										endif
+
+										assign variant_option_size_no_units_check = variant_dimensions_part_check | replace: 'cm', '' | replace: 'mm', '' | replace: 'CM', '' | replace: 'MM', '' | downcase | strip
+										assign variant_dimensions_array_check = variant_option_size_no_units_check | split: 'x'
+
+										if variant_dimensions_array_check.size >= 2
+											assign variant_dimension_1_check = variant_dimensions_array_check[0] | strip
+											assign variant_dimension_2_check = variant_dimensions_array_check[1] | strip
+											assign variant_option_size_cleaned_check = variant_dimension_1_check | append: 'x' | append: variant_dimension_2_check
+										else
+											assign variant_option_size_cleaned_check = variant_option_size_check
+										endif
+
+										if variant_type_part_check != blank
+											assign variant_option_size_cleaned_check = variant_option_size_cleaned_check | append: '-' | append: variant_type_part_check
+										endif
+									endif
+
+									# Validation : les dimensions correspondent-elles ?
+									if parent_option_size_cleaned == variant_option_size_cleaned_check
+										assign has_matching_size_variant_main = true
+									endif
+								endif
+							endif
+						endif
+
+						comment
+							VÉRIFICATION COMPLÈTE DE DISPONIBILITÉ
+
+							Même logique complexe que dans product-bundle.liquid :
+							- Gestion stock Shopify vs externe
+							- Règles quantité minimum
+							- Statut disponibilité + correspondance dimensions
+						endcomment
+						assign check_against_inventory = true
+						if variant_bundle.inventory_management != 'shopify' or variant_bundle.inventory_policy == 'continue'
+							assign check_against_inventory = false
+						endif
+						assign quantity_rule_soldout = false
+						if variant_bundle.quantity_rule.min > variant_bundle.inventory_quantity and check_against_inventory
+							assign quantity_rule_soldout = true
+						endif
+
+						assign variant_available = true
+						if variant_bundle.available == false or quantity_rule_soldout or variant_bundle == null or has_matching_size_variant_main == false
+							assign variant_available = false
+						endif
+
+						comment
+							CONSTRUCTION DE LA CHAÎNE D'OPTIONS POUR LA PREMIÈRE VARIANTE DISPONIBLE
+
+							Cette section construit la chaîne finale qui sera utilisée pour :
+							- L'affichage dans l'interface
+							- La synchronisation entre composants
+							- Le suivi des sélections utilisateur
+						endcomment
+						if variant_available and step_has_available_items == false
+							assign step_has_available_items = true
+
+							# Récupération du titre du produit bundle avec priorité aux metafields
+							if variant_bundle.metafields.custom.pack_information.value != blank
+								assign selected_variant_bundle_title = variant_bundle.metafields.custom.pack_information.value.title.value
+							elsif variant_bundle.product.metafields.custom.pack_information.value != blank
+								assign selected_variant_bundle_title = variant_bundle.product.metafields.custom.pack_information.value.title.value
+							else
+								if variant_bundle.product.metafields.custom.combined_listings_produit_parent.value != blank
+									assign selected_variant_bundle_title = variant_bundle.product.metafields.custom.combined_listings_produit_parent.value.title
+								else
+									assign selected_variant_bundle_title = variant_bundle.product.title
+								endif
+							endif
+
+							# Ajout du titre du produit à la chaîne
+							if variant_option_string != blank
+								assign variant_option_string = variant_option_string | append: '|' | append: selected_variant_bundle_title
+							else
+								assign variant_option_string = selected_variant_bundle_title
+							endif
+
+							comment
+								TRAITEMENT SPÉCIFIQUE DE CHAQUE OPTION DE LA VARIANTE
+
+								Pour chaque option, applique un traitement selon son type :
+								- Options taille : nettoie selon les règles d'exception
+								- Options pieds : extrait le type après le tiret
+								- Autres options : garde la valeur complète
+							endcomment
+							for option in variant_bundle.options
+								assign option_value = option
+								assign option_name_downcase = option.name | downcase
+								assign option_name_array = option_name_downcase | split: ' ' | uniq
+
+								# Traitement spécial pour les options de taille
+								if bundle_option_position_size_array_check == forloop.index0
+									assign has_value_except = false
+									assign has_value_except_strict = false
+
+									# Vérification des exceptions pour cette valeur
+									for value_strict_except in options_names_for_size_value_strict_except
+										if option_name_downcase == value_strict_except
+											assign has_value_except_strict = true
+											break
+										endif
+									endfor
+
+									for option_name in option_name_array
+										if options_names_for_size_value_except contains option_name
+											assign has_value_except = true
+											break
+										endif
+									endfor
+
+									# Si pas d'exception : extrait le type après le tiret
+									unless has_value_except == true or has_value_except_strict == true
+										assign option_parts = option_value | split: '-'
+										assign type_part = blank
+
+										if option_parts.size > 1
+											assign type_part_raw = option_parts[1] | strip
+											assign type_part_raw_lc = type_part_raw | downcase
+											if type_part_raw_lc == default_format_lc
+												assign type_part = blank
+											else
+												assign type_part = type_part_raw
+											endif
+										endif
+
+										assign option_value = type_part
+									endunless
+
+									# Traitement spécial pour les options de pieds
+								elsif bundle_option_position_foot_array_check == forloop.index0
+									assign option_parts = option_value | split: '-'
+									assign type_part = blank
+
+									if option_parts.size > 1
+										assign type_part = option_parts[1] | strip
+									endif
+
+									assign option_value = type_part | default: blank
+								endif
+
+								# Ignore les valeurs par défaut et vides
+								if option_value == 'Default Title' or option_value == blank
+									continue
+								endif
+
+								# Ajout de l'option à la chaîne finale
+								assign variant_option_string = variant_option_string | append: '|' | append: option_value
+							endfor
+						endif
+					endfor
+
+					comment
+						PHASE 2: VÉRIFICATION DES PRODUITS (FALLBACK)
+
+						Même logique que pour les variantes mais appliquée aux produits
+						avec leurs propres variantes internes
+					endcomment
+					unless step_has_available_items
+						for product_bundle in products_bundle
+							comment
+								COMPOSANT COMBINED LISTING (contourne le cap Liquid de 250 variantes)
+
+								Si le produit d'étape est un parent de combined listing volumineux
+								(ex. sommier tapissier ~480 variantes agrégées), `product_bundle.variants`
+								est tronqué à 250 → la variante représentante (taille/version) peut être
+								absente → chaîne SSR incomplète (matelas seul) → flash d'image au load.
+								On résout via l'enfant couleur par défaut (≤ cap), exposé par le métafield
+								`custom.combined_listings_produits_enfants`. Couleur = option de la variante
+								par défaut du parent ; taille/pieds/version = variante de l'enfant. Match sur
+								les DIMENSIONS seules (format mono/bibloc ignoré pour le match, défaut Monobloc
+								préféré) car la taille du pack n'expose pas le format.
+							endcomment
+								if step_has_available_items == false and product_bundle.metafields.custom.combined_listings_produits_enfants.value != blank
+									# Composant combined listing volumineux (ex. sommier tapissier) : product_bundle.variants
+									# du parent est tronqué au cap Liquid de 250 → on résout via l'enfant couleur par défaut
+									# (≤ cap). Couleur = option de la variante par défaut du parent ; taille/pieds/version = enfant.
+									assign component_default_variant = product_bundle.selected_or_first_available_variant
+									assign component_child = component_default_variant.product
+									# Index des options taille et pieds sur l'enfant
+									assign component_size_index = blank
+									assign component_foot_index = blank
+									for component_option in component_child.options_with_values
+										assign component_option_words = component_option.name | downcase | split: ' ' | uniq
+										assign component_option_is_foot = false
+										for component_foot_term in options_names_for_foot
+											if component_option_words contains component_foot_term
+												assign component_option_is_foot = true
+												break
+											endif
+										endfor
+										if component_option_is_foot
+											assign component_foot_index = component_option.position | minus: 1
+										else
+											for component_size_term in component_option_words
+												if options_names_for_size contains component_size_term
+													assign component_size_index = component_option.position | minus: 1
+													break
+												endif
+											endfor
+										endif
+									endfor
+									# Dimensions cibles du pack (suffixe format retiré)
+									assign component_target_dimensions = parent_option_size_cleaned | split: '-' | first | strip
+									# Variante enfant : dimensions identiques (+ version d'étape) ; format par défaut préféré
+									assign component_matched_variant = blank
+									assign component_matched_default_format = blank
+									if component_size_index != blank
+										for component_candidate in component_child.variants
+											assign component_candidate_size = component_candidate.options[component_size_index]
+											assign component_candidate_size_parts = component_candidate_size | split: ' - '
+											assign component_candidate_dim_parts = component_candidate_size_parts[0] | replace: 'cm', '' | replace: 'CM', '' | downcase | strip | split: 'x'
+											assign component_candidate_dimensions = blank
+											if component_candidate_dim_parts.size >= 2
+												assign component_dim_width = component_candidate_dim_parts[0] | strip
+												assign component_dim_length = component_candidate_dim_parts[1] | strip
+												assign component_candidate_dimensions = component_dim_width | append: 'x' | append: component_dim_length
+											endif
+											if component_candidate_dimensions == component_target_dimensions
+												assign component_version_ok = true
+												if products_bundle_option_version != blank and products_bundle_option_version != 'Aucun'
+													assign component_version_ok = false
+													if component_candidate.options contains products_bundle_option_version
+														assign component_version_ok = true
+													endif
+												endif
+												if component_version_ok
+													if component_matched_variant == blank
+														assign component_matched_variant = component_candidate
+													endif
+													assign component_candidate_format = blank
+													if component_candidate_size_parts.size > 1
+														assign component_candidate_format = component_candidate_size_parts[1] | downcase | strip
+													endif
+													if component_matched_default_format == blank and component_candidate_format == default_format_lc
+														assign component_matched_default_format = component_candidate
+													endif
+												endif
+											endif
+										endfor
+									endif
+									if component_matched_default_format != blank
+										assign component_matched_variant = component_matched_default_format
+									endif
+									if component_matched_variant != blank
+										assign step_has_available_items = true
+										if product_bundle.metafields.custom.pack_information.value.title.value != blank
+											assign component_title = product_bundle.metafields.custom.pack_information.value.title.value
+										else
+											assign component_title = product_bundle.title
+										endif
+										if variant_option_string != blank
+											assign variant_option_string = variant_option_string | append: '|' | append: component_title
+										else
+											assign variant_option_string = component_title
+										endif
+										# Couleur, taille (token format), pieds, version dans l'ordre des options de l'enfant
+										for component_chain_option in component_matched_variant.options
+											assign component_chain_value = component_chain_option
+											if component_size_index == forloop.index0
+												assign component_chain_parts = component_chain_value | split: '-'
+												assign component_chain_type = blank
+												if component_chain_parts.size > 1
+													assign component_chain_type_raw = component_chain_parts[1] | strip
+													assign component_chain_type_raw_lc = component_chain_type_raw | downcase
+													unless component_chain_type_raw_lc == default_format_lc
+														assign component_chain_type = component_chain_type_raw
+													endunless
+												endif
+												assign component_chain_value = component_chain_type | default: blank
+											elsif component_foot_index == forloop.index0
+												assign component_chain_parts = component_chain_value | split: '-'
+												assign component_chain_type = blank
+												if component_chain_parts.size > 1
+													assign component_chain_type = component_chain_parts[1] | strip
+												endif
+												assign component_chain_value = component_chain_type | default: blank
+											endif
+											if component_chain_value == 'Default Title' or component_chain_value == blank
+												continue
+											endif
+											assign variant_option_string = variant_option_string | append: '|' | append: component_chain_value
+										endfor
+										continue
+									endif
+								endif
+
+							comment
+								DÉTECTION DES OPTIONS DANS LE PRODUIT BUNDLE
+							endcomment
+							assign bundle_option_position_size_array_check = blank
+							assign bundle_option_position_foot_array_check = blank
+							unless product_bundle.has_only_default_variant
+								for option in product_bundle.options_with_values
+									assign option_name_downcase = option.name | downcase
+									assign option_name_array = option_name_downcase | split: ' ' | uniq
+
+									for translation in options_names_for_foot
+										assign has_foot_in_array = option_name_array | find: translation
+										if has_foot_in_array
+											assign has_foot_in_array = true
+											break
+										endif
+									endfor
+
+									if has_foot_in_array
+										assign bundle_option_position_foot_array_check = option.position | minus: 1
+									else
+										for option_name in option_name_array
+											if options_names_for_size contains option_name
+												assign bundle_option_position_size_array_check = option.position | minus: 1
+												break
+											endif
+										endfor
+									endif
+								endfor
+							endunless
+
+							comment
+								SÉLECTION DE LA VARIANTE REPRÉSENTATIVE DU PRODUIT
+
+								Utilise la variante par défaut ou recherche une variante
+								compatible avec les dimensions du produit parent
+							endcomment
+							assign bundle_variant_check = product_bundle.selected_or_first_available_variant
+
+							comment
+								VÉRIFICATION ET REMPLACEMENT DES VARIANTES CACHÉES
+
+								Si la variante sélectionnée a le métafield hidden_variant à true,
+								on cherche une variante alternative disponible et non cachée
+							endcomment
+							if bundle_variant_check.metafields.custom.hidden_variant.value == true
+								if bundle_variant_check.options.size == 1
+									assign candidate_variants_all = product_bundle.variants
+								elsif bundle_variant_check.options.size == 2
+									assign candidate_variants_all = product_bundle.variants
+									assign candidate_variants_matching_first_options = product_bundle.variants | where: 'option1', bundle_variant_check.options[0] | where: 'option2', bundle_variant_check.options[1]
+								elsif bundle_variant_check.options.size == 3
+									assign candidate_variants_all = product_bundle.variants
+									assign candidate_variants_matching_first_options = product_bundle.variants | where: 'option1', bundle_variant_check.options[0] | where: 'option2', bundle_variant_check.options[1] | where: 'option3', bundle_variant_check.options[2]
+									assign candidate_variants_matching_two_options = product_bundle.variants | where: 'option1', bundle_variant_check.options[0] | where: 'option2', bundle_variant_check.options[1] | where: 'option3', bundle_variant_check.options[2]
+								elsif bundle_variant_check.options.size == 4
+									assign candidate_variants_all = product_bundle.variants
+									assign candidate_variants_matching_first_options = product_bundle.variants | where: 'option1', bundle_variant_check.options[0] | where: 'option2', bundle_variant_check.options[1]
+									assign candidate_variants_matching_two_options = product_bundle.variants | where: 'option1', bundle_variant_check.options[0] | where: 'option2', bundle_variant_check.options[1] | where: 'option3', bundle_variant_check.options[2]
+									assign candidate_variants_matching_three_options = product_bundle.variants | where: 'option1', bundle_variant_check.options[0] | where: 'option2', bundle_variant_check.options[1] | where: 'option3', bundle_variant_check.options[2]
+								endif
+
+								assign valid_variant_bundle_found = false
+								if valid_variant_bundle_found == false and candidate_variants_matching_three_options != blank
+									for variant in candidate_variants_matching_three_options
+										comment
+											Pour option4, on doit filtrer manuellement car where: 'option4' n'existe pas en Liquid
+										endcomment
+										if variant.options[3] != bundle_variant_check.options[3]
+											continue
+										endif
+
+										comment
+											VÉRIFICATION DE DISPONIBILITÉ COMPLÈTE
+
+											Même logique que dans le reste du fichier pour garantir
+											qu'on sélectionne une variante réellement disponible
+										endcomment
+										assign check_against_inventory = true
+										if variant.inventory_management != 'shopify' or variant.inventory_policy == 'continue'
+											assign check_against_inventory = false
+										endif
+
+										assign quantity_rule_soldout = false
+										if variant.quantity_rule.min > variant.inventory_quantity and check_against_inventory
+											assign quantity_rule_soldout = true
+										endif
+
+										assign variant_available = true
+										if variant.available == false or quantity_rule_soldout or variant == null
+											assign variant_available = false
+										endif
+
+										comment
+											Sélectionner cette variante si elle est disponible ET non cachée
+										endcomment
+										if variant_available and variant.metafields.custom.hidden_variant.value != true
+											assign bundle_variant_check = variant
+											assign valid_variant_bundle_found = true
+											break
+										endif
+									endfor
+								endif
+
+								if valid_variant_bundle_found == false and candidate_variants_matching_two_options != blank
+									for variant in candidate_variants_matching_two_options
+										comment
+											VÉRIFICATION DE DISPONIBILITÉ COMPLÈTE
+
+											Même logique que dans le reste du fichier pour garantir
+											qu'on sélectionne une variante réellement disponible
+										endcomment
+										assign check_against_inventory = true
+										if variant.inventory_management != 'shopify' or variant.inventory_policy == 'continue'
+											assign check_against_inventory = false
+										endif
+
+										assign quantity_rule_soldout = false
+										if variant.quantity_rule.min > variant.inventory_quantity and check_against_inventory
+											assign quantity_rule_soldout = true
+										endif
+
+										assign variant_available = true
+										if variant.available == false or quantity_rule_soldout or variant == null
+											assign variant_available = false
+										endif
+
+										comment
+											Sélectionner cette variante si elle est disponible ET non cachée
+										endcomment
+										if variant_available and variant.metafields.custom.hidden_variant.value != true
+											assign bundle_variant_check = variant
+											assign valid_variant_bundle_found = true
+											break
+										endif
+									endfor
+								endif
+
+								if valid_variant_bundle_found == false and candidate_variants_matching_first_options != blank
+									for variant in candidate_variants_matching_first_options
+										comment
+											VÉRIFICATION DE DISPONIBILITÉ COMPLÈTE
+
+											Même logique que dans le reste du fichier pour garantir
+											qu'on sélectionne une variante réellement disponible
+										endcomment
+										assign check_against_inventory = true
+										if variant.inventory_management != 'shopify' or variant.inventory_policy == 'continue'
+											assign check_against_inventory = false
+										endif
+
+										assign quantity_rule_soldout = false
+										if variant.quantity_rule.min > variant.inventory_quantity and check_against_inventory
+											assign quantity_rule_soldout = true
+										endif
+
+										assign variant_available = true
+										if variant.available == false or quantity_rule_soldout or variant == null
+											assign variant_available = false
+										endif
+
+										comment
+											Sélectionner cette variante si elle est disponible ET non cachée
+										endcomment
+										if variant_available and variant.metafields.custom.hidden_variant.value != true
+											assign bundle_variant_check = variant
+											assign valid_variant_bundle_found = true
+											break
+										endif
+									endfor
+								endif
+
+								if valid_variant_bundle_found == false and candidate_variants_all != blank
+									for variant in candidate_variants_all
+										comment
+											VÉRIFICATION DE DISPONIBILITÉ COMPLÈTE
+
+											Même logique que dans le reste du fichier pour garantir
+											qu'on sélectionne une variante réellement disponible
+										endcomment
+										assign check_against_inventory = true
+										if variant.inventory_management != 'shopify' or variant.inventory_policy == 'continue'
+											assign check_against_inventory = false
+										endif
+
+										assign quantity_rule_soldout = false
+										if variant.quantity_rule.min > variant.inventory_quantity and check_against_inventory
+											assign quantity_rule_soldout = true
+										endif
+
+										assign variant_available = true
+										if variant.available == false or quantity_rule_soldout or variant == null
+											assign variant_available = false
+										endif
+
+										comment
+											Sélectionner cette variante si elle est disponible ET non cachée
+										endcomment
+										if variant_available and variant.metafields.custom.hidden_variant.value != true
+											assign bundle_variant_check = variant
+											assign valid_variant_bundle_found = true
+											break
+										endif
+									endfor
+								endif
+							endif
+
+							comment
+								LOGIQUE DE CORRESPONDANCE DES DIMENSIONS POUR PRODUITS
+
+								Même principe que pour les variantes individuelles mais
+								avec recherche dans toutes les variantes du produit
+							endcomment
+							assign has_matching_size_variant_main = true
+							if parent_option_size_cleaned != blank and product_bundle.has_only_default_variant == false
+								assign has_matching_size_variant_main = false
+
+								comment
+									RECHERCHE DE LA VARIANTE COMPATIBLE DANS LE PRODUIT
+
+									Parcourt toutes les variantes pour trouver celle qui
+									correspond aux dimensions du produit parent
+								endcomment
+								if bundle_option_position_size_array_check != blank
+									assign has_matching_size_variant_main = false
+
+									for variant in product_bundle.variants
+										assign variant_option_size_check = variant.options[bundle_option_position_size_array_check]
+
+										comment
+											Application du même algorithme de nettoyage des dimensions
+										endcomment
+										assign variant_option_size_cleaned_check = blank
+										if variant_option_size_check != blank
+											assign variant_option_size_parts_check = variant_option_size_check | split: '-'
+											assign variant_dimensions_part_check = variant_option_size_parts_check[0] | strip
+											assign variant_type_part_check = blank
+
+											if variant_option_size_parts_check.size > 1
+												assign variant_type_part_check_raw = variant_option_size_parts_check[1] | strip
+												assign variant_type_part_check_raw_lc = variant_type_part_check_raw | downcase
+												if variant_type_part_check_raw_lc == default_format_lc
+													assign variant_type_part_check = blank
+												else
+													assign variant_type_part_check = variant_type_part_check_raw
+												endif
+											endif
+
+											assign variant_option_size_no_units_check = variant_dimensions_part_check | replace: 'cm', '' | replace: 'mm', '' | replace: 'CM', '' | replace: 'MM', '' | downcase | strip
+											assign variant_dimensions_array_check = variant_option_size_no_units_check | split: 'x'
+
+											if variant_dimensions_array_check.size >= 2
+												assign variant_dimension_1_check = variant_dimensions_array_check[0] | strip
+												assign variant_dimension_2_check = variant_dimensions_array_check[1] | strip
+												assign variant_option_size_cleaned_check = variant_dimension_1_check | append: 'x' | append: variant_dimension_2_check
+											else
+												assign variant_option_size_cleaned_check = variant_option_size_check
+											endif
+
+											if variant_type_part_check != blank
+												assign variant_option_size_cleaned_check = variant_option_size_cleaned_check | append: '-' | append: variant_type_part_check
+											endif
+										endif
+
+										comment
+											VALIDATION ET SÉLECTION DE LA VARIANTE COMPATIBLE
+
+											Si les dimensions correspondent et que la variante est disponible,
+											elle devient la représentante du produit pour cette étape
+										endcomment
+										if parent_option_size_cleaned == variant_option_size_cleaned_check
+											# Filtre par option_version (BO : etape_X_option_version).
+											# Sans ce filtre, la 1re variante matchant la taille gagne,
+											# qui peut être p.ex. "Standard" alors que le BO force "Plus".
+											# Conséquence directe : variant_option_string SSR = "...|Standard"
+											# tandis que les images ont alt "...|Plus" → aucune image
+											# matchée, le SSR fallback sur la featured (générique).
+											assign variant_matches_version = true
+											if products_bundle_option_version != blank and products_bundle_option_version != 'Aucun'
+												assign variant_matches_version = false
+												if variant.option1 == products_bundle_option_version
+													assign variant_matches_version = true
+												elsif variant.option2 == products_bundle_option_version
+													assign variant_matches_version = true
+												elsif variant.option3 == products_bundle_option_version
+													assign variant_matches_version = true
+												endif
+											endif
+											if variant_matches_version == false
+												continue
+											endif
+
+											assign check_against_inventory = true
+											if variant.inventory_management != 'shopify' or variant.inventory_policy == 'continue'
+												assign check_against_inventory = false
+											endif
+											assign quantity_rule_soldout = false
+											if variant.quantity_rule.min > variant.inventory_quantity and check_against_inventory
+												assign quantity_rule_soldout = true
+											endif
+
+											assign product_available_check = true
+											if variant.available == false or quantity_rule_soldout or variant == null
+												assign product_available_check = false
+											endif
+
+											assign has_matching_size_variant_main = true
+
+											if product_available_check
+												assign bundle_variant_check = variant
+												break
+											endif
+										endif
+									endfor
+								endif
+							endif
+
+							comment
+								VÉRIFICATION FINALE DE DISPONIBILITÉ DU PRODUIT
+							endcomment
+							assign check_against_inventory = true
+							if bundle_variant_check.inventory_management != 'shopify' or bundle_variant_check.inventory_policy == 'continue'
+								assign check_against_inventory = false
+							endif
+							assign quantity_rule_soldout = false
+							if bundle_variant_check.quantity_rule.min > bundle_variant_check.inventory_quantity and check_against_inventory
+								assign quantity_rule_soldout = true
+							endif
+
+							assign product_available_check = true
+							if bundle_variant_check.available == false or quantity_rule_soldout or bundle_variant_check == null or has_matching_size_variant_main == false
+								assign product_available_check = false
+							endif
+
+							comment
+								CONSTRUCTION DE LA CHAÎNE D'OPTIONS POUR LE PREMIER PRODUIT DISPONIBLE
+
+								Même logique que pour les variantes mais avec la variante
+								représentative sélectionnée du produit
+							endcomment
+							if product_available_check and step_has_available_items == false
+								assign step_has_available_items = true
+
+								# Récupération du titre avec priorité aux metafields
+								if bundle_variant_check.metafields.custom.pack_information.value != blank
+									assign selected_variant_bundle_title = bundle_variant_check.metafields.custom.pack_information.value.title.value
+								elsif bundle_variant_check.product.metafields.custom.pack_information.value != blank
+									# Fallback vers les informations du produit parent
+									assign selected_variant_bundle_title = bundle_variant_check.product.metafields.custom.pack_information.value.title.value
+								else
+									if bundle_variant_check.product.metafields.custom.combined_listings_produit_parent.value != blank
+										assign selected_variant_bundle_title = bundle_variant_check.product.metafields.custom.combined_listings_produit_parent.value.title
+									else
+										assign selected_variant_bundle_title = bundle_variant_check.product.title
+									endif
+								endif
+
+								# Ajout du titre à la chaîne
+								if variant_option_string != blank
+									assign variant_option_string = variant_option_string | append: '|' | append: selected_variant_bundle_title
+								else
+									assign variant_option_string = selected_variant_bundle_title
+								endif
+
+								# Traitement de chaque option de la variante sélectionnée
+								for option in bundle_variant_check.options
+									assign option_value = option
+									assign option_name_downcase = option.name | downcase
+									assign option_name_array = option_name_downcase | split: ' ' | uniq
+
+									# Traitement spécial selon le type d'option
+									if bundle_option_position_size_array_check == forloop.index0
+										assign has_value_except = false
+										assign has_value_except_strict = false
+
+										for value_strict_except in options_names_for_size_value_strict_except
+											if option_name_downcase == value_strict_except
+												assign has_value_except_strict = true
+												break
+											endif
+										endfor
+
+										for option_name in option_name_array
+											if options_names_for_size_value_except contains option_name
+												assign has_value_except = true
+												break
+											endif
+										endfor
+
+										unless has_value_except == true or has_value_except_strict == true
+											assign option_parts = option_value | split: '-'
+											assign type_part = blank
+
+											if option_parts.size > 1
+												assign type_part_raw = option_parts[1] | strip
+												assign type_part_raw_lc = type_part_raw | downcase
+												if type_part_raw_lc == default_format_lc
+													assign type_part = blank
+												else
+													assign type_part = type_part_raw
+												endif
+											endif
+
+											assign option_value = type_part | default: blank
+										endunless
+									elsif bundle_option_position_foot_array_check == forloop.index0
+										assign option_parts = option_value | split: '-'
+										assign type_part = blank
+
+										if option_parts.size > 1
+											assign type_part = option_parts[1] | strip
+										endif
+
+										assign option_value = type_part | default: blank
+									endif
+
+									if option_value == 'Default Title' or option_value == blank
+										continue
+									endif
+
+									assign variant_option_string = variant_option_string | append: '|' | append: option_value
+								endfor
+							endif
+						endfor
+					endunless
+				endif
+			endfor
+
+			comment
+				TRAITEMENT POUR LES PRODUITS NON-BUNDLE (STANDARD)
+
+				Pour les produits normaux, construit simplement la chaîne d'options
+				de la variante sélectionnée avec les règles de nettoyage appropriées
+			endcomment
+		elsif selected_variant
+			# Récupération de la taxe écologique si présente
+			assign price_eco_part = selected_variant.metafields.custom.exo_tax.value
+
+			# Construction de la chaîne d'options pour le produit standard
+			for option in selected_variant.options
+				assign option_value = option
+				assign option_name_downcase = option.name | downcase
+				assign option_name_array = option_name_downcase | split: ' ' | uniq
+
+				# Traitement spécial pour les options de taille
+				if option_position_size_array == forloop.index0
+					assign has_value_except = false
+					assign has_value_except_strict = false
+
+					for value_strict_except in options_names_for_size_value_strict_except
+						if option_name_downcase == value_strict_except
+							assign has_value_except_strict = true
+							break
+						endif
+					endfor
+
+					for option_name in option_name_array
+						if options_names_for_size_value_except contains option_name
+							assign has_value_except = true
+							break
+						endif
+					endfor
+
+					unless has_value_except == true or has_value_except_strict == true
+						assign option_parts = option_value | split: '-'
+						assign type_part = blank
+
+						if option_parts.size > 1
+							assign type_part_raw = option_parts[1] | strip
+							assign type_part_raw_lc = type_part_raw | downcase
+							if type_part_raw_lc == default_format_lc
+								assign type_part = blank
+							else
+								assign type_part = type_part_raw
+							endif
+						endif
+
+						assign option_value = type_part | default: blank
+					endunless
+
+					# Traitement spécial pour les options de pieds
+				elsif option_position_foot_array == forloop.index0
+					assign has_value_except = false
+
+					for option_name in option_name_array
+						if options_names_for_foot_value_except contains option_name
+							assign has_value_except = true
+							break
+						endif
+					endfor
+
+					unless has_value_except == true
+						assign option_parts = option_value | split: '-'
+						assign type_part = blank
+
+						if option_parts.size > 1
+							assign type_part = option_parts[1] | strip
+						endif
+
+						assign option_value = type_part | default: blank
+					endunless
+				endif
+
+				# Ignore les valeurs par défaut et vides
+				if option_value == 'Default Title' or option_value == blank
+					continue
+				endif
+
+				# Construction progressive de la chaîne d'options
+				if variant_option_string == blank
+					assign variant_option_string = option_value
+				else
+					assign variant_option_string = variant_option_string | append: '|' | append: option_value
+				endif
+			endfor
+		endif
+
+		assign first_3d_model = product_media | where: 'media_type', 'model' | first
+	-%}
+
+	{%- if first_3d_model -%}
+		{{ 'component-product-model.css' | asset_url | stylesheet_tag }}
+		<link
+			id="ModelViewerStyle"
+			rel="stylesheet"
+			href="https://cdn.shopify.com/shopifycloud/model-viewer-ui/assets/v1.0/model-viewer-ui.css"
+			media="print"
+			onload="this.media='all'"
+		>
+		<link
+			id="ModelViewerOverride"
+			rel="stylesheet"
+			href="{{ 'component-model-viewer-ui.css' | asset_url }}"
+			media="print"
+			onload="this.media='all'"
+		>
+	{%- endif -%}
+
+	{% if is_bundle %}
+		<script src="{{ 'bundle.product-bundle-manager.js' | asset_url }}" defer="defer"></script>
+	{% endif %}
+
+	<div class="page-width">
+		<div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product_media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
+			<div class="grid__item product__media-wrapper">
+				{% render 'product-media-gallery',
+					product_media: product_media,
+					selected_variant_child: selected_variant_child,
+					variant_images: variant_images,
+					selected_variant: selected_variant,
+					template_new_offer: use_new_offer_layout,
+					variant_option_string: variant_option_string,
+					option_position_size_array: option_position_size_array,
+					option_position_foot_array: option_position_foot_array
+				%}
+			</div>
+			<div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+				<section
+					id="ProductInfo-{{ section.id }}"
+					class="product__info-container{% if section.settings.enable_sticky_info %} product__column-sticky{% endif %}"
+				>
+					{%- assign product_form_id = 'product-form-' | append: section.id -%}
+
+					{%- for block in section.blocks -%}
+						{%- liquid
+							assign block_type = block.type
+							if template_new_offer
+								if block_type == 'reassurances'
+									continue
+								endif
+							endif
+						-%}
+						{%- case block.type -%}
+							{%- when '@app' -%}
+								{% render block %}
+							{%- when 'text' -%}
+								<p
+									class="product__text inline-richtext{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}"
+									{{ block.shopify_attributes }}
+								>
+									{{- block.settings.text -}}
+								</p>
+							{%- when 'title' -%}
+								<div class="product__title" {{ block.shopify_attributes }}>
+									{% if product.metafields.custom.combined_listings_produit_parent.value != blank %}
+										<span class="h1">
+											{{ product.metafields.custom.combined_listings_produit_parent.value.title | escape }}
+										</span>
+										<h1 class="visually-hidden">{{ product.title | escape }}</h1>
+									{% else %}
+										<h1>{{ product.title | escape }}</h1>
+									{% endif %}
+								</div>
+							{%- when 'price' -%}
+								<div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+									{%- render 'price',
+										product: product,
+										use_variant: false,
+										show_badges: true,
+										price_class: 'price--large',
+										is_bundle: is_bundle
+									-%}
+								</div>
+								{%- if product.quantity_price_breaks_configured? -%}
+									<div class="volume-pricing-note" id="Volume-Note-{{ section.id }}">
+										<span>{{ 'products.product.volume_pricing.note' | t }}</span>
+									</div>
+								{%- endif -%}
+								<div {{ block.shopify_attributes }} class="hidden">
+									{%- assign product_form_installment_id = 'product-form-installment-' | append: section.id -%}
+									{%- form 'product', product, id: product_form_installment_id, class: 'installment caption-large' -%}
+										<input type="hidden" name="id" value="{{ selected_variant.id }}">
+										{{ form | payment_terms }}
+									{%- endform -%}
+								</div>
+							{%- when 'inventory' -%}
+								<p
+									class="product__inventory{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if selected_variant.inventory_management != 'shopify' %} visibility-hidden{% endif %}"
+									{{ block.shopify_attributes }}
+									id="Inventory-{{ section.id }}"
+									role="status"
+								>
+									{%- if selected_variant.inventory_management == 'shopify' -%}
+										{%- if selected_variant.inventory_quantity > 0 -%}
+											{%- if selected_variant.inventory_quantity <= block.settings.inventory_threshold -%}
+												<span class="svg-wrapper" style="color: rgb(238, 148, 65)">
+													{{- 'icon-inventory-status.svg' | inline_asset_content -}}
+												</span>
+												{%- if block.settings.show_inventory_quantity -%}
+													{{-
+														'products.product.inventory_low_stock_show_count'
+														| t: quantity: selected_variant.inventory_quantity
+													-}}
+												{%- else -%}
+													{{- 'products.product.inventory_low_stock' | t -}}
+												{%- endif -%}
+											{%- else -%}
+												<span class="svg-wrapper" style="color: rgb(62, 214, 96)">
+													{{- 'icon-inventory-status.svg' | inline_asset_content -}}
+												</span>
+												{%- if block.settings.show_inventory_quantity -%}
+													{{-
+														'products.product.inventory_in_stock_show_count'
+														| t: quantity: selected_variant.inventory_quantity
+													-}}
+												{%- else -%}
+													{{- 'products.product.inventory_in_stock' | t -}}
+												{%- endif -%}
+											{%- endif -%}
+										{%- else -%}
+											{%- if selected_variant.inventory_policy == 'continue' -%}
+												<span class="svg-wrapper" style="color: rgb(62, 214, 96)">
+													{{- 'icon-inventory-status.svg' | inline_asset_content -}}
+												</span>
+												{{- 'products.product.inventory_out_of_stock_continue_selling' | t -}}
+											{%- else -%}
+												<span class="svg-wrapper" style="color: rgb(200, 200, 200)">
+													{{- 'icon-inventory-status.svg' | inline_asset_content -}}
+												</span>
+												{{- 'products.product.inventory_out_of_stock' | t -}}
+											{%- endif -%}
+										{%- endif -%}
+									{%- endif -%}
+								</p>
+							{%- when 'description' -%}
+								{%- if product.description != blank -%}
+									<div class="product__description rte quick-add-hidden" {{ block.shopify_attributes }}>
+										{{ product.description }}
+									</div>
+								{%- endif -%}
+							{%- when 'claims' -%}
+								{%- comment -%}
+									Pack-new : titre "Contenu du pack" déplacé ici (au-dessus
+									des claims) avec un wording dédié `pack_new_content_title`
+									au lieu de "Configurez votre pack". Le rendu legacy du
+									titre dans `variant_picker` est masqué côté template_pack_new.
+								{%- endcomment -%}
+								{%- if template_pack_new -%}
+									<div class="product__variant-selects__information__title product__variant-selects__information__title--pack-new">
+										{{ 'products.product.pack_new_content_title' | t }}
+									</div>
+								{%- endif -%}
+								{%- if product.metafields.custom.claims.value != blank or product.metafields.custom.ribbon_badges.value != blank -%}
+								<div class="product__claims__with_special_badges">
+									{%- if product.metafields.custom.claims.value != blank -%}
+										<div class="product__claims rte" {{ block.shopify_attributes }}>
+											<ul class="product__claims__list">
+												{%- for claim in product.metafields.custom.claims.value -%}
+													<li class="product__claim__item">
+														{{ claim }}
+													</li>
+												{%- endfor -%}
+											</ul>
+										</div>
+									{%- endif -%}
+									{%- if template_pack_new -%}
+										{%- render 'product-ribbon-badges', product: product, block: block -%}
+									{%- endif -%}
+									</div>
+								{%- endif -%}
+
+							{%- when 'list_claims_matelas' -%}
+								{%- if product.metafields.custom.liste_des_caracteristiques_du_matelas.value != blank -%}
+									<div class="product__list_claims" {{ block.shopify_attributes }}>
+										<ul class="product__list_claims__list">
+											{%- for caracteristique in product.metafields.custom.liste_des_caracteristiques_du_matelas.value -%}
+												{% if caracteristique.texte_court.value != blank
+													or caracteristique.image_miniature.value != blank
+												%}
+													<li class="product__list_claims__item">
+														{% if caracteristique.image_miniature.value != blank %}
+															<div class="product__list_claims__item__image">
+																{{
+																	caracteristique.image_miniature.value
+																	| image_url: width: 40
+																	| image_tag: loading: 'lazy'
+																}}
+															</div>
+														{% endif %}
+														{% if caracteristique.texte_court.value != blank %}
+															<div class="product__list_claims__item__text">
+																{{ caracteristique.texte_court.value }}
+															</div>
+														{% endif %}
+													</li>
+												{% endif %}
+											{%- endfor -%}
+										</ul>
+										{% if block.settings.link_text != blank %}
+											<a
+												id="scrollTo-{{ block.id }}"
+												data-target="{{ block.settings.link_target }}"
+												class="product__list_claims__link ax-link reversed"
+												style="
+													{% if block.settings.link_font_weight != blank %}
+														font-weight: {{ block.settings.link_font_weight }};
+													{% endif %}
+													{% if block.settings.link_font_family != blank %}
+														font-family: '{{ block.settings.link_font_family }}', sans-serif;
+													{% endif %}
+												"
+											>
+												{{ block.settings.link_text }}
+											</a>
+										{% endif %}
+									</div>
+								{%- endif -%}
+							{%- when 'sku' -%}
+								<p
+									class="product__sku{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if selected_variant.sku.size == 0 %} visibility-hidden{% endif %}"
+									id="Sku-{{ section.id }}"
+									role="status"
+									{{ block.shopify_attributes }}
+								>
+									<span class="visually-hidden">{{ 'products.product.sku' | t }}:</span>
+									{{- selected_variant.sku -}}
+								</p>
+							{%- when 'custom_liquid' -%}
+								{{ block.settings.custom_liquid }}
+							{%- when 'collapsible_tab' -%}
+								<div class="product__accordion accordion quick-add-hidden" {{ block.shopify_attributes }}>
+									<details id="Details-{{ block.id }}-{{ section.id }}">
+										<summary>
+											<div class="summary__title">
+												{% render 'icon-accordion', icon: block.settings.icon %}
+												<h2 class="h4 accordion__title inline-richtext">
+													{{ block.settings.heading | default: block.settings.page.title | escape }}
+												</h2>
+											</div>
+											{{- 'icon-caret.svg' | inline_asset_content -}}
+										</summary>
+										<div class="accordion__content rte" id="ProductAccordion-{{ block.id }}-{{ section.id }}">
+											{{ block.settings.content }}
+											{{ block.settings.page.content }}
+										</div>
+									</details>
+								</div>
+							{%- when 'popup' -%}
+								<modal-opener
+									class="product-popup-modal__opener quick-add-hidden"
+									data-modal="#PopupModal-{{ block.id }}"
+									{{ block.shopify_attributes }}
+								>
+									<button
+										id="ProductPopup-{{ block.id }}"
+										class="product-popup-modal__button link"
+										type="button"
+										aria-haspopup="dialog"
+									>
+										{{ block.settings.text | default: block.settings.page.title | escape }}
+									</button>
+								</modal-opener>
+							{%- when 'share' -%}
+								{% liquid
+									assign share_url = product.selected_variant.url | default: product.url | prepend: request.origin
+									render 'share-button', block: block, share_link: share_url
+								%}
+							{%- when 'badges-rating' -%}
+								<div id="ProductBadges-{{ section.id }}" class="product__badges-rating">
+									{% render 'product-badges',
+										product: product,
+										selected_variant: selected_variant,
+										section_id: section.id,
+										class: 'product__badges',
+										show_discount: false,
+										show_rating: block.settings.show_rating
+									%}
+								</div>
+
+							{%- when 'variant_picker' -%}
+								<div class="product__variant-selects__information">
+									<div id="ProductConfigureText-{{ section.id }}">
+										{%- liquid
+											if product.metafields.custom.combined_listings_produit_parent.value != blank and product.metafields.custom.combined_listings_produit_parent.value.metafields.custom.configure_text.value != blank
+												assign configure_text = product.metafields.custom.combined_listings_produit_parent.value.metafields.custom.configure_text.value
+											else
+												assign configure_text = product.metafields.custom.configure_text.value
+											endif
+
+											if configure_text != blank
+												assign configure_text = configure_text
+											elsif is_bundle
+												assign configure_text = 'products.product.config_bundle_title' | t
+											elsif product.metafields.custom.parures_affichage.value
+												assign configure_text = 'products.product.config_parure_pillowcases' | t
+											endif
+										-%}
+
+										{%- comment -%}
+											Pack-new : le titre est déplacé au-dessus du block claims
+											(cf. case 'claims' plus haut) avec un wording dédié.
+											On masque donc le rendu legacy ici pour éviter le doublon.
+										{%- endcomment -%}
+										{%- if configure_text != blank and template_pack_new == false -%}
+											<div class="product__variant-selects__information__title">
+												{{ configure_text }}
+											</div>
+										{%- endif -%}
+									</div>
+
+									{% if is_bundle %}
+										{% render 'product-bundle',
+											product: product,
+											selected_variant: selected_variant,
+											has_changed_option_for_hidden: has_changed_option_for_hidden,
+											block: block,
+											product_form_id: product_form_id,
+											bundle_configurator: bundle_configurator,
+											section_id: section.id,
+											parent_option_position_size_array: option_position_size_array
+										%}
+									{% else %}
+										{% render 'product-variant-picker',
+											product: product,
+											block: block,
+											product_form_id: product_form_id,
+											template_new_offer: template_new_offer,
+											template_new_offer_sommier: template_new_offer_sommier,
+											selected_variant: selected_variant,
+											has_changed_option_for_hidden: has_changed_option_for_hidden
+										%}
+									{% endif %}
+								</div>
+							{%- when 'upsell' -%}
+								{%- render 'product-upsell',
+									product: product,
+									selected_variant: selected_variant,
+									product_form_id: product_form_id,
+									section_id: section.id,
+									get_url: get_url
+								-%}
+							{%- when 'buy_buttons' -%}
+								{%- render 'buy-buttons',
+									block: block,
+									product: product,
+									selected_variant: selected_variant,
+									product_form_id: product_form_id,
+									section_id: section.id,
+									show_pickup_availability: true,
+									is_bundle: is_bundle,
+									is_hidden: is_hidden
+								-%}
+								<div id="ProductPriceEcoPart-{{ section.id }}" class="product__price-eco-part">
+									{%- if price_eco_part != blank -%}
+										{%- liquid
+											assign price_eco_part = price_eco_part | times: 100
+											assign price_eco_part_formatted = price_eco_part | money
+										-%}
+										<div
+											class="product__price-eco-part__text{% if is_bundle or price_eco_part == 0 %} hidden{% endif %}"
+											data-price-eco-part="{{ price_eco_part }}"
+										>
+											{{ 'products.product.price_eco_part_html' | t: price: price_eco_part_formatted }}
+										</div>
+									{%- endif -%}
+								</div>
+								<div id="ProductAlmaBadge-{{ section.id }}" product-alma-badge data-id="{{ section.id }}">
+									{%- unless is_hidden -%}
+										{%- render 'alma-badge', variant: selected_variant, product: product, style: 'display: block;' -%}
+									{%- endunless -%}
+								</div>
+							{%- when 'rating' -%}
+								{%- if product.metafields.reviews.rating.value != blank -%}
+									<div class="rating-wrapper">
+										{% liquid
+											assign rating_decimal = 0
+											assign decimal = product.metafields.reviews.rating.value.rating | modulo: 1
+											if decimal >= 0.3 and decimal <= 0.7
+												assign rating_decimal = 0.5
+											elsif decimal > 0.7
+												assign rating_decimal = 1
+											endif
+										%}
+										<div
+											class="rating"
+											role="img"
+											aria-label="{{ 'accessibility.star_reviews_info' | t: rating_value: product.metafields.reviews.rating.value, rating_max: product.metafields.reviews.rating.value.scale_max }}"
+										>
+											<span
+												aria-hidden="true"
+												class="rating-star"
+												style="--rating: {{ product.metafields.reviews.rating.value.rating | floor }}; --rating-max: {{ product.metafields.reviews.rating.value.scale_max }}; --rating-decimal: {{ rating_decimal }};"
+											></span>
+										</div>
+										<p class="rating-text caption">
+											<span aria-hidden="true">
+												{{- product.metafields.reviews.rating.value }} /
+												{{ product.metafields.reviews.rating.value.scale_max -}}
+											</span>
+										</p>
+										<p class="rating-count caption">
+											<span aria-hidden="true">({{ product.metafields.reviews.rating_count }})</span>
+											<span class="visually-hidden">
+												{{- product.metafields.reviews.rating_count }}
+												{{ 'accessibility.total_reviews' | t -}}
+											</span>
+										</p>
+									</div>
+								{%- endif -%}
+							{%- when 'complementary' -%}
+								<div class="complementary-products-container">
+									<product-recommendations
+										class="complementary-products quick-add-hidden{% if block.settings.make_collapsible_row %} is-accordion{% endif %}{% if block.settings.enable_quick_add %} complementary-products-contains-quick-add{% endif %}"
+										data-url="{{ routes.product_recommendations_url }}?limit={{ block.settings.product_list_limit }}&intent=complementary"
+										data-section-id="{{ section.id }}"
+										data-product-id="{{ product.id }}"
+									>
+										{%- if recommendations.performed and recommendations.products_count > 0 -%}
+											<aside
+												aria-label="{{ 'accessibility.complementary_products' | t }}"
+												{{ block.shopify_attributes -}}
+												{% if block.settings.make_collapsible_row %}
+													class="product__accordion accordion"
+												{% endif %}
+											>
+												<div class="complementary-products__container">
+													{%- if block.settings.make_collapsible_row -%}
+														<details id="Details-{{ block.id }}-{{ section.id }}" open>
+															<summary>
+													{%- endif %}
+													<div class="summary__title">
+														{%- if block.settings.make_collapsible_row -%}
+															{% render 'icon-accordion', icon: block.settings.icon %}
+															<h2 class="h4 accordion__title">{{ block.settings.block_heading }}</h2>
+														{%- else -%}
+															<h2 class="h3 accordion__title">{{ block.settings.block_heading }}</h2>
+														{%- endif -%}
+													</div>
+													{%- if block.settings.make_collapsible_row -%}
+														{{- 'icon-caret.svg' | inline_asset_content -}}
+														</summary>
+													{%- endif -%}
+													<slideshow-component class="slider-mobile-gutter">
+														{%- assign number_of_slides = recommendations.products_count
+															| plus: 0.0
+															| divided_by: block.settings.products_per_page
+															| ceil
+														-%}
+														<div
+															id="Slider-{{ block.id }}"
+															class="contains-card contains-card--product complementary-slider grid grid--1-col slider slider--everywhere"
+															role="list"
+															{% if number_of_slides > 1 %}
+																aria-label="{{ 'general.slider.name' | t }}"
+															{% endif %}
+														>
+															{% assign skip_card_product_styles = false %}
+															{%- for i in (1..number_of_slides) -%}
+																<div
+																	id="Slide-{{ block.id }}-{{ forloop.index }}"
+																	class="complementary-slide complementary-slide--{{ settings.card_style }} grid__item slider__slide slideshow__slide"
+																	tabindex="-1"
+																	role="group"
+																	{% if number_of_slides > 1 %}
+																		aria-roledescription="{{ 'sections.slideshow.slide' | t }}"
+																		aria-label="{{ forloop.index }} {{ 'general.slider.of' | t }} {{ forloop.length }}"
+																	{% endif %}
+																>
+																	<ul class="list-unstyled" role="list">
+																		{%- for product in recommendations.products
+																			limit: block.settings.products_per_page
+																			offset: continue
+																		-%}
+																			{%- liquid
+																				if product.metafields.seo.hidden.value == 1
+																					continue
+																				endif
+																			-%}
+																			<li>
+																				{%- if block.settings.enable_quick_add -%}
+																					{% assign quick_add = 'standard' %}
+																				{%- else -%}
+																					{% assign quick_add = 'none' %}
+																				{%- endif -%}
+																				{% render 'card-product',
+																					card_product: product,
+																					media_aspect_ratio: block.settings.image_ratio,
+																					show_secondary_image: true,
+																					lazy_load: false,
+																					skip_styles: skip_card_product_styles,
+																					quick_add: quick_add,
+																					section_id: section.id,
+																					horizontal_class: true,
+																					horizontal_quick_add: true
+																				%}
+																			</li>
+																			{%- assign skip_card_product_styles = true -%}
+																		{%- endfor -%}
+																	</ul>
+																</div>
+															{%- endfor -%}
+														</div>
+														{%- if number_of_slides > 1 -%}
+															<div class="slider-buttons">
+																<button
+																	type="button"
+																	class="slider-button slider-button--prev"
+																	name="previous"
+																	aria-label="{{ 'general.slider.previous_slide' | t }}"
+																>
+																	<span class="svg-wrapper">
+																		{{- 'icon-caret.svg' | inline_asset_content -}}
+																	</span>
+																</button>
+																<div class="slider-counter slider-counter--{{ block.settings.pagination_style }}{% if block.settings.pagination_style == 'counter' or block.settings.pagination_style == 'numbers' %} caption{% endif %}">
+																	{%- if block.settings.pagination_style == 'counter' -%}
+																		<span class="slider-counter--current">1</span>
+																		<span aria-hidden="true">/</span>
+																		<span class="visually-hidden">{{ 'general.slider.of' | t }}</span>
+																		<span class="slider-counter--total">{{ number_of_slides }}</span>
+																	{%- else -%}
+																		<div class="slideshow__control-wrapper">
+																			{%- for i in (1..number_of_slides) -%}
+																				<button
+																					class="slider-counter__link slider-counter__link--{{ block.settings.pagination_style }} link"
+																					aria-label="{{ 'sections.slideshow.load_slide' | t }} {{ forloop.index }} {{ 'general.slider.of' | t }} {{ forloop.length }}"
+																					aria-controls="Slider-{{ block.id }}"
+																				>
+																					{%- if block.settings.pagination_style == 'numbers' -%}
+																						{{ forloop.index -}}
+																					{%- else -%}
+																						<span class="dot"></span>
+																					{%- endif -%}
+																				</button>
+																			{%- endfor -%}
+																		</div>
+																	{%- endif -%}
+																</div>
+																<button
+																	type="button"
+																	class="slider-button slider-button--next"
+																	name="next"
+																	aria-label="{{ 'general.slider.next_slide' | t }}"
+																>
+																	<span class="svg-wrapper">
+																		{{- 'icon-caret.svg' | inline_asset_content -}}
+																	</span>
+																</button>
+															</div>
+														{%- endif -%}
+													</slideshow-component>
+													{%- if block.settings.make_collapsible_row -%}
+														</details>
+													{%- endif -%}
+												</div>
+											</aside>
+										{%- endif -%}
+										{{ 'component-card.css' | asset_url | stylesheet_tag }}
+										{{ 'component-complementary-products.css' | asset_url | stylesheet_tag }}
+										{%- if block.settings.enable_quick_add -%}
+											{{ 'quick-add.css' | asset_url | stylesheet_tag }}
+											<script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
+										{%- endif -%}
+									</product-recommendations>
+								</div>
+							{%- when 'icon-with-text' -%}
+								{% render 'icon-with-text', block: block %}
+							{%- when 'disponibility' -%}
+								<div id="ProductDisponibility-{{ section.id }}">
+									{%- if selected_variant.metafields.custom.date_de_dispo.value != blank -%}
+										<div
+											class="product__disponibility"
+											data-date-dispo="{{ selected_variant.metafields.custom.date_de_dispo.value }}"
+										>
+											<p>{{ selected_variant.metafields.custom.date_de_dispo.value }}</p>
+										</div>
+									{%- endif -%}
+								</div>
+							{%- when 'delivery' -%}
+								<div id="ProductDeliveryInfo-{{ section.id }}">
+									{%- if block.settings.enable_only_pack and is_bundle -%}
+										{%- unless is_hidden -%}
+											{% render 'product-delivery-info',
+												block: block,
+												selected_variant: selected_variant,
+												template_new_offer: template_new_offer
+											%}
+										{%- endunless -%}
+									{%- elsif block.settings.enable_only_pack != true and is_bundle != true -%}
+										{%- unless is_hidden -%}
+											{% render 'product-delivery-info',
+												block: block,
+												selected_variant: selected_variant,
+												template_new_offer: template_new_offer
+											%}
+										{%- endunless -%}
+									{%- endif -%}
+								</div>
+							{%- when 'banner_pack' -%}
+								<div id="ProductBannerPack-{{ section.id }}">
+									{% render 'product-banner-pack', block: block %}
+								</div>
+							{%- when 'description_tabs' -%}
+								<div id="ProductDescriptionTabs-{{ section.id }}">
+									{% render 'product-description-tabs', block: block %}
+								</div>
+						{%- endcase -%}
+					{%- endfor -%}
+					<a href="{{ product.url }}" class="link product__view-details animate-arrow">
+						{{ 'products.product.view_full_details' | t }}
+						{{- 'icon-arrow.svg' | inline_asset_content -}}
+					</a>
+				</section>
+			</div>
+
+			{%- liquid
+				render 'product-reassurances', product: product, section: section, template_new_offer: template_new_offer
+			-%}
+
+			{% render 'product-media-modal',
+				product_media: product_media,
+				selected_variant_child: selected_variant_child,
+				variant_images: variant_images,
+				selected_variant: selected_variant,
+				variant_option_string: variant_option_string,
+				get_url: get_url
+			%}
+
+			{% assign popups = section.blocks | where: 'type', 'popup' %}
+			{%- for block in popups -%}
+				<modal-dialog id="PopupModal-{{ block.id }}" class="product-popup-modal" {{ block.shopify_attributes }}>
+					<div
+						role="dialog"
+						aria-label="{{ block.settings.text }}"
+						aria-modal="true"
+						class="product-popup-modal__content"
+						tabindex="-1"
+					>
+						<button
+							id="ModalClose-{{ block.id }}"
+							type="button"
+							class="product-popup-modal__toggle"
+							aria-label="{{ 'accessibility.close' | t }}"
+						>
+							{{- 'icon-close.svg' | inline_asset_content -}}
+						</button>
+						<div class="product-popup-modal__content-info">
+							<h1 class="h2">{{ block.settings.page.title | escape }}</h1>
+							{{ block.settings.page.content }}
+						</div>
+					</div>
+				</modal-dialog>
+			{%- endfor -%}
+
+			{%- if product_media.size > 0 -%}
+				<script src="{{ 'bundle.product-modal.js' | asset_url }}" defer="defer"></script>
+				<script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>
+			{%- endif -%}
+
+			{%- if first_3d_model -%}
+				<script type="application/json" id="ProductJSON-{{ product.id }}">
+					{{ product_media | where: 'media_type', 'model' | json }}
+				</script>
+				<script src="{{ 'bundle.product-model.js' | asset_url }}" defer></script>
+			{%- endif -%}
+		</div>
+	</div>
+	<div id="ProductStickyBar-{{ section.id }}" class="product-sticky-bar__morph">
+		{%- unless is_hidden -%}
+			{%- render 'product-sticky-bar',
+				product: product,
+				selected_variant: selected_variant,
+				section: section,
+				is_bundle: is_bundle,
+				is_hidden: is_hidden,
+				template_new_offer: template_new_offer,
+				show_sticky_price: section.settings.enable_sticky_bar_price
+			-%}
+		{%- endunless -%}
+	</div>
+</product-info>
+
+{% schema %}
+	{
+		"name": "t:sections.main-product.name",
+		"tag": "section",
+		"class": "section",
+		"blocks": [
+			{
+				"type": "@app"
+			},
+			{
+				"type": "text",
+				"name": "t:sections.main-product.blocks.text.name",
+				"settings": [
+					{
+						"type": "inline_richtext",
+						"id": "text",
+						"default": "t:sections.main-product.blocks.text.settings.text.default",
+						"label": "t:sections.main-product.blocks.text.settings.text.label"
+					},
+					{
+						"type": "select",
+						"id": "text_style",
+						"options": [
+							{
+								"value": "body",
+								"label": "t:sections.main-product.blocks.text.settings.text_style.options__1.label"
+							},
+							{
+								"value": "subtitle",
+								"label": "t:sections.main-product.blocks.text.settings.text_style.options__2.label"
+							},
+							{
+								"value": "uppercase",
+								"label": "t:sections.main-product.blocks.text.settings.text_style.options__3.label"
+							}
+						],
+						"default": "body",
+						"label": "t:sections.main-product.blocks.text.settings.text_style.label"
+					}
+				]
+			},
+			{
+				"type": "title",
+				"name": "t:sections.main-product.blocks.title.name",
+				"limit": 1
+			},
+			{
+				"type": "price",
+				"name": "t:sections.main-product.blocks.price.name",
+				"limit": 1
+			},
+			{
+				"type": "sku",
+				"name": "t:sections.main-product.blocks.sku.name",
+				"limit": 1,
+				"settings": [
+					{
+						"type": "select",
+						"id": "text_style",
+						"options": [
+							{
+								"value": "body",
+								"label": "t:sections.main-product.blocks.sku.settings.text_style.options__1.label"
+							},
+							{
+								"value": "subtitle",
+								"label": "t:sections.main-product.blocks.sku.settings.text_style.options__2.label"
+							},
+							{
+								"value": "uppercase",
+								"label": "t:sections.main-product.blocks.sku.settings.text_style.options__3.label"
+							}
+						],
+						"default": "body",
+						"label": "t:sections.main-product.blocks.sku.settings.text_style.label"
+					}
+				]
+			},
+			{
+				"type": "inventory",
+				"name": "t:sections.main-product.blocks.inventory.name",
+				"limit": 1,
+				"settings": [
+					{
+						"type": "select",
+						"id": "text_style",
+						"options": [
+							{
+								"value": "body",
+								"label": "t:sections.main-product.blocks.inventory.settings.text_style.options__1.label"
+							},
+							{
+								"value": "subtitle",
+								"label": "t:sections.main-product.blocks.inventory.settings.text_style.options__2.label"
+							},
+							{
+								"value": "uppercase",
+								"label": "t:sections.main-product.blocks.inventory.settings.text_style.options__3.label"
+							}
+						],
+						"default": "body",
+						"label": "t:sections.main-product.blocks.inventory.settings.text_style.label"
+					},
+					{
+						"type": "range",
+						"id": "inventory_threshold",
+						"label": "t:sections.main-product.blocks.inventory.settings.inventory_threshold.label",
+						"min": 0,
+						"max": 100,
+						"step": 1,
+						"default": 10
+					},
+					{
+						"type": "checkbox",
+						"id": "show_inventory_quantity",
+						"label": "t:sections.main-product.blocks.inventory.settings.show_inventory_quantity.label",
+						"default": true
+					}
+				]
+			},
+			{
+				"type": "disponibility",
+				"name": "Disponibilité",
+				"limit": 1
+			},
+			{
+				"type": "variant_picker",
+				"name": "t:sections.main-product.blocks.variant_picker.name",
+				"limit": 1,
+				"settings": [
+					{
+						"type": "select",
+						"id": "picker_type",
+						"options": [
+							{
+								"value": "dropdown",
+								"label": "t:sections.main-product.blocks.variant_picker.settings.picker_type.options__1.label"
+							},
+							{
+								"value": "button",
+								"label": "t:sections.main-product.blocks.variant_picker.settings.picker_type.options__2.label"
+							},
+							{
+								"value": "variant_dropdown",
+								"label": "Variant Dropdown"
+							}
+						],
+						"default": "button",
+						"label": "t:sections.main-product.blocks.variant_picker.settings.picker_type.label"
+					},
+					{
+						"id": "swatch_shape",
+						"label": "t:sections.main-product.blocks.variant_picker.settings.swatch_shape.label",
+						"type": "select",
+						"info": "t:sections.main-product.blocks.variant_picker.settings.swatch_shape.info",
+						"options": [
+							{
+								"value": "circle",
+								"label": "t:sections.main-product.blocks.variant_picker.settings.swatch_shape.options__1.label"
+							},
+							{
+								"value": "square",
+								"label": "t:sections.main-product.blocks.variant_picker.settings.swatch_shape.options__2.label"
+							},
+							{
+								"value": "none",
+								"label": "t:sections.main-product.blocks.variant_picker.settings.swatch_shape.options__3.label"
+							}
+						],
+						"default": "circle"
+					}
+				]
+			},
+			{
+				"type": "upsell",
+				"name": "Upsell",
+				"limit": 1
+			},
+			{
+				"type": "buy_buttons",
+				"name": "t:sections.main-product.blocks.buy_buttons.name",
+				"limit": 1,
+				"settings": [
+					{
+						"type": "checkbox",
+						"id": "show_quantity_selector",
+						"default": true,
+						"label": "Afficher le sélecteur de quantité"
+					},
+					{
+						"type": "checkbox",
+						"id": "show_dynamic_checkout",
+						"default": true,
+						"label": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout.label",
+						"info": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout.info"
+					},
+					{
+						"type": "checkbox",
+						"id": "show_gift_card_recipient",
+						"default": true,
+						"label": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.label",
+						"info": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.info"
+					}
+				]
+			},
+			{
+				"type": "description",
+				"name": "t:sections.main-product.blocks.description.name",
+				"limit": 1
+			},
+			{
+				"type": "claims",
+				"name": "Claims",
+				"limit": 1
+			},
+			{
+				"type": "list_claims_matelas",
+				"name": "Liste des claims",
+				"limit": 1,
+				"settings": [
+					{
+						"type": "text",
+						"id": "link_text",
+						"label": "Texte du lien",
+						"default": "Voir plus de critères"
+					},
+					{
+						"type": "text",
+						"id": "link_target",
+						"label": "Target du bouton",
+						"info": "Selecteur CSS de l'élément à cibler",
+						"default": "specifications"
+					},
+					{
+						"type": "select",
+						"id": "link_font_weight",
+						"label": "Taille du texte",
+						"default": "bold",
+						"options": [
+							{
+								"value": "normal",
+								"label": "Normal"
+							},
+							{
+								"value": "bold",
+								"label": "Bold"
+							}
+						]
+					},
+					{
+						"type": "select",
+						"id": "link_font_family",
+						"label": "Font Family du texte",
+						"default": "ObviouslyNarrow",
+						"options": [
+							{
+								"value": "ObviouslyNarrow",
+								"label": "ObviouslyNarrow"
+							},
+							{
+								"value": "Obviously",
+								"label": "Obviously"
+							},
+							{
+								"value": "ObviouslyWide",
+								"label": "ObviouslyWide"
+							}
+						]
+					}
+				]
+			},
+			{
+				"type": "share",
+				"name": "t:sections.main-product.blocks.share.name",
+				"limit": 1,
+				"settings": [
+					{
+						"type": "text",
+						"id": "share_label",
+						"label": "t:sections.main-product.blocks.share.settings.text.label",
+						"default": "t:sections.main-product.blocks.share.settings.text.default"
+					}
+				]
+			},
+			{
+				"type": "custom_liquid",
+				"name": "t:sections.custom-liquid.name",
+				"settings": [
+					{
+						"type": "liquid",
+						"id": "custom_liquid",
+						"label": "t:sections.custom-liquid.settings.custom_liquid.label",
+						"info": "t:sections.custom-liquid.settings.custom_liquid.info"
+					}
+				]
+			},
+			{
+				"type": "collapsible_tab",
+				"name": "t:sections.main-product.blocks.collapsible_tab.name",
+				"settings": [
+					{
+						"type": "text",
+						"id": "heading",
+						"default": "t:sections.main-product.blocks.collapsible_tab.settings.heading.default",
+						"label": "t:sections.main-product.blocks.collapsible_tab.settings.heading.label"
+					},
+					{
+						"type": "select",
+						"id": "icon",
+						"options": [
+							{
+								"value": "none",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__1.label"
+							},
+							{
+								"value": "apple",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__2.label"
+							},
+							{
+								"value": "banana",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__3.label"
+							},
+							{
+								"value": "bottle",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__4.label"
+							},
+							{
+								"value": "box",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__5.label"
+							},
+							{
+								"value": "carrot",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__6.label"
+							},
+							{
+								"value": "chat_bubble",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__7.label"
+							},
+							{
+								"value": "check_mark",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__8.label"
+							},
+							{
+								"value": "clipboard",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__9.label"
+							},
+							{
+								"value": "dairy",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__10.label"
+							},
+							{
+								"value": "dairy_free",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__11.label"
+							},
+							{
+								"value": "dryer",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__12.label"
+							},
+							{
+								"value": "eye",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__13.label"
+							},
+							{
+								"value": "fire",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__14.label"
+							},
+							{
+								"value": "gluten_free",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__15.label"
+							},
+							{
+								"value": "heart",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__16.label"
+							},
+							{
+								"value": "iron",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__17.label"
+							},
+							{
+								"value": "leaf",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__18.label"
+							},
+							{
+								"value": "leather",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__19.label"
+							},
+							{
+								"value": "lightning_bolt",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__20.label"
+							},
+							{
+								"value": "lipstick",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__21.label"
+							},
+							{
+								"value": "lock",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__22.label"
+							},
+							{
+								"value": "map_pin",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__23.label"
+							},
+							{
+								"value": "nut_free",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__24.label"
+							},
+							{
+								"value": "pants",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__25.label"
+							},
+							{
+								"value": "paw_print",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__26.label"
+							},
+							{
+								"value": "pepper",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__27.label"
+							},
+							{
+								"value": "perfume",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__28.label"
+							},
+							{
+								"value": "plane",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__29.label"
+							},
+							{
+								"value": "plant",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__30.label"
+							},
+							{
+								"value": "price_tag",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__31.label"
+							},
+							{
+								"value": "question_mark",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__32.label"
+							},
+							{
+								"value": "recycle",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__33.label"
+							},
+							{
+								"value": "return",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__34.label"
+							},
+							{
+								"value": "ruler",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__35.label"
+							},
+							{
+								"value": "serving_dish",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__36.label"
+							},
+							{
+								"value": "shirt",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__37.label"
+							},
+							{
+								"value": "shoe",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__38.label"
+							},
+							{
+								"value": "silhouette",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__39.label"
+							},
+							{
+								"value": "snowflake",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__40.label"
+							},
+							{
+								"value": "star",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__41.label"
+							},
+							{
+								"value": "stopwatch",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__42.label"
+							},
+							{
+								"value": "truck",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__43.label"
+							},
+							{
+								"value": "washing",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__44.label"
+							}
+						],
+						"default": "check_mark",
+						"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.label"
+					},
+					{
+						"type": "richtext",
+						"id": "content",
+						"label": "t:sections.main-product.blocks.collapsible_tab.settings.content.label"
+					},
+					{
+						"type": "page",
+						"id": "page",
+						"label": "t:sections.main-product.blocks.collapsible_tab.settings.page.label"
+					}
+				]
+			},
+			{
+				"type": "popup",
+				"name": "t:sections.main-product.blocks.popup.name",
+				"settings": [
+					{
+						"type": "text",
+						"id": "text",
+						"default": "t:sections.main-product.blocks.popup.settings.link_label.default",
+						"label": "t:sections.main-product.blocks.popup.settings.link_label.label"
+					},
+					{
+						"id": "page",
+						"type": "page",
+						"label": "t:sections.main-product.blocks.popup.settings.page.label"
+					}
+				]
+			},
+			{
+				"type": "rating",
+				"name": "t:sections.main-product.blocks.rating.name",
+				"limit": 1,
+				"settings": [
+					{
+						"type": "paragraph",
+						"content": "t:sections.main-product.blocks.rating.settings.paragraph.content"
+					}
+				]
+			},
+			{
+				"type": "badges-rating",
+				"name": "Badges / Rating",
+				"limit": 1,
+				"settings": [
+					{
+						"type": "checkbox",
+						"id": "show_rating",
+						"label": "Show rating",
+						"default": true
+					}
+				]
+			},
+			{
+				"type": "complementary",
+				"name": "t:sections.main-product.blocks.complementary_products.name",
+				"limit": 1,
+				"settings": [
+					{
+						"type": "paragraph",
+						"content": "t:sections.main-product.blocks.complementary_products.settings.paragraph.content"
+					},
+					{
+						"type": "text",
+						"id": "block_heading",
+						"default": "t:sections.main-product.blocks.complementary_products.settings.heading.default",
+						"label": "t:sections.main-product.blocks.complementary_products.settings.heading.label"
+					},
+					{
+						"type": "checkbox",
+						"id": "make_collapsible_row",
+						"default": false,
+						"label": "t:sections.main-product.blocks.complementary_products.settings.make_collapsible_row.label"
+					},
+					{
+						"type": "select",
+						"id": "icon",
+						"options": [
+							{
+								"value": "none",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__1.label"
+							},
+							{
+								"value": "apple",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__2.label"
+							},
+							{
+								"value": "banana",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__3.label"
+							},
+							{
+								"value": "bottle",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__4.label"
+							},
+							{
+								"value": "box",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__5.label"
+							},
+							{
+								"value": "carrot",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__6.label"
+							},
+							{
+								"value": "chat_bubble",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__7.label"
+							},
+							{
+								"value": "check_mark",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__8.label"
+							},
+							{
+								"value": "clipboard",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__9.label"
+							},
+							{
+								"value": "dairy",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__10.label"
+							},
+							{
+								"value": "dairy_free",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__11.label"
+							},
+							{
+								"value": "dryer",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__12.label"
+							},
+							{
+								"value": "eye",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__13.label"
+							},
+							{
+								"value": "fire",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__14.label"
+							},
+							{
+								"value": "gluten_free",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__15.label"
+							},
+							{
+								"value": "heart",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__16.label"
+							},
+							{
+								"value": "iron",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__17.label"
+							},
+							{
+								"value": "leaf",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__18.label"
+							},
+							{
+								"value": "leather",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__19.label"
+							},
+							{
+								"value": "lightning_bolt",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__20.label"
+							},
+							{
+								"value": "lipstick",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__21.label"
+							},
+							{
+								"value": "lock",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__22.label"
+							},
+							{
+								"value": "map_pin",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__23.label"
+							},
+							{
+								"value": "nut_free",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__24.label"
+							},
+							{
+								"value": "pants",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__25.label"
+							},
+							{
+								"value": "paw_print",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__26.label"
+							},
+							{
+								"value": "pepper",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__27.label"
+							},
+							{
+								"value": "perfume",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__28.label"
+							},
+							{
+								"value": "plane",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__29.label"
+							},
+							{
+								"value": "plant",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__30.label"
+							},
+							{
+								"value": "price_tag",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__31.label"
+							},
+							{
+								"value": "question_mark",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__32.label"
+							},
+							{
+								"value": "recycle",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__33.label"
+							},
+							{
+								"value": "return",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__34.label"
+							},
+							{
+								"value": "ruler",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__35.label"
+							},
+							{
+								"value": "serving_dish",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__36.label"
+							},
+							{
+								"value": "shirt",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__37.label"
+							},
+							{
+								"value": "shoe",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__38.label"
+							},
+							{
+								"value": "silhouette",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__39.label"
+							},
+							{
+								"value": "snowflake",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__40.label"
+							},
+							{
+								"value": "star",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__41.label"
+							},
+							{
+								"value": "stopwatch",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__42.label"
+							},
+							{
+								"value": "truck",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__43.label"
+							},
+							{
+								"value": "washing",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__44.label"
+							}
+						],
+						"default": "price_tag",
+						"info": "t:sections.main-product.blocks.complementary_products.settings.icon.info",
+						"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.label"
+					},
+					{
+						"type": "range",
+						"id": "product_list_limit",
+						"min": 1,
+						"max": 10,
+						"step": 1,
+						"default": 10,
+						"label": "t:sections.main-product.blocks.complementary_products.settings.product_list_limit.label"
+					},
+					{
+						"type": "range",
+						"id": "products_per_page",
+						"min": 1,
+						"max": 4,
+						"step": 1,
+						"default": 3,
+						"label": "t:sections.main-product.blocks.complementary_products.settings.products_per_page.label"
+					},
+					{
+						"type": "select",
+						"id": "pagination_style",
+						"options": [
+							{
+								"value": "dots",
+								"label": "t:sections.main-product.blocks.complementary_products.settings.pagination_style.options.option_1"
+							},
+							{
+								"value": "counter",
+								"label": "t:sections.main-product.blocks.complementary_products.settings.pagination_style.options.option_2"
+							},
+							{
+								"value": "numbers",
+								"label": "t:sections.main-product.blocks.complementary_products.settings.pagination_style.options.option_3"
+							}
+						],
+						"label": "t:sections.main-product.blocks.complementary_products.settings.pagination_style.label",
+						"default": "counter"
+					},
+					{
+						"type": "header",
+						"content": "t:sections.main-product.blocks.complementary_products.settings.product_card.heading"
+					},
+					{
+						"type": "select",
+						"id": "image_ratio",
+						"options": [
+							{
+								"value": "portrait",
+								"label": "t:sections.main-product.blocks.complementary_products.settings.image_ratio.options.option_1"
+							},
+							{
+								"value": "square",
+								"label": "t:sections.main-product.blocks.complementary_products.settings.image_ratio.options.option_2"
+							}
+						],
+						"label": "t:sections.main-product.blocks.complementary_products.settings.image_ratio.label",
+						"default": "square"
+					},
+					{
+						"type": "checkbox",
+						"id": "enable_quick_add",
+						"label": "t:sections.main-product.blocks.complementary_products.settings.enable_quick_add.label",
+						"default": false
+					}
+				]
+			},
+			{
+				"type": "delivery",
+				"name": "Livraison",
+				"limit": 2,
+				"settings": [
+					{
+						"type": "checkbox",
+						"id": "enable_only_pack",
+						"label": "Afficher uniquement pour le pack",
+						"default": false
+					},
+					{
+						"type": "text",
+						"id": "modal_link_text",
+						"default": "Estimer le délai de livraison",
+						"label": "Texte du lien modal"
+					},
+					{
+						"type": "text",
+						"id": "cgv_link_text",
+						"default": "Voir nos CGV",
+						"label": "Texte du lien CGV"
+					},
+					{
+						"type": "url",
+						"id": "cgv_link_url",
+						"label": "Lien vers les CGV"
+					}
+				]
+			},
+			{
+				"type": "icon-with-text",
+				"name": "t:sections.main-product.blocks.icon_with_text.name",
+				"settings": [
+					{
+						"type": "select",
+						"id": "layout",
+						"options": [
+							{
+								"value": "horizontal",
+								"label": "t:sections.main-product.blocks.icon_with_text.settings.layout.options__1.label"
+							},
+							{
+								"value": "vertical",
+								"label": "t:sections.main-product.blocks.icon_with_text.settings.layout.options__2.label"
+							}
+						],
+						"default": "horizontal",
+						"label": "t:sections.main-product.blocks.icon_with_text.settings.layout.label"
+					},
+					{
+						"type": "header",
+						"content": "t:sections.main-product.blocks.icon_with_text.settings.pairing_1.label",
+						"info": "t:sections.main-product.blocks.icon_with_text.settings.pairing_1.info"
+					},
+					{
+						"type": "select",
+						"id": "icon_1",
+						"options": [
+							{
+								"value": "none",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__1.label"
+							},
+							{
+								"value": "apple",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__2.label"
+							},
+							{
+								"value": "banana",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__3.label"
+							},
+							{
+								"value": "bottle",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__4.label"
+							},
+							{
+								"value": "box",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__5.label"
+							},
+							{
+								"value": "carrot",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__6.label"
+							},
+							{
+								"value": "chat_bubble",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__7.label"
+							},
+							{
+								"value": "check_mark",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__8.label"
+							},
+							{
+								"value": "clipboard",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__9.label"
+							},
+							{
+								"value": "dairy",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__10.label"
+							},
+							{
+								"value": "dairy_free",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__11.label"
+							},
+							{
+								"value": "dryer",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__12.label"
+							},
+							{
+								"value": "eye",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__13.label"
+							},
+							{
+								"value": "fire",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__14.label"
+							},
+							{
+								"value": "gluten_free",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__15.label"
+							},
+							{
+								"value": "heart",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__16.label"
+							},
+							{
+								"value": "iron",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__17.label"
+							},
+							{
+								"value": "leaf",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__18.label"
+							},
+							{
+								"value": "leather",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__19.label"
+							},
+							{
+								"value": "lightning_bolt",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__20.label"
+							},
+							{
+								"value": "lipstick",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__21.label"
+							},
+							{
+								"value": "lock",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__22.label"
+							},
+							{
+								"value": "map_pin",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__23.label"
+							},
+							{
+								"value": "nut_free",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__24.label"
+							},
+							{
+								"value": "pants",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__25.label"
+							},
+							{
+								"value": "paw_print",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__26.label"
+							},
+							{
+								"value": "pepper",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__27.label"
+							},
+							{
+								"value": "perfume",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__28.label"
+							},
+							{
+								"value": "plane",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__29.label"
+							},
+							{
+								"value": "plant",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__30.label"
+							},
+							{
+								"value": "price_tag",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__31.label"
+							},
+							{
+								"value": "question_mark",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__32.label"
+							},
+							{
+								"value": "recycle",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__33.label"
+							},
+							{
+								"value": "return",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__34.label"
+							},
+							{
+								"value": "ruler",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__35.label"
+							},
+							{
+								"value": "serving_dish",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__36.label"
+							},
+							{
+								"value": "shirt",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__37.label"
+							},
+							{
+								"value": "shoe",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__38.label"
+							},
+							{
+								"value": "silhouette",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__39.label"
+							},
+							{
+								"value": "snowflake",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__40.label"
+							},
+							{
+								"value": "star",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__41.label"
+							},
+							{
+								"value": "stopwatch",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__42.label"
+							},
+							{
+								"value": "truck",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__43.label"
+							},
+							{
+								"value": "washing",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__44.label"
+							}
+						],
+						"default": "heart",
+						"label": "t:sections.main-product.blocks.icon_with_text.settings.icon_1.label"
+					},
+					{
+						"type": "image_picker",
+						"id": "image_1",
+						"label": "t:sections.main-product.blocks.icon_with_text.settings.image_1.label"
+					},
+					{
+						"type": "inline_richtext",
+						"id": "heading_1",
+						"default": "t:sections.main-product.blocks.icon_with_text.settings.heading_1.default",
+						"label": "t:sections.main-product.blocks.icon_with_text.settings.heading_1.label",
+						"info": "t:sections.main-product.blocks.icon_with_text.settings.heading.info"
+					},
+					{
+						"type": "header",
+						"content": "t:sections.main-product.blocks.icon_with_text.settings.pairing_2.label"
+					},
+					{
+						"type": "select",
+						"id": "icon_2",
+						"options": [
+							{
+								"value": "none",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__1.label"
+							},
+							{
+								"value": "apple",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__2.label"
+							},
+							{
+								"value": "banana",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__3.label"
+							},
+							{
+								"value": "bottle",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__4.label"
+							},
+							{
+								"value": "box",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__5.label"
+							},
+							{
+								"value": "carrot",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__6.label"
+							},
+							{
+								"value": "chat_bubble",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__7.label"
+							},
+							{
+								"value": "check_mark",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__8.label"
+							},
+							{
+								"value": "clipboard",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__9.label"
+							},
+							{
+								"value": "dairy",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__10.label"
+							},
+							{
+								"value": "dairy_free",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__11.label"
+							},
+							{
+								"value": "dryer",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__12.label"
+							},
+							{
+								"value": "eye",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__13.label"
+							},
+							{
+								"value": "fire",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__14.label"
+							},
+							{
+								"value": "gluten_free",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__15.label"
+							},
+							{
+								"value": "heart",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__16.label"
+							},
+							{
+								"value": "iron",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__17.label"
+							},
+							{
+								"value": "leaf",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__18.label"
+							},
+							{
+								"value": "leather",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__19.label"
+							},
+							{
+								"value": "lightning_bolt",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__20.label"
+							},
+							{
+								"value": "lipstick",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__21.label"
+							},
+							{
+								"value": "lock",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__22.label"
+							},
+							{
+								"value": "map_pin",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__23.label"
+							},
+							{
+								"value": "nut_free",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__24.label"
+							},
+							{
+								"value": "pants",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__25.label"
+							},
+							{
+								"value": "paw_print",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__26.label"
+							},
+							{
+								"value": "pepper",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__27.label"
+							},
+							{
+								"value": "perfume",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__28.label"
+							},
+							{
+								"value": "plane",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__29.label"
+							},
+							{
+								"value": "plant",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__30.label"
+							},
+							{
+								"value": "price_tag",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__31.label"
+							},
+							{
+								"value": "question_mark",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__32.label"
+							},
+							{
+								"value": "recycle",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__33.label"
+							},
+							{
+								"value": "return",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__34.label"
+							},
+							{
+								"value": "ruler",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__35.label"
+							},
+							{
+								"value": "serving_dish",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__36.label"
+							},
+							{
+								"value": "shirt",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__37.label"
+							},
+							{
+								"value": "shoe",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__38.label"
+							},
+							{
+								"value": "silhouette",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__39.label"
+							},
+							{
+								"value": "snowflake",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__40.label"
+							},
+							{
+								"value": "star",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__41.label"
+							},
+							{
+								"value": "stopwatch",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__42.label"
+							},
+							{
+								"value": "truck",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__43.label"
+							},
+							{
+								"value": "washing",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__44.label"
+							}
+						],
+						"default": "return",
+						"label": "t:sections.main-product.blocks.icon_with_text.settings.icon_2.label"
+					},
+					{
+						"type": "image_picker",
+						"id": "image_2",
+						"label": "t:sections.main-product.blocks.icon_with_text.settings.image_2.label"
+					},
+					{
+						"type": "inline_richtext",
+						"id": "heading_2",
+						"default": "t:sections.main-product.blocks.icon_with_text.settings.heading_2.default",
+						"label": "t:sections.main-product.blocks.icon_with_text.settings.heading_2.label",
+						"info": "t:sections.main-product.blocks.icon_with_text.settings.heading.info"
+					},
+					{
+						"type": "header",
+						"content": "t:sections.main-product.blocks.icon_with_text.settings.pairing_3.label"
+					},
+					{
+						"type": "select",
+						"id": "icon_3",
+						"options": [
+							{
+								"value": "none",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__1.label"
+							},
+							{
+								"value": "apple",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__2.label"
+							},
+							{
+								"value": "banana",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__3.label"
+							},
+							{
+								"value": "bottle",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__4.label"
+							},
+							{
+								"value": "box",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__5.label"
+							},
+							{
+								"value": "carrot",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__6.label"
+							},
+							{
+								"value": "chat_bubble",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__7.label"
+							},
+							{
+								"value": "check_mark",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__8.label"
+							},
+							{
+								"value": "clipboard",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__9.label"
+							},
+							{
+								"value": "dairy",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__10.label"
+							},
+							{
+								"value": "dairy_free",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__11.label"
+							},
+							{
+								"value": "dryer",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__12.label"
+							},
+							{
+								"value": "eye",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__13.label"
+							},
+							{
+								"value": "fire",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__14.label"
+							},
+							{
+								"value": "gluten_free",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__15.label"
+							},
+							{
+								"value": "heart",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__16.label"
+							},
+							{
+								"value": "iron",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__17.label"
+							},
+							{
+								"value": "leaf",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__18.label"
+							},
+							{
+								"value": "leather",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__19.label"
+							},
+							{
+								"value": "lightning_bolt",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__20.label"
+							},
+							{
+								"value": "lipstick",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__21.label"
+							},
+							{
+								"value": "lock",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__22.label"
+							},
+							{
+								"value": "map_pin",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__23.label"
+							},
+							{
+								"value": "nut_free",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__24.label"
+							},
+							{
+								"value": "pants",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__25.label"
+							},
+							{
+								"value": "paw_print",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__26.label"
+							},
+							{
+								"value": "pepper",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__27.label"
+							},
+							{
+								"value": "perfume",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__28.label"
+							},
+							{
+								"value": "plane",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__29.label"
+							},
+							{
+								"value": "plant",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__30.label"
+							},
+							{
+								"value": "price_tag",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__31.label"
+							},
+							{
+								"value": "question_mark",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__32.label"
+							},
+							{
+								"value": "recycle",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__33.label"
+							},
+							{
+								"value": "return",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__34.label"
+							},
+							{
+								"value": "ruler",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__35.label"
+							},
+							{
+								"value": "serving_dish",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__36.label"
+							},
+							{
+								"value": "shirt",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__37.label"
+							},
+							{
+								"value": "shoe",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__38.label"
+							},
+							{
+								"value": "silhouette",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__39.label"
+							},
+							{
+								"value": "snowflake",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__40.label"
+							},
+							{
+								"value": "star",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__41.label"
+							},
+							{
+								"value": "stopwatch",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__42.label"
+							},
+							{
+								"value": "truck",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__43.label"
+							},
+							{
+								"value": "washing",
+								"label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__44.label"
+							}
+						],
+						"default": "truck",
+						"label": "t:sections.main-product.blocks.icon_with_text.settings.icon_3.label"
+					},
+					{
+						"type": "image_picker",
+						"id": "image_3",
+						"label": "t:sections.main-product.blocks.icon_with_text.settings.image_3.label"
+					},
+					{
+						"type": "inline_richtext",
+						"id": "heading_3",
+						"default": "t:sections.main-product.blocks.icon_with_text.settings.heading_3.default",
+						"label": "t:sections.main-product.blocks.icon_with_text.settings.heading_3.label",
+						"info": "t:sections.main-product.blocks.icon_with_text.settings.heading.info"
+					}
+				]
+			},
+			{
+				"type": "reassurances",
+				"name": "Réassurances",
+				"limit": 1,
+				"settings": [
+					{
+						"type": "metaobject_list",
+						"id": "reassurances_list",
+						"label": "Liste des réassurances",
+						"metaobject_type": "reassurance"
+					},
+					{
+						"type": "header",
+						"content": "Paramètres d'affichage"
+					},
+					{
+						"type": "range",
+						"id": "icon_width",
+						"min": 20,
+						"max": 100,
+						"step": 2,
+						"unit": "px",
+						"label": "Largeur des icônes",
+						"default": 40
+					},
+					{
+						"type": "checkbox",
+						"id": "show_text",
+						"label": "Afficher le texte des réassurances",
+						"default": false
+					}
+				]
+			},
+			{
+				"type": "description_tabs",
+				"name": "Onglet description",
+				"settings": [
+					{
+						"type": "metaobject_list",
+						"id": "content_list",
+						"label": "Liste du contenu",
+						"metaobject_type": "product_onglet_description"
+					}
+				]
+			},
+			{
+				"type": "banner_pack",
+				"name": "Bannière Pack",
+				"settings": [
+					{
+						"type": "metaobject",
+						"id": "item_metaobject",
+						"label": "Metaobject",
+						"info": "Sélectionnez le metaobjet à afficher",
+						"metaobject_type": "pack_offer_item"
+					},
+					{
+						"type": "checkbox",
+						"id": "show_only_metaobject",
+						"label": "Afficher uniquement si un metaobject est sélectionné",
+						"default": false
+					},
+					{
+						"type": "header",
+						"content": "Image"
+					},
+					{
+						"type": "image_picker",
+						"id": "image",
+						"label": "Image desktop"
+					},
+					{
+						"type": "image_picker",
+						"id": "image_mobile",
+						"label": "Image mobile"
+					},
+					{
+						"type": "color_background",
+						"id": "image_overlay_color",
+						"label": "Overlay de l'image"
+					},
+					{
+						"type": "color_scheme",
+						"id": "color_scheme",
+						"label": "Nuancier de couleurs du bloc",
+						"default": "scheme-1"
+					},
+					{
+						"type": "header",
+						"content": "Contenu"
+					},
+					{
+						"type": "text",
+						"id": "title",
+						"label": "Titre",
+						"default": "Pack titre"
+					},
+					{
+						"type": "richtext",
+						"id": "description",
+						"label": "Description",
+						"default": "<p>Description du pack</p>"
+					},
+					{
+						"type": "header",
+						"content": "Badge"
+					},
+					{
+						"type": "image_picker",
+						"id": "badge_icon",
+						"label": "Icône du badge"
+					},
+					{
+						"type": "text",
+						"id": "badge",
+						"label": "Badge texte",
+						"default": "Badge"
+					},
+					{
+						"type": "color",
+						"id": "badge_color",
+						"label": "Couleur du badge"
+					},
+					{
+						"type": "color",
+						"id": "badge_text_color",
+						"label": "Couleur du texte du badge"
+					},
+					{
+						"type": "header",
+						"content": "Bouton"
+					},
+					{
+						"type": "image_picker",
+						"id": "button_icon",
+						"label": "Icône du bouton"
+					},
+					{
+						"type": "text",
+						"id": "button_label",
+						"label": "Texte du bouton",
+						"default": "Découvrir"
+					},
+					{
+						"type": "url",
+						"id": "button_link",
+						"label": "Lien du bouton"
+					}
+				]
+			}
+		],
+		"settings": [
+			{
+				"type": "checkbox",
+				"id": "enable_sticky_info",
+				"default": true,
+				"label": "t:sections.main-product.settings.enable_sticky_info.label"
+			},
+			{
+				"type": "checkbox",
+				"id": "enable_sticky_bar_price",
+				"default": false,
+				"label": "Afficher le prix et l'économie dans la sticky bar"
+			},
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "t:sections.all.colors.label",
+				"default": "scheme-1"
+			},
+			{
+				"type": "header",
+				"content": "t:sections.main-product.settings.header.content"
+			},
+			{
+				"type": "header",
+				"content": "Nouvelle offre"
+			},
+			{
+				"type": "checkbox",
+				"id": "enable_new_offer",
+				"default": false,
+				"label": "Activer l'affichage de la nouvelle offre"
+			},
+			{
+				"type": "select",
+				"id": "media_size",
+				"options": [
+					{
+						"value": "small",
+						"label": "t:sections.main-product.settings.media_size.options__1.label"
+					},
+					{
+						"value": "medium",
+						"label": "t:sections.main-product.settings.media_size.options__2.label"
+					},
+					{
+						"value": "large",
+						"label": "t:sections.main-product.settings.media_size.options__3.label"
+					}
+				],
+				"default": "large",
+				"label": "t:sections.main-product.settings.media_size.label"
+			},
+			{
+				"type": "checkbox",
+				"id": "constrain_to_viewport",
+				"default": true,
+				"label": "t:sections.main-product.settings.constrain_to_viewport.label"
+			},
+			{
+				"type": "select",
+				"id": "media_fit",
+				"options": [
+					{
+						"value": "contain",
+						"label": "t:sections.main-product.settings.media_fit.options__1.label"
+					},
+					{
+						"value": "cover",
+						"label": "t:sections.main-product.settings.media_fit.options__2.label"
+					}
+				],
+				"default": "contain",
+				"label": "t:sections.main-product.settings.media_fit.label"
+			},
+			{
+				"type": "select",
+				"id": "gallery_layout",
+				"options": [
+					{
+						"value": "stacked",
+						"label": "t:sections.main-product.settings.gallery_layout.options__1.label"
+					},
+					{
+						"value": "columns",
+						"label": "t:sections.main-product.settings.gallery_layout.options__2.label"
+					},
+					{
+						"value": "thumbnail",
+						"label": "t:sections.main-product.settings.gallery_layout.options__3.label"
+					},
+					{
+						"value": "thumbnail_slider",
+						"label": "t:sections.main-product.settings.gallery_layout.options__4.label"
+					}
+				],
+				"default": "stacked",
+				"label": "t:sections.main-product.settings.gallery_layout.label"
+			},
+			{
+				"type": "select",
+				"id": "mobile_thumbnails",
+				"options": [
+					{
+						"value": "columns",
+						"label": "t:sections.main-product.settings.mobile_thumbnails.options__1.label"
+					},
+					{
+						"value": "show",
+						"label": "t:sections.main-product.settings.mobile_thumbnails.options__2.label"
+					},
+					{
+						"value": "hide",
+						"label": "t:sections.main-product.settings.mobile_thumbnails.options__3.label"
+					}
+				],
+				"default": "hide",
+				"label": "t:sections.main-product.settings.mobile_thumbnails.label"
+			},
+			{
+				"type": "select",
+				"id": "media_position",
+				"options": [
+					{
+						"value": "left",
+						"label": "t:sections.main-product.settings.media_position.options__1.label"
+					},
+					{
+						"value": "right",
+						"label": "t:sections.main-product.settings.media_position.options__2.label"
+					}
+				],
+				"default": "left",
+				"label": "t:sections.main-product.settings.media_position.label"
+			},
+			{
+				"type": "select",
+				"id": "image_zoom",
+				"options": [
+					{
+						"value": "lightbox",
+						"label": "t:sections.main-product.settings.image_zoom.options__1.label"
+					},
+					{
+						"value": "hover",
+						"label": "t:sections.main-product.settings.image_zoom.options__2.label"
+					},
+					{
+						"value": "none",
+						"label": "t:sections.main-product.settings.image_zoom.options__3.label"
+					}
+				],
+				"default": "lightbox",
+				"label": "t:sections.main-product.settings.image_zoom.label"
+			},
+			{
+				"type": "checkbox",
+				"id": "hide_variants",
+				"default": false,
+				"label": "t:sections.main-product.settings.hide_variants.label"
+			},
+			{
+				"type": "checkbox",
+				"id": "enable_video_looping",
+				"default": false,
+				"label": "t:sections.main-product.settings.enable_video_looping.label"
+			},
+			{
+				"type": "checkbox",
+				"id": "enable_video_controls",
+				"default": true,
+				"label": "t:sections.main-product.settings.enable_video_controls.label"
+			},
+			{
+				"type": "header",
+				"content": "t:sections.all.padding.section_padding_heading"
+			},
+			{
+				"type": "range",
+				"id": "padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "t:sections.all.padding.padding_top",
+				"default": 36
+			},
+			{
+				"type": "range",
+				"id": "padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "t:sections.all.padding.padding_bottom",
+				"default": 36
+			}
+		]
+	}
+{% endschema %}

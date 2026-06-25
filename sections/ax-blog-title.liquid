@@ -1,0 +1,117 @@
+{{ 'bundle.blog-title.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+	.section-{{ section.id }}-padding {
+	  padding-top: {{ section.settings.mob_padding_top }}px;
+	  padding-bottom: {{ section.settings.mob_padding_bottom }}px;
+	}
+
+	@media screen and (min-width: 750px) {
+	  .section-{{ section.id }}-padding {
+	    padding-top: {{ section.settings.padding_top }}px;
+	    padding-bottom: {{ section.settings.padding_bottom }}px;
+	  }
+	}
+{%- endstyle -%}
+
+{%- liquid
+	assign blog_title = blog.title
+	if section.settings.title != blank
+		assign blog_title = section.settings.title
+	endif
+-%}
+
+<div
+	class="blog-title section-{{ section.id }}-padding"
+	data-ax-section="blogTitle"
+>
+	<div class="page-width page-width--restricted-width">
+		<div class="blog-title__heading">
+			<h1 class="h2 center">{{ blog_title | escape }}</h1>
+		</div>
+	</div>
+</div>
+
+{% schema %}
+	{
+		"name": "Ax blog title",
+		"tag": "section",
+		"class": "section",
+		"enabled_on": {
+			"templates": ["blog"]
+		},
+		"limit": 1,
+		"settings": [
+			{
+				"type": "header",
+				"content": "Contenu"
+			},
+			{
+				"type": "text",
+				"id": "title",
+				"label": "Titre"
+			},
+			{
+				"type": "header",
+				"content": "Color"
+			},
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "Color scheme",
+				"default": "background-1"
+			},
+			{
+				"type": "header",
+				"content": "Padding (space)"
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding bottom",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding bottom",
+				"default": 0
+			}
+		],
+		"blocks": [],
+		"presets": [
+			{
+				"name": "Ax blog title",
+				"blocks": []
+			}
+		]
+	}
+{% endschema %}

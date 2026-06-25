@@ -1,0 +1,163 @@
+{{ 'bundle.collections-grid.css' | asset_url | stylesheet_tag }}
+
+<script>
+	window.assetsUrl.js.push({"collections-grid": "{{ "bundle.collections-grid.js" | asset_url }}"});
+</script>
+
+{%- style -%}
+	.section-{{ section.id }}-padding {
+	  padding-top: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px;
+	  padding-bottom: {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px;
+	}
+
+	@media screen and (min-width: 750px) {
+	  .section-{{ section.id }}-padding {
+	    padding-top: {{ section.settings.padding_top }}px;
+	    padding-bottom: {{ section.settings.padding_bottom }}px;
+	  }
+	}
+{%- endstyle -%}
+
+{%- liquid
+	assign lazy_load = false
+	if section.index > 1
+		assign lazy_load = true
+	endif
+-%}
+
+<div
+	class="gradient color-{{ section.settings.color_scheme }} section-{{ section.id }}-padding"
+	data-ax-section="collections-grid"
+	aria-labelledby="collections-grid-title-{{ section.id }}"
+>
+	<div class="page-width">
+		{%- render 'section-heading',
+			heading: section.settings.heading,
+			subheading: blank,
+			text_alignment: 'center',
+			heading_size: 'h2'
+		-%}
+		<div class="ax-collections-grid__wrapper">
+			<ul
+				class="grid grid--gapless grid--2-col grid--4-col-desktop"
+				role="list"
+			>
+				{%- for block in section.blocks -%}
+					{%- if block.settings.collection != blank -%}
+						<li
+							class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+							role="listitem"
+							{% if settings.animations_reveal_on_scroll %}
+								data-cascade
+								style="--animation-order: {{ forloop.index }};"
+							{% endif %}
+							{{ block.shopify_attributes }}
+						>
+							{%- render 'card-collection',
+								card_collection: block.settings.collection,
+								media_aspect_ratio: section.settings.image_ratio,
+								columns: 4,
+								custom_title: block.settings.title,
+								lazy_load: lazy_load
+							-%}
+						</li>
+					{%- endif -%}
+				{%- endfor -%}
+			</ul>
+		</div>
+	</div>
+</div>
+
+{% schema %}
+	{
+		"name": "Ax Collections Grid",
+		"tag": "section",
+		"class": "section ax-collections-grid",
+		"disabled_on": {
+			"groups": ["header", "footer"]
+		},
+		"settings": [
+			{
+				"type": "header",
+				"content": "Contenu"
+			},
+			{
+				"type": "inline_richtext",
+				"id": "heading",
+				"label": "Titre"
+			},
+			{
+				"type": "header",
+				"content": "Couleurs"
+			},
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "t:sections.all.colors.label",
+				"default": "background-1"
+			},
+			{
+				"type": "header",
+				"content": "Espacement"
+			},
+			{
+				"type": "range",
+				"id": "padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding haut",
+				"default": 36
+			},
+			{
+				"type": "range",
+				"id": "padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding bas",
+				"default": 36
+			}
+		],
+		"blocks": [
+			{
+				"type": "collection",
+				"name": "Collection",
+				"settings": [
+					{
+						"type": "collection",
+						"id": "collection",
+						"label": "Collection"
+					},
+					{
+						"type": "textarea",
+						"id": "title",
+						"label": "Titre personnalisé",
+						"info": "Si vide, le titre de la collection sera utilisé"
+					}
+				]
+			}
+		],
+		"presets": [
+			{
+				"name": "Ax Collections Grid",
+				"blocks": [
+					{
+						"type": "collection"
+					},
+					{
+						"type": "collection"
+					},
+					{
+						"type": "collection"
+					},
+					{
+						"type": "collection"
+					}
+				]
+			}
+		]
+	}
+{% endschema %}

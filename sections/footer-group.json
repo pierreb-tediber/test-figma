@@ -1,0 +1,124 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "newsletter_wbYywb": {
+      "type": "newsletter",
+      "blocks": {
+        "heading_eFeVTr": {
+          "type": "heading",
+          "settings": {
+            "heading": "Soyez les premiers au courant de nos actualitÉs et de nos incroyables nouveaux produits.",
+            "heading_size": "h3"
+          }
+        },
+        "paragraph_ChQfKw": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>Tediber s’engage à assurer le meilleur niveau de protection de vos données à caractère personnel. Vous pourrez vous désinscrire de nos communications à tout moment.</p>"
+          }
+        },
+        "email_form_jeUUQB": {
+          "type": "email_form",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "heading_eFeVTr",
+        "paragraph_ChQfKw",
+        "email_form_jeUUQB"
+      ],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "full_width": true,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 48,
+        "padding_top_desktop": 96,
+        "padding_bottom_desktop": 96
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "link_list_Yr7AGd": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Nos produits",
+            "menu": "footer-nos-produits"
+          }
+        },
+        "link_list_TabXyU": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Nos conseils",
+            "menu": "footer-nos-conseils"
+          }
+        },
+        "link_list_Y6WEay": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Nos services",
+            "menu": "footer-nos-services"
+          }
+        },
+        "link_list_33Tgek": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Notre univers",
+            "menu": "footer-nos-univers"
+          }
+        },
+        "b2b_TAg69K": {
+          "type": "b2b",
+          "settings": {
+            "background_color": "#eff5ff",
+            "image": "shopify://shop_images/LOGO_TEDIBER_HOSPITALITY.svg",
+            "heading": "L'offre dédiée aux professionnels",
+            "button_text": "Découvrir l'offre pro",
+            "button_url": "https://hospitality.tediber.com/",
+            "target_blank": true
+          }
+        }
+      },
+      "block_order": [
+        "link_list_Yr7AGd",
+        "link_list_TabXyU",
+        "link_list_Y6WEay",
+        "link_list_33Tgek",
+        "b2b_TAg69K"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "newsletter_enable": false,
+        "newsletter_heading": "Subscribe to our emails",
+        "enable_follow_on_shop": false,
+        "show_social": true,
+        "enable_country_selector": false,
+        "enable_language_selector": false,
+        "payment_enable": true,
+        "dynamic_footer_links_per_column": 8,
+        "ambassador_url": "https://viewy.fr/marque/tediber",
+        "show_policy": true,
+        "policies_menu": "",
+        "accessibility_url": "shopify://pages/declaration-daccessibilite",
+        "accessibility_text": "Déclaration d'accessibilité",
+        "margin_top": 0,
+        "padding_top": 96,
+        "padding_bottom": 24
+      }
+    }
+  },
+  "order": [
+    "newsletter_wbYywb",
+    "footer"
+  ]
+}

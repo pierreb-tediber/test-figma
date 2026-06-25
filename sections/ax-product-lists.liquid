@@ -1,0 +1,470 @@
+{{ 'bundle.product-lists.css' | asset_url | stylesheet_tag }}
+
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+
+{%- unless section.settings.quick_add == 'none' -%}
+	{{ 'quick-add.css' | asset_url | stylesheet_tag }}
+	<script src="{{ 'bundle.product-form.js' | asset_url }}" defer="defer"></script>
+{%- endunless -%}
+
+{%- if section.settings.quick_add == 'standard' -%}
+	<script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+{%- if section.settings.quick_add == 'bulk' -%}
+	<script src="{{ 'quick-add-bulk.js' | asset_url }}" defer="defer"></script>
+	<script src="{{ 'quantity-popover.js' | asset_url }}" defer="defer"></script>
+	<script src="{{ 'price-per-item.js' | asset_url }}" defer="defer"></script>
+	<script src="{{ 'quick-order-list.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+<script>
+	window.assetsUrl.js.push({ productLists: "{{ 'bundle.product-lists.js' | asset_url }}" });
+</script>
+
+{%- style -%}
+	.section-{{ section.id }}-padding {
+	  padding-top: {{ section.settings.mob_padding_top }}px;
+	  padding-bottom: {{ section.settings.mob_padding_bottom }}px;
+	}
+
+	@media screen and (min-width: 750px) {
+	  .section-{{ section.id }}-padding {
+	    padding-top: {{ section.settings.padding_top }}px;
+	    padding-bottom: {{ section.settings.padding_bottom }}px;
+	  }
+	}
+{%- endstyle -%}
+
+{%- liquid
+	# theme-check-disable
+	capture content_for_query_string
+		echo content_for_header
+	endcapture
+	assign get_url = content_for_query_string | split: '"pageurl":"' | last | split: '"' | first | split: '.myshopify.com' | last | replace: '\/', '/' | replace: '%20', ' ' | replace: '\u0026', '&' | split: '?' | last
+	# theme-check-enable
+
+	assign use_lazy_loading = true
+	if get_url contains 'section_id' or get_url contains 'sections' or get_url contains 'should_fetch_full_page'
+		assign use_lazy_loading = false
+	endif
+-%}
+
+<div
+	id="product-lists-{{ section.id }}"
+	class="product-lists gradient color-{{ section.settings.color_scheme }} section-{{ section.id }}-padding"
+	data-ax-section="productLists"
+>
+	<div class="page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}{% if section.settings.quick_add == 'bulk' %} collection-quick-add-bulk{% endif %}">
+		{%- if section.settings.surtitle != blank -%}
+			<div
+				class="product-lists__surtitle inline-richtext"
+			>
+				{{ section.settings.surtitle }}
+			</div>
+		{%- endif -%}
+
+		<product-lists-nav
+			data-section="{{ section.id }}"
+			role="navigation"
+			aria-label="{{ 'general.slider.name' | t }}"
+		>
+			<ul class="product-lists__nav list-unstyled" role="tablist">
+				{%- assign first_product_list_show = false -%}
+				{%- for block in section.blocks -%}
+					{%- if block.settings.title != blank -%}
+						<li
+							class="product-lists__nav-item collection-title--{{ forloop.index0 }} {% if first_product_list_show == false %} active {% endif %}"
+							data-product-lists-ref="product-lists-{{ section.id }}-{{ forloop.index0 }}"
+							role="tab"
+							aria-selected="{% if first_product_list_show == false %}true{% else %}false{% endif %}"
+							aria-controls="product-lists-{{ section.id }}-{{ forloop.index0 }}"
+						>
+							<button
+								type="button"
+								class="product-lists__nav-item-btn h2"
+								data-product-lists-nav-btn="product-lists-{{ section.id }}-{{ forloop.index0 }}"
+								aria-label="{{ block.settings.title }}"
+							>
+								{{ block.settings.title }}
+							</button>
+							<h2 class="visually-hidden">
+								{{ block.settings.title }}
+							</h2>
+						</li>
+						{%- assign first_product_list_show = true -%}
+					{%- endif -%}
+				{%- endfor -%}
+			</ul>
+		</product-lists-nav>
+
+		{%- if section.settings.description != blank -%}
+			<div
+				class="product-lists__description richtext"
+			>
+				{{ section.settings.description }}
+			</div>
+		{%- endif -%}
+
+		<div class="product-lists__lists" role="tabpanel">
+			{%- liquid
+				assign skip_card_product_styles = false
+				assign first_product_list_show = false
+				assign lazy_load = false
+			-%}
+
+			{%- for block in section.blocks -%}
+				{%- assign products = block.settings.collection.products | default: block.settings.product_list -%}
+				{% if products != blank %}
+					{%- liquid
+						if first_product_list_show
+							assign lazy_load = true
+						endif
+
+						if use_lazy_loading == true and forloop.index0 > 0
+							continue
+						endif
+					-%}
+					<div
+						class="product-lists__list-wrapper"
+						id="product-lists-{{ section.id }}-{{ forloop.index0 }}"
+						{% unless first_product_list_show == false %}
+							aria-hidden="true"
+						{% endunless %}
+					>
+						<div class="loading__spinner" role="status" aria-label="{{ 'accessibility.loading' | t }}">
+							{% render 'loading-spinner' %}
+						</div>
+						<slider-product-lists
+							class="product-lists__list swipper-container {% if first_product_list_show == false %} active {% endif %}"
+							data-product-lists-ref="product-lists-{{ section.id }}-{{ forloop.index0 }}"
+							role="region"
+							aria-label="{{ block.settings.title }}"
+						>
+							{% capture swiper_options %}
+              {
+                "loop": false,
+                "effect": "slide",
+                "grabCursor": false,
+                "speed": 240,
+                "slideInView": "auto",
+                "slidesToMove": 1
+              }
+            {% endcapture %}
+							<div
+								id="Swiper-{{ section.id }}-{{ block.id }}"
+								class="swiper product-lists__slider"
+								data-options="{{ swiper_options | escape }}"
+							>
+								<ul
+									class="product-lists__slider-wrapper swiper-wrapper grid grid--1-7-col grid--2-col-tablet grid--4-5-col-desktop"
+									role="list"
+									aria-label="{{ 'general.slider.name' | t }}"
+								>
+									{%- for product in products limit: block.settings.products_to_show -%}
+										{%- liquid
+											# Vérifie si le produit est masqué via metafield seo.hidden
+											if product.metafields.seo.hidden.value == 1
+												continue
+											endif
+
+											if lazy_load == false and forloop.index > 4
+												assign lazy_load = true
+											endif
+										-%}
+
+										<li
+											id="Swiper-{{ section.id }}-{{ block.id }}-{{ forloop.index }}"
+											class="swiper-slide grid__item"
+											role="listitem"
+										>
+											{% render 'card-product',
+												card_product: product,
+												media_aspect_ratio: section.settings.image_ratio,
+												image_shape: 'default',
+												show_secondary_image: section.settings.show_secondary_image,
+												show_vendor: section.settings.show_vendor,
+												show_rating: section.settings.show_rating,
+												show_trustpilot: true,
+												lazy_load: lazy_load,
+												skip_styles: skip_card_product_styles,
+												quick_add: section.settings.quick_add,
+												section_id: section.id,
+												no_hn: true
+											%}
+										</li>
+
+										{%- assign skip_card_product_styles = true -%}
+
+									{%- else -%}
+										{%- for i in (1..4) -%}
+											<li
+												id="Swiper-{{ section.id }}-{{ block.id }}-{{ forloop.index }}"
+												class="swiper-slide grid__item"
+											>
+												{%- assign placeholder_image = 'product-apparel-' | append: forloop.rindex -%}
+												{% render 'card-product',
+													show_vendor: section.settings.show_vendor,
+													media_aspect_ratio: section.settings.image_ratio,
+													image_shape: 'default',
+													placeholder_image: placeholder_image
+												%}
+											</li>
+										{%- endfor -%}
+									{%- endfor -%}
+								</ul>
+							</div>
+
+							<div
+								class="swiper-button-next small-hide medium-hide"
+								role="button"
+								aria-label="{{ 'general.slider.next_slide' | t }}"
+							>
+								{{- 'icon-arrow.svg' | inline_asset_content }}
+							</div>
+							<div
+								class="swiper-button-prev small-hide medium-hide"
+								role="button"
+								aria-label="{{ 'general.slider.previous_slide' | t }}"
+							>
+								{{- 'icon-arrow.svg' | inline_asset_content }}
+							</div>
+
+							{%- if block.settings.button_text != blank and block.settings.button_link != blank -%}
+								<div class="product-lists__button">
+									{%- render 'link-style',
+										link_label: block.settings.button_text,
+										link_url: block.settings.button_link,
+										link_style: block.settings.link_style,
+										link_attributes: section.shopify_attributes
+									-%}
+								</div>
+							{%- endif -%}
+						</slider-product-lists>
+					</div>
+
+					{%- assign first_product_list_show = true -%}
+				{% endif %}
+			{%- endfor -%}
+		</div>
+	</div>
+</div>
+
+{% schema %}
+	{
+		"name": "Ax product lists",
+		"tag": "section",
+		"class": "section",
+		"disabled_on": {
+			"groups": ["header", "footer"]
+		},
+		"settings": [
+			{
+				"type": "inline_richtext",
+				"id": "surtitle",
+				"label": "Sur-titre",
+				"default": "Bestsellers"
+			},
+			{
+				"type": "richtext",
+				"id": "description",
+				"label": "Description"
+			},
+			{
+				"type": "header",
+				"content": "Product card"
+			},
+			{
+				"type": "select",
+				"id": "image_ratio",
+				"options": [
+					{
+						"value": "adapt",
+						"label": "Adapt to image"
+					},
+					{
+						"value": "portrait",
+						"label": "Portrait"
+					},
+					{
+						"value": "square",
+						"label": "Square"
+					}
+				],
+				"default": "square",
+				"label": "Image ratio"
+			},
+			{
+				"type": "checkbox",
+				"id": "show_secondary_image",
+				"default": true,
+				"label": "Show second image on hover"
+			},
+			{
+				"type": "checkbox",
+				"id": "show_vendor",
+				"default": false,
+				"label": "Show vendor"
+			},
+			{
+				"type": "checkbox",
+				"id": "show_rating",
+				"default": true,
+				"label": "Show product rating",
+				"info": "To display a rating, add a product rating app. [Learn more](https:\/\/help.shopify.com\/manual\/online-store\/themes\/theme-structure\/theme-features#featured-collection-show-product-rating)"
+			},
+			{
+				"type": "select",
+				"id": "quick_add",
+				"default": "standard",
+				"label": "Quick add",
+				"info": "t:sections.main-collection-product-grid.settings.quick_add.info",
+				"options": [
+					{
+						"value": "none",
+						"label": "t:sections.main-collection-product-grid.settings.quick_add.options.option_1"
+					},
+					{
+						"value": "standard",
+						"label": "t:sections.main-collection-product-grid.settings.quick_add.options.option_2"
+					},
+					{
+						"value": "bulk",
+						"label": "t:sections.main-collection-product-grid.settings.quick_add.options.option_3"
+					}
+				]
+			},
+			{
+				"type": "header",
+				"content": "Color"
+			},
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "Color scheme",
+				"default": "background-1"
+			},
+			{
+				"type": "header",
+				"content": "Padding (space)"
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "mob_padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "(Mobile) Padding bottom",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding top",
+				"default": 0
+			},
+			{
+				"type": "range",
+				"id": "padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "Padding bottom",
+				"default": 0
+			}
+		],
+		"blocks": [
+			{
+				"type": "product-list",
+				"name": "Product list",
+				"settings": [
+					{
+						"type": "text",
+						"id": "title",
+						"label": "Title"
+					},
+					{
+						"type": "collection",
+						"id": "collection",
+						"label": "Collection"
+					},
+					{
+						"type": "product_list",
+						"id": "product_list",
+						"label": "Liste de produits"
+					},
+					{
+						"type": "range",
+						"id": "products_to_show",
+						"min": 2,
+						"max": 12,
+						"step": 1,
+						"default": 6,
+						"label": "Maximum products to show"
+					},
+					{
+						"type": "text",
+						"id": "button_text",
+						"label": "Texte du bouton"
+					},
+					{
+						"type": "url",
+						"id": "button_link",
+						"label": "Lien du bouton"
+					},
+					{
+						"type": "select",
+						"id": "link_style",
+						"options": [
+							{
+								"value": "button button--primary",
+								"label": "Primary"
+							},
+							{
+								"value": "button button--secondary",
+								"label": "Secondary"
+							},
+							{
+								"value": "ax-link",
+								"label": "Link"
+							},
+							{
+								"value": "ax-link reversed",
+								"label": "Link inversé"
+							},
+							{
+								"value": "underlined-link",
+								"label": "Underline link"
+							}
+						],
+						"default": "button button--primary",
+						"label": "Style du bouton"
+					}
+				]
+			}
+		],
+		"presets": [
+			{
+				"name": "Ax product lists",
+				"blocks": []
+			}
+		]
+	}
+{% endschema %}

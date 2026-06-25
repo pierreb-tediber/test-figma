@@ -1,0 +1,40 @@
+{% comment %}
+	    Renders an Alma badge
+	    Accompanies product forms and meant to be updated dynamically
+	    Accepts:
+	    - variant: {Object} Variant Liquid object (optional)
+	    - product: {Object} Product Liquid object (optional)
+
+	Usage:
+	In product template:
+	    {% render 'alma-badge', variant: current_variant, product: product %}
+	In cart template:
+	   {% render 'alma-badge' %}
+
+	If you need to adapt the containers width, positionning, margins (...)
+	then you can provide some custom styles directly to the snippet:
+	{% render 'alma-badge' style: "max-width: 400px; margin 20px 0" %}
+{% endcomment %}
+
+{%- liquid
+	if variant
+		assign price = variant.price
+	elsif product
+		assign price = product.price
+	else
+		assign price = cart.total_price
+	endif
+-%}
+
+<alma-badge
+	data-price="{{price}}"
+	{% if style %}
+		style="{{ style }}"
+	{% endif %}
+	data-locale="{{ request.locale.iso_code }}"
+>
+	<div id="alma-badge"></div>
+</alma-badge>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@alma/widgets@3.x.x/dist/widgets.min.css">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@alma/widgets@3.x.x/dist/widgets.umd.js"></script>

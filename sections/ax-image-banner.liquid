@@ -1,0 +1,390 @@
+{{ 'bundle.image-banner.css' | asset_url | stylesheet_tag }}
+
+<script>
+	window.assetsUrl.js.push({"image-banner": "{{ "bundle.image-banner.js" | asset_url }}"});
+</script>
+
+{%- if section.settings.overlay -%}
+	{% style %}
+		#shopify-section-{{ section.id }} .media.overlay::before {
+			background: rgba(0, 0, 0, {{ section.settings.overlay_opacity }});
+		}
+	{% endstyle %}
+{%- endif -%}
+
+{%- if section.settings.heading_font != 'default' -%}
+	{%- assign base_scale = settings.heading_scale | times: 1.0 | divided_by: settings.body_scale -%}
+	{%- assign title_scale = base_scale | times: section.settings.heading_font_scale -%}
+	{% style %}
+		#shopify-section-{{ section.id }} .section-heading__title {
+			--font-size-h2: calc({{ title_scale }} * 4.8rem);
+			--font-size-h1: calc({{ title_scale }} * 6.4rem);
+			--font-size-h0: calc({{ title_scale }} * 8rem);
+			--font-size-hxl: calc({{ title_scale }} * 9.6rem);
+		}
+		#shopify-section-{{ section.id }} .section-heading__title.hxxl {
+			font-size: clamp(calc({{ title_scale }} * 7.2rem), 16vw, calc({{ title_scale }} * 12rem));
+		}
+		@media (max-width: 800px) {
+			#shopify-section-{{ section.id }} .section-heading__title {
+				--font-size-h2: calc({{ title_scale }} * 3.2rem);
+				--font-size-h1: calc({{ title_scale }} * 3.2rem);
+				--font-size-h0: calc({{ title_scale }} * 3.6rem);
+				--font-size-hxl: calc({{ title_scale }} * 3.8rem);
+			}
+		}
+	{% endstyle %}
+{%- endif -%}
+
+{%- liquid
+	assign lazy_load = false
+	assign fetchpriority = 'high'
+	assign loading = 'eager'
+	if section.index > 1
+		assign lazy_load = true
+		assign fetchpriority = 'low'
+		assign loading = 'lazy'
+	endif
+-%}
+
+<div
+	class="gradient color-{{ section.settings.color_scheme }} section-{{ section.id }}-padding"
+	data-ax-section="image-banner"
+	role="banner"
+	aria-label="{% if section.settings.heading != blank %}{{ section.settings.heading }}{% else %}{{ 'sections.image_banner.aria_section' | t }}{% endif %}"
+>
+	<div class="ax-image-banner__container">
+		{%- if section.settings.button_link != blank -%}
+			<a href="{{ section.settings.button_link }}" class="ax-image-banner__link full-unstyled-link link-hover-button">
+		{%- endif -%}
+		<div
+			class="media media--display{% if section.settings.overlay %} overlay{% endif %}{% if section.settings.image == blank %} placeholder{% endif %}"
+			role="img"
+			aria-label="{% if section.settings.image.alt != blank %}{{ section.settings.image.alt | escape }}{% else %}{{ 'sections.image_banner.aria_image' | t }}{% endif %}"
+		>
+			{%- if section.settings.image -%}
+				{%- capture media_image -%}
+				<picture>
+					{%- if section.settings.image_mobile -%}
+						<source
+							media="(max-width: 450px)"
+							srcset="{{ section.settings.image_mobile | image_url: width: 450 }} 1x, {{ section.settings.image_mobile | image_url: width: 900 }} 2x"
+						>
+						{%- if section.settings.image_mobile.width >= 500 -%}
+							<source
+								media="(max-width: 500px)"
+								srcset="{{ section.settings.image_mobile | image_url: width: 500 }} 1x, {{ section.settings.image_mobile | image_url: width: 1000 }} 2x"
+							>
+						{%- endif -%}
+						{%- if section.settings.image_mobile.width >= 600 -%}
+							<source
+								media="(max-width: 600px)"
+								srcset="{{ section.settings.image_mobile | image_url: width: 600 }} 1x, {{ section.settings.image_mobile | image_url: width: 1200 }} 2x"
+							>
+						{%- endif -%}
+						{%- if section.settings.image_mobile.width >= 700 -%}
+							<source
+								media="(max-width: 700px)"
+								srcset="{{ section.settings.image_mobile | image_url: width: 700 }} 1x, {{ section.settings.image_mobile | image_url: width: 1400 }} 2x"
+							>
+						{%- endif -%}
+					{%- else -%}
+						{%- if section.settings.image.width >= 330 -%}
+							<source
+								media="(max-width: 330px)"
+								srcset="{{ section.settings.image | image_url: width: 330 }} 1x, {{ section.settings.image | image_url: width: 660 }} 2x"
+							>
+						{%- endif -%}
+						{%- if section.settings.image.width >= 375 -%}
+							<source
+								media="(max-width: 375px)"
+								srcset="{{ section.settings.image | image_url: width: 375 }} 1x, {{ section.settings.image | image_url: width: 750 }} 2x"
+							>
+						{%- endif -%}
+						{%- if section.settings.image.width >= 400 -%}
+							<source
+								media="(max-width: 400px)"
+								srcset="{{ section.settings.image | image_url: width: 400 }} 1x, {{ section.settings.image | image_url: width: 800 }} 2x"
+							>
+						{%- endif -%}
+						{%- if section.settings.image.width >= 450 -%}
+							<source
+								media="(max-width: 450px)"
+								srcset="{{ section.settings.image | image_url: width: 450 }} 1x, {{ section.settings.image | image_url: width: 900 }} 2x"
+							>
+						{%- endif -%}
+						{%- if section.settings.image.width >= 550 -%}
+							<source
+								media="(max-width: 550px)"
+								srcset="{{ section.settings.image | image_url: width: 550 }} 1x, {{ section.settings.image | image_url: width: 1100 }} 2x"
+							>
+						{%- endif -%}
+					{%- endif -%}
+					{%- if section.settings.image.width >= 768 -%}
+						<source
+							media="(max-width: 768px)"
+							srcset="{{ section.settings.image | image_url: width: 768 }} 1x, {{ section.settings.image | image_url: width: 1536 }} 2x"
+						>
+					{%- endif -%}
+					{%- if section.settings.image.width >= 1280 -%}
+						<source
+							media="(max-width: 1280px)"
+							srcset="{{ section.settings.image | image_url: width: 1280 }} 1x, {{ section.settings.image | image_url: width: 2560 }} 2x"
+						>
+					{%- endif -%}
+					{%- if section.settings.image.width >= 1366 -%}
+						<source
+							media="(max-width: 1366px)"
+							srcset="{{ section.settings.image | image_url: width: 1366 }} 1x, {{ section.settings.image | image_url: width: 2732 }} 2x"
+						>
+					{%- endif -%}
+					{%- if section.settings.image.width >= 1440 -%}
+						<source
+							media="(max-width: 1440px)"
+							srcset="{{ section.settings.image | image_url: width: 1440 }} 1x, {{ section.settings.image | image_url: width: 2880 }} 2x"
+						>
+					{%- endif -%}
+					{%- if section.settings.image.width >= 1600 -%}
+						<source
+							media="(max-width: 1600px)"
+							srcset="{{ section.settings.image | image_url: width: 1600 }} 1x, {{ section.settings.image | image_url: width: 3200 }} 2x"
+						>
+					{%- endif -%}
+					{%- if section.settings.image.width >= 1920 -%}
+						<source
+							media="(max-width: 1920px)"
+							srcset="{{ section.settings.image | image_url: width: 1920 }} 1x, {{ section.settings.image | image_url: width: 3840 }} 2x"
+						>
+					{%- endif -%}
+					{%- if section.settings.image.width >= 2300 -%}
+						<source
+							media="(max-width: 2300px)"
+							srcset="{{ section.settings.image | image_url: width: 2300 }} 1x, {{ section.settings.image | image_url: width: 4600 }} 2x"
+						>
+					{%- endif -%}
+					{%- if section.settings.image.width >= 2560 -%}
+						<source
+							media="(min-width: 2301px)"
+							srcset="{{ section.settings.image | image_url: width: 2560 }} 1x, {{ section.settings.image | image_url: width: 5120 }} 2x"
+						>
+					{%- endif -%}
+
+					<img
+						src="{{ section.settings.image | image_url: width: section.settings.image.width }}"
+						srcset="{{ section.settings.image | image_url: width: section.settings.image.width }}"
+						alt="{{ section.settings.image.alt | escape | default: alt_img }}"
+						width="{{ section.settings.image.width }}"
+						height="{{ section.settings.image.width | divided_by: section.settings.image.aspect_ratio | round }}"
+						loading="{{ loading }}"
+						fetchpriority="{{ fetchpriority }}"
+					>
+				</picture>
+			{%- endcapture -%}
+				{%- if lazy_load -%}
+					{{ media_image | replace: 'srcset=', 'lazy-srcset=' | replace: 'src=', 'lazy-src=' }}
+				{%- else -%}
+					{{ media_image }}
+				{%- endif -%}
+			{%- else -%}
+				{{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+			{%- endif -%}
+		</div>
+
+		<div class="ax-image-banner__content" role="contentinfo">
+			{%- liquid
+				assign heading_classes = 'h2'
+				if section.settings.heading_font contains 'campagne_'
+					assign campagne_slug = section.settings.heading_font | replace: '_', '-'
+					assign heading_classes = 'h2 content-title--font-' | append: campagne_slug
+				endif
+			-%}
+			{%- capture heading_html %}{% render 'legal-asterisk', text: section.settings.heading %}{% endcapture -%}
+			{%- capture subheading_html %}{% render 'legal-asterisk', text: section.settings.subheading %}{% endcapture -%}
+			{%- render 'section-heading',
+				heading: heading_html,
+				subheading: subheading_html,
+				text_alignment: 'center',
+				heading_size: 'div',
+				heading_class: heading_classes
+			-%}
+			{%- if section.settings.button_text != blank -%}
+				{%- render 'link-style',
+					link_label: section.settings.button_text,
+					link_url: section.settings.button_link,
+					link_style: section.settings.link_style,
+					link_target: section.settings.link_blank,
+					link_icon: section.settings.button_icon,
+					link_attributes: section.shopify_attributes,
+					no_link: true
+				-%}
+			{%- endif -%}
+		</div>
+		{%- if section.settings.button_link != blank -%}
+			</a>
+		{%- endif -%}
+	</div>
+</div>
+
+{% schema %}
+	{
+		"name": "Ax Image Banner",
+		"tag": "section",
+		"class": "section ax-image-banner",
+		"disabled_on": {
+			"groups": ["header", "footer"]
+		},
+		"settings": [
+			{
+				"type": "header",
+				"content": "Images"
+			},
+			{
+				"type": "image_picker",
+				"id": "image",
+				"label": "Image"
+			},
+			{
+				"type": "image_picker",
+				"id": "image_mobile",
+				"label": "Image mobile"
+			},
+			{
+				"type": "header",
+				"content": "Contenu"
+			},
+			{
+				"type": "inline_richtext",
+				"id": "subheading",
+				"label": "Sur-titre"
+			},
+			{
+				"type": "richtext",
+				"id": "heading",
+				"label": "Titre"
+			},
+			{
+				"type": "select",
+				"id": "heading_font",
+				"label": "Police du titre",
+				"options": [
+					{
+						"value": "default",
+						"label": "Classique"
+					},
+					{
+						"value": "campagne_1",
+						"label": "Campagne 1"
+					},
+					{
+						"value": "campagne_2",
+						"label": "Campagne 2"
+					},
+					{
+						"value": "campagne_3",
+						"label": "Campagne 3"
+					},
+					{
+						"value": "campagne_4",
+						"label": "Campagne 4"
+					}
+				],
+				"default": "default"
+			},
+			{
+				"type": "range",
+				"id": "heading_font_scale",
+				"label": "Échelle titre",
+				"info": "Appliqué uniquement avec une police non classique",
+				"min": 0.5,
+				"max": 3,
+				"step": 0.1,
+				"default": 1
+			},
+			{
+				"type": "text",
+				"id": "button_text",
+				"label": "Texte du bouton"
+			},
+			{
+				"type": "url",
+				"id": "button_link",
+				"label": "Lien du bouton"
+			},
+			{
+				"type": "checkbox",
+				"id": "link_blank",
+				"label": "Lien _blank",
+				"info": "Ouvrir ce lien dans une nouvelle fenêtre",
+				"default": false
+			},
+			{
+				"type": "image_picker",
+				"id": "button_icon",
+				"label": "Icône du bouton"
+			},
+			{
+				"type": "select",
+				"id": "link_style",
+				"options": [
+					{
+						"value": "button button--primary",
+						"label": "Primary"
+					},
+					{
+						"value": "button button--secondary",
+						"label": "Secondary"
+					},
+					{
+						"value": "ax-link",
+						"label": "Link"
+					},
+					{
+						"value": "ax-link reversed",
+						"label": "Link inversé"
+					},
+					{
+						"value": "underlined-link",
+						"label": "Underline link"
+					}
+				],
+				"default": "button button--primary",
+				"label": "Style du bouton"
+			},
+			{
+				"type": "header",
+				"content": "Couleurs"
+			},
+			{
+				"type": "color_scheme",
+				"id": "color_scheme",
+				"label": "t:sections.all.colors.label",
+				"default": "background-1"
+			},
+			{
+				"type": "header",
+				"content": "Overlay"
+			},
+			{
+				"type": "checkbox",
+				"id": "overlay",
+				"label": "Ajouter un overlay",
+				"default": true
+			},
+			{
+				"type": "range",
+				"id": "overlay_opacity",
+				"min": 0,
+				"max": 1,
+				"step": 0.1,
+				"label": "Image overlay opacity",
+				"info": "Increase contrast for legible text.",
+				"default": 0.2
+			}
+		],
+		"presets": [
+			{
+				"name": "Ax Image Banner"
+			}
+		]
+	}
+{% endschema %}

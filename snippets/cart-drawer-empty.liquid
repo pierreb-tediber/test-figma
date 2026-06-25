@@ -1,0 +1,47 @@
+<div id="cart-drawer-inner-empty">
+	{%- if cart == empty -%}
+		<div class="drawer__inner-empty color-{{ section.settings.cart_empty_color_scheme }} gradient">
+			<div class="cart-drawer__warnings center">
+				<div class="cart-drawer__empty-content">
+					{%- if section.settings.cart_empty_image != blank -%}
+						{%- liquid
+							assign alt_text = 'sections.cart.empty_title_html' | t | strip_html
+							assign alt_custom = section.settings.cart_empty_image.alt | default: alt_text
+						-%}
+						<div class="cart__empty-image drawer__empty-image">
+							{% capture image_tag %}
+								{{ section.settings.cart_empty_image | image_url: width: 100 | image_tag: loading: 'lazy', widths: '100, 200', alt: alt_custom }}
+							{% endcapture %}
+							{% if use_lazy_loading %}
+								{{
+									image_tag
+									| replace: 'src=', 'lazy-src='
+									| replace: 'srcset=', 'lazy-srcset='
+									| replace: 'lazy-srcset=', 'data-lazy-keep lazy-srcset='
+								}}
+							{% else %}
+								{{ image_tag }}
+							{% endif %}
+						</div>
+					{%- else -%}
+						<div class="cart__empty-image drawer__empty-image">
+							<span class="svg-wrapper">
+								{{- 'icon-empty-cart.svg' | inline_asset_content -}}
+							</span>
+						</div>
+					{%- endif -%}
+					<div class="cart__empty-title h2 drawer__empty-title">{{ 'sections.cart.empty_title_html' | t }}</div>
+					<div class="cart__empty-text drawer__empty-text">{{ 'sections.cart.empty_text_html' | t }}</div>
+					{%- if section.settings.cart_empty_link != blank -%}
+						<a
+							href="{{ section.settings.cart_empty_link }}"
+							class="cart__empty-button drawer__empty-button button button--primary"
+						>
+							{{ 'sections.cart.empty_button' | t }}
+						</a>
+					{%- endif -%}
+				</div>
+			</div>
+		</div>
+	{%- endif -%}
+</div>

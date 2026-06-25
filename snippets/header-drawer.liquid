@@ -1,0 +1,206 @@
+{% comment %}
+  Renders a header drawer menu for mobile and desktop.
+
+  Usage:
+  {% render 'header-drawer' %}
+{% endcomment %}
+
+<header-drawer
+  data-breakpoint="{% if section.settings.menu_type_desktop == 'drawer' %}desktop{% else %}tablet{% endif %}"
+  data-section-id="{{ section.id }}"
+>
+  <details id="Details-menu-drawer-container" class="menu-drawer-container">
+    <summary
+      class="header__icon header__icon--menu header__icon--summary link focus-inset"
+      aria-label="{{ 'sections.header.menu' | t }}"
+    >
+      <span>
+        {{- 'icon-hamburger.svg' | inline_asset_content -}}
+        {{- 'icon-close.svg' | inline_asset_content -}}
+      </span>
+    </summary>
+    <div id="menu-drawer" class="gradient menu-drawer motion-reduce color-{{ section.settings.menu_color_scheme }}">
+      <div class="menu-drawer__inner-container">
+        <div class="menu-drawer__navigation-container">
+          <nav class="menu-drawer__navigation">
+            <ul class="menu-drawer__menu has-submenu list-menu" role="list">
+              {%- assign block_push = section.blocks | where: 'type', 'push-global' | first -%}
+              {%- if get_url contains 'section_id' or get_url contains 'sections' -%}
+                {%- render 'menu-drawer-content', section: section -%}
+              {%- else -%}
+                {%- for link in section.settings.menu.links -%}
+                  {%- liquid
+                    assign link_title = link.title | handle
+                    assign current_block = blank
+                    assign custom_link_block = blank
+                    assign link_color = blank
+                    assign link_weight = blank
+                    assign link_icon = blank
+                    assign link_icon_class = ''
+
+                    # Chercher d'abord un bloc custom-link (prioritaire)
+                    for block in section.blocks
+                      if block.type == 'custom-link'
+                        assign block_title = block.settings.title | handle
+                        if block_title == link_title
+                          assign custom_link_block = block
+                          break
+                        endif
+                      endif
+                    endfor
+
+                    # Si custom-link trouvé, utiliser ses paramètres
+                    if custom_link_block != blank
+                      assign link_color = custom_link_block.settings.color
+                      assign link_weight = custom_link_block.settings.weight
+                      assign link_icon = custom_link_block.settings.icon
+                      if custom_link_block.settings.keep_icon_color
+                        assign link_icon_class = 'keep-icon-color'
+                      endif
+                    else
+                      # Sinon, chercher les autres blocs
+                      for block in section.blocks
+                        if block.type != 'push-global' and block.type != 'custom-link'
+                          assign block_title = block.settings.title | handle
+                          if block_title == link_title
+                            assign current_block = block
+                            break
+                          endif
+                        endif
+                      endfor
+
+                      if current_block != blank
+                        assign link_color = current_block.settings.color
+                      endif
+                    endif
+
+                    assign badge_block = custom_link_block
+                    if badge_block == blank
+                      assign badge_block = current_block
+                    endif
+                  -%}
+
+                  <li>
+                    {%- if link.links != blank -%}
+                      <details id="Details-menu-drawer-menu-item-{{ forloop.index }}">
+                        <summary
+                          id="HeaderDrawer-{{ link.handle }}"
+                          class="menu-drawer__menu-item menu-drawer__menu-item--level-1 list-menu__item link link--text focus-inset{% if link_color != blank or link_weight != blank %} modified{% endif %}"
+                          style="
+                            {% if link_weight != blank %} font-weight: {{ link_weight }};{% endif %}
+                            {% if link_color != blank %} color: {{ link_color }};{% endif %}
+                          "
+                        >
+                          {% if link_icon != blank %}
+                            <img
+                              src="{{ link_icon | image_url: width: 16 }}"
+                              srcset="{{ link_icon | image_url: width: 1 }} 1w, {{ link_icon | image_url: width: 16 }} 16w"
+                              sizes="(max-width: 1200px) 1px, 16px"
+                              loading="eager"
+                              width="16"
+                              height="16"
+                              alt="icon {{- link.title | escape -}}"
+                              {% if link_icon_class != blank %} class="{{ link_icon_class }}"{% endif %}
+                            >
+                          {% endif %}
+                          {{ link.title | escape }}
+                          {%- render 'menu-mobile-badge', block: badge_block -%}
+                          <span class="svg-wrapper">
+                            {{- 'icon-caret.svg' | inline_asset_content -}}
+                          </span>
+                        </summary>
+                        <div
+                          id="link-{{ link.handle | escape }}"
+                          class="menu-drawer__submenu has-submenu gradient motion-reduce"
+                          tabindex="-1"
+                        >
+                          <div class="header__menu__loading header__menu-drawer__loading">
+                            {% render 'loading-spinner' %}
+                          </div>
+                        </div>
+                      </details>
+                    {%- else -%}
+                      <a
+                        id="HeaderDrawer-{{ link.handle }}"
+                        href="{{ link.url }}"
+                        class="menu-drawer__menu-item menu-drawer__menu-item--level-1 list-menu__item link link--text focus-inset{% if link_color != blank or link_weight != blank %} modified{% endif %}"
+                        {% if link.current %}
+                          aria-current="page"
+                        {% endif %}
+                        style="
+                          {% if link_weight != blank %} font-weight: {{ link_weight }};{% endif %}
+                          {% if link_color != blank %} color: {{ link_color }};{% endif %}
+                        "
+                      >
+                        {% if link_icon != blank %}
+                          <img
+                            src="{{ link_icon | image_url: width: 16 }}"
+                            srcset="{{ link_icon | image_url: width: 1 }} 1w, {{ link_icon | image_url: width: 16 }} 16w"
+                            sizes="(max-width: 1200px) 1px, 16px"
+                            loading="eager"
+                            width="16"
+                            height="16"
+                            alt="icon {{- link.title | escape -}}"
+                            {% if link_icon_class != blank %} class="{{ link_icon_class }}"{% endif %}
+                          >
+                        {% endif %}
+                        {{ link.title | escape }}
+                        {%- render 'menu-mobile-badge', block: badge_block -%}
+                      </a>
+                    {%- endif -%}
+                  </li>
+                {%- endfor -%}
+              {%- endif -%}
+              {%- if block_push != blank -%}
+                <li>
+                  {%- render 'menu-push',
+                    block: block_push,
+                    push_color_scheme: block_push.settings.push_color_scheme,
+                    push_opacity: block_push.settings.push_opacity,
+                    image: block_push.settings.image,
+                    title: block_push.settings.title_push,
+                    url_text: block_push.settings.url_text,
+                    url: block_push.settings.url,
+                    link_style: block_push.settings.link_style,
+                    position: 'mobile-center'
+                  -%}
+                </li>
+              {%- endif -%}
+            </ul>
+          </nav>
+          <div class="menu-drawer__utility-links">
+            <ul class="menu-drawer__utility-links__list list-menu" role="list">
+              {%- assign block_menu_drawer = section.blocks | where: 'type', 'menu-drawer' | first -%}
+              {%- for link in block_menu_drawer.settings.menu.links -%}
+                <li>
+                  <a
+                    href="{{ link.url }}"
+                    class="menu-drawer__menu-item menu-drawer__menu-item--level-1 list-menu__item link link--text focus-inset"
+                  >
+                    {{ link.title | escape }}
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+
+            {%- if shop.customer_accounts_enabled -%}
+              <a
+                href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
+                class="menu-drawer__menu-item menu-drawer__menu-item--level-1 list-menu__item link link--text focus-inset medium-hide large-up-hide"
+                rel="nofollow"
+              >
+                {%- liquid
+                  if customer
+                    echo 'customer.account_fallback' | t
+                  else
+                    echo 'customer.log_in' | t
+                  endif
+                -%}
+              </a>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </details>
+</header-drawer>

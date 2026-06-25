@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-cart" width="40" height="40" fill="none" viewBox="0 0 40 40">
+	<path
+		stroke="currentColor"
+		stroke-linecap="round"
+		stroke-linejoin="round"
+		stroke-width="2"
+		d="M13.197 15.2h13.607a2.4 2.4 0 0 1 2.372 2.765l-1.506 9.782a3.6 3.6 0 0 1-3.56 3.053h-8.222a3.6 3.6 0 0 1-3.558-3.053l-1.506-9.782a2.4 2.4 0 0 1 2.373-2.765"
+	/>
+	<path
+		stroke="currentColor"
+		stroke-linecap="round"
+		stroke-linejoin="round"
+		stroke-width="2"
+		d="M16.4 18.8v-6a3.6 3.6 0 1 1 7.2 0v6"
+	/>
+</svg>

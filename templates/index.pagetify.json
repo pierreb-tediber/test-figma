@@ -1,0 +1,1263 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "ax_slider_jK8jNk": {
+      "type": "ax-slider",
+      "blocks": {
+        "slide_gmErWy": {
+          "type": "slide",
+          "settings": {
+            "img_slider": "shopify://shop_images/Only-Person.00_00_01_04.Still005.jpg",
+            "img_slider_mobile": "shopify://shop_images/Only-Person_916.00_00_00_00.Still005.jpg",
+            "video": "shopify://files/videos/desktop_homepage_hero_only_person.mp4",
+            "video_mobile": "shopify://files/videos/mobile_homepage_hero_only_person.mp4",
+            "heading": "<p>L'INCROYABLE MATELAS</p>",
+            "heading_size": "hxl",
+            "subheading": "<p>Exclusivité M6 : -15% de réduction</p>",
+            "subheading_shadow": false,
+            "hide_button": false,
+            "button_text": "Découvrir le matelas",
+            "url": "shopify://products/matelas",
+            "link_blank": false,
+            "style_button": "button button--secondary",
+            "content_position": "middle-center",
+            "mobile_position": "mobile-center",
+            "begin_date": "",
+            "end_date": "",
+            "overlay": true,
+            "overlay_opacity": 0.1,
+            "color_scheme": "scheme-a6ba1938-1dcc-48fa-a1c5-cecd367da137",
+            "label_position": "bottom_left",
+            "label_max_width": 150,
+            "label_max_width_mobile": 100,
+            "mention_text": "",
+            "mention_position": "bottom_right"
+          }
+        }
+      },
+      "block_order": [
+        "slide_gmErWy"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".hxl {font-size: 7rem;}",
+        "@media (max-width: 768px) {.hxl {font-size: 8vw; /* taille relative à la largeur de l’écran */ line-height: 1.1; /* resserrer un peu si besoin */ }}"
+      ],
+      "name": "Ax Slider - L'incroyable Matelas",
+      "settings": {
+        "autoplay": false,
+        "delay": 3,
+        "speed": 300,
+        "random": false,
+        "loop": false,
+        "pagination": false,
+        "image_ratio": "display display--no-header",
+        "fixed_height": 600,
+        "fixed_height_mobile": 400,
+        "show_text_below": false,
+        "accessibility_info": "Slideshow about our brand"
+      }
+    },
+    "ax_slider_4AC7R6": {
+      "type": "ax-slider",
+      "blocks": {
+        "slide_h8WRiW": {
+          "type": "slide",
+          "settings": {
+            "img_slider": "shopify://shop_images/Hero_desktop_overlay.jpg",
+            "img_slider_mobile": "shopify://shop_images/Hero_mobile_overlay.jpg",
+            "heading": "<p>Le confort Tediber, au bon moment</p>",
+            "heading_size": "h2",
+            "subheading": "<p>Jusqu'à -40%</p>",
+            "subheading_shadow": false,
+            "hide_button": false,
+            "button_icon": "shopify://shop_images/stars_f12708e8-603c-432e-940a-3895a95d9469.png",
+            "button_text": "Je découvre",
+            "url": "shopify://collections/pack-literie",
+            "link_blank": false,
+            "style_button": "button button--secondary",
+            "content_position": "middle-center",
+            "mobile_position": "mobile-center",
+            "begin_date": "",
+            "end_date": "",
+            "overlay": false,
+            "overlay_opacity": 0.1,
+            "color_scheme": "scheme-3617bbb9-ee3f-4a2e-938e-b824aeabf037",
+            "label_position": "bottom_left",
+            "label_max_width": 160,
+            "label_max_width_mobile": 80,
+            "mention_text": "",
+            "mention_position": "bottom_center"
+          }
+        },
+        "slide_xzxEQ9": {
+          "type": "slide",
+          "settings": {
+            "heading": "<p>Heading</p>",
+            "heading_size": "h1",
+            "subheading": "<p>Tell your brand's story through images</p>",
+            "subheading_shadow": false,
+            "hide_button": false,
+            "button_text": "Button label",
+            "url": "",
+            "link_blank": false,
+            "style_button": "button button--primary",
+            "content_position": "middle-left",
+            "mobile_position": "mobile-left",
+            "begin_date": "",
+            "end_date": "",
+            "overlay": true,
+            "overlay_opacity": 0.2,
+            "color_scheme": "accent-1",
+            "label_position": "bottom_left",
+            "label_max_width": 150,
+            "label_max_width_mobile": 100,
+            "mention_text": "",
+            "mention_position": "bottom_right"
+          }
+        },
+        "slide_CibkBC": {
+          "type": "slide",
+          "disabled": true,
+          "settings": {
+            "heading": "<p>Pack lit 2 places</p>",
+            "heading_size": "h1",
+            "subheading": "<p>Entrez dans l’expérience Tediber, sans compromis.</p>",
+            "subheading_shadow": false,
+            "hide_button": false,
+            "button_text": "Je découvre",
+            "url": "shopify://products/pack-lit-2-places-hybride",
+            "link_blank": false,
+            "style_button": "button button--primary",
+            "content_position": "middle-left",
+            "mobile_position": "mobile-left",
+            "begin_date": "",
+            "end_date": "",
+            "overlay": true,
+            "overlay_opacity": 0.2,
+            "color_scheme": "accent-1",
+            "label_position": "bottom_left",
+            "label_max_width": 150,
+            "label_max_width_mobile": 100,
+            "mention_text": "",
+            "mention_position": "bottom_right"
+          }
+        }
+      },
+      "block_order": [
+        "slide_h8WRiW",
+        "slide_xzxEQ9",
+        "slide_CibkBC"
+      ],
+      "name": "Ax Slider - Générique",
+      "settings": {
+        "autoplay": false,
+        "delay": 3,
+        "speed": 300,
+        "random": false,
+        "loop": false,
+        "pagination": false,
+        "image_ratio": "fixed",
+        "fixed_height": 750,
+        "fixed_height_mobile": 625,
+        "show_text_below": false,
+        "accessibility_info": "Slideshow about our brand"
+      }
+    },
+    "ax_slider_EEmix7": {
+      "type": "ax-slider",
+      "blocks": {
+        "slide_Jgki4f": {
+          "type": "slide",
+          "settings": {
+            "img_slider": "shopify://shop_images/desk.webp",
+            "img_slider_mobile": "shopify://shop_images/mob.webp",
+            "heading": "<p>BLACK FRIDAY -15%</p>",
+            "heading_size": "hxl",
+            "subheading": "<p>sur tout le site avec le code* BLACKMONTH</p>",
+            "subheading_shadow": false,
+            "hide_button": false,
+            "button_text": "Découvrir l’offre",
+            "url": "shopify://collections/black-friday",
+            "link_blank": false,
+            "style_button": "button button--secondary",
+            "content_position": "middle-center",
+            "mobile_position": "mobile-center",
+            "begin_date": "",
+            "end_date": "",
+            "overlay": true,
+            "overlay_opacity": 0.1,
+            "color_scheme": "scheme-a6ba1938-1dcc-48fa-a1c5-cecd367da137",
+            "label_position": "bottom_left",
+            "label_max_width": 150,
+            "label_max_width_mobile": 100,
+            "mention_text": "",
+            "mention_position": "bottom_right"
+          }
+        }
+      },
+      "block_order": [
+        "slide_Jgki4f"
+      ],
+      "disabled": true,
+      "name": "Ax Slider - Black Month",
+      "settings": {
+        "autoplay": false,
+        "delay": 3,
+        "speed": 300,
+        "random": false,
+        "loop": false,
+        "pagination": false,
+        "image_ratio": "display",
+        "fixed_height": 300,
+        "fixed_height_mobile": 200,
+        "show_text_below": false,
+        "accessibility_info": "Slideshow about our brand"
+      }
+    },
+    "custom_liquid_U86D8J": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "name": "Bannière Alma 10x",
+      "settings": {
+        "custom_liquid": "<!-- Bannière 10× Alma – HTML pur -->\n<div class=\"banner-alma\" role=\"region\" aria-label=\"Paiement 10× Alma sans frais\">\n  <div class=\"banner-alma__inner\">\n    <span class=\"banner-alma__badge\" aria-hidden=\"true\">\n      <img src=\"https://cdn.shopify.com/s/files/1/0903/1342/5220/files/Badge-Alma-orange-10x.svg?v=1758009341\" alt=\"10× Alma\" loading=\"lazy\" width=\"96\" height=\"28\">\n    </span>\n\n    <!-- Texte desktop -->\n    <p class=\"banner-alma__text banner-alma__text--desktop\">\n      Jusqu'au 3 février inclus, le paiement en <strong>10x sans frais est offert</strong>.\n    </p>\n\n    <!-- Texte mobile -->\n    <p class=\"banner-alma__text banner-alma__text--mobile\">\n       Jusqu'au 3 février inclus, le paiement en <strong>10x sans frais est offert</strong>.\n    </p>\n  </div>\n</div>\n\n<style>\n  :root {\n    --alma-blue: #010C27;\n    --alma-text: #ffffff;\n  }\n\n  .banner-alma {\n    background: var(--alma-blue);\n    color: var(--alma-text);\n    width: 100%;\n  }\n\n  .banner-alma__inner {\n    max-width: 1080px;\n    margin: 0 auto;\n    display: flex;                /* ✅ flex au lieu de grid */\n    justify-content: center;      /* ✅ centre horizontalement */\n    align-items: center;          /* aligne verticalement */\n    gap: 0.9rem;                  /* espace logo/texte */\n    padding: 0.75rem 0.4rem;\n    min-height: 56px;\n    text-align: center;           /* centre aussi le texte */\n  }\n\n  /* Badge */\n  .banner-alma__badge {\n    line-height: 0;\n    display: inline-flex;\n    align-items: center;\n  }\n  .banner-alma__badge img {\n    display: block;\n    height: 28px;\n    width: auto;\n  }\n\n  /* Texte */\n  .banner-alma__text {\n    margin: 4px;\n    line-height: 1.35;\n    font-size: 14px;\n    font-weight: 500;\n  }\n  .banner-alma__text strong { font-weight: 700; }\n\n  /* Cacher la version mobile par défaut */\n  .banner-alma__text--mobile { display: none; }\n\n  /* Responsive */\n  @media (max-width: 740px) {\n    .banner-alma__inner {\n      flex-direction: column;     /* ✅ passe en colonne */\n      justify-content: center;\n      gap: 0.55rem;\n      padding: 0.7rem 0.9rem;\n    }\n    .banner-alma__badge img { height: 28px; }\n    .banner-alma__text--desktop { display: none; }\n    .banner-alma__text--mobile { display: block; font-size: 12px; }\n  }\n</style>",
+        "color_scheme": "",
+        "padding_top": 16,
+        "padding_bottom": 0
+      }
+    },
+    "ax_product_lists_WwnNQi": {
+      "type": "ax-product-lists",
+      "blocks": {
+        "product_list_eVcycQ": {
+          "type": "product-list",
+          "settings": {
+            "title": "NOS ICONIQUES",
+            "collection": "",
+            "product_list": [
+              "matelas-hybride-infinite",
+              "matelas-hybride-premium",
+              "matelas-hybride-unlisted",
+              "sommier",
+              "matelas-enfant-ado-grand-tedi",
+              "matelas-bebe-tedi",
+              "parure-lit-satin-coton",
+              "sommier-coffre",
+              "oreiller-universel",
+              "couette-universelle",
+              "canape-convertible",
+              "parure-percale-de-coton-enfant",
+              "sommier-bois"
+            ],
+            "products_to_show": 12,
+            "button_text": "",
+            "button_link": "",
+            "link_style": "button button--primary"
+          }
+        }
+      },
+      "block_order": [
+        "product_list_eVcycQ"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".product-lists__nav-item:before {height: 0;}"
+      ],
+      "name": "Ax product lists - Générique",
+      "settings": {
+        "surtitle": "MAISON DE LITERIE FRANÇAISE",
+        "description": "",
+        "image_ratio": "portrait",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "color_scheme": "",
+        "mob_padding_top": 32,
+        "mob_padding_bottom": 48,
+        "padding_top": 56,
+        "padding_bottom": 48
+      }
+    },
+    "ax_product_lists_zDM7n9": {
+      "type": "ax-product-lists",
+      "blocks": {
+        "product_list_UpfrCp": {
+          "type": "product-list",
+          "settings": {
+            "title": "Nos iconiques",
+            "collection": "",
+            "product_list": [
+              "matelas-hybride",
+              "matelas-hybride-premium",
+              "matelas-hybride-infinite",
+              "sommier",
+              "sommier-coffre",
+              "matelas-bebe-tedi",
+              "matelas-enfant-ado-grand-tedi",
+              "couette-universelle",
+              "oreiller-universel",
+              "pack-lit-2-places",
+              "pack-lit-1-place",
+              "pack-lit-2-places-hybride"
+            ],
+            "products_to_show": 12,
+            "button_text": "",
+            "button_link": "",
+            "link_style": "button button--primary"
+          }
+        }
+      },
+      "block_order": [
+        "product_list_UpfrCp"
+      ],
+      "name": "Ax product lists - Soldes d'hiver",
+      "settings": {
+        "surtitle": "MAISON DE LITERIE FRANÇAISE",
+        "description": "",
+        "image_ratio": "portrait",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "color_scheme": "",
+        "mob_padding_top": 32,
+        "mob_padding_bottom": 48,
+        "padding_top": 56,
+        "padding_bottom": 48
+      }
+    },
+    "ax_reassurances_ktwzWd": {
+      "type": "ax-reassurances",
+      "blocks": {
+        "reassurance_xktGqY": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "100-nuits-essai",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_ewyyWh": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-mnd3qioq",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_pNPP9Y": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-vfy3a8q5",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_V34gFt": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "ebc9a07f110cb6c68f311a9a37ca7c69c281d7f8",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        }
+      },
+      "block_order": [
+        "reassurance_xktGqY",
+        "reassurance_ewyyWh",
+        "reassurance_pNPP9Y",
+        "reassurance_V34gFt"
+      ],
+      "settings": {
+        "heading": "Nos engagements",
+        "restricted_width": false,
+        "stack_mobile": false,
+        "border_top_mobile": true,
+        "border_bottom_mobile": false,
+        "show_content": false,
+        "autoplay": true,
+        "speed": 300,
+        "loop": false,
+        "pagination": true,
+        "color_scheme": "",
+        "color_scheme_popin": "scheme-2",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 48,
+        "padding_top": 48,
+        "padding_bottom": 42,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "ax_image_banner_kEqdbR": {
+      "type": "ax-image-banner",
+      "name": "Ax Bannière Soldes",
+      "settings": {
+        "image": "shopify://shop_images/new_desktop_06a59330-ab13-4472-badd-5525af5b4acf.jpg",
+        "image_mobile": "shopify://shop_images/new_mobile_3c001267-b8d3-48ee-96f5-10457a79c936.jpg",
+        "subheading": "<strong>-40% de réduction</strong>",
+        "heading": "<p>Matelas Hybride Premium</p>",
+        "button_text": "Découvrir le matelas",
+        "button_link": "shopify://products/matelas-hybride-premium",
+        "link_blank": false,
+        "link_style": "button button--secondary",
+        "color_scheme": "scheme-a6ba1938-1dcc-48fa-a1c5-cecd367da137",
+        "overlay": true,
+        "overlay_opacity": 0.1
+      }
+    },
+    "ax_image_banner_Da4HJc": {
+      "type": "ax-image-banner",
+      "disabled": true,
+      "name": "Ax Image Banner - Signature",
+      "settings": {
+        "image": "shopify://shop_images/Image_c994b77d-fe4c-44be-a288-2f759f67674d.jpg",
+        "image_mobile": "shopify://shop_images/hero_homepage_77aa1579-f222-45c9-be6c-5e7d47124e71.png",
+        "subheading": "À DÉCOUVRIR",
+        "heading": "<p>LE MATELAS HYBRIDE PREMIUM</p>",
+        "button_text": "Découvrir le matelas",
+        "button_link": "shopify://collections/collection-signature",
+        "link_blank": false,
+        "link_style": "button button--secondary",
+        "color_scheme": "scheme-a6ba1938-1dcc-48fa-a1c5-cecd367da137",
+        "overlay": true,
+        "overlay_opacity": 0.1
+      }
+    },
+    "ax_collections_grid_PNTmQi": {
+      "type": "ax-collections-grid",
+      "blocks": {
+        "collection_ywc7yG": {
+          "type": "collection",
+          "settings": {
+            "collection": "matelas",
+            "title": ""
+          }
+        },
+        "collection_ijP8gG": {
+          "type": "collection",
+          "settings": {
+            "collection": "sommier",
+            "title": ""
+          }
+        },
+        "collection_JmtaMC": {
+          "type": "collection",
+          "settings": {
+            "collection": "lit",
+            "title": ""
+          }
+        },
+        "collection_j4rn6r": {
+          "type": "collection",
+          "settings": {
+            "collection": "tete-de-lit",
+            "title": ""
+          }
+        },
+        "collection_KfHVpg": {
+          "type": "collection",
+          "settings": {
+            "collection": "canape",
+            "title": ""
+          }
+        },
+        "collection_P4FxQm": {
+          "type": "collection",
+          "settings": {
+            "collection": "gamme-enfant-bebe",
+            "title": ""
+          }
+        },
+        "collection_ABwC3n": {
+          "type": "collection",
+          "settings": {
+            "collection": "couette-et-oreiller",
+            "title": ""
+          }
+        },
+        "collection_HgNtPh": {
+          "type": "collection",
+          "settings": {
+            "collection": "linge-de-lit",
+            "title": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_ywc7yG",
+        "collection_ijP8gG",
+        "collection_JmtaMC",
+        "collection_j4rn6r",
+        "collection_KfHVpg",
+        "collection_P4FxQm",
+        "collection_ABwC3n",
+        "collection_HgNtPh"
+      ],
+      "settings": {
+        "heading": "GAMME TEDIBER",
+        "color_scheme": "",
+        "padding_top": 96,
+        "padding_bottom": 48
+      }
+    },
+    "ax_media_text_slider_A6RmXR": {
+      "type": "ax-media-text-slider",
+      "blocks": {
+        "slide_NHR9ik": {
+          "type": "slide",
+          "settings": {
+            "item_metaobject": "m-h-premium-hybridetech-by-tediber",
+            "show_only_metaobject": false,
+            "content_position": "middle-right",
+            "overlay": false,
+            "overlay_opacity": 0.2,
+            "subheading": "",
+            "heading": "Titre",
+            "heading_size": "h2",
+            "heading_class": "h2",
+            "text_alignment": "left",
+            "text": "<p>Texte</p>",
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center",
+            "button_text": "",
+            "button_link": "",
+            "link_blank": false,
+            "link_style": "button button--primary",
+            "color_scheme": "scheme-1"
+          }
+        },
+        "slide_jkaTAf": {
+          "type": "slide",
+          "settings": {
+            "item_metaobject": "dormez-a-deux-sans-vous-reveiller",
+            "show_only_metaobject": false,
+            "content_position": "middle-right",
+            "overlay": false,
+            "overlay_opacity": 0.2,
+            "subheading": "",
+            "heading": "Titre",
+            "heading_size": "h2",
+            "heading_class": "h2",
+            "text_alignment": "left",
+            "text": "<p>Texte</p>",
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center",
+            "button_text": "",
+            "button_link": "",
+            "link_blank": false,
+            "link_style": "button button--primary",
+            "color_scheme": "scheme-1"
+          }
+        },
+        "slide_rRTRa4": {
+          "type": "slide",
+          "settings": {
+            "item_metaobject": "surmatelas-integre-reversible",
+            "show_only_metaobject": false,
+            "content_position": "middle-right",
+            "overlay": false,
+            "overlay_opacity": 0.2,
+            "subheading": "",
+            "heading": "Titre",
+            "heading_size": "h2",
+            "heading_class": "h2",
+            "text_alignment": "left",
+            "text": "<p>Texte</p>",
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center",
+            "button_text": "",
+            "button_link": "",
+            "link_blank": false,
+            "link_style": "button button--primary",
+            "color_scheme": "scheme-1"
+          }
+        },
+        "slide_fWGYAm": {
+          "type": "slide",
+          "settings": {
+            "item_metaobject": "m-hybride-1er-matelas-reparable",
+            "show_only_metaobject": false,
+            "content_position": "middle-right",
+            "overlay": false,
+            "overlay_opacity": 0.2,
+            "subheading": "",
+            "heading": "Titre",
+            "heading_size": "h2",
+            "heading_class": "h2",
+            "text_alignment": "left",
+            "text": "<p>Texte</p>",
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center",
+            "button_text": "",
+            "button_link": "",
+            "link_blank": false,
+            "link_style": "button button--primary",
+            "color_scheme": "scheme-1"
+          }
+        }
+      },
+      "block_order": [
+        "slide_NHR9ik",
+        "slide_jkaTAf",
+        "slide_rRTRa4",
+        "slide_fWGYAm"
+      ],
+      "name": "Technologie",
+      "settings": {
+        "hide_if_no_blocks": true,
+        "full_width": true,
+        "accessibility_info": "Slider de médias avec texte",
+        "autoplay": true,
+        "delay": 8,
+        "speed": 300,
+        "random": false,
+        "loop": true,
+        "pagination": true,
+        "swiper_arrows": true,
+        "image_height": "large",
+        "section_color_scheme": "",
+        "color_scheme": "",
+        "container_style": "glass",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "ax_image_with_text_rtb_RKVTWh": {
+      "type": "ax-image-with-text-rtb",
+      "blocks": {
+        "heading_yPfEWp": {
+          "type": "heading",
+          "settings": {
+            "picto": "shopify://shop_images/flag.png",
+            "picto_size": 96,
+            "picto_size_mobile": 96,
+            "heading": "<p>UN SAVOIR-FAIRE FRANÇAIS</p>",
+            "heading_size": "h2"
+          }
+        },
+        "rtb_zmVdWK": {
+          "type": "rtb",
+          "settings": {
+            "rtb_metaobject": "rtb-xvph0jcn"
+          }
+        },
+        "text_aJ9ndz": {
+          "type": "text",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "text": "<p>Chez Tediber, nous concevons et fabriquons nos produits en France et en Europe, avec des partenaires au savoir-faire reconnu. Ce choix nous permet de garantir la qualité, la durabilité et la juste fabrication de chaque produit.</p>",
+            "description_hn_replace": false,
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center"
+          }
+        },
+        "button_jAq74B": {
+          "type": "button",
+          "settings": {
+            "button_text": "",
+            "button_link": "",
+            "link_blank": false,
+            "link_style": "button button--primary",
+            "button_alignment": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_yPfEWp",
+        "rtb_zmVdWK",
+        "text_aJ9ndz",
+        "button_jAq74B"
+      ],
+      "name": "Savoir faire français",
+      "settings": {
+        "full_width": true,
+        "text_alignment": "left",
+        "mobile_text_alignment": "center",
+        "no_vertical_padding": false,
+        "image": "shopify://shop_images/savoir-faire-francais-tediber.jpg",
+        "image_restricted_width": false,
+        "image_adapted_height_with_content": false,
+        "contain_image": false,
+        "layout": "image_first",
+        "mobile_layout": "image_first",
+        "overlay": false,
+        "overlay_opacity": 0.2,
+        "section_color_scheme": "scheme-3",
+        "color_scheme": "scheme-3",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "ax_shop_the_look_PrCm39": {
+      "type": "ax-shop-the-look",
+      "blocks": {
+        "product_zUGpfm": {
+          "type": "product",
+          "settings": {
+            "product": "oreiller",
+            "combined_product": [],
+            "position_left": 42,
+            "position_top": 48,
+            "mobile_position_left": 30,
+            "mobile_position_top": 30,
+            "display_on": "both"
+          }
+        },
+        "product_wrzQpf": {
+          "type": "product",
+          "settings": {
+            "product": "matelas-hybride",
+            "combined_product": [],
+            "position_left": 55,
+            "position_top": 75,
+            "mobile_position_left": 65,
+            "mobile_position_top": 60,
+            "display_on": "both"
+          }
+        }
+      },
+      "block_order": [
+        "product_zUGpfm",
+        "product_wrzQpf"
+      ],
+      "disabled": true,
+      "settings": {
+        "image": "shopify://shop_images/TEDIBER_2024_06_240612_3.jpg",
+        "image_mobile": "shopify://shop_images/shop-the-look-mobile.webp",
+        "gradient": 10,
+        "color_scheme": "scheme-a6ba1938-1dcc-48fa-a1c5-cecd367da137",
+        "subheading": "Le confort Tediber chez vous",
+        "heading": "<p>Adoptez le look Tediber</p>",
+        "description": "<p>Recréez l’univers Tediber dans votre chambre avec notre sélection de linge de lit, mobilier et objets déco. Confort, design et simplicité pour des nuits incroyables.</p>",
+        "button_text": "",
+        "button_link": "",
+        "link_blank": false,
+        "link_style": "button button--secondary",
+        "modal_title": "PARCOURIR LE LOOK",
+        "mob_padding_top": 24,
+        "mob_padding_bottom": 24,
+        "padding_top": 0,
+        "padding_bottom": 48
+      }
+    },
+    "ax_cards_links_eiKqcp": {
+      "type": "ax-cards-links",
+      "blocks": {
+        "card_3dGYek": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/LesaviezVous.svg",
+            "heading": "<p>Tout savoir sur le cododo</p>",
+            "link_text": "Lire l’article",
+            "link": "shopify://blogs/sommeil/cododo-cosleeping",
+            "link_blank": false,
+            "color_scheme": "scheme-e50a3d25-8111-430b-a12b-76298bbc4e33",
+            "border_color": "#010c27"
+          }
+        },
+        "card_4J6WkE": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/conseil-black.svg",
+            "heading": "<p>Comment survivre à la canicule ?</p>",
+            "link_text": "Lire l’article",
+            "link": "shopify://blogs/matelas/astuce-dormir-canicule",
+            "link_blank": false,
+            "color_scheme": "scheme-4",
+            "border_color": "#010c27"
+          }
+        },
+        "card_dn49LT": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/CaracteristiqueProduits_1.svg",
+            "heading": "<p>Les secrets de matelas d'Hôtel</p>",
+            "link_text": "Lire l’article",
+            "link": "shopify://blogs/matelas/secrets-matelas-hotels",
+            "link_blank": false,
+            "color_scheme": "scheme-63662268-9ea3-4531-80d0-ded5252e7502",
+            "border_color": "#010c27"
+          }
+        },
+        "card_MTFWAn": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/TypeProduit.svg",
+            "heading": "<p>Comment choisir un matelas enfant ?</p>",
+            "link_text": "Lire l’article",
+            "link": "shopify://blogs/matelas-enfant-ado-grand-tedi/lit-enfant-bois",
+            "link_blank": false,
+            "color_scheme": "scheme-fd8a6b7f-fb17-41ee-ac65-43143a48e740",
+            "border_color": "#010c27"
+          }
+        },
+        "card_9GmrhH": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/conseil-black.svg",
+            "heading": "<p>Meilleur sommier, comparatif des plus...</p>",
+            "link_text": "Lire l’article",
+            "link": "shopify://blogs/sommier/meilleur-sommier-comparatif",
+            "link_blank": false,
+            "color_scheme": "scheme-346651c5-8a51-47a1-b24f-bf7ddf212822",
+            "border_color": "#010c27"
+          }
+        }
+      },
+      "block_order": [
+        "card_3dGYek",
+        "card_4J6WkE",
+        "card_dn49LT",
+        "card_MTFWAn",
+        "card_9GmrhH"
+      ],
+      "settings": {
+        "heading": "<p>NOS CONSEILS</p>",
+        "button_text": "Voir tous nos conseils",
+        "button_link": "shopify://pages/blogs",
+        "link_blank": false,
+        "link_style": "button button--primary",
+        "color_scheme": "",
+        "mob_padding_top": 24,
+        "mob_padding_bottom": 48,
+        "padding_top": 48,
+        "padding_bottom": 96
+      }
+    },
+    "ax_cards_links_GgzJ6H": {
+      "type": "ax-cards-links",
+      "blocks": {
+        "card_frYdec": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/LesaviezVous.svg",
+            "heading": "<p>Emma Matelas vs Tediber ?</p>",
+            "link_text": "Lire l’article",
+            "link": "shopify://blogs/matelas/emma-matelas-ou-tediber",
+            "link_blank": false,
+            "color_scheme": "scheme-e50a3d25-8111-430b-a12b-76298bbc4e33",
+            "border_color": "#010c27"
+          }
+        },
+        "card_iyreV8": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/conseil-black.svg",
+            "heading": "<p>5 astuces pour choisir sa couette</p>",
+            "link_text": "Lire l’article",
+            "link": "https://www.tediber.com/blogs/couette/choisir-sa-couette",
+            "link_blank": false,
+            "color_scheme": "scheme-4",
+            "border_color": "#010c27"
+          }
+        },
+        "card_HqJhat": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/CaracteristiqueProduits_1.svg",
+            "heading": "<p>Les secrets de matelas d'Hôtel</p>",
+            "link_text": "Lire l’article",
+            "link": "shopify://blogs/matelas/secrets-matelas-hotels",
+            "link_blank": false,
+            "color_scheme": "scheme-63662268-9ea3-4531-80d0-ded5252e7502",
+            "border_color": "#010c27"
+          }
+        },
+        "card_NWDx8g": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/TypeProduit.svg",
+            "heading": "<p>Comment choisir un matelas enfant ?</p>",
+            "link_text": "Lire l’article",
+            "link": "shopify://blogs/matelas-enfant-ado-grand-tedi/lit-enfant-bois",
+            "link_blank": false,
+            "color_scheme": "scheme-fd8a6b7f-fb17-41ee-ac65-43143a48e740",
+            "border_color": "#010c27"
+          }
+        },
+        "card_MGc6WW": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/conseil-black.svg",
+            "heading": "<p>Meilleur sommier, comparatif des plus...</p>",
+            "link_text": "Lire l’article",
+            "link": "shopify://blogs/sommier/meilleur-sommier-comparatif",
+            "link_blank": false,
+            "color_scheme": "scheme-346651c5-8a51-47a1-b24f-bf7ddf212822",
+            "border_color": "#010c27"
+          }
+        }
+      },
+      "block_order": [
+        "card_frYdec",
+        "card_iyreV8",
+        "card_HqJhat",
+        "card_NWDx8g",
+        "card_MGc6WW"
+      ],
+      "disabled": true,
+      "name": "Ax cards links BM",
+      "settings": {
+        "heading": "<p>NOS CONSEILS</p>",
+        "button_text": "Voir tous nos conseils",
+        "button_link": "shopify://pages/blogs",
+        "link_blank": false,
+        "link_style": "button button--primary",
+        "color_scheme": "",
+        "mob_padding_top": 24,
+        "mob_padding_bottom": 48,
+        "padding_top": 48,
+        "padding_bottom": 96
+      }
+    },
+    "ax_image_overlayed_text_dM8Vch": {
+      "type": "ax-image-overlayed-text",
+      "blocks": {
+        "subheading_H9QREV": {
+          "type": "subheading",
+          "settings": {
+            "subheading": ""
+          }
+        },
+        "heading_bDxNYD": {
+          "type": "heading",
+          "settings": {
+            "heading": "Notre incroyable histoire",
+            "heading_size": "h2"
+          }
+        },
+        "text_zLGxGY": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Le Teddy bear est à l’image de notre incroyable matelas : réconfortant, rassurant, doux. Il est à l’épreuve du temps, on peut compter sur lui en toutes circonstances, son contact nous fait du bien. Cela ne vous aura pas échappé, dans Teddy bear il y a bear, qui veut dire ours en anglais. Pour nous, l’ours évoque la robustesse, la solidité, la force, la qualité en quelque sorte, de nos matelas.<br/><br/>L’alliance de la douceur et de la fermeté, qui a inspiré la composition même de notre matelas et son confort : ferme et accueillant à la fois. Vous savez donc pourquoi Tediber s’est inspiré du Teddy bear et comment ce nom nous inspire au quotidien, en tant que marque, à vous permettre de vivre l’incroyable plaisir du sommeil et du repos avec nos produits de literie, matelas, sommier, tête de lit, oreiller, couette, linge de lit et literie pour bébé et enfant avec un niveau d’exigence toujours plus haut.</p>",
+            "show_more": true,
+            "text_max_lines": 8,
+            "text_more": "Lire plus",
+            "text_less": "Lire moins",
+            "show_more_alignment": "center"
+          }
+        },
+        "button_eQC8J7": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_text": "En savoir plus",
+            "button_link": "shopify://collections",
+            "link_blank": false,
+            "link_style": "underlined-link"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_H9QREV",
+        "heading_bDxNYD",
+        "text_zLGxGY",
+        "button_eQC8J7"
+      ],
+      "name": "Notre histoire",
+      "settings": {
+        "full_width": true,
+        "image": "shopify://shop_images/text-img.jpg",
+        "image_mobile": "shopify://shop_images/push_c8b1ab2a-9ccb-48cf-aa32-9d4e2e48e23e.jpg",
+        "reduce_height_mobile": false,
+        "overlay": false,
+        "overlay_opacity": 0.2,
+        "content_position": "right",
+        "content_position_mobile": "bottom",
+        "section_color_scheme": "",
+        "color_scheme": "scheme-1",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "ax_testimonial_HP7ptw": {
+      "type": "ax-testimonial",
+      "blocks": {
+        "subheading_7VBbAz": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "NOS AVIS CLIENT 5/5"
+          }
+        },
+        "heading_kGzTbJ": {
+          "type": "heading",
+          "settings": {
+            "picto_size": 24,
+            "heading": "‘PLUS DE MAL DE DOS AU RÉVEIL’",
+            "heading_class": "h1"
+          }
+        },
+        "text_cJnGEE": {
+          "type": "text",
+          "settings": {
+            "picto": "shopify://shop_images/stars.png",
+            "picto_size": 78,
+            "text": "<p>Cornuau, Paris</p>"
+          }
+        },
+        "button_HaLHrL": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_text": "Voir tous nos avis",
+            "button_link": "shopify://pages/contact",
+            "link_blank": false,
+            "link_style": "button button--primary"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_7VBbAz",
+        "heading_kGzTbJ",
+        "text_cJnGEE",
+        "button_HaLHrL"
+      ],
+      "disabled": true,
+      "settings": {
+        "full_width": true,
+        "show_trustpilot_shop": false,
+        "trustpilot_product_skus": "",
+        "image": "shopify://shop_images/Conseil_9996aa68-f308-4230-bb9f-ac014e5d79e5.jpg",
+        "layout": "image_first",
+        "mobile_layout": "text_first",
+        "overlay": false,
+        "overlay_opacity": 0.2,
+        "section_color_scheme": "scheme-4",
+        "color_scheme": "scheme-4",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mobile_padding_top": 48,
+        "mobile_padding_bottom": 48
+      }
+    },
+    "rich_text_GXELRQ": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_zcAWwz": {
+          "type": "heading",
+          "settings": {
+            "heading": "Nos avis clients",
+            "heading_size": "h2"
+          }
+        },
+        "text_ynM6JD": {
+          "type": "text",
+          "settings": {
+            "text": ""
+          }
+        },
+        "button_HY4VLR": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_label": "Texte du bouton",
+            "button_link": "",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_zcAWwz",
+        "text_ynM6JD",
+        "button_HY4VLR"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top_desktop": 100,
+        "padding_bottom_desktop": 0
+      }
+    },
+    "custom_liquid_wycR9E": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<!-- TrustBox widget - Slider -->\n<div class=\"trustpilot-widget\" data-locale=\"fr-FR\" data-template-id=\"54ad5defc6454f065c28af8b\" data-businessunit-id=\"5a5cdcedf3b8320001d06ddf\" data-style-height=\"240px\" data-style-width=\"100%\" data-token=\"e01bb250-def5-4c13-9d67-b1a815a0827a\" data-stars=\"4,5\" data-review-languages=\"fr\">\n  <a href=\"https://fr.trustpilot.com/review/www.tediber.com\" target=\"_blank\" rel=\"noopener\">Trustpilot</a>\n</div>\n<!-- End TrustBox widget -->",
+        "color_scheme": "",
+        "padding_top": 32,
+        "padding_bottom": 100
+      }
+    },
+    "ax_richtext_taYHde": {
+      "type": "ax-richtext",
+      "blocks": {
+        "text_3fpdeP": {
+          "type": "text",
+          "settings": {
+            "text": "<p>* Voir les conditions de l’offre dans nos <a href=\"/policies/terms-of-sale\" target=\"_blank\" title=\"Terms of Sale\">CGV</a></p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "text_3fpdeP"
+      ],
+      "name": "Ax richtext - Politiques Soldes",
+      "settings": {
+        "restricted_width": true,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 24,
+        "padding_top": 0,
+        "padding_bottom": 24,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "ax_richtext_zR8aQd": {
+      "type": "ax-richtext",
+      "blocks": {
+        "text_cjMXjb": {
+          "type": "text",
+          "settings": {
+            "text": "<p>** L'incroyable matelas Tediber a été testé lors d'un test comparatif paru en 10/24 dans les publications de L'UFC-QUE-CHOISIR et a reçu le qualificatif de meilleur choix.</p>",
+            "text_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "text_cjMXjb"
+      ],
+      "disabled": true,
+      "name": "Ax richtext - Générique",
+      "settings": {
+        "restricted_width": true,
+        "color_scheme": "",
+        "color_scheme_container": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 24,
+        "padding_top": 0,
+        "padding_bottom": 24,
+        "mob_padding_top_content": 0,
+        "mob_padding_bottom_content": 0,
+        "mob_padding_left_content": 0,
+        "mob_padding_right_content": 0,
+        "padding_top_content": 0,
+        "padding_bottom_content": 0,
+        "padding_left_content": 0,
+        "padding_right_content": 0,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "1762420182b49cad35": {
+      "type": "apps",
+      "blocks": {
+        "join_stories_sticky_widget_integration_wCh9Wr": {
+          "type": "shopify://apps/join-stories/blocks/sticky-widget-integration/01ec6b69-ffcd-4917-91ec-8e867f5f7704",
+          "settings": {
+            "alias": "blackmonth"
+          }
+        }
+      },
+      "block_order": [
+        "join_stories_sticky_widget_integration_wCh9Wr"
+      ],
+      "disabled": true,
+      "custom_css": [],
+      "settings": {
+        "include_margins": true,
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "1762421047fb9b511e": {
+      "type": "apps",
+      "blocks": {
+        "join_stories_widget_integration_9mc7YV": {
+          "type": "shopify://apps/join-stories/blocks/widget-integration/01ec6b69-ffcd-4917-91ec-8e867f5f7704",
+          "disabled": true,
+          "settings": {
+            "alias": "",
+            "cls_config": ""
+          }
+        }
+      },
+      "block_order": [
+        "join_stories_widget_integration_9mc7YV"
+      ],
+      "disabled": true,
+      "settings": {
+        "include_margins": true,
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "ax_slider_jK8jNk",
+    "ax_slider_4AC7R6",
+    "ax_slider_EEmix7",
+    "custom_liquid_U86D8J",
+    "ax_product_lists_WwnNQi",
+    "ax_product_lists_zDM7n9",
+    "ax_reassurances_ktwzWd",
+    "ax_image_banner_kEqdbR",
+    "ax_image_banner_Da4HJc",
+    "ax_collections_grid_PNTmQi",
+    "ax_media_text_slider_A6RmXR",
+    "ax_image_with_text_rtb_RKVTWh",
+    "ax_shop_the_look_PrCm39",
+    "ax_cards_links_eiKqcp",
+    "ax_cards_links_GgzJ6H",
+    "ax_image_overlayed_text_dM8Vch",
+    "ax_testimonial_HP7ptw",
+    "rich_text_GXELRQ",
+    "custom_liquid_wycR9E",
+    "ax_richtext_taYHde",
+    "ax_richtext_zR8aQd",
+    "1762420182b49cad35",
+    "1762421047fb9b511e"
+  ]
+}

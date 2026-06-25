@@ -1,0 +1,11 @@
+{%- comment -%}
+	Renders one "En savoir plus" bullet (green check + rich text).
+
+	Accepts:
+	- content: richtext (required)
+{%- endcomment -%}
+
+<li class="ax-versus-comparator__card-knowmore-item">
+	<span class="ax-versus-comparator__card-knowmore-check" aria-hidden="true">{{ 'icon-check.svg' | inline_asset_content }}</span>
+	<div class="ax-versus-comparator__card-knowmore-text rte">{{ content }}</div>
+</li>

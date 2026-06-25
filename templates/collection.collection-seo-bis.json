@@ -1,0 +1,414 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "banner": {
+      "type": "main-banner",
+      "settings": {
+        "heading": "<p>{{ collection.title }}</p>",
+        "color_scheme": "scheme-1",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "disabled": true,
+      "settings": {
+        "products_per_page": 16,
+        "columns_desktop": 4,
+        "columns_mobile": "1",
+        "color_scheme": "scheme-1",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "horizontal_mobile_one_col": true,
+        "quick_add": "none",
+        "visible_items_limit": 0,
+        "see_more_label": "Voir plus",
+        "see_less_label": "Voir moins",
+        "enable_filtering": true,
+        "filter_type": "drawer",
+        "enable_sorting": true,
+        "compare_page": "",
+        "padding_top": 24,
+        "padding_bottom": 0
+      }
+    },
+    "ax_heading_metafield_mjqkqf": {
+      "type": "ax-heading-metafield",
+      "name": "Ax heading metafield",
+      "settings": {
+        "metafield_key": "alias_join_story",
+        "heading": "<p>Tous nos modèles</p>",
+        "heading_size": "h2",
+        "heading_first": false,
+        "subheading": "",
+        "description": "",
+        "full_width": false,
+        "text_alignment": "center",
+        "color_scheme": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 16,
+        "padding_bottom": 0
+      }
+    },
+    "ax_variants_grid_kRgxc6": {
+      "type": "ax-variants-grid",
+      "settings": {
+        "product_per_page": 11,
+        "color_scheme": "",
+        "mob_padding_top": 12,
+        "mob_padding_bottom": 24,
+        "padding_top": 24,
+        "padding_bottom": 48
+      }
+    },
+    "ax_reassurances_w4aFWA": {
+      "type": "ax-reassurances",
+      "blocks": {
+        "reassurance_LMXCkP": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "100-nuits-essai",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_wy3GMj": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-mnd3qioq",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_WzdJiV": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-vfy3a8q5",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_Eb8iLP": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-87bgy0zq",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        }
+      },
+      "block_order": [
+        "reassurance_LMXCkP",
+        "reassurance_wy3GMj",
+        "reassurance_WzdJiV",
+        "reassurance_Eb8iLP"
+      ],
+      "settings": {
+        "heading": "Nos engagements",
+        "restricted_width": false,
+        "stack_mobile": false,
+        "border_top_mobile": true,
+        "border_bottom_mobile": true,
+        "show_content": false,
+        "autoplay": false,
+        "speed": 300,
+        "loop": false,
+        "pagination": true,
+        "color_scheme": "",
+        "color_scheme_popin": "scheme-2",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 48,
+        "padding_top": 48,
+        "padding_bottom": 48,
+        "mob_margin_top": 48,
+        "mob_margin_bottom": 36,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "ax_recently_viewed_wXEy3W": {
+      "type": "ax-recently-viewed",
+      "settings": {
+        "heading": "À DÉCOUVRIR AUSSI",
+        "heading_tag": "h2",
+        "product_list": "{{ collection.metafields.custom.vus_recemment.value }}",
+        "color_scheme": "",
+        "mob_padding_top": 24,
+        "mob_padding_bottom": 48,
+        "padding_top": 48,
+        "padding_bottom": 96
+      }
+    },
+    "ax_image_with_text_ACNcBn": {
+      "type": "ax-image-with-text",
+      "blocks": {
+        "heading_jV4G4D": {
+          "type": "heading",
+          "settings": {
+            "picto": "shopify://shop_images/graphic_border.png",
+            "picto_size": 92,
+            "picto_size_mobile": 92,
+            "heading": "",
+            "heading_size": "h2"
+          }
+        },
+        "text_AqqaWG": {
+          "type": "text",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "text": "{{ collection.description }}",
+            "description_hn_replace": false,
+            "show_more": true,
+            "text_max_lines": 8,
+            "text_more": "Lire la suite",
+            "text_less": "Lire moins",
+            "show_more_alignment": "left"
+          }
+        }
+      },
+      "block_order": [
+        "heading_jV4G4D",
+        "text_AqqaWG"
+      ],
+      "settings": {
+        "full_width": true,
+        "text_alignment": "left",
+        "no_vertical_padding": false,
+        "image": "{{ collection.metafields.custom.section_seo_image.value }}",
+        "image_restricted_width": false,
+        "image_adapted_height_with_content": false,
+        "contain_image": false,
+        "layout": "image_first",
+        "mobile_layout": "image_first",
+        "overlay": false,
+        "overlay_opacity": 0.2,
+        "section_color_scheme": "scheme-3",
+        "color_scheme": "scheme-3",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "ax_variant_link_buttons_DpPXjK": {
+      "type": "ax-variant-link-buttons",
+      "settings": {
+        "heading": "Toutes les tailles (en cm)",
+        "color_scheme": "",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 24,
+        "padding_top": 96,
+        "padding_bottom": 48
+      }
+    },
+    "ax_image_with_text_Mrcpbc": {
+      "type": "ax-image-with-text",
+      "blocks": {
+        "heading_aKpWe4": {
+          "type": "heading",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "heading": "<p>SECTION SEO</p>",
+            "heading_size": "h2"
+          }
+        },
+        "text_dFH7RF": {
+          "type": "text",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "text": "<p>Lorem ipsum dolor sit amet consectetur. Etiam ac tempor ut eleifend auctor egestas laoreet. Convallis est tempus at quisque elementum et integer morbi orci. Lorem ipsum dolor sit amet consectetur. Etiam ac tempor ut eleifend auctor egestas laoreet. Convallis est tempus at quisque elementum et integer morbi orci. Lorem ipsum dolor sit amet consectetur. Etiam ac tempor ut eleifend auctor egestas laoreet. Convallis est tempus at quisque elementum et integer morbi orci. <br/><br/></p>",
+            "description_hn_replace": false,
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "heading_aKpWe4",
+        "text_dFH7RF"
+      ],
+      "disabled": true,
+      "settings": {
+        "full_width": false,
+        "text_alignment": "left",
+        "no_vertical_padding": false,
+        "image": "shopify://shop_images/push_3bda25f0-9edf-47d5-ac04-bb3e56f06ae0.png",
+        "image_restricted_width": true,
+        "image_adapted_height_with_content": false,
+        "contain_image": false,
+        "layout": "text_first",
+        "mobile_layout": "image_first",
+        "overlay": false,
+        "overlay_opacity": 0.2,
+        "section_color_scheme": "",
+        "color_scheme": "",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "ax_cards_links_RL9C8b": {
+      "type": "ax-cards-links",
+      "blocks": {
+        "card_KQ6tpV": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/conseil-black.svg",
+            "heading": "<p>{{ collection.metafields.custom.card_1_titre.value }}</p>",
+            "link_text": "Lire l’article",
+            "link": "",
+            "link_blank": false,
+            "color_scheme": "scheme-e50a3d25-8111-430b-a12b-76298bbc4e33",
+            "border_color": "#010c27"
+          }
+        },
+        "card_a3EwL9": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/conseil-black.svg",
+            "heading": "<p>{{ collection.metafields.custom.card_2_titre.value }}</p>",
+            "link_text": "Lire l’article",
+            "link": "shopify://blogs/tete-de-lit/hauteur-tete-de-lit",
+            "link_blank": false,
+            "color_scheme": "scheme-4",
+            "border_color": "#010c27"
+          }
+        },
+        "card_eX4RN9": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/conseil-black.svg",
+            "heading": "<p>{{ collection.metafields.custom.card_3_titre.value }}</p>",
+            "link_text": "Lire l’article",
+            "link": "shopify://blogs/tete-de-lit/couleur-tete-lit-beige-ou-bleue",
+            "link_blank": false,
+            "color_scheme": "scheme-63662268-9ea3-4531-80d0-ded5252e7502",
+            "border_color": "#010c27"
+          }
+        },
+        "card_Qf4ifY": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/conseil-cream.svg",
+            "heading": "<p>{{ collection.metafields.custom.card_4_titre.value }}</p>",
+            "link_text": "Lire l’article",
+            "link": "shopify://blogs/tete-de-lit/fixer-tete-lit-mur",
+            "link_blank": false,
+            "color_scheme": "scheme-fd8a6b7f-fb17-41ee-ac65-43143a48e740",
+            "border_color": "#010c27"
+          }
+        }
+      },
+      "block_order": [
+        "card_KQ6tpV",
+        "card_a3EwL9",
+        "card_eX4RN9",
+        "card_Qf4ifY"
+      ],
+      "disabled": true,
+      "settings": {
+        "heading": "<p>NOS CONSEILS</p>",
+        "button_text": "Voir tous nos conseils",
+        "button_link": "",
+        "link_blank": false,
+        "link_style": "button button--primary",
+        "color_scheme": "",
+        "mob_padding_top": 24,
+        "mob_padding_bottom": 48,
+        "padding_top": 48,
+        "padding_bottom": 96
+      }
+    },
+    "ax_testimonial_8yJrqR": {
+      "type": "ax-testimonial",
+      "blocks": {
+        "subheading_hkFUkj": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "NOS AVIS CLIENT 5/5"
+          }
+        },
+        "heading_9fwmaT": {
+          "type": "heading",
+          "settings": {
+            "picto_size": 24,
+            "heading": "{{ collection.metafields.custom.temoignage.value }}",
+            "heading_class": "h1"
+          }
+        },
+        "text_gtmVj3": {
+          "type": "text",
+          "settings": {
+            "picto": "shopify://shop_images/stars.png",
+            "picto_size": 78,
+            "text": "<p>{{ collection.metafields.custom.prenom_temoignage.value }}</p>"
+          }
+        },
+        "button_h7eAcH": {
+          "type": "button",
+          "settings": {
+            "button_text": "Voir tous nos avis",
+            "button_link": "shopify://pages/contact",
+            "link_blank": false,
+            "link_style": "button button--primary"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_hkFUkj",
+        "heading_9fwmaT",
+        "text_gtmVj3",
+        "button_h7eAcH"
+      ],
+      "disabled": true,
+      "settings": {
+        "full_width": true,
+        "show_trustpilot_shop": false,
+        "trustpilot_product_skus": "",
+        "image": "shopify://shop_images/push.png",
+        "image_mobile": "shopify://shop_images/reviews_widget.png",
+        "layout": "image_first",
+        "mobile_layout": "text_first",
+        "overlay": false,
+        "overlay_opacity": 0.2,
+        "section_color_scheme": "scheme-4",
+        "color_scheme": "scheme-4",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mobile_padding_top": 48,
+        "mobile_padding_bottom": 48
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "product-grid",
+    "ax_heading_metafield_mjqkqf",
+    "ax_variants_grid_kRgxc6",
+    "ax_reassurances_w4aFWA",
+    "ax_recently_viewed_wXEy3W",
+    "ax_image_with_text_ACNcBn",
+    "ax_variant_link_buttons_DpPXjK",
+    "ax_image_with_text_Mrcpbc",
+    "ax_cards_links_RL9C8b",
+    "ax_testimonial_8yJrqR"
+  ]
+}

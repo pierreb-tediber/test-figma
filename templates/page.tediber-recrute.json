@@ -1,0 +1,85 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_content": false,
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "ax_image_banner_HAcjEq": {
+      "type": "ax-image-banner",
+      "name": "Ax Image Banner",
+      "settings": {
+        "image": "shopify://shop_images/all-team.jpg",
+        "subheading": "",
+        "heading": "",
+        "button_text": "",
+        "button_link": "",
+        "link_blank": false,
+        "link_style": "button button--primary",
+        "color_scheme": "",
+        "overlay": true,
+        "overlay_opacity": 0.2
+      }
+    },
+    "ax_image_with_text_ngVpbj": {
+      "type": "ax-image-with-text",
+      "blocks": {
+        "heading_aVCY44": {
+          "type": "heading",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "heading": "<p>Rejoignez nous !</p>",
+            "heading_size": "h3"
+          }
+        },
+        "text_brg9pD": {
+          "type": "text",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "text": "<p>Nous recherchons avant tout des talents et des compétences plus que des parcours. Nous cherchons des personnalités enthousiastes, passionnées, qui ont pour moteur la curiosité et le dépassement de soi, qui aiment trouver des solutions, qui aiment les défis et savent s'adapter car Tediber se renouvelle sans cesse. Qui ont envie d'apporter leur pierre au développement de Tediber et de grandir au fil de notre aventure.<br/><br/>Nous cherchons des personnalités d'horizons et d'expériences variés, qui pensent comme nous que l'incroyable est dans les détails et qui partagent notre exigence pour honorer le niveau de qualité de service et d'expérience que nous voulons offrir à nos clients. <br/><br/>Qui allient rigueur et créativité, qui aiment remettre en cause le status quo et ne prennent rien pour acquis. Des personnalités qui partagent nos valeurs, qui ont un réel esprit d'équipe, le respect des autres et qui mettent le client au cœur de tout ce qu'ils font.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_aVCY44",
+        "text_brg9pD"
+      ],
+      "settings": {
+        "full_width": true,
+        "text_alignment": "left",
+        "no_vertical_padding": false,
+        "image": "shopify://shop_images/joins-us.jpg",
+        "image_restricted_width": false,
+        "image_adapted_height_with_content": false,
+        "contain_image": false,
+        "layout": "image_first",
+        "mobile_layout": "text_first",
+        "overlay": false,
+        "overlay_opacity": 0.2,
+        "section_color_scheme": "scheme-1",
+        "color_scheme": "scheme-2",
+        "padding_top": 40,
+        "padding_bottom": 48
+      }
+    }
+  },
+  "order": [
+    "main",
+    "ax_image_banner_HAcjEq",
+    "ax_image_with_text_ngVpbj"
+  ]
+}

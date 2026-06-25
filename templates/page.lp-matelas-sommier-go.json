@@ -1,0 +1,302 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_content": false,
+        "custom_h1": "",
+        "h1_size": "h1",
+        "h1_no_margin": false,
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "ax_media_with_text_xpdWcX": {
+      "type": "ax-media-with-text",
+      "blocks": {
+        "subheading_fiiWex": {
+          "type": "subheading",
+          "settings": {
+            "subheading": ""
+          }
+        },
+        "heading_mTznD6": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>GRAND OURS</strong>",
+            "heading_size": "h2"
+          }
+        },
+        "text_qNKpPJ": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>ENSEMBLE MATELAS + SOMMIER</strong></p>",
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center"
+          }
+        },
+        "button_gVnPP3": {
+          "type": "button",
+          "settings": {
+            "button_text": "Découvrir",
+            "button_link": "shopify://products/sommier-grand-ours",
+            "link_blank": true,
+            "link_style": "button button--secondary"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_fiiWex",
+        "heading_mTznD6",
+        "text_qNKpPJ",
+        "button_gVnPP3"
+      ],
+      "name": "Ax Media with text",
+      "settings": {
+        "full_width": false,
+        "image": "shopify://shop_images/lp_ensemble_matelas_sommier_go_hero.png",
+        "layout": "text_first",
+        "overlay": true,
+        "overlay_opacity": 0,
+        "section_color_scheme": "scheme-3",
+        "color_scheme": "scheme-3",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "ax_image_with_text_Uic6bV": {
+      "type": "ax-image-with-text",
+      "blocks": {
+        "heading_Mt8Tiw": {
+          "type": "heading",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "heading": "<p>LOREM IPSUM DOLOR</p>",
+            "heading_size": "h2"
+          }
+        },
+        "text_tqAUVX": {
+          "type": "text",
+          "settings": {
+            "picto_size": 24,
+            "picto_size_mobile": 24,
+            "text": "<p>Lorem ipsum dolor sit amet consectetur. Turpis in in leo velit turpis at. Sed vivamus amet elementum lobortis pretium enim elit volutpat dignissim. Diam sit non amet at ipsum. In faucibus amet nulla amet. </p>",
+            "description_hn_replace": false,
+            "show_more": false,
+            "text_max_lines": 3,
+            "text_more": "Voir plus",
+            "text_less": "Voir moins",
+            "show_more_alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "heading_Mt8Tiw",
+        "text_tqAUVX"
+      ],
+      "settings": {
+        "full_width": true,
+        "text_alignment": "left",
+        "no_vertical_padding": false,
+        "image_restricted_width": false,
+        "image_adapted_height_with_content": false,
+        "contain_image": false,
+        "layout": "image_first",
+        "mobile_layout": "image_first",
+        "overlay": true,
+        "overlay_opacity": 0.2,
+        "section_color_scheme": "",
+        "color_scheme": "scheme-2",
+        "padding_top": 0,
+        "padding_bottom": 48
+      }
+    },
+    "ax_faq_Ge79NK": {
+      "type": "ax-faq",
+      "settings": {
+        "heading": "<p>Question <br/>fréquentes</p>",
+        "picto_size": 94,
+        "picto_size_mobile": 94,
+        "faq": [
+          "le-matelas-hybride-de-tediber-convient-il-aux-personnes-qui-ont-chaud-la-nuit",
+          "comment-fonctionnent-les-100-nuits-dessai",
+          "quels-sont-les-delais-de-livraison"
+        ],
+        "color_scheme": "scheme-e1828edc-858e-4a98-a2f7-4650db2b6838",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "ax_shop_the_look_8yjByL": {
+      "type": "ax-shop-the-look",
+      "blocks": {
+        "product_jJVHFK": {
+          "type": "product",
+          "settings": {
+            "product": "matelas-grand-ours",
+            "combined_product": [],
+            "position_left": 60,
+            "position_top": 50,
+            "mobile_position_left": 56,
+            "mobile_position_top": 59,
+            "display_on": "both"
+          }
+        },
+        "product_mbGpRC": {
+          "type": "product",
+          "settings": {
+            "product": "sommier-grand-ours",
+            "combined_product": [],
+            "position_left": 50,
+            "position_top": 76,
+            "mobile_position_left": 50,
+            "mobile_position_top": 68,
+            "display_on": "both"
+          }
+        }
+      },
+      "block_order": [
+        "product_jJVHFK",
+        "product_mbGpRC"
+      ],
+      "name": "Ax shop the look",
+      "settings": {
+        "image": "shopify://shop_images/lp_sommier_matelas_go_shop_the_look.png",
+        "image_mobile": "shopify://shop_images/lp_ensemble_matelas_sommier_go_shop_the_look_mobile.png",
+        "gradient": 32,
+        "color_scheme": "scheme-3",
+        "subheading": "<strong>À partir de 4440 €</strong>",
+        "heading": "<p>Collection Grand Ours</p>",
+        "description": "<p>Laissez-vous transporter dans d'autres cieux grâce à la technologie unique des ressorts ensachés TediHoltelSprings et la structure en pin massif du sommier boxpsring, conçu pour <strong>soutenir avec précision exceptionnelle chaque centimètre de votre corps</strong>.</p>",
+        "button_text": "Découvrir la collection",
+        "button_link": "shopify://collections/grand-ours",
+        "link_blank": false,
+        "link_style": "button button--secondary",
+        "modal_title": "",
+        "mob_padding_top": 36,
+        "mob_padding_bottom": 36,
+        "padding_top": 0,
+        "padding_bottom": 52
+      }
+    },
+    "rich_text_iCpWHK": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_N7kJAQ": {
+          "type": "heading",
+          "settings": {
+            "heading": "Une gamme d'exception",
+            "heading_size": "h2"
+          }
+        },
+        "text_Tgj3CG": {
+          "type": "text",
+          "settings": {
+            "text": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_N7kJAQ",
+        "text_Tgj3CG"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 24
+      }
+    },
+    "ax_product_lists_Ed6zgx": {
+      "type": "ax-product-lists",
+      "blocks": {
+        "product_list_3ygEBQ": {
+          "type": "product-list",
+          "settings": {
+            "title": "",
+            "collection": "grand-ours",
+            "product_list": [],
+            "products_to_show": 6,
+            "button_text": "",
+            "button_link": "",
+            "link_style": "button button--primary"
+          }
+        }
+      },
+      "block_order": [
+        "product_list_3ygEBQ"
+      ],
+      "name": "Ax product lists",
+      "settings": {
+        "surtitle": "",
+        "description": "",
+        "image_ratio": "square",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": true,
+        "quick_add": "none",
+        "color_scheme": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 56,
+        "padding_top": 0,
+        "padding_bottom": 56
+      }
+    },
+    "rich_text_NzcTaz": {
+      "type": "rich-text",
+      "blocks": {
+        "button_TUGRz3": {
+          "type": "button",
+          "settings": {
+            "button_label": "Découvrir la collection",
+            "button_link": "shopify://collections/grand-ours",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "button_TUGRz3"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 56
+      }
+    }
+  },
+  "order": [
+    "main",
+    "ax_media_with_text_xpdWcX",
+    "ax_image_with_text_Uic6bV",
+    "ax_faq_Ge79NK",
+    "ax_shop_the_look_8yjByL",
+    "rich_text_iCpWHK",
+    "ax_product_lists_Ed6zgx",
+    "rich_text_NzcTaz"
+  ]
+}

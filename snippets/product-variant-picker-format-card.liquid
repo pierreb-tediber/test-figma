@@ -1,0 +1,139 @@
+{% comment %}
+	Renders a single format card inside product-variant-picker-format.
+	Réutilise la structure HTML `pill__block` / `pill__card` du picker version
+	pour intégration visuelle cohérente.
+
+	Deux variantes de rendu :
+	- legacy (`is_pack_new = false`) : icône SVG + libellé centré (carte 128px).
+	- pack-new (`is_pack_new = true`) : image variante issue du metaobject
+	  `custom.format_information` + étiquette + ligne secondaire (Inclus / +X €).
+
+	Accepts:
+	- card_variant: {Object} representant variant for this format+dim
+	- value_format: {String} format label (ex. "Monobloc", "Bibloc")
+	- value_format_lc: {String} format label lowercased (for icon switch)
+	- value_size_raw: {String} raw option value from the picker (ex. "140 x 190 cm - Bibloc"),
+	                  used as data-target-option-value to match the size picker input
+	- current_size_raw: {String} option value of the currently selected variant
+	- format_min_price: {Number} min price across all formats of the current dim
+	- section_id: {String}
+	- is_pack_new: {Boolean} active le rendu pack-new (image + sous-libellé)
+
+	Usage: see product-variant-picker-format.liquid
+{% endcomment %}
+
+{%- liquid
+	assign card_format_key = value_format_lc | replace: ' ', '-'
+	assign card_is_checked = false
+	if value_size_raw == current_size_raw
+		assign card_is_checked = true
+	endif
+	assign card_is_disabled = false
+	if card_variant.available == false
+		assign card_is_disabled = true
+	endif
+	assign card_surplus = card_variant.price | minus: format_min_price
+
+	# Récupère le metaobject format_information (rendu pack-new uniquement).
+	# .value déréférence la metaobject reference ; absent = nil sur les variants
+	# pas encore équipés du metafield.
+	assign card_format_info = nil
+	if is_pack_new
+		assign card_format_info = card_variant.metafields.custom.format_information.value
+	endif
+
+	# Libellé carte : priorité à l'étiquette du metaobject, fallback sur le format
+	# brut détecté dans la value (ex. "Monobloc") pour garantir un rendu si le
+	# metafield n'est pas encore configuré.
+	assign card_label = value_format
+	if card_format_info != nil and card_format_info.etiquette != blank
+		assign card_label = card_format_info.etiquette
+	endif
+
+	# Modifier de classe : permet de différencier les styles legacy / pack-new
+	# sans toucher au pill__card de base.
+	assign card_layout_modifier = ''
+	if is_pack_new
+		assign card_layout_modifier = ' product__variant-selects__pill__card--format-pack-new'
+	endif
+-%}
+
+<div class="product__variant-selects__pill__block product__variant-selects__pill__block--format">
+	<input
+		type="radio"
+		id="format-{{ section_id }}-{{ card_format_key }}"
+		name="format-{{ section_id }}"
+		value="{{ value_format | escape }}"
+		class="{% if card_is_disabled %}visually-disabled{% endif %}"
+		data-format="{{ value_format | escape }}"
+		data-target-option-value="{{ value_size_raw | escape }}"
+		{% if card_is_checked %}
+			checked
+		{% endif %}
+		{% if card_is_disabled %}
+			disabled
+		{% endif %}
+	>
+	<label
+		for="format-{{ section_id }}-{{ card_format_key }}"
+		class="product__variant-selects__pill__card product__variant-selects__pill__card--format{{ card_layout_modifier }}"
+	>
+		{%- if is_pack_new -%}
+			{%- comment -%}
+				Rendu pack-new : image variante (gauche) + bloc texte (label + Inclus/+X €).
+				Si pas d'image dans le metaobject, on n'affiche rien à la place (pas de fallback
+				SVG pour éviter une double-charte visuelle).
+			{%- endcomment -%}
+			{%- if card_format_info != nil and card_format_info.image != blank -%}
+				<span class="product__variant-selects__pill__card__image product__variant-selects__pill__card__image--format">
+					{{
+						card_format_info.image
+						| image_url: width: 200
+						| image_tag:
+							loading: 'lazy',
+							width: card_format_info.image.width,
+							height: card_format_info.image.height,
+							alt: card_label,
+							class: 'product__variant-selects__pill__card__image__picture'
+					}}
+				</span>
+			{%- endif -%}
+			<span class="product__variant-selects__pill__card__content product__variant-selects__pill__card__content--format">
+				<span class="product__variant-selects__pill__card__title product__variant-selects__pill__card__title--format">{{ card_label }}</span>
+				{%- comment -%}
+					Surplus +X€ / "Inclus" — gated par `hide_extras` (BO metaobject
+					`pack_configuration.masquer_surplus_et_inclus`). Même convention que
+					les `+X€` des cards bundle (matelas/sommier) et du picker variantes
+					incluses : quand actif, aucun surplus de prix affiché.
+				{%- endcomment -%}
+				{%- unless hide_extras -%}
+					<span class="product__variant-selects__pill__card__surplus product__variant-selects__pill__card__surplus--format">
+						{%- if card_surplus > 0 -%}
+							+ {{ card_surplus | money_without_trailing_zeros }}
+						{%- else -%}
+							{{ 'products.product.format_included' | t }}
+						{%- endif -%}
+					</span>
+				{%- endunless -%}
+			</span>
+		{%- else -%}
+			{%- comment -%}
+				Rendu legacy : icône SVG + label sur une ligne, +X € éventuel à droite.
+				Conservé pour PDP standalone & packs non pack-new.
+			{%- endcomment -%}
+			<span class="product__variant-selects__pill__card__icon product__variant-selects__pill__card__icon--format">
+				{%- if value_format_lc == 'monobloc' -%}
+					{{- 'icon-monobloc.svg' | inline_asset_content -}}
+				{%- elsif value_format_lc == 'bibloc' -%}
+					{{- 'icon-bibloc.svg' | inline_asset_content -}}
+				{%- endif -%}
+			</span>
+			<span class="product__variant-selects__pill__card__title product__variant-selects__pill__card__title--format">{{ card_label }}</span>
+			{%- if card_surplus > 0 and hide_extras != true -%}
+				<span class="product__variant-selects__pill__card__surplus">
+					+ {{ card_surplus | money_without_trailing_zeros }}
+				</span>
+			{%- endif -%}
+		{%- endif -%}
+	</label>
+</div>

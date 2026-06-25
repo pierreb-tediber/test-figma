@@ -1,0 +1,566 @@
+{%- liquid
+  # Vérifier s'il y a au moins un block qui sera affiché
+  assign has_visible_blocks = false
+  if section.blocks.size > 0
+    for block in section.blocks
+      assign item_metaobject_check = blank
+      if block.settings.item_metaobject != blank
+        assign item_metaobject_check = block.settings.item_metaobject
+      endif
+
+      assign should_display_check = true
+      if block.settings.show_only_metaobject
+        if item_metaobject_check == blank
+          assign should_display_check = false
+        endif
+      endif
+
+      assign final_image_check = blank
+      if item_metaobject_check != blank and item_metaobject_check.image.value != blank
+        assign final_image_check = item_metaobject_check.image.value
+      elsif block.settings.image != blank
+        assign final_image_check = block.settings.image
+      endif
+
+      if should_display_check and final_image_check != blank
+        assign has_visible_blocks = true
+        break
+      endif
+    endfor
+  endif
+-%}
+
+{%- if section.settings.hide_if_no_blocks == false or has_visible_blocks -%}
+
+{{ 'bundle.pack-offer.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .section-{{ section.id }}-padding {
+    {% if section.blocks.size < 2 and section.settings.layout != 'hero' %}
+      .ax-pack-offer__item {
+        min-height: 0px !important;
+      }
+    {% endif %}
+
+    {% for block in section.blocks %}
+      {%- liquid
+        # Logique de priorité metaobject pour les couleurs du badge
+        assign style_badge_color = blank
+        assign style_badge_text_color = blank
+
+        if block.settings.item_metaobject != blank
+          assign item_metaobject_style = block.settings.item_metaobject
+          if item_metaobject_style.badge_color.value != blank
+            assign style_badge_color = item_metaobject_style.badge_color.value
+          elsif block.settings.badge_color != blank
+            assign style_badge_color = block.settings.badge_color
+          endif
+
+          if block.settings.badge_text_color != blank
+            assign style_badge_text_color = block.settings.badge_text_color
+          endif
+        else
+          if block.settings.badge_color != blank
+            assign style_badge_color = block.settings.badge_color
+          endif
+          if block.settings.badge_text_color != blank
+            assign style_badge_text_color = block.settings.badge_text_color
+          endif
+        endif
+      -%}
+    #pack-offer-item-{{ block.id }} {
+
+      {% if block.settings.image_overlay_color != blank and section.settings.layout != 'hero' %}
+        .overlay {
+          background: {{ block.settings.image_overlay_color }} !important;
+        }
+      {% endif %}
+
+      .badge--other {
+        {% if style_badge_text_color != blank  %}
+          --text-color: {{ style_badge_text_color }};
+        {% endif %}
+        {% if style_badge_color != blank %}
+          --background-color: {{ style_badge_color }};
+        {% endif %}
+        {% if style_badge_text_color != blank %}
+          --border-color: {{ style_badge_text_color }};
+        {% endif %}
+      }
+    }
+    {% endfor %}
+  }
+{%- endstyle -%}
+
+<div
+  class="section-{{ section.id }}-padding gradient color-{{ section.settings.section_color_scheme }}"
+  role="region"
+  aria-label="{{ 'sections.ax_pack_offer.section_title' | t }}"
+  data-ax-section="pack-offer"
+>
+  {%- unless section.settings.full_width -%}
+    <div class="page-width">
+  {%- endunless -%}
+
+    <div class="ax-pack-offer ax-pack-offer--{{ section.settings.layout | default: 'grid' }}{% if section.settings.hero_disable_overlay %} ax-pack-offer--no-overlay{% endif %}">
+      {%- if section.settings.heading != blank -%}
+        <div class="ax-pack-offer__header">
+          <h2 class="ax-pack-offer__heading {{ section.settings.heading_size }}">
+            {{ section.settings.heading }}
+          </h2>
+          {%- if section.settings.subheading != blank -%}
+            <div class="ax-pack-offer__subheading">
+              {{ section.settings.subheading }}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <div class="ax-pack-offer__content grid grid--1-col  grid--{{ section.blocks.size }}-col-desktop">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            # Logique de priorité metaobject
+            assign item_metaobject = blank
+            if block.settings.item_metaobject != blank
+              assign item_metaobject = block.settings.item_metaobject
+            endif
+
+            # Vérifier si le bloc doit être affiché uniquement avec metaobject
+            assign should_display = true
+            if block.settings.show_only_metaobject
+              if item_metaobject == blank
+                assign should_display = false
+              endif
+            endif
+
+            # Images - priorité metaobject puis fallback
+            assign final_image = blank
+            assign final_image_mobile = blank
+            if item_metaobject != blank and item_metaobject.image.value != blank
+              assign final_image = item_metaobject.image.value
+            elsif block.settings.image != blank
+              assign final_image = block.settings.image
+            endif
+
+            if item_metaobject != blank and item_metaobject.image_mobile.value != blank
+              assign final_image_mobile = item_metaobject.image_mobile.value
+            elsif block.settings.image_mobile != blank
+              assign final_image_mobile = block.settings.image_mobile
+            endif
+
+            # Contenu - priorité metaobject puis fallback
+            assign final_title = blank
+            assign final_description = blank
+            if item_metaobject != blank and item_metaobject.titre.value != blank
+              assign final_title = item_metaobject.titre.value
+            elsif block.settings.title != blank
+              assign final_title = block.settings.title
+            endif
+
+            if item_metaobject != blank and item_metaobject.description.value != blank
+              assign final_description = item_metaobject.description | metafield_tag
+            elsif block.settings.description != blank
+              assign final_description = block.settings.description
+            endif
+
+            # Badge - priorité metaobject puis fallback
+            assign final_badge = blank
+            assign final_badge_icon = blank
+            if item_metaobject != blank and item_metaobject.badge_texte.value != blank
+              assign final_badge = item_metaobject.badge_texte.value
+            elsif block.settings.badge != blank
+              assign final_badge = block.settings.badge
+            endif
+
+            if item_metaobject != blank and item_metaobject.badge_icon.value != blank
+              assign final_badge_icon = item_metaobject.badge_icon.value
+            elsif block.settings.badge_icon != blank
+              assign final_badge_icon = block.settings.badge_icon
+            endif
+
+            # Bouton - priorité metaobject puis fallback
+            assign final_button_label = blank
+            assign final_button_link = blank
+            assign final_button_icon = blank
+            if item_metaobject != blank and item_metaobject.bouton_texte.value != blank
+              assign final_button_label = item_metaobject.bouton_texte.value
+            elsif block.settings.button_label != blank
+              assign final_button_label = block.settings.button_label
+            endif
+
+            if item_metaobject != blank and item_metaobject.bouton_url.value != blank
+              # Si button_url est un champ de référence avec sous-champs
+              if item_metaobject.bouton_url.value.url != blank
+                assign final_button_link = item_metaobject.bouton_url.value.url
+              else
+                assign final_button_link = item_metaobject.bouton_url.value
+              endif
+            elsif block.settings.button_link != blank
+              assign final_button_link = block.settings.button_link
+            endif
+
+            if item_metaobject != blank and item_metaobject.bouton_icon.value != blank
+              assign final_button_icon = item_metaobject.bouton_icon.value
+            elsif block.settings.button_icon != blank
+              assign final_button_icon = block.settings.button_icon
+            endif
+          -%}
+
+          {% if should_display and final_image != blank %}
+            <div id="pack-offer-item-{{ block.id }}" class="ax-pack-offer__item grid__item gradient color-{{ block.settings.color_scheme }} gradient-overlay" {{ block.shopify_attributes }}>
+              {%- if section.settings.layout == 'hero' and final_button_link != blank -%}
+                <a
+                  href="{{ final_button_link }}"
+                  class="ax-pack-offer__overlay-link"
+                  aria-hidden="true"
+                  tabindex="-1"
+                ></a>
+              {%- endif -%}
+              {%- if final_image != blank -%}
+                <div class="ax-pack-offer__image-wrapper card__media">
+                  {% capture media_image %}
+                    {%- if final_image_mobile != blank -%}
+                      <picture>
+                        <source
+                          media="(max-width: 749px)"
+                          srcset="
+                            {{ final_image_mobile | image_url: width: 375 }} 375w,
+                            {{ final_image_mobile | image_url: width: 750 }} 750w,
+                            {{ final_image_mobile | image_url: width: 1000 }} 1000w,
+                            {{ final_image_mobile | image_url: width: 1500 }} 1500w
+                          "
+                          sizes="95vw"
+                        >
+                        <img
+                          src="{{ final_image | image_url: width: 1000 }}"
+                          srcset="
+                            {{ final_image | image_url: width: 900 }} 900w,
+                            {{ final_image | image_url: width: 1200 }} 1200w,
+                            {{ final_image | image_url: width: 1440 }} 1440w,
+                            {{ final_image | image_url: width: 1800 }} 1800w,
+                            {{ final_image | image_url: width: 2880 }} 2880w
+                          "
+                          sizes="{% if section.blocks.size > 1 %}60vw{% else %}95vw{% endif %}"
+                          alt="{{ final_image.alt | escape | default: final_title }}"
+                          width="{{ final_image.width }}"
+                          height="{{ final_image.height }}"
+                          loading="lazy"
+                          class="ax-pack-offer__image overlay"
+                        >
+                      </picture>
+                    {%- else -%}
+                      <img
+                        src="{{ final_image | image_url: width: 1000 }}"
+                        srcset="{{ final_image | image_url: width: 375 }} 375w,
+                          {{ final_image | image_url: width: 750 }} 750w,
+                          {{ final_image | image_url: width: 900 }} 900w,
+                          {{ final_image | image_url: width: 1200 }} 1200w,
+                          {{ final_image | image_url: width: 1440 }} 1440w,
+                          {{ final_image | image_url: width: 1800 }} 1800w,
+                          {{ final_image | image_url: width: 2880 }} 2880w
+                        "
+                        sizes="{% if section.blocks.size > 1 %}(max-width: 989px) 90vw, 60vw{% else %}95vw{% endif %}"
+                        alt="{{ final_image.alt | escape | default: final_title }}"
+                        width="{{ final_image.width }}"
+                        height="{{ final_image.height }}"
+                        loading="lazy"
+                        class="ax-pack-offer__image overlay"
+                      >
+                    {%- endif -%}
+                  {% endcapture %}
+                  {% if section.index > 1 %}
+                    {{ media_image | replace: 'src=', 'lazy-src=' | replace: 'srcset=', 'lazy-srcset=' }}
+                  {% else %}
+                    {{ media_image }}
+                  {% endif %}
+                  <div class="overlay">&nbsp;</div>
+                </div>
+              {%- endif -%}
+
+              <div class="ax-pack-offer__text">
+
+                {%- if final_badge != blank -%}
+                  <div class="ax-pack-offer__badge badge badge--other">
+                    {% if final_badge_icon != blank %}
+                      {% assign badge_icon_alt = blank %}
+                      {% assign badge_icon_alt = final_badge_icon.alt | escape | default: 'Badge icon' %}
+                      {{ final_badge_icon | image_url: width: 20 | image_tag: width: 14, height: 14, loading: 'lazy', alt: badge_icon_alt | escape | default: 'Badge icon' | replace: 'src=', 'lazy-src=' | replace: 'srcset=', 'lazy-srcset=' }}
+                    {% endif %}
+                    {{ final_badge }}
+                  </div>
+                {%- endif -%}
+
+                {%- if final_title != blank -%}
+                  <div class="ax-pack-offer__item-title h2">
+                    {{ final_title }}
+                  </div>
+                {%- endif -%}
+
+                {%- if final_description != blank -%}
+                  <div class="ax-pack-offer__description">
+                    {{ final_description }}
+                  </div>
+                {%- endif -%}
+
+                {%- if final_button_label != blank or final_button_link != blank -%}
+                  <a href="{{ final_button_link | default: '#' }}" class="button button--secondary">
+                    {% if final_button_icon != blank %}
+                      {{ final_button_icon | image_url: width: 20 | image_tag: width: 14, height: 14, loading: 'lazy' | replace: 'src=', 'lazy-src=' | replace: 'srcset=', 'lazy-srcset=' }}
+                    {% endif %}
+                    {{ final_button_label | default: 'Découvrir' }}
+                  </a>
+                {%- endif -%}
+              </div>
+            </div>
+          {% endif %}
+        {%- endfor -%}
+      </div>
+    </div>
+
+  {%- unless section.settings.full_width -%}
+    </div>
+  {%- endunless -%}
+</div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Ax Pack Offer",
+  "class": "section ax-section ax-pack-offer",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "hide_if_no_blocks",
+      "label": "Masquer la section si aucun bloc n'est affiché",
+      "info": "Si activé, la section ne sera pas rendue si aucun bloc n'est visible",
+      "default": true
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Titre"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Taille du titre",
+      "options": [
+        {
+          "value": "h2",
+          "label": "Petit"
+        },
+        {
+          "value": "h1",
+          "label": "Moyen"
+        },
+        {
+          "value": "h0",
+          "label": "Grand"
+        }
+      ],
+      "default": "h1"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Sous-titre"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Largeur complète",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Mise en page",
+      "options": [
+        {
+          "value": "grid",
+          "label": "Grille (multi-blocs)"
+        },
+        {
+          "value": "hero",
+          "label": "Hero (bannière 1 bloc)"
+        }
+      ],
+      "default": "grid",
+      "info": "Hero : image à gauche + texte à droite sur fond crème (idéal pour un bloc unique)"
+    },
+    {
+      "type": "checkbox",
+      "id": "hero_disable_overlay",
+      "label": "Désactiver l'overlay (hero)",
+      "default": false,
+      "info": "Affiche l'image sans dégradé crème"
+    },
+    {
+      "type": "header",
+      "content": "Couleurs"
+    },
+    {
+      "type": "color_scheme",
+      "id": "section_color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "pack_item",
+      "name": "Pack item",
+      "settings": [
+        {
+          "type": "metaobject",
+          "id": "item_metaobject",
+          "label": "Metaobject",
+          "info": "Sélectionnez le metaobjet à afficher",
+          "metaobject_type": "pack_offer_item"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_only_metaobject",
+          "label": "Afficher uniquement si un metaobject est sélectionné",
+          "default": false
+        },
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image desktop"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "Image mobile"
+        },
+        {
+          "type": "color_background",
+          "id": "image_overlay_color",
+          "label": "Overlay de l'image"
+        },
+        {
+          "type": "color_scheme",
+          "id": "color_scheme",
+          "label": "Nuancier de couleurs du bloc",
+          "default": "scheme-1"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Titre",
+          "default": "Pack titre"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description",
+          "default": "<p>Description du pack</p>"
+        },
+        {
+          "type": "header",
+          "content": "Badge"
+        },
+        {
+          "type": "image_picker",
+          "id": "badge_icon",
+          "label": "Icône du badge"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge texte",
+          "default": "Badge"
+        },
+        {
+          "type": "color",
+          "id": "badge_color",
+          "label": "Couleur du badge"
+        },
+        {
+          "type": "color",
+          "id": "badge_text_color",
+          "label": "Couleur du texte du badge"
+        },
+        {
+          "type": "header",
+          "content": "Bouton"
+        },
+        {
+          "type": "image_picker",
+          "id": "button_icon",
+          "label": "Icône du bouton"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Texte du bouton",
+          "default": "Découvrir"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Lien du bouton"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ax Pack Offer",
+      "blocks": [
+        {
+          "type": "pack_item"
+        },
+        {
+          "type": "pack_item"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

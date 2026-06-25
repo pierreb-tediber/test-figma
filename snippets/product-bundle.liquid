@@ -1,0 +1,1318 @@
+{% doc %}
+	Render the bundle products
+
+	@param {object} product - The product to display
+	@param {object} selected_variant - The selected variant object.
+	@param {object} has_changed_option_for_hidden - The flag to indicate if the option for hidden has changed.
+	@param {object} block - The block object.
+	@param {string} product_form_id - The ID of the product form
+	@param {object} bundle_configurator - The bundle configurator object.
+	@param {object} section_id - The section ID.
+	@param {object} parent_option_position_size_array - The position of the size option in the product options.
+
+	@example
+	{% render 'product-bundle', product: product, block: block, product_form_id: product_form_id, bundle_configurator: bundle_configurator, section: section %}
+{% enddoc %}
+
+{%- liquid
+	# Flag global pack : distingue le nouveau template "pack-new" du template "pack" legacy.
+	# Transite via tous les snippets enfants pour activer/désactiver les évolutions en cours
+	# (ex. step Format Monobloc/Bibloc) sans toucher aux packs déjà en prod.
+	assign is_pack_new = false
+	if template.suffix == 'pack-new'
+		assign is_pack_new = true
+	endif
+
+	# Flag BO `masquer_surplus_et_inclus` (metaobject pack_configuration). Quand actif :
+	# - force `no_price_surplus = true` sur toutes les étapes (masque +X€ dans
+	#   card-bundle-variant ET card-bundle-product)
+	# - masque les +X€ du picker variantes dans `product-bundle-item-included`
+	#   (gating via `card_show_surplus = false` dans le snippet picker)
+	# - NE masque PAS la section "Produits également inclus" (les items doivent
+	#   rester visibles côté client, seuls les surplus internes sont cachés)
+	# - exposé en `data-hide-extras` sur <product-bundle> + propagé via
+	#   `&hide_extras=1` dans l'URL fetch du bundle-gallery-modal (card-bundle-product)
+	#   pour que le rendu AJAX reste cohérent.
+	assign hide_extras = false
+	if bundle_configurator.masquer_surplus_et_inclus.value == true
+		assign hide_extras = true
+	endif
+
+	# Pré-scan : présence du produit "sommier" (sommier tapissier coffre) parmi
+	# les étapes du metaobject. Active un filtre hardcodé qui retire la couleur
+	# sommier "Bleu" (option1) et les pieds bleus "15/20 cm - Pieds Bleus"
+	# (option3) des pickers — demande BO pour les packs new-pack uniquement.
+	# Le sommier reste accessible avec toutes ses options sur sa PDP standalone
+	# et dans d'éventuels packs non new-pack.
+	assign has_sommier_tapissier_in_bundle = false
+	if is_pack_new
+		for sommier_scan_i in (1..3)
+			assign sommier_scan_key = 'etape_' | append: sommier_scan_i | append: '_produits'
+			assign sommier_scan_products = bundle_configurator[sommier_scan_key].value
+			if sommier_scan_products
+				for sommier_scan_product in sommier_scan_products
+					if sommier_scan_product.handle == 'sommier'
+						assign has_sommier_tapissier_in_bundle = true
+						break
+					endif
+				endfor
+			endif
+			if has_sommier_tapissier_in_bundle
+				break
+			endif
+		endfor
+	endif
+
+	# Initialise la position personnalisée basée sur le nombre d'options du produit principal
+	assign custom_position = product.options.size
+
+	# Ajuste la position si le produit n'a qu'une variante par défaut
+	if product.has_only_default_variant
+		assign custom_position = custom_position | minus: 1
+	endif
+
+	# Récupère la valeur de l'option parent à la position spécifiée pour la synchronisation des tailles
+	assign parent_option = selected_variant.options[parent_option_position_size_array]
+
+	# Format par défaut (Monobloc) : suffixe transparent dans la normalisation
+	# pour préserver les ALT existantes et le matching cross-produits.
+	assign default_format_lc = 'products.product.default_format_for_size_value' | t | downcase | strip
+
+	comment
+		Nettoie et normalise la valeur parent_option pour extraire longueur x largeur + type
+		Transforme "140 cm x 190 cm x 25 cm - Bibloc" en "140 x 190 - Bibloc"
+		Cette normalisation permet la comparaison avec les variantes des produits du bundle
+	endcomment
+	assign parent_option_size_cleaned = blank
+
+	if parent_option != blank
+		comment
+			Algorithme de nettoyage des dimensions :
+			1. Sépare les dimensions du type (split par '-')
+			2. Supprime toutes les unités (cm, mm, etc.) des dimensions
+			3. Split par 'x' pour récupérer les dimensions individuelles
+			4. Garde seulement les 2 premières dimensions (longueur x largeur)
+			5. Reconstruit la chaîne finale avec type si présent
+		endcomment
+		assign option_parts = parent_option | split: '-'
+		assign dimensions_part = option_parts[0] | strip
+		assign type_part = blank
+
+		if option_parts.size > 1
+			assign type_part_raw = option_parts[1] | strip
+			assign type_part_raw_lc = type_part_raw | downcase
+			if type_part_raw_lc == default_format_lc
+				assign type_part = blank
+			else
+				assign type_part = type_part_raw
+			endif
+		endif
+
+		assign dimensions_no_units = dimensions_part | replace: 'cm', '' | replace: 'mm', '' | replace: 'CM', '' | replace: 'MM', '' | downcase | strip
+		assign dimensions_array = dimensions_no_units | split: 'x'
+
+		if dimensions_array.size >= 2
+			assign dimension_1 = dimensions_array[0] | strip
+			assign dimension_2 = dimensions_array[1] | strip
+			assign parent_option_size_cleaned = dimension_1 | append: 'x' | append: dimension_2
+		else
+			assign parent_option_size_cleaned = dimensions_array | join: 'x'
+		endif
+
+		if type_part != blank
+			assign parent_option_size_cleaned = parent_option_size_cleaned | append: '-' | append: type_part
+		endif
+	endif
+
+	# Dimension propre pour l'affichage du sous-titre "Taille sélectionnée : {dim}" :
+	# on garde la string brute du parent (ex. "140 x 190 cm - Bibloc") et on strip
+	# le suffixe " - {format}" pour ne garder que la dimension visible ("140 x 190 cm").
+	# Différent de `parent_option_size_cleaned` qui sert au matching cross-variants.
+	assign parent_option_dim_display = blank
+	if parent_option != blank
+		assign parent_option_dim_display = parent_option | split: ' - ' | first | strip
+	endif
+
+	# Variables pour stocker les informations du produit parent
+	assign parent_variant_id = selected_variant.id
+	assign parent_product_id = product.id
+
+	assign parent_variant_id = selected_variant.id
+	assign parent_product_id = product.id
+	assign parent_product_title = product.title
+	assign reference_price_default = selected_variant.price
+	assign reference_price_compare_at_price_default = selected_variant.compare_at_price | default: selected_variant.price
+
+	# Récupère la réduction du pack depuis les metafields
+	if product.metafields.custom.pack_reduction.value != blank
+		assign discount_value = product.metafields.custom.pack_reduction.value
+	endif
+
+	comment
+		Gestion des Combined Listings :
+		Si le produit actuel fait partie d'un combined listing,
+		on utilise les informations du produit parent pour les calculs de prix et réductions
+	endcomment
+	if product.metafields.custom.combined_listings_produit_parent.value != blank
+		assign parent_info = product.metafields.custom.combined_listings_produit_parent.value
+		assign parent_variant = parent_info.selected_or_first_available_variant
+		assign all_variants_combined_listings = parent_info.variants
+		comment
+			VÉRIFICATION ET REMPLACEMENT DES VARIANTES CACHÉES
+
+			Si la variante sélectionnée a le métafield hidden_variant à true,
+			on cherche une variante alternative disponible et non cachée
+		endcomment
+		if parent_variant.metafields.custom.hidden_variant.value == true
+			if parent_variant.options.size == 1
+				assign candidate_variants_all = all_variants_combined_listings
+			elsif parent_variant.options.size == 2
+				assign candidate_variants_all = all_variants_combined_listings
+				assign candidate_variants_matching_first_options = all_variants_combined_listings | where: 'option1', parent_variant.options[0] | where: 'option2', parent_variant.options[1]
+			elsif parent_variant.options.size == 3
+				assign candidate_variants_all = all_variants_combined_listings
+				assign candidate_variants_matching_first_options = all_variants_combined_listings | where: 'option1', parent_variant.options[0] | where: 'option2', parent_variant.options[1]
+				assign candidate_variants_matching_two_options = all_variants_combined_listings | where: 'option1', parent_variant.options[0] | where: 'option2', parent_variant.options[1] | where: 'option3', parent_variant.options[2]
+			elsif parent_variant.options.size == 4
+				assign candidate_variants_all = all_variants_combined_listings
+				assign candidate_variants_matching_first_options = all_variants_combined_listings | where: 'option1', parent_variant.options[0] | where: 'option2', parent_variant.options[1]
+				assign candidate_variants_matching_two_options = all_variants_combined_listings | where: 'option1', parent_variant.options[0] | where: 'option2', parent_variant.options[1] | where: 'option3', parent_variant.options[2]
+				assign candidate_variants_matching_three_options = all_variants_combined_listings | where: 'option1', parent_variant.options[0] | where: 'option2', parent_variant.options[1] | where: 'option3', parent_variant.options[2]
+			endif
+
+			assign valid_variant_child_found = false
+			if valid_variant_child_found == false and candidate_variants_matching_three_options != blank
+				for variant in candidate_variants_matching_three_options
+					comment
+						Pour option4, on doit filtrer manuellement car where: 'option4' n'existe pas en Liquid
+					endcomment
+					if variant.options[3] != parent_variant.options[3]
+						continue
+					endif
+
+					comment
+						VÉRIFICATION DE DISPONIBILITÉ COMPLÈTE
+
+						Même logique que dans le reste du fichier pour garantir
+						qu'on sélectionne une variante réellement disponible
+					endcomment
+					assign check_against_inventory = true
+					if variant.inventory_management != 'shopify' or variant.inventory_policy == 'continue'
+						assign check_against_inventory = false
+					endif
+
+					assign quantity_rule_soldout = false
+					if variant.quantity_rule.min > variant.inventory_quantity and check_against_inventory
+						assign quantity_rule_soldout = true
+					endif
+
+					assign variant_available = true
+					if variant.available == false or quantity_rule_soldout or variant == null
+						assign variant_available = false
+					endif
+
+					comment
+						Sélectionner cette variante si elle est disponible ET non cachée
+					endcomment
+					if variant_available and variant.metafields.custom.hidden_variant.value != true
+						assign parent_variant = variant
+						assign valid_variant_child_found = true
+						break
+					endif
+				endfor
+			endif
+
+			if valid_variant_child_found == false and candidate_variants_matching_two_options != blank
+				for variant in candidate_variants_matching_two_options
+					comment
+						VÉRIFICATION DE DISPONIBILITÉ COMPLÈTE
+
+						Même logique que dans le reste du fichier pour garantir
+						qu'on sélectionne une variante réellement disponible
+					endcomment
+					assign check_against_inventory = true
+					if variant.inventory_management != 'shopify' or variant.inventory_policy == 'continue'
+						assign check_against_inventory = false
+					endif
+
+					assign quantity_rule_soldout = false
+					if variant.quantity_rule.min > variant.inventory_quantity and check_against_inventory
+						assign quantity_rule_soldout = true
+					endif
+
+					assign variant_available = true
+					if variant.available == false or quantity_rule_soldout or variant == null
+						assign variant_available = false
+					endif
+
+					comment
+						Sélectionner cette variante si elle est disponible ET non cachée
+					endcomment
+					if variant_available and variant.metafields.custom.hidden_variant.value != true
+						assign parent_variant = variant
+						assign valid_variant_child_found = true
+						break
+					endif
+				endfor
+			endif
+
+			if valid_variant_child_found == false and candidate_variants_matching_first_options != blank
+				for variant in candidate_variants_matching_first_options
+					comment
+						VÉRIFICATION DE DISPONIBILITÉ COMPLÈTE
+
+						Même logique que dans le reste du fichier pour garantir
+						qu'on sélectionne une variante réellement disponible
+					endcomment
+					assign check_against_inventory = true
+					if variant.inventory_management != 'shopify' or variant.inventory_policy == 'continue'
+						assign check_against_inventory = false
+					endif
+
+					assign quantity_rule_soldout = false
+					if variant.quantity_rule.min > variant.inventory_quantity and check_against_inventory
+						assign quantity_rule_soldout = true
+					endif
+
+					assign variant_available = true
+					if variant.available == false or quantity_rule_soldout or variant == null
+						assign variant_available = false
+					endif
+
+					comment
+						Sélectionner cette variante si elle est disponible ET non cachée
+					endcomment
+					if variant_available and variant.metafields.custom.hidden_variant.value != true
+						assign parent_variant = variant
+						assign valid_variant_child_found = true
+						break
+					endif
+				endfor
+			endif
+
+			if valid_variant_child_found == false and candidate_variants_all != blank
+				for variant in candidate_variants_all
+					comment
+						VÉRIFICATION DE DISPONIBILITÉ COMPLÈTE
+
+						Même logique que dans le reste du fichier pour garantir
+						qu'on sélectionne une variante réellement disponible
+					endcomment
+					assign check_against_inventory = true
+					if variant.inventory_management != 'shopify' or variant.inventory_policy == 'continue'
+						assign check_against_inventory = false
+					endif
+
+					assign quantity_rule_soldout = false
+					if variant.quantity_rule.min > variant.inventory_quantity and check_against_inventory
+						assign quantity_rule_soldout = true
+					endif
+
+					assign variant_available = true
+					if variant.available == false or quantity_rule_soldout or variant == null
+						assign variant_available = false
+					endif
+
+					comment
+						Sélectionner cette variante si elle est disponible ET non cachée
+					endcomment
+					if variant_available and variant.metafields.custom.hidden_variant.value != true
+						assign parent_variant = variant
+						assign valid_variant_child_found = true
+						break
+					endif
+				endfor
+			endif
+		endif
+
+		assign parent_variant_id = parent_variant.id
+		assign parent_product_id = parent_info.id
+		assign parent_product_title = parent_info.title
+		if parent_info.metafields.custom.combined_listings_premier_produit_enfant.value != blank
+			assign reference_price_default = parent_info.metafields.custom.combined_listings_premier_produit_enfant.value.price
+			assign reference_price_compare_at_price_default = parent_info.metafields.custom.combined_listings_premier_produit_enfant.value.compare_at_price | default: parent_info.metafields.custom.combined_listings_premier_produit_enfant.value.price
+		else
+			assign reference_price_default = parent_info.selected_or_first_available_variant.price
+			assign reference_price_compare_at_price_default = parent_info.selected_or_first_available_variant.compare_at_price | default: parent_info.selected_or_first_available_variant.price
+		endif
+	endif
+
+	# Set discount_value to 0 if it's blank
+	assign discount_value = discount_value | default: 0
+
+	# Prépare les traductions pour la détection des options de taille et de pieds
+	assign options_names_for_size_translated = 'products.product.options_names_for_size' | t | downcase | replace: ', ', ','
+	assign options_names_for_size = options_names_for_size_translated | split: ',' | uniq
+
+	assign options_names_for_foot_translated = 'products.product.options_names_for_foot' | t | downcase | replace: ', ', ','
+	assign options_names_for_foot = options_names_for_foot_translated | split: ',' | uniq
+
+	# Récupère les traductions des noms d'options pour les formes
+	assign options_names_for_shape_translated = 'products.product.options_names_for_shape' | t | downcase | replace: ', ', ','
+	assign options_names_for_shape = options_names_for_shape_translated | split: ',' | uniq
+
+	# Récupère les traductions des noms d'options pour les versions
+	assign options_names_for_version_translated = 'products.product.options_names_for_version' | t | downcase | replace: ', ', ','
+	assign options_names_for_version = options_names_for_version_translated | split: ',' | uniq
+
+	# Whitelist des labels de VERSION à afficher (ex. "Plus"). Les autres
+	# ("Standard", "Aucun"…) sont exclus du rendu pour ne pas polluer le
+	# subtitle. Même convention que dans card-bundle-variant.liquid et
+	# card-bundle-product.liquid via `options_version_labels_to_show`.
+	assign options_version_labels_to_show_translated = 'products.product.options_version_labels_to_show' | t | replace: ', ', ','
+	assign options_version_labels_to_show = options_version_labels_to_show_translated | split: ',' | uniq
+-%}
+
+{% comment %}
+	Conteneur principal du bundle produit avec composant web custom
+	Stocke toutes les données nécessaires pour la gestion JavaScript côté client
+{% endcomment %}
+<div id="ProductBundle-{{ section_id }}">
+	<product-bundle
+		data-section="{{ section_id }}"
+		data-variant-id="{{ parent_variant_id }}"
+		data-product-id="{{ parent_product_id }}"
+		data-url="{{ product.url }}"
+		data-discount="{{ discount_value }}"
+		data-title="{{ parent_product_title }}"
+		data-hide-extras="{{ hide_extras }}"
+		class="product__variant-selects product__variant-selects--bundle"
+		{{ block.shopify_attributes }}
+	>
+		{% comment %}
+			Rendu du sélecteur de variantes principal (produit parent)
+			Ce sélecteur contrôle les options du produit principal du bundle
+		{% endcomment %}
+		{%- render 'product-variant-picker',
+			product: product,
+			block: block,
+			selected_variant: selected_variant,
+			has_changed_option_for_hidden: has_changed_option_for_hidden,
+			product_form_id: product_form_id,
+			is_bundle: true,
+			reference_price: reference_price_default,
+			reference_price_compare_at_price: reference_price_compare_at_price_default,
+			hide_extras: hide_extras
+		-%}
+
+		{% comment %}
+			Boucle principale : traite jusqu'à 3 étapes de configuration du bundle
+			Chaque étape peut contenir des produits et/ou des variantes individuelles
+		{% endcomment %}
+		{%- for i in (1..3) -%}
+			{%- liquid
+				# Construction dynamique des clés pour accéder aux metafields du configurateur
+				assign key_bundle_configurator_label = 'etape_' | append: i | append: '_label'
+				assign key_bundle_configurator_products = 'etape_' | append: i | append: '_produits'
+				assign key_bundle_configurator_products_option_version = 'etape_' | append: i | append: '_option_version'
+				assign key_bundle_configurator_configuration = 'etape_' | append: i | append: '_afficher_la_configuration_du_produit'
+				assign key_bundle_configurator_variants = 'etape_' | append: i | append: '_variantes'
+				assign key_bundle_configurator_matching_size_with_variants = 'etape_' | append: i | append: '_correspondance_avec_la_taille'
+				assign key_bundle_configurator_governs_variants = 'etape_' | append: i | append: '_regit_les_variantes_inclus_dans_le_pack'
+
+				# Extraction des valeurs du configurateur pour cette étape
+				assign label = bundle_configurator[key_bundle_configurator_label].value
+				assign products_bundle = bundle_configurator[key_bundle_configurator_products].value
+				assign products_bundle_option_version = bundle_configurator[key_bundle_configurator_products_option_version].value
+
+				assign configuration = bundle_configurator[key_bundle_configurator_configuration].value
+				assign variants_bundle = bundle_configurator[key_bundle_configurator_variants].value
+				assign matching_size_with_variants = bundle_configurator[key_bundle_configurator_matching_size_with_variants].value
+				assign governs_variants = bundle_configurator[key_bundle_configurator_governs_variants].value
+
+				# Calcul du nombre total d'éléments dans cette étape
+				assign number_of_products = products_bundle | compact | size
+				assign number_of_variants = variants_bundle | compact | size
+				assign item_count = number_of_products | plus: number_of_variants
+
+				# Gestion de la position d'affichage
+				assign custom_position = custom_position | plus: 1
+				assign current_custom_position = custom_position
+
+				comment
+					Mode configuration spécial :
+					Si la configuration est active avec un seul produit et aucune variante,
+					on utilise un rendu simplifié sans label d'étape
+				endcomment
+				assign is_special_config_mode = false
+				if configuration and number_of_products == 1 and number_of_variants == 0
+					assign is_special_config_mode = true
+				endif
+
+				comment
+					Si le label est constitué du mot 'forme', on n'affiche pas le surplus du prix
+				endcomment
+				# Traitement du nom de l'option en minuscules
+				assign label_downcase = label | downcase
+
+				# Divise le nom de l'option en tableau de mots uniques
+				assign label_array = label_downcase | split: ' ' | uniq
+
+				for translation in options_names_for_shape
+					assign has_shape_in_array = label_array | find: translation
+					if has_shape_in_array
+						assign has_shape_in_array = true
+						break
+					endif
+				endfor
+
+				assign no_price_surplus = false
+				if has_shape_in_array
+					assign no_price_surplus = true
+				endif
+				# Override BO : si le pack a `masquer_surplus_et_inclus`, on force
+				# `no_price_surplus = true` pour TOUTES les étapes (cache +X€).
+				if hide_extras
+					assign no_price_surplus = true
+				endif
+			-%}
+
+			{%- if item_count > 0 -%}
+				{%- liquid
+					comment
+						ALGORITHME DE DISPONIBILITÉ ET SÉLECTION PAR DÉFAUT
+
+						Cette section complexe détermine :
+						1. Si l'étape a des éléments disponibles
+						2. Quel élément sera sélectionné par défaut
+						3. Le prix de référence pour les calculs de supplément
+
+						Ordre de priorité :
+						1) Variantes individuelles (vérification en premier)
+						2) Produits avec leurs variantes (seulement si aucune variante individuelle disponible)
+					endcomment
+					assign step_has_available_items = false
+					assign first_available_index = 0
+					assign current_index = 0
+					assign reference_price = 0
+					assign reference_price_compare_at_price = 0
+					assign has_item_visible = false
+
+					comment
+						PHASE 1: VÉRIFICATION DES VARIANTES INDIVIDUELLES
+						Les variantes individuelles ont la priorité car elles représentent des choix directs
+						sans configuration supplémentaire requise
+					endcomment
+					assign variants_bundle = variants_bundle | sort: 'price'
+
+					for variant_bundle in variants_bundle
+						comment
+							VÉRIFICATION DES VARIANTES CACHÉES
+
+							Si la variante sélectionnée a le métafield hidden_variant à true,
+							on cherche une variante alternative disponible et non cachée
+						endcomment
+						if variant_bundle.metafields.custom.hidden_variant.value == true
+							continue
+						endif
+
+						comment
+							SYNCHRONISATION DES DIMENSIONS PARENT-ENFANT
+
+							Si la synchronisation est activée, on vérifie que la variante bundle
+							a une dimension compatible avec le produit parent.
+							Cette fonctionnalité assure la cohérence des tailles dans le pack.
+						endcomment
+						if matching_size_with_variants == true
+							assign has_matching_size_variant_main = true
+							if parent_option_size_cleaned != blank and variant_bundle.product.has_only_default_variant == false
+								assign has_matching_size_variant_main = false
+
+								comment
+									Détection de la position de l'option taille dans le produit bundle
+									On exclut les options de type "pieds" de la recherche
+								endcomment
+								assign bundle_option_position_size_array_check = blank
+
+								unless variant_bundle.product.has_only_default_variant
+									for option in variant_bundle.product.options_with_values
+										assign option_name_downcase = option.name | downcase
+										assign option_name_array = option_name_downcase | split: ' ' | uniq
+
+										# Vérification si l'option concerne les pieds (à exclure)
+										for translation in options_names_for_foot
+											assign has_foot_in_array = option_name_array | find: translation
+											if has_foot_in_array
+												assign has_foot_in_array = true
+												break
+											endif
+										endfor
+
+										if has_foot_in_array
+											continue
+										else
+											# Recherche de l'option taille
+											for option_name in option_name_array
+												if options_names_for_size contains option_name
+													assign bundle_option_position_size_array_check = option.position | minus: 1
+													break
+												endif
+											endfor
+										endif
+
+										if bundle_option_position_size_array_check != blank
+											break
+										endif
+									endfor
+								endunless
+
+								comment
+									COMPARAISON ET VALIDATION DES DIMENSIONS
+									Si une position d'option taille est trouvée, on compare les dimensions
+									entre le produit parent et la variante bundle après normalisation
+								endcomment
+								if bundle_option_position_size_array_check != blank
+									assign has_matching_size_variant_main = false
+									assign variant_option_size_check = variant_bundle.options[bundle_option_position_size_array_check]
+
+									comment
+										Normalisation de la dimension de la variante bundle
+										(même algorithme que pour le produit parent)
+									endcomment
+									assign variant_option_size_cleaned_check = blank
+									if variant_option_size_check != blank
+										assign variant_option_size_parts_check = variant_option_size_check | split: '-'
+										assign variant_dimensions_part_check = variant_option_size_parts_check[0] | strip
+										assign variant_type_part_check = blank
+
+										if variant_option_size_parts_check.size > 1
+											assign variant_type_part_check_raw = variant_option_size_parts_check[1] | strip
+											assign variant_type_part_check_raw_lc = variant_type_part_check_raw | downcase
+											if variant_type_part_check_raw_lc == default_format_lc
+												assign variant_type_part_check = blank
+											else
+												assign variant_type_part_check = variant_type_part_check_raw
+											endif
+										endif
+
+										assign variant_option_size_no_units_check = variant_dimensions_part_check | replace: 'cm', '' | replace: 'mm', '' | replace: 'CM', '' | replace: 'MM', '' | downcase | strip
+										assign variant_dimensions_array_check = variant_option_size_no_units_check | split: 'x'
+
+										if variant_dimensions_array_check.size >= 2
+											assign variant_dimension_1_check = variant_dimensions_array_check[0] | strip
+											assign variant_dimension_2_check = variant_dimensions_array_check[1] | strip
+											assign variant_option_size_cleaned_check = variant_dimension_1_check | append: 'x' | append: variant_dimension_2_check
+										else
+											assign variant_option_size_cleaned_check = variant_option_size_check
+										endif
+
+										if variant_type_part_check != blank
+											assign variant_option_size_cleaned_check = variant_option_size_cleaned_check | append: '-' | append: variant_type_part_check
+										endif
+									endif
+
+									# Validation finale : les dimensions correspondent-elles ?
+									# Pack-new uniquement : fallback dim-only quand l'un des deux
+									# côtés n'a pas de suffixe format (ex. parent pack-lit-5-etoiles
+									# "200×200 cm" sans suffixe vs tapissier "200×200 cm - Bibloc").
+									# Match strict ailleurs (legacy intact, évite Bibloc↔Monobloc).
+									assign size_match_step1 = false
+									if parent_option_size_cleaned == variant_option_size_cleaned_check
+										assign size_match_step1 = true
+									elsif is_pack_new
+										if type_part == blank or variant_type_part_check == blank
+											assign parent_dim_only_s1 = parent_option_size_cleaned | split: '-' | first
+											assign variant_dim_only_s1 = variant_option_size_cleaned_check | split: '-' | first
+											if parent_dim_only_s1 == variant_dim_only_s1
+												assign size_match_step1 = true
+											endif
+										endif
+									endif
+									if size_match_step1
+										assign has_matching_size_variant_main = true
+									endif
+								endif
+							endif
+						endif
+
+						comment
+							VÉRIFICATION COMPLÈTE DE DISPONIBILITÉ
+
+							Cette logique complexe gère :
+							- Gestion des stocks Shopify vs externe
+							- Règles de quantité minimum
+							- Statut général de disponibilité
+							- Correspondance des dimensions (si activée)
+						endcomment
+						assign check_against_inventory = true
+						if variant_bundle.inventory_management != 'shopify' or variant_bundle.inventory_policy == 'continue'
+							assign check_against_inventory = false
+						endif
+
+						assign quantity_rule_soldout = false
+						if variant_bundle.quantity_rule.min > variant_bundle.inventory_quantity and check_against_inventory
+							assign quantity_rule_soldout = true
+						endif
+
+						assign variant_available = true
+						if variant_bundle.available == false or quantity_rule_soldout or variant_bundle == null or has_matching_size_variant_main == false
+							assign variant_available = false
+						endif
+
+						if variant_bundle.metafields.custom.hidden_variant.value == true
+							assign variant_available = false
+						endif
+
+						comment
+							SÉLECTION PAR DÉFAUT ET PRIX DE RÉFÉRENCE
+							La première variante disponible devient la sélection par défaut
+							Son prix sert de référence pour calculer les suppléments des autres options
+						endcomment
+
+						if variant_available and step_has_available_items == false
+							assign step_has_available_items = true
+							assign first_available_index = current_index 
+							comment
+								Récupération du prix de référence : prix normal
+							endcomment
+							assign reference_price = variant_bundle.price
+							assign reference_price_compare_at_price = variant_bundle.compare_at_price | default: variant_bundle.price
+							assign has_item_visible = true
+						endif						
+						assign current_index = current_index | plus: 1
+					endfor
+
+					comment
+						PHASE 2: VÉRIFICATION DES PRODUITS (FALLBACK)
+
+						Cette phase ne s'exécute QUE si aucune variante individuelle n'est disponible.
+						Cela maintient une hiérarchie claire dans les types d'éléments sélectionnés.
+
+						Pour les produits, la logique est plus complexe car chaque produit peut avoir
+						ses propres variantes, nécessitant une recherche de la variante compatible.
+					endcomment
+					unless step_has_available_items
+						for product_bundle in products_bundle
+							comment
+								Utilise la variante sélectionnée ou première disponible comme point de départ
+							endcomment
+							assign bundle_variant_check = product_bundle.selected_or_first_available_variant
+
+							comment
+								FILTRAGE PAR VERSION (PLUS/STANDARD)
+								Pour option 1-3 : filtre avec where
+								Pour option 4 : pas de pre-filtrage, vérification manuelle dans les boucles
+							endcomment
+							assign bundle_version_position = blank
+							if products_bundle_option_version != blank and products_bundle_option_version != 'Aucun'
+								for option in product_bundle.options_with_values
+									assign option_name_downcase = option.name | downcase
+									assign option_name_array = option_name_downcase | split: ' ' | uniq
+									for translation in options_names_for_version
+										if option_name_array contains translation
+											assign bundle_version_position = option.position
+											break
+										endif
+									endfor
+									if bundle_version_position != blank
+										break
+									endif
+								endfor
+							endif
+
+							comment
+								Pool de variantes à utiliser dans les vérifications suivantes
+								Filtré par version pour option 1-3, non filtré pour option 4
+							endcomment
+							assign bundle_variants_pool = product_bundle.variants
+							assign version_filtered_variants = blank
+							if bundle_version_position != blank and products_bundle_option_version != blank and products_bundle_option_version != 'Aucun'
+								if bundle_version_position == 1
+									assign version_filtered_variants = product_bundle.variants | where: 'option1', products_bundle_option_version
+								elsif bundle_version_position == 2
+									assign version_filtered_variants = product_bundle.variants | where: 'option2', products_bundle_option_version
+								elsif bundle_version_position == 3
+									assign version_filtered_variants = product_bundle.variants | where: 'option3', products_bundle_option_version
+								endif
+
+								if version_filtered_variants != blank and version_filtered_variants.size > 0
+									assign bundle_variants_pool = version_filtered_variants
+									comment
+										Sélectionner la première variante disponible dans le pool filtré
+									endcomment
+									for filtered_variant in version_filtered_variants
+										if filtered_variant.available and filtered_variant.metafields.custom.hidden_variant.value != true
+											assign bundle_variant_check = filtered_variant
+											break
+										endif
+									endfor
+								endif
+
+								comment
+									Si bundle_version_position == 4, bundle_variants_pool reste = product_bundle.variants
+									et on vérifie manuellement variant.options[3] dans toutes les boucles
+								endcomment
+							endif
+
+							comment
+								VÉRIFICATION ET REMPLACEMENT DES VARIANTES CACHÉES
+
+								Si la variante sélectionnée a le métafield hidden_variant à true,
+								on cherche une variante alternative disponible et non cachée
+							endcomment
+							if bundle_variant_check.metafields.custom.hidden_variant.value == true
+								if bundle_variant_check.options.size == 1
+									assign candidate_variants_all = bundle_variants_pool
+								elsif bundle_variant_check.options.size == 2
+									assign candidate_variants_all = bundle_variants_pool
+									assign candidate_variants_matching_first_options = bundle_variants_pool | where: 'option1', bundle_variant_check.options[0] | where: 'option2', bundle_variant_check.options[1]
+								elsif bundle_variant_check.options.size == 3
+									assign candidate_variants_all = bundle_variants_pool
+									assign candidate_variants_matching_first_options = bundle_variants_pool | where: 'option1', bundle_variant_check.options[0] | where: 'option2', bundle_variant_check.options[1] | where: 'option3', bundle_variant_check.options[2]
+									assign candidate_variants_matching_two_options = bundle_variants_pool | where: 'option1', bundle_variant_check.options[0] | where: 'option2', bundle_variant_check.options[1] | where: 'option3', bundle_variant_check.options[2]
+								elsif bundle_variant_check.options.size == 4
+									assign candidate_variants_all = bundle_variants_pool
+									assign candidate_variants_matching_first_options = bundle_variants_pool | where: 'option1', bundle_variant_check.options[0] | where: 'option2', bundle_variant_check.options[1]
+									assign candidate_variants_matching_two_options = bundle_variants_pool | where: 'option1', bundle_variant_check.options[0] | where: 'option2', bundle_variant_check.options[1] | where: 'option3', bundle_variant_check.options[2]
+									assign candidate_variants_matching_three_options = bundle_variants_pool | where: 'option1', bundle_variant_check.options[0] | where: 'option2', bundle_variant_check.options[1] | where: 'option3', bundle_variant_check.options[2]
+								endif
+
+								assign valid_variant_bundle_found = false
+								if valid_variant_bundle_found == false and candidate_variants_matching_three_options != blank
+									for variant in candidate_variants_matching_three_options
+										comment
+											Pour option4, on doit filtrer manuellement car where: 'option4' n'existe pas en Liquid
+										endcomment
+										if variant.options[3] != bundle_variant_check.options[3]
+											continue
+										endif
+
+										comment
+											VÉRIFICATION DE DISPONIBILITÉ COMPLÈTE
+
+											Même logique que dans le reste du fichier pour garantir
+											qu'on sélectionne une variante réellement disponible
+										endcomment
+										assign check_against_inventory = true
+										if variant.inventory_management != 'shopify' or variant.inventory_policy == 'continue'
+											assign check_against_inventory = false
+										endif
+
+										assign quantity_rule_soldout = false
+										if variant.quantity_rule.min > variant.inventory_quantity and check_against_inventory
+											assign quantity_rule_soldout = true
+										endif
+
+										assign variant_available = true
+										if variant.available == false or quantity_rule_soldout or variant == null
+											assign variant_available = false
+										endif
+
+										comment
+											Sélectionner cette variante si elle est disponible ET non cachée
+										endcomment
+										if variant_available and variant.metafields.custom.hidden_variant.value != true
+											assign bundle_variant_check = variant
+											assign valid_variant_bundle_found = true
+											break
+										endif
+									endfor
+								endif
+
+								if valid_variant_bundle_found == false and candidate_variants_matching_two_options != blank
+									for variant in candidate_variants_matching_two_options
+										comment
+											VÉRIFICATION DE DISPONIBILITÉ COMPLÈTE
+
+											Même logique que dans le reste du fichier pour garantir
+											qu'on sélectionne une variante réellement disponible
+										endcomment
+										assign check_against_inventory = true
+										if variant.inventory_management != 'shopify' or variant.inventory_policy == 'continue'
+											assign check_against_inventory = false
+										endif
+
+										assign quantity_rule_soldout = false
+										if variant.quantity_rule.min > variant.inventory_quantity and check_against_inventory
+											assign quantity_rule_soldout = true
+										endif
+
+										assign variant_available = true
+										if variant.available == false or quantity_rule_soldout or variant == null
+											assign variant_available = false
+										endif
+
+										comment
+											Sélectionner cette variante si elle est disponible ET non cachée
+										endcomment
+										if variant_available and variant.metafields.custom.hidden_variant.value != true
+											assign bundle_variant_check = variant
+											assign valid_variant_bundle_found = true
+											break
+										endif
+									endfor
+								endif
+
+								if valid_variant_bundle_found == false and candidate_variants_matching_first_options != blank
+									for variant in candidate_variants_matching_first_options
+										comment
+											VÉRIFICATION DE DISPONIBILITÉ COMPLÈTE
+
+											Même logique que dans le reste du fichier pour garantir
+											qu'on sélectionne une variante réellement disponible
+										endcomment
+										assign check_against_inventory = true
+										if variant.inventory_management != 'shopify' or variant.inventory_policy == 'continue'
+											assign check_against_inventory = false
+										endif
+
+										assign quantity_rule_soldout = false
+										if variant.quantity_rule.min > variant.inventory_quantity and check_against_inventory
+											assign quantity_rule_soldout = true
+										endif
+
+										assign variant_available = true
+										if variant.available == false or quantity_rule_soldout or variant == null
+											assign variant_available = false
+										endif
+
+										comment
+											Sélectionner cette variante si elle est disponible ET non cachée
+										endcomment
+										if variant_available and variant.metafields.custom.hidden_variant.value != true
+											assign bundle_variant_check = variant
+											assign valid_variant_bundle_found = true
+											break
+										endif
+									endfor
+								endif
+
+								if valid_variant_bundle_found == false and candidate_variants_all != blank
+									for variant in candidate_variants_all
+										comment
+											VÉRIFICATION DE DISPONIBILITÉ COMPLÈTE
+
+											Même logique que dans le reste du fichier pour garantir
+											qu'on sélectionne une variante réellement disponible
+										endcomment
+										assign check_against_inventory = true
+										if variant.inventory_management != 'shopify' or variant.inventory_policy == 'continue'
+											assign check_against_inventory = false
+										endif
+
+										assign quantity_rule_soldout = false
+										if variant.quantity_rule.min > variant.inventory_quantity and check_against_inventory
+											assign quantity_rule_soldout = true
+										endif
+
+										assign variant_available = true
+										if variant.available == false or quantity_rule_soldout or variant == null
+											assign variant_available = false
+										endif
+
+										comment
+											Sélectionner cette variante si elle est disponible ET non cachée
+										endcomment
+										if variant_available and variant.metafields.custom.hidden_variant.value != true
+											assign bundle_variant_check = variant
+											assign valid_variant_bundle_found = true
+											break
+										endif
+									endfor
+								endif
+							endif
+
+							comment
+								SYNCHRONISATION DES DIMENSIONS POUR PRODUITS
+								Même logique que pour les variantes, mais appliquée aux produits
+								avec recherche dans toutes leurs variantes pour trouver la correspondance
+							endcomment
+							assign has_matching_size_variant_main = true
+							if parent_option_size_cleaned != blank and product_bundle.has_only_default_variant == false
+								assign has_matching_size_variant_main = false
+
+								comment
+									Détection de l'option taille dans le produit bundle
+								endcomment
+								assign bundle_option_position_size_array_check = blank
+								unless product_bundle.has_only_default_variant
+									for option in product_bundle.options_with_values
+										assign option_name_downcase = option.name | downcase
+										assign option_name_array = option_name_downcase | split: ' ' | uniq
+
+										for translation in options_names_for_foot
+											assign has_foot_in_array = option_name_array | find: translation
+											if has_foot_in_array
+												assign has_foot_in_array = true
+												break
+											endif
+										endfor
+
+										if has_foot_in_array
+											continue
+										else
+											for option_name in option_name_array
+												if options_names_for_size contains option_name
+													assign bundle_option_position_size_array_check = option.position | minus: 1
+													break
+												endif
+											endfor
+										endif
+
+										if bundle_option_position_size_array_check != blank
+											break
+										endif
+									endfor
+								endunless
+
+								comment
+									RECHERCHE DE LA VARIANTE COMPATIBLE
+									Parcourt toutes les variantes du produit pour trouver celle
+									qui correspond aux dimensions du produit parent
+								endcomment
+								if bundle_option_position_size_array_check != blank
+									assign has_matching_size_variant_main = false
+
+									for variant in bundle_variants_pool
+										comment
+											Filtrage manuel pour option4 si la version est à la position 4
+										endcomment
+										if bundle_version_position == 4 and products_bundle_option_version != blank and products_bundle_option_version != 'Aucun'
+											if variant.options[3] != products_bundle_option_version
+												continue
+											endif
+										endif
+
+										comment
+											VÉRIFICATION DES VARIANTES CACHÉES
+
+											Si la variante sélectionnée a le métafield hidden_variant à true,
+											on cherche une variante alternative disponible et non cachée
+										endcomment
+										if variant.metafields.custom.hidden_variant.value == true
+											continue
+										endif
+
+										assign variant_option_size_check = variant.options[bundle_option_position_size_array_check]
+
+										comment
+											Normalisation des dimensions de cette variante
+										endcomment
+										assign variant_option_size_cleaned_check = blank
+										if variant_option_size_check != blank
+											assign variant_option_size_parts_check = variant_option_size_check | split: '-'
+											assign variant_dimensions_part_check = variant_option_size_parts_check[0] | strip
+											assign variant_type_part_check = blank
+
+											if variant_option_size_parts_check.size > 1
+												assign variant_type_part_check_raw = variant_option_size_parts_check[1] | strip
+												assign variant_type_part_check_raw_lc = variant_type_part_check_raw | downcase
+												if variant_type_part_check_raw_lc == default_format_lc
+													assign variant_type_part_check = blank
+												else
+													assign variant_type_part_check = variant_type_part_check_raw
+												endif
+											endif
+
+											assign variant_option_size_no_units_check = variant_dimensions_part_check | replace: 'cm', '' | replace: 'mm', '' | replace: 'CM', '' | replace: 'MM', '' | downcase | strip
+											assign variant_dimensions_array_check = variant_option_size_no_units_check | split: 'x'
+
+											if variant_dimensions_array_check.size >= 2
+												assign variant_dimension_1_check = variant_dimensions_array_check[0] | strip
+												assign variant_dimension_2_check = variant_dimensions_array_check[1] | strip
+												assign variant_option_size_cleaned_check = variant_dimension_1_check | append: 'x' | append: variant_dimension_2_check
+											else
+												assign variant_option_size_cleaned_check = variant_option_size_check
+											endif
+
+											if variant_type_part_check != blank
+												assign variant_option_size_cleaned_check = variant_option_size_cleaned_check | append: '-' | append: variant_type_part_check
+											endif
+										endif
+
+										comment
+											VALIDATION ET SÉLECTION DE LA VARIANTE COMPATIBLE
+											Si les dimensions correspondent, on vérifie la disponibilité
+											et on sélectionne cette variante comme représentante du produit.
+											Pack-new uniquement : fallback dim-only quand l'un des deux
+											côtés n'a pas de suffixe format (ex. parent sans suffixe vs
+											tapissier "200×200 cm - Bibloc"). Cf. site 1 pour détails.
+										endcomment
+										assign size_match_step2 = false
+										if parent_option_size_cleaned == variant_option_size_cleaned_check
+											assign size_match_step2 = true
+										elsif is_pack_new
+											if type_part == blank or variant_type_part_check == blank
+												assign parent_dim_only_s2 = parent_option_size_cleaned | split: '-' | first
+												assign variant_dim_only_s2 = variant_option_size_cleaned_check | split: '-' | first
+												if parent_dim_only_s2 == variant_dim_only_s2
+													assign size_match_step2 = true
+												endif
+											endif
+										endif
+										if size_match_step2
+											assign check_against_inventory = true
+											if variant.inventory_management != 'shopify' or variant.inventory_policy == 'continue'
+												assign check_against_inventory = false
+											endif
+											assign quantity_rule_soldout = false
+											if variant.quantity_rule.min > variant.inventory_quantity and check_against_inventory
+												assign quantity_rule_soldout = true
+											endif
+
+											assign product_available_check = true
+											if variant.available == false or quantity_rule_soldout or variant == null
+												assign product_available_check = false
+											endif
+
+											assign has_matching_size_variant_main = true
+
+											if product_available_check
+												assign bundle_variant_check = variant
+												break
+											endif
+										endif
+									endfor
+								endif
+							endif
+
+							comment
+								VÉRIFICATION FINALE DE DISPONIBILITÉ DU PRODUIT
+								Utilise la variante sélectionnée (soit la première disponible,
+								soit celle qui correspond aux dimensions)
+							endcomment
+							assign check_against_inventory = true
+							if bundle_variant_check.inventory_management != 'shopify' or bundle_variant_check.inventory_policy == 'continue'
+								assign check_against_inventory = false
+							endif
+							assign quantity_rule_soldout = false
+							if bundle_variant_check.quantity_rule.min > bundle_variant_check.inventory_quantity and check_against_inventory
+								assign quantity_rule_soldout = true
+							endif
+
+							assign product_available_check = true
+							if bundle_variant_check.available == false or quantity_rule_soldout or bundle_variant_check == null or has_matching_size_variant_main == false
+								assign product_available_check = false
+							endif
+
+							comment
+								SÉLECTION PAR DÉFAUT ET PRIX DE RÉFÉRENCE POUR PRODUIT
+								Premier produit disponible devient la sélection par défaut
+								seulement si aucune variante individuelle n'était disponible
+							endcomment
+							if product_available_check and step_has_available_items == false
+								assign step_has_available_items = true
+								assign first_available_index = current_index
+
+								comment
+									Récupération du prix de référence du produit
+								endcomment
+								assign reference_price = bundle_variant_check.price
+								assign reference_price_compare_at_price = bundle_variant_check.compare_at_price | default: bundle_variant_check.price
+								assign has_item_visible = true
+							endif
+							assign current_index = current_index | plus: 1
+						endfor
+					endunless
+
+					# Application de la réduction du pack au prix de référence final
+					assign discount_amount = reference_price | times: discount_value | divided_by: 100
+					assign reference_price = reference_price | minus: discount_amount
+					assign reference_price_compare_at_price = reference_price_compare_at_price | minus: discount_amount
+				-%}
+
+				{%- if is_special_config_mode -%}
+					{%- assign product_bundle = products_bundle | first -%}
+					<div class="product__variant-selects__bundle-step" data-bundle-step="{{ i }}">
+						{% render 'card-bundle-special-config',
+							product_bundle: product_bundle,
+							step_number: i,
+							parent_option_size_cleaned: parent_option_size_cleaned,
+							reference_price: reference_price,
+							reference_price_compare_at_price: reference_price_compare_at_price,
+							current_custom_position: current_custom_position,
+							current_index: 0,
+							first_available_index: first_available_index,
+							step_has_available_items: step_has_available_items,
+							has_item_visible: has_item_visible,
+							block: block,
+							product_form_id: product_form_id,
+							section_id: section_id,
+							discount_value: discount_value,
+							products_bundle_option_version: products_bundle_option_version,
+							is_pack_new: is_pack_new,
+							hide_extras: hide_extras
+						%}
+					</div>
+				{%- else -%}
+					<div class="product__variant-selects__bundle-step">
+						<fieldset
+							class="js product-form__input product-form__input--bundle product__variant-selects__bundle{% unless step_has_available_items %} product__variant-selects__bundle--unavailable{% endunless %}{% if is_pack_new %} product__variant-selects__bundle--pack-new{% endif %}"
+							style="order: {{ current_custom_position }};"
+							data-bundle-step="{{ i }}"
+						>
+							<legend class="form__label product__variant-selects__label product__variant-selects__bundle__label">
+								{{ current_custom_position | append: '. ' | append: label }}
+								{%- unless step_has_available_items -%}
+									<span class="product__variant-selects__bundle__step__status visually-hidden">
+										({{ 'products.product.sold_out' | t }})
+									</span>
+								{%- endunless -%}
+							</legend>
+							{%- comment -%}
+								Sous-titre affiché entre la legend et le container des cards,
+								uniquement en contexte pack-new. Couvre 2 cas :
+								- Étape MATELAS (variants_bundle > 0) : "Taille sélectionnée : {dim}"
+								- Étape SOMMIER solo (1 produit + 0 variants) : "{titre produit} {version} • {dim}"
+								Avant ce refactor, le subtitle du sommier était rendu DANS le card
+								(à l'intérieur de `__bundle__container`) → DOM hétérogène entre les
+								2 cas. Maintenant le subtitle est toujours sibling direct de la legend,
+								ce qui homogénéise et permet à `:has(+ __subtitle)` (sur le label) de
+								matcher quel que soit le type d'étape.
+							{%- endcomment -%}
+							{%- liquid
+								assign variants_bundle_count_for_subtitle = variants_bundle | size
+								assign products_bundle_count_for_subtitle = products_bundle | size
+
+								# Sommier solo (0 variantes + 1 produit) : pré-calcule titre du
+								# subtitle. Title-level uniquement (variant-level override possible
+								# côté card-bundle-product mais rare — on garde simple ici).
+								assign solo_subtitle_title = blank
+								if is_pack_new and variants_bundle_count_for_subtitle == 0 and products_bundle_count_for_subtitle == 1
+									assign solo_product_for_subtitle = products_bundle | first
+									if solo_product_for_subtitle.metafields.custom.pack_information.value.title.value != blank
+										assign solo_subtitle_title = solo_product_for_subtitle.metafields.custom.pack_information.value.title.value
+									elsif solo_product_for_subtitle.metafields.custom.combined_listings_produit_parent.value.title != blank
+										assign solo_subtitle_title = solo_product_for_subtitle.metafields.custom.combined_listings_produit_parent.value.title
+									else
+										assign solo_subtitle_title = solo_product_for_subtitle.title
+									endif
+								endif
+							-%}
+							{%- if is_pack_new and variants_bundle_count_for_subtitle > 0 and parent_option_dim_display != blank -%}
+								<p class="product__variant-selects__bundle__subtitle">
+									{{ 'products.product.selected_size_label_html' | t: size: parent_option_dim_display }}
+								</p>
+							{%- elsif solo_subtitle_title != blank -%}
+								<p class="product__variant-selects__bundle__subtitle">
+									{{- solo_subtitle_title -}}
+									{%- if products_bundle_option_version != blank and options_version_labels_to_show contains products_bundle_option_version -%}
+										<span class="product__variant-selects__bundle__subtitle__version"> {{ products_bundle_option_version }}</span>
+									{%- endif -%}
+									{%- if parent_option_dim_display != blank -%}
+										<span class="product__variant-selects__bundle__subtitle__separator"> • </span>{{ parent_option_dim_display }}
+									{%- endif -%}
+								</p>
+							{%- endif -%}
+							<div class="product__variant-selects__bundle__container">
+								{%- liquid
+									comment
+										SECTION 1: RENDU DES VARIANTES INDIVIDUELLES
+
+										Chaque variante individuelle représente un choix direct avec :
+										- Son propre stock et disponibilité
+										- Ses propres prix et métadonnées
+										- Aucune configuration supplémentaire requise
+									endcomment
+									assign variant_index = 0
+								-%}
+
+								{%- for variant_bundle in variants_bundle -%}
+									{% render 'card-bundle-variant',
+										variant_bundle: variant_bundle,
+										step_number: i,
+										reference_price: reference_price,
+										reference_price_compare_at_price: reference_price_compare_at_price,
+										current_index: variant_index,
+										first_available_index: first_available_index,
+										parent_option_size_cleaned: parent_option_size_cleaned,
+										matching_size_with_variants: matching_size_with_variants,
+										step_has_available_items: step_has_available_items,
+										has_item_visible: has_item_visible,
+										governs_variants: governs_variants,
+										discount_value: discount_value,
+										no_price_surplus: no_price_surplus,
+										products_bundle_option_version: products_bundle_option_version,
+										is_pack_new: is_pack_new
+									%}
+									{%- liquid
+										assign has_item_visible = blank
+										assign variant_index = variant_index | plus: 1
+									-%}
+								{%- endfor -%}
+
+								{%- liquid
+									comment
+										SECTION 2: RENDU DES PRODUITS AVEC CONFIGURATION
+
+										Chaque produit peut avoir :
+										- Ses propres variantes et options de configuration
+										- Une synchronisation avec les options du produit parent
+										- Des règles de disponibilité complexes basées sur les dimensions
+									endcomment
+
+									# Flag "solo" : la step ne contient qu'un seul item avec configuration
+									# (0 variant individuelle + 1 produit avec config). Active la mise
+									# en page riche (sous-titre + image large) en contexte `pack-new`.
+									assign variants_bundle_count = variants_bundle | size
+									assign products_bundle_count = products_bundle | size
+									assign is_solo_in_step = false
+									if variants_bundle_count == 0 and products_bundle_count == 1
+										assign is_solo_in_step = true
+									endif
+								-%}
+								{%- for product_bundle in products_bundle -%}
+									{%- liquid
+										# Calcul de l'index global en tenant compte des variantes déjà rendues
+										assign current_item_index = variant_index | plus: forloop.index0
+									-%}
+									{% render 'card-bundle-product',
+										product_bundle: product_bundle,
+										step_number: i,
+										parent_option_size_cleaned: parent_option_size_cleaned,
+										reference_price: reference_price,
+										reference_price_compare_at_price: reference_price_compare_at_price,
+										current_custom_position: current_custom_position,
+										current_index: current_item_index,
+										first_available_index: first_available_index,
+										step_has_available_items: step_has_available_items,
+										has_item_visible: has_item_visible,
+										block: block,
+										product_form_id: product_form_id,
+										section_id: section_id,
+										discount_value: discount_value,
+										no_price_surplus: no_price_surplus,
+										products_bundle_option_version: products_bundle_option_version,
+										is_pack_new: is_pack_new,
+										is_solo_in_step: is_solo_in_step,
+										hide_extras: hide_extras,
+										has_sommier_tapissier_in_bundle: has_sommier_tapissier_in_bundle
+									%}
+									{%- liquid
+										assign has_item_visible = blank
+									-%}
+								{%- endfor -%}
+							</div>
+						</fieldset>
+					</div>
+				{%- endif -%}
+			{%- endif -%}
+		{%- endfor -%}
+
+		{% comment %}
+			Rendu de la section des éléments inclus dans le bundle.
+			Affiche un résumé des produits automatiquement inclus.
+
+			Toujours rendu, y compris quand `hide_extras` (BO :
+			`masquer_surplus_et_inclus`) est actif — dans ce cas la section
+			reste visible mais ses surplus internes (+X€ du picker) sont
+			masqués via `card_show_surplus = false` côté
+			product-bundle-included-picker.liquid.
+		{% endcomment %}
+		{%- render 'product-bundle-item-included',
+			product: product,
+			product_form_id: product_form_id,
+			section_id: section_id,
+			bundle_configurator: bundle_configurator,
+			is_pack_new: is_pack_new
+		-%}
+
+		{% comment %}
+			Script JSON contenant les données de la variante sélectionnée
+			Utilisé par JavaScript pour la gestion dynamique côté client
+		{% endcomment %}
+		<script type="application/json" data-selected-variant>
+			{{ selected_variant | json }}
+		</script>
+	</product-bundle>
+</div>

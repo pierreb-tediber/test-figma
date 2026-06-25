@@ -1,0 +1,45 @@
+{%- liquid
+	assign progress_bar = section.blocks | where: 'type', 'progress_bar' | first
+	assign free_shipping_amount = progress_bar.settings.free_shipping | default: 0 | times: 100
+
+	# Initialisation des variables par défaut
+	assign progress_percentage = 0
+
+	# Calcul uniquement si le panier n'est pas vide et si le montant pour la livraison gratuite est supérieur à 0
+	if cart.total_price > 0 and free_shipping_amount > 0
+		# Calcul du montant restant pour la livraison gratuite
+		assign free_shipping_remaining = free_shipping_amount | minus: cart.total_price
+
+		# Formater le montant restant en devise
+		assign free_shipping_currency = free_shipping_remaining | money
+
+		# Calcul du pourcentage de progression
+		assign progress_percentage = cart.total_price | times: 100 | divided_by: free_shipping_amount
+
+		# S'assurer que le pourcentage ne dépasse pas 100%
+		if progress_percentage > 100
+			assign progress_percentage = 100
+		endif
+	endif
+-%}
+
+{% if free_shipping_amount > 0 %}
+	<div class="drawer__progress-bar" data-nosnippet>
+		<div class="drawer__progress-bar-wrapper">
+			{% if free_shipping_amount > cart.total_price %}
+				<div class="drawer__progress-bar-info">
+					{{ 'sections.cart.progress_bar.remaining_html' | t: amount: free_shipping_currency }}
+				</div>
+			{% else %}
+				<div class="drawer__progress-bar-info">
+					{{ 'sections.cart.progress_bar.congratulations_html' | t }}
+				</div>
+			{% endif %}
+			<div class="drawer__progress-bar-container">
+				<div class="drawer__progress-bar-track">
+					<div class="drawer__progress-bar-fill" style="width: {{ progress_percentage }}%"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endif %}

@@ -1,0 +1,271 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "show_content": false,
+        "custom_h1": "",
+        "h1_size": "h1",
+        "h1_no_margin": false,
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "rich_text_3x73Na": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_8TmknV": {
+          "type": "heading",
+          "settings": {
+            "heading": "Avis canapé-lit",
+            "heading_size": "h1"
+          }
+        }
+      },
+      "block_order": [
+        "heading_8TmknV"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 52
+      }
+    },
+    "ax_testimonial_bEhDwJ": {
+      "type": "ax-testimonial",
+      "blocks": {
+        "heading_PVjWUQ": {
+          "type": "heading",
+          "settings": {
+            "picto_size": 100,
+            "heading": "4.3/5",
+            "heading_class": "h1"
+          }
+        },
+        "subheading_amQwEy": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Note fondée sur 714 évaluations"
+          }
+        },
+        "text_aVqPeH": {
+          "type": "text",
+          "settings": {
+            "picto_size": 24,
+            "text": "<p>Les clients sont satisfaits de notre canapé-lit, soulignant son confort aussi bien en position canapé qu'en lit. Ils apprécient la simplicité d'installation, l'ouverture et la fermeture se font facilement. Le design personnalisable et intemporel de ce canapé-lit s'intègre bien dans tous les intérieurs. La qualité des matériaux et son entretien facile garantissent durabilité et solidité.</p>"
+          }
+        },
+        "button_PrA3R9": {
+          "type": "button",
+          "settings": {
+            "button_text": "Découvrir le canapé lit Tediber",
+            "button_link": "shopify://products/canape-convertible",
+            "link_blank": false,
+            "link_style": "button button--primary"
+          }
+        }
+      },
+      "block_order": [
+        "heading_PVjWUQ",
+        "subheading_amQwEy",
+        "text_aVqPeH",
+        "button_PrA3R9"
+      ],
+      "name": "Ax Testimonial",
+      "settings": {
+        "full_width": false,
+        "show_trustpilot_shop": false,
+        "trustpilot_product_skus": "TEDCPSTBOIS_CMBLEU_TEDCPACBOIS",
+        "image": "shopify://shop_images/TEDIBER_2024_06_240993_1.jpg",
+        "layout": "image_first",
+        "mobile_layout": "image_first",
+        "overlay": true,
+        "overlay_opacity": 0.2,
+        "section_color_scheme": "scheme-1",
+        "color_scheme": "scheme-2",
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "mobile_padding_top": 24,
+        "mobile_padding_bottom": 24
+      }
+    },
+    "ax_trustpilot_product_BRHUV4": {
+      "type": "ax-trustpilot-product",
+      "name": "Ax trustpilot product",
+      "settings": {
+        "restrict_width": false,
+        "skus": "TEDCPSTBOIS_CMBEIGE_TEDCPACBOIS,TEDCPSTBOIS_CMBLEU_TEDCPACBOIS",
+        "color_scheme": "",
+        "mob_padding_top": 0,
+        "mob_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "ax_collections_grid_XJXzfB": {
+      "type": "ax-collections-grid",
+      "blocks": {
+        "collection_zJnzxA": {
+          "type": "collection",
+          "settings": {
+            "collection": "matelas",
+            "title": ""
+          }
+        },
+        "collection_WVQHpz": {
+          "type": "collection",
+          "settings": {
+            "collection": "sommier",
+            "title": ""
+          }
+        },
+        "collection_DxDaXk": {
+          "type": "collection",
+          "settings": {
+            "collection": "lit",
+            "title": ""
+          }
+        },
+        "collection_pyTdDP": {
+          "type": "collection",
+          "settings": {
+            "collection": "tete-de-lit",
+            "title": ""
+          }
+        },
+        "collection_meUw8H": {
+          "type": "collection",
+          "settings": {
+            "collection": "canape",
+            "title": ""
+          }
+        },
+        "collection_X63R6x": {
+          "type": "collection",
+          "settings": {
+            "collection": "gamme-enfant-bebe",
+            "title": ""
+          }
+        },
+        "collection_bRqQAC": {
+          "type": "collection",
+          "settings": {
+            "collection": "couette-et-oreiller",
+            "title": ""
+          }
+        },
+        "collection_Xd8rwb": {
+          "type": "collection",
+          "settings": {
+            "collection": "linge-de-lit",
+            "title": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_zJnzxA",
+        "collection_WVQHpz",
+        "collection_DxDaXk",
+        "collection_pyTdDP",
+        "collection_meUw8H",
+        "collection_X63R6x",
+        "collection_bRqQAC",
+        "collection_Xd8rwb"
+      ],
+      "name": "Ax Collections Grid",
+      "settings": {
+        "heading": "Gamme tediber",
+        "color_scheme": "",
+        "padding_top": 48,
+        "padding_bottom": 24
+      }
+    },
+    "ax_reassurances_cQcLPh": {
+      "type": "ax-reassurances",
+      "blocks": {
+        "reassurance_GwYeyP": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "100-nuits-essai",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_tTNg4j": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-vfy3a8q5",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_wDyNcX": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-vfy3a8q5",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        },
+        "reassurance_LtQMN3": {
+          "type": "reassurance",
+          "settings": {
+            "metaobject": "reassurance-87bgy0zq",
+            "width": 40,
+            "margin_bottom": 16
+          }
+        }
+      },
+      "block_order": [
+        "reassurance_GwYeyP",
+        "reassurance_tTNg4j",
+        "reassurance_wDyNcX",
+        "reassurance_LtQMN3"
+      ],
+      "settings": {
+        "heading": "Nos engagements",
+        "restricted_width": false,
+        "stack_mobile": false,
+        "border_top_mobile": false,
+        "border_bottom_mobile": false,
+        "show_content": false,
+        "autoplay": false,
+        "speed": 300,
+        "loop": false,
+        "pagination": true,
+        "color_scheme": "",
+        "color_scheme_popin": "scheme-2",
+        "mob_padding_top": 48,
+        "mob_padding_bottom": 24,
+        "padding_top": 96,
+        "padding_bottom": 48,
+        "mob_margin_top": 0,
+        "mob_margin_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "rich_text_3x73Na",
+    "ax_testimonial_bEhDwJ",
+    "ax_trustpilot_product_BRHUV4",
+    "ax_collections_grid_XJXzfB",
+    "ax_reassurances_cQcLPh"
+  ]
+}
