@@ -1,0 +1,126 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_content": false,
+        "custom_h1": "",
+        "h1_size": "h1",
+        "h1_no_margin": false,
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "ax_image_banner_fGNk2t": {
+      "type": "ax-image-banner",
+      "name": "Ax Image Banner",
+      "settings": {
+        "image": "",
+        "image_mobile": "",
+        "subheading": "",
+        "heading": "<p>Nouvelle collection grand ours</p>",
+        "heading_font": "default",
+        "heading_font_scale": 1,
+        "button_text": "Découvrir la collection",
+        "button_link": "",
+        "link_blank": false,
+        "link_style": "button button--primary",
+        "color_scheme": "",
+        "overlay": true,
+        "overlay_opacity": 0.1
+      }
+    },
+    "ax_collections_grid_pQ7wXr": {
+      "type": "ax-collections-grid",
+      "name": "Ax Collections Grid",
+      "blocks": {
+        "collection_Gbkz9F": {
+          "type": "collection",
+          "settings": {
+            "collection": "matelas",
+            "title": "Matelas et surmatelas"
+          }
+        },
+        "collection_ehVyyR": {
+          "type": "collection",
+          "settings": {
+            "collection": "sommier",
+            "title": "Sommiers"
+          }
+        },
+        "collection_HamrDR": {
+          "type": "collection",
+          "settings": {
+            "collection": "lit",
+            "title": "Lits"
+          }
+        },
+        "collection_mCjDGg": {
+          "type": "collection",
+          "settings": {
+            "collection": "tete-de-lit",
+            "title": "Têtes de lit"
+          }
+        },
+        "collection_Wpck3T": {
+          "type": "collection",
+          "settings": {
+            "collection": "canape",
+            "title": "Canapés"
+          }
+        },
+        "collection_K93YnA": {
+          "type": "collection",
+          "settings": {
+            "collection": "gamme-enfant-bebe",
+            "title": "Gamme enfant"
+          }
+        },
+        "collection_nnyaQ4": {
+          "type": "collection",
+          "settings": {
+            "collection": "couette-et-oreiller",
+            "title": "Couettes et oreillers"
+          }
+        },
+        "collection_DpLkPD": {
+          "type": "collection",
+          "settings": {
+            "collection": "linge-de-lit",
+            "title": "Linges et protections"
+          }
+        }
+      },
+      "block_order": [
+        "collection_Gbkz9F",
+        "collection_ehVyyR",
+        "collection_HamrDR",
+        "collection_mCjDGg",
+        "collection_Wpck3T",
+        "collection_K93YnA",
+        "collection_nnyaQ4",
+        "collection_DpLkPD"
+      ],
+      "settings": {
+        "heading": "Gamme tediber",
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main",
+    "ax_image_banner_fGNk2t",
+    "ax_collections_grid_pQ7wXr"
+  ]
+}
